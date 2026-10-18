@@ -1,0 +1,450 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Proton VPN
+icon: proton-vpn.svg
+checked: 2026-10-18
+
+criteria:
+  identity:
+    website: https://protonvpn.com
+    legal_entity:
+      value: Proton AG
+      sources: [privacy-policy, who-owns]
+    owner:
+      value: Proton Foundation
+      sources: [who-owns, foundation]
+    founded:
+      value: 2017
+      sources: [transparency, open-source]
+    team:
+      value: public
+      sources: [team]
+    sister_brands: []
+    acquisitions:
+      value:
+        - date: 2024-06-17
+          acquirer: Proton Foundation
+          source: non-profit
+      note: >-
+        Proton's founders gave shares to the non-profit Proton Foundation they set up, making it the
+        main shareholder. It wasn't a sale.
+      sources: [non-profit, who-owns]
+
+  jurisdiction:
+    hq:
+      value: CH
+      sources: [privacy-policy, proton-privacy]
+    entities:
+      value: [CH, LU, MK, TW]
+      note: >-
+        The group companies Proton's privacy policy names. Proton also has offices in France, the UK,
+        Spain, Lithuania and Czechia.
+      sources: [proton-privacy, team]
+
+  logging:
+    traffic:
+      value: none
+      evidence: verified
+      note: >-
+        Free servers check traffic on the fly to block BitTorrent. The 2025 audit found none of it
+        is stored.
+      sources: [no-logs, audit-2025]
+    dns:
+      value: none
+      evidence: verified
+      sources: [audit-2025, no-logs-audits]
+    timestamps:
+      value: none
+      evidence: verified
+      sources: [no-logs, audit-2025]
+    bandwidth:
+      value: null
+      note: Neither the policy nor the audits say whether per-user data use is recorded.
+      sources: [privacy-policy, no-logs]
+    source_ip:
+      value: none
+      evidence: verified
+      note: >-
+        This is for VPN connections. Proton's account-wide policy says login IPs may be kept for a
+        while to fight abuse.
+      sources: [no-logs, audit-2025, proton-privacy]
+    proven:
+      value: [court, audit]
+      note: >-
+        Proton says it couldn't answer any of the 458 legally binding Swiss orders for VPN user data
+        it got from 2019 to mid-2026, including a 2019 court case, as it keeps no logs. Only Proton
+        has published those cases.
+      sources: [transparency, no-logs, no-logs-audits]
+    policy: https://protonvpn.com/privacy-policy
+
+  transparency:
+    audits:
+      value:
+        - date: 2026-05-27
+          auditor: Securitum
+          scope: no_logs
+          source: audit-2026
+        - date: 2025-09-19
+          auditor: Securitum
+          scope: no_logs
+          source: audit-2025
+        - date: 2025-01-01
+          auditor: Ruben Santamarta
+          scope: apps
+          source: audit-apps-2025
+        - date: 2024-09-01
+          auditor: Ruben Santamarta
+          scope: apps
+          source: audit-extension-2024
+        - date: 2024-07-12
+          auditor: Securitum
+          scope: no_logs
+          source: audit-2024
+        - date: 2023-05-01
+          auditor: Securitum
+          scope: no_logs
+          source: audit-2023
+        - date: 2022-03-24
+          auditor: Securitum
+          scope: no_logs
+          source: audit-2022
+        - date: 2019-11-22
+          auditor: SEC Consult
+          scope: apps
+          source: audit-2019-ios
+        - date: 2019-11-22
+          auditor: SEC Consult
+          scope: apps
+          source: audit-2019-macos
+        - date: 2019-11-15
+          auditor: SEC Consult
+          scope: apps
+          source: audit-2019-android
+        - date: 2019-11-15
+          auditor: SEC Consult
+          scope: apps
+          source: audit-2019-windows
+      evidence: verified
+      note: >-
+        Dates are the last day of testing. Santamarta's audits of the apps and the browser extension
+        are dated to the month by Privacy Guides.
+      sources: [no-logs-audits, open-source, privacy-guides, audit-2026-news]
+    report:
+      value: regular
+      sources: [transparency, proton-transparency]
+    canary:
+      value: none
+      note: >-
+        Proton says a canary isn't meaningful under Swiss law, which requires the target of a data
+        request to be told eventually.
+      sources: [transparency]
+    bug_bounty:
+      value: true
+      sources: [bug-bounty]
+    incidents:
+      value:
+        - date: 2018-09-07
+          summary: >-
+            Cisco Talos found the Windows app could be made to run code as admin (CVE-2018-4010),
+            getting round Proton's fix for an earlier bug. Proton patched it before it went public.
+          handled: well
+          source: talos-2018
+      sources: [talos-2018]
+
+  account:
+    email:
+      value: optional
+      note: >-
+        Proton VPN's own sign-up asks for an outside email, but a Proton account made with a new
+        Proton Mail address works without one. Sign-ups may be asked to verify by CAPTCHA, email or
+        SMS.
+      sources: [free-account, proton-privacy]
+    personal_data:
+      value: []
+      sources: [proton-privacy]
+    payment:
+      value: [card, paypal, bank, app_store, bitcoin, cash]
+      sources: [payment, bitcoin, cancel]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn, ikev2, proprietary]
+      note: >-
+        Among the apps, OpenVPN is only on Linux and IKEv2 only on macOS. Stealth, Proton's own
+        WireGuard-over-TLS protocol, counts as proprietary.
+      sources: [protocols, stealth]
+    post_quantum:
+      value: none
+      note: Proton lists post-quantum encryption as planned for its new protocol engine.
+      sources: [proton-protocols]
+    kill_switch:
+      value: system
+      note: >-
+        The advanced kill switch on Windows, the Linux app and iOS (beta) blocks everything outside
+        the tunnel, even after a restart, and Android's always-on setting does the same. macOS only
+        gets the standard one, which Proton says can leak your IP when switching servers.
+      sources: [kill-switch]
+    dns:
+      value: first_party
+      sources: [netshield, audit-2025]
+
+  infra:
+    ram_only:
+      value: none
+      note: Servers use full-disk encryption instead. Proton argues RAM-only adds little.
+      sources: [ram-only, privacy-policy]
+    hosting:
+      value: mixed
+      note: Proton owns all its Secure Core servers and most of its servers in Switzerland and Germany.
+      sources: [privacy-policy, secure-core]
+    virtual_locations:
+      value: disclosed
+      note: Proton calls them Smart Routing and lists where each one really is.
+      sources: [smart-routing]
+    servers:
+      value: 20839
+      sources: [servers]
+    countries:
+      value: 149
+      note: Includes Smart Routing locations, whose servers sit in another country.
+      sources: [servers, smart-routing]
+
+  features:
+    connections:
+      value: 10
+      note: One on the free plan.
+      sources: [pricing]
+    multihop:
+      value: true
+      note: Secure Core sends traffic through Proton's own servers in Switzerland, Iceland or Sweden first.
+      sources: [secure-core]
+    obfuscation:
+      value: [proprietary, udp2tcp]
+      note: Stealth wraps WireGuard in TLS, and plain WireGuard can also run over TCP.
+      sources: [stealth, protocols]
+    port_forwarding:
+      value: true
+      note: Paid plans, on P2P servers.
+      sources: [port-forwarding]
+    split_tunnel:
+      value: true
+      note: Not on iOS.
+      sources: [split-tunnel]
+    blocking:
+      value: [ads, trackers, malware]
+      note: Paid plans only.
+      sources: [netshield]
+
+  clients:
+    platforms:
+      value: [windows, macos, linux_gui, linux_cli, ios, android, browser]
+      sources: [download, linux]
+    open_source:
+      value: all
+      sources: [github, open-source]
+    telemetry:
+      value: opt_out
+      note: >-
+        Anonymous usage stats and crash reports are on by default. Proton says they're deleted after
+        30 days.
+      sources: [usage-stats, fdroid]
+    trackers:
+      value: 1
+      note: Sentry crash reporting, in version 5.20.74.0.
+      sources: [exodus]
+    fdroid:
+      value: true
+      sources: [fdroid]
+
+  pricing:
+    monthly:
+      value: { amount: 9.99, currency: USD }
+      sources: [pricing]
+    best:
+      value: { amount: 3.49, currency: USD }
+      sources: [pricing]
+    best_term:
+      value: 24
+      sources: [pricing]
+    renewal_increase:
+      value: 100
+      note: The 2-year plan is $83.76 up front, then renews at $83.88 a year ($6.99 a month).
+      sources: [pricing]
+    free_tier:
+      value: true
+      note: One device, and servers in 10 countries.
+      sources: [pricing, free-account]
+    refund_days:
+      value: 30
+      note: A full refund, once per user. Cash and bank transfer payments aren't refundable.
+      sources: [terms, cancel]
+
+  ethics:
+    misleading_claims:
+      value: false
+      note: >-
+        Slogans like "Expose nothing" aside, its pages make no claims of total anonymity or
+        "military-grade" encryption.
+      sources: [home]
+    affiliates:
+      value: true
+      sources: [affiliates]
+    review_sites: false
+    activism:
+      value: true
+      note: The Proton Foundation, its main shareholder, says it has given over $5 million in grants.
+      sources: [foundation]
+
+refs:
+  privacy-policy:
+    url: https://protonvpn.com/privacy-policy
+    title: Proton VPN privacy policy
+  proton-privacy:
+    url: https://proton.me/legal/privacy
+    title: Proton privacy policy
+  no-logs:
+    url: https://protonvpn.com/support/no-logs-vpn
+    title: Does Proton VPN keep logs?
+  who-owns:
+    url: https://protonvpn.com/support/who-owns-protonvpn
+    title: Who owns Proton VPN?
+  non-profit:
+    url: https://proton.me/blog/proton-non-profit-foundation
+    title: Proton is transitioning towards a non-profit structure
+  foundation:
+    url: https://proton.me/foundation
+    title: The Proton Foundation
+  team:
+    url: https://proton.me/about/team
+    title: Meet the team behind Proton
+  open-source:
+    url: https://protonvpn.com/blog/open-source
+    title: All Proton VPN apps are now open source and audited
+  transparency:
+    url: https://protonvpn.com/blog/transparency-report
+    title: Proton VPN transparency report and warrant canary
+  proton-transparency:
+    url: https://proton.me/legal/transparency
+    title: Proton transparency report
+  no-logs-audits:
+    url: https://protonvpn.com/blog/no-logs-audit
+    title: For 5th year running, Proton VPN passes external no-logs audit
+  audit-2026:
+    url: https://drive.proton.me/urls/DZVEJZFYHM#FPSKdUEykprb
+    title: Securitum, Proton VPN no-logs audit 2026
+  audit-2026-news:
+    url: https://cyberinsider.com/proton-vpn-passes-no-logs-audit-that-found-no-user-activity-retention/
+    title: Proton VPN passes no-logs audit that found no user activity retention (CyberInsider)
+  audit-2025:
+    url: https://securitum.com/public-reports/securitum-protonvpn-nologs-2025.pdf
+    title: Securitum, Verification of Proton VPN's No-Log policy (2025)
+  audit-2024:
+    url: https://securitum.com/public-reports/securitum-protonvpn-nologs-2024.pdf
+    title: Securitum, Verification of Proton VPN's No-Log policy (2024)
+  audit-2023:
+    url: https://securitum.com/public-reports/securitum-protonvpn-nologs-2023.pdf
+    title: Securitum, Proton VPN's No-Log policy regarding VPN activity (2023)
+  audit-2022:
+    url: https://securitum.com/public-reports/securitum-protonvpn-nologs-20220330.pdf
+    title: Securitum, ProtonVPN's No-Logs policy regarding VPN activity (2022)
+  audit-apps-2025:
+    url: https://drive.proton.me/urls/RVW8TXG484#uTXX5Fc9GADo
+    title: Ruben Santamarta, Proton VPN apps security audit
+  audit-extension-2024:
+    url: https://drive.proton.me/urls/RWDD2SHT98#v7ZrwNcafkG8
+    title: Ruben Santamarta, Proton VPN browser extension security audit
+  audit-2019-ios:
+    url: https://protonvpn.com/files/proton-vpn-ios-app-audit-report-2020.pdf
+    title: SEC Consult, Proton VPN iOS app security assessment
+  audit-2019-macos:
+    url: https://protonvpn.com/files/proton-vpn-macos-app-audit-report-2020.pdf
+    title: SEC Consult, Proton VPN macOS app security assessment
+  audit-2019-android:
+    url: https://protonvpn.com/files/proton-vpn-android-app-audit-report-2020.pdf
+    title: SEC Consult, Proton VPN Android app security assessment
+  audit-2019-windows:
+    url: https://protonvpn.com/files/proton-vpn-windows-app-audit-report-2020.pdf
+    title: SEC Consult, Proton VPN Windows app security assessment
+  privacy-guides:
+    url: https://www.privacyguides.org/en/vpn/
+    title: VPN services (Privacy Guides)
+  bug-bounty:
+    url: https://proton.me/security/bug-bounty
+    title: The Proton bug bounty program
+  talos-2018:
+    url: https://talosintelligence.com/reports/TALOS-2018-0679
+    title: ProtonVPN VPN client privilege escalation (TALOS-2018-0679)
+  free-account:
+    url: https://protonvpn.com/support/how-to-create-free-vpn-account
+    title: How to create a free VPN account
+  payment:
+    url: https://protonvpn.com/support/payment-options
+    title: Payment methods
+  bitcoin:
+    url: https://protonvpn.com/support/vpn-bitcoin-payments
+    title: How to pay for Proton VPN with Bitcoin
+  cancel:
+    url: https://protonvpn.com/support/cancel-vpn-subscription
+    title: How to cancel a Proton VPN subscription
+  terms:
+    url: https://proton.me/legal/terms
+    title: Proton terms of service
+  protocols:
+    url: https://protonvpn.com/support/how-to-change-vpn-protocols
+    title: Change your VPN protocol
+  stealth:
+    url: https://protonvpn.com/blog/stealth-vpn-protocol
+    title: Defeat censorship with Stealth, our new VPN protocol
+  proton-protocols:
+    url: https://protonvpn.com/blog/introducing-proton-protocols
+    title: "Introducing Proton protocols: a new VPN protocol codebase for faster, more reliable apps"
+  kill-switch:
+    url: https://protonvpn.com/support/what-is-kill-switch
+    title: How to use kill switch
+  netshield:
+    url: https://protonvpn.com/support/netshield
+    title: How to use NetShield Ad-blocker
+  ram-only:
+    url: https://protonvpn.com/blog/ram-only-servers
+    title: Why Proton VPN doesn't use RAM-only VPN servers
+  secure-core:
+    url: https://protonvpn.com/support/secure-core-vpn
+    title: What is Secure Core?
+  smart-routing:
+    url: https://protonvpn.com/support/how-smart-routing-works
+    title: What is Smart Routing?
+  servers:
+    url: https://protonvpn.com/vpn-servers
+    title: Proton VPN server list
+  port-forwarding:
+    url: https://protonvpn.com/support/port-forwarding
+    title: Port forwarding
+  split-tunnel:
+    url: https://protonvpn.com/support/protonvpn-split-tunneling
+    title: How to use split tunneling
+  download:
+    url: https://protonvpn.com/download
+    title: Download VPN
+  linux:
+    url: https://protonvpn.com/support/linux-vpn-setup
+    title: Proton VPN on Linux
+  github:
+    url: https://github.com/ProtonVPN
+    title: ProtonVPN on GitHub
+  usage-stats:
+    url: https://protonvpn.com/support/share-usage-statistics
+    title: Help us fight censorship (usage statistics)
+  exodus:
+    url: https://reports.exodus-privacy.eu.org/en/reports/ch.protonvpn.android/latest/
+    title: Exodus Privacy report for ch.protonvpn.android
+  fdroid:
+    url: https://f-droid.org/packages/ch.protonvpn.android/
+    title: Proton VPN on F-Droid
+  pricing:
+    url: https://protonvpn.com/pricing
+    title: Proton VPN pricing
+  affiliates:
+    url: https://proton.me/partners/affiliates
+    title: Proton affiliate program
+  home:
+    url: https://protonvpn.com/
+    title: Proton VPN homepage
