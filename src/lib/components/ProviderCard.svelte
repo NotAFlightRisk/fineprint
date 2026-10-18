@@ -29,7 +29,7 @@
     />
   </header>
 
-  <p class="where"><Flag src={flag} />{located(provider, criteria)}</p>
+  <p class="where"><Flag src={flag} />{located(provider, criteria).join(' · ')}</p>
 
   <ul class="checks">
     {#each checklist(provider, criteria) as check (check.id)}

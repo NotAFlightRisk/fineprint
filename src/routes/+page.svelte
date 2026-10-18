@@ -40,7 +40,7 @@
 <Seo title="{site.name} - the unsponsored VPN comparison" description={site.description} path="/" />
 
 <section class="intro">
-  <h1>The VPN fine print, side by side</h1>
+  <h1>The VPN fine&nbsp;print, side by side</h1>
   <p>
     {data.providers.length} providers measured on {criteria.size} things that matter for privacy, backed
     by {sources} sources. Nobody pays to be here, and every grade follows

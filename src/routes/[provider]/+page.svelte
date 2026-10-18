@@ -35,7 +35,7 @@
 
   const passes = $derived(checks.filter((check) => check.grade === 'good').map((c) => c.label));
   const description = $derived(
-    `${provider.name}, based in ${where}. ${passes.length ? `${passes.join(', ')}. ` : ''}${provider.flags.length} red flag${provider.flags.length === 1 ? '' : 's'}. Logging, audits, payment, apps and pricing, every claim sourced.`
+    `${provider.name}, based in ${where.join(', ')}. ${passes.length ? `${passes.join(', ')}. ` : ''}${provider.flags.length} red flag${provider.flags.length === 1 ? '' : 's'}. Logging, audits, payment, apps and pricing, every claim sourced.`
   );
 
   const schema = $derived({
@@ -80,12 +80,18 @@
   <header class="head">
     <div class="name">
       <h1><img src="/icons/{provider.icon}" alt="" width="64" height="64" />{provider.name}</h1>
-      <p>
+      <p class="meta">
         <a href={website} target="_blank" rel="noopener external"
           >{formatValue(criteria.get('identity.website')!, website)}</a
         >
-        <span aria-hidden="true">·</span>
-        <Flag src={flags[provider.criteria['jurisdiction.hq'].value as string]} />{where}
+        {#each where as part, index (part)}
+          <span aria-hidden="true">·</span>
+          <span>
+            {#if index === 0}<Flag
+                src={flags[provider.criteria['jurisdiction.hq'].value as string]}
+              />{/if}{part}
+          </span>
+        {/each}
       </p>
     </div>
     <p class="checked" class:stale={provider.stale}>
@@ -229,6 +235,10 @@
 </article>
 
 <style>
+  article {
+    --strip: 5rem;
+  }
+
   .head {
     display: grid;
     grid-template-columns: 1fr auto;
@@ -250,9 +260,17 @@
       height: 0.85em;
     }
 
-    & .name p {
+    & .meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 0 var(--space-2);
       margin-top: var(--space-3);
       color: var(--text-muted);
+
+      & > * {
+        white-space: nowrap;
+      }
     }
 
     @media (max-width: 40rem) {
@@ -281,6 +299,13 @@
       position: sticky;
       top: 0;
       z-index: 2;
+      grid-template-columns: none;
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(6.5rem, 1fr);
+      overflow-x: auto;
+      scrollbar-width: thin;
+      scrollbar-color: var(--rule-faint) transparent;
+      white-space: nowrap;
     }
 
     & a {
@@ -389,7 +414,7 @@
     scroll-margin-top: var(--space-4);
 
     @media (min-width: 56rem) {
-      scroll-margin-top: var(--space-8);
+      scroll-margin-top: var(--strip);
     }
 
     @media (max-width: 56rem) {
@@ -426,7 +451,7 @@
     scroll-margin-top: var(--space-6);
 
     @media (min-width: 56rem) {
-      scroll-margin-top: calc(var(--space-8) + var(--space-4));
+      scroll-margin-top: calc(var(--strip) + var(--space-4));
     }
 
     &:target {
@@ -500,6 +525,10 @@
       grid-template-columns: 2rem 1fr;
       gap: var(--space-3);
       scroll-margin-top: var(--space-6);
+
+      @media (min-width: 56rem) {
+        scroll-margin-top: calc(var(--strip) + var(--space-4));
+      }
 
       &:target {
         background: var(--surface-sunken);

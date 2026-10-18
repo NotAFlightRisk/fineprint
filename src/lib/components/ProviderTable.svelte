@@ -455,7 +455,7 @@
     }
 
     &:is(:hover, :focus-within) > * {
-      background-color: color-mix(in srgb, var(--surface-sunken) 60%, transparent);
+      background-color: color-mix(in srgb, var(--surface-sunken) 60%, var(--surface));
     }
   }
 

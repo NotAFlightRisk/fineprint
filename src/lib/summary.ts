@@ -84,5 +84,4 @@ export const flagged = (provider: Provider, criteria: Map<string, Criterion>) =>
 export const located = (provider: Provider, criteria: Map<string, Criterion>) =>
   ['jurisdiction.hq', 'jurisdiction.eyes']
     .filter((id) => provider.criteria[id])
-    .map((id) => formatValue(criteria.get(id)!, provider.criteria[id].value))
-    .join(' · ');
+    .map((id) => formatValue(criteria.get(id)!, provider.criteria[id].value));
