@@ -11,6 +11,7 @@ criteria:
       sources: [privacy-policy, who-owns]
     owner:
       value: Proton Foundation
+      note: The foundation is the main shareholder. Proton staff own most of the rest, with FONGIT and some users holding the remainder.
       sources: [who-owns, foundation]
     founded:
       value: 2017
@@ -261,6 +262,7 @@ criteria:
       sources: [pricing]
     best:
       value: { amount: 3.49, currency: USD }
+      note: An intro price for the first two years. After that it renews at $6.99 a month.
       sources: [pricing]
     best_term:
       value: 24

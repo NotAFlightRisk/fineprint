@@ -83,6 +83,10 @@ criteria:
           auditor: Packetlabs
           scope: infra
           source: packetlabs-2024
+        - date: 2022-12-11
+          auditor: Cure53
+          scope: infra
+          source: cure53-2022
         - date: 2022-03-04
           auditor: Leviathan Security Group
           scope: apps
@@ -93,8 +97,9 @@ criteria:
           source: leviathan-desktop-2021
       evidence: verified
       note: >-
-        Packetlabs tested one server node and its source, including a no-logs review. Leviathan
-        covered the desktop apps in 2021 and the Android and iOS apps in 2022.
+        Packetlabs tested one server node and its source, including a no-logs review. Cure53
+        tested the VPN servers in late 2022. Leviathan covered the desktop apps in 2021 and the
+        Android and iOS apps in 2022.
       sources: [audits-kb]
     report:
       value: regular
@@ -430,3 +435,6 @@ refs:
   affiliate-kb:
     url: https://windscribe.com/knowledge-base/articles/does-windscribe-have-a-referral-or-affiliate-program
     title: Does Windscribe have a referral or affiliate program?
+  cure53-2022:
+    url: https://windscribe.com/blog/content/files/2024/07/2022-12-11---Windscribe---Cure53.pdf
+    title: Cure53, VPN server pentest (2022)
