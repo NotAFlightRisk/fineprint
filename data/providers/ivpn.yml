@@ -53,15 +53,15 @@ criteria:
       note: Cure53 found the gateways cached DNS responses in 2019, and IVPN turned caching off during the audit.
       sources: [privacy, audit-2019]
     timestamps:
-      value: none
+      value: nope
       evidence: verified
       sources: [privacy, audit-2019]
     bandwidth:
-      value: none
+      value: nope
       evidence: verified
       sources: [privacy, audit-2019]
     source_ip:
-      value: none
+      value: nope
       evidence: verified
       sources: [privacy, audit-2019]
     proven:
@@ -135,7 +135,7 @@ criteria:
 
   account:
     email:
-      value: none
+      value: nope
       note: You can add one in the client area after signing up if you want IVPN to be able to reach you.
       sources: [privacy]
     personal_data:
@@ -175,7 +175,7 @@ criteria:
       note: Dedicated bare-metal servers rented from datacentre partners such as Datapacket, M247 and Leaseweb.
       sources: [status, server-api]
     virtual_locations:
-      value: none
+      value: nope
       sources: [status]
     servers:
       value: 89
