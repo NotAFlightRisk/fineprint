@@ -301,7 +301,8 @@
       z-index: 2;
       grid-template-columns: none;
       grid-auto-flow: column;
-      grid-auto-columns: minmax(6.5rem, 1fr);
+      grid-auto-columns: minmax(max-content, 1fr);
+      column-gap: var(--space-4);
       overflow-x: auto;
       scrollbar-width: thin;
       scrollbar-color: var(--rule-faint) transparent;
