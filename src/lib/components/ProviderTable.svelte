@@ -1,7 +1,7 @@
 <script lang="ts">
   import { SvelteSet } from 'svelte/reactivity';
   import type { Category, Criterion, Entry, Provider } from '#lib/data/types.js';
-  import { formatValue } from '#lib/format.js';
+  import { showEntry } from '#lib/format.js';
   import { checklist, checks } from '#lib/summary.js';
   import { compare, toCsv, download } from '#lib/table.js';
   import { tip } from '#lib/tip.js';
@@ -165,7 +165,7 @@
           <td class="flags" class:none={!provider.flags.length}>{provider.flags.length}</td>
           {#each columns as column (column.id)}
             {@const entry = provider.criteria[column.id]}
-            {@const text = formatValue(column, entry?.value)}
+            {@const text = showEntry(column, entry)}
             {@const note = cellTip(entry, text)}
             {@const source = entry?.sources[0] && provider.refs[entry.sources[0]]}
             <td

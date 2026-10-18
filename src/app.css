@@ -140,7 +140,6 @@ a {
   font-size: var(--text-sm);
   line-height: 1.45;
   white-space: pre-line;
-  pointer-events: none;
 }
 
 .plain {

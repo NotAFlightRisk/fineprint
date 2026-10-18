@@ -1,5 +1,5 @@
 import type { Criterion, Entry, Grade, Price, Provider, Value } from './data/types.ts';
-import { formatValue } from './format.ts';
+import { formatValue, showEntry } from './format.ts';
 
 const rank: Record<string, number> = { good: 0, ok: 1, bad: 2, na: 3 };
 const usd: Record<string, number> = { USD: 1, EUR: 1.08, GBP: 1.27, CHF: 1.12 };
@@ -38,7 +38,7 @@ export function toCsv(providers: Provider[], columns: Criterion[]) {
   const header = ['Provider', ...columns.map((column) => column.label)];
   const rows = providers.map((provider) => [
     provider.name,
-    ...columns.map((column) => formatValue(column, provider.criteria[column.id]?.value))
+    ...columns.map((column) => showEntry(column, provider.criteria[column.id]))
   ]);
   return [header, ...rows].map((row) => row.map(quote).join(',')).join('\n');
 }

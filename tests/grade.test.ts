@@ -94,3 +94,21 @@ describe('unify', () => {
     expect(unify(categories, 'good', raw as never, new Date('2027-06-01')).stale).toBe(true);
   });
 });
+
+describe('dates near the edges', () => {
+  it('counts back whole months from a leap day', () => {
+    const audit = [{ date: '2026-02-28', auditor: 'Cure53', scope: 'no_logs' }];
+    expect(grade(criteria.get('transparency.audits')!, audit, new Date('2028-02-29'))).toBe('good');
+  });
+});
+
+describe('derived values that do not apply', () => {
+  it('marks the per-device price n/a when devices are unlimited', () => {
+    const { raw } = readProvider('tests/fixtures/good.yml');
+    const unlimited = structuredClone(raw) as { criteria: { features: { connections: unknown } } };
+    unlimited.criteria.features.connections = 'unlimited';
+    expect(
+      unify(categories, 'good', unlimited as never, today).criteria['pricing.per_connection']
+    ).toMatchObject({ value: null, grade: 'na' });
+  });
+});

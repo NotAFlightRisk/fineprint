@@ -1,5 +1,5 @@
 import type { Category, Criterion, Grade, Match, Provider } from './data/types.ts';
-import { formatValue, optionLabel } from './format.ts';
+import { formatValue, optionLabel, showEntry } from './format.ts';
 
 export interface Check {
   id: string;
@@ -17,7 +17,7 @@ export const checks: Check[] = [
   {
     id: 'anonymous',
     label: 'Anonymous signup and payment',
-    from: ['account.email', 'account.payment']
+    from: ['account.email', 'account.personal_data', 'account.payment']
   },
   { id: 'open', label: 'Open source apps', from: ['clients.open_source'] },
   { id: 'ram', label: 'RAM-only servers', from: ['infra.ram_only'] },
@@ -57,14 +57,14 @@ const options = (criterion: Criterion, values: (string | boolean)[]) =>
     .join(' or ');
 
 export function describeRule(criterion: Criterion, match: Match): string {
-  const unit = criterion.unit ? ` ${criterion.unit === '%' ? '%' : criterion.unit}` : '';
+  const unit = !criterion.unit ? '' : criterion.unit === '%' ? '%' : ` ${criterion.unit}`;
   const parts: string[] = [];
   if (match.is) parts.push(options(criterion, match.is));
   if (match.any) parts.push(`Includes ${options(criterion, match.any)}`);
   if (match.where) {
     const [field, allowed] = Object.entries(match.where)[0];
     const kind = options({ options: criterion.fields?.[field].options } as Criterion, allowed);
-    parts.push(match.max === 0 ? `None ${kind.toLowerCase()}` : `${kind} scope`);
+    parts.push(match.max === 0 ? `None ${kind.toLowerCase()}` : `Covering ${kind.toLowerCase()}`);
   }
   if (match.within) parts.push(`in the last ${match.within} months`);
   const many = criterion.type === 'set' || criterion.type === 'records';
@@ -76,7 +76,7 @@ export function describeRule(criterion: Criterion, match: Match): string {
 }
 
 const describeEntry = (provider: Provider, criterion: Criterion) =>
-  `${criterion.label}: ${formatValue(criterion, provider.criteria[criterion.id]?.value)}`;
+  `${criterion.label}: ${showEntry(criterion, provider.criteria[criterion.id])}`;
 
 export const flagged = (provider: Provider, criteria: Map<string, Criterion>) =>
   provider.flags.map((id) => describeEntry(provider, criteria.get(id)!));

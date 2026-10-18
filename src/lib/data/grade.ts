@@ -1,10 +1,12 @@
 import type { Criterion, Grade, Item, Match, Price, Value } from './types.ts';
 
-const monthsAgo = (today: Date, months: number) => {
-  const date = new Date(today);
-  date.setUTCMonth(date.getUTCMonth() - months);
-  return date.toISOString().slice(0, 10);
-};
+function monthsAgo(today: Date, months: number) {
+  const [year, month] = [today.getUTCFullYear(), today.getUTCMonth() - months];
+  const last = new Date(Date.UTC(year, month + 1, 0)).getUTCDate();
+  return new Date(Date.UTC(year, month, Math.min(today.getUTCDate(), last)))
+    .toISOString()
+    .slice(0, 10);
+}
 
 const sizeOf = (value: Value) => {
   if (value === 'unlimited') return Infinity;

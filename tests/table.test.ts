@@ -22,6 +22,11 @@ describe('table sorting', () => {
     }
   });
 
+  it('treats two unknowns as equal', () => {
+    expect(compare(best, undefined, entry(null, null), 1)).toBe(0);
+    expect(compare(best, entry(null, null), undefined, -1)).toBe(0);
+  });
+
   it('compares prices across currencies', () => {
     expect(compare(best, cheap, dear, 1)).toBeLessThan(0);
     expect(compare(best, cheap, dear, -1)).toBeGreaterThan(0);
