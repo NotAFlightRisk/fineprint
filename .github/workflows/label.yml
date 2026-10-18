@@ -1,0 +1,80 @@
+name: 🏷️ Label
+
+on:
+  pull_request_target: # zizmor: ignore[dangerous-triggers] reads the PR's metadata, never checks out its code
+    types: [opened, edited, reopened]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: label-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  label:
+    name: 🏷️ Sort by what it touches
+    runs-on: ubuntu-latest
+    if: github.actor != 'dependabot[bot]'
+    permissions:
+      pull-requests: write
+    steps:
+      - name: Take the label off its Category, or guess from the title and files
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        with:
+          script: |
+            const { number, title, body } = context.payload.pull_request;
+            const issue = { ...context.repo, issue_number: number };
+            const kinds = {
+              'data update': 'data',
+              data: 'data',
+              'new provider': 'new-provider',
+              criteria: 'criteria',
+              website: 'website',
+              api: 'api',
+              scripts: 'scripts',
+              docs: 'documentation',
+              maintenance: 'maintenance',
+              security: 'security',
+              dependencies: 'dependencies',
+            };
+            const areas = [
+              [/^data\/providers\/.+\.yml$/, 'new-provider', 'added'],
+              [/^(data\/providers|static\/icons)\//, 'data'],
+              [/^data\/criteria\.yml$/, 'criteria'],
+              [/^src\/(lib\/data|routes\/(api|schema))\//, 'api'],
+              [/^(src|static)\//, 'website'],
+              [/^scripts\//, 'scripts'],
+              [/\.md$/, 'documentation'],
+            ];
+            const [, type, scope, bang] = title.match(/^(\w+)(?:\((.+?)\))?(!?):/) ?? [];
+
+            const guess = async () => {
+              if (scope === 'deps') return 'dependencies';
+              if (type === 'docs') return 'documentation';
+              const files = await github.paginate(github.rest.pulls.listFiles, {
+                ...context.repo,
+                pull_number: number,
+              });
+              const touched = ([path, , status]) =>
+                files.some((file) => path.test(file.filename) && (!status || file.status === status));
+              return areas.find(touched)?.[1] ?? 'maintenance';
+            };
+
+            const [, category = ''] =
+              (body ?? '').replace(/<!--[\s\S]*?-->/g, '').match(/^### Category\s+([^#\s].*)/m) ?? [];
+            const words = category.toLowerCase().match(/[a-z]+/g) ?? [];
+            const owned = [...Object.values(kinds), 'breaking-change'];
+            const { data: labels } = await github.rest.issues.listLabelsOnIssue(issue);
+            const has = labels.map(({ name }) => name);
+            const current = has.filter((name) => Object.values(kinds).includes(name));
+            const kind = kinds[words.slice(0, 2).join(' ')] ?? kinds[words[0]];
+            const wanted = kind ? [kind] : current.length ? current : [await guess()];
+            if (bang) wanted.push('breaking-change');
+
+            for (const name of has.filter((name) => owned.includes(name) && !wanted.includes(name))) {
+              await github.rest.issues.removeLabel({ ...issue, name });
+            }
+            const missing = wanted.filter((name) => !has.includes(name));
+            if (missing.length) await github.rest.issues.addLabels({ ...issue, labels: missing });
+            await core.summary.addHeading(wanted.join(', '), 3).write();

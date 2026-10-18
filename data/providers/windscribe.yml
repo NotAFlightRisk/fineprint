@@ -1,0 +1,432 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Windscribe
+icon: windscribe.png
+checked: 2026-10-18
+
+criteria:
+  identity:
+    website: https://windscribe.com
+    legal_entity:
+      value: Windscribe Limited
+      sources: [terms]
+    owner:
+      value: null
+      note: Windscribe says it's self-funded with no outside investors, but doesn't publish who holds its shares.
+      sources: [about, ethics]
+    founded:
+      value: 2016
+      sources: [not-paying, ukraine-disclosure]
+    team:
+      value: public
+      note: Names its founders Yegor Sak (CEO), Alex Paguis (CTO) and Mark Ulicki (CIO).
+      sources: [about]
+    sister_brands:
+      value: []
+      note: Control D, a DNS service it calls its sister product, isn't a VPN.
+      sources: [flexible-dns]
+    acquisitions:
+      value: []
+      sources: [about, ethics]
+
+  jurisdiction:
+    hq:
+      value: CA
+      note: >-
+        Canada's lawful access bill C-22, before the Senate as of September 2026, could force
+        metadata retention. Windscribe says it's preparing to leave Canada if it has to.
+      sources: [terms, c22-letter, canary]
+    entities:
+      value: [CA]
+      sources: [terms]
+
+  logging:
+    traffic:
+      value: none
+      evidence: verified
+      sources: [privacy, no-logs, packetlabs-2024]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [no-logs]
+    timestamps:
+      value: aggregate
+      evidence: claimed
+      note: >-
+        Keeps when you last used it against your account, which the policy calls a timestamp and the
+        no-logs page a date only. Connection times sit in server memory until you disconnect.
+      sources: [privacy, no-logs]
+    bandwidth:
+      value: aggregate
+      evidence: claimed
+      note: A running 30-day total per account, used to enforce the free plan's cap.
+      sources: [privacy]
+    source_ip:
+      value: none
+      evidence: verified
+      note: >-
+        Packetlabs' May 2024 audit found IKEv2 and debug logs on its test server holding users' IPs
+        and connection times for hours to days. Its June 2024 retest found them fixed.
+      sources: [privacy, packetlabs-2024]
+    proven:
+      value: [seizure, audit]
+      note: >-
+        Servers were seized in Ukraine in 2021 and the Netherlands in 2026, with only Windscribe's
+        word on what they held. Greece's 2025 case against its CEO isn't counted, as Windscribe says
+        no data was ever asked of it.
+      sources: [ukraine-disclosure, dutch-seizure, greek-case, packetlabs-2024]
+    policy: https://windscribe.com/privacy
+
+  transparency:
+    audits:
+      value:
+        - date: 2024-06-26
+          auditor: Packetlabs
+          scope: infra
+          source: packetlabs-2024
+        - date: 2022-03-04
+          auditor: Leviathan Security Group
+          scope: apps
+          source: leviathan-mobile-2022
+        - date: 2021-09-24
+          auditor: Leviathan Security Group
+          scope: apps
+          source: leviathan-desktop-2021
+      evidence: verified
+      note: >-
+        Packetlabs tested one server node and its source, including a no-logs review. Leviathan
+        covered the desktop apps in 2021 and the Android and iOS apps in 2022.
+      sources: [audits-kb]
+    report:
+      value: regular
+      note: A live counter of DMCA and law enforcement requests rather than a periodic report.
+      sources: [transparency]
+    canary:
+      value: maintained
+      grade: ok
+      note: >-
+        The page's "valid as of" date comes from the reader's own device clock, so it shows today's
+        date whether or not anyone has renewed it. It isn't signed either.
+      sources: [canary]
+    bug_bounty:
+      value: true
+      note: Says it has paid between $100 and $5,000 per report.
+      sources: [vdp]
+    incidents:
+      value:
+        - date: 2026-02-01
+          summary: >-
+            Dutch authorities took a VPN server from a data centre, without a warrant according to
+            Windscribe. It said the server ran from RAM and held no user data. Dutch police haven't
+            commented.
+          handled: well
+          source: dutch-seizure
+        - date: 2023-06-01
+          summary: >-
+            Greece charged CEO Yegor Sak personally after the IP of a Windscribe server in Finland
+            was linked to a breach of a Greek system. The case was dismissed on 11 April 2025.
+          handled: well
+          source: greek-case
+        - date: 2021-06-24
+          summary: >-
+            Ukraine seized two servers whose disks weren't encrypted and held an OpenVPN server
+            certificate and private key, which could have let someone impersonate its servers to
+            manual OpenVPN users. Windscribe disclosed it on 7 July and replaced its OpenVPN CA by 20 July.
+          handled: well
+          source: ukraine-disclosure
+      note: >-
+        The Dutch seizure is dated to the month only. For the Greek case that's when Windscribe
+        learnt of the charge.
+      sources: [dutch-seizure, greek-cyberinsider, ukraine-techradar, ukraine-followup]
+
+  account:
+    email:
+      value: optional
+      sources: [privacy, ethics]
+    personal_data:
+      value: []
+      sources: [privacy]
+    payment:
+      value: [card, paypal, app_store, bitcoin, lightning, monero, other_crypto, cash]
+      note: Cash by post only buys a year of Pro.
+      sources: [payment-options, crypto, cash]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn, ikev2]
+      sources: [connectivity]
+    post_quantum:
+      value: default
+      note: >-
+        WireGuard only, which is the apps' default protocol. Its pre-shared key is exchanged over TLS
+        with X25519MLKEM768, from the October 2025 app versions.
+      sources: [post-quantum, encryption]
+    kill_switch:
+      value: system
+      note: >-
+        The desktop firewall can block all traffic even with the app closed. The mobile apps rely on
+        the OS's always-on VPN setting.
+      sources: [firewall]
+    dns:
+      value: first_party
+      note: Answered by R.O.B.E.R.T. on the VPN server you're connected to.
+      sources: [flexible-dns]
+
+  infra:
+    ram_only:
+      value: all
+      evidence: claimed
+      sources: [nodeos, physical-servers]
+    hosting:
+      value: mixed
+      evidence: claimed
+      note: Dedicated servers it either owns or leases, without saying how many of each.
+      sources: [ethics, nodeos]
+    virtual_locations:
+      value: disclosed
+      note: Fake India, Fake Russia and Fake Antarctica are virtual and labelled as fake.
+      sources: [physical-servers]
+    servers:
+      value: null
+      note: Lists locations and data centres rather than a server count.
+      sources: [upgrade]
+    countries:
+      value: 69
+      note: >-
+        The figure on its feature pages. Its server status page says over 85, and the Build A Plan
+        picker lists 71 plus Fake Antarctica.
+      sources: [features, vpn-servers, upgrade]
+
+  features:
+    connections:
+      value: unlimited
+      note: For personal devices, "within reason".
+      sources: [unlimited-devices]
+    multihop:
+      value: true
+      note: Browser traffic only, by pairing the desktop app with the browser extension's proxy.
+      sources: [double-hop]
+    obfuscation:
+      value: [stunnel, amneziawg]
+      note: >-
+        Stealth wraps OpenVPN in TLS via stunnel and WStunnel wraps it in WebSocket. The
+        anti-censorship QUIC option swaps WireGuard for AmneziaWG.
+      sources: [connectivity, circumvent]
+    port_forwarding:
+      value: true
+      note: Pro includes ports that expire after 7 days. Permanent ones need a paid static IP.
+      sources: [port-forwarding]
+    split_tunnel:
+      value: true
+      note: On Windows, macOS, Linux and Android.
+      sources: [split-tunneling]
+    blocking:
+      value: [ads, trackers, malware]
+      note: Server-side through R.O.B.E.R.T. The free plan gets fewer lists.
+      sources: [robert]
+
+  clients:
+    platforms:
+      value: [windows, macos, linux_gui, linux_cli, ios, android, browser]
+      note: Routers are supported with generated config files rather than an app.
+      sources: [download, desktop-releases, routers-kb]
+    open_source:
+      value: all
+      sources: [github]
+    telemetry:
+      value: none
+      evidence: claimed
+      note: The apps report which version you've activated, and Windscribe keeps that against your account.
+      sources: [privacy, no-logs]
+    trackers:
+      value: 0
+      note: Exodus's latest report covers version 3.82.1645 from March 2025.
+      sources: [exodus]
+    fdroid:
+      value: true
+      sources: [fdroid]
+
+  pricing:
+    monthly:
+      value: { amount: 9, currency: USD }
+      sources: [upgrade]
+    best:
+      value: { amount: 5.75, currency: USD }
+      note: Build A Plan starts at $3 a month but only covers the locations you pick.
+      sources: [upgrade]
+    best_term:
+      value: 12
+      sources: [upgrade]
+    renewal_increase:
+      value: 0
+      sources: [upgrade]
+    free_tier:
+      value: true
+      note: 2 GB a month, or 10 GB with a confirmed email, in 10 countries.
+      sources: [use-for-free]
+    refund_days:
+      value: 7
+      note: Business days, on the first payment only, and only if you've used under 10 GB.
+      sources: [terms]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        Its free plan page promises "military-grade encryption", and it calls itself court-proven
+        although by its own account Greece never asked it for data.
+      sources: [use-for-free, no-logs, greek-case]
+    affiliates:
+      value: false
+      note: Closed its affiliate programme in January 2021. A user referral scheme pays in free service.
+      sources: [affiliate-kb, not-paying]
+    review_sites:
+      value: false
+      evidence: claimed
+      sources: [ethics]
+    activism:
+      value: true
+      note: Co-signed a 2026 open letter asking Canada to amend its lawful access bill, C-22.
+      sources: [c22-letter]
+
+refs:
+  terms:
+    url: https://windscribe.com/terms
+    title: Terms of Service
+  privacy:
+    url: https://windscribe.com/privacy
+    title: Privacy Policy
+  about:
+    url: https://windscribe.com/about
+    title: About Windscribe
+  ethics:
+    url: https://windscribe.com/ethics
+    title: Ethics and Philosophy
+  no-logs:
+    url: https://windscribe.com/features/no-identifying-logs
+    title: No Identifying Logs. Ever.
+  not-paying:
+    url: https://windscribe.com/blog/were-not-paying-for-first-place/
+    title: We're not paying for 1st place.
+  flexible-dns:
+    url: https://windscribe.com/features/flexible-dns
+    title: Flexible DNS
+  c22-letter:
+    url: https://windscribe.com/blog/we-signed-a-letter-against-c22/
+    title: We Signed a Letter Agreeing With Nord and ExpressVPN
+  canary:
+    url: https://windscribe.com/canary
+    title: Windscribe Warrant Canary
+  transparency:
+    url: https://windscribe.com/transparency
+    title: Transparency Report
+  vdp:
+    url: https://windscribe.com/vdp
+    title: Vulnerability Disclosure Policy
+  audits-kb:
+    url: https://windscribe.com/knowledge-base/articles/has-windscribe-been-audited
+    title: Has Windscribe been audited?
+  packetlabs-2024:
+    url: https://drive.google.com/file/d/1EgNETLVm2oZdGJXZJmFSCDc7Ib72LIOw/view
+    title: Packetlabs - Penetration Test Report (Retest), Windscribe
+  leviathan-mobile-2022:
+    url: https://github.com/Windscribe/Android-App/files/11266292/Windscribe.Limited.-.2022.-.VPN.Source.Code.Review.Final.Report.pdf
+    title: Leviathan Security Group - VPN Source Code Review Final Report (2022)
+  leviathan-desktop-2021:
+    url: https://github.com/Windscribe/Desktop-App/files/11266277/Windscribe.Limited.-.Client.Application.Code.Review.Final.Report.pdf
+    title: Leviathan Security Group - Client Application Code Review Final Report
+  ukraine-disclosure:
+    url: https://windscribe.com/blog/openvpn-security-improvements-and-changes-7b04ea49222/
+    title: OpenVPN Security Improvements and Changes
+  ukraine-followup:
+    url: https://windscribe.com/blog/ukrainian-server-seizure-a-commentary-and-state-of-the-industry-e71e8d205b26/
+    title: Ukrainian server seizure - a commentary and state of the industry
+  ukraine-techradar:
+    url: https://www.techradar.com/news/windscribe-vpn-servers-seized-by-authorities-were-not-encrypted
+    title: Windscribe VPN servers seized by authorities were not encrypted
+  greek-case:
+    url: https://windscribe.com/blog/windscribe-greek-court-case/
+    title: My Big Fat Greek Case
+  greek-cyberinsider:
+    url: https://cyberinsider.com/windscribe-vpn-acquitted-in-legal-case-affirming-no-logs-policy/
+    title: Windscribe VPN Acquitted in Legal Case Affirming No-Logs Policy
+  dutch-seizure:
+    url: https://cyberinsider.com/windscribe-alleges-warrantless-seizure-of-vpn-server-by-dutch-authorities/
+    title: Windscribe alleges warrantless seizure of VPN server by Dutch authorities
+  payment-options:
+    url: https://windscribe.com/knowledge-base/articles/what-type-of-payment-options-do-you-accept
+    title: What type of payment options do you accept?
+  crypto:
+    url: https://windscribe.com/knowledge-base/articles/which-cryptocurrencies-do-you-support
+    title: Which cryptocurrencies do you support?
+  cash:
+    url: https://windscribe.com/knowledge-base/articles/can-i-pay-for-windscribe-with-cash
+    title: Can I pay for Windscribe with cash?
+  connectivity:
+    url: https://windscribe.com/features/flexible-connectivity
+    title: Flexible Connectivity
+  post-quantum:
+    url: https://windscribe.com/blog/post-quantum-vpn/
+    title: Post-Quantum VPN Encryption is Now Supported by Windscribe
+  encryption:
+    url: https://windscribe.com/features/strongest-encryption
+    title: We're a VPN With the Strongest Encryption. Period.
+  firewall:
+    url: https://windscribe.com/features/firewall
+    title: Firewall
+  nodeos:
+    url: https://windscribe.com/blog/nodeos-booting-from-ram/
+    title: 'NodeOS: How We Stopped Worrying about Disks and Started Booting from RAM'
+  physical-servers:
+    url: https://windscribe.com/features/physical-servers
+    title: A VPN with Physical Servers. No Virtual Tricks.
+  upgrade:
+    url: https://windscribe.com/upgrade
+    title: Windscribe Pro pricing
+  features:
+    url: https://windscribe.com/features
+    title: Features
+  vpn-servers:
+    url: https://windscribe.com/vpn-servers
+    title: Windscribe VPN Server List
+  unlimited-devices:
+    url: https://windscribe.com/features/unlimited-devices
+    title: Unlimited Devices
+  double-hop:
+    url: https://windscribe.com/features/double-hop
+    title: Double Hop
+  circumvent:
+    url: https://windscribe.com/features/circumvent-censorship
+    title: Circumvent Censorship
+  port-forwarding:
+    url: https://windscribe.com/features/port-forwarding
+    title: VPN Port Forwarding
+  split-tunneling:
+    url: https://windscribe.com/features/split-tunneling
+    title: Split Tunneling
+  robert:
+    url: https://windscribe.com/features/robert
+    title: R.O.B.E.R.T.
+  download:
+    url: https://windscribe.com/download
+    title: Download Windscribe
+  desktop-releases:
+    url: https://github.com/Windscribe/Desktop-App/releases
+    title: Windscribe Desktop-App releases
+  routers-kb:
+    url: https://windscribe.com/knowledge-base/articles/what-routers-are-supported-by-windscribe
+    title: What Routers are supported by Windscribe?
+  github:
+    url: https://github.com/Windscribe
+    title: Windscribe on GitHub
+  exodus:
+    url: https://reports.exodus-privacy.eu.org/en/reports/com.windscribe.vpn/latest/
+    title: Exodus Privacy report for com.windscribe.vpn
+  fdroid:
+    url: https://f-droid.org/en/packages/com.windscribe.vpn/
+    title: Windscribe on F-Droid
+  use-for-free:
+    url: https://windscribe.com/features/use-for-free
+    title: 'Free VPN: Get Pro Features for $0'
+  affiliate-kb:
+    url: https://windscribe.com/knowledge-base/articles/does-windscribe-have-a-referral-or-affiliate-program
+    title: Does Windscribe have a referral or affiliate program?

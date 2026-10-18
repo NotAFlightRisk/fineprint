@@ -1,0 +1,5 @@
+build
+.svelte-kit
+package-lock.json
+data
+iains-notes

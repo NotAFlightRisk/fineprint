@@ -1,0 +1,152 @@
+@import '@fontsource-variable/geist';
+
+:root {
+  color-scheme: light dark;
+
+  --surface: light-dark(#ffffff, #121212);
+  --surface-sunken: light-dark(#f3f3f1, #1b1b1b);
+  --surface-hover: light-dark(#e9e9e6, #262626);
+  --text: light-dark(#111111, #f1f1ee);
+  --text-muted: light-dark(#5a5a5a, #a6a6a3);
+  --rule: var(--text);
+  --rule-faint: light-dark(#d6d6d2, #363636);
+
+  --good: light-dark(#0b7a3a, #45d17e);
+  --ok: light-dark(#9a5a00, #f2b445);
+  --bad: light-dark(#c3151b, #ff7070);
+  --info: light-dark(#1f5bd0, #79acff);
+  --na: light-dark(#737373, #8f8f8c);
+  --on-grade: light-dark(#ffffff, #121212);
+
+  --font: 'Geist Variable', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-md: 1.25rem;
+  --text-lg: 1.75rem;
+  --text-xl: 2.5rem;
+  --text-display: 4rem;
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4.5rem;
+
+  --rule-thin: 1px;
+  --rule-heavy: 3px;
+  --page: 88rem;
+  --pad: clamp(1rem, 4vw, 3rem);
+  --mark: 1.125rem;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --quick: 180ms;
+
+  accent-color: var(--text);
+}
+
+@media (max-width: 40rem) {
+  :root {
+    --text-xl: 2rem;
+    --text-display: 2.5rem;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--surface);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: var(--text-base);
+  line-height: 1.5;
+  font-variant-numeric: tabular-nums;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  font-weight: 650;
+  text-wrap: balance;
+}
+
+p {
+  margin: 0;
+  text-wrap: pretty;
+}
+
+a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+
+  &:hover {
+    text-decoration-thickness: 2px;
+  }
+}
+
+::selection {
+  background: var(--text);
+  color: var(--surface);
+}
+
+:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 2px;
+}
+
+:where(button, input, select) {
+  font: inherit;
+  color: inherit;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+.tip {
+  position: fixed;
+  z-index: 10;
+  max-width: min(24rem, calc(100vw - 1rem));
+  padding: var(--space-2) var(--space-3);
+  background: var(--text);
+  color: var(--surface);
+  font-size: var(--text-sm);
+  line-height: 1.45;
+  white-space: pre-line;
+  pointer-events: none;
+}
+
+.plain {
+  padding: 0;
+  border: 0;
+  background: none;
+  text-align: left;
+  cursor: help;
+}

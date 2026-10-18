@@ -1,0 +1,37 @@
+name: Broken VPN
+icon: nope.svg
+checked: 2099-01-01
+colour: red
+criteria:
+  identity:
+    website: http://broken.example
+    founded: '2009'
+  jurisdiction:
+    hq: UK
+    eyes: five
+  logging:
+    dns:
+      value: nope
+      sources: [policy, missing]
+    traffic:
+      value: none
+      grade: bad
+    timestamps:
+      value: none
+      grade: good
+  transparency:
+    audits:
+      - date: 2025-02-30
+        auditor: Cure53
+        scope: everything
+  pricing:
+    monthly: { amount: 4.999, currency: EURO }
+  vibes:
+    cool: true
+refs:
+  policy:
+    url: https://broken.example/privacy
+    title: Privacy policy
+  unused:
+    url: https://broken.example/unused
+    title: Never cited

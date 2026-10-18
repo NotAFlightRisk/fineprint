@@ -1,0 +1,330 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: AzireVPN
+icon: azirevpn.svg
+checked: 2026-10-18
+
+criteria:
+  identity:
+    website:
+      value: https://www.azirevpn.com
+      sources: [home]
+    legal_entity:
+      value: Malwarebytes Inc.
+      note: AzireVPN was run by the Swedish company Netbouncer AB before Malwarebytes bought it in 2024.
+      sources: [tos-2024, privacy-2024, privacy-change-2024]
+    owner:
+      value: Malwarebytes Inc.
+      sources: [about, acquisition]
+    founded:
+      value: 2012
+      sources: [about]
+    team:
+      value: partial
+      note: Staff are listed by first name only. Co-founder Tobias Windh is named on the blog, and owner Malwarebytes' leadership is public.
+      sources: [about, audit-post, acquisition]
+    sister_brands:
+      value: [Malwarebytes Privacy VPN]
+      note: Runs on AzireVPN's servers and server software.
+      sources: [audit-post]
+    acquisitions:
+      value:
+        - date: 2024-11-07
+          acquirer: Malwarebytes
+          source: acquisition
+      sources: [acquisition-post]
+
+  jurisdiction:
+    hq:
+      value: US
+      note: The team and office are in Stockholm, but the service is offered by Malwarebytes Inc. of Santa Clara, California.
+      sources: [tos-2024, about]
+    entities:
+      value: null
+      note: Malwarebytes Inc. offers the service. Netbouncer AB, which ran it before the sale, has had a merger pending since September 2026, and no other Swedish company is named.
+      sources: [tos-2024, privacy-change-2024, allabolag]
+
+  logging:
+    traffic:
+      value: none
+      evidence: verified
+      note: X41 D-Sec's 2025-26 audit found the VPN server images discard log messages. It was a penetration test rather than a dedicated no-logs audit.
+      sources: [no-logging, audit-2026]
+    dns:
+      value: none
+      evidence: verified
+      sources: [no-logging, audit-2026]
+    timestamps:
+      value: none
+      evidence: verified
+      sources: [no-logging, audit-2026]
+    bandwidth:
+      value: none
+      evidence: claimed
+      note: It does see total bandwidth per server, which it used to measure OpenVPN use.
+      sources: [no-logging, openvpn-end]
+    source_ip:
+      value: none
+      evidence: verified
+      sources: [no-logging, audit-2026]
+    proven:
+      value: [audit]
+      evidence: verified
+      note: No raids or server seizures are known, and the warrant canary says none have happened.
+      sources: [audit-2026, canary]
+    policy:
+      value: https://www.azirevpn.com/service/security#no-logging
+      note: The site's privacy policy link has redirected to Malwarebytes' general policy since mid-2026, and that policy doesn't mention AzireVPN.
+      sources: [no-logging, mb-privacy, privacy-2024]
+
+  transparency:
+    audits:
+      value:
+        - date: 2026-03-31
+          auditor: X41 D-Sec
+          scope: full
+          source: audit-2026
+      evidence: verified
+      note: A white-box test of the servers, hardware, apps, website and API that found two critical issues. In April 2026 AzireVPN said one, the unverified boot chain, was still being fixed.
+      sources: [audit-post]
+    report:
+      value: regular
+      note: A yearly table covering 2023 to 2025. It got two valid requests in 2023 and handed over no data.
+      sources: [transparency-report]
+    canary:
+      value: maintained
+      note: PGP signed, last declared on 2026-10-07.
+      sources: [canary, home]
+    bug_bounty:
+      value: false
+      note: Malwarebytes' bug bounty, which doesn't name AzireVPN, is paused and takes reports by email instead.
+      sources: [mb-bug-bounty]
+    incidents:
+      value: []
+      sources: [canary, transparency-report]
+
+  account:
+    email:
+      value: optional
+      sources: [register, faq]
+    personal_data:
+      value: []
+      sources: [register, about]
+    payment:
+      value: [card, paypal, bank, app_store]
+      note: Bank is SEPA Direct Debit and the iOS app bills through Apple. The Google Play listing still mentions Bitcoin and Monero, but the site no longer lists crypto or cash.
+      sources: [faq, about, pricing, app-store, play-store]
+
+  security:
+    protocols:
+      value: [wireguard]
+      note: OpenVPN was retired on 15 March 2025.
+      sources: [openvpn-end, apps]
+    post_quantum:
+      value: none
+      note: Not mentioned anywhere on the site or in the 2026 audit report.
+      sources: [security, audit-post]
+    kill_switch:
+      value: system
+      evidence: claimed
+      note: The FAQ says it's on by default and can't be turned off, though the Windows app lists it as a setting.
+      sources: [faq, windows-2-0-3]
+    dns:
+      value: first_party
+      sources: [servers]
+
+  infra:
+    ram_only:
+      value: all
+      evidence: claimed
+      sources: [security, service, audit-2026]
+    hosting:
+      value: owned
+      evidence: claimed
+      sources: [security, audit-2026]
+    virtual_locations:
+      value: none
+      evidence: claimed
+      sources: [servers, faq]
+    servers:
+      value: 179
+      note: The support page still says 153.
+      sources: [servers, about]
+    countries:
+      value: 36
+      note: Counted from the 62 locations on its server list.
+      sources: [servers]
+
+  features:
+    connections:
+      value: 5
+      note: Up to 10 devices on an account, 5 connected at once.
+      sources: [faq, apps]
+    multihop:
+      value: false
+      note: SOCKS5 proxies at other locations work inside the tunnel, but that hop isn't encrypted, so it isn't multi-hop.
+      sources: [faq]
+    obfuscation:
+      value: []
+      sources: [openvpn-end]
+    port_forwarding:
+      value: true
+      sources: [home]
+    split_tunnel:
+      value: null
+      note: AzireVPN doesn't mention it, and third-party reviews disagree on whether the Android app has it.
+    blocking:
+      value: []
+      note: Only one internal DNS resolver is offered, with no filtering.
+      sources: [servers]
+
+  clients:
+    platforms:
+      value: [windows, macos, linux_cli, ios, android, router]
+      note: Linux gets a WireGuard setup script and routers a manual OpenWrt guide, not apps.
+      sources: [apps, linux-guide, openwrt-guide]
+    open_source:
+      value: some
+      note: Only the Linux setup script is on GitHub. The Windows, macOS, iOS and Android apps aren't published.
+      sources: [github]
+    telemetry:
+      value: none
+      evidence: claimed
+      sources: [play-data-safety, app-store]
+    fdroid:
+      value: false
+      sources: [fdroid-search]
+
+  pricing:
+    monthly:
+      value: { amount: 5, currency: EUR }
+      sources: [pricing]
+    best:
+      value: { amount: 3.75, currency: EUR }
+      sources: [pricing]
+    best_term:
+      value: 12
+      sources: [pricing]
+    renewal_increase:
+      value: null
+      note: Each plan shows one flat price with no intro offer, but nothing says what a renewal costs.
+      sources: [pricing]
+    free_tier:
+      value: false
+      sources: [pricing]
+    refund_days:
+      value: 7
+      note: Not offered on the 1-month plan.
+      sources: [pricing, tos-2024]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: The homepage says it's "built for true anonymity" and couldn't log your data "even if we wanted to", while its own FAQ says a VPN won't make you completely anonymous.
+      sources: [home, faq]
+    affiliates:
+      value: true
+      note: Its terms described an open affiliate scheme paid through PayPal until mid-2026, when the terms page started redirecting to Malwarebytes'.
+      sources: [tos-2024]
+    review_sites:
+      value: false
+      evidence: claimed
+      sources: [about]
+    activism:
+      value: true
+      note: The only example found is a donation to WireGuard's development.
+      sources: [pricing]
+
+refs:
+  home:
+    url: https://www.azirevpn.com/
+    title: AzireVPN - Privacy first, No exceptions
+  about:
+    url: https://www.azirevpn.com/about
+    title: AzireVPN - Our story
+  service:
+    url: https://www.azirevpn.com/service
+    title: Service and server infrastructure
+  security:
+    url: https://www.azirevpn.com/service/security
+    title: Advanced security features (Blind Operator, hardware)
+  no-logging:
+    url: https://www.azirevpn.com/service/security#no-logging
+    title: Advanced security features - No logging
+  servers:
+    url: https://www.azirevpn.com/service/servers
+    title: Unique server infrastructure (server list and DNS servers)
+  faq:
+    url: https://www.azirevpn.com/support/faq
+    title: AzireVPN FAQ
+  pricing:
+    url: https://www.azirevpn.com/pricing
+    title: Plans and pricing
+  apps:
+    url: https://www.azirevpn.com/apps
+    title: Download AzireVPN apps
+  linux-guide:
+    url: https://www.azirevpn.com/support/guides/linux
+    title: AzireVPN on Linux
+  openwrt-guide:
+    url: https://www.azirevpn.com/support/guides/openwrt
+    title: AzireVPN on OpenWrt
+  register:
+    url: https://manager.azirevpn.com/auth/register
+    title: AzireVPN - Register account
+  transparency-report:
+    url: https://www.azirevpn.com/legal/transparency-report
+    title: AzireVPN transparency report
+  canary:
+    url: https://api.azirevpn.com/v3/warrantcanary
+    title: AzireVPN warrant canary
+  github:
+    url: https://github.com/AzireVPN
+    title: AzireVPN on GitHub
+  audit-post:
+    url: https://blog.azirevpn.com/third-party-audit/
+    title: AzireVPN Now Third-Party Audited and Verified
+  audit-2026:
+    url: https://blog.azirevpn.com/content/files/2026/03/X41-DSec-Audit-AzireVPN-Public.pdf
+    title: X41 D-Sec - Penetration Test on AzireVPN for Malwarebytes Inc. (2026-03-31)
+  acquisition:
+    url: https://www.malwarebytes.com/press/2024/11/07/malwarebytes-acquires-azirevpn-to-strengthen-security-and-privacy-offerings
+    title: Malwarebytes Acquires AzireVPN to Strengthen Security and Privacy Offerings
+  acquisition-post:
+    url: https://blog.azirevpn.com/azirevpn-joins-forces-with-malwarebytes/
+    title: AzireVPN joins forces with Malwarebytes
+  tos-2024:
+    url: https://web.archive.org/web/20260513160950/https://www.azirevpn.com/legal/terms-of-service
+    title: AzireVPN Terms of Service, last updated 2024-12-06 (archived May 2026)
+  privacy-2024:
+    url: https://web.archive.org/web/20260513161042/https://www.azirevpn.com/legal/privacy-policy
+    title: AzireVPN Privacy Policy, last updated 2024-12-06 (archived May 2026)
+  privacy-change-2024:
+    url: https://blog.azirevpn.com/changes-to-privacy-policy/
+    title: Changes to our Privacy policy
+  mb-privacy:
+    url: https://www.malwarebytes.com/legal/privacy-policy
+    title: Malwarebytes Privacy Policy
+  allabolag:
+    url: https://www.allabolag.se/5590894175/netbouncer-ab
+    title: Netbouncer AB - Allabolag
+  openvpn-end:
+    url: https://blog.azirevpn.com/openvpn-support-ending-on-march-15/
+    title: OpenVPN support ending on March 15
+  windows-2-0-3:
+    url: https://blog.azirevpn.com/the-new-windows-update_2-0-3/
+    title: The new Windows 2.0.3 update is finally here
+  play-store:
+    url: https://play.google.com/store/apps/details?id=com.azirevpn.android
+    title: AzireVPN - Ultra private VPN on Google Play
+  play-data-safety:
+    url: https://play.google.com/store/apps/datasafety?id=com.azirevpn.android
+    title: AzireVPN data safety on Google Play
+  app-store:
+    url: https://apps.apple.com/se/app/azirevpn/id6745491309?l=en-GB
+    title: AzireVPN on the App Store
+  fdroid-search:
+    url: https://search.f-droid.org/?q=azirevpn&lang=en
+    title: F-Droid search for azirevpn
+  mb-bug-bounty:
+    url: https://www.malwarebytes.com/secure
+    title: Malwarebytes Coordinated Vulnerability Disclosure Bug Bounty Program

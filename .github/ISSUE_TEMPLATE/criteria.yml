@@ -1,0 +1,36 @@
+name: 📐 Suggest a criterion
+description: Something every provider should be measured on, or a grading rule that's off
+title: '[Criteria]: '
+labels: ['criteria']
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What should change?
+      description: A new criterion, a tweak to an existing one, or a grading rule you'd change.
+      placeholder: Track whether the apps support DNS over HTTPS.
+    validations:
+      required: true
+
+  - type: textarea
+    id: why
+    attributes:
+      label: Why does it matter for privacy?
+    validations:
+      required: true
+
+  - type: textarea
+    id: grading
+    attributes:
+      label: How would you grade it?
+      description: What counts as good, OK and bad. Leave blank if it should just be for reference.
+    validations:
+      required: false
+
+  - type: textarea
+    id: findable
+    attributes:
+      label: Can it be found for most providers?
+      description: Where would someone look it up? A criterion nobody can source just fills the table with Unknown.
+    validations:
+      required: true

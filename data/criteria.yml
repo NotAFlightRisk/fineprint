@@ -1,0 +1,550 @@
+# Everything a provider gets measured on, in the order the site shows it.
+# Each criterion's id is `category.key`, e.g. `logging.dns`.
+#
+# rules: how a value is graded. Checked good, then ok, then bad - first match wins.
+#   is: [..]      the value is one of these
+#   any: [..]     a set shares at least one item with these
+#   min/max: n    a number (or a list's length) is within range
+#   where/within  records filter by field values, or to the last n months, before min/max
+#   {}            matches anything
+# No rules means the criterion is reference only, graded `info`.
+
+categories:
+  - id: identity
+    label: Identity
+    description: Who runs it, and who's behind them.
+    criteria:
+      - key: website
+        label: Website
+        type: url
+        required: true
+        description: The provider's main website.
+      - key: legal_entity
+        label: Company
+        type: text
+        description: The company that sells the service and signs the privacy policy.
+      - key: owner
+        label: Owner
+        type: text
+        description: The parent company at the top of the chain, if it isn't the company itself.
+      - key: founded
+        label: Founded
+        type: int
+        description: Year the VPN service launched.
+      - key: team
+        label: Team
+        type: enum
+        description: Whether you can find out who runs it.
+        options:
+          public: Named publicly
+          partial: Some people named
+          anonymous: Anonymous
+        rules:
+          good: { is: [public] }
+          ok: { is: [partial] }
+          bad: {}
+      - key: sister_brands
+        label: Sister brands
+        type: list
+        description: Other VPNs with the same owner.
+      - key: acquisitions
+        label: Acquisitions
+        type: records
+        description: Times the provider changed hands.
+        fields:
+          date: { type: date }
+          acquirer: { type: text }
+
+  - id: jurisdiction
+    label: Jurisdiction
+    description: Whose laws it answers to.
+    criteria:
+      - key: hq
+        label: Headquarters
+        type: country
+        required: true
+        description: Country the provider is legally based in.
+      - key: entities
+        label: Entities
+        type: countries
+        description: Every country it has a registered company in.
+      - key: eyes
+        label: Eyes alliance
+        type: enum
+        derived: true
+        description: >-
+          The intelligence sharing alliance its headquarters belongs to. Worked out from the
+          headquarters, so you never enter it.
+        options:
+          none: Outside 14 Eyes
+          fourteen: 14 Eyes
+          nine: 9 Eyes
+          five: 5 Eyes
+        rules:
+          good: { is: [none] }
+          ok: { is: [fourteen, nine] }
+          bad: {}
+
+  - id: logging
+    label: Logging
+    description: What it keeps about you while you're connected.
+    criteria:
+      - key: traffic
+        label: Traffic
+        type: enum
+        description: Sites you visit and what you send.
+        options: &logs
+          none: Not logged
+          temporary: Deleted within 24 hours
+          aggregate: Aggregated only
+          'yes': Logged
+        rules: &logs-rules
+          good: { is: [none] }
+          ok: { is: [temporary, aggregate] }
+          bad: {}
+      - key: dns
+        label: DNS requests
+        type: enum
+        description: The domain names you look up.
+        options: *logs
+        rules: *logs-rules
+      - key: timestamps
+        label: Connection times
+        type: enum
+        description: When you connect and disconnect.
+        options: *logs
+        rules: *logs-rules
+      - key: bandwidth
+        label: Bandwidth
+        type: enum
+        description: How much data you use.
+        options: *logs
+        rules: *logs-rules
+      - key: source_ip
+        label: Your IP address
+        type: enum
+        description: The real IP address you connect from.
+        options: *logs
+        rules: *logs-rules
+      - key: proven
+        label: Proven
+        type: set
+        description: How the no-logs claim has been put to the test.
+        options:
+          court: Court case
+          seizure: Server seizure or raid
+          audit: Independent audit
+        rules:
+          good: { any: [court, seizure] }
+          ok: { any: [audit] }
+          bad: {}
+      - key: policy
+        label: Privacy policy
+        type: url
+        required: true
+        description: Link to the privacy or logging policy.
+
+  - id: transparency
+    label: Transparency
+    description: How much it lets outsiders check.
+    criteria:
+      - key: audits
+        label: Audits
+        type: records
+        description: >-
+          Independent security or no-logs audits. Good means a no-logs, server or full audit
+          in the last two years.
+        fields:
+          date: { type: date }
+          auditor: { type: text }
+          scope:
+            type: enum
+            options:
+              no_logs: No-logs policy
+              infra: Servers
+              apps: Apps
+              full: Everything
+        rules:
+          good: { where: { scope: [no_logs, infra, full] }, within: 24, min: 1 }
+          ok: { min: 1 }
+          bad: {}
+      - key: report
+        label: Transparency report
+        type: enum
+        description: Whether it publishes the legal requests it gets.
+        options:
+          regular: Published regularly
+          irregular: Published now and then
+          none: Not published
+        rules:
+          good: { is: [regular] }
+          ok: { is: [irregular] }
+          bad: {}
+      - key: canary
+        label: Warrant canary
+        type: enum
+        description: A regularly updated statement that it hasn't been served a gag order.
+        options:
+          maintained: Kept up to date
+          none: No canary
+          stale: Gone stale
+        rules:
+          good: { is: [maintained] }
+          ok: { is: [none] }
+          bad: {}
+      - key: bug_bounty
+        label: Bug bounty
+        type: bool
+        description: Pays researchers who report security bugs.
+        rules:
+          good: { is: [true] }
+          ok: {}
+      - key: incidents
+        label: Incidents
+        type: records
+        description: Breaches, leaks and legal run-ins, and how well they were handled.
+        fields:
+          date: { type: date }
+          summary: { type: text }
+          handled:
+            type: enum
+            options:
+              well: Handled well
+              poorly: Handled poorly
+        rules:
+          good: { where: { handled: [poorly] }, max: 0 }
+          bad: {}
+
+  - id: account
+    label: Signup and payment
+    description: What it needs to know to sell you an account.
+    criteria:
+      - key: email
+        label: Email
+        type: enum
+        description: Whether signing up needs an email address.
+        options:
+          none: Not asked for
+          optional: Optional
+          required: Required
+        rules:
+          good: { is: [none] }
+          ok: { is: [optional] }
+          bad: {}
+      - key: personal_data
+        label: Personal details
+        type: set
+        description: Anything else it asks for when you sign up.
+        options:
+          name: Name
+          address: Address
+          phone: Phone number
+          dob: Date of birth
+          id_document: ID document
+        rules:
+          good: { max: 0 }
+          bad: {}
+      - key: payment
+        label: Payment methods
+        type: set
+        description: Ways to pay. Cash and Monero are the only ones that don't point back at you.
+        options:
+          card: Card
+          paypal: PayPal
+          bank: Bank transfer
+          app_store: App store
+          bitcoin: Bitcoin
+          lightning: Lightning
+          monero: Monero
+          other_crypto: Other crypto
+          cash: Cash by post
+          gift_card: Gift cards or vouchers
+        rules:
+          good: { any: [monero, cash] }
+          ok: { any: [bitcoin, lightning, other_crypto, gift_card] }
+          bad: {}
+
+  - id: security
+    label: Security
+    description: How the connection itself is protected.
+    criteria:
+      - key: protocols
+        label: Protocols
+        type: set
+        description: VPN protocols you can connect with.
+        options:
+          wireguard: WireGuard
+          openvpn: OpenVPN
+          ikev2: IKEv2
+          proprietary: Proprietary
+          other: Other
+        rules:
+          good: { any: [wireguard, openvpn] }
+          ok: { any: [ikev2] }
+          bad: {}
+      - key: post_quantum
+        label: Post-quantum
+        type: enum
+        description: Key exchange that holds up against a future quantum computer.
+        options:
+          default: On by default
+          optional: Optional
+          none: Not available
+        rules:
+          good: { is: [default] }
+          ok: { is: [optional] }
+          bad: {}
+      - key: kill_switch
+        label: Kill switch
+        type: enum
+        description: Blocks traffic if the tunnel drops.
+        options:
+          system: System level, always on
+          app: In the app only
+          none: None
+        rules:
+          good: { is: [system] }
+          ok: { is: [app] }
+          bad: {}
+      - key: dns
+        label: DNS servers
+        type: enum
+        description: Who answers your DNS lookups inside the tunnel.
+        options:
+          first_party: Its own
+          third_party: Someone else's
+        rules:
+          good: { is: [first_party] }
+          bad: {}
+
+  - id: infra
+    label: Servers
+    description: The hardware your traffic runs through.
+    criteria:
+      - key: ram_only
+        label: RAM-only
+        type: enum
+        description: Servers that run from memory, so nothing survives a reboot or a seizure.
+        options:
+          all: All servers
+          partial: Some servers
+          none: No
+        rules:
+          good: { is: [all] }
+          ok: { is: [partial] }
+          bad: {}
+      - key: hosting
+        label: Hosting
+        type: enum
+        description: Whether it owns its servers or rents them.
+        options:
+          owned: Owned
+          mixed: Owned and rented
+          rented: Rented
+        rules:
+          good: { is: [owned] }
+          ok: {}
+      - key: virtual_locations
+        label: Virtual locations
+        type: enum
+        description: Servers that claim to be in one country but sit in another.
+        options:
+          none: None
+          disclosed: Used, and labelled
+          undisclosed: Used, not labelled
+        rules:
+          good: { is: [none] }
+          ok: { is: [disclosed] }
+          bad: {}
+      - key: servers
+        label: Servers
+        type: int
+        description: Number of VPN servers, as listed by the provider.
+      - key: countries
+        label: Countries
+        type: int
+        description: Number of countries with servers.
+
+  - id: features
+    label: Features
+    description: What the service can do.
+    criteria:
+      - key: connections
+        label: Devices
+        type: limit
+        description: How many devices can be connected at once.
+        rules:
+          good: { min: 5 }
+          ok: { min: 2 }
+          bad: {}
+      - key: multihop
+        label: Multi-hop
+        type: bool
+        description: Route through two servers, so neither sees both ends.
+        rules:
+          good: { is: [true] }
+          ok: {}
+      - key: obfuscation
+        label: Obfuscation
+        type: set
+        description: Ways to disguise VPN traffic where it's blocked.
+        options:
+          shadowsocks: Shadowsocks
+          udp2tcp: UDP over TCP
+          quic: QUIC
+          obfs4: obfs4
+          stunnel: Stunnel
+          v2ray: V2Ray
+          amneziawg: AmneziaWG
+          proprietary: Proprietary
+        rules:
+          good: { min: 1 }
+          ok: {}
+      - key: port_forwarding
+        label: Port forwarding
+        type: bool
+        description: Open a port for incoming connections, handy for seeding.
+      - key: split_tunnel
+        label: Split tunnelling
+        type: bool
+        description: Choose which apps go through the VPN.
+      - key: blocking
+        label: Blocking
+        type: set
+        description: Built in DNS blocklists.
+        options:
+          ads: Ads
+          trackers: Trackers
+          malware: Malware
+
+  - id: clients
+    label: Apps
+    description: The software you install.
+    criteria:
+      - key: platforms
+        label: Platforms
+        type: set
+        description: Where it has an official app.
+        options:
+          windows: Windows
+          macos: macOS
+          linux_gui: Linux app
+          linux_cli: Linux CLI
+          ios: iOS
+          android: Android
+          router: Routers
+          browser: Browser extension
+      - key: open_source
+        label: Open source
+        type: enum
+        description: Whether you can read the apps' source code.
+        options:
+          all: All apps
+          some: Some apps
+          none: None
+        rules:
+          good: { is: [all] }
+          ok: { is: [some] }
+          bad: {}
+      - key: telemetry
+        label: Telemetry
+        type: enum
+        description: Usage or crash data the apps send home.
+        options:
+          none: None
+          opt_in: Opt-in
+          opt_out: Opt-out
+          forced: Can't be turned off
+        rules:
+          good: { is: [none] }
+          ok: { is: [opt_in] }
+          bad: {}
+      - key: trackers
+        label: Android trackers
+        type: int
+        description: Third party trackers in the Android app, as counted by Exodus Privacy.
+        rules:
+          good: { max: 0 }
+          bad: {}
+      - key: fdroid
+        label: F-Droid
+        type: bool
+        description: Available from F-Droid, the open source Android store.
+
+  - id: pricing
+    label: Pricing
+    description: What it costs, and what happens if you change your mind.
+    criteria:
+      - key: monthly
+        label: Monthly
+        type: price
+        description: Price of the rolling monthly plan.
+      - key: best
+        label: Cheapest
+        type: price
+        description: Lowest price per month on any plan.
+      - key: best_term
+        label: Cheapest plan
+        type: int
+        unit: months
+        description: Length of the plan that gets the cheapest price.
+      - key: per_connection
+        label: Per device
+        type: price
+        derived: true
+        description: The cheapest price split across every device you can connect.
+      - key: renewal_increase
+        label: Renewal increase
+        type: int
+        unit: '%'
+        description: How much the price goes up when an intro deal renews.
+        rules:
+          good: { max: 0 }
+          ok: { max: 25 }
+          bad: {}
+      - key: free_tier
+        label: Free plan
+        type: bool
+        description: A free plan that doesn't run out.
+      - key: refund_days
+        label: Refund window
+        type: int
+        unit: days
+        description: How long you have to ask for your money back.
+        rules:
+          good: { min: 30 }
+          ok: { min: 7 }
+          bad: {}
+
+  - id: ethics
+    label: Ethics
+    description: How it sells itself.
+    criteria:
+      - key: misleading_claims
+        label: Misleading claims
+        type: bool
+        description: Promises it can't keep, like "100% anonymous" or "military grade".
+        rules:
+          good: { is: [false] }
+          bad: {}
+      - key: affiliates
+        label: Affiliate scheme
+        type: bool
+        description: Pays reviewers and websites a cut of each sale.
+        rules:
+          good: { is: [false] }
+          ok: {}
+      - key: review_sites
+        label: Owns review sites
+        type: bool
+        description: Owns or funds sites that review VPNs.
+        rules:
+          good: { is: [false] }
+          bad: {}
+      - key: activism
+        label: Activism
+        type: bool
+        description: Funds or campaigns for privacy causes.
+        rules:
+          good: { is: [true] }
+          ok: {}

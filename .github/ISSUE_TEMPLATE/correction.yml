@@ -1,0 +1,51 @@
+name: 📋 Data correction
+description: Something about a provider is wrong, missing or out of date
+title: '[Data]: '
+labels: ['data']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks! If you're happy editing a YAML file, the "Suggest an edit" button on the provider's page is quicker, and the checks will help you get it right.
+
+  - type: input
+    id: provider
+    attributes:
+      label: Provider
+      placeholder: Mullvad
+    validations:
+      required: true
+
+  - type: input
+    id: criterion
+    attributes:
+      label: What's wrong
+      description: The criterion's name or id, as shown on the site or in the methodology.
+      placeholder: DNS requests (logging.dns)
+    validations:
+      required: true
+
+  - type: textarea
+    id: correct
+    attributes:
+      label: What it should say
+      placeholder: They stopped keeping DNS logs in 2025.
+    validations:
+      required: true
+
+  - type: textarea
+    id: sources
+    attributes:
+      label: Sources
+      description: Links that back it up. The provider's own pages, audits, court records or decent press, please - not review sites.
+      placeholder: https://...
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before submitting
+      options:
+        - label: I don't work for, or get paid by, this provider or a competitor (or I've said so above)
+          required: true

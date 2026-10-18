@@ -1,0 +1,44 @@
+name: 🆕 Add a provider
+description: Suggest a VPN we should be tracking
+title: '[Provider]: '
+labels: ['new-provider']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Fancy doing the research yourself? `npm run new -- <id> "<Name>"` makes the file for you, and [CONTRIBUTING.md](https://github.com/NotAFlightRisk/fineprint/blob/main/.github/CONTRIBUTING.md) walks through the rest.
+
+  - type: input
+    id: name
+    attributes:
+      label: Provider
+      placeholder: Example VPN
+    validations:
+      required: true
+
+  - type: input
+    id: website
+    attributes:
+      label: Website
+      placeholder: https://example.com
+    validations:
+      required: true
+
+  - type: textarea
+    id: why
+    attributes:
+      label: Anything we should know?
+      description: Useful sources, audits, who owns it, red flags you've spotted.
+    validations:
+      required: false
+
+  - type: dropdown
+    id: contribute
+    attributes:
+      label: Would you be up for researching it?
+      options:
+        - "Yes, I'll open a PR"
+        - 'Yes, with some guidance'
+        - 'No, just suggesting'
+    validations:
+      required: true

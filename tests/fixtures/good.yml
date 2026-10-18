@@ -1,0 +1,36 @@
+name: Good VPN
+icon: good.svg
+checked: 2026-10-01
+criteria:
+  identity:
+    website: https://good.example
+  jurisdiction:
+    hq: CH
+  logging:
+    dns:
+      value: none
+      evidence: verified
+      sources: [policy]
+    traffic:
+      value: temporary
+      grade: good
+      note: Wiped the moment you disconnect.
+      sources: [policy]
+    policy: https://good.example/privacy
+  transparency:
+    audits:
+      - date: 2026-03-01
+        auditor: Cure53
+        scope: no_logs
+        source: audit
+  features:
+    connections: 10
+  pricing:
+    best: { amount: 4.99, currency: EUR }
+refs:
+  policy:
+    url: https://good.example/privacy
+    title: Privacy policy
+  audit:
+    url: https://good.example/audit.pdf
+    title: No-logs audit

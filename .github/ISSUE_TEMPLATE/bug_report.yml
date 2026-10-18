@@ -1,0 +1,80 @@
+name: 🐛 Bug report
+description: Something on the site or in the tooling isn't working
+title: '[Bug]: '
+labels: ['bug', 'triage']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to file a bug report!
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: A clear description of the bug, and what you expected instead.
+      placeholder: I expected X, but Y happened.
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      description: The smallest set of steps that reliably triggers it.
+      placeholder: |
+        1. Open the table view
+        2. Sort by '...'
+        3. See error
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: Release tag, commit or Docker tag. Leave blank if it's the live site.
+      placeholder: 1.2.3
+    validations:
+      required: false
+
+  - type: dropdown
+    id: install-method
+    attributes:
+      label: How are you running it?
+      options:
+        - fineprint.peng.ly
+        - Docker
+        - From a release
+        - From source
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: Browser and OS, plus Node version if you're running it yourself.
+      placeholder: Firefox 141, Ubuntu 24.04, Node 22
+    validations:
+      required: false
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant log output
+      description: Anything from the browser console or the server. Formatted as code automatically, so no backticks needed.
+      render: shell
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before submitting
+      options:
+        - label: I have searched existing issues for duplicates
+          required: true
+        - label: I agree to follow this project's [Code of Conduct](https://github.com/NotAFlightRisk/fineprint/blob/main/.github/CODE_OF_CONDUCT.md)
+          required: true

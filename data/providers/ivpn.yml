@@ -1,0 +1,416 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: IVPN
+icon: ivpn.png
+checked: 2026-10-18
+
+criteria:
+  identity:
+    website: https://www.ivpn.net
+    legal_entity:
+      value: IVPN Limited
+      note: Called Privatus Limited until August 2023, when it was renamed with the same owner.
+      sources: [legal-guidelines, company-rename]
+    owner:
+      value: Nicholas Pestell
+      note: IVPN Limited is wholly owned by its founder rather than by a parent company.
+      sources: [team, safing-acquisition]
+    founded:
+      value: 2009
+      sources: [team]
+    team:
+      value: public
+      sources: [team]
+    sister_brands:
+      value: [Safing Privacy Network (SPN)]
+      note: >-
+        IVPN's owner bought Safing in December 2024. Its SPN is a paid multi-hop network sold with
+        Portmaster, which Safing pitches as an alternative to a VPN rather than as one.
+      sources: [safing-acquisition, safing-spn]
+    acquisitions:
+      value: []
+      sources: [home, company-rename]
+
+  jurisdiction:
+    hq:
+      value: GI
+      note: Gibraltar is a British Overseas Territory, so the UK handles its defence and foreign affairs.
+      sources: [legal-guidelines, gibraltar-bot]
+    entities:
+      value: [GI, CH, AT]
+      note: >-
+        Privatus GmbH in Switzerland publishes the Google Play app, and Safing ICS Technologies GmbH
+        in Austria runs Portmaster and SPN. Both are owned by IVPN's owner.
+      sources: [legal-guidelines, android-app, safing-contact]
+
+  logging:
+    traffic:
+      value: none
+      evidence: verified
+      sources: [privacy, audit-2019]
+    dns:
+      value: none
+      evidence: verified
+      note: Cure53 found the gateways cached DNS responses in 2019, and IVPN turned caching off during the audit.
+      sources: [privacy, audit-2019]
+    timestamps:
+      value: none
+      evidence: verified
+      sources: [privacy, audit-2019]
+    bandwidth:
+      value: none
+      evidence: verified
+      sources: [privacy, audit-2019]
+    source_ip:
+      value: none
+      evidence: verified
+      sources: [privacy, audit-2019]
+    proven:
+      value: [audit]
+      evidence: verified
+      note: >-
+        Only Cure53's March 2019 no-logs audit. IVPN has said it won't commission another one.
+        No court case or seizure has tested it.
+      sources: [audit-2019, audit-plans-2026, canary]
+    policy: https://www.ivpn.net/en/privacy/
+
+  transparency:
+    audits:
+      value:
+        - date: 2024-04-08
+          auditor: Cure53
+          scope: infra
+          source: audit-2024
+        - date: 2023-03-13
+          auditor: Cure53
+          scope: infra
+          source: audit-2023
+        - date: 2022-03-30
+          auditor: Cure53
+          scope: apps
+          source: audit-2022
+        - date: 2021-03-03
+          auditor: Cure53
+          scope: apps
+          source: audit-2021
+        - date: 2020-01-14
+          auditor: Cure53
+          scope: infra
+          source: audit-2020
+        - date: 2019-03-20
+          auditor: Cure53
+          scope: no_logs
+          source: audit-2019
+      evidence: verified
+      note: >-
+        The 2024 audit covered the customer website and its servers, not the VPN gateways. Cure53's
+        2025 audit of the Mailx and modDNS add-ons is left out, and the July 2026 audit has no
+        published report yet.
+      sources: [audits-blog, audit-plans-2026]
+    report:
+      value: regular
+      sources: [transparency-report]
+    canary:
+      value: maintained
+      note: Signed monthly. The latest is dated 2026-10-06.
+      sources: [canary]
+    bug_bounty:
+      value: false
+      note: Takes security reports by email but doesn't offer any reward.
+      sources: [vuln-reporting]
+    incidents:
+      value:
+        - date: 2026-08-07
+          summary: >-
+            Attackers used a BTCPay Server flaw, exploited before it was disclosed, to take 0.6168 BTC
+            of IVPN's own funds from its Lightning node. IVPN says no customer data or funds were touched.
+          handled: well
+          source: btcpay-incident
+        - date: 2025-02-18
+          summary: >-
+            The iOS app could briefly leak DNS traffic outside the tunnel while rotating WireGuard keys.
+            Fixed in version 2.12.5.
+          handled: well
+          source: ios-dns-leak
+      sources: [btcpay-incident, ios-dns-leak]
+
+  account:
+    email:
+      value: none
+      note: You can add one in the client area after signing up if you want IVPN to be able to reach you.
+      sources: [privacy]
+    personal_data:
+      value: []
+      sources: [privacy]
+    payment:
+      value: [card, paypal, app_store, bitcoin, lightning, monero, cash, gift_card]
+      note: Android in-app payments are paused while the app is off Google Play.
+      sources: [payment-methods, vouchers, btcpay-incident]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn, ikev2]
+      note: IKEv2 is only in the iOS app and manual setups.
+      sources: [windows-app, ios-app, android-app]
+    post_quantum:
+      value: default
+      note: Only in IVPN's own apps, not in manual WireGuard configs.
+      sources: [quantum, status]
+    kill_switch:
+      value: system
+      note: >-
+        The desktop firewall can be set to always on. The iOS app has had no kill switch since 2023
+        because of an Apple leak issue.
+      sources: [windows-app, home, ios-kill-switch]
+    dns:
+      value: first_party
+      sources: [home, audit-2019]
+
+  infra:
+    ram_only:
+      value: partial
+      note: A few pilot gateways run diskless. The rest use full-disk encryption.
+      sources: [status]
+    hosting:
+      value: rented
+      note: Dedicated bare-metal servers rented from datacentre partners such as Datapacket, M247 and Leaseweb.
+      sources: [status, server-api]
+    virtual_locations:
+      value: none
+      sources: [status]
+    servers:
+      value: 89
+      sources: [status, server-api]
+    countries:
+      value: 42
+      note: Counted from IVPN's live server list. The summary on its status page still says 41.
+      sources: [server-api, status]
+
+  features:
+    connections:
+      value: 5
+      note: Standard and Plus allow 5 devices, Pro Suite allows 10.
+      sources: [plan-changes, services]
+    multihop:
+      value: true
+      note: On every plan since May 2026.
+      sources: [plan-changes]
+    obfuscation:
+      value: [v2ray, obfs4]
+      note: V2Ray (VMess over QUIC or TCP) is in every app. obfs4 is for OpenVPN in the desktop apps.
+      sources: [v2ray, windows-app]
+    port_forwarding:
+      value: false
+      note: Removed in September 2023.
+      sources: [port-forwarding]
+    split_tunnel:
+      value: true
+      note: Windows, Linux and Android only.
+      sources: [split-tunnel]
+    blocking:
+      value: [ads, trackers, malware]
+      sources: [windows-app]
+
+  clients:
+    platforms:
+      value: [windows, macos, linux_gui, linux_cli, ios, android]
+      sources: [windows-app, macos-app, linux-app, ios-app, android-app]
+    open_source:
+      value: all
+      sources: [home, github]
+    telemetry:
+      value: opt_out
+      note: The mobile apps send crash reports unless you turn them off. Desktop apps only send one when you confirm it.
+      sources: [privacy]
+    trackers:
+      value: 0
+      note: Exodus's latest report is for version 2.11.1 from October 2025, as the app is currently off Google Play.
+      sources: [exodus, android-app]
+    fdroid:
+      value: true
+      sources: [fdroid, android-app]
+
+  pricing:
+    monthly:
+      value: { amount: 6, currency: USD }
+      sources: [plan-changes, pricing]
+    best:
+      value: { amount: 5, currency: USD }
+      note: $60 a year on the Standard plan.
+      sources: [plan-changes, services]
+    best_term:
+      value: 12
+      sources: [services]
+    renewal_increase:
+      value: 0
+      evidence: claimed
+      note: No introductory deals, so plans renew at the listed price.
+      sources: [plan-changes, ethics]
+    free_tier:
+      value: false
+      sources: [services]
+    refund_days:
+      value: 30
+      note: >-
+        Once per account. Cash, voucher and IVPN Light payments aren't refundable, and App Store
+        refunds go through Apple.
+      sources: [refunds]
+
+  ethics:
+    misleading_claims:
+      value: false
+      sources: [home, ethics]
+    affiliates:
+      value: false
+      sources: [affiliate-kb, ethics]
+    review_sites:
+      value: true
+      note: >-
+        It owns none, but sponsors privacy educators including The New Oil, whose VPN guide recommends
+        IVPN. It lists these sponsorships on its ethics page.
+      sources: [ethics, new-oil-vpns]
+    activism:
+      value: true
+      sources: [supported-projects]
+
+refs:
+  home:
+    url: https://www.ivpn.net/en/
+    title: IVPN homepage
+  team:
+    url: https://www.ivpn.net/en/team/
+    title: IVPN Team
+  company-rename:
+    url: https://www.ivpn.net/blog/change-company-name-privatus-ivpn-limited/
+    title: Change of company name to IVPN Limited
+  safing-acquisition:
+    url: https://www.ivpn.net/blog/ivpn-acquires-safing-portmaster-spn-network/
+    title: IVPN acquires Safing, operator of Portmaster and the SPN network
+  safing-spn:
+    url: https://safing.io/spn/
+    title: Safing Portmaster - SPN Features
+  safing-contact:
+    url: https://safing.io/contact/
+    title: Safing Legal Disclosure - Impressum
+  services:
+    url: https://www.ivpn.net/en/services/
+    title: IVPN Privacy Stack - Services Overview
+  legal-guidelines:
+    url: https://www.ivpn.net/en/legal-process-guidelines/
+    title: Law Enforcement Legal Process Guidelines
+  gibraltar-bot:
+    url: https://en.wikipedia.org/wiki/British_Overseas_Territories
+    title: British Overseas Territories - Wikipedia
+  privacy:
+    url: https://www.ivpn.net/en/privacy/
+    title: IVPN Privacy Policy
+  audit-2019:
+    url: https://cure53.de/audit-report_ivpn.pdf
+    title: Cure53 - IVPN Privacy & No-Log Audit Report 03.2019
+  audit-2020:
+    url: https://cure53.de/summary-report_ivpn_2019.pdf
+    title: Cure53 - Pentest-Report IVPN VPN, Server & Web 01.2020
+  audit-2021:
+    url: https://cure53.de/pentest-report_IVPN.pdf
+    title: Cure53 - Pentest-Report IVPN Apps & Daemon 03.2021
+  audit-2022:
+    url: https://cure53.de/pentest-report_IVPN_2022.pdf
+    title: Cure53 - Pentest-Report IVPN Apps & Daemon 02.-03.2022
+  audit-2023:
+    url: https://cure53.de/pentest-report_IVPN_2023.pdf
+    title: Cure53 - Pentest-Report IVPN Gateway, Server & Setup 02.2023
+  audit-2024:
+    url: https://cure53.de/pentest-report_IVPN_2024.pdf
+    title: Cure53 - Pentest-Report IVPN Customer Website & Servers 03.2024
+  audits-blog:
+    url: https://www.ivpn.net/en/blog/tags/audit/
+    title: IVPN blog posts tagged audit
+  audit-plans-2026:
+    url: https://www.ivpn.net/blog/annual-security-audit-scheduled-2026/
+    title: Annual security audit scheduled for 2026
+  transparency-report:
+    url: https://www.ivpn.net/en/transparency-report/
+    title: IVPN Transparency report
+  canary:
+    url: https://www.ivpn.net/resources/canary.txt
+    title: IVPN Warrant Canary
+  vuln-reporting:
+    url: https://www.ivpn.net/en/vulnerability-reporting/
+    title: IVPN Vulnerability Reporting
+  btcpay-incident:
+    url: https://www.ivpn.net/blog/security-incident-bitcoin-payment-server/
+    title: A security incident on our Bitcoin payment server
+  ios-dns-leak:
+    url: https://www.ivpn.net/blog/key-rotation-issue-fix-in-ivpn-ios-app/
+    title: Key rotation issue fix in IVPN iOS app - update required
+  payment-methods:
+    url: https://www.ivpn.net/knowledgebase/general/what-payment-methods-do-you-accept/
+    title: What payment methods do you accept? - IVPN Help
+  vouchers:
+    url: https://www.ivpn.net/knowledgebase/billing/voucher-cards-faq/
+    title: Voucher cards FAQ - IVPN Help
+  pricing:
+    url: https://www.ivpn.net/en/pricing/
+    title: 'IVPN Pricing: VPN subscription with anonymous registration'
+  plan-changes:
+    url: https://www.ivpn.net/blog/ivpn-plan-changes-new-plus-tier-increased-device-limits-additional-privacy-services/
+    title: IVPN plan changes - new Plus tier, increased device limits, additional privacy services
+  quantum:
+    url: https://www.ivpn.net/blog/quantum-resistant-wireguard-connections-ivpn-apps/
+    title: Introducing quantum resistant WireGuard connections in IVPN apps
+  windows-app:
+    url: https://www.ivpn.net/en/apps-windows/
+    title: IVPN for Windows
+  macos-app:
+    url: https://www.ivpn.net/en/apps-macos/
+    title: IVPN for macOS
+  linux-app:
+    url: https://www.ivpn.net/en/apps-linux/
+    title: IVPN for Linux
+  ios-app:
+    url: https://www.ivpn.net/en/apps-ios/
+    title: IVPN for iOS
+  android-app:
+    url: https://www.ivpn.net/en/apps-android/
+    title: IVPN for Android
+  ios-kill-switch:
+    url: https://www.ivpn.net/blog/removal-of-kill-switch-from-our-ios-app-due-to-apple-ip-leak-issue/
+    title: Removal of kill switch from our iOS app due to Apple IP leak issue
+  status:
+    url: https://www.ivpn.net/en/status/
+    title: IVPN Server Status
+  server-api:
+    url: https://api.ivpn.net/v5/servers/stats
+    title: IVPN live server list (JSON)
+  v2ray:
+    url: https://www.ivpn.net/blog/v2ray-obfuscation-available-all-ivpn-platforms/
+    title: V2Ray Obfuscation Now Available on All IVPN Platforms
+  port-forwarding:
+    url: https://www.ivpn.net/blog/gradual-removal-of-port-forwarding/
+    title: Gradual removal of port forwarding from the IVPN service
+  split-tunnel:
+    url: https://www.ivpn.net/knowledgebase/general/split-tunnel-faq/
+    title: Split Tunnel FAQ - IVPN Help
+  github:
+    url: https://github.com/ivpn
+    title: IVPN on GitHub
+  exodus:
+    url: https://web.archive.org/web/20251012135041/https://reports.exodus-privacy.eu.org/en/reports/net.ivpn.client/latest/
+    title: Exodus Privacy report for net.ivpn.client 2.11.1 (archived copy)
+  fdroid:
+    url: https://f-droid.org/en/packages/net.ivpn.client/
+    title: IVPN on F-Droid
+  refunds:
+    url: https://www.ivpn.net/en/refunds/
+    title: IVPN Refund Policy and Process
+  ethics:
+    url: https://www.ivpn.net/en/ethics/
+    title: Ethical guidelines for privacy protection
+  affiliate-kb:
+    url: https://www.ivpn.net/knowledgebase/general/do-you-have-an-affiliate-program/
+    title: Do you have an affiliate program? - IVPN Help
+  new-oil-vpns:
+    url: https://thenewoil.org/en/guides/less-important/vpns
+    title: 'The New Oil | Privacy: VPNs'
+  supported-projects:
+    url: https://www.ivpn.net/en/supported-projects/
+    title: IVPN Supported Projects

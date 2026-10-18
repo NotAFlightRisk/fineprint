@@ -1,0 +1,496 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Mullvad VPN
+icon: mullvad.svg
+checked: 2026-10-18
+
+criteria:
+  identity:
+    website:
+      value: https://mullvad.net
+      sources: [about]
+    legal_entity:
+      value: Mullvad VPN AB
+      sources: [privacy-policy, terms]
+    owner:
+      value: Amagicom AB
+      note: Both Amagicom AB and Mullvad VPN AB are wholly owned by founders Fredrik Strömberg and Daniel Berntsson.
+      sources: [about]
+    founded:
+      value: 2009
+      sources: [about]
+    team:
+      value: public
+      note: The two founders are named in full, the rest of the team by first name.
+      sources: [about]
+    sister_brands:
+      value: []
+      note: Mozilla VPN runs on Mullvad's servers under a partnership, but Mullvad doesn't own it.
+      sources: [resellers]
+    acquisitions:
+      value: []
+      sources: [about]
+
+  jurisdiction:
+    hq:
+      value: SE
+      sources: [terms]
+    entities:
+      value: [SE]
+      sources: [about, raid-2023-update]
+
+  logging:
+    traffic:
+      value: none
+      evidence: verified
+      note: Swedish police searched the office with a warrant in 2023 and left without any customer data.
+      sources: [policy, raid-2023, audit-assured-relay-2022]
+    dns:
+      value: none
+      evidence: verified
+      sources: [policy, raid-2023, audit-assured-relay-2022]
+    timestamps:
+      value: none
+      evidence: verified
+      note: Connections per account are counted in memory to enforce the five-device limit, and not stored.
+      sources: [policy, raid-2023, audit-assured-relay-2022]
+    bandwidth:
+      value: none
+      evidence: verified
+      note: Only each server's total bandwidth is recorded, for monitoring.
+      sources: [policy, raid-2023, audit-assured-relay-2022]
+    source_ip:
+      value: none
+      evidence: verified
+      sources: [policy, raid-2023, audit-assured-relay-2022]
+    proven:
+      value: [seizure, audit]
+      evidence: verified
+      note: Police searched the Gothenburg office in April 2023 at Germany's request and left with nothing. Server audits in 2022 and 2023 found no logging of user activity.
+      sources: [raid-2023, raid-2023-update, audit-assured-relay-2022, audit-ros-2023]
+    policy: https://mullvad.net/en/help/no-logging-data-policy
+
+  transparency:
+    audits:
+      value:
+        - date: 2026-04-10
+          auditor: Leviathan Security Group
+          scope: apps
+          source: audit-leviathan-2026
+        - date: 2026-02-17
+          auditor: Assured
+          scope: apps
+          source: audit-assured-gotatun-2026
+        - date: 2026-01-20
+          auditor: X41 D-Sec
+          scope: apps
+          source: audit-x41-2026
+        - date: 2025-10-13
+          auditor: Assured
+          scope: apps
+          source: audit-assured-webapp-2025
+        - date: 2025-03-20
+          auditor: Assured
+          scope: apps
+          source: audit-assured-loader-2025
+        - date: 2025-02-24
+          auditor: NCC Group
+          scope: apps
+          source: audit-ncc-2025
+        - date: 2024-12-10
+          auditor: X41 D-Sec
+          scope: apps
+          source: audit-x41-2024
+        - date: 2024-06-27
+          auditor: Cure53
+          scope: infra
+          source: audit-cure53-2024
+        - date: 2023-08-07
+          auditor: Radically Open Security
+          scope: infra
+          source: audit-ros-2023
+        - date: 2022-12-20
+          auditor: Assured
+          scope: apps
+          source: audit-assured-api-2022
+        - date: 2022-10-14
+          auditor: Atredis Partners
+          scope: apps
+          source: audit-atredis-2022
+        - date: 2022-09-13
+          auditor: Assured
+          scope: infra
+          source: audit-assured-dns-2022
+        - date: 2022-06-21
+          auditor: Assured
+          scope: infra
+          source: audit-assured-relay-2022
+        - date: 2021-01-19
+          auditor: Cure53
+          scope: infra
+          source: audit-cure53-2021
+        - date: 2020-06-12
+          auditor: Cure53
+          scope: apps
+          source: audit-cure53-2020
+        - date: 2018-09-20
+          auditor: Cure53
+          scope: apps
+          source: audit-cure53-2018
+      evidence: verified
+      note: The VPN servers were last audited by Cure53 in June 2024, just over two years ago. Everything since covers the apps, website and account and payment systems.
+      sources: [audits-page]
+    report:
+      value: none
+      note: Mullvad says it answers data requests by pointing to its no-logging policy, but publishes no figures.
+      sources: [gov-requests, policies]
+    canary:
+      value: none
+      sources: [policies]
+    bug_bounty:
+      value: false
+      note: It has a disclosure policy and promises not to sue researchers, but doesn't pay.
+      sources: [bug-report]
+    incidents:
+      value:
+        - date: 2026-05-15
+          summary: A third-party write-up showed users got exit IPs at the same relative spot on every server, so sites could often link someone who switched servers. Mullvad disclosed it five days later and its fix covered 96% of servers by October 2026.
+          handled: well
+          source: exit-ip
+        - date: 2024-04-22
+          summary: A Reddit user found DNS queries leaking on Android around reconnects. The root cause is in Android; Mullvad confirmed it, published details and shipped a partial workaround in May 2024.
+          handled: well
+          source: android-dns-leak
+        - date: 2023-04-18
+          summary: Swedish police searched the Gothenburg office with a warrant, at Germany's request, to seize customer data. They left with nothing, as none was stored.
+          handled: well
+          source: raid-2023
+      sources: [exit-ip-rollout, android-changelog, raid-2023-update]
+
+  account:
+    email:
+      value: none
+      note: Signing up just generates a random account number.
+      sources: [policy]
+    personal_data:
+      value: []
+      sources: [policy]
+    payment:
+      value:
+        [card, paypal, bank, app_store, bitcoin, lightning, monero, other_crypto, cash, gift_card]
+      note: Other crypto is Bitcoin Cash. Gift cards are activation codes sold through Amazon and other resellers.
+      sources: [pricing, terms, lightning, restrictive, resellers]
+
+  security:
+    protocols:
+      value: [wireguard]
+      note: OpenVPN left the desktop apps in December 2025 and its servers were gone by 15 January 2026.
+      sources: [openvpn-removal, terms]
+    post_quantum:
+      value: default
+      note: On by default on desktop since January 2025 and on Android and iOS since late 2025.
+      sources: [pq-desktop, review-2025, android-changelog, ios-changelog]
+    kill_switch:
+      value: system
+      note: Always on while connected and can't be turned off. An optional lockdown mode also blocks traffic while disconnected.
+      sources: [faq, using-app]
+    dns:
+      value: first_party
+      note: The separate public encrypted DNS service shuts on 2 November 2026, which doesn't affect DNS inside the VPN.
+      sources: [dns-help, quad9]
+
+  infra:
+    ram_only:
+      value: all
+      evidence: claimed
+      sources: [server-list, ram-only]
+    hosting:
+      value: mixed
+      note: 120 of 553 WireGuard servers were listed as owned on 2026-10-18. The rest are dedicated servers rented from hosts.
+      sources: [server-list, relays-api]
+    virtual_locations:
+      value: none
+      sources: [server-list]
+    servers:
+      value: 553
+      note: WireGuard servers on the list on 2026-10-18, 535 of them online. Leaves out 13 bridge servers.
+      sources: [servers, relays-api]
+    countries:
+      value: 50
+      sources: [servers, relays-api]
+
+  features:
+    connections:
+      value: 5
+      sources: [pricing, terms]
+    multihop:
+      value: true
+      sources: [multihop-help, multihop-modes]
+    obfuscation:
+      value: [shadowsocks, udp2tcp, quic, proprietary]
+      note: Proprietary here is LWO, Mullvad's own open source WireGuard header scrambling.
+      sources: [restrictive, lwo]
+    port_forwarding:
+      value: false
+      note: Dropped in 2023 over abuse.
+      sources: [port-forwarding]
+    split_tunnel:
+      value: true
+      note: Windows, macOS, Linux and Android, not iOS.
+      sources: [split-tunnel]
+    blocking:
+      value: [ads, trackers, malware]
+      note: Also has adult content, gambling and social media lists.
+      sources: [dns-blocklists]
+
+  clients:
+    platforms:
+      value: [windows, macos, linux_gui, linux_cli, ios, android]
+      note: Routers use WireGuard config files rather than an app. The Firefox extension only works alongside the VPN app, so isn't counted.
+      sources: [downloads, cli]
+    open_source:
+      value: all
+      note: GPL-3.0, covering the desktop, Android and iOS apps.
+      sources: [source-code]
+    telemetry:
+      value: forced
+      grade: ok
+      evidence: claimed
+      note: A daily update check sends only the app and OS version, which Mullvad counts in aggregate. Graded ok, not bad, as nothing in it identifies the user.
+      sources: [telemetry-doc]
+    trackers:
+      value: 0
+      note: The newest Exodus report that would load was for version 2025.6, from August 2025.
+      sources: [exodus]
+    fdroid:
+      value: true
+      sources: [fdroid]
+
+  pricing:
+    monthly:
+      value: { amount: 5, currency: EUR }
+      sources: [pricing]
+    best:
+      value: { amount: 5, currency: EUR }
+      note: Every plan length costs the same. Crypto payments get 10% off.
+      sources: [pricing]
+    best_term:
+      value: 1
+      sources: [pricing]
+    renewal_increase:
+      value: 0
+      note: One flat rate since 2009, with no intro deals.
+      sources: [pricing]
+    free_tier:
+      value: false
+      sources: [pricing]
+    refund_days:
+      value: 14
+      note: No refunds on cash or crypto payments. Cut from 30 days in January 2025.
+      sources: [terms, refund-change]
+
+  ethics:
+    misleading_claims:
+      value: false
+      sources: [vpn-page]
+    affiliates:
+      value: false
+      note: Sells activation codes through resellers such as Amazon, but pays no affiliates or influencers.
+      sources: [affiliates]
+    review_sites:
+      value: false
+      sources: [affiliates]
+    activism:
+      value: true
+      note: Campaigns against the EU's Chat Control proposal, is a paying Tor Project member and sponsors Quad9.
+      sources: [chat-control, tor-shallot, quad9]
+
+refs:
+  about:
+    url: https://mullvad.net/en/about
+    title: About Mullvad
+  privacy-policy:
+    url: https://mullvad.net/en/help/privacy-policy
+    title: Privacy policy
+  terms:
+    url: https://mullvad.net/en/help/terms-service
+    title: Terms of service
+  policies:
+    url: https://mullvad.net/en/policies
+    title: Policies
+  resellers:
+    url: https://mullvad.net/en/help/partnerships-and-resellers
+    title: Partnerships and resellers
+  policy:
+    url: https://mullvad.net/en/help/no-logging-data-policy
+    title: No-logging of user activity policy
+  raid-2023:
+    url: https://mullvad.net/en/blog/mullvad-vpn-was-subject-to-a-search-warrant-customer-data-not-compromised
+    title: Mullvad VPN was subject to a search warrant. Customer data not compromised
+  raid-2023-update:
+    url: https://mullvad.net/en/blog/update-the-swedish-authorities-answered-our-protocol-request
+    title: 'Update: The Swedish authorities answered our protocol request'
+  audits-page:
+    url: https://mullvad.net/en/blog/tag/audits
+    title: Mullvad blog, external audits
+  audit-leviathan-2026:
+    url: https://github.com/mullvad/mullvadvpn-app/blob/main/audits/2026-04-16-leviathan-masa-map-compliance-report.pdf
+    title: Leviathan Security Group, MASA compliance report for the Android app (2026)
+  audit-assured-gotatun-2026:
+    url: https://www.assured.se/publications/Assured_Mullvad_GotaTun_Code_Review_2026.pdf
+    title: Assured, GotaTun code review (2026)
+  audit-x41-2026:
+    url: https://www.x41-dsec.de/static/reports/X41-Mullvad-Audit-Public-Report-2026-01-20.pdf
+    title: X41 D-Sec, account and payment services audit (2026)
+  audit-assured-webapp-2025:
+    url: https://www.assured.se/publications/Assured_Mullvad_Web_App_Pentest_2025.pdf
+    title: Assured, web app penetration test (2025)
+  audit-assured-loader-2025:
+    url: https://www.assured.se/publications/Assured_Mullvad_Installer_Downloader_Audit_2025.pdf
+    title: Assured, installer downloader audit (2025)
+  audit-ncc-2025:
+    url: https://appdefensealliance.dev/reports/net.mullvad.mullvadvpn_1740398400000000.pdf
+    title: NCC Group, MASA report for the Android app (2025)
+  audit-x41-2024:
+    url: https://www.x41-dsec.de/static/reports/X41-Mullvad-Audit-Public-Report-2024-12-10.pdf
+    title: X41 D-Sec, VPN app audit (2024)
+  audit-cure53-2024:
+    url: https://cure53.de/pentest-report_mullvad_2024_v1.pdf
+    title: Cure53, VPN infrastructure audit (2024)
+  audit-ros-2023:
+    url: https://github.com/radicallyopensecurity/ros-website/blob/main/ros-public-reports/ROS%20-%202023%20-%20Mullvad%20VPN.pdf
+    title: Radically Open Security, VPN server penetration test (2023)
+  audit-assured-api-2022:
+    url: https://www.assured.se/publications/Assured_Mullvad_API_audit_report_2022.pdf
+    title: Assured, account and payment services audit (2022)
+  audit-atredis-2022:
+    url: https://www.atredis.com/s/Atredis-Partners-Mullvad-VPN-Platform-Security-Assessment-Report-v10.pdf
+    title: Atredis Partners, VPN app security assessment (2022)
+  audit-assured-dns-2022:
+    url: https://www.assured.se/publications/Assured_Mullvad_DNS_server_audit_report_2022.pdf
+    title: Assured, authoritative DNS server audit (2022)
+  audit-assured-relay-2022:
+    url: https://www.assured.se/publications/Assured_Mullvad_relay_server_audit_report_2022.pdf
+    title: Assured, VPN server audit (2022)
+  audit-cure53-2021:
+    url: https://cure53.de/pentest-report_mullvad_2021_v1.pdf
+    title: Cure53, infrastructure audit (2020)
+  audit-cure53-2020:
+    url: https://cure53.de/pentest-report_mullvad_2020_v2.pdf
+    title: Cure53, VPN app audit (2020)
+  audit-cure53-2018:
+    url: https://cure53.de/pentest-report_mullvad_v2.pdf
+    title: Cure53, VPN app audit (2018)
+  gov-requests:
+    url: https://mullvad.net/en/help/how-we-handle-government-requests-user-data
+    title: How we handle government requests for user data
+  bug-report:
+    url: https://mullvad.net/en/help/how-report-bug-or-vulnerability
+    title: How to report a bug or vulnerability
+  exit-ip:
+    url: https://mullvad.net/en/blog/exit-ip-fingerprinting-between-vpn-servers
+    title: Exit IP fingerprinting between VPN servers
+  exit-ip-rollout:
+    url: https://mullvad.net/en/help/exit-ip-vpn-servers-mitigation-rollout
+    title: Exit IP VPN servers mitigation rollout
+  android-dns-leak:
+    url: https://mullvad.net/en/blog/dns-traffic-can-leak-outside-the-vpn-tunnel-on-android
+    title: DNS traffic can leak outside the VPN tunnel on Android
+  android-changelog:
+    url: https://github.com/mullvad/mullvadvpn-app/blob/main/android/CHANGELOG.md
+    title: Mullvad VPN Android changelog
+  ios-changelog:
+    url: https://github.com/mullvad/mullvadvpn-app/blob/main/ios/CHANGELOG.md
+    title: Mullvad VPN iOS changelog
+  pricing:
+    url: https://mullvad.net/en/pricing
+    title: Pricing
+  lightning:
+    url: https://mullvad.net/en/blog/lightning-payments
+    title: Lightning payments
+  restrictive:
+    url: https://mullvad.net/en/help/connecting-to-mullvad-vpn-from-restrictive-locations
+    title: Using Mullvad VPN in restrictive locations
+  refund-change:
+    url: https://mullvad.net/en/blog/for-privacy-change-of-our-refund-policy-from-30-to-14-days
+    title: 'For privacy: Change of our refund policy from 30 to 14 days'
+  openvpn-removal:
+    url: https://mullvad.net/en/blog/removing-openvpn-from-the-mullvad-vpn-app
+    title: Removing OpenVPN from the Mullvad VPN app
+  pq-desktop:
+    url: https://mullvad.net/en/blog/quantum-resistant-tunnels-are-now-the-default-on-desktop
+    title: Quantum-resistant tunnels are now the default on desktop
+  review-2025:
+    url: https://mullvad.net/en/blog/mullvad-review-of-2025
+    title: Mullvad Review of 2025
+  faq:
+    url: https://mullvad.net/en/help/faq
+    title: FAQ
+  using-app:
+    url: https://mullvad.net/en/help/using-mullvad-vpn-app
+    title: Using the Mullvad VPN app
+  dns-help:
+    url: https://mullvad.net/en/help/all-about-dns-servers-and-privacy
+    title: All about DNS servers and privacy
+  quad9:
+    url: https://mullvad.net/en/blog/shutting-down-our-public-encrypted-dns-servers-and-sponsoring-quad9-instead
+    title: Shutting down our public encrypted DNS servers and sponsoring Quad9 instead
+  server-list:
+    url: https://mullvad.net/en/help/server-list
+    title: About our servers
+  ram-only:
+    url: https://mullvad.net/en/blog/we-have-successfully-completed-our-migration-to-ram-only-vpn-infrastructure
+    title: We have successfully completed our migration to RAM-only VPN infrastructure
+  servers:
+    url: https://mullvad.net/en/servers
+    title: Servers
+  relays-api:
+    url: https://api.mullvad.net/www/relays/all/
+    title: Mullvad relay list (API)
+  multihop-help:
+    url: https://mullvad.net/en/help/multihop-wireguard
+    title: Multihop with WireGuard
+  multihop-modes:
+    url: https://mullvad.net/en/blog/introducing-multihop-modes
+    title: Introducing Multihop modes
+  lwo:
+    url: https://mullvad.net/en/blog/introducing-lightweight-wireguard-obfuscation
+    title: Introducing Lightweight WireGuard Obfuscation
+  port-forwarding:
+    url: https://mullvad.net/en/blog/removing-the-support-for-forwarded-ports
+    title: Removing the support for forwarded ports
+  split-tunnel:
+    url: https://mullvad.net/en/help/split-tunneling-with-the-mullvad-app
+    title: Split tunneling with the Mullvad app
+  dns-blocklists:
+    url: https://github.com/mullvad/dns-blocklists
+    title: mullvad/dns-blocklists on GitHub
+  downloads:
+    url: https://mullvad.net/en/download/vpn/linux
+    title: Downloads
+  cli:
+    url: https://mullvad.net/en/help/how-use-mullvad-cli
+    title: How to use the Mullvad CLI
+  source-code:
+    url: https://github.com/mullvad/mullvadvpn-app
+    title: mullvad/mullvadvpn-app on GitHub
+  telemetry-doc:
+    url: https://github.com/mullvad/mullvadvpn-app/blob/main/docs/logging-and-telemetry.md
+    title: Logging and telemetry
+  exodus:
+    url: https://web.archive.org/web/20250912073627/https://reports.exodus-privacy.eu.org/en/reports/net.mullvad.mullvadvpn/latest/
+    title: Exodus Privacy report for net.mullvad.mullvadvpn 2025.6 (archived)
+  fdroid:
+    url: https://f-droid.org/en/packages/net.mullvad.mullvadvpn/
+    title: Mullvad VPN on F-Droid
+  vpn-page:
+    url: https://mullvad.net/en/vpn
+    title: Mullvad VPN
+  affiliates:
+    url: https://mullvad.net/en/help/policy-reviews-advertising-and-affiliates
+    title: Policy on reviews, advertising, influencers, and affiliates
+  chat-control:
+    url: https://mullvad.net/en/chatcontrol
+    title: Stop chat control
+  tor-shallot:
+    url: https://mullvad.net/en/blog/mullvad-becomes-highest-level-of-tor-member-shallot
+    title: Mullvad becomes highest level of Tor Member (Shallot)

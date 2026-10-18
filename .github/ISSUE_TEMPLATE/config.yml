@@ -1,0 +1,25 @@
+# The chooser shown after "New issue". URLs must be absolute, relative paths won't resolve here.
+# Docs: https://docs.github.com/communities/using-templates-to-encourage-useful-issues-and-pull-requests/configuring-issue-templates-for-your-repository
+
+blank_issues_enabled: false
+
+contact_links:
+  - name: 🔒 Report a security vulnerability
+    url: https://github.com/NotAFlightRisk/fineprint/security/policy
+    about: Never report vulnerabilities in a public issue. Read our security policy and disclose privately.
+
+  - name: 📖 How grading works
+    url: https://fineprint.peng.ly/methodology
+    about: Every criterion and the rules behind each grade. Worth a look before disputing one.
+
+  - name: 🙋 Support
+    url: https://github.com/NotAFlightRisk/fineprint/blob/main/.github/SUPPORT.md
+    about: Not sure where something belongs? This explains where to ask what.
+
+  - name: 💬 Questions and ideas
+    url: https://github.com/NotAFlightRisk/fineprint/discussions
+    about: Ask a question or start a discussion about a provider.
+
+  - name: 🛠️ Contributing guide
+    url: https://github.com/NotAFlightRisk/fineprint/blob/main/.github/CONTRIBUTING.md
+    about: Want to fix it yourself? Editing one YAML file is all it takes.
