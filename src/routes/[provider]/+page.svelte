@@ -3,7 +3,7 @@
   import Records from '#lib/components/Records.svelte';
   import Seo from '#lib/components/Seo.svelte';
   import type { Item } from '#lib/data/types.js';
-  import { formatDate, formatValue } from '#lib/format.js';
+  import { formatDate, formatValue, showEntry } from '#lib/format.js';
   import { editUrl, historyUrl, site } from '#lib/site.js';
   import { byId, checklist, located } from '#lib/summary.js';
   import { tip } from '#lib/tip.js';
@@ -150,12 +150,16 @@
         {#each category.criteria as criterion (criterion.id)}
           {@const entry = provider.criteria[criterion.id]}
           <div class="row" id={criterion.id}>
-            <dt {@attach tip(criterion.description)}>{criterion.label}</dt>
+            <dt>
+              <button type="button" class="plain" {@attach tip(criterion.description)}
+                >{criterion.label}</button
+              >
+            </dt>
             <dd>
               <p class="value">
                 {#if entry?.grade !== 'info'}<GradeMark grade={entry?.grade} />{/if}
                 <span class:unknown={!entry || entry.value === null}
-                  >{formatValue(criterion, entry?.value)}</span
+                  >{showEntry(criterion, entry)}</span
                 >
                 {#if entry?.evidence}<span class="evidence">{entry.evidence}</span>{/if}
                 {#each entry?.sources ?? [] as ref (ref)}
@@ -405,9 +409,7 @@
   }
 
   dt {
-    width: fit-content;
     font-weight: 600;
-    cursor: help;
   }
 
   dd {

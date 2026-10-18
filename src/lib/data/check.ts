@@ -172,9 +172,13 @@ function checkEntry(
 
   const found = slips(entry.value, criterion);
   for (const { at: inner, message } of found) flag([...at, ...inner], message);
+  const future = (date: unknown) => typeof date === 'string' && date > today.toISOString();
+  if (criterion.type === 'date' && future(entry.value)) flag(at, 'is in the future');
   if (criterion.type === 'records' && Array.isArray(entry.value))
     entry.value.forEach((item, index) => {
-      if (isObject(item) && 'source' in item) cite([...at, index, 'source'], item.source);
+      if (!isObject(item)) return;
+      if ('source' in item) cite([...at, index, 'source'], item.source);
+      if (future(item.date)) flag([...at, index, 'date'], "is in the future - it hasn't happened yet");
     });
   if (found.length) return;
 

@@ -24,6 +24,9 @@ criteria:
       - date: 2025-02-30
         auditor: Cure53
         scope: everything
+      - date: 2099-01-01
+        auditor: Cure53
+        scope: no_logs
   pricing:
     monthly: { amount: 4.999, currency: EURO }
   vibes:

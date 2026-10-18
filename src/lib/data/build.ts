@@ -14,16 +14,20 @@ export const isLong = (raw: unknown): raw is Partial<Entry> & { value: Value } =
 
 export const entryOf = (raw: unknown) => (isLong(raw) ? raw : { value: (raw ?? null) as Value });
 
-function derive(criteria: Record<string, Entry>, criterion: Criterion): Value | undefined {
+function derive(criteria: Record<string, Entry>, criterion: Criterion): Partial<Entry> | undefined {
   const hq = criteria['jurisdiction.hq']?.value as string | null;
   const best = criteria['pricing.best']?.value as Price | null;
   const devices = criteria['features.connections']?.value;
   switch (criterion.id) {
     case 'jurisdiction.eyes':
-      return hq && eyes(hq);
+      return hq ? { value: eyes(hq) } : undefined;
     case 'pricing.per_connection':
+      if (best && devices === 'unlimited')
+        return { value: null, grade: 'na', note: 'Unlimited devices, so there is no per-device price.' };
       if (!best || typeof devices !== 'number') return undefined;
-      return { amount: Math.round((best.amount / devices) * 100) / 100, currency: best.currency };
+      return {
+        value: { amount: Math.round((best.amount / devices) * 100) / 100, currency: best.currency }
+      };
   }
 }
 
@@ -32,7 +36,7 @@ export function unify(categories: Category[], id: string, raw: Raw, today: Date)
   for (const criterion of categories.flatMap((category) => category.criteria)) {
     const given = raw.criteria[criterion.category]?.[criterion.key];
     const entry: Partial<Entry> | undefined = criterion.derived
-      ? { value: derive(criteria, criterion) }
+      ? derive(criteria, criterion)
       : given === undefined
         ? undefined
         : entryOf(given);

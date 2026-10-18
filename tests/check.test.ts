@@ -46,6 +46,10 @@ describe('validator', () => {
     expect(said('jurisdiction.hq')[0].line).toBe(10);
   });
 
+  it('refuses records dated in the future', () => {
+    expect(said('transparency.audits[1].date')[0].message).toMatch(/in the future/);
+  });
+
   it('flags missing required criteria', () => {
     expect(said('logging')[0].message).toMatch(/needs policy/);
   });

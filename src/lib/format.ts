@@ -1,5 +1,5 @@
 import { countryName, flag } from './data/countries.ts';
-import type { Criterion, Item, Price, Value } from './data/types.ts';
+import type { Criterion, Entry, Item, Price, Value } from './data/types.ts';
 
 const day = new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
 const month = new Intl.DateTimeFormat('en-GB', { month: 'short', year: 'numeric' });
@@ -65,3 +65,8 @@ export function formatValue(criterion: Criterion, value: Value | undefined): str
       return String(value);
   }
 }
+
+export const showEntry = (criterion: Criterion, entry: Entry | undefined) =>
+  entry?.grade === 'na' && entry.value === null
+    ? "Doesn't apply"
+    : formatValue(criterion, entry?.value);
