@@ -1,4 +1,4 @@
-import { countryName, flag } from './data/countries.ts';
+import { countryName } from './data/countries.ts';
 import type { Criterion, Entry, Item, Price, Value } from './data/types.ts';
 
 const day = new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
@@ -43,7 +43,7 @@ export function formatValue(criterion: Criterion, value: Value | undefined): str
     case 'date':
       return formatDate(value as string);
     case 'country':
-      return `${flag(value as string)} ${countryName(value as string)}`;
+      return countryName(value as string);
     case 'countries':
       return list((value as string[]).map(countryName));
     case 'enum':

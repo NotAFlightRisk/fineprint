@@ -25,6 +25,3 @@ export const eyes = (country: string) =>
 
 const names = new Intl.DisplayNames(['en-GB'], { type: 'region' });
 export const countryName = (code: string) => names.of(code) ?? code;
-
-export const flag = (code: string) =>
-  String.fromCodePoint(...[...code].map((letter) => 0x1f1a5 + letter.charCodeAt(0)));

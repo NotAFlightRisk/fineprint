@@ -1,6 +1,6 @@
-import { data } from '#lib/server/data.js';
+import { data, flags } from '#lib/server/data.js';
 
 export const load = () => {
   const { categories, providers } = data();
-  return { categories, providers };
+  return { categories, providers, flags: flags() };
 };

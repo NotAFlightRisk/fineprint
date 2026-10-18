@@ -4,9 +4,14 @@
   import { checklist, flagged, located } from '#lib/summary.js';
   import { tip } from '#lib/tip.js';
   import External from './External.svelte';
+  import Flag from './Flag.svelte';
   import GradeMark from './GradeMark.svelte';
 
-  let { provider, criteria }: { provider: Provider; criteria: Map<string, Criterion> } = $props();
+  let {
+    provider,
+    criteria,
+    flag
+  }: { provider: Provider; criteria: Map<string, Criterion>; flag?: string } = $props();
 
   const best = $derived(provider.criteria['pricing.best']);
   const flags = $derived(flagged(provider, criteria));
@@ -24,13 +29,13 @@
     />
   </header>
 
-  <p class="where">{located(provider, criteria)}</p>
+  <p class="where"><Flag src={flag} />{located(provider, criteria).join(' · ')}</p>
 
   <ul class="checks">
     {#each checklist(provider, criteria) as check (check.id)}
       <li>
         <GradeMark grade={check.grade} />
-        <button type="button" class="plain" {@attach tip(check.tip)}>{check.label}</button>
+        <button type="button" class="plain noted" {@attach tip(check.tip)}>{check.label}</button>
       </li>
     {/each}
   </ul>
@@ -41,7 +46,7 @@
         unknown{/if}
     </span>
     {#if flags.length}
-      <button type="button" class="plain flags" {@attach tip(flags.join('\n'))}>
+      <button type="button" class="plain noted flags" {@attach tip(flags.join('\n'))}>
         {flags.length} red flag{flags.length === 1 ? '' : 's'}
       </button>
     {:else}

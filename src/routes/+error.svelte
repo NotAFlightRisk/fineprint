@@ -26,7 +26,7 @@
 
     & h1 {
       font-size: var(--text-display);
-      letter-spacing: -0.045em;
+      letter-spacing: -0.04em;
     }
 
     & p {

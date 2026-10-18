@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Flag from '#lib/components/Flag.svelte';
   import GradeMark from '#lib/components/GradeMark.svelte';
   import Records from '#lib/components/Records.svelte';
   import Seo from '#lib/components/Seo.svelte';
@@ -9,7 +10,7 @@
   import { tip } from '#lib/tip.js';
 
   let { data } = $props();
-  const { provider, categories } = $derived(data);
+  const { provider, categories, flags } = $derived(data);
 
   const criteria = $derived(byId(categories));
   const website = $derived(provider.criteria['identity.website'].value as string);
@@ -34,7 +35,7 @@
 
   const passes = $derived(checks.filter((check) => check.grade === 'good').map((c) => c.label));
   const description = $derived(
-    `${provider.name}, based in ${where}. ${passes.length ? `${passes.join(', ')}. ` : ''}${provider.flags.length} red flag${provider.flags.length === 1 ? '' : 's'}. Logging, audits, payment, apps and pricing, every claim sourced.`
+    `${provider.name}, based in ${where.join(', ')}. ${passes.length ? `${passes.join(', ')}. ` : ''}${provider.flags.length} red flag${provider.flags.length === 1 ? '' : 's'}. Logging, audits, payment, apps and pricing, every claim sourced.`
   );
 
   const schema = $derived({
@@ -77,15 +78,20 @@
 
 <article>
   <header class="head">
-    <img src="/icons/{provider.icon}" alt="" width="64" height="64" />
     <div class="name">
-      <h1>{provider.name}</h1>
-      <p>
+      <h1><img src="/icons/{provider.icon}" alt="" width="64" height="64" />{provider.name}</h1>
+      <p class="meta">
         <a href={website} target="_blank" rel="noopener external"
           >{formatValue(criteria.get('identity.website')!, website)}</a
         >
-        <span aria-hidden="true">·</span>
-        {where}
+        {#each where as part, index (part)}
+          <span aria-hidden="true">·</span>
+          <span>
+            {#if index === 0}<Flag
+                src={flags[provider.criteria['jurisdiction.hq'].value as string]}
+              />{/if}{part}
+          </span>
+        {/each}
       </p>
     </div>
     <p class="checked" class:stale={provider.stale}>
@@ -109,34 +115,37 @@
 
   <section class="summary" aria-labelledby="summary">
     <h2 id="summary">Summary</h2>
-    <ul class="checks">
-      {#each checks as check (check.id)}
-        <li>
-          <GradeMark grade={check.grade} />
-          <button type="button" class="plain" {@attach tip(check.tip)}>{check.label}</button>
-        </li>
-      {/each}
-    </ul>
-    <div class="flags">
-      <h3>{provider.flags.length || 'No'} red flag{provider.flags.length === 1 ? '' : 's'}</h3>
-      {#if provider.flags.length}
-        <ul>
-          {#each provider.flags as id (id)}
-            {@const criterion = criteria.get(id)!}
-            <li>
-              <GradeMark grade="bad" />
-              <span
-                ><a href="#{id}">{criterion.label}</a>: {formatValue(
-                  criterion,
-                  provider.criteria[id].value
-                )}</span
-              >
-            </li>
-          {/each}
-        </ul>
-      {:else}
-        <p>Nothing graded red. Have a read below anyway, the details matter.</p>
-      {/if}
+    <div class="facts">
+      <ul class="checks">
+        {#each checks as check (check.id)}
+          <li>
+            <GradeMark grade={check.grade} />
+            <button type="button" class="plain noted" {@attach tip(check.tip)}>{check.label}</button
+            >
+          </li>
+        {/each}
+      </ul>
+      <div class="flags">
+        <h3>{provider.flags.length || 'No'} red flag{provider.flags.length === 1 ? '' : 's'}</h3>
+        {#if provider.flags.length}
+          <ul>
+            {#each provider.flags as id (id)}
+              {@const criterion = criteria.get(id)!}
+              <li>
+                <GradeMark grade="bad" />
+                <span
+                  ><a href="#{id}">{criterion.label}</a>: {formatValue(
+                    criterion,
+                    provider.criteria[id].value
+                  )}</span
+                >
+              </li>
+            {/each}
+          </ul>
+        {:else}
+          <p>Nothing graded red. Have a read below anyway, the details matter.</p>
+        {/if}
+      </div>
     </div>
   </section>
 
@@ -158,6 +167,9 @@
             <dd>
               <p class="value">
                 {#if entry?.grade !== 'info'}<GradeMark grade={entry?.grade} />{/if}
+                {#if criterion.type === 'country' && typeof entry?.value === 'string'}
+                  <Flag src={flags[entry.value]} />
+                {/if}
                 <span class:unknown={!entry || entry.value === null}
                   >{showEntry(criterion, entry)}</span
                 >
@@ -223,35 +235,46 @@
 </article>
 
 <style>
+  article {
+    --strip: 5rem;
+  }
+
   .head {
     display: grid;
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: 1fr auto;
     align-items: end;
     gap: var(--space-4) var(--space-5);
     padding-bottom: var(--space-5);
 
     & h1 {
+      display: flex;
+      align-items: center;
+      gap: 0.2em;
       font-size: var(--text-display);
-      letter-spacing: -0.045em;
+      letter-spacing: -0.04em;
       line-height: 0.95;
     }
 
-    & .name p {
+    & img {
+      width: 0.85em;
+      height: 0.85em;
+    }
+
+    & .meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 0 var(--space-2);
       margin-top: var(--space-3);
       color: var(--text-muted);
+
+      & > * {
+        white-space: nowrap;
+      }
     }
 
     @media (max-width: 40rem) {
-      grid-template-columns: auto 1fr;
-
-      & img {
-        width: 3rem;
-        height: 3rem;
-      }
-
-      & .checked {
-        grid-column: 1 / -1;
-      }
+      grid-template-columns: 1fr;
     }
   }
 
@@ -270,6 +293,21 @@
     grid-template-columns: repeat(auto-fill, minmax(6.5rem, 1fr));
     border-top: var(--rule-heavy) solid var(--rule);
     border-bottom: var(--rule-thin) solid var(--rule);
+    background: var(--surface);
+
+    @media (min-width: 56rem) {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      grid-template-columns: none;
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(max-content, 1fr);
+      column-gap: var(--space-4);
+      overflow-x: auto;
+      scrollbar-width: thin;
+      scrollbar-color: var(--rule-faint) transparent;
+      white-space: nowrap;
+    }
 
     & a {
       display: grid;
@@ -315,7 +353,7 @@
 
   .summary {
     display: grid;
-    grid-template-columns: 3fr 5fr 4fr;
+    grid-template-columns: 3fr 9fr;
     gap: var(--space-5);
     padding-block: var(--space-6);
 
@@ -324,6 +362,16 @@
     }
 
     @media (max-width: 56rem) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .facts {
+    display: grid;
+    grid-template-columns: minmax(9rem, 2fr) 5fr;
+    gap: var(--space-5) var(--space-4);
+
+    @media (max-width: 40rem) {
       grid-template-columns: 1fr;
     }
   }
@@ -366,6 +414,10 @@
     border-top: var(--rule-heavy) solid var(--rule);
     scroll-margin-top: var(--space-4);
 
+    @media (min-width: 56rem) {
+      scroll-margin-top: var(--strip);
+    }
+
     @media (max-width: 56rem) {
       grid-template-columns: 1fr;
     }
@@ -398,6 +450,10 @@
     padding-block: var(--space-3);
     border-bottom: var(--rule-thin) solid var(--rule-faint);
     scroll-margin-top: var(--space-6);
+
+    @media (min-width: 56rem) {
+      scroll-margin-top: calc(var(--strip) + var(--space-4));
+    }
 
     &:target {
       background: var(--surface-sunken);
@@ -459,7 +515,8 @@
 
   .refs {
     display: grid;
-    gap: var(--space-4);
+    grid-template-columns: repeat(auto-fill, minmax(min(24rem, 100%), 1fr));
+    gap: var(--space-4) var(--space-5);
     margin: 0;
     padding: 0;
     list-style: none;
@@ -469,6 +526,10 @@
       grid-template-columns: 2rem 1fr;
       gap: var(--space-3);
       scroll-margin-top: var(--space-6);
+
+      @media (min-width: 56rem) {
+        scroll-margin-top: calc(var(--strip) + var(--space-4));
+      }
 
       &:target {
         background: var(--surface-sunken);
