@@ -126,7 +126,9 @@
         {/each}
       </ul>
       <div class="flags">
-        <h3>{provider.flags.length || 'No'} red flag{provider.flags.length === 1 ? '' : 's'}</h3>
+        <h3 class:none={!provider.flags.length}>
+          {provider.flags.length || 'No'} red flag{provider.flags.length === 1 ? '' : 's'}
+        </h3>
         {#if provider.flags.length}
           <ul>
             {#each provider.flags as id (id)}
@@ -399,6 +401,10 @@
     & h3 {
       font-size: var(--text-md);
       color: var(--bad);
+
+      &.none {
+        color: var(--text-muted);
+      }
     }
 
     & p {
