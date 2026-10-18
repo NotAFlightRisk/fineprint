@@ -1,5 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+  import { MediaQuery } from 'svelte/reactivity';
+  import { fade } from 'svelte/transition';
   import GradeMark, { gradeNames } from '#lib/components/GradeMark.svelte';
   import ProviderCard from '#lib/components/ProviderCard.svelte';
   import ProviderTable from '#lib/components/ProviderTable.svelte';
@@ -13,6 +15,9 @@
   const sources = $derived(
     data.providers.reduce((total, provider) => total + Object.keys(provider.refs).length, 0)
   );
+
+  const calm = new MediaQuery('prefers-reduced-motion: reduce');
+  const appear = $derived({ duration: calm.current ? 0 : 180 });
 
   const views = ['cards', 'table'] as const;
   let view = $state<(typeof views)[number]>('cards');
@@ -60,13 +65,24 @@
 </div>
 
 {#if view === 'cards'}
-  <div class="cards">
+  <div class="cards" in:fade={appear}>
     {#each data.providers as provider (provider.id)}
-      <ProviderCard {provider} {criteria} />
+      <ProviderCard
+        {provider}
+        {criteria}
+        flag={data.flags[provider.criteria['jurisdiction.hq'].value as string]}
+      />
     {/each}
   </div>
 {:else}
-  <ProviderTable providers={data.providers} categories={data.categories} {criteria} />
+  <div in:fade={appear}>
+    <ProviderTable
+      providers={data.providers}
+      categories={data.categories}
+      {criteria}
+      flags={data.flags}
+    />
+  </div>
 {/if}
 
 <style>
@@ -79,7 +95,7 @@
     & h1 {
       grid-column: 1 / span 8;
       font-size: var(--text-display);
-      letter-spacing: -0.045em;
+      letter-spacing: -0.04em;
       line-height: 0.95;
     }
 

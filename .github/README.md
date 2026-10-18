@@ -72,7 +72,12 @@ docker run -p 8080:8080 notaflightrisk/fineprint
 
 ### Option 3: From a release
 
-Every [release](https://github.com/NotAFlightRisk/fineprint/releases) has the built site attached as `site.zip`. Unzip it and serve the folder with anything, like `npx serve site`.
+Every [release](https://github.com/NotAFlightRisk/fineprint/releases) has the built site attached as `site.zip`. Unzip it and serve the folder with anything:
+
+```bash
+unzip site.zip -d site
+npx serve site
+```
 
 ### Option 4: Build from source
 

@@ -119,7 +119,7 @@
     & h1 {
       grid-column: 1 / span 5;
       font-size: var(--text-display);
-      letter-spacing: -0.045em;
+      letter-spacing: -0.04em;
       line-height: 0.95;
     }
 

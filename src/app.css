@@ -149,3 +149,8 @@ a {
   text-align: left;
   cursor: help;
 }
+
+.noted {
+  text-decoration: underline dotted var(--text-muted);
+  text-underline-offset: 0.25em;
+}

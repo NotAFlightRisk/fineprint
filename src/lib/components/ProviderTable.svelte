@@ -5,13 +5,20 @@
   import { checklist, checks } from '#lib/summary.js';
   import { compare, toCsv, download } from '#lib/table.js';
   import { tip } from '#lib/tip.js';
+  import Flag from './Flag.svelte';
   import GradeMark from './GradeMark.svelte';
 
   let {
     providers,
     categories,
-    criteria
-  }: { providers: Provider[]; categories: Category[]; criteria: Map<string, Criterion> } = $props();
+    criteria,
+    flags
+  }: {
+    providers: Provider[];
+    categories: Category[];
+    criteria: Map<string, Criterion>;
+    flags: Record<string, string>;
+  } = $props();
 
   let query = $state('');
   let sort = $state<{ id: string; direction: 1 | -1 }>({ id: 'name', direction: 1 });
@@ -88,7 +95,10 @@
   </fieldset>
 
   <details class="columns">
-    <summary>Columns <span>{shown.length} of {categories.length}</span></summary>
+    <summary>
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3.5 10.5 8 6 12.5" /></svg>
+      Columns <span>{shown.length} of {categories.length}</span>
+    </summary>
     <fieldset>
       <legend class="visually-hidden">Show categories</legend>
       {#each categories as category (category.id)}
@@ -171,11 +181,15 @@
             <td
               onpointerenter={() => (active = column.id)}
               onfocusin={() => (active = column.id)}
+              onfocusout={() => (active = undefined)}
               class:missing={!entry}
             >
               <span class="cell">
                 {#if entry && entry.grade !== 'info'}
                   <GradeMark grade={entry.grade} />
+                {/if}
+                {#if column.type === 'country' && typeof entry?.value === 'string'}
+                  <Flag src={flags[entry.value]} />
                 {/if}
                 {#if note}
                   <button type="button" class="plain noted text" {@attach tip(note)}>{text}</button>
@@ -232,6 +246,8 @@
   }
 
   .chips {
+    min-inline-size: 0;
+
     @media (max-width: 40rem) {
       flex-wrap: nowrap;
       overflow-x: auto;
@@ -248,6 +264,11 @@
     margin-right: var(--space-2);
     padding-block: var(--space-1);
     color: var(--text-muted);
+
+    @media (max-width: 40rem) {
+      float: none;
+      padding-block: 0 var(--space-2);
+    }
   }
 
   .tools button {
@@ -268,13 +289,34 @@
 
   .columns {
     & summary {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
       padding: var(--space-1) var(--space-3);
       border: var(--rule-thin) solid var(--rule);
+      list-style: none;
       cursor: pointer;
+
+      &::-webkit-details-marker {
+        display: none;
+      }
+
+      & svg {
+        width: 0.875rem;
+        height: 0.875rem;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 2;
+        transition: rotate var(--quick) var(--ease);
+      }
 
       & span {
         color: var(--text-muted);
       }
+    }
+
+    &[open] summary svg {
+      rotate: 90deg;
     }
 
     & fieldset {
@@ -323,6 +365,8 @@
   .scroller {
     overflow: auto;
     max-height: 80vh;
+    scrollbar-color: var(--rule-faint) transparent;
+    scrollbar-width: thin;
     border-top: var(--rule-heavy) solid var(--rule);
   }
 
@@ -332,8 +376,12 @@
     font-size: var(--text-sm);
   }
 
-  col.active {
-    background: var(--surface-sunken);
+  col {
+    transition: background-color var(--quick) var(--ease);
+
+    &.active {
+      background: var(--surface-sunken);
+    }
   }
 
   th,
@@ -401,8 +449,14 @@
     z-index: 3;
   }
 
-  tbody tr:hover > * {
-    background-color: color-mix(in srgb, var(--surface-sunken) 60%, transparent);
+  tbody tr {
+    & > * {
+      transition: background-color var(--quick) var(--ease);
+    }
+
+    &:is(:hover, :focus-within) > * {
+      background-color: color-mix(in srgb, var(--surface-sunken) 60%, transparent);
+    }
   }
 
   tbody th a {
@@ -443,12 +497,6 @@
     -webkit-line-clamp: 3;
     line-clamp: 3;
     overflow: hidden;
-  }
-
-  .noted {
-    text-decoration: underline dotted var(--text-muted);
-    text-underline-offset: 0.25em;
-    cursor: help;
   }
 
   .missing {
