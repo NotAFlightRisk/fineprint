@@ -1,6 +1,8 @@
 import { data } from '#lib/server/data.js';
 import { site } from '#lib/site.js';
 
+export const prerender = true;
+
 export const GET = () => {
   const { built, providers } = data();
   const pages = [

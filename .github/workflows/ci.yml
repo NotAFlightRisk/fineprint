@@ -68,7 +68,8 @@ jobs:
           for i in $(seq 1 20); do
             if curl -fsS http://127.0.0.1:8080/methodology > /dev/null; then
               echo "up after ${i}s"
-              exit 0
+              curl -fsS http://127.0.0.1:8080/api/providers.json > /dev/null
+              exit
             fi
             sleep 1
           done
