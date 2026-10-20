@@ -31,7 +31,9 @@ export default defineConfig({
           '/api/providers.json',
           '/api/criteria.json',
           '/schema/provider.json',
-          '/sitemap.xml'
+          '/sitemap.xml',
+          '/llms.txt',
+          '/logo.png'
         ]
       },
       csp: {

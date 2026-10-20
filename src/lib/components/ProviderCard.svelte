@@ -1,38 +1,27 @@
 <script lang="ts">
-  import type { Criterion, Provider } from '#lib/data/types.js';
-  import { formatValue } from '#lib/format.js';
-  import { checklist, flagged, located } from '#lib/summary.js';
+  import { plural, type Summary } from '#lib/summary.js';
   import { tip } from '#lib/tip.js';
   import External from './External.svelte';
   import Flag from './Flag.svelte';
   import GradeMark from './GradeMark.svelte';
 
-  let {
-    provider,
-    criteria,
-    flag
-  }: { provider: Provider; criteria: Map<string, Criterion>; flag?: string } = $props();
-
-  const best = $derived(provider.criteria['pricing.best']);
-  const flags = $derived(flagged(provider, criteria));
+  let { summary }: { summary: Summary } = $props();
+  const { id, name, icon, website, hq, where, checks, flags, price } = $derived(summary);
 </script>
 
 <article class="card">
   <header>
-    <a class="title" href="/{provider.id}">
-      <img src="/icons/{provider.icon}" alt="" width="32" height="32" />
-      <h2>{provider.name}</h2>
+    <a class="title" href="/{id}">
+      <img src="/icons/{icon}" alt="" width="32" height="32" />
+      <h2>{name}</h2>
     </a>
-    <External
-      href={provider.criteria['identity.website'].value as string}
-      label="{provider.name} website"
-    />
+    <External href={website} label="{name} website" />
   </header>
 
-  <p class="where"><Flag src={flag} />{located(provider, criteria).join(' · ')}</p>
+  <p class="where"><Flag code={hq} />{where.join(' · ')}</p>
 
   <ul class="checks">
-    {#each checklist(provider, criteria) as check (check.id)}
+    {#each checks as check (check.id)}
       <li>
         <GradeMark grade={check.grade} />
         <button type="button" class="plain noted" {@attach tip(check.tip)}>{check.label}</button>
@@ -41,20 +30,15 @@
   </ul>
 
   <footer>
-    <span>
-      {#if best?.value}From {formatValue(criteria.get('pricing.best')!, best.value)}{:else}Price
-        unknown{/if}
-    </span>
+    <span>{price ? `From ${price}` : 'Price unknown'}</span>
     {#if flags.length}
       <button type="button" class="plain noted flags" {@attach tip(flags.join('\n'))}>
-        {flags.length} red flag{flags.length === 1 ? '' : 's'}
+        {plural(flags.length, 'red flag')}
       </button>
     {:else}
       <span class="none">No red flags</span>
     {/if}
-    <a class="more" href="/{provider.id}"
-      >Full picture<span class="visually-hidden"> of {provider.name}</span></a
-    >
+    <a class="more" href="/{id}">Full picture<span class="visually-hidden"> of {name}</span></a>
   </footer>
 </article>
 

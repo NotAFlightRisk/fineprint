@@ -85,3 +85,29 @@ export const located = (provider: Provider, criteria: Map<string, Criterion>) =>
   ['jurisdiction.hq', 'jurisdiction.eyes']
     .filter((id) => provider.criteria[id])
     .map((id) => formatValue(criteria.get(id)!, provider.criteria[id].value));
+
+export const plural = (count: number, word: string) => `${count} ${word}${count === 1 ? '' : 's'}`;
+
+// The gist of a provider: what its card, social image and llms.txt entry show
+export function summarise(provider: Provider, criteria: Map<string, Criterion>) {
+  const best = provider.criteria['pricing.best']?.value;
+  return {
+    id: provider.id,
+    name: provider.name,
+    icon: provider.icon,
+    website: provider.criteria['identity.website'].value as string,
+    hq: provider.criteria['jurisdiction.hq'].value as string,
+    where: located(provider, criteria),
+    checks: checklist(provider, criteria),
+    flags: flagged(provider, criteria),
+    price: best ? formatValue(criteria.get('pricing.best')!, best) : undefined
+  };
+}
+
+export type Summary = ReturnType<typeof summarise>;
+
+export function verdict({ name, where, checks, flags }: Summary) {
+  const passed = checks.filter((check) => check.grade === 'good').length;
+  const red = flags.length ? plural(flags.length, 'red flag') : 'no red flags';
+  return `${name} (${where.join(', ')}) passes ${passed} of ${checks.length} privacy checks, with ${red}.`;
+}
