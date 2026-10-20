@@ -5,9 +5,9 @@
   import GradeMark from '#lib/components/GradeMark.svelte';
   import ProviderCard from '#lib/components/ProviderCard.svelte';
   import Seo from '#lib/components/Seo.svelte';
-  import type { Category, Provider } from '#lib/data/types.js';
-  import { gradeNames } from '#lib/marks.js';
-  import { absolute, schemaIds } from '#lib/site.js';
+  import type { Category, Provider } from '#lib/data/types.ts';
+  import { gradeNames } from '#lib/marks.ts';
+  import { absolute, schemaIds } from '#lib/site.ts';
 
   let { data } = $props();
   const { summaries, stats } = $derived(data);
@@ -158,9 +158,6 @@
 
     & h1 {
       grid-column: 1 / span 8;
-      font-size: var(--text-display);
-      letter-spacing: -0.04em;
-      line-height: 0.95;
     }
 
     & p {

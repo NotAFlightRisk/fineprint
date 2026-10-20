@@ -1,6 +1,6 @@
 <script lang="ts">
-  import type { Grade } from '#lib/data/types.js';
-  import { gradeNames, markPaths } from '#lib/marks.js';
+  import type { Grade } from '#lib/data/types.ts';
+  import { gradeNames, markPaths } from '#lib/marks.ts';
 
   let { grade, label }: { grade: Grade | undefined; label?: string } = $props();
   const key = $derived(grade ?? 'unknown');
@@ -27,21 +27,6 @@
     color: var(--on-grade);
     vertical-align: -0.2em;
 
-    &[data-grade='good'] {
-      --grade: var(--good);
-    }
-    &[data-grade='ok'] {
-      --grade: var(--ok);
-    }
-    &[data-grade='bad'] {
-      --grade: var(--bad);
-    }
-    &[data-grade='info'] {
-      --grade: var(--info);
-    }
-    &[data-grade='na'] {
-      --grade: var(--na);
-    }
     &[data-grade='unknown'] {
       background: none;
       color: var(--text-muted);

@@ -1,5 +1,5 @@
-import type { Category, Criterion, Grade, Match, Provider } from './data/types.ts';
-import { formatValue, optionLabel, showEntry } from './format.ts';
+import type { Category, Criterion, Grade, Match, Provider } from '#lib/data/types.ts';
+import { formatValue, optionLabel, showEntry } from '#lib/format.ts';
 
 export interface Check {
   id: string;
@@ -86,7 +86,7 @@ export const located = (provider: Provider, criteria: Map<string, Criterion>) =>
     .filter((id) => provider.criteria[id])
     .map((id) => formatValue(criteria.get(id)!, provider.criteria[id].value));
 
-export const plural = (count: number, word: string) => `${count} ${word}${count === 1 ? '' : 's'}`;
+export const redFlags = (count: number) => `${count || 'No'} red flag${count === 1 ? '' : 's'}`;
 
 // The gist of a provider: what its card, social image and llms.txt entry show
 export function summarise(provider: Provider, criteria: Map<string, Criterion>) {
@@ -108,6 +108,6 @@ export type Summary = ReturnType<typeof summarise>;
 
 export function verdict({ name, where, checks, flags }: Summary) {
   const passed = checks.filter((check) => check.grade === 'good').length;
-  const red = flags.length ? plural(flags.length, 'red flag') : 'no red flags';
+  const red = redFlags(flags.length).toLowerCase();
   return `${name} (${where.join(', ')}) passes ${passed} of ${checks.length} privacy checks, with ${red}.`;
 }

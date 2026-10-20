@@ -6,7 +6,7 @@ let sentry: Promise<(error: unknown) => void> | undefined;
 // The SDK only downloads once something's actually broken, so pages that work never pay for it,
 // and if it can't load (offline, or a newer deploy) the report's dropped rather than thrown again
 function report(error: unknown) {
-  sentry ??= import('#lib/sentry.js').then(({ start }) => start(dsn)).catch(() => () => {});
+  sentry ??= import('#lib/sentry.ts').then(({ start }) => start(dsn)).catch(() => () => {});
   sentry.then((capture) => capture(error));
 }
 

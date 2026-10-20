@@ -1,5 +1,5 @@
-import { countries, currencies } from './countries.ts';
-import { evidences, grades, type Category, type Criterion, type Field } from './types.ts';
+import { countries, currencies } from '#lib/data/countries.ts';
+import { evidences, grades, type Category, type Criterion, type Field } from '#lib/data/types.ts';
 
 const text = { type: 'string', minLength: 1 };
 const date = { type: 'string', pattern: '^\\d{4}-\\d{2}-\\d{2}$' };

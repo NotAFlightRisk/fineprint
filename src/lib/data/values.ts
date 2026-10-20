@@ -1,5 +1,5 @@
-import { countries, currencies } from './countries.ts';
-import type { Criterion, Field } from './types.ts';
+import { countries, currencies } from '#lib/data/countries.ts';
+import type { Criterion, Field } from '#lib/data/types.ts';
 
 export interface Slip {
   at: (string | number)[];

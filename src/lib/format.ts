@@ -1,5 +1,5 @@
-import { countryName } from './data/countries.ts';
-import type { Criterion, Entry, Item, Price, Value } from './data/types.ts';
+import { countryName } from '#lib/data/countries.ts';
+import type { Criterion, Entry, Item, Price, Value } from '#lib/data/types.ts';
 
 const day = new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
 const month = new Intl.DateTimeFormat('en-GB', { month: 'short', year: 'numeric' });

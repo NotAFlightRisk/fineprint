@@ -2,11 +2,11 @@ import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { initWasm, Resvg } from '@resvg/resvg-wasm';
 import satori from 'satori';
-import { formatDate } from '#lib/format.js';
-import { gradeNames, markPaths, type MarkKey } from '#lib/marks.js';
-import { ogSize } from '#lib/site.js';
-import { byId, plural, summarise, type Summary } from '#lib/summary.js';
-import { data, flagFile, stats } from '#lib/server/data.js';
+import { formatDate } from '#lib/format.ts';
+import { gradeNames, markPaths, type MarkKey } from '#lib/marks.ts';
+import { ogSize } from '#lib/site.ts';
+import { byId, redFlags, summarise, type Summary } from '#lib/summary.ts';
+import { data, flagFile, stats } from '#lib/server/data.ts';
 
 // Social images drawn at build time: satori lays the divs out as SVG, resvg makes the PNG
 
@@ -42,7 +42,7 @@ const file = (path: string, type: string) =>
   `data:${type};base64,${readFileSync(path).toString('base64')}`;
 const icon = (name: string) =>
   file(resolve('static/icons', name), name.endsWith('.svg') ? 'image/svg+xml' : 'image/png');
-const flag = (code: string) => file(flagFile(code), 'image/svg+xml');
+const countryFlag = (code: string) => file(flagFile(code), 'image/svg+xml');
 
 function mark(key: MarkKey, size: number) {
   const ink = key === 'unknown' ? colour.muted : '#ffffff';
@@ -98,10 +98,10 @@ const headline = (text: string, size = 88) =>
     text
   );
 
-const redFlags = (flags: string[], size: number) =>
+const flagCount = (count: number, size: number) =>
   div(
-    { fontSize: size, fontWeight: 600, color: flags.length ? colour.bad : colour.muted },
-    flags.length ? plural(flags.length, 'red flag') : 'No red flags'
+    { fontSize: size, fontWeight: 600, color: count ? colour.bad : colour.muted },
+    redFlags(count)
   );
 
 function providerImage(summary: Summary, checked: string) {
@@ -117,7 +117,7 @@ function providerImage(summary: Summary, checked: string) {
         headline(summary.name, size),
         div(
           { alignItems: 'center', fontSize: 30, color: colour.muted },
-          img(flag(summary.hq), 36, 27, { marginRight: 14 }),
+          img(countryFlag(summary.hq), 36, 27, { marginRight: 14 }),
           summary.where.join(' · ')
         )
       )
@@ -141,7 +141,7 @@ function providerImage(summary: Summary, checked: string) {
         fontSize: 30
       },
       summary.price ? `From ${summary.price}` : 'Price unknown',
-      redFlags(summary.flags, 30)
+      flagCount(summary.flags.length, 30)
     )
   );
 }
@@ -179,7 +179,7 @@ function homeImage(summaries: Summary[], counts: ReturnType<typeof stats>) {
             )
           ),
           div({ gap: 6 }, ...checks.map((check) => mark(check.grade ?? 'unknown', 24))),
-          redFlags(flags, 20)
+          flagCount(flags.length, 20)
         )
       ),
       summaries.length > shown.length &&

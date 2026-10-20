@@ -1,6 +1,6 @@
 import { json } from '@sveltejs/kit';
-import { providerSchema } from '#lib/data/schema.js';
-import { data } from '#lib/server/data.js';
+import { providerSchema } from '#lib/data/schema.ts';
+import { data } from '#lib/server/data.ts';
 
 export const prerender = true;
 

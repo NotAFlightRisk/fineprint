@@ -1,12 +1,13 @@
 <script lang="ts">
   import { SvelteSet } from 'svelte/reactivity';
-  import type { Category, Entry, Provider } from '#lib/data/types.js';
-  import { showEntry } from '#lib/format.js';
-  import { byId, checklist, checks } from '#lib/summary.js';
-  import { compare, toCsv, download } from '#lib/table.js';
-  import { tip } from '#lib/tip.js';
-  import Flag from './Flag.svelte';
-  import GradeMark from './GradeMark.svelte';
+  import External from '#lib/components/External.svelte';
+  import Flag from '#lib/components/Flag.svelte';
+  import GradeMark from '#lib/components/GradeMark.svelte';
+  import type { Category, Entry, Provider } from '#lib/data/types.ts';
+  import { showEntry } from '#lib/format.ts';
+  import { byId, checklist, checks } from '#lib/summary.ts';
+  import { compare, toCsv, download } from '#lib/table.ts';
+  import { tip } from '#lib/tip.ts';
 
   let { providers, categories }: { providers: Provider[]; categories: Category[] } = $props();
 
@@ -58,6 +59,7 @@
     download(`fineprint-${stamp()}.json`, 'application/json', JSON.stringify(rows, null, 2));
 </script>
 
+<!-- the sort buttons keep their tooltips but skip the ⓘ, which would crowd the header -->
 {#snippet heading(id: string, label: string, description?: string)}
   <button type="button" onclick={() => sortBy(id)} {@attach tip(description)}>
     {label}
@@ -184,17 +186,12 @@
                   <Flag code={entry.value} />
                 {/if}
                 {#if note}
-                  <button type="button" class="plain noted text" {@attach tip(note)}>{text}</button>
+                  <button type="button" class="noted text" {@attach tip(note)}>{text}</button>
                 {:else}
                   <span class="text">{text}</span>
                 {/if}
                 {#if source}
-                  <a class="source" href={source.url} target="_blank" rel="noopener external">
-                    <svg viewBox="0 0 16 16" aria-hidden="true"
-                      ><path d="M6 3.5H3.5v9h9V10M9 3.5h3.5V7M12.5 3.5 7 9" /></svg
-                    >
-                    <span class="visually-hidden">Source: {source.title} (opens in a new tab)</span>
-                  </a>
+                  <External href={source.url} label="Source: {source.title}" />
                 {/if}
               </span>
             </td>
@@ -493,23 +490,6 @@
 
   .missing {
     color: var(--text-muted);
-  }
-
-  .source {
-    color: var(--text-muted);
-
-    &:hover {
-      color: var(--text);
-    }
-
-    & svg {
-      width: 0.875rem;
-      height: 0.875rem;
-      vertical-align: -0.1em;
-      fill: none;
-      stroke: currentColor;
-      stroke-width: 1.5;
-    }
   }
 
   .empty {

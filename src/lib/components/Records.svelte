@@ -1,7 +1,7 @@
 <script lang="ts">
-  import type { Criterion, Item, Ref } from '#lib/data/types.js';
-  import { formatDate, newestFirst, optionLabel } from '#lib/format.js';
-  import GradeMark from './GradeMark.svelte';
+  import GradeMark from '#lib/components/GradeMark.svelte';
+  import type { Criterion, Item, Ref } from '#lib/data/types.ts';
+  import { formatDate, newestFirst, optionLabel } from '#lib/format.ts';
 
   let {
     criterion,

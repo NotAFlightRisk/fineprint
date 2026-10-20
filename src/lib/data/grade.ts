@@ -1,4 +1,4 @@
-import type { Criterion, Grade, Item, Match, Price, Value } from './types.ts';
+import type { Criterion, Grade, Item, Match, Price, Value } from '#lib/data/types.ts';
 
 function monthsAgo(today: Date, months: number) {
   const [year, month] = [today.getUTCFullYear(), today.getUTCMonth() - months];

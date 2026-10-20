@@ -1,6 +1,6 @@
-import { data, stats } from '#lib/server/data.js';
-import { absolute, site } from '#lib/site.js';
-import { byId, summarise, verdict } from '#lib/summary.js';
+import { data, stats } from '#lib/server/data.ts';
+import { absolute, site } from '#lib/site.ts';
+import { byId, summarise, verdict } from '#lib/summary.ts';
 
 export const prerender = true;
 

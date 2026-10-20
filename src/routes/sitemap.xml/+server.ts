@@ -1,5 +1,5 @@
-import { data, stats } from '#lib/server/data.js';
-import { absolute } from '#lib/site.js';
+import { data, stats } from '#lib/server/data.ts';
+import { absolute } from '#lib/site.ts';
 
 export const prerender = true;
 

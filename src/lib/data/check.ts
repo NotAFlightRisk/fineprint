@@ -1,10 +1,10 @@
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
-import { entryOf, isLong } from './build.ts';
-import { grade } from './grade.ts';
-import type { Source } from './load.ts';
-import { evidences, grades, type Category, type Criterion } from './types.ts';
-import { slips } from './values.ts';
+import { entryOf, isLong } from '#lib/data/build.ts';
+import { grade } from '#lib/data/grade.ts';
+import type { Source } from '#lib/data/load.ts';
+import { evidences, grades, type Category, type Criterion } from '#lib/data/types.ts';
+import { slips } from '#lib/data/values.ts';
 
 export interface Problem {
   file: string;
