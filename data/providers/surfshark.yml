@@ -1,0 +1,515 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Surfshark
+icon: surfshark.svg
+checked: 2026-10-20
+
+criteria:
+  identity:
+    website: https://surfshark.com
+    legal_entity:
+      value: Surfshark B.V.
+      sources: [terms]
+    owner:
+      value: Nord Security
+      note: >-
+        Surfshark merged with Nord Security in 2022 under a Dutch holding company, Cyberspace B.V.
+        Nord Security's co-founders each hold over 25% of Surfshark's UK company.
+      sources: [cybernews, pcmag-merger, companies-house]
+    founded:
+      value: 2018
+      sources: [about]
+    team:
+      value: public
+      sources: [about]
+    sister_brands:
+      value: [NordVPN, NordLayer]
+      note: >-
+        NordLayer is Nord Security's business VPN. Atlas VPN, another Nord Security brand, shut down
+        in April 2024.
+      sources: [merger-pr, nord-about, atlas-shutdown]
+    acquisitions:
+      value:
+        - date: 2022-02-02
+          acquirer: Nord Security
+          source: merger-pr
+      note: >-
+        A merger with Nord Security under one holding company, with terms undisclosed. Both say they
+        still run separately.
+      sources: [merger-pr, merger-blog, pcmag-merger]
+
+  jurisdiction:
+    hq:
+      value: NL
+      note: Its terms are still governed by British Virgin Islands law, as they were before it moved to the Netherlands.
+      sources: [terms, hq-help]
+    entities:
+      value: [GB, LT, NL, US]
+      note: >-
+        Surfshark B.V. in the Netherlands, Surfshark Limited in the UK, Surfshark Inc. and Incogni Inc.
+        in the US, and Netflow, UAB in Lithuania, which holds its patents. It also has offices in
+        Poland and Germany.
+      sources: [incogni-privacy, incogni-terms, companies-house, patent, trust-center, about]
+
+  logging:
+    traffic:
+      value: none
+      evidence: verified
+      sources: [privacy, deloitte-2022, deloitte-2025]
+    dns:
+      value: none
+      evidence: verified
+      sources: [privacy, deloitte-2022]
+    timestamps:
+      value: temporary
+      evidence: verified
+      note: Kept with your user ID while you're connected, and deleted within 15 minutes of disconnecting.
+      sources: [privacy, logs-help, deloitte-2025]
+    bandwidth:
+      value: none
+      evidence: verified
+      sources: [logs-help, deloitte-2022]
+    source_ip:
+      value: temporary
+      evidence: claimed
+      note: >-
+        The policy says it may be kept for up to 15 minutes after you disconnect, though the statement
+        Deloitte checked in 2025 only mentions your user ID.
+      sources: [privacy, logs-help, deloitte-2025]
+    proven:
+      value: [audit]
+      evidence: verified
+      sources: [deloitte-2022, deloitte-2025]
+    policy: https://surfshark.com/privacy
+
+  transparency:
+    audits:
+      value:
+        - date: 2026-03-01
+          auditor: Cure53
+          scope: apps
+          source: audit-cure53-2026
+        - date: 2025-12-10
+          auditor: SecuRing
+          scope: infra
+          source: audit-securing-infra-2025
+        - date: 2025-06-10
+          auditor: Deloitte
+          scope: no_logs
+          source: deloitte-2025
+        - date: 2025-04-03
+          auditor: SecuRing
+          scope: apps
+          source: audit-securing-apps-2025
+        - date: 2025-01-22
+          auditor: NowSecure
+          scope: apps
+          source: audit-masa-2025
+        - date: 2023-11-28
+          auditor: NowSecure
+          scope: apps
+          source: audit-masa-2023
+        - date: 2022-12-02
+          auditor: Deloitte
+          scope: no_logs
+          source: deloitte-2022
+        - date: 2021-03-28
+          auditor: Cure53
+          scope: infra
+          source: audit-cure53-2021
+        - date: 2018-11-01
+          auditor: Cure53
+          scope: apps
+          source: audit-cure53-2018
+      evidence: verified
+      note: >-
+        Dated to the last day of testing where the report gives it, otherwise to the report or
+        announcement.
+      sources: [trust-center]
+    report:
+      value: regular
+      sources: [transparency, transparency-blog]
+    canary:
+      value: none
+      note: Surfshark has dropped its warrant canary in favour of quarterly transparency reports.
+      sources: [transparency]
+    bug_bounty:
+      value: true
+      note: Rewards are at Surfshark's discretion.
+      sources: [bounty]
+    incidents:
+      value:
+        - date: 2026-08-31
+          summary: >-
+            Attackers got into an internal test server left reachable from the internet by mistake,
+            and a proxy server, reaching some binaries and service configs. Surfshark says no user
+            data or VPN service was affected, rotated build credentials that had been left in its
+            code history, and published a timeline a week after containing it.
+          handled: well
+          source: incident-2026
+      sources: [incident-2026, incident-2026-news]
+
+  account:
+    email:
+      value: required
+      note: A Google or Apple sign-in works instead.
+      sources: [privacy, free-trial]
+    personal_data:
+      value: []
+      note: The policy says payment partners may ask for a name, address or ID in some countries.
+      sources: [privacy]
+    payment:
+      value: [card, paypal, app_store, bitcoin, other_crypto]
+      note: Crypto goes through CoinGate, which lists Bitcoin, Ethereum, Litecoin and others but not Monero.
+      sources: [payment, crypto, refund-help]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn, ikev2, proprietary]
+      note: Proprietary is Dausos, Surfshark's own protocol, in beta in the macOS App Store app only.
+      sources: [protocols, dausos, protocols-page]
+    post_quantum:
+      value: optional
+      note: >-
+        WireGuard uses post-quantum key exchange in the macOS, iOS, Android and Linux apps, but the
+        apps default to an Automatic protocol setting and Windows isn't listed.
+      sources: [protocols-page, pq-launch, pq-2026, protocol-default]
+    kill_switch:
+      value: system
+      note: >-
+        A setting in every app. The soft mode blocks traffic when the VPN drops, the strict one also
+        while you're disconnected.
+      sources: [kill-switch, kill-switch-help]
+    dns:
+      value: first_party
+      sources: [dns-help]
+
+  infra:
+    ram_only:
+      value: all
+      evidence: verified
+      note: Deloitte checked this in 2022.
+      sources: [trust-center, servers, deloitte-2022]
+    hosting:
+      value: null
+      note: Surfshark doesn't say whether it owns or rents its servers.
+      sources: [trust-center, servers]
+    virtual_locations:
+      value: disclosed
+      note: >-
+        47 of its 142 locations were virtual on 2026-10-20, and the apps label them. Surfshark
+        doesn't say where they really are.
+      sources: [virtual, servers-api, virtual-labels]
+    servers:
+      value: 4500
+      note: Listed as 4500+.
+      sources: [servers, server-locations]
+    countries:
+      value: 100
+      note: In 46 of them, every location was virtual on 2026-10-20, with the servers elsewhere.
+      sources: [servers, servers-api]
+
+  features:
+    connections:
+      value: unlimited
+      note: Subject to a fair use policy, and three devices during a free trial.
+      sources: [devices, terms, pricing]
+    multihop:
+      value: true
+      sources: [multihop]
+    obfuscation:
+      value: [proprietary]
+      note: >-
+        A modified OpenVPN that Surfshark applies whenever you use OpenVPN. Shadowsocks support ended
+        in November 2021.
+      sources: [obfuscation, noborders, shadowsocks]
+    port_forwarding:
+      value: false
+      sources: [port-forwarding]
+    split_tunnel:
+      value: true
+      note: Not in the Linux app.
+      sources: [features-help]
+    blocking:
+      value: [ads, trackers, malware]
+      sources: [clean-web, features-help]
+
+  clients:
+    platforms:
+      value: [windows, macos, linux_gui, ios, android, browser]
+      note: Routers need manual setup. The Linux command-line client is a legacy version, so isn't counted.
+      sources: [download, linux, linux-legacy, devices]
+    open_source:
+      value: none
+      note: Its GitHub only holds a few infrastructure tools.
+      sources: [github]
+    telemetry:
+      value: null
+      note: >-
+        The Android app has toggles for crash reports and usage analytics, and the policy says both
+        need consent, but we couldn't confirm whether they're on by default.
+      sources: [privacy, android-setup]
+    trackers:
+      value: 3
+      note: AppsFlyer, Google Crashlytics and Firebase Analytics, in version 3.25.0 from February 2026.
+      sources: [exodus]
+    fdroid:
+      value: false
+      sources: [fdroid]
+
+  pricing:
+    monthly:
+      value: { amount: 18.95, currency: USD }
+      note: Starter, the cheapest tier, in US dollars before tax. The pricing page shows your local currency.
+      sources: [pricing, pricing-api, renewal]
+    best:
+      value: { amount: 2.49, currency: USD }
+      note: >-
+        Starter's 2-year plan, sold as 24 months plus 3 free for $67.23. Surfshark says it A/B tests
+        its prices.
+      sources: [pricing, pricing-api, renewal]
+    best_term:
+      value: 27
+      sources: [pricing, pricing-api]
+    renewal_increase:
+      value: 164
+      note: After the first 27 months it renews at $79 a year ($6.58 a month).
+      sources: [pricing-api, renewal]
+    free_tier:
+      value: false
+      note: There's a 7-day free trial on the 1 and 2-year plans, but it takes payment details.
+      sources: [pricing, free-trial]
+    refund_days:
+      value: 30
+      note: First purchase only, and not for gift cards or most resellers.
+      sources: [terms, refund-help]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        The pricing page sells Rotating IP with "Stay untraceable online", though Surfshark's own
+        site admits a VPN can't make you anonymous.
+      sources: [pricing, crypto]
+    affiliates:
+      value: true
+      note: A 40% revenue share on new sales.
+      sources: [affiliate]
+    review_sites:
+      value: true
+      note: Cybernews, which reviews VPNs, says its owner Mediatech is backed by Nord Security's founders.
+      sources: [cybernews]
+    activism:
+      value: true
+      note: >-
+        Gives free VPN access to journalists and activists facing censorship, and runs a fund of up to
+        €100,000 a year for digital rights projects.
+      sources: [emergency-vpn, advocacy-fund]
+
+refs:
+  privacy:
+    url: https://surfshark.com/privacy
+    title: Surfshark privacy policy
+  terms:
+    url: https://surfshark.com/terms-of-service
+    title: Surfshark terms of service
+  about:
+    url: https://surfshark.com/about-us
+    title: About Surfshark
+  hq-help:
+    url: https://support.surfshark.com/hc/en-us/articles/360003088553-Where-is-Surfshark-located
+    title: Where is Surfshark located?
+  trust-center:
+    url: https://surfshark.com/trust-center
+    title: Surfshark trust center
+  merger-pr:
+    url: https://www.prnewswire.co.uk/news-releases/nord-security-and-surfshark-join-forces-to-strengthen-positions-in-the-cybersecurity-industry-848240050.html
+    title: Nord Security and Surfshark join forces (PR Newswire)
+  merger-blog:
+    url: https://surfshark.com/blog/surfshark-merges-with-nord-security
+    title: Surfshark and Nord Security are getting aboard to secure people's digital lives
+  pcmag-merger:
+    url: https://uk.pcmag.com/vpn/138489/nordvpns-parent-company-is-merging-with-vpn-provider-surfshark
+    title: NordVPN's parent company is merging with VPN provider Surfshark (PCMag)
+  cybernews:
+    url: https://cybernews.com/editorial-policy/
+    title: Cybernews editorial policy
+  companies-house:
+    url: https://find-and-update.company-information.service.gov.uk/company/11737924/persons-with-significant-control
+    title: Surfshark Limited, persons with significant control (Companies House)
+  nord-about:
+    url: https://nordsecurity.com/about-us/
+    title: About Nord Security
+  atlas-shutdown:
+    url: https://www.techradar.com/computing/cyber-security/atlasvpn-shuts-down-handing-users-over-to-nordvpn
+    title: AtlasVPN shuts down, handing users over to NordVPN (TechRadar)
+  incogni-privacy:
+    url: https://incogni.com/legal/privacy-policy
+    title: Incogni privacy policy
+  incogni-terms:
+    url: https://incogni.com/legal/terms-of-service
+    title: Incogni terms of service
+  patent:
+    url: https://patents.google.com/patent/US11310146B1/en
+    title: US11310146B1, assigned to Netflow, UAB (Google Patents)
+  logs-help:
+    url: https://support.surfshark.com/hc/en-us/articles/360003068834-Do-you-keep-any-logs-of-my-internet-activities
+    title: Do you keep any logs of my internet activities?
+  deloitte-2022:
+    url: https://surfshark.com/wp-content/uploads/2023/01/Surfshark_Nologs-assurance.pdf
+    title: Deloitte, no-logs assurance report for Surfshark B.V. (2022)
+  deloitte-2025:
+    url: https://surfshark.com/wp-content/uploads/2025/06/ISAE_3000-_Report-Surfshark_No_Log_VPN.pdf
+    title: Deloitte, no-logs assurance report for Surfshark B.V. (2025)
+  audit-cure53-2026:
+    url: https://surfshark.com/media/NOR-29-summary.pdf
+    title: Cure53, Dausos protocol architecture and crypto audit, summary (2026)
+  audit-securing-infra-2025:
+    url: https://surfshark.com/media/SurfShark-InfrastructureTestReport_20251217_Public.pdf
+    title: SecuRing, network infrastructure penetration test (2025)
+  audit-securing-apps-2025:
+    url: https://surfshark.com/media/attestation_letter_20250609-sig.pdf
+    title: SecuRing, apps, extensions and websites assessment letter (2025)
+  audit-masa-2025:
+    url: https://appdefensealliance.dev/reports/com.surfshark.vpnclient.android_1737563031288000.pdf
+    title: NowSecure, MASA report for the Android app (2025)
+  audit-masa-2023:
+    url: https://appdefensealliance.dev/reports/com.surfshark.vpnclient.android_1701184051798000.pdf
+    title: NowSecure, MASA report for the Android app (2023)
+  audit-cure53-2021:
+    url: https://surfshark.com/wp-content/uploads/2021/05/SRF-02-summary.pdf
+    title: Cure53, server and VPN configuration audit, summary (2021)
+  audit-cure53-2018:
+    url: https://cure53.de/pentest-report_surfshark.pdf
+    title: Cure53, browser extension pentest (2018)
+  transparency:
+    url: https://surfshark.com/transparency-report
+    title: Surfshark transparency report
+  transparency-blog:
+    url: https://surfshark.com/blog/surfshark-releases-its-first-transparency-report
+    title: Surfshark introduces quarterly transparency reports
+  bounty:
+    url: https://surfshark.com/bounty-policy
+    title: Surfshark bug bounty program
+  incident-2026:
+    url: https://surfshark.com/blog/security-update-september-2026-incident-report
+    title: 'Security update: September 2026 incident report'
+  incident-2026-news:
+    url: https://www.bleepingcomputer.com/news/security/surfshark-vpn-says-hackers-breached-internal-testing-proxy-servers/
+    title: Surfshark VPN says hackers breached internal testing, proxy servers (BleepingComputer)
+  free-trial:
+    url: https://support.surfshark.com/hc/en-us/articles/360026123554-Does-Surfshark-offer-a-free-trial
+    title: Does Surfshark offer a free trial?
+  payment:
+    url: https://support.surfshark.com/hc/en-us/articles/360003069034-What-payment-options-do-you-offer
+    title: What payment options do you offer?
+  crypto:
+    url: https://surfshark.com/vpn-with-bitcoin
+    title: Get a VPN that accepts Bitcoin
+  refund-help:
+    url: https://support.surfshark.com/hc/en-us/articles/360003103653-What-is-Surfshark-s-refund-policy
+    title: What is Surfshark's refund policy?
+  protocols:
+    url: https://support.surfshark.com/hc/en-us/articles/360010324739-What-protocols-can-I-use-with-Surfshark
+    title: What protocols can I use with Surfshark?
+  dausos:
+    url: https://support.surfshark.com/hc/en-us/articles/34333469217682-What-is-Dausos-the-new-VPN-protocol-and-how-do-I-enable-it
+    title: What is Dausos, the new VPN protocol, and how do I enable it?
+  protocols-page:
+    url: https://surfshark.com/features/surfshark-vpn-protocols
+    title: 'Surfshark VPN protocols: Dausos, WireGuard, OpenVPN, IKEv2'
+  pq-launch:
+    url: https://surfshark.com/blog/surfshark-launches-post-quantum-protection-on-wireguard
+    title: Surfshark launches post-quantum protection on WireGuard
+  pq-2026:
+    url: https://surfshark.com/blog/post-quantum-secure-wireguard
+    title: Surfshark's WireGuard is now fully post-quantum secure
+  protocol-default:
+    url: https://support.surfshark.com/hc/en-us/articles/360012228500-How-to-fix-slow-connection-issues-on-Android
+    title: How to fix slow connection issues on Android
+  kill-switch:
+    url: https://surfshark.com/features/kill-switch
+    title: Surfshark kill switch
+  kill-switch-help:
+    url: https://support.surfshark.com/hc/en-us/articles/360016978413-How-to-use-Kill-Switch
+    title: How to use Kill Switch
+  dns-help:
+    url: https://support.surfshark.com/hc/en-us/articles/360003409733-What-DNS-addresses-do-you-get-after-connecting-to-Surfshark
+    title: What DNS addresses do you get after connecting to Surfshark?
+  servers:
+    url: https://surfshark.com/servers
+    title: Surfshark VPN servers
+  server-locations:
+    url: https://support.surfshark.com/hc/en-us/articles/360003069614-Server-locations
+    title: Server locations
+  servers-api:
+    url: https://api.surfshark.com/v4/server/clusters/generic
+    title: Surfshark server locations (API)
+  virtual:
+    url: https://support.surfshark.com/hc/en-us/articles/360023512493-What-are-virtual-locations
+    title: What are virtual locations?
+  virtual-labels:
+    url: https://www.techradar.com/pro/vpn/surfshark-has-just-fixed-its-issue-with-virtual-location-labels
+    title: Surfshark has just fixed its issue with virtual location labels (TechRadar)
+  devices:
+    url: https://support.surfshark.com/hc/en-us/articles/360003069434-How-many-devices-can-I-use-with-Surfshark-simultaneously
+    title: How many devices can I use with Surfshark simultaneously?
+  multihop:
+    url: https://support.surfshark.com/hc/en-us/articles/360026295774-What-is-Surfshark-MultiHop-and-how-to-use-it
+    title: What is Surfshark MultiHop and how to use it?
+  obfuscation:
+    url: https://surfshark.com/features/obfuscated-servers
+    title: Obfuscated servers
+  noborders:
+    url: https://support.surfshark.com/hc/en-us/articles/360010423359-How-to-use-Surfshark-NoBorders
+    title: How to use Surfshark NoBorders
+  shadowsocks:
+    url: https://support.surfshark.com/hc/en-us/articles/4410093515538-Why-is-Shadowsocks-no-longer-available
+    title: Why is Shadowsocks no longer available?
+  port-forwarding:
+    url: https://surfshark.com/blog/vpn-port-forwarding
+    title: VPN port forwarding
+  features-help:
+    url: https://support.surfshark.com/hc/en-us/articles/10448039999122-Surfshark-Features
+    title: Surfshark features
+  clean-web:
+    url: https://surfshark.com/features/clean-web
+    title: Surfshark CleanWeb
+  download:
+    url: https://surfshark.com/download
+    title: Download Surfshark
+  linux:
+    url: https://support.surfshark.com/hc/en-us/articles/5067279648146-How-to-set-up-Surfshark-VPN-on-Linux
+    title: How to set up Surfshark VPN on Linux
+  linux-legacy:
+    url: https://support.surfshark.com/hc/en-us/articles/360017418334-How-to-set-up-Surfshark-VPN-on-Linux-Legacy-version
+    title: How to set up Surfshark VPN on Linux (legacy version)
+  github:
+    url: https://github.com/surfshark
+    title: Surfshark on GitHub
+  android-setup:
+    url: https://support.surfshark.com/hc/en-us/articles/360010921959-How-to-set-up-Surfshark-VPN-on-Android
+    title: How to set up Surfshark VPN on Android
+  exodus:
+    url: https://reports.exodus-privacy.eu.org/en/reports/com.surfshark.vpnclient.android/latest/
+    title: Exodus Privacy report for com.surfshark.vpnclient.android
+  fdroid:
+    url: https://search.f-droid.org/?q=surfshark&lang=en
+    title: F-Droid search for Surfshark
+  pricing:
+    url: https://surfshark.com/pricing
+    title: Surfshark pricing
+  pricing-api:
+    url: https://api.surfshark.com/v1/product/payment/plans?countryCode=US&currency=USD
+    title: Surfshark plan prices for the US (API)
+  renewal:
+    url: https://surfshark.com/terms-of-service/pricing
+    title: Billing practices, currency policy and renewal prices
+  affiliate:
+    url: https://surfshark.com/affiliate
+    title: Surfshark affiliate program
+  emergency-vpn:
+    url: https://surfshark.com/emergency-vpn
+    title: Emergency VPN
+  advocacy-fund:
+    url: https://surfshark.com/cybersecurity-advocacy-fund
+    title: Cybersecurity Advocacy Fund
