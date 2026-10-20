@@ -1,10 +1,12 @@
 <script lang="ts">
-  import GradeMark, { gradeNames } from '#lib/components/GradeMark.svelte';
+  import GradeMark from '#lib/components/GradeMark.svelte';
   import Seo from '#lib/components/Seo.svelte';
+  import { gradeNames } from '#lib/marks.js';
   import { site } from '#lib/site.js';
   import { describeRule } from '#lib/summary.js';
 
   let { data } = $props();
+  const { categories, criteria } = $derived(data);
 
   const grades = [
     ['good', 'Meets or beats best practice.'],
@@ -25,21 +27,19 @@
 </script>
 
 <Seo
-  title="How grading works - {site.name}"
-  description="How fineprint grades VPN providers: the criteria, the rules behind every colour, and where the data comes from."
+  title="How VPNs are graded: every criterion and rule"
+  description="How fineprint grades VPN providers on {criteria} privacy criteria: the rule behind every grade, what counts as evidence, and where the data comes from."
   path="/methodology"
+  crumb="How grading works"
 />
 
 <section class="intro">
   <h1>How grading works</h1>
   <div class="prose">
     <p>
-      Every provider is measured on the same {data.categories.reduce(
-        (total, category) => total + category.criteria.length,
-        0
-      )} criteria. Each value comes with a source, and the grade comes from the rules below, not from
-      anyone's opinion of the brand. Where a rule would mislead for one provider, the grade can be overridden,
-      but only with a note saying why.
+      Every provider is measured on the same {criteria} criteria. Each value comes with a source, and
+      the grade comes from the rules below, not from anyone's opinion of the brand. Where a rule would
+      mislead for one provider, the grade can be overridden, but only with a note saying why.
     </p>
     <p>
       Nobody pays to be listed, there are no affiliate links, and the data lives in
@@ -75,7 +75,7 @@
   </div>
 </section>
 
-{#each data.categories as category (category.id)}
+{#each categories as category (category.id)}
   <section class="category" id={category.id} aria-labelledby="{category.id}-title">
     <div class="lead">
       <h2 id="{category.id}-title">{category.label}</h2>

@@ -1,24 +1,16 @@
 <script lang="ts">
   import { SvelteSet } from 'svelte/reactivity';
-  import type { Category, Criterion, Entry, Provider } from '#lib/data/types.js';
+  import type { Category, Entry, Provider } from '#lib/data/types.js';
   import { showEntry } from '#lib/format.js';
-  import { checklist, checks } from '#lib/summary.js';
+  import { byId, checklist, checks } from '#lib/summary.js';
   import { compare, toCsv, download } from '#lib/table.js';
   import { tip } from '#lib/tip.js';
   import Flag from './Flag.svelte';
   import GradeMark from './GradeMark.svelte';
 
-  let {
-    providers,
-    categories,
-    criteria,
-    flags
-  }: {
-    providers: Provider[];
-    categories: Category[];
-    criteria: Map<string, Criterion>;
-    flags: Record<string, string>;
-  } = $props();
+  let { providers, categories }: { providers: Provider[]; categories: Category[] } = $props();
+
+  const criteria = $derived(byId(categories));
 
   let query = $state('');
   let sort = $state<{ id: string; direction: 1 | -1 }>({ id: 'name', direction: 1 });
@@ -189,7 +181,7 @@
                   <GradeMark grade={entry.grade} />
                 {/if}
                 {#if column.type === 'country' && typeof entry?.value === 'string'}
-                  <Flag src={flags[entry.value]} />
+                  <Flag code={entry.value} />
                 {/if}
                 {#if note}
                   <button type="button" class="plain noted text" {@attach tip(note)}>{text}</button>

@@ -1,9 +1,10 @@
 <script lang="ts">
   import { page } from '$app/state';
+  import { site } from '#lib/site.js';
 </script>
 
 <svelte:head>
-  <title>{page.status} - fineprint</title>
+  <title>{page.status === 404 ? 'Page not found' : 'Something broke'} - {site.name}</title>
   <meta name="robots" content="noindex" />
 </svelte:head>
 

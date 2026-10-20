@@ -1,8 +1,8 @@
 <script lang="ts">
-  let { src }: { src: string | undefined } = $props();
+  let { code }: { code: string } = $props();
 </script>
 
-{#if src}<img class="flag" {src} alt="" width="16" height="12" />{/if}
+<img class="flag" src="/flags/{code.toLowerCase()}.svg" alt="" width="16" height="12" />
 
 <style>
   .flag {

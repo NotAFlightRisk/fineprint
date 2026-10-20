@@ -67,8 +67,12 @@ export function check(
       flag(['name'], `is already used by ${names.get(raw.name.toLowerCase())}`);
     else names.set(raw.name.toLowerCase(), source.id);
 
-    if (typeof raw.icon !== 'string' || !existsSync(join(icons, raw.icon)))
-      flag(['icon'], `should name a file in static/icons, like ${source.id}.svg`);
+    if (
+      typeof raw.icon !== 'string' ||
+      !/\.(svg|png)$/.test(raw.icon) ||
+      !existsSync(join(icons, raw.icon))
+    )
+      flag(['icon'], `should name an SVG or PNG in static/icons, like ${source.id}.svg`);
 
     const checked = slips(raw.checked, { type: 'date' })[0];
     if (checked) flag(['checked'], checked.message);

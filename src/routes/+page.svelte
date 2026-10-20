@@ -2,59 +2,120 @@
   import { onMount } from 'svelte';
   import { MediaQuery } from 'svelte/reactivity';
   import { fade } from 'svelte/transition';
-  import GradeMark, { gradeNames } from '#lib/components/GradeMark.svelte';
+  import GradeMark from '#lib/components/GradeMark.svelte';
   import ProviderCard from '#lib/components/ProviderCard.svelte';
-  import ProviderTable from '#lib/components/ProviderTable.svelte';
   import Seo from '#lib/components/Seo.svelte';
-  import { site } from '#lib/site.js';
-  import { byId } from '#lib/summary.js';
+  import type { Category, Provider } from '#lib/data/types.js';
+  import { gradeNames } from '#lib/marks.js';
+  import { absolute, schemaIds } from '#lib/site.js';
 
   let { data } = $props();
-
-  const criteria = $derived(byId(data.categories));
-  const sources = $derived(
-    data.providers.reduce((total, provider) => total + Object.keys(provider.refs).length, 0)
-  );
+  const { summaries, stats } = $derived(data);
 
   const calm = new MediaQuery('prefers-reduced-motion: reduce');
   const appear = $derived({ duration: calm.current ? 0 : 180 });
 
-  const views = ['cards', 'table'] as const;
-  let view = $state<(typeof views)[number]>('cards');
+  let view = $state<'cards' | 'table'>('cards');
+  let table = $state<ReturnType<typeof loadTable>>();
 
-  onMount(() => {
-    try {
-      const saved = localStorage.getItem('view');
-      if (saved === 'table') view = saved;
-    } catch {}
-  });
+  async function json<T>(path: string): Promise<T> {
+    const response = await fetch(path);
+    if (!response.ok) throw new Error(`${path} answered ${response.status}`);
+    return response.json();
+  }
+
+  // The table needs every value of every provider, so it and its code only load when asked for
+  async function loadTable() {
+    const [{ default: ProviderTable }, { providers }, { categories }] = await Promise.all([
+      import('#lib/components/ProviderTable.svelte'),
+      json<{ providers: Provider[] }>('/api/providers.json'),
+      json<{ categories: Category[] }>('/api/criteria.json')
+    ]);
+    return { ProviderTable, providers, categories };
+  }
+
+  function prepare() {
+    if (table) return;
+    table = loadTable();
+    // a failed preload shows if the table's opened, rather than as an uncaught error
+    table.catch(() => {});
+  }
 
   function show(next: typeof view) {
     view = next;
+    if (next === 'table') prepare();
     try {
       localStorage.setItem('view', next);
     } catch {}
   }
+
+  onMount(() => {
+    try {
+      if (localStorage.getItem('view') === 'table') show('table');
+    } catch {}
+  });
+
+  const schema = $derived([
+    {
+      '@type': 'ItemList',
+      name: 'VPN providers compared',
+      numberOfItems: summaries.length,
+      itemListElement: summaries.map(({ id, name }, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        name,
+        url: absolute(`/${id}`)
+      }))
+    },
+    {
+      '@type': 'Dataset',
+      name: 'fineprint VPN comparison data',
+      description: `${stats.providers} VPN providers graded on ${stats.criteria} privacy criteria, covering logging, jurisdiction, audits, payment, apps and pricing. Every value comes with its grade, evidence, notes and sources.`,
+      url: absolute('/'),
+      license: 'https://opensource.org/license/mit',
+      isAccessibleForFree: true,
+      creator: { '@id': schemaIds.publisher },
+      dateModified: stats.updated,
+      distribution: ['providers', 'criteria'].map((name) => ({
+        '@type': 'DataDownload',
+        encodingFormat: 'application/json',
+        contentUrl: absolute(`/api/${name}.json`)
+      }))
+    }
+  ]);
 </script>
 
-<Seo title="{site.name} - the unsponsored VPN comparison" description={site.description} path="/" />
+<Seo
+  title="Unsponsored VPN comparison, every claim sourced"
+  description="Compare {stats.providers} VPNs on {stats.criteria} privacy criteria, from logging and audits to payment and apps. No sponsors or affiliate links, and a source for every claim."
+  path="/"
+  modified={stats.updated}
+  {schema}
+/>
 
 <section class="intro">
   <h1>The VPN fine&nbsp;print, side by side</h1>
   <p>
-    {data.providers.length} providers measured on {criteria.size} things that matter for privacy, backed
-    by {sources} sources. Nobody pays to be here, and every grade follows
+    {stats.providers} providers measured on {stats.criteria} things that matter for privacy, backed by
+    {stats.sources} sources. Nobody pays to be here, and every grade follows
     <a href="/methodology">the same published rules</a>.
   </p>
 </section>
 
 <div class="bar">
   <div class="toggle" role="group" aria-label="View">
-    {#each views as option (option)}
-      <button type="button" aria-pressed={view === option} onclick={() => show(option)}>
-        {option === 'cards' ? 'Cards' : 'Table'}
-      </button>
-    {/each}
+    <button type="button" aria-pressed={view === 'cards'} onclick={() => show('cards')}>
+      Cards
+    </button>
+    <button
+      type="button"
+      aria-pressed={view === 'table'}
+      onclick={() => show('table')}
+      onpointerenter={prepare}
+      onfocus={prepare}
+    >
+      Table
+    </button>
   </div>
   <ul class="key" aria-label="Grade key">
     {#each ['good', 'ok', 'bad', 'info', 'na'] as const as grade (grade)}
@@ -66,23 +127,27 @@
 
 {#if view === 'cards'}
   <div class="cards" in:fade={appear}>
-    {#each data.providers as provider (provider.id)}
-      <ProviderCard
-        {provider}
-        {criteria}
-        flag={data.flags[provider.criteria['jurisdiction.hq'].value as string]}
-      />
+    {#each summaries as summary (summary.id)}
+      <ProviderCard {summary} />
     {/each}
   </div>
 {:else}
-  <div in:fade={appear}>
-    <ProviderTable
-      providers={data.providers}
-      categories={data.categories}
-      {criteria}
-      flags={data.flags}
-    />
-  </div>
+  {#await table}
+    <p class="status" role="status">Loading the table…</p>
+  {:then loaded}
+    {#if loaded}
+      <div in:fade={appear}>
+        <loaded.ProviderTable providers={loaded.providers} categories={loaded.categories} />
+      </div>
+    {/if}
+  {:catch}
+    <!-- reloading also picks up a newer deploy, if that's why its code went missing -->
+    <p class="status" role="status">
+      The table didn't load. <button type="button" onclick={() => location.reload()}
+        >Try again</button
+      >
+    </p>
+  {/await}
 {/if}
 
 <style>
@@ -173,5 +238,19 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
     gap: var(--space-7) var(--space-5);
+  }
+
+  .status {
+    padding-block: var(--space-6);
+    color: var(--text-muted);
+
+    & button {
+      padding: 0;
+      border: 0;
+      background: none;
+      color: var(--text);
+      text-decoration: underline;
+      cursor: pointer;
+    }
   }
 </style>

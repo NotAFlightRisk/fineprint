@@ -5,17 +5,16 @@
   import Seo from '#lib/components/Seo.svelte';
   import type { Item } from '#lib/data/types.js';
   import { formatDate, formatValue, showEntry } from '#lib/format.js';
-  import { editUrl, historyUrl, site } from '#lib/site.js';
-  import { byId, checklist, located } from '#lib/summary.js';
+  import { absolute, editUrl, historyUrl, site } from '#lib/site.js';
+  import { byId, summarise, verdict } from '#lib/summary.js';
   import { tip } from '#lib/tip.js';
 
   let { data } = $props();
-  const { provider, categories, flags } = $derived(data);
+  const { provider, categories } = $derived(data);
 
   const criteria = $derived(byId(categories));
-  const website = $derived(provider.criteria['identity.website'].value as string);
-  const checks = $derived(checklist(provider, criteria));
-  const where = $derived(located(provider, criteria));
+  const summary = $derived(summarise(provider, criteria));
+  const { website, hq, where, checks } = $derived(summary);
 
   const cited = $derived.by(() => {
     const order = new Map<string, number>();
@@ -33,47 +32,27 @@
       .filter(([, entry]) => entry.sources.includes(ref))
       .map(([id]) => criteria.get(id)!.label);
 
-  const passes = $derived(checks.filter((check) => check.grade === 'good').map((c) => c.label));
-  const description = $derived(
-    `${provider.name}, based in ${where.join(', ')}. ${passes.length ? `${passes.join(', ')}. ` : ''}${provider.flags.length} red flag${provider.flags.length === 1 ? '' : 's'}. Logging, audits, payment, apps and pricing, every claim sourced.`
-  );
+  // "Windscribe VPN", but never "Mullvad VPN VPN"
+  const product = $derived(/vpn/i.test(provider.name) ? provider.name : `${provider.name} VPN`);
 
-  const schema = $derived({
-    '@context': 'https://schema.org',
-    '@graph': [
-      {
-        '@type': 'Organization',
-        name: provider.name,
-        legalName: provider.criteria['identity.legal_entity']?.value ?? undefined,
-        url: website,
-        logo: `${site.url}/icons/${provider.icon}`,
-        foundingDate: provider.criteria['identity.founded']?.value?.toString(),
-        address: {
-          '@type': 'PostalAddress',
-          addressCountry: provider.criteria['jurisdiction.hq'].value
-        }
-      },
-      {
-        '@type': 'BreadcrumbList',
-        itemListElement: [
-          { '@type': 'ListItem', position: 1, name: site.name, item: site.url },
-          {
-            '@type': 'ListItem',
-            position: 2,
-            name: provider.name,
-            item: `${site.url}/${provider.id}`
-          }
-        ]
-      }
-    ]
+  const company = $derived({
+    '@type': 'Organization',
+    '@id': absolute(`/${provider.id}#provider`),
+    name: provider.name,
+    legalName: provider.criteria['identity.legal_entity']?.value ?? undefined,
+    url: website,
+    foundingDate: provider.criteria['identity.founded']?.value?.toString(),
+    address: { '@type': 'PostalAddress', addressCountry: hq }
   });
 </script>
 
 <Seo
-  title="{provider.name} VPN fine print - {site.name}"
-  {description}
+  title="{product} review: logs, audits and red flags"
+  description="{verdict(summary)} Logging, audits, payment and pricing, every claim sourced."
   path="/{provider.id}"
-  {schema}
+  crumb={provider.name}
+  modified={provider.checked}
+  about={company}
 />
 
 <article>
@@ -87,9 +66,7 @@
         {#each where as part, index (part)}
           <span aria-hidden="true">·</span>
           <span>
-            {#if index === 0}<Flag
-                src={flags[provider.criteria['jurisdiction.hq'].value as string]}
-              />{/if}{part}
+            {#if index === 0}<Flag code={hq} />{/if}{part}
           </span>
         {/each}
       </p>
@@ -114,7 +91,10 @@
   </nav>
 
   <section class="summary" aria-labelledby="summary">
-    <h2 id="summary">Summary</h2>
+    <div class="lead">
+      <h2 id="summary">Summary</h2>
+      <p>{verdict(summary)}</p>
+    </div>
     <div class="facts">
       <ul class="checks">
         {#each checks as check (check.id)}
@@ -170,7 +150,7 @@
               <p class="value">
                 {#if entry?.grade !== 'info'}<GradeMark grade={entry?.grade} />{/if}
                 {#if criterion.type === 'country' && typeof entry?.value === 'string'}
-                  <Flag src={flags[entry.value]} />
+                  <Flag code={entry.value} />
                 {/if}
                 <span class:unknown={!entry || entry.value === null}
                   >{showEntry(criterion, entry)}</span
@@ -358,10 +338,6 @@
     grid-template-columns: 3fr 9fr;
     gap: var(--space-5);
     padding-block: var(--space-6);
-
-    & h2 {
-      font-size: var(--text-xl);
-    }
 
     @media (max-width: 56rem) {
       grid-template-columns: 1fr;
