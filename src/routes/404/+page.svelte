@@ -1,0 +1,7 @@
+<script lang="ts">
+  import ErrorPage from '#lib/components/ErrorPage.svelte';
+
+  let { data } = $props();
+</script>
+
+<ErrorPage status={404} providers={data.providers} />

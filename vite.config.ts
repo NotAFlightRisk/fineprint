@@ -24,7 +24,9 @@ export default defineConfig({
         runes: ({ filename }) =>
           filename.split(/[/\\]/).includes('node_modules') ? undefined : true
       },
-      adapter: adapter({ fallback: '404.html' }),
+      adapter: adapter(),
+      // the 404 page is served at any depth, so assets need absolute paths
+      paths: { relative: false },
       prerender: {
         entries: [
           '*',
