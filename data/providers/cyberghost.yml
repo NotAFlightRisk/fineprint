@@ -1,0 +1,365 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: CyberGhost VPN
+icon: cyberghost.png
+checked: 2026-10-20
+
+criteria:
+  identity:
+    website: https://www.cyberghostvpn.com
+    legal_entity:
+      value: CyberGhost S.R.L.
+      sources: [tos, about]
+    owner:
+      value: Kape Technologies
+      note: >-
+        Kape is controlled by Teddy Sagi through Unikmind Holdings, which held 98.5% when it took Kape
+        private in 2023.
+      sources: [kape-holding-2023, kape-brands]
+    founded:
+      value: 2011
+      sources: [about, kape-acquisition]
+    team:
+      value: partial
+      note: >-
+        There's no leadership page, but the privacy policy names the chief technology officer and the
+        data protection officer.
+      sources: [privacy-policy]
+    sister_brands:
+      value: [ExpressVPN, Private Internet Access, EventVPN]
+      note: >-
+        EventVPN is a free app built by ExpressVPN's team. ZenMate's users were moved to CyberGhost in
+        2023.
+      sources: [kape-brands, eventvpn-launch, zenmate]
+    acquisitions:
+      value:
+        - date: 2017-03-14
+          acquirer: Kape Technologies
+          source: kape-acquisition
+      note: Bought for up to €9.2 million by Crossrider, which renamed itself Kape Technologies in 2018.
+      sources: [kape-acquisition]
+
+  jurisdiction:
+    hq:
+      value: RO
+      sources: [about, transparency]
+    entities:
+      value: [RO]
+      note: >-
+        CyberGhost S.R.L. is the only company named, though most development is done by a team in
+        Germany. Its parent, Kape, is incorporated in the Isle of Man.
+      sources: [tos, about, companies-house]
+
+  logging:
+    traffic:
+      value: none
+      evidence: verified
+      sources: [privacy-policy, audit-deloitte-2025]
+    dns:
+      value: none
+      evidence: verified
+      sources: [privacy-policy, audit-deloitte-2025]
+    timestamps:
+      value: none
+      evidence: verified
+      sources: [privacy-policy, audit-deloitte-2025]
+    bandwidth:
+      value: none
+      evidence: verified
+      note: >-
+        The privacy policy doesn't mention data use, but the no-logs statement Deloitte checked in 2025
+        says the amount of data transferred isn't stored.
+      sources: [audit-deloitte-2025]
+    source_ip:
+      value: none
+      evidence: verified
+      note: Connection attempts are counted for analytics with the country you connect from, but not your IP.
+      sources: [privacy-policy, audit-deloitte-2025]
+    proven:
+      value: [audit]
+      evidence: verified
+      note: >-
+        Deloitte last checked the server setup against the no-logs policy as of October 2025. No court
+        case or seizure has tested it in public.
+      sources: [audit-deloitte-2025, transparency]
+    policy: https://www.cyberghostvpn.com/privacypolicy
+
+  transparency:
+    audits:
+      value:
+        - date: 2025-10-31
+          auditor: Deloitte
+          scope: no_logs
+          source: audit-deloitte-2025
+        - date: 2024-01-31
+          auditor: Deloitte
+          scope: no_logs
+          source: audit-deloitte-2024
+        - date: 2022-06-30
+          auditor: Deloitte
+          scope: no_logs
+          source: audit-deloitte-2022-date
+      evidence: verified
+      note: >-
+        Each report checks the setup at a single date. The 2022 report was only shared with customers,
+        so its date comes from press coverage.
+      sources: [audit-2025-post, audit-2024-post, audit-2022-post]
+    report:
+      value: regular
+      note: Quarterly, with figures up to mid-2026 when checked.
+      sources: [transparency, transparency-q4-2025]
+    canary:
+      value: none
+      sources: [transparency]
+    bug_bounty:
+      value: true
+      note: Run through YesWeHack. Its blog says rewards go up to $1,250.
+      sources: [bug-bounty, yeswehack]
+    incidents:
+      value:
+        - date: 2023-01-18
+          summary: >-
+            Pen Test Partners reported a Windows app flaw that let local software gain full control of
+            the PC. The fix shipped in version 8.3.10.10015 on 24 February 2023, after a rocky start
+            where the researcher was pushed to report through Bugcrowd.
+          handled: well
+          source: ptp-2023
+        - date: 2018-04-17
+          summary: >-
+            VerSprite reported a Windows app flaw in version 6.5.0.3180 that let local software run code
+            as SYSTEM. CyberGhost replied within days and said the next release would fix it.
+          handled: well
+          source: versprite-2018
+        - date: 2018-06-29
+          summary: >-
+            A breach at Typeform, which CyberGhost used for surveys, exposed 120 email addresses and 14
+            usernames from two old surveys. CyberGhost told the Romanian data protection authority and
+            published what happened a week later.
+          handled: well
+          source: typeform-2018
+      sources: [ptp-2023, versprite-2018, typeform-2018]
+
+  account:
+    email:
+      value: required
+      sources: [pricing]
+    personal_data:
+      value: []
+      note: >-
+        Checkout only asks for an email. Card payments go through Cleverbridge or Stripe, which take a
+        name and billing address.
+      sources: [pricing, privacy-policy]
+    payment:
+      value: [card, paypal, app_store]
+      note: >-
+        Checkout offers cards, PayPal, Apple Pay and Google Pay, plus Amazon Pay in the US. The privacy
+        policy still mentions Bitcoin through BitPay, but checkout doesn't offer it.
+      sources: [pricing, privacy-policy]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn, ikev2]
+      sources: [features]
+    kill_switch:
+      value: null
+      note: It has an automatic kill switch, but CyberGhost's pages don't say whether it works at system level.
+      sources: [features]
+    dns:
+      value: first_party
+      sources: [features]
+
+  infra:
+    ram_only:
+      value: all
+      evidence: verified
+      sources: [server-list, audit-deloitte-2025]
+    hosting:
+      value: mixed
+      note: It says it owns a growing share of its servers, colocated in data centres, without saying how many.
+      sources: [fleet, audit-2022-post]
+    virtual_locations:
+      value: disclosed
+      note: Marked on the server list, which flags 56 of the 100 countries as virtual locations.
+      sources: [server-list]
+    servers:
+      value: 9682
+      note: The sum of the per-city counts on its server list.
+      sources: [server-list]
+    countries:
+      value: 100
+      sources: [server-list]
+
+  features:
+    connections:
+      value: 7
+      note: The terms mention abuse of "unlimited simultaneous devices", but the pricing page and homepage say 7.
+      sources: [pricing, home, tos]
+    split_tunnel:
+      value: true
+      sources: [features]
+    blocking:
+      value: [ads, trackers, malware]
+      note: Through its DNS-based Content Blocker.
+      sources: [features]
+
+  clients:
+    platforms:
+      value: [windows, macos, linux_cli, ios, android, browser]
+      note: >-
+        Routers are only supported by setting them up by hand with OpenVPN. The Chrome and Firefox
+        extensions are free proxies for the browser alone.
+      sources: [download, linux, router, chrome]
+    telemetry:
+      value: null
+      note: >-
+        The apps send connection events to third-party analytics, which the policy calls anonymous. It
+        doesn't say whether you can turn this off.
+      sources: [privacy-policy]
+    trackers:
+      value: 4
+      note: >-
+        AppsFlyer, Google Analytics, Google Tag Manager and Sentry, in version 8.18.0.2844 from January
+        2024, the newest archived report.
+      sources: [exodus]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 12.99, currency: USD }
+      sources: [pricing]
+    best:
+      value: { amount: 2.19, currency: USD }
+      note: An intro price for the first 26 months. It then renews at about $4.75 a month.
+      sources: [pricing]
+    best_term:
+      value: 26
+      note: A 2-year plan with 2 months added.
+      sources: [pricing]
+    renewal_increase:
+      value: 117
+      note: The 26-month plan is $56.94, then renews at $56.94 a year.
+      sources: [pricing]
+    free_tier:
+      value: false
+      note: The free Chrome and Firefox extensions are browser proxies, not the VPN.
+      sources: [chrome, tos]
+    refund_days:
+      value: 45
+      note: On plans of 6 months or more. The monthly plan gets 14 days, and app store purchases go through the store.
+      sources: [tos]
+
+  ethics:
+    affiliates:
+      value: true
+      note: Its affiliate page offers up to 100% commission.
+      sources: [affiliates]
+    review_sites:
+      value: true
+      note: Its owner, Kape, also owns VPN review sites such as vpnMentor and Safety Detectives, which disclose it.
+      sources: [kape-brands, vpnmentor, safety-detectives]
+
+refs:
+  home:
+    url: https://www.cyberghostvpn.com/
+    title: CyberGhost VPN homepage
+  about:
+    url: https://www.cyberghostvpn.com/about
+    title: About CyberGhost
+  privacy-policy:
+    url: https://www.cyberghostvpn.com/privacypolicy
+    title: CyberGhost privacy policy
+  tos:
+    url: https://www.cyberghostvpn.com/terms
+    title: CyberGhost terms and conditions
+  pricing:
+    url: https://www.cyberghostvpn.com/buy
+    title: CyberGhost pricing
+  features:
+    url: https://www.cyberghostvpn.com/features
+    title: CyberGhost VPN features
+  server-list:
+    url: https://www.cyberghostvpn.com/vpn-server
+    title: CyberGhost VPN server locations
+  fleet:
+    url: https://www.cyberghostvpn.com/transparency-report/fleet
+    title: CyberGhost, our tech in numbers
+  download:
+    url: https://www.cyberghostvpn.com/download
+    title: Download CyberGhost VPN
+  linux:
+    url: https://www.cyberghostvpn.com/download/linux-vpn
+    title: CyberGhost VPN for Linux
+  router:
+    url: https://www.cyberghostvpn.com/download/vpn-router
+    title: CyberGhost VPN for routers
+  chrome:
+    url: https://www.cyberghostvpn.com/download/chrome-vpn
+    title: CyberGhost VPN extension for Chrome
+  affiliates:
+    url: https://www.cyberghostvpn.com/affiliate
+    title: Become a CyberGhost affiliate
+  transparency:
+    url: https://www.cyberghostvpn.com/transparency-report
+    title: CyberGhost VPN's transparency reports
+  transparency-q4-2025:
+    url: https://www.cyberghostvpn.com/privacyhub/transparency-report-q4-2025/
+    title: 'CyberGhost quarterly transparency report: October to December 2025'
+  bug-bounty:
+    url: https://www.cyberghostvpn.com/privacyhub/cyberghost-bug-bounty/
+    title: CyberGhost's bug bounty for VPN vulnerabilities
+  yeswehack:
+    url: https://yeswehack.com/programs/cyberghost-bug-bounty-program
+    title: CyberGhost bug bounty program (YesWeHack)
+  audit-deloitte-2025:
+    url: https://download.cyberghostvpn.com/press/documents/CON-003_CG_Report_ISAE_3000_(signed).pdf
+    title: Deloitte, independent limited assurance report on CyberGhost's no-logs safeguards (2025)
+  audit-2025-post:
+    url: https://www.cyberghostvpn.com/privacyhub/privacy-audit-2025/
+    title: Third Deloitte Romania audit verifies our commitment to privacy
+  audit-2024-post:
+    url: https://www.cyberghostvpn.com/privacyhub/privacy-audit-2024/
+    title: CyberGhost VPN announces completion of second independent audit
+  audit-deloitte-2024:
+    url: https://assets.cyberghostvpn.com/files/cg/30013_ISAE_3000_CyberGhost_VPN_report.pdf
+    title: Deloitte, independent limited assurance report for CyberGhost (2024)
+  typeform-2018:
+    url: https://www.cyberghostvpn.com/privacyhub/typeform-breach/
+    title: "Typeform breach update: here's what happened"
+  audit-2022-post:
+    url: https://www.cyberghostvpn.com/privacyhub/privacy-audit/
+    title: CyberGhost VPN completes independent audit by Deloitte (2022)
+  audit-deloitte-2022-date:
+    url: https://www.clubic.com/antivirus-securite-informatique/vpn/actualite-439017-vpn-no-log-cyberghost-joue-la-transparence-avec-un-audit-de-deloitte.html
+    title: 'VPN no log : CyberGhost joue la transparence avec un audit de Deloitte (Clubic)'
+  ptp-2023:
+    url: https://www.pentestpartners.com/security-blog/bullied-by-bugcrowd-over-kape-cyberghost-disclosure/
+    title: Bullied by Bugcrowd over Kape CyberGhost disclosure (Pen Test Partners)
+  versprite-2018:
+    url: https://github.com/VerSprite/research/blob/master/advisories/VS-2018-023.md
+    title: VerSprite, CyberGhost 6 for Windows privilege escalation (CVE-2018-10646)
+  kape-acquisition:
+    url: https://www.investegate.co.uk/announcement/rns/kape-technologies--kape/acquisition/4571358
+    title: Crossrider, acquisition of CyberGhost (RNS, 2017)
+  kape-holding-2023:
+    url: https://www.investegate.co.uk/announcement/rns/kape-technologies--kape/holding-s-in-company/7541123
+    title: Kape Technologies, holding(s) in company (RNS, May 2023)
+  kape-brands:
+    url: https://www.kape.com/our-brands/
+    title: Kape, our brands
+  companies-house:
+    url: https://find-and-update.company-information.service.gov.uk/company/FC038564
+    title: Kape Technologies (Companies House)
+  eventvpn-launch:
+    url: https://www.expressvpn.com/blog/free-vpn-eventvpn/
+    title: 'EventVPN: A free VPN from the team behind ExpressVPN'
+  zenmate:
+    url: https://zenmate.com/blog/zenmate-changes
+    title: Important changes to ZenMate
+  exodus:
+    url: https://reports.exodus-privacy.eu.org/en/reports/de.mobileconcepts.cyberghost/latest/
+    title: Exodus Privacy report for de.mobileconcepts.cyberghost
+  vpnmentor:
+    url: https://www.vpnmentor.com/about-us/
+    title: About vpnMentor
+  safety-detectives:
+    url: https://www.safetydetectives.com/
+    title: Safety Detectives homepage
