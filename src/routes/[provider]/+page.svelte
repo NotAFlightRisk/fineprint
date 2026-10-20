@@ -133,7 +133,7 @@
           {@const entry = provider.criteria[criterion.id]}
           <div class="row" id={criterion.id}>
             <dt>
-              <button type="button" class="plain" {@attach tip(criterion.description)}
+              <button type="button" class="noted" {@attach tip(criterion.description)}
                 >{criterion.label}</button
               >
             </dt>

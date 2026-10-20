@@ -27,7 +27,7 @@
   <footer>
     <span>{price ? `From ${price}` : 'Price unknown'}</span>
     {#if flags.length}
-      <button type="button" class="plain noted flags" {@attach tip(flags.join('\n'))}>
+      <button type="button" class="noted flags" {@attach tip(flags.join('\n'))}>
         {redFlags(flags.length)}
       </button>
     {:else}

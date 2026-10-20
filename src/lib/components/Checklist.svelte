@@ -10,7 +10,7 @@
   {#each checks as check (check.id)}
     <li>
       <GradeMark grade={check.grade} />
-      <button type="button" class="plain noted" {@attach tip(check.tip)}>{check.label}</button>
+      <button type="button" class="noted" {@attach tip(check.tip)}>{check.label}</button>
     </li>
   {/each}
 </ul>

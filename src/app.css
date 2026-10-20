@@ -6,6 +6,8 @@
   --surface: light-dark(#ffffff, #121212);
   --surface-sunken: light-dark(#f3f3f1, #1b1b1b);
   --surface-hover: light-dark(#e9e9e6, #262626);
+  --surface-raised: light-dark(#ffffff, #1f1f1f);
+  --shadow: light-dark(rgb(0 0 0 / 0.14), rgb(0 0 0 / 0.5));
   --text: light-dark(#111111, #f1f1ee);
   --text-muted: light-dark(#5a5a5a, #a6a6a3);
   --rule: var(--text);
@@ -136,29 +138,103 @@ a {
   }
 }
 
+/* floats above the page, with an arrow at its trigger that it grows out of */
 .tip {
   position: fixed;
   z-index: 10;
-  max-width: min(24rem, calc(100vw - 1rem));
+  display: grid;
+  gap: var(--space-1);
+  max-width: min(20rem, calc(100% - 1.25rem));
   padding: var(--space-2) var(--space-3);
-  background: var(--text);
-  color: var(--surface);
+  border: var(--rule-thin) solid var(--rule);
+  background: var(--surface-raised);
+  box-shadow: 0 0.5rem 1.5rem -0.5rem var(--shadow);
+  color: var(--text);
   font-size: var(--text-sm);
   line-height: 1.45;
-  white-space: pre-line;
+  transform-origin: var(--arrow) 100%;
+  transition:
+    opacity var(--quick) var(--ease),
+    scale var(--quick) var(--ease),
+    display var(--quick) allow-discrete;
+
+  /* the arrow is a turned square, with the border on its two outer sides */
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: -0.3125rem;
+    left: var(--arrow);
+    width: 0.625rem;
+    height: 0.625rem;
+    border: 0 solid var(--rule);
+    border-width: 0 var(--rule-thin) var(--rule-thin) 0;
+    background: inherit;
+    translate: -50% 0;
+    rotate: 45deg;
+  }
+
+  &[data-side='below'] {
+    transform-origin: var(--arrow) 0;
+
+    &::before {
+      top: -0.3125rem;
+      bottom: auto;
+      border-width: var(--rule-thin) 0 0 var(--rule-thin);
+    }
+  }
+
+  /* slid over its trigger to fit, so there's nothing to point at */
+  &[data-shifted]::before {
+    display: none;
+  }
+
+  @starting-style {
+    opacity: 0;
+    scale: 0.96;
+  }
+
+  &[hidden] {
+    display: none;
+    opacity: 0;
+    scale: 0.96;
+    transition-duration: 120ms;
+  }
+
+  &[data-instant] {
+    transition: none;
+  }
 }
 
-.plain {
+/* a button that explains itself in a tooltip, marked with an info icon */
+.noted {
   padding: 0;
   border: 0;
   background: none;
   text-align: left;
   cursor: help;
-}
 
-.noted {
-  text-decoration: underline dotted var(--text-muted);
-  text-underline-offset: 0.25em;
+  /* a non-breaking space keeps the icon on the same line as the last word */
+  &::after {
+    content: '\00a0';
+    padding-left: 0.9em;
+    background: var(--text-muted);
+    mask: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='black' stroke-width='1.5'><circle cx='8' cy='8' r='6.75'/><path d='M8 7.25v4M8 4.5v.25' stroke-linecap='square'/></svg>")
+      right center / 0.8em no-repeat;
+    transition: background-color var(--quick) var(--ease);
+  }
+
+  &:is(:hover, [aria-describedby])::after {
+    background: var(--text);
+  }
+
+  /* high contrast mode paints over backgrounds, which would hide the icon */
+  @media (forced-colors: active) {
+    &::after,
+    &:is(:hover, [aria-describedby])::after {
+      background: CanvasText;
+      forced-color-adjust: none;
+    }
+  }
 }
 
 [data-grade='good'] {

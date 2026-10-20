@@ -59,6 +59,7 @@
     download(`fineprint-${stamp()}.json`, 'application/json', JSON.stringify(rows, null, 2));
 </script>
 
+<!-- the sort buttons keep their tooltips but skip the ⓘ, which would crowd the header -->
 {#snippet heading(id: string, label: string, description?: string)}
   <button type="button" onclick={() => sortBy(id)} {@attach tip(description)}>
     {label}
@@ -185,7 +186,7 @@
                   <Flag code={entry.value} />
                 {/if}
                 {#if note}
-                  <button type="button" class="plain noted text" {@attach tip(note)}>{text}</button>
+                  <button type="button" class="noted text" {@attach tip(note)}>{text}</button>
                 {:else}
                   <span class="text">{text}</span>
                 {/if}
