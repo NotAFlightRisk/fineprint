@@ -1,8 +1,8 @@
 import { appendFileSync } from 'node:fs';
 import { relative, resolve } from 'node:path';
 import { parseArgs } from 'node:util';
-import { check, type Problem } from '../src/lib/data/check.ts';
-import { loadCriteria, loadProviders } from '../src/lib/data/load.ts';
+import { check, type Problem } from '#lib/data/check.ts';
+import { loadCriteria, loadProviders } from '#lib/data/load.ts';
 
 const { values: args } = parseArgs({ options: { file: { type: 'string' } } });
 

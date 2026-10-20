@@ -1,6 +1,6 @@
 import { error } from '@sveltejs/kit';
-import { data } from '#lib/server/data.js';
-import { drawPage } from '#lib/server/og.js';
+import { data } from '#lib/server/data.ts';
+import { drawPage } from '#lib/server/og.ts';
 
 export const prerender = true;
 

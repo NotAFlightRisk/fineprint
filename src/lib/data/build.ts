@@ -1,7 +1,7 @@
-import { eyes } from './countries.ts';
-import { grade } from './grade.ts';
-import { loadCriteria, loadProviders } from './load.ts';
-import type { Category, Criterion, Dataset, Entry, Price, Provider, Ref, Value } from './types.ts';
+import { eyes } from '#lib/data/countries.ts';
+import { grade } from '#lib/data/grade.ts';
+import { loadCriteria, loadProviders } from '#lib/data/load.ts';
+import type { Category, Criterion, Dataset, Entry, Price, Provider, Ref, Value } from '#lib/data/types.ts';
 
 export const staleAfterDays = 180;
 

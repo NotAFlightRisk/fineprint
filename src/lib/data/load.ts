@@ -1,7 +1,7 @@
 import { readdirSync, readFileSync } from 'node:fs';
 import { basename, join, resolve } from 'node:path';
 import { isMap, isSeq, LineCounter, parse, parseDocument, type Node } from 'yaml';
-import type { Category } from './types.ts';
+import type { Category } from '#lib/data/types.ts';
 
 export const dataDir = resolve('data');
 

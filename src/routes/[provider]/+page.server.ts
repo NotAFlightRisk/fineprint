@@ -1,5 +1,5 @@
 import { error } from '@sveltejs/kit';
-import { data } from '#lib/server/data.js';
+import { data } from '#lib/server/data.ts';
 
 export const entries = () => data().providers.map(({ id }) => ({ provider: id }));
 

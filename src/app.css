@@ -82,6 +82,12 @@ h3 {
   text-wrap: balance;
 }
 
+h1 {
+  font-size: var(--text-display);
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+}
+
 p {
   margin: 0;
   text-wrap: pretty;
@@ -153,4 +159,49 @@ a {
 .noted {
   text-decoration: underline dotted var(--text-muted);
   text-underline-offset: 0.25em;
+}
+
+[data-grade='good'] {
+  --grade: var(--good);
+}
+[data-grade='ok'] {
+  --grade: var(--ok);
+}
+[data-grade='bad'] {
+  --grade: var(--bad);
+}
+[data-grade='info'] {
+  --grade: var(--info);
+}
+[data-grade='na'] {
+  --grade: var(--na);
+}
+
+/* a ruled page section, with its heading and intro beside the content */
+.section {
+  display: grid;
+  grid-template-columns: 3fr 9fr;
+  gap: var(--space-4) var(--space-5);
+  padding-block: var(--space-4) var(--space-6);
+  border-top: var(--rule-heavy) solid var(--rule);
+
+  @media (max-width: 56rem) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.lead {
+  display: grid;
+  align-content: start;
+  gap: var(--space-2);
+
+  & h2 {
+    font-size: var(--text-lg);
+  }
+
+  & p {
+    max-width: 30ch;
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+  }
 }

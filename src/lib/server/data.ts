@@ -1,6 +1,6 @@
 import { resolve } from 'node:path';
-import { dataset } from '#lib/data/build.js';
-import type { Dataset } from '#lib/data/types.js';
+import { dataset } from '#lib/data/build.ts';
+import type { Dataset } from '#lib/data/types.ts';
 
 let cached: Dataset | undefined;
 export const data = () => (cached ??= dataset());

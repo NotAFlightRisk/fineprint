@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { unify } from '../src/lib/data/build.ts';
-import { grade } from '../src/lib/data/grade.ts';
-import { loadCriteria, readProvider } from '../src/lib/data/load.ts';
+import { unify } from '#lib/data/build.ts';
+import { grade } from '#lib/data/grade.ts';
+import { loadCriteria, readProvider } from '#lib/data/load.ts';
 
 const categories = loadCriteria();
 const criteria = new Map(categories.flatMap((c) => c.criteria.map((x) => [x.id, x])));

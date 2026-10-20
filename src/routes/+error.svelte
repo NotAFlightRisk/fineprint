@@ -1,6 +1,6 @@
 <script lang="ts">
   import { page } from '$app/state';
-  import { site } from '#lib/site.js';
+  import { site } from '#lib/site.ts';
 </script>
 
 <svelte:head>
@@ -24,11 +24,6 @@
     gap: var(--space-4);
     max-width: 40rem;
     padding-block: var(--space-6) var(--space-8);
-
-    & h1 {
-      font-size: var(--text-display);
-      letter-spacing: -0.04em;
-    }
 
     & p {
       color: var(--text-muted);

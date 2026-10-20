@@ -1,7 +1,7 @@
 import { existsSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { dataDir, loadCriteria } from '../src/lib/data/load.ts';
-import type { Criterion } from '../src/lib/data/types.ts';
+import { dataDir, loadCriteria } from '#lib/data/load.ts';
+import type { Criterion } from '#lib/data/types.ts';
 
 const [id, name] = process.argv.slice(2);
 const file = join(dataDir, 'providers', `${id}.yml`);

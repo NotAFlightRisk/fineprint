@@ -16,10 +16,10 @@
 
 <style>
   .external {
-    display: inline-grid;
-    place-items: center;
-    width: 1.5rem;
-    height: 1.5rem;
+    display: inline-block;
+    width: 1.5em;
+    line-height: 1.5;
+    text-align: center;
     flex: none;
     color: var(--text-muted);
 
@@ -30,8 +30,9 @@
   }
 
   svg {
-    width: 1rem;
-    height: 1rem;
+    width: 1em;
+    height: 1em;
+    vertical-align: middle;
     fill: none;
     stroke: currentColor;
     stroke-width: 1.5;

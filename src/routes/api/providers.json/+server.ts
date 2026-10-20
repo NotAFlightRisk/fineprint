@@ -1,5 +1,5 @@
 import { json } from '@sveltejs/kit';
-import { data } from '#lib/server/data.js';
+import { data } from '#lib/server/data.ts';
 
 export const prerender = true;
 

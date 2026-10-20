@@ -1,5 +1,5 @@
-import { data, stats } from '#lib/server/data.js';
-import { byId, summarise } from '#lib/summary.js';
+import { data, stats } from '#lib/server/data.ts';
+import { byId, summarise } from '#lib/summary.ts';
 
 // Just what the cards need: the table fetches the full data itself, if it's opened
 export const load = () => {

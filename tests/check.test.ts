@@ -1,9 +1,9 @@
 import { Ajv2020 } from 'ajv/dist/2020.js';
 import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { check } from '../src/lib/data/check.ts';
-import { loadCriteria, loadProviders, readProvider } from '../src/lib/data/load.ts';
-import { providerSchema } from '../src/lib/data/schema.ts';
+import { check } from '#lib/data/check.ts';
+import { loadCriteria, loadProviders, readProvider } from '#lib/data/load.ts';
+import { providerSchema } from '#lib/data/schema.ts';
 
 const categories = loadCriteria();
 const today = new Date('2026-10-18');

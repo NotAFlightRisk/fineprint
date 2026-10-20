@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { error } from '@sveltejs/kit';
-import { countries } from '#lib/data/countries.js';
-import { data, flagFile } from '#lib/server/data.js';
+import { countries } from '#lib/data/countries.ts';
+import { data, flagFile } from '#lib/server/data.ts';
 
 export const prerender = true;
 

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { absolute, ogPage, ogSize, schemaIds, site } from '#lib/site.js';
+  import { absolute, ogPage, ogSize, schemaIds, site } from '#lib/site.ts';
 
   let {
     title,

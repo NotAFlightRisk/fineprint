@@ -1,13 +1,14 @@
 <script lang="ts">
+  import Checklist from '#lib/components/Checklist.svelte';
   import Flag from '#lib/components/Flag.svelte';
   import GradeMark from '#lib/components/GradeMark.svelte';
   import Records from '#lib/components/Records.svelte';
   import Seo from '#lib/components/Seo.svelte';
-  import type { Item } from '#lib/data/types.js';
-  import { formatDate, formatValue, showEntry } from '#lib/format.js';
-  import { absolute, editUrl, historyUrl, site } from '#lib/site.js';
-  import { byId, summarise, verdict } from '#lib/summary.js';
-  import { tip } from '#lib/tip.js';
+  import type { Item } from '#lib/data/types.ts';
+  import { formatDate, formatValue, showEntry } from '#lib/format.ts';
+  import { absolute, editUrl, historyUrl, site } from '#lib/site.ts';
+  import { byId, redFlags, summarise, verdict } from '#lib/summary.ts';
+  import { tip } from '#lib/tip.ts';
 
   let { data } = $props();
   const { provider, categories } = $derived(data);
@@ -90,25 +91,15 @@
     {/each}
   </nav>
 
-  <section class="summary" aria-labelledby="summary">
+  <section class="section summary" aria-labelledby="summary">
     <div class="lead">
       <h2 id="summary">Summary</h2>
       <p>{verdict(summary)}</p>
     </div>
     <div class="facts">
-      <ul class="checks">
-        {#each checks as check (check.id)}
-          <li>
-            <GradeMark grade={check.grade} />
-            <button type="button" class="plain noted" {@attach tip(check.tip)}>{check.label}</button
-            >
-          </li>
-        {/each}
-      </ul>
+      <Checklist {checks} />
       <div class="flags">
-        <h3 class:none={!provider.flags.length}>
-          {provider.flags.length || 'No'} red flag{provider.flags.length === 1 ? '' : 's'}
-        </h3>
+        <h3 class:none={!provider.flags.length}>{redFlags(provider.flags.length)}</h3>
         {#if provider.flags.length}
           <ul>
             {#each provider.flags as id (id)}
@@ -132,7 +123,7 @@
   </section>
 
   {#each categories as category (category.id)}
-    <section class="category" id={category.id} aria-labelledby="{category.id}-title">
+    <section class="section" id={category.id} aria-labelledby="{category.id}-title">
       <div class="lead">
         <h2 id="{category.id}-title">{category.label}</h2>
         <p>{category.description}</p>
@@ -173,7 +164,7 @@
     </section>
   {/each}
 
-  <section class="category" aria-labelledby="sources">
+  <section class="section" aria-labelledby="sources">
     <div class="lead">
       <h2 id="sources">Sources</h2>
       <p>Everything above, and where it came from.</p>
@@ -194,7 +185,7 @@
     </ol>
   </section>
 
-  <section class="category contribute" aria-labelledby="contribute">
+  <section class="section" aria-labelledby="contribute">
     <div class="lead">
       <h2 id="contribute">Spotted something?</h2>
       <p>
@@ -232,9 +223,6 @@
       display: flex;
       align-items: center;
       gap: 0.2em;
-      font-size: var(--text-display);
-      letter-spacing: -0.04em;
-      line-height: 0.95;
     }
 
     & img {
@@ -314,34 +302,21 @@
       height: 0.5rem;
       background: var(--grade, transparent);
       box-shadow: inset 0 0 0 var(--rule-thin) var(--grade, var(--rule-faint));
+    }
+  }
 
-      &[data-grade='good'] {
-        --grade: var(--good);
-      }
-      &[data-grade='ok'] {
-        --grade: var(--ok);
-      }
-      &[data-grade='bad'] {
-        --grade: var(--bad);
-      }
-      &[data-grade='info'] {
-        --grade: var(--info);
-      }
-      &[data-grade='na'] {
-        --grade: var(--na);
-      }
+  .section {
+    scroll-margin-top: var(--space-4);
+
+    @media (min-width: 56rem) {
+      scroll-margin-top: var(--strip);
     }
   }
 
   .summary {
-    display: grid;
-    grid-template-columns: 3fr 9fr;
     gap: var(--space-5);
     padding-block: var(--space-6);
-
-    @media (max-width: 56rem) {
-      grid-template-columns: 1fr;
-    }
+    border-top: 0;
   }
 
   .facts {
@@ -351,21 +326,6 @@
 
     @media (max-width: 40rem) {
       grid-template-columns: 1fr;
-    }
-  }
-
-  .checks,
-  .flags ul {
-    display: grid;
-    gap: var(--space-2);
-    margin: 0;
-    padding: 0;
-    list-style: none;
-
-    & li {
-      display: flex;
-      align-items: baseline;
-      gap: var(--space-2);
     }
   }
 
@@ -383,41 +343,22 @@
       }
     }
 
-    & p {
-      color: var(--text-muted);
-    }
-  }
-
-  .category {
-    display: grid;
-    grid-template-columns: 3fr 9fr;
-    gap: var(--space-4) var(--space-5);
-    padding-block: var(--space-4) var(--space-6);
-    border-top: var(--rule-heavy) solid var(--rule);
-    scroll-margin-top: var(--space-4);
-
-    @media (min-width: 56rem) {
-      scroll-margin-top: var(--strip);
+    & ul {
+      display: grid;
+      gap: var(--space-2);
+      margin: 0;
+      padding: 0;
+      list-style: none;
     }
 
-    @media (max-width: 56rem) {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  .lead {
-    display: grid;
-    align-content: start;
-    gap: var(--space-2);
-
-    & h2 {
-      font-size: var(--text-lg);
+    & li {
+      display: flex;
+      align-items: baseline;
+      gap: var(--space-2);
     }
 
     & p {
-      max-width: 30ch;
       color: var(--text-muted);
-      font-size: var(--text-sm);
     }
   }
 

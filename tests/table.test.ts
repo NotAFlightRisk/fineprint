@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { loadCriteria } from '../src/lib/data/load.ts';
-import type { Entry } from '../src/lib/data/types.ts';
-import { compare, toCsv } from '../src/lib/table.ts';
+import { loadCriteria } from '#lib/data/load.ts';
+import type { Entry } from '#lib/data/types.ts';
+import { compare, toCsv } from '#lib/table.ts';
 
 const criteria = new Map(loadCriteria().flatMap((c) => c.criteria.map((x) => [x.id, x])));
 const entry = (value: Entry['value'], grade: Entry['grade']): Entry => ({

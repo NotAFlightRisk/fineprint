@@ -1,8 +1,8 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { page } from '$app/state';
-  import { loadPlausible } from '#lib/plausible.js';
-  import { site } from '#lib/site.js';
+  import { loadPlausible } from '#lib/plausible.ts';
+  import { site } from '#lib/site.ts';
   import '../app.css';
 
   let { children } = $props();

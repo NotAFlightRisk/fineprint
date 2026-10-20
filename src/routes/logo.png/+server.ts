@@ -1,4 +1,4 @@
-import { drawLogo } from '#lib/server/og.js';
+import { drawLogo } from '#lib/server/og.ts';
 
 export const prerender = true;
 

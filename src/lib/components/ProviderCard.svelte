@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { plural, type Summary } from '#lib/summary.js';
-  import { tip } from '#lib/tip.js';
-  import External from './External.svelte';
-  import Flag from './Flag.svelte';
-  import GradeMark from './GradeMark.svelte';
+  import Checklist from '#lib/components/Checklist.svelte';
+  import External from '#lib/components/External.svelte';
+  import Flag from '#lib/components/Flag.svelte';
+  import { redFlags, type Summary } from '#lib/summary.ts';
+  import { tip } from '#lib/tip.ts';
 
   let { summary }: { summary: Summary } = $props();
   const { id, name, icon, website, hq, where, checks, flags, price } = $derived(summary);
@@ -20,23 +20,18 @@
 
   <p class="where"><Flag code={hq} />{where.join(' · ')}</p>
 
-  <ul class="checks">
-    {#each checks as check (check.id)}
-      <li>
-        <GradeMark grade={check.grade} />
-        <button type="button" class="plain noted" {@attach tip(check.tip)}>{check.label}</button>
-      </li>
-    {/each}
-  </ul>
+  <div class="checks">
+    <Checklist {checks} />
+  </div>
 
   <footer>
     <span>{price ? `From ${price}` : 'Price unknown'}</span>
     {#if flags.length}
       <button type="button" class="plain noted flags" {@attach tip(flags.join('\n'))}>
-        {plural(flags.length, 'red flag')}
+        {redFlags(flags.length)}
       </button>
     {:else}
-      <span class="none">No red flags</span>
+      <span class="none">{redFlags(0)}</span>
     {/if}
     <a class="more" href="/{id}">Full picture<span class="visually-hidden"> of {name}</span></a>
   </footer>
@@ -85,17 +80,8 @@
 
   .checks {
     display: grid;
-    gap: var(--space-2);
-    margin: 0;
-    padding: var(--space-3) 0 0;
+    padding-top: var(--space-3);
     border-top: var(--rule-thin) solid var(--rule-faint);
-    list-style: none;
-
-    & li {
-      display: flex;
-      gap: var(--space-2);
-      align-items: baseline;
-    }
   }
 
   footer {

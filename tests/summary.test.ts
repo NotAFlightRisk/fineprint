@@ -1,26 +1,32 @@
 import { describe, expect, it } from 'vitest';
-import { unify } from '../src/lib/data/build.ts';
-import { loadCriteria, readProvider } from '../src/lib/data/load.ts';
-import { absolute, ogPage } from '../src/lib/site.ts';
-import { byId, checks, summarise, verdict } from '../src/lib/summary.ts';
+import { unify } from '#lib/data/build.ts';
+import { loadCriteria, readProvider } from '#lib/data/load.ts';
+import { absolute, ogPage } from '#lib/site.ts';
+import { byId, checks, redFlags, summarise, verdict } from '#lib/summary.ts';
 
 const categories = loadCriteria();
 const criteria = byId(categories);
 const { raw } = readProvider('tests/fixtures/good.yml');
 const provider = unify(categories, 'good', raw as never, new Date('2026-10-18'));
 
-describe('provider summary', () => {
-  it('only leans on criteria that exist', () => {
-    const used = [
+describe('criteria named in the code', () => {
+  it('all still exist in criteria.yml', () => {
+    const named = [
       ...checks.flatMap((check) => check.from),
+      'features.connections',
+      'identity.founded',
+      'identity.legal_entity',
       'identity.website',
-      'jurisdiction.hq',
       'jurisdiction.eyes',
-      'pricing.best'
+      'jurisdiction.hq',
+      'pricing.best',
+      'pricing.per_connection'
     ];
-    expect(used.filter((id) => !criteria.has(id))).toEqual([]);
+    expect(named.filter((id) => !criteria.has(id))).toEqual([]);
   });
+});
 
+describe('provider summary', () => {
   it('sums a provider up in a sentence that stands on its own', () => {
     expect(verdict(summarise(provider, criteria))).toBe(
       'Good VPN (Switzerland, Outside 14 Eyes) passes 1 of 6 privacy checks, with no red flags.'
@@ -28,6 +34,7 @@ describe('provider summary', () => {
   });
 
   it('counts red flags in words', () => {
+    expect([0, 1, 2].map(redFlags)).toEqual(['No red flags', '1 red flag', '2 red flags']);
     const flagged = { ...provider, flags: ['jurisdiction.eyes'] };
     expect(verdict(summarise(flagged, criteria))).toMatch(/with 1 red flag\.$/);
   });

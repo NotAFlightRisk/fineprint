@@ -1,9 +1,9 @@
 <script lang="ts">
   import GradeMark from '#lib/components/GradeMark.svelte';
   import Seo from '#lib/components/Seo.svelte';
-  import { gradeNames } from '#lib/marks.js';
-  import { site } from '#lib/site.js';
-  import { describeRule } from '#lib/summary.js';
+  import { gradeNames } from '#lib/marks.ts';
+  import { site } from '#lib/site.ts';
+  import { describeRule } from '#lib/summary.ts';
 
   let { data } = $props();
   const { categories, criteria } = $derived(data);
@@ -76,7 +76,7 @@
 </section>
 
 {#each categories as category (category.id)}
-  <section class="category" id={category.id} aria-labelledby="{category.id}-title">
+  <section class="section" id={category.id} aria-labelledby="{category.id}-title">
     <div class="lead">
       <h2 id="{category.id}-title">{category.label}</h2>
       <p>{category.description}</p>
@@ -118,9 +118,6 @@
 
     & h1 {
       grid-column: 1 / span 5;
-      font-size: var(--text-display);
-      letter-spacing: -0.04em;
-      line-height: 0.95;
     }
 
     & .prose {
@@ -172,34 +169,6 @@
 
     & dd {
       margin: 0;
-      color: var(--text-muted);
-    }
-  }
-
-  .category {
-    display: grid;
-    grid-template-columns: 3fr 9fr;
-    gap: var(--space-4) var(--space-5);
-    padding-block: var(--space-4) var(--space-6);
-    border-top: var(--rule-heavy) solid var(--rule);
-
-    @media (max-width: 56rem) {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  .lead {
-    display: grid;
-    align-content: start;
-    gap: var(--space-2);
-
-    & h2 {
-      font-size: var(--text-lg);
-    }
-
-    & p {
-      max-width: 30ch;
-      font-size: var(--text-sm);
       color: var(--text-muted);
     }
   }
