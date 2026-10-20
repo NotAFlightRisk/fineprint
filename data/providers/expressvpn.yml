@@ -1,0 +1,610 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: ExpressVPN
+icon: expressvpn.png
+checked: 2026-10-20
+
+criteria:
+  identity:
+    website: https://www.expressvpn.com
+    legal_entity:
+      value: Express Technologies Ltd.
+      sources: [tos]
+    owner:
+      value: Kape Technologies
+      note: >-
+        Kape is controlled by Teddy Sagi through Unikmind Holdings, which held 98.5% when it took Kape
+        private in 2023.
+      sources: [kape-holding-2023, kape-about]
+    founded:
+      value: 2009
+      sources: [about, kape-acquisition]
+    team:
+      value: partial
+      note: >-
+        There's no leadership page, but press releases name the chief executive, Charles Butler, who
+        also runs Kape.
+      sources: [ceo-pr, kape-leadership]
+    sister_brands:
+      value: [CyberGhost, Private Internet Access, EventVPN]
+      note: >-
+        EventVPN is a free app built by ExpressVPN's team. ZenMate's users were moved to CyberGhost in
+        2023.
+      sources: [kape-brands, eventvpn-launch, zenmate]
+    acquisitions:
+      value:
+        - date: 2021-12-15
+          acquirer: Kape Technologies
+          source: kape-results-2021
+      note: Announced in September 2021 for about $936 million.
+      sources: [kape-acquisition, expressvpn-joins-kape]
+
+  jurisdiction:
+    hq:
+      value: VG
+      sources: [privacy-policy, tos]
+    entities:
+      value: [VG]
+      note: >-
+        Express Technologies Ltd. is the only ExpressVPN company named. Its parent, Kape, is
+        incorporated in the Isle of Man with a branch in London.
+      sources: [tos, companies-house]
+
+  logging:
+    traffic:
+      value: none
+      evidence: verified
+      sources: [no-logs, audit-kpmg-2025, audit-cure53-trustedserver]
+    dns:
+      value: none
+      evidence: verified
+      sources: [no-logs, audit-kpmg-2025]
+    timestamps:
+      value: aggregate
+      evidence: claimed
+      note: Keeps the day each user connected, though not the time, along with the location they picked.
+      sources: [privacy-policy, no-logs]
+    bandwidth:
+      value: aggregate
+      evidence: claimed
+      note: Keeps a total of the data each user transfers, which the policy's example gives per day.
+      sources: [privacy-policy, no-logs]
+    source_ip:
+      value: none
+      evidence: verified
+      note: >-
+        It does keep the country and ISP you connect from, by day. The separate MediaStreamer DNS
+        service stores the IPs you register for it.
+      sources: [privacy-policy, audit-kpmg-2025]
+    proven:
+      value: [seizure, audit]
+      evidence: verified
+      note: >-
+        Turkish investigators traced deletions in the 2016 Karlov assassination case to an ExpressVPN
+        IP and found it kept no logs, and ExpressVPN says they seized the server too. KPMG last checked
+        the servers against the privacy policy in 2025.
+      sources: [karlov-istiklal, karlov-torrentfreak, audit-kpmg-2025, audit-cure53-trustedserver]
+    policy: https://www.expressvpn.com/privacy-policy
+
+  transparency:
+    audits:
+      value:
+        - date: 2025-02-28
+          auditor: KPMG
+          scope: no_logs
+          source: audit-kpmg-2025
+        - date: 2024-11-22
+          auditor: Cure53
+          scope: apps
+          source: audit-cure53-aircove-2024
+        - date: 2024-11-01
+          auditor: Cure53
+          scope: apps
+          source: audit-cure53-lightway-2024
+        - date: 2024-10-10
+          auditor: Praetorian
+          scope: apps
+          source: audit-praetorian-2024
+        - date: 2024-06-14
+          auditor: Cure53
+          scope: apps
+          source: audit-cure53-extension-2024
+        - date: 2024-04-01
+          auditor: Nettitude
+          scope: apps
+          source: audit-nettitude-2024
+        - date: 2023-12-12
+          auditor: KPMG
+          scope: no_logs
+          source: audit-kpmg-2023
+        - date: 2022-11-11
+          auditor: Cure53
+          scope: apps
+          source: audit-cure53-lightway-2022
+        - date: 2022-10-07
+          auditor: Cure53
+          scope: apps
+          source: audit-cure53-extension-2022
+        - date: 2022-09-09
+          auditor: Cure53
+          scope: apps
+          source: audit-cure53-ios-2022
+        - date: 2022-09-01
+          auditor: KPMG
+          scope: no_logs
+          source: audit-kpmg-2022
+        - date: 2022-08-12
+          auditor: Cure53
+          scope: apps
+          source: audit-cure53-android-2022
+        - date: 2022-08-05
+          auditor: Cure53
+          scope: apps
+          source: audit-cure53-linux-2022
+        - date: 2022-07-08
+          auditor: Cure53
+          scope: apps
+          source: audit-cure53-macos-2022
+        - date: 2022-07-08
+          auditor: Cure53
+          scope: apps
+          source: audit-cure53-aircove-2022
+        - date: 2022-04-29
+          auditor: Cure53
+          scope: infra
+          source: audit-cure53-trustedserver
+        - date: 2022-03-01
+          auditor: F-Secure
+          scope: apps
+          source: audit-fsecure-2022
+        - date: 2021-12-28
+          auditor: F-Secure
+          scope: apps
+          source: audit-fsecure-2021
+        - date: 2021-03-26
+          auditor: Cure53
+          scope: apps
+          source: audit-cure53-lightway-2021
+        - date: 2019-06-01
+          auditor: PwC Switzerland
+          scope: no_logs
+          source: audit-pwc-2019
+        - date: 2018-10-01
+          auditor: Cure53
+          scope: apps
+          source: audit-cure53-extension-2018
+      evidence: verified
+      note: >-
+        Dates are the last day of testing, or the 1st where only the month is known. The servers were
+        last pentested in April 2022, KPMG's no-logs reports each check controls at a single date, and
+        audits of its non-VPN products and EventVPN are left out.
+      sources: [transparency]
+    report:
+      value: regular
+      note: Twice a year.
+      sources: [transparency, transparency-2026]
+    canary:
+      value: none
+      note: >-
+        Its reports listed gag orders and National Security Letters separately, at zero, until 2024.
+        Since 2025 they're folded into government requests.
+      sources: [transparency]
+    bug_bounty:
+      value: true
+      note: Run through YesWeHack, with a one-off $100,000 award for breaking TrustedServer.
+      sources: [bug-bounty]
+    incidents:
+      value:
+        - date: 2025-04-25
+          summary: >-
+            A researcher found the Windows app sent anything on TCP port 3389, mostly Remote Desktop,
+            outside the tunnel, which could expose a user's real IP. Debug code had shipped in versions
+            12.97 to 12.101.0.2-beta, and ExpressVPN fixed it and disclosed it in July 2025.
+          handled: well
+          source: rdp-leak
+        - date: 2024-02-08
+          summary: >-
+            A CNET reviewer found the Windows app could send DNS requests outside the tunnel with split
+            tunnelling on. ExpressVPN switched split tunnelling off, fixed the bug and had Nettitude
+            check the fix.
+          handled: well
+          source: dns-leak
+        - date: 2021-09-14
+          summary: >-
+            Its CIO, Daniel Gericke, was one of three former US intelligence and military staff who
+            agreed a US deferred prosecution over hacking work for the UAE before he joined in 2019.
+            ExpressVPN said it knew his background but not the investigation, kept him on and promised
+            yearly no-logs audits. He left in 2023.
+          handled: well
+          source: doj-gericke
+        - date: 2017-01-01
+          summary: >-
+            Turkish investigators traced deletions from the Karlov assassin's accounts to an ExpressVPN
+            IP and got nothing, as it keeps no connection logs. ExpressVPN says they seized and
+            inspected the server, and that it has a few seizures a year it doesn't announce.
+          handled: well
+          source: karlov-torrentfreak
+      sources: [gericke-response, gericke-left, karlov-istiklal, audit-nettitude-2024]
+
+  account:
+    email:
+      value: required
+      sources: [payments]
+    personal_data:
+      value: []
+      note: Card and other payments may add a name and billing address, depending on the method.
+      sources: [privacy-policy]
+    payment:
+      value: [card, paypal, app_store]
+      note: >-
+        Checkout offers cards, PayPal, Apple Pay and Google Pay. The privacy policy says gift cards and
+        Bitcoin may be available, but the payments page lists neither and its Bitcoin pages are gone.
+      sources: [payments, privacy-policy]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn, ikev2, proprietary]
+      note: >-
+        Lightway, ExpressVPN's own protocol, counts as proprietary and is the default. IKEv2 is only in
+        some of the apps.
+      sources: [lightway, wireguard, server-list]
+    post_quantum:
+      value: default
+      note: For Lightway and WireGuard, not OpenVPN or IKEv2.
+      sources: [lightway, wireguard, ml-kem]
+    kill_switch:
+      value: system
+      note: >-
+        On by default and firewall-based on desktop, with an option to block traffic while disconnected
+        too.
+      sources: [kill-switch]
+    dns:
+      value: first_party
+      sources: [private-dns]
+
+  infra:
+    ram_only:
+      value: all
+      evidence: verified
+      sources: [trustedserver, audit-cure53-trustedserver]
+    hosting:
+      value: null
+      note: ExpressVPN doesn't say whether it owns or rents its servers.
+      sources: [trustedserver]
+    virtual_locations:
+      value: disclosed
+      note: Marked on the server list, and a help page says where each one really is.
+      sources: [server-list, virtual-locations]
+    servers:
+      value: null
+      note: ExpressVPN lists 214 locations in 113 countries, but no server count.
+      sources: [server-list]
+    countries:
+      value: 113
+      note: ExpressVPN's own list names 57 of them as virtual locations, served from another country.
+      sources: [server-list, virtual-locations]
+
+  features:
+    connections:
+      value: 10
+      note: On Basic. Advanced allows 12 and Express Pro 14.
+      sources: [pricing, tos]
+    multihop:
+      value: false
+      sources: [features]
+    obfuscation:
+      value: [proprietary]
+      note: Automatic on every server, disguising VPN traffic as HTTPS.
+      sources: [android]
+    port_forwarding:
+      value: false
+      note: Only on routers, where forwarded ports bypass the VPN.
+      sources: [port-fail]
+    split_tunnel:
+      value: true
+      note: On Windows, macOS, Linux, Android and iOS.
+      sources: [split-tunnel]
+    blocking:
+      value: [ads, trackers, malware]
+      note: Tracker blocking needs the Advanced tier or above.
+      sources: [threat-manager, ad-blocker, pricing]
+
+  clients:
+    platforms:
+      value: [windows, macos, linux_gui, linux_cli, ios, android, router, browser]
+      note: >-
+        Routers means its own Aircove and Fortify, as the app for other routers reached end of service
+        in December 2025. The browser extensions work alone as a proxy.
+      sources: [download, linux-notes, aircove, router-notes, chrome]
+    open_source:
+      value: some
+      note: >-
+        Only the Lightway protocol and the browser extension, last published at version 6.0.1 in March
+        2024. The desktop and mobile apps are closed.
+      sources: [github, extension-source]
+    telemetry:
+      value: forced
+      note: >-
+        Crash reports and diagnostics are opt-in, but the daily usage stats in the privacy policy can't
+        be turned off. It may also use your advertising ID for remarketing, with consent where the law
+        asks for it.
+      sources: [privacy-policy, analytics]
+    trackers:
+      value: 4
+      note: AppsFlyer, Mixpanel, Google Firebase Analytics and Crashlytics, in version 12.51.0 from February 2026.
+      sources: [exodus]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 14.99, currency: USD }
+      note: Basic tier. Advanced is $16.99 and Express Pro $22.99.
+      sources: [pricing]
+    best:
+      value: { amount: 2.99, currency: USD }
+      note: Basic tier, an intro price for the first 28 months. It then renews at $8.33 a month.
+      sources: [pricing]
+    best_term:
+      value: 28
+      note: A 2-year plan with 4 months added.
+      sources: [pricing]
+    renewal_increase:
+      value: 179
+      note: The Basic 2-year plan is $83.72 for the first 28 months, then $99.95 a year.
+      sources: [pricing]
+    free_tier:
+      value: false
+      sources: [pricing]
+    refund_days:
+      value: 30
+      note: First-time customers buying on the website only. App store purchases go through Apple or Google.
+      sources: [tos]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        Its no-logs page says it keeps no connection logs, defined there as including connection dates
+        and data used, both of which its privacy policy says it records. The homepage's "#1 Best VPN
+        2026" has a footnote saying it pays review sites for referrals.
+      sources: [no-logs, privacy-policy, home]
+    affiliates:
+      value: true
+      note: Its homepage says it pays review sites for referrals.
+      sources: [affiliates, home]
+    review_sites:
+      value: true
+      note: Its owner, Kape, also owns VPN review sites such as vpnMentor and Safety Detectives, which disclose it.
+      sources: [kape-brands, vpnmentor, safety-detectives]
+    activism:
+      value: true
+      note: >-
+        Says it funds the EFF, Access Now, Fight for the Future, OpenMedia and the Internet Defense
+        League.
+      sources: [no-logs, about]
+
+refs:
+  home:
+    url: https://www.expressvpn.com/
+    title: ExpressVPN homepage
+  about:
+    url: https://www.expressvpn.com/about-us
+    title: Meet ExpressVPN
+  tos:
+    url: https://www.expressvpn.com/tos
+    title: ExpressVPN terms of service
+  privacy-policy:
+    url: https://www.expressvpn.com/privacy-policy
+    title: ExpressVPN privacy policy
+  no-logs:
+    url: https://www.expressvpn.com/what-is-vpn/policy-towards-logs
+    title: 'Best no-logs VPN: Protect your privacy and security'
+  kape-acquisition:
+    url: https://www.investegate.co.uk/announcement/rns/kape-technologies--kape/-936m-acquisition-of-expressvpn-354m-placing/6825145
+    title: Kape Technologies, $936m acquisition of ExpressVPN (RNS, 2021)
+  kape-results-2021:
+    url: https://www.investegate.co.uk/announcement/rns/kape-technologies--kape/final-results/7004211
+    title: Kape Technologies, final results for 2021 (RNS)
+  expressvpn-joins-kape:
+    url: https://www.expressvpn.com/blog/expressvpn-joining-kape/
+    title: ExpressVPN joining Kape to strengthen push for privacy
+  kape-holding-2023:
+    url: https://www.investegate.co.uk/announcement/rns/kape-technologies--kape/holding-s-in-company/7541123
+    title: Kape Technologies, holding(s) in company (RNS, May 2023)
+  kape-about:
+    url: https://www.kape.com/about-us/
+    title: About Kape
+  kape-brands:
+    url: https://www.kape.com/our-brands/
+    title: Kape, our brands
+  kape-leadership:
+    url: https://www.kape.com/our-leadership-team/
+    title: Kape, our leadership team
+  companies-house:
+    url: https://find-and-update.company-information.service.gov.uk/company/FC038564
+    title: Kape Technologies (Companies House)
+  ceo-pr:
+    url: https://www.expressvpn.com/news-pr/expressvpn-fifa-world-cup-2026-supporter/
+    title: ExpressVPN named official supporter of FIFA World Cup 2026
+  eventvpn-launch:
+    url: https://www.expressvpn.com/blog/free-vpn-eventvpn/
+    title: 'EventVPN: A free VPN from the team behind ExpressVPN'
+  zenmate:
+    url: https://zenmate.com/blog/zenmate-changes
+    title: Important changes to ZenMate
+  transparency:
+    url: https://www.expressvpn.com/trust
+    title: ExpressVPN Trust Center
+  transparency-2026:
+    url: https://www.expressvpn.com/blog/transparency-report-h1-2026/
+    title: 'ExpressVPN transparency report: January to June 2026'
+  bug-bounty:
+    url: https://www.expressvpn.com/bug-bounty
+    title: ExpressVPN bug bounty program
+  audit-kpmg-2025:
+    url: https://www.expressvpn.com/security-audit-reports/kpmg-privacy-policy-2025
+    title: KPMG, ISAE (UK) 3000 report on ExpressVPN's privacy policy controls (2025)
+  audit-kpmg-2023:
+    url: https://www.expressvpn.com/security-audit-reports/kpmg-privacy-policy-2023
+    title: KPMG, ISAE (UK) 3000 report on ExpressVPN's privacy policy controls (2023)
+  audit-kpmg-2022:
+    url: https://www.expressvpn.com/security-audit-reports/kpmg-privacy-policy-2022
+    title: KPMG, ISAE (UK) 3000 report on ExpressVPN's privacy policy controls (2022)
+  audit-cure53-aircove-2024:
+    url: https://cure53.de/pentest-report_expressvpn-aircove_2024.pdf
+    title: Cure53, Aircove router pentest (2024)
+  audit-cure53-lightway-2024:
+    url: https://cure53.de/pentest-report_expressvpn-lightway_2024.pdf
+    title: Cure53, Lightway Rust source review (2024)
+  audit-praetorian-2024:
+    url: https://www.expressvpn.com/wp-ws-cache/uploads-expressvpn/2025/02/Praetorian-ExpressVPN-ExpressVPN-Lightway-Security-Assessment-Retest-Final-Version.pdf
+    title: Praetorian, Lightway security assessment (2024)
+  audit-cure53-extension-2024:
+    url: https://cure53.de/pentest-report_expressvpn-vpn-extension_2.pdf
+    title: Cure53, VPN browser extension pentest (2024)
+  audit-nettitude-2024:
+    url: https://www.expressvpn.com/wp-ws-cache/uploads-expressvpn/2024/04/ExpressVPN-and-Nettitude-audit-report.pdf
+    title: Nettitude, Windows app security assessment (2024)
+  audit-cure53-lightway-2022:
+    url: https://cure53.de/pentest-report_expressvpn-lightway.pdf
+    title: Cure53, Lightway pentest and source review (2022)
+  audit-cure53-extension-2022:
+    url: https://cure53.de/pentest-report_expressvpn-vpn-extension.pdf
+    title: Cure53, VPN browser extension pentest (2022)
+  audit-cure53-ios-2022:
+    url: https://cure53.de/pentest-report_expressvpn-ios.pdf
+    title: Cure53, iOS app pentest (2022)
+  audit-cure53-android-2022:
+    url: https://cure53.de/pentest-report_expressvpn-android.pdf
+    title: Cure53, Android app pentest (2022)
+  audit-cure53-linux-2022:
+    url: https://cure53.de/pentest-report_expressvpn-linux.pdf
+    title: Cure53, Linux app pentest (2022)
+  audit-cure53-macos-2022:
+    url: https://cure53.de/pentest-report_expressvpn-macos.pdf
+    title: Cure53, macOS app pentest (2022)
+  audit-cure53-aircove-2022:
+    url: https://cure53.de/pentest-report_expressvpn-aircove.pdf
+    title: Cure53, Aircove router pentest (2022)
+  audit-cure53-trustedserver:
+    url: https://cure53.de/pentest-report_expressvpn-trusted-server.pdf
+    title: Cure53, TrustedServer pentest (2022)
+  audit-fsecure-2022:
+    url: https://www.expressvpn.com/news-pr/mac-linux-windows-v12-audits
+    title: 3 new audits confirm security of our desktop apps
+  audit-fsecure-2021:
+    url: https://www.expressvpn.com/wp-ws-cache/uploads-expressvpn/2022/03/expressvpn-windows-app-audit.pdf
+    title: F-Secure, Windows app security assessment (2021)
+  audit-cure53-lightway-2021:
+    url: https://cure53.de/pentest-report_lightway.pdf
+    title: Cure53, Lightway core pentest and source review (2021)
+  audit-pwc-2019:
+    url: https://www.expressvpn.com/blog/pwc-audits-expressvpn-servers-to-confirm-essential-privacy-protections/
+    title: PwC audits ExpressVPN servers to confirm essential privacy protections
+  audit-cure53-extension-2018:
+    url: https://cure53.de/pentest-report_expressvpn.pdf
+    title: Cure53, Chrome extension pentest (2018)
+  rdp-leak:
+    url: https://www.expressvpn.com/blog/expressvpn-rdp-leak-fixed/
+    title: After a tip, ExpressVPN updates its Windows app to strengthen protections
+  dns-leak:
+    url: https://www.expressvpn.com/blog/windows-app-dns-requests/
+    title: After a tip, ExpressVPN acts swiftly to protect customers
+  doj-gericke:
+    url: https://www.justice.gov/archives/opa/pr/three-former-us-intelligence-community-and-military-personnel-agree-pay-more-168-million
+    title: Three former US intelligence community and military personnel agree to pay more than $1.68 million (US Department of Justice)
+  gericke-response:
+    url: https://www.expressvpn.com/go/daniel-gericke
+    title: 'Daniel Gericke and ExpressVPN: official response'
+  gericke-left:
+    url: https://www.ibtimes.com/cybersecurity-firm-kape-technologies-lays-off-180-staff-over-200k-tech-jobs-hit-so-far-3707064
+    title: Cybersecurity firm Kape Technologies lays off 180 staff (IBTimes)
+  karlov-istiklal:
+    url: https://www.istiklal.com.tr/gundem/buyukelci-cinayetinde-katilin-arsivini-kim-sildi-351486h
+    title: Büyükelçi cinayetinde katilin arşivini kim sildi? (İstiklal, 2017)
+  karlov-torrentfreak:
+    url: https://torrentfreak.com/vpn-server-seized-to-investigate-russian-ambassadors-assassination-1171219/
+    title: VPN server seized to investigate Russian ambassador's assassination (TorrentFreak)
+  payments:
+    url: https://www.expressvpn.com/features/vpn-payments
+    title: ExpressVPN payment methods
+  pricing:
+    url: https://www.expressvpn.com/pricing
+    title: ExpressVPN pricing
+  lightway:
+    url: https://www.expressvpn.com/lightway
+    title: 'Lightway: A modern VPN protocol by ExpressVPN'
+  wireguard:
+    url: https://www.expressvpn.com/what-is-vpn/protocols/wireguard
+    title: WireGuard VPN protocol explained
+  ml-kem:
+    url: https://www.expressvpn.com/blog/ml-kem-lightway-upgrade/
+    title: 'Lightway upgrade: Integrating ML-KEM for post-quantum security'
+  server-list:
+    url: https://www.expressvpn.com/vpn-server
+    title: ExpressVPN server locations
+  virtual-locations:
+    url: https://www.expressvpn.com/support/knowledge-hub/virtual-server-locations/
+    title: What are ExpressVPN's virtual server locations?
+  kill-switch:
+    url: https://www.expressvpn.com/features/network-lock
+    title: ExpressVPN Internet Kill Switch
+  private-dns:
+    url: https://www.expressvpn.com/features/dns
+    title: 'A VPN with a private DNS: What it is and why it matters'
+  trustedserver:
+    url: https://www.expressvpn.com/features/trustedserver
+    title: ExpressVPN TrustedServer
+  features:
+    url: https://www.expressvpn.com/features
+    title: ExpressVPN features
+  android:
+    url: https://www.expressvpn.com/vpn-download/vpn-android
+    title: ExpressVPN for Android
+  port-fail:
+    url: https://www.expressvpn.com/support/troubleshooting/no-port-fail/
+    title: Is ExpressVPN affected by the "port fail" security vulnerability?
+  split-tunnel:
+    url: https://www.expressvpn.com/features/split-tunneling
+    title: ExpressVPN split tunneling
+  threat-manager:
+    url: https://www.expressvpn.com/features/threat-manager
+    title: Block trackers and malicious sites with ExpressVPN
+  ad-blocker:
+    url: https://www.expressvpn.com/features/ad-blocker
+    title: ExpressVPN ad blocker
+  download:
+    url: https://www.expressvpn.com/vpn-download
+    title: Download ExpressVPN
+  linux-notes:
+    url: https://www.expressvpn.com/support/vpn-setup/release-notes/linux-app/
+    title: ExpressVPN Linux release notes
+  router-notes:
+    url: https://www.expressvpn.com/support/vpn-setup/release-notes/router-app/
+    title: ExpressVPN router release notes
+  aircove:
+    url: https://www.expressvpn.com/aircove
+    title: Aircove routers
+  chrome:
+    url: https://www.expressvpn.com/vpn-download/chrome-vpn
+    title: ExpressVPN Chrome extension
+  github:
+    url: https://github.com/expressvpn
+    title: ExpressVPN on GitHub
+  extension-source:
+    url: https://github.com/expressvpn/expressvpn_browser_extension
+    title: expressvpn/expressvpn_browser_extension on GitHub
+  analytics:
+    url: https://www.expressvpn.com/support/troubleshooting/change-analytics-preferences/
+    title: How to change your anonymous analytics sharing setting in the app
+  exodus:
+    url: https://reports.exodus-privacy.eu.org/en/reports/com.expressvpn.vpn/latest/
+    title: Exodus Privacy report for com.expressvpn.vpn
+  affiliates:
+    url: https://www.expressvpn.com/affiliates
+    title: ExpressVPN affiliate program
+  vpnmentor:
+    url: https://www.vpnmentor.com/about-us/
+    title: About vpnMentor
+  safety-detectives:
+    url: https://www.safetydetectives.com/
+    title: Safety Detectives homepage
