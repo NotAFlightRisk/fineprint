@@ -24,7 +24,7 @@
     return response.json();
   }
 
-  // The table needs every value of every provider, so it and its code only load when asked for
+  // the table and every value it shows only load once someone asks for it
   async function loadTable() {
     const [{ default: ProviderTable }, { providers }, { categories }] = await Promise.all([
       import('#lib/components/ProviderTable.svelte'),
@@ -141,7 +141,6 @@
       </div>
     {/if}
   {:catch}
-    <!-- reloading also picks up a newer deploy, if that's why its code went missing -->
     <p class="status" role="status">
       The table didn't load. <button type="button" onclick={() => location.reload()}
         >Try again</button

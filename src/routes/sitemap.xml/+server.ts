@@ -3,7 +3,7 @@ import { absolute } from '#lib/site.js';
 
 export const prerender = true;
 
-// lastmod only where there's a real date, as a build date on every page teaches crawlers to ignore it
+// lastmod only where there's a real date to give
 export const GET = () => {
   const pages = [
     { path: '/', modified: stats().updated },

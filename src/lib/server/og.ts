@@ -8,8 +8,7 @@ import { ogSize } from '#lib/site.js';
 import { byId, plural, summarise, type Summary } from '#lib/summary.js';
 import { data, flagFile, stats } from '#lib/server/data.js';
 
-// The social images for each page, drawn at build time. Satori lays out a tree of
-// flexbox divs as an SVG, and resvg turns that into a PNG.
+// Social images drawn at build time: satori lays the divs out as SVG, resvg makes the PNG
 
 // the light theme from app.css
 const colour = {
