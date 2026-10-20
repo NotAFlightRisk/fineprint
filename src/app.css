@@ -205,35 +205,46 @@ a {
   }
 }
 
+/* a small icon after the text, kept on its last line by a non-breaking space */
+.noted::after,
+a[target='_blank']:not(.external)::after {
+  content: '\00a0';
+  padding-left: 0.9em;
+  background: var(--tint, color-mix(in srgb, currentColor 70%, transparent));
+  mask: var(--icon) right center / 0.8em no-repeat;
+  transition: background-color var(--quick) var(--ease);
+
+  /* high contrast mode paints over backgrounds, which would hide the icon */
+  @media (forced-colors: active) {
+    background: CanvasText;
+    forced-color-adjust: none;
+  }
+}
+
 /* a button that explains itself in a tooltip, marked with an info icon */
 .noted {
+  --icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='black' stroke-width='1.5'><circle cx='8' cy='8' r='6.75'/><path d='M8 7.25v4M8 4.5v.25' stroke-linecap='square'/></svg>");
   padding: 0;
   border: 0;
   background: none;
   text-align: left;
   cursor: help;
 
-  /* a non-breaking space keeps the icon on the same line as the last word */
-  &::after {
-    content: '\00a0';
-    padding-left: 0.9em;
-    background: var(--text-muted);
-    mask: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='black' stroke-width='1.5'><circle cx='8' cy='8' r='6.75'/><path d='M8 7.25v4M8 4.5v.25' stroke-linecap='square'/></svg>")
-      right center / 0.8em no-repeat;
-    transition: background-color var(--quick) var(--ease);
+  &:is(:hover, [aria-describedby]) {
+    --tint: currentColor;
+  }
+}
+
+/* links to other sites open in a new tab, marked with an arrow */
+a[target='_blank'] {
+  --icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='black' stroke-width='1.5'><path d='M6 3.5H3.5v9h9V10M9 3.5h3.5V7M12.5 3.5 7 9'/></svg>");
+
+  &:hover {
+    --tint: currentColor;
   }
 
-  &:is(:hover, [aria-describedby])::after {
-    background: var(--text);
-  }
-
-  /* high contrast mode paints over backgrounds, which would hide the icon */
-  @media (forced-colors: active) {
-    &::after,
-    &:is(:hover, [aria-describedby])::after {
-      background: CanvasText;
-      forced-color-adjust: none;
-    }
+  &:not(.external)::after {
+    content: '\00a0' / ' (opens in a new tab)';
   }
 }
 

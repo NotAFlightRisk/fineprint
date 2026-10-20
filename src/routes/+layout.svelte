@@ -9,8 +9,7 @@
 
   const nav = [
     { href: '/', label: 'Compare' },
-    { href: '/methodology', label: 'Methodology' },
-    { href: `${site.repo}/blob/main/.github/CONTRIBUTING.md`, label: 'Contribute' }
+    { href: '/methodology', label: 'Methodology' }
   ];
 
   onMount(() => loadPlausible());
@@ -24,6 +23,9 @@
     {#each nav as { href, label } (href)}
       <a {href} aria-current={page.url.pathname === href ? 'page' : undefined}>{label}</a>
     {/each}
+    <a href="{site.repo}/blob/main/.github/CONTRIBUTING.md" target="_blank" rel="noopener external"
+      >Contribute</a
+    >
   </nav>
 </header>
 
@@ -39,7 +41,7 @@
   <ul>
     <li><a href="/methodology">How grading works</a></li>
     <li><a href="/api/providers.json">Data as JSON</a></li>
-    <li><a href={site.repo}>Source on GitHub</a></li>
+    <li><a href={site.repo} target="_blank" rel="noopener external">Source on GitHub</a></li>
   </ul>
 </footer>
 

@@ -194,14 +194,14 @@
       </p>
     </div>
     <p class="actions">
-      <a href={editUrl(provider.id)} target="_blank" rel="noopener">Suggest an edit</a>
-      <a href={historyUrl(provider.id)} target="_blank" rel="noopener">History</a>
+      <a href={editUrl(provider.id)} target="_blank" rel="noopener external">Suggest an edit</a>
+      <a href={historyUrl(provider.id)} target="_blank" rel="noopener external">History</a>
       <a
         href="{site.repo}/issues/new?template=correction.yml&title={encodeURIComponent(
           `${provider.name}: `
         )}"
         target="_blank"
-        rel="noopener">Report a mistake</a
+        rel="noopener external">Report a mistake</a
       >
     </p>
   </section>

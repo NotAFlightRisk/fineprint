@@ -43,9 +43,10 @@
     </p>
     <p>
       Nobody pays to be listed, there are no affiliate links, and the data lives in
-      <a href="{site.repo}/tree/main/data">plain YAML files on GitHub</a>, so you can check our
-      working or fix it. It's also available as <a href="/api/providers.json">JSON</a> if you'd like to
-      build something with it.
+      <a href="{site.repo}/tree/main/data" target="_blank" rel="noopener external"
+        >plain YAML files on GitHub</a
+      >, so you can check our working or fix it. It's also available as
+      <a href="/api/providers.json">JSON</a> if you'd like to build something with it.
     </p>
   </div>
 </section>
