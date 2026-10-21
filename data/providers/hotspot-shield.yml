@@ -1,0 +1,411 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Hotspot Shield
+icon: hotspot-shield.png
+checked: 2026-10-21
+
+criteria:
+  identity:
+    website: https://www.hotspotshield.com
+    legal_entity:
+      value: Anchorfree, LLC
+      note: Or Pango GmbH in Switzerland, depending on where you buy.
+      sources: [tos, privacy-policy]
+    owner:
+      value: Point Wild
+      note: >-
+        Aura bought Pango, Hotspot Shield's maker, in 2020 and spun it off to its own shareholders in
+        2024. Pango Group then merged with Total Security, TotalAV's maker, to form Point Wild.
+      sources: [aura-pango-2020, aura-split-2024, point-wild-merger, comparitech-disclosure]
+    team:
+      value: partial
+      note: There's no Hotspot Shield leadership page, but Pango's site names its president and other executives.
+      sources: [pango-team]
+    sister_brands:
+      value: [Betternet, Touch VPN, UltraVPN, VPN 360, TotalAV VPN]
+      note: TotalAV's VPN joined the family when Pango Group merged with TotalAV's maker, Total Security.
+      sources: [aura-split-2024, privacy-vpn, point-wild-merger, totalav-vpn]
+    acquisitions:
+      value:
+        - date: 2024-12-12
+          acquirer: Point Wild
+          source: point-wild-merger
+        - date: 2024-09-03
+          acquirer: Pango Group, spun off from Aura
+          source: aura-split-2024
+        - date: 2020-07-07
+          acquirer: Aura
+          source: aura-pango-2020
+      note: >-
+        Point Wild was formed when Pango Group merged with Total Security in December 2024. The 2024
+        spin-off gave Aura's shareholders matching shares in Pango Group.
+      sources: [aura-pango-2020, aura-split-2024, point-wild-merger, comparitech-disclosure]
+
+  jurisdiction:
+    hq:
+      value: US
+      sources: [tos]
+    entities:
+      value: [US, CH]
+      note: Anchorfree, LLC is in Boston and Pango GmbH in Stans, Switzerland.
+      sources: [privacy-policy, tos]
+
+  logging:
+    traffic:
+      value: aggregate
+      evidence: verified
+      note: >-
+        It doesn't inspect what you send, but it logs the domains people visit, without full URLs or
+        anything that identifies them, and aggregates them about monthly.
+      sources: [privacy-vpn, audit-aon-2023]
+    dns:
+      value: aggregate
+      evidence: verified
+      note: Domains visited are logged without a user or device attached and aggregated about monthly.
+      sources: [privacy-vpn, audit-aon-2023]
+    timestamps:
+      value: 'yes'
+      evidence: claimed
+      note: >-
+        It logs how long each VPN session lasts and ties usage data to a random ID for your device,
+        without saying how long it keeps it.
+      sources: [privacy-vpn, privacy-policy]
+    bandwidth:
+      value: 'yes'
+      evidence: claimed
+      note: >-
+        It logs the data each session uses and measures it against a random device ID, partly to enforce
+        the free plan's limits, without saying how long it keeps it.
+      sources: [privacy-vpn]
+    source_ip:
+      value: temporary
+      evidence: verified
+      note: >-
+        Kept encrypted until the session ends. It also uses your IP to work out your rough location and
+        ISP, and to attribute ads.
+      sources: [privacy-vpn, audit-aon-2023]
+    proven:
+      value: [audit]
+      evidence: verified
+      note: Aon's 2023 review checked that browsing activity isn't logged with your IP or another identifier.
+      sources: [audit-aon-2023]
+    policy: https://www.hotspotshield.com/privacy-policy/vpn/
+
+  transparency:
+    audits:
+      value:
+        - date: 2023-08-25
+          auditor: Aon
+          scope: no_logs
+          source: audit-aon-2023
+      evidence: verified
+      note: >-
+        Only a four-page summary of Aon's review is published, dated by the report. The Android app has
+        no Google MASA listing.
+      sources: [security-audit, audit-aon-2023]
+    report:
+      value: irregular
+      note: Its site calls the report annual, but the newest is Pango's for 2023, published by Point Wild.
+      sources: [pango-transparency-2023, point-wild-reports, free-vpn]
+    canary: none
+    bug_bounty:
+      value: false
+      note: Pango used to list fixed vulnerabilities and thank reporters on a security page, which has since gone.
+      sources: [pango-security, cymptom-2020]
+    incidents:
+      value:
+        - date: 2020-06-14
+          summary: >-
+            Cymptom reported a Windows app flaw that let a local user overwrite any file as SYSTEM
+            (CVE-2020-17365). Hotspot Shield replied in two days, sent a fix to test in July and
+            published the update in September 2020.
+          handled: well
+          source: cymptom-2020
+        - date: 2018-03-12
+          summary: >-
+            Researchers hired by a VPN review site found the Chrome extension could leak your real IP
+            address (CVE-2018-7878 to CVE-2018-7880). Hotspot Shield fixed them promptly, after version
+            3.2.14, while two other VPNs named hadn't responded.
+          handled: well
+          source: pango-security
+        - date: 2018-01-30
+          summary: >-
+            Paulos Yibelo published a flaw in the app's local web server that let websites read VPN
+            status, Wi-Fi name and country (CVE-2018-6460). AnchorFree hadn't answered his December
+            report, disputed that real IPs leaked, then shipped a fix on 6 February.
+          handled: poorly
+          source: ssd-2018
+        - date: 2017-08-07
+          summary: >-
+            The Center for Democracy & Technology asked the FTC to investigate the free app, saying it
+            injected ads and tracking code and redirected traffic despite promising privacy. AnchorFree
+            called the claims unfounded, and no FTC action is on record.
+          handled: poorly
+          source: cdt-2017
+      sources: [cymptom-2020, pango-security, securityaffairs-2018, ssd-2018, zdnet-2018, cdt-2017, eweek-2017]
+
+  account:
+    email:
+      value: required
+      note: The free app works without an account.
+      sources: [privacy-vpn]
+    personal_data:
+      value: null
+      note: The privacy policy says buying may need your billing name and address, depending on how you pay.
+      sources: [privacy-policy]
+    payment:
+      value: [card, paypal, app_store]
+      sources: [paypal, app-store, privacy-policy]
+
+  security:
+    protocols:
+      value: [proprietary, wireguard, ikev2]
+      note: >-
+        Hydra, its own protocol built on OpenVPN, is the default. Aon also found OpenVPN in 2023, but the
+        apps' settings no longer list it.
+      sources: [protocols, features-settings, security-article, audit-aon-2023]
+    post_quantum:
+      value: none
+      note: Nothing on its site or help centre mentions post-quantum key exchange.
+      sources: [protocols, security-article]
+    kill_switch:
+      value: app
+      note: A setting on Windows, Android and iOS that cuts the internet if the VPN drops, but not after you disconnect yourself.
+      sources: [kill-switch, features-settings]
+    dns:
+      value: null
+      note: It says DNS requests are encrypted, but not whose servers answer them.
+      sources: [dns-leaks]
+
+  infra:
+    ram_only:
+      value: null
+      note: Hotspot Shield doesn't say its servers run from RAM.
+      sources: [server-locations, security-article]
+    hosting:
+      value: rented
+      sources: [privacy-vpn]
+    virtual_locations:
+      value: disclosed
+      note: >-
+        The server page lists India as served via Singapore. It doesn't say whether any of its other
+        locations are virtual.
+      sources: [server-locations]
+    servers:
+      value: null
+      note: Its own pages variously claim 800+, 1,800+ and 3,200+ servers.
+      sources: [server-locations, pricing, security-audit]
+    countries:
+      value: 85
+      note: Counted from its server locations page, which says 80+, including India via Singapore.
+      sources: [server-locations]
+
+  features:
+    connections:
+      value: 10
+      note: Free accounts get one.
+      sources: [devices]
+    multihop:
+      value: true
+      note: Android only.
+      sources: [multihop]
+    obfuscation:
+      value: [proprietary]
+      note: Hotspot Shield says Hydra looks like ordinary encrypted web traffic and is hard for censors to block.
+      sources: [protocols]
+    port_forwarding:
+      value: false
+      sources: [features-settings]
+    split_tunnel:
+      value: true
+      note: On iOS it only works for websites, not apps.
+      sources: [features-settings]
+    blocking:
+      value: [malware]
+      note: It blocks sites known for malware or phishing, not ads or trackers.
+      sources: [pricing, antivirus]
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android, browser]
+      note: >-
+        Also Android TV. The help centre says Linux and routers aren't supported. The Chrome and Firefox
+        extensions only cover the browser.
+      sources: [devices, firefox, chrome]
+    open_source:
+      value: none
+      sources: [protocols, security-article]
+    telemetry:
+      value: null
+      note: >-
+        The policy says it collects which app features you use and when, tied to a random device ID, but
+        doesn't mention a way to turn this off.
+      sources: [privacy-policy, privacy-vpn]
+    trackers:
+      value: 10
+      note: >-
+        Mostly ad networks such as AdMob, ironSource, Pangle and Unity Ads, in version 10.1.2 from
+        February 2023, the newest archived report.
+      sources: [exodus]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 12.99, currency: USD }
+      note: Premium, shown as $1.99 for the first month and $12.99 a month after.
+      sources: [pricing, plan-script]
+    best:
+      value: { amount: 2.42, currency: USD }
+      note: An intro price of $29 for the first year of Premium. It then renews at $95.99 a year, about $8 a month.
+      sources: [pricing]
+    best_term:
+      value: 12
+      sources: [pricing]
+    renewal_increase:
+      value: 231
+      note: The 1-year plan is $29, then renews at $95.99 a year.
+      sources: [pricing, plan-script]
+    free_tier:
+      value: true
+      note: >-
+        Basic is ad-supported and limited to one device and the US location, with a daily data cap on
+        iOS and Android that watching ads can lift.
+      sources: [pricing, basic-premium]
+    refund_days:
+      value: 45
+      note: For purchases made directly or through Google Play.
+      sources: [pricing, refund-google-play]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: It promises "military-grade encryption" and that you can "browse anonymously".
+      sources: [pricing, security-audit]
+    affiliates:
+      value: true
+      sources: [affiliates]
+    review_sites:
+      value: true
+      note: Point Wild also owns Comparitech, a VPN review site, which discloses it.
+      sources: [comparitech-disclosure]
+
+refs:
+  pango-transparency-2023:
+    url: https://www.pointwild.com/wp-content/uploads/2026/01/pango_transparency_report_2023.pdf
+    title: Pango transparency report 2023
+  point-wild-reports:
+    url: https://www.pointwild.com/press/resources/security-reviews-and-reports/
+    title: Point Wild, security reviews and reports
+  free-vpn:
+    url: https://www.hotspotshield.com/free-vpn/
+    title: Hotspot Shield free VPN
+  totalav-vpn:
+    url: https://www.totalav.com/security/vpn
+    title: TotalAV VPN
+  privacy-policy:
+    url: https://legal.hotspotshield.com/documents/privacy_policy
+    title: Hotspot Shield privacy policy
+  privacy-vpn:
+    url: https://www.hotspotshield.com/privacy-policy/vpn/
+    title: Hotspot Shield VPN products privacy notice
+  tos:
+    url: https://legal.hotspotshield.com/documents/terms_of_service
+    title: Hotspot Shield terms of service
+  pricing:
+    url: https://www.hotspotshield.com/select-plan/
+    title: Hotspot Shield plans and pricing
+  plan-script:
+    url: https://www.hotspotshield.com/js/select-plan/js/select-plan.js
+    title: Hotspot Shield pricing page script with plan prices
+  security-audit:
+    url: https://www.hotspotshield.com/security-audit/
+    title: Hotspot Shield independent security audit
+  audit-aon-2023:
+    url: https://www.hotspotshield.com/reports/Pango_HotSpot%20Shield_VPN_Privacy_Policy_Review_Summary_Report.pdf
+    title: Aon, technical security review of Hotspot Shield's VPN privacy policy, summary (2023)
+  server-locations:
+    url: https://www.hotspotshield.com/vpn-service/server-locations/
+    title: Hotspot Shield VPN server locations
+  affiliates:
+    url: https://www.hotspotshield.com/affiliates/
+    title: Hotspot Shield VPN affiliate program
+  protocols:
+    url: https://support.hotspotshield.com/en/general/announcements/which-vpn-protocol-should-i-choose
+    title: Which VPN protocol should I choose?
+  features-settings:
+    url: https://support.hotspotshield.com/en/general/announcements/hotspot-shield-app-features-and-settings
+    title: Hotspot Shield app features and settings
+  security-article:
+    url: https://support.hotspotshield.com/en/windows-hotspot-shield/security-and-privacy/is-my-vpn-connection-secure-and-private
+    title: Is my VPN connection secure and private?
+  kill-switch:
+    url: https://support.hotspotshield.com/en/getting-started/hotspot-shield-for-windows/what-is-the-kill-switch-in-hotspot-shield-for-windows
+    title: What is the kill switch in Hotspot Shield for Windows?
+  dns-leaks:
+    url: https://support.hotspotshield.com/en/linux/security-and-privacy/does-hotspot-shield-generate-dns-leaks
+    title: Does Hotspot Shield generate DNS leaks?
+  multihop:
+    url: https://support.hotspotshield.com/en/android-hotspot-shield/general-information/what-is-multi-hop-on-android
+    title: What is Multi-hop on Android?
+  devices:
+    url: https://support.hotspotshield.com/en/manage-account-devices/add-or-remove-devices-on-your-account/how-many-devices-can-be-connected-to-hotspot-shield-vpn-simultaneously
+    title: How many devices can be connected to Hotspot Shield VPN simultaneously?
+  basic-premium:
+    url: https://support.hotspotshield.com/en/payments-subscriptions/manage-your-subscription/what-are-the-difference-s-between-being-hotspot-shield-basic-or-premium
+    title: What are the differences between Hotspot Shield Basic and Premium?
+  paypal:
+    url: https://support.hotspotshield.com/en/payments-subscriptions/purchase-and-activate-premium-subscription/how-do-i-get-a-premium-subscription-using-paypal
+    title: How do I get a Premium subscription using PayPal?
+  app-store:
+    url: https://support.hotspotshield.com/en/payments-subscriptions/purchase-and-activate-premium-subscription/how-do-i-restore-my-purchase-or-activate-my-account-when-i-bought-it-from-the-app-store
+    title: How do I restore my purchase when I bought it from the App Store?
+  refund-google-play:
+    url: https://support.hotspotshield.com/en/hotspot-shield-on-android/payments-subscription/request-a-refund
+    title: Request a refund (Google Play)
+  firefox:
+    url: https://support.hotspotshield.com/en/getting-started/hotspot-shield-firefox-add-on/get-started-with-hotspot-shield-for-firefox
+    title: Get started with Hotspot Shield for Firefox
+  chrome:
+    url: https://chromewebstore.google.com/detail/nlbejmccbhkncgokjcmghpfloaajcffj
+    title: Hotspot Shield on the Chrome Web Store
+  pango-security:
+    url: https://web.archive.org/web/20210321174858/https://www.pango.co/sec31944/
+    title: Pango security updates (archived)
+  cymptom-2020:
+    url: https://web.archive.org/web/20201101022230/https://cymptom.com/cve-2020-17365-hotspot-shield-vpn-new-privilege-escalation-vulnerability/2020/10/
+    title: Cymptom, Hotspot Shield VPN privilege escalation (CVE-2020-17365, archived)
+  securityaffairs-2018:
+    url: https://securityaffairs.com/70286/security/hotspot-shield-vpn-flaw-2.html
+    title: VPN leaks affect 3 major VPN vendors, only Hotspot Shield promptly fixed it (Security Affairs)
+  ssd-2018:
+    url: https://ssd-disclosure.com/ssd-advisory-hotspot-shield-information-disclosure/
+    title: 'SSD advisory: Hotspot Shield information disclosure (CVE-2018-6460)'
+  zdnet-2018:
+    url: https://www.zdnet.com/article/privacy-flaw-in-hotspot-shield-can-identify-users-locations/
+    title: Privacy flaw in Hotspot Shield can identify users' locations (ZDNet)
+  cdt-2017:
+    url: https://web.archive.org/web/20260914210044/https://cdt.org/wp-content/uploads/2017/08/FTC-CDT-VPN-complaint-8-7-17.pdf
+    title: CDT, complaint to the FTC about Hotspot Shield (2017, archived)
+  eweek-2017:
+    url: https://www.eweek.com/security/ftc-asked-to-investigate-hotspot-shield-vpn-privacy-risks/
+    title: AnchorFree disputes privacy risk claims against Hotspot Shield VPN (eWeek)
+  exodus:
+    url: https://reports.exodus-privacy.eu.org/en/reports/hotspotshield.android.vpn/latest/
+    title: Exodus Privacy report for hotspotshield.android.vpn
+  antivirus:
+    url: https://support.hotspotshield.com/en/android-hotspot-shield/general-information/is-hotspot-shield-anti-virus-software
+    title: Is Hotspot Shield anti-virus software?
+  pango-team:
+    url: https://www.pango.co/team
+    title: Pango, our team
+  aura-pango-2020:
+    url: https://www.aura.com/press/release/aura-acquires-digital-privacy-and-security-company-pango
+    title: Aura acquires digital privacy and security company Pango (2020)
+  aura-split-2024:
+    url: https://www.aura.com/press/release/aura-splits-into-two-world-class-online-safety-companies
+    title: Aura splits into two world-class online safety companies (2024)
+  point-wild-merger:
+    url: https://www.paulweiss.com/insights/client-news/pango-group-merges-with-total-security
+    title: Pango Group merges with Total Security (Paul, Weiss)
+  comparitech-disclosure:
+    url: https://www.comparitech.com/disclosure/
+    title: Comparitech disclosure
