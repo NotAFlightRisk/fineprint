@@ -193,7 +193,10 @@
             {@const entry = provider.criteria[column.id]}
             {@const text = showEntry(column, entry)}
             {@const note = cellTip(entry, text)}
-            {@const source = entry?.sources[0] && provider.refs[entry.sources[0]]}
+            {@const source =
+              column.type === 'url' && typeof entry?.value === 'string'
+                ? { url: entry.value, title: text }
+                : entry?.sources[0] && provider.refs[entry.sources[0]]}
             <td
               onpointerenter={() => (active = column.id)}
               onfocusin={() => (active = column.id)}
