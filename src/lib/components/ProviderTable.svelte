@@ -3,46 +3,45 @@
   import External from '#lib/components/External.svelte';
   import Flag from '#lib/components/Flag.svelte';
   import GradeMark from '#lib/components/GradeMark.svelte';
-  import MustHave from '#lib/components/MustHave.svelte';
   import type { Category, Entry, Provider } from '#lib/data/types.ts';
+  import { sortBy, type Sort } from '#lib/filters.ts';
   import { showEntry } from '#lib/format.ts';
-  import { byId, checklist, flagged, seriousFlags } from '#lib/summary.ts';
-  import { byFlags, compare, toCsv, download } from '#lib/table.ts';
+  import { byId, type Summary } from '#lib/summary.ts';
+  import { compare, toCsv, download } from '#lib/table.ts';
   import { tip } from '#lib/tip.ts';
 
-  let { providers, categories }: { providers: Provider[]; categories: Category[] } = $props();
+  let {
+    summaries,
+    providers,
+    categories,
+    order
+  }: { summaries: Summary[]; providers: Provider[]; categories: Category[]; order: Sort } =
+    $props();
 
   const criteria = $derived(byId(categories));
-  const flagOrder = $derived(byFlags(criteria));
-  const red = (provider: Provider) => seriousFlags(provider, criteria) > 0;
+  const lookup = $derived(new Map(providers.map((provider) => [provider.id, provider])));
+  const columnFor: Record<Sort, string> = { flags: 'flags', price: 'pricing.best', name: 'name' };
 
-  let query = $state('');
-  let sort = $state<{ id: string; direction: 1 | -1 }>({ id: 'name', direction: 1 });
+  // follows the chosen order until a header is clicked
+  let sort = $derived<{ id: string; direction: 1 | -1 }>({ id: columnFor[order], direction: 1 });
   let active = $state<string>();
-  let required = $state<string[]>([]);
   const hidden = new SvelteSet<string>();
 
   const shown = $derived(categories.filter((category) => !hidden.has(category.id)));
   const columns = $derived(shown.flatMap((category) => category.criteria));
 
   const rows = $derived.by(() => {
-    const words = query.trim().toLowerCase();
-    const list = providers.filter((provider) => {
-      if (words && !provider.name.toLowerCase().includes(words)) return false;
-      const passed = checklist(provider, criteria);
-      return required.every((id) => passed.find((check) => check.id === id)?.grade === 'good');
-    });
     const { id, direction } = sort;
-    return list.toSorted((a, b) =>
-      id === 'name'
-        ? direction * a.name.localeCompare(b.name)
-        : id === 'flags'
-          ? direction * flagOrder(a, b)
-          : compare(criteria.get(id)!, a.criteria[id], b.criteria[id], direction)
-    );
+    return summaries
+      .map((summary) => ({ summary, provider: lookup.get(summary.id)! }))
+      .toSorted((a, b) =>
+        id === 'name' || id === 'flags'
+          ? direction * sortBy[id](a.summary, b.summary)
+          : compare(criteria.get(id)!, a.provider.criteria[id], b.provider.criteria[id], direction)
+      );
   });
 
-  const sortBy = (id: string) =>
+  const sortOn = (id: string) =>
     (sort = { id, direction: sort.id === id ? (-sort.direction as 1 | -1) : 1 });
   const ariaSort = (id: string) =>
     sort.id === id ? (sort.direction === 1 ? 'ascending' : 'descending') : undefined;
@@ -57,14 +56,16 @@
       .join('\n');
 
   const stamp = () => new Date().toISOString().slice(0, 10);
-  const exportCsv = () => download(`fineprint-${stamp()}.csv`, 'text/csv', toCsv(rows, columns));
+  const listed = () => rows.map(({ provider }) => provider);
+  const exportCsv = () =>
+    download(`fineprint-${stamp()}.csv`, 'text/csv', toCsv(listed(), columns));
   const exportJson = () =>
-    download(`fineprint-${stamp()}.json`, 'application/json', JSON.stringify(rows, null, 2));
+    download(`fineprint-${stamp()}.json`, 'application/json', JSON.stringify(listed(), null, 2));
 </script>
 
 <!-- the sort buttons keep their tooltips but skip the ⓘ, which would crowd the header -->
 {#snippet heading(id: string, label: string, description?: string)}
-  <button type="button" onclick={() => sortBy(id)} {@attach tip(description)}>
+  <button type="button" onclick={() => sortOn(id)} {@attach tip(description)}>
     {label}
     {#if sort.id === id}
       <svg viewBox="0 0 16 16" aria-hidden="true" class:down={sort.direction === -1}
@@ -75,13 +76,6 @@
 {/snippet}
 
 <section class="tools" aria-label="Table controls">
-  <label class="search">
-    <span class="visually-hidden">Find a provider</span>
-    <input type="search" placeholder="Find a provider" bind:value={query} />
-  </label>
-
-  <MustHave bind:selected={required} />
-
   <details class="columns">
     <summary>
       <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3.5 10.5 8 6 12.5" /></svg>
@@ -108,15 +102,6 @@
     <button type="button" onclick={exportJson}>JSON</button>
   </div>
 </section>
-
-<p class="count" role="status">
-  Showing {rows.length} of {providers.length} providers
-  {#if rows.length < providers.length}
-    <button type="button" class="reset" onclick={() => ((query = ''), (required = []))}>
-      Clear filters
-    </button>
-  {/if}
-</p>
 
 <!-- svelte-ignore a11y_no_noninteractive_tabindex -->
 <div class="scroller" role="region" aria-label="Comparison table" tabindex="0">
@@ -156,7 +141,7 @@
       </tr>
     </thead>
     <tbody>
-      {#each rows as provider (provider.id)}
+      {#each rows as { summary, provider } (provider.id)}
         <tr>
           <th scope="row">
             <a href="/{provider.id}">
@@ -166,16 +151,12 @@
           </th>
           <td
             class="flags"
-            class:none={!provider.flags.length}
-            data-grade={red(provider) ? 'bad' : 'ok'}
+            class:none={!summary.flags.length}
+            data-grade={summary.serious ? 'bad' : 'ok'}
           >
-            {#if provider.flags.length}
-              <button
-                type="button"
-                class="noted"
-                {@attach tip(flagged(provider, criteria).join('\n'))}
-              >
-                {provider.flags.length}
+            {#if summary.flags.length}
+              <button type="button" class="noted" {@attach tip(summary.flags.join('\n'))}>
+                {summary.flags.length}
               </button>
             {:else}
               0
@@ -216,9 +197,7 @@
         </tr>
       {:else}
         <tr>
-          <td class="empty" colspan={columns.length + 2}>
-            Nothing passes all of those. Try fewer must-haves.
-          </td>
+          <td class="empty" colspan={columns.length + 2}> Nothing matches. Try fewer filters. </td>
         </tr>
       {/each}
     </tbody>
@@ -231,15 +210,8 @@
     flex-wrap: wrap;
     align-items: start;
     gap: var(--space-3) var(--space-5);
+    margin-bottom: var(--space-4);
     font-size: var(--text-sm);
-  }
-
-  input[type='search'] {
-    width: 14rem;
-    padding: var(--space-2) var(--space-3);
-    border: var(--rule-thin) solid var(--rule);
-    border-radius: 0;
-    background: var(--surface);
   }
 
   .export button {
@@ -310,24 +282,6 @@
     & span {
       color: var(--text-muted);
     }
-  }
-
-  .count {
-    display: flex;
-    align-items: baseline;
-    gap: var(--space-3);
-    margin-block: var(--space-4) var(--space-2);
-    font-size: var(--text-sm);
-    color: var(--text-muted);
-  }
-
-  .reset {
-    border: 0;
-    padding: 0;
-    background: none;
-    text-decoration: underline;
-    color: var(--text);
-    cursor: pointer;
   }
 
   .scroller {

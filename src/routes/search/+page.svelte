@@ -5,6 +5,7 @@
   import MustHave from '#lib/components/MustHave.svelte';
   import SearchResult from '#lib/components/SearchResult.svelte';
   import Seo from '#lib/components/Seo.svelte';
+  import SortBy from '#lib/components/SortBy.svelte';
   import {
     filter,
     order,
@@ -32,7 +33,7 @@
     scored?.terms.filter((_, t) => !scored.live[t]).map(({ text }) => text) ?? []
   );
   const results = $derived(
-    index && scored ? order(filter(scored, filters.must), filters.sort, index.lookup) : []
+    index && scored ? order(filter(scored, filters.must), filters.sort) : []
   );
   const unfiltered = $derived(scored && filters.must.length ? filter(scored, []) : []);
 
@@ -159,14 +160,9 @@
       {#if filters.must.length}
         <button type="button" class="link" onclick={clearFilters}>Clear filters</button>
       {/if}
-      <label class="sort">
-        <span>Sort</span>
-        <select bind:value={filters.sort}>
-          {#each Object.entries(sorts) as [value, label] (value)}
-            <option {value}>{label}</option>
-          {/each}
-        </select>
-      </label>
+      <div class="sort">
+        <SortBy bind:value={filters.sort} options={sorts} />
+      </div>
     </header>
 
     {#if ignored.length && results.length}
@@ -295,22 +291,7 @@
   }
 
   .sort {
-    display: flex;
-    align-items: center;
-    gap: var(--space-2);
     margin-left: auto;
-    font-size: var(--text-sm);
-
-    & span {
-      color: var(--text-muted);
-    }
-
-    & select {
-      padding: var(--space-1) var(--space-2);
-      border: var(--rule-thin) solid var(--rule);
-      border-radius: 0;
-      background: var(--surface);
-    }
   }
 
   .try {

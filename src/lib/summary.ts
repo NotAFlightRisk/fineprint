@@ -1,5 +1,5 @@
-import type { Category, Criterion, Grade, Match, Provider } from '#lib/data/types.ts';
-import { formatValue, optionLabel, showEntry } from '#lib/format.ts';
+import type { Category, Criterion, Grade, Match, Price, Provider } from '#lib/data/types.ts';
+import { formatValue, inUsd, optionLabel, showEntry } from '#lib/format.ts';
 
 export interface Check {
   id: string;
@@ -104,7 +104,8 @@ export function summarise(provider: Provider, criteria: Map<string, Criterion>) 
     checks: checklist(provider, criteria),
     flags: flagged(provider, criteria),
     serious: seriousFlags(provider, criteria),
-    price: best ? formatValue(criteria.get('pricing.best')!, best) : undefined
+    price: best ? formatValue(criteria.get('pricing.best')!, best) : undefined,
+    usd: best ? inUsd(best as Price) : undefined
   };
 }
 

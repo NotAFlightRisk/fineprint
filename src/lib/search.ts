@@ -1,14 +1,9 @@
 import type { Category, Criterion, Grade, Item, Provider, Value } from '#lib/data/types.ts';
+import { passes, sortBy, sorts as listSorts } from '#lib/filters.ts';
 import { formatDate, newestFirst, optionLabel, showEntry } from '#lib/format.ts';
 import { byId, checks, summarise, type Summary } from '#lib/summary.ts';
-import { byFlags, compare } from '#lib/table.ts';
 
-export const sorts = {
-  relevance: 'Best match',
-  flags: 'Fewest red flags',
-  price: 'Cheapest',
-  name: 'A to Z'
-};
+export const sorts = { relevance: 'Best match', ...listSorts };
 type Sort = keyof typeof sorts;
 
 export const suggestions = [
@@ -147,7 +142,6 @@ interface Doc {
 
 export interface Index {
   docs: Doc[];
-  lookup: Map<string, Criterion>;
 }
 
 const factsOf = (provider: Provider, categories: Category[]): Fact[] =>
@@ -191,7 +185,7 @@ export function buildIndex(providers: Provider[], categories: Category[]): Index
       facts: factsOf(provider, categories)
     };
   });
-  return { docs, lookup };
+  return { docs };
 }
 
 interface Rating {
@@ -255,9 +249,8 @@ export function filter({ terms, live, docs }: Scored, must: string[]): Result[] 
 
   return docs.flatMap(({ doc, name, facts }) => {
     const { provider, summary } = doc;
-    const passes = (id: string) => summary.checks.some((c) => c.id === id && c.grade === 'good');
     const hits = terms.map((_, t) => Math.max(name.hits[t], ...facts.map((f) => f.hits[t])));
-    if (!must.every(passes) || !covers(hits)) return [];
+    if (!passes(summary, must) || !covers(hits)) return [];
     // terms the name answers aren't repeated in its values
     const rest = live.map((on, t) => on && !name.hits[t]);
     const weigh = (f: Rating) => total(f.hits, rest) + (rest.includes(true) ? f.bonus : 0);
@@ -273,17 +266,13 @@ export function filter({ terms, live, docs }: Scored, must: string[]): Result[] 
   });
 }
 
-export function order(results: Result[], sort: Sort, lookup: Index['lookup']) {
-  const best = lookup.get('pricing.best')!;
-  const flags = byFlags(lookup);
-  const by: Record<Sort, (a: Result, b: Result) => number> = {
-    relevance: (a, b) => b.score - a.score || b.favour - a.favour || by.flags(a, b),
-    flags: (a, b) => flags(a.provider, b.provider),
-    price: (a, b) => compare(best, a.provider.criteria[best.id], b.provider.criteria[best.id], 1),
-    name: () => 0
-  };
+export function order(results: Result[], sort: Sort) {
+  const relevance = (a: Result, b: Result) =>
+    b.score - a.score || b.favour - a.favour || sortBy.flags(a.summary, b.summary);
   return results.toSorted(
-    (a, b) => by[sort](a, b) || a.provider.name.localeCompare(b.provider.name)
+    (a, b) =>
+      (sort === 'relevance' ? relevance(a, b) : sortBy[sort](a.summary, b.summary)) ||
+      sortBy.name(a.summary, b.summary)
   );
 }
 
@@ -292,7 +281,7 @@ export const search = (
   query: string,
   must: string[] = [],
   sort: Sort = 'relevance'
-) => order(filter(score(index, query), must), sort, index.lookup);
+) => order(filter(score(index, query), must), sort);
 
 interface Piece {
   text: string;

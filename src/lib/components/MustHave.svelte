@@ -9,19 +9,21 @@
 
 <fieldset>
   <legend>Must have</legend>
-  {#each checks as check (check.id)}
-    <button
-      type="button"
-      aria-pressed={selected.includes(check.id)}
-      onclick={() => toggle(check.id)}>{check.label}</button
-    >
-  {/each}
+  <div class="options">
+    {#each checks as check (check.id)}
+      <button
+        type="button"
+        aria-pressed={selected.includes(check.id)}
+        onclick={() => toggle(check.id)}>{check.label}</button
+      >
+    {/each}
+  </div>
 </fieldset>
 
 <style>
   fieldset {
     display: flex;
-    flex-wrap: wrap;
+    align-items: baseline;
     gap: var(--space-2);
     min-inline-size: 0;
     margin: 0;
@@ -30,21 +32,27 @@
     font-size: var(--text-sm);
 
     @media (max-width: 40rem) {
-      flex-wrap: nowrap;
-      overflow-x: auto;
       width: 100%;
     }
   }
 
   legend {
     float: left;
-    margin-right: var(--space-2);
-    padding-block: var(--space-1);
+    flex: none;
+    min-width: var(--label-width, auto);
+    padding: 0;
     color: var(--text-muted);
+  }
+
+  .options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    min-width: 0;
 
     @media (max-width: 40rem) {
-      float: none;
-      padding-block: 0 var(--space-2);
+      flex-wrap: nowrap;
+      overflow-x: auto;
     }
   }
 
