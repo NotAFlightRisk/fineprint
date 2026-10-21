@@ -10,6 +10,6 @@
 <style>
   mark {
     background: color-mix(in srgb, var(--ok) 24%, transparent);
-    color: inherit;
+    color: var(--text);
   }
 </style>
