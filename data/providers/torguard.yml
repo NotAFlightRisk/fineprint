@@ -1,0 +1,336 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: TorGuard
+icon: torguard.png
+checked: 2026-10-21
+
+criteria:
+  identity:
+    website: https://torguard.net
+    legal_entity:
+      value: VPNetworks LLC
+      note: Named as data controller in the privacy policy, and as the seller on the App Store.
+      sources: [privacy, sunbiz, app-store]
+    owner:
+      value: Ben Van Pelt
+      note: >-
+        Through Data Protection Services LLC, which Florida's company register lists as VPNetworks'
+        member. Its own listed member is Benjamin Van Pelt, TorGuard's CEO.
+      sources: [sunbiz, sunbiz-dps, ceo-post]
+    founded:
+      value: 2012
+      note: Its site's metadata says 2011, but its pages say "since 2012", the year VPNetworks LLC was registered.
+      sources: [anonymous-vpn, sunbiz, faq]
+    team:
+      value: partial
+      note: The site names no staff, but its blog names Ben Van Pelt as CEO.
+      sources: [ceo-post]
+    sister_brands:
+      value: []
+      note: None found. Its site also sells private email and VPS hosting.
+    acquisitions:
+      value: []
+      note: A 2022 post says it has never been sold and is still run by its original founder.
+      sources: [bittorrent-post]
+
+  jurisdiction:
+    hq:
+      value: US
+      note: Based in Orlando, Florida. Its terms are governed by Florida law, with arbitration in Orange County.
+      sources: [privacy, terms]
+    entities:
+      value: [US]
+      sources: [sunbiz]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [privacy]
+    dns:
+      value: none
+      evidence: claimed
+      note: DNS isn't named, but the policy says it collects no data from its VPN and doesn't monitor the sites you visit.
+      sources: [privacy]
+    timestamps:
+      value: none
+      evidence: claimed
+      sources: [privacy]
+    bandwidth:
+      value: none
+      evidence: claimed
+      note: Only covered by its blanket statement that it logs no data from its VPN.
+      sources: [privacy]
+    source_ip:
+      value: none
+      evidence: claimed
+      sources: [privacy]
+    proven:
+      value: []
+      note: No audit or raid has tested the policy. It says the 2022 copyright settlement didn't make it log.
+      sources: [bittorrent-post]
+    policy: https://torguard.net/privacy/
+
+  transparency:
+    audits:
+      value: []
+    report:
+      value: none
+      note: There's no transparency report on its site.
+    canary:
+      value: none
+      note: There's no warrant canary on its site.
+    bug_bounty:
+      value: true
+      note: Launched in 2018 and relaunched in March 2024, with rewards for valid finds.
+      sources: [bounty-2024, bounty-2020]
+    incidents:
+      value:
+        - date: 2023-02-24
+          summary: >-
+            Greece tried CEO Ben Van Pelt for fraud after about 2,000 euros of declined card payments
+            were tried through a TorGuard server he leased. He was acquitted on 24 February 2023.
+          handled: well
+          source: ceo-post
+        - date: 2022-03-01
+          summary: >-
+            Film studios sued VPNetworks in Florida in 2021 over piracy by its users. It settled and
+            agreed to block BitTorrent on its US servers. Its post on the block put it down to network
+            abuse and never mentioned the settlement.
+          handled: poorly
+          source: settlement
+        - date: 2019-05-20
+          summary: >-
+            Someone found TorGuard's old IPsec streaming server install scripts left open during
+            upgrades, and asked for money. TorGuard said the server wasn't in use, reissued all its
+            certificates and posted about it the same day.
+          handled: well
+          source: blackmail-post
+        - date: 2017-09-01
+          summary: >-
+            An attacker got into one TorGuard server at a hosting reseller and took an old proxy TLS
+            certificate. TorGuard says it learned of it in May 2019 and sued NordVPN that June, but
+            only told users in October 2019, after the leak went public. Its CA key was never on the
+            server.
+          handled: poorly
+          source: breach-post
+      note: The settlement and the breach are dated to the month, as no day was given.
+      sources: [settlement, bittorrent-post, breach-post, blackmail-post, ceo-post]
+
+  account:
+    payment:
+      value: [card, bitcoin, other_crypto, gift_card]
+      note: Bitcoin and Litecoin go through its own BTCPay server, and gift cards through PayGarden. PayPal couldn't be confirmed.
+      sources: [terms, btcpay, paygarden]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn, ikev2, other]
+      note: Other is OpenConnect, plus SSTP on Stealth servers.
+      sources: [anonymous-vpn, vpn-software, stealth]
+    post_quantum:
+      value: none
+      note: Its WireGuard page calls ChaCha20 "quantum-resistant", but there's no post-quantum key exchange.
+      sources: [wireguard]
+    kill_switch:
+      value: app
+      note: The desktop app has a full kill switch and a per-app one.
+      sources: [vpn-software]
+    dns:
+      value: first_party
+      note: Listed as internal encrypted DNS.
+      sources: [anonymous-vpn]
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say whether its servers run from RAM.
+    hosting:
+      value: null
+      note: It doesn't say whether it owns or rents its servers.
+    virtual_locations:
+      value: null
+      note: It doesn't say whether any of its locations are virtual.
+    servers:
+      value: 3000
+      note: Listed as "3000+".
+      sources: [pricing]
+    countries:
+      value: 55
+      note: Listed as "55+" on its plans, though older copy on the same pages still says "50+".
+      sources: [pricing, anonymous-vpn]
+
+  features:
+    connections:
+      value: 8
+      note: Standard plan. Pro allows 12.
+      sources: [terms, pricing]
+    multihop:
+      value: null
+      note: No multi-hop option is listed. Its Stealth option can chain a proxy in front of the VPN.
+      sources: [stealth]
+    obfuscation:
+      value: [shadowsocks, stunnel]
+      note: Its Stealth option also hides OpenVPN headers.
+      sources: [vpn-software, stealth]
+    port_forwarding:
+      value: true
+      sources: [anonymous-vpn]
+    split_tunnel:
+      value: true
+      note: In the Android app. Its help centre doesn't mention it for the desktop apps.
+      sources: [android-split, anonymous-vpn, features-kb]
+    blocking:
+      value: [ads, trackers, malware]
+      note: An optional ad blocking DNS in the app.
+      sources: [vpn-software]
+
+  clients:
+    platforms:
+      value: [windows, macos, linux_gui, ios, android]
+      sources: [downloads, anonymous-vpn]
+    open_source:
+      value: some
+      note: Only router and server tools are on GitHub, with no licence. The desktop and mobile apps' code isn't published.
+      sources: [github]
+    telemetry:
+      value: null
+      note: The privacy policy covers website analytics only, and says nothing about app usage or crash data.
+      sources: [privacy]
+    trackers:
+      value: 0
+      note: The newest Exodus report that would load was for version 1.60.11, from December 2022. The current app is newer.
+      sources: [exodus]
+    fdroid:
+      value: false
+      sources: [fdroid]
+
+  pricing:
+    monthly:
+      value: { amount: 9.99, currency: USD }
+      note: The Anonymous VPN page lists the same plan at $10.99 a month.
+      sources: [pricing, anonymous-vpn]
+    best:
+      value: { amount: 5, currency: USD }
+      note: The Standard plan at $59.99 a year.
+      sources: [pricing]
+    best_term:
+      value: 12
+      sources: [pricing]
+    renewal_increase:
+      value: null
+      note: Neither the pricing page nor the terms say what plans renew at. The pricing page carries a "50% OFF" banner.
+      sources: [pricing, terms]
+    free_tier:
+      value: false
+      note: There's a 7-day free trial, with no card needed.
+      sources: [free-trial]
+    refund_days:
+      value: 7
+      note: First-time customers only. Not for dedicated IPs, or crypto or gift card payments.
+      sources: [terms]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: It promises "Complete Anonymity", "100% private" and "Untraceable Stealth VPN".
+      sources: [anonymous-vpn]
+    affiliates:
+      value: true
+      note: 30% lifetime recurring commission.
+      sources: [affiliates]
+    review_sites:
+      value: null
+      note: No link to a VPN review site was found. Its "VPN Reviews" page is customer testimonials.
+      sources: [vpn-reviews]
+    activism:
+      value: false
+      note: No funding or campaigning for privacy causes was found.
+
+refs:
+  privacy:
+    url: https://torguard.net/privacy/
+    title: Privacy policy
+  terms:
+    url: https://torguard.net/terms/
+    title: Terms of service
+  faq:
+    url: https://torguard.net/faq/
+    title: FAQ
+  bounty-2024:
+    url: https://blog.torguard.net/wanted-dead-or-alive-torguards-bug-bounty-program/
+    title: "Wanted Dead or Alive: TorGuard's Bug Bounty Program (March 2024)"
+  blackmail-post:
+    url: https://blog.torguard.net/when-bug-bounties-border-on-blackmail/
+    title: When Bug Bounties Border on Blackmail (May 2019)
+  android-split:
+    url: https://www.torguard.net/support/articles/OS-and-Apps/android-dedicated-ip-setup.php
+    title: How to add a dedicated IP to the TorGuard Android app
+  free-trial:
+    url: https://torguard.net/free-trial/
+    title: Free VPN trial
+  sunbiz-dps:
+    url: https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResultDetail?inquirytype=EntityName&directionType=Initial&searchNameOrder=DATAPROTECTIONSERVICES%20L190000087320&aggregateId=flal-l19000008732-5aa43a99-04d6-41d7-b400-81fa686186f8&searchTerm=Data%20Protection%20Services&listNameOrder=DATAPROTECTIONSERVICES%20L190000087320
+    title: Data Protection Services LLC on Florida's Division of Corporations register
+  sunbiz:
+    url: https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResultDetail?inquirytype=EntityName&directionType=Initial&searchNameOrder=VPNETWORKS%20L120001540890&aggregateId=flal-l12000154089-933d9d49-81d5-431f-ac25-01809070c15c&searchTerm=VPNETWORKS%20LLC&listNameOrder=VPNETWORKS%20L120001540890
+    title: VPNetworks, LLC on Florida's Division of Corporations register
+  app-store:
+    url: https://apps.apple.com/us/app/id988743799
+    title: 'Private & Secure VPN: TorGuard on the App Store'
+  ceo-post:
+    url: https://blog.torguard.net/clearing-the-air-the-truth-behind-torguard-ceos-legal-battle-and-acquittal/
+    title: "Clearing the Air: The Truth Behind TorGuard CEO's Legal Battle and Acquittal"
+  bittorrent-post:
+    url: https://blog.torguard.net/why-torguard-is-blocking-bittorrent-on-us-servers/
+    title: Why TorGuard is blocking Bittorrent on US Servers
+  settlement:
+    url: https://www.bleepingcomputer.com/news/security/vpn-provider-bans-bittorrent-after-getting-sued-by-film-studios/
+    title: BleepingComputer, VPN provider bans BitTorrent after getting sued by film studios
+  breach-post:
+    url: https://blog.torguard.net/why-torguards-network-is-secure-after-an-isolated-2017-server-breach/
+    title: Why TorGuard's Network is Secure After an Isolated 2017 Server Breach
+  btcpay:
+    url: https://blog.torguard.net/introducing-new-btcpay-checkout-for-bitcoin-and-litecoin/
+    title: Introducing New BTCPay Checkout for Bitcoin and Litecoin
+  paygarden:
+    url: https://torguard.net/support/articles/Account-Billing-Payments/paygarden-gift-card-troubleshooting.php
+    title: PayGarden gift card troubleshooting guide
+  pricing:
+    url: https://torguard.net/buy-vpn/
+    title: Buy VPN
+  anonymous-vpn:
+    url: https://torguard.net/anonymous-vpn/
+    title: Anonymous VPN
+  vpn-software:
+    url: https://torguard.net/vpn-software/
+    title: TorGuard VPN software
+  stealth:
+    url: https://torguard.net/stealth-vpn/
+    title: Stealth VPN
+  downloads:
+    url: https://torguard.net/downloads/
+    title: TorGuard downloads
+  affiliates:
+    url: https://torguard.net/vpn-reseller-affiliate/
+    title: VPN reseller and affiliate program
+  exodus:
+    url: https://web.archive.org/web/20221222092143/https://reports.exodus-privacy.eu.org/en/reports/net.torguard.openvpn.client/latest/
+    title: Exodus Privacy report for net.torguard.openvpn.client 1.60.11 (archived)
+  fdroid:
+    url: https://search.f-droid.org/?q=torguard&lang=en
+    title: F-Droid search for TorGuard
+  bounty-2020:
+    url: https://blog.torguard.net/new-torguard-2020-bug-bounty-program-details/
+    title: New TorGuard 2020 Bug Bounty Program Details
+  wireguard:
+    url: https://torguard.net/wireguard/
+    title: WireGuard VPN
+  features-kb:
+    url: https://torguard.net/support/categories/torguard-features.php
+    title: TorGuard VPN features (support centre)
+  github:
+    url: https://github.com/torguardvpn
+    title: torguardvpn on GitHub
+  vpn-reviews:
+    url: https://torguard.net/vpn-reviews/
+    title: VPN reviews (customer testimonials)
