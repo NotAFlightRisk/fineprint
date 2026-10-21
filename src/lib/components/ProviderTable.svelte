@@ -5,7 +5,7 @@
   import GradeMark from '#lib/components/GradeMark.svelte';
   import type { Category, Entry, Provider } from '#lib/data/types.ts';
   import { showEntry } from '#lib/format.ts';
-  import { byId, checklist, checks } from '#lib/summary.ts';
+  import { byId, checklist, checks, seriousFlags } from '#lib/summary.ts';
   import { compare, toCsv, download } from '#lib/table.ts';
   import { tip } from '#lib/tip.ts';
 
@@ -143,7 +143,11 @@
           {@render heading('name', 'Provider')}
         </th>
         <th rowspan="2" scope="col" aria-sort={ariaSort('flags')}>
-          {@render heading('flags', 'Red flags', 'How many things graded red')}
+          {@render heading(
+            'flags',
+            'Red flags',
+            'How many things graded red. Red if any are serious, orange if not'
+          )}
         </th>
         {#each shown as category (category.id)}
           <th colspan={category.criteria.length} scope="colgroup">{category.label}</th>
@@ -166,7 +170,13 @@
               {provider.name}
             </a>
           </th>
-          <td class="flags" class:none={!provider.flags.length}>{provider.flags.length}</td>
+          <td
+            class="flags"
+            class:none={!provider.flags.length}
+            data-grade={seriousFlags(provider, criteria) ? 'bad' : 'ok'}
+          >
+            {provider.flags.length}
+          </td>
           {#each columns as column (column.id)}
             {@const entry = provider.criteria[column.id]}
             {@const text = showEntry(column, entry)}
@@ -463,7 +473,7 @@
 
   .flags {
     font-weight: 600;
-    color: var(--bad);
+    color: var(--grade);
 
     &.none {
       color: var(--text-muted);

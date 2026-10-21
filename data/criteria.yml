@@ -8,6 +8,9 @@
 #   where/within  records filter by field values, or to the last n months, before min/max
 #   {}            matches anything
 # No rules means the criterion is reference only, graded `info`.
+#
+# serious: true   a bad grade here is a serious red flag, which turns the count red.
+#                 Without it, a bad grade is a minor flag, shown in orange.
 
 categories:
   - id: identity
@@ -33,6 +36,7 @@ categories:
         description: Year the VPN service launched.
       - key: team
         label: Team
+        serious: true
         type: enum
         description: Whether you can find out who runs it.
         options:
@@ -70,6 +74,7 @@ categories:
         description: Every country it has a registered company in.
       - key: eyes
         label: Eyes alliance
+        serious: true
         type: enum
         derived: true
         description: >-
@@ -91,6 +96,7 @@ categories:
     criteria:
       - key: traffic
         label: Traffic
+        serious: true
         type: enum
         description: Sites you visit and what you send.
         options: &logs
@@ -104,12 +110,14 @@ categories:
           bad: {}
       - key: dns
         label: DNS requests
+        serious: true
         type: enum
         description: The domain names you look up.
         options: *logs
         rules: *logs-rules
       - key: timestamps
         label: Connection times
+        serious: true
         type: enum
         description: When you connect and disconnect.
         options: *logs
@@ -122,6 +130,7 @@ categories:
         rules: *logs-rules
       - key: source_ip
         label: Your IP address
+        serious: true
         type: enum
         description: The real IP address you connect from.
         options: *logs
@@ -182,6 +191,7 @@ categories:
           bad: {}
       - key: canary
         label: Warrant canary
+        serious: true
         type: enum
         description: A regularly updated statement that it hasn't been served a gag order.
         options:
@@ -201,6 +211,7 @@ categories:
           ok: {}
       - key: incidents
         label: Incidents
+        serious: true
         type: records
         description: Breaches, leaks and legal run-ins, and how well they were handled.
         fields:
@@ -296,6 +307,7 @@ categories:
           bad: {}
       - key: kill_switch
         label: Kill switch
+        serious: true
         type: enum
         description: Blocks traffic if the tunnel drops.
         options:
@@ -346,6 +358,7 @@ categories:
           ok: {}
       - key: virtual_locations
         label: Virtual locations
+        serious: true
         type: enum
         description: Servers that claim to be in one country but sit in another.
         options:
@@ -536,6 +549,7 @@ categories:
           ok: {}
       - key: review_sites
         label: Owns review sites
+        serious: true
         type: bool
         description: Owns or funds sites that review VPNs.
         rules:

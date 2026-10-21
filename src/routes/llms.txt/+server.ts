@@ -23,7 +23,11 @@ export const GET = () => {
     '',
     ...providers.map((provider) => {
       const summary = summarise(provider, criteria);
-      const flags = summary.flags.length ? ` Red flags: ${summary.flags.join('; ')}.` : '';
+      // serious flags come first, so the first few get marked
+      const named = summary.flags.map((flag, i) =>
+        i < summary.serious ? `${flag} (serious)` : flag
+      );
+      const flags = named.length ? ` Red flags: ${named.join('; ')}.` : '';
       const price = summary.price ? ` From ${summary.price}.` : '';
       return link(provider.name, `/${provider.id}`, `${verdict(summary)}${flags}${price}`);
     }),

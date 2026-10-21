@@ -60,6 +60,11 @@ describe('grading rules', () => {
       .filter(({ grade }) => grade === undefined);
     expect(ungraded).toEqual([]);
   });
+
+  it('only calls a criterion serious if it can be graded bad', () => {
+    const never = [...criteria.values()].filter((c) => c.serious && !c.rules?.bad);
+    expect(never.map((c) => c.id)).toEqual([]);
+  });
 });
 
 describe('unify', () => {
@@ -87,6 +92,18 @@ describe('unify', () => {
       grade: 'good',
       sources: []
     });
+  });
+
+  it('lists serious red flags first', () => {
+    const flagged = structuredClone(raw) as {
+      criteria: { logging: Record<string, unknown>; transparency: Record<string, unknown> };
+    };
+    flagged.criteria.logging.proven = [];
+    flagged.criteria.transparency.canary = 'stale';
+    expect(unify(categories, 'good', flagged as never, today).flags).toEqual([
+      'transparency.canary',
+      'logging.proven'
+    ]);
   });
 
   it('flags a provider as stale six months after it was checked', () => {

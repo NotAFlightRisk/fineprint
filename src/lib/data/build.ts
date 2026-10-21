@@ -33,7 +33,9 @@ function derive(criteria: Record<string, Entry>, criterion: Criterion): Partial<
 
 export function unify(categories: Category[], id: string, raw: Raw, today: Date): Provider {
   const criteria: Record<string, Entry> = {};
-  for (const criterion of categories.flatMap((category) => category.criteria)) {
+  const all = categories.flatMap((category) => category.criteria);
+  const serious = new Set(all.filter((criterion) => criterion.serious).map(({ id }) => id));
+  for (const criterion of all) {
     const given = raw.criteria[criterion.category]?.[criterion.key];
     const entry: Partial<Entry> | undefined = criterion.derived
       ? derive(criteria, criterion)
@@ -59,7 +61,10 @@ export function unify(categories: Category[], id: string, raw: Raw, today: Date)
     stale: age > staleAfterDays * 864e5,
     criteria,
     refs: raw.refs ?? {},
-    flags: Object.keys(criteria).filter((key) => criteria[key].grade === 'bad')
+    // serious ones first, then in the order the site shows them
+    flags: Object.keys(criteria)
+      .filter((key) => criteria[key].grade === 'bad')
+      .sort((a, b) => Number(serious.has(b)) - Number(serious.has(a)))
   };
 }
 

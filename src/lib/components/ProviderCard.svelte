@@ -2,11 +2,14 @@
   import Checklist from '#lib/components/Checklist.svelte';
   import External from '#lib/components/External.svelte';
   import Flag from '#lib/components/Flag.svelte';
+  import GradeMark from '#lib/components/GradeMark.svelte';
   import { redFlags, type Summary } from '#lib/summary.ts';
   import { tip } from '#lib/tip.ts';
 
   let { summary }: { summary: Summary } = $props();
-  const { id, name, icon, website, hq, where, checks, flags, price } = $derived(summary);
+  const { id, name, icon, website, hq, where, checks, flags, serious, price } = $derived(summary);
+  // red if any flag is serious, otherwise orange
+  const tone = $derived(serious ? 'bad' : 'ok');
 </script>
 
 <article class="card">
@@ -27,9 +30,12 @@
     <div class="facts">
       <span>{price ? `From ${price}` : 'Price unknown'}</span>
       {#if flags.length}
-        <button type="button" class="noted flags" {@attach tip(flags.join('\n'))}>
-          {redFlags(flags.length)}
-        </button>
+        <span class="flags" data-grade={tone}>
+          <GradeMark grade={tone} label="" />
+          <button type="button" class="noted" {@attach tip(flags.join('\n'))}>
+            {redFlags(flags.length)}
+          </button>
+        </span>
       {:else}
         <span class="none">{redFlags(0)}</span>
       {/if}
@@ -39,7 +45,7 @@
 </article>
 
 <style>
-  /* shares its row's tracks, so every card's sections line up with its neighbours' */
+  /* shares its row's tracks, so sections line up across cards */
   .card {
     display: grid;
     grid-row: span 3;
@@ -106,7 +112,11 @@
   }
 
   .flags {
-    color: var(--bad);
+    --mark: 1rem;
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-2);
+    color: var(--grade);
     font-weight: 600;
   }
 
