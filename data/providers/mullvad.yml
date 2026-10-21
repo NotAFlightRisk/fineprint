@@ -252,10 +252,9 @@ criteria:
       note: GPL-3.0, covering the desktop, Android and iOS apps.
       sources: [source-code]
     telemetry:
-      value: forced
-      grade: ok
+      value: none
       evidence: claimed
-      note: A daily update check sends only the app and OS version, which Mullvad counts in aggregate. Graded ok, not bad, as nothing in it identifies the user.
+      note: The apps only make a daily update check, sending the app and OS version, which Mullvad counts in aggregate.
       sources: [telemetry-doc]
     trackers:
       value: 0

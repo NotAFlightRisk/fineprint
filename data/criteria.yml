@@ -462,7 +462,7 @@ categories:
       - key: telemetry
         label: Telemetry
         type: enum
-        description: Usage or crash data the apps send home.
+        description: Usage or crash data the apps send home. Update checks don't count.
         options:
           none: None
           opt_in: Opt-in
