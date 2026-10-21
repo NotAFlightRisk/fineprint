@@ -1,0 +1,325 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Norton VPN
+icon: norton-vpn.png
+checked: 2026-10-21
+
+criteria:
+  identity:
+    website: https://us.norton.com/products/norton-vpn
+    legal_entity:
+      value: Gen Digital Inc.
+      note: Sells and licenses it in the Americas. Who sells it elsewhere depends on where you live, such as NortonLifeLock Ireland Limited in the UK and Ireland and Avast Software s.r.o. in the rest of Europe.
+      sources: [terms-of-sale, lsa, lsa-emea]
+    founded:
+      value: null
+      note: Norton's pages don't give a launch year, and Gen's newsroom has no releases from the Symantec era.
+    owner:
+      value: Gen Digital
+      sources: [terms-of-sale, lsa]
+    team:
+      value: partial
+      note: Gen's executives are named, but no one running the VPN is.
+      sources: [gen-leadership]
+    sister_brands:
+      value: [HMA VPN, Avast Premium VPN, AVG Secure VPN, Avira Phantom VPN]
+      note: Avast Premium VPN was called SecureLine VPN until recently.
+      sources: [hma, avast-vpn, avg-vpn, avira-vpn]
+    acquisitions:
+      value: []
+      note: Symantec renamed itself NortonLifeLock in 2019 when it sold its enterprise arm to Broadcom, then renamed itself Gen Digital after merging with Avast in 2022. Norton itself was never sold.
+      sources: [nll-rename, gen-avast-merger]
+
+  jurisdiction:
+    hq:
+      value: US
+      note: Gen Digital Inc. is based in Tempe, Arizona.
+      sources: [terms-of-sale, lsa]
+    entities:
+      value: [US, IE, CZ, JP, SG, GB]
+      sources: [terms-of-sale, gen-privacy]
+
+  logging:
+    traffic:
+      value: none
+      evidence: verified
+      sources: [vpn-notice, audit-2025]
+    dns:
+      value: none
+      evidence: verified
+      sources: [vpn-notice, audit-2025]
+    timestamps:
+      value: aggregate
+      evidence: claimed
+      note: Connection events are kept for 12 months with the day you connected and the location you used, but not the time.
+      sources: [vpn-notice]
+    bandwidth:
+      value: aggregate
+      evidence: claimed
+      note: A running total of data transferred is kept for 18 months to plan capacity and spot abuse.
+      sources: [vpn-notice]
+    source_ip:
+      value: none
+      evidence: verified
+      note: VerSprite's 2025 assessment found one server role could log your IP under certain errors, fixed before its retest.
+      sources: [vpn-notice, audit-2025]
+    proven:
+      value: [audit]
+      evidence: verified
+      sources: [audit-2025, audit-2024]
+    policy: https://us.norton.com/privacy/products-privacy-notice
+
+  transparency:
+    audits:
+      value:
+        - date: 2025-11-11
+          auditor: VerSprite
+          scope: infra
+          source: audit-mimic-2025
+        - date: 2025-08-26
+          auditor: VerSprite
+          scope: no_logs
+          source: audit-2025
+        - date: 2024-07-25
+          auditor: VerSprite
+          scope: no_logs
+          source: audit-2024
+      evidence: verified
+      note: >-
+        Only executive summaries are published. Both privacy assessments first found gaps that could
+        identify users in rare cases, fixed by the retests. The 2025 Mimic review covered the
+        protocol's source code, mostly its server side.
+      sources: [no-log-page]
+    report:
+      value: regular
+      note: Quarterly counts of warrants, subpoenas and National Security Letters since July 2024.
+      sources: [transparency-report]
+    canary:
+      value: none
+      sources: [privacy-center, transparency-report]
+    bug_bounty:
+      value: true
+      note: Through Gen Digital's vulnerability programme, which says not every report qualifies for a reward.
+      sources: [security]
+    incidents:
+      value:
+        - date: 2026-05-04
+          summary: Cisco Talos found a privilege escalation (CVE-2025-58074, CVSS 8.8) in the Microsoft Store installer of Norton Secure VPN for Windows. Talos tried to reach Norton three times from September 2025 and published with no reply on record, and Gen's advisories page has no entry for it.
+          handled: poorly
+          source: talos-2025-2276
+      sources: [gen-advisories]
+
+  account:
+    email:
+      value: required
+      sources: [vpn-notice, terms-of-sale]
+    personal_data:
+      value: []
+      note: Card payments take your billing details, which Norton keeps in your account to renew the subscription.
+      sources: [terms-of-sale]
+    payment:
+      value: [card, paypal, app_store]
+      note: Gen's privacy notice names cards and PayPal, and the Android app is sold through Google Play.
+      sources: [gen-privacy, play]
+
+  security:
+    protocols:
+      value: [proprietary, wireguard, openvpn, other]
+      note: Mimic is Norton's own protocol. It names IPsec rather than IKEv2, and says which protocols you get varies by platform.
+      sources: [locations]
+    post_quantum:
+      value: optional
+      note: Only over Mimic, which the app may pick for you or you can choose. Not on iOS.
+      sources: [product, no-log-page, audit-mimic-2025]
+    kill_switch:
+      value: app
+      note: Not on iOS.
+      sources: [windows-vpn]
+    dns:
+      value: null
+      note: The VPN privacy notice says DNS queries aren't collected, but nothing says whose DNS servers answer them.
+      sources: [vpn-notice]
+
+  infra:
+    ram_only:
+      value: null
+      note: Not mentioned on the locations page, the no-log page or in the audit summaries.
+      sources: [locations, no-log-page]
+    hosting:
+      value: null
+      note: Says it has a "large network of physical servers", but not whether it owns them.
+      sources: [locations]
+    virtual_locations:
+      value: disclosed
+      note: The locations table marks 39 of its 146 locations as having no physical server there.
+      sources: [locations]
+    servers:
+      value: null
+      note: Norton counts 140+ locations, not servers.
+      sources: [locations]
+    countries:
+      value: 103
+      note: Counted from the locations table, which includes territories such as Hong Kong, Puerto Rico and Jersey.
+      sources: [locations]
+
+  features:
+    connections:
+      value: 10
+      note: Twenty on the Ultimate plan.
+      sources: [product]
+    multihop:
+      value: true
+      note: Sold as Double VPN, between eight pairs of countries.
+      sources: [locations]
+    obfuscation:
+      value: [proprietary]
+      note: The Mimic protocol is built to look like ordinary web traffic.
+      sources: [audit-mimic-2025]
+    port_forwarding:
+      value: false
+      note: Not mentioned on the product, locations or Windows pages.
+      sources: [locations, windows-vpn]
+    blocking:
+      value: []
+      note: The Ad Blocker is a separate extension for desktop Chrome, Edge and Firefox, not a blocklist in the VPN.
+      sources: [product]
+    split_tunnel:
+      value: true
+      note: Not on Mac or iOS.
+      sources: [windows-vpn]
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android]
+      note: Also Google TV and Apple TV. No Linux app.
+      sources: [windows-vpn]
+    open_source:
+      value: none
+      sources: [product]
+    telemetry:
+      value: forced
+      evidence: claimed
+      note: The apps send usage events kept for 18 months. Only the third-party analytics (Firebase and Crashlytics) can be turned off in settings.
+      sources: [vpn-notice]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: null
+      note: The pricing page has no monthly plan, only 1 and 2 years, each with 3 extra months.
+      sources: [product]
+    best:
+      value: { amount: 2.66, currency: USD }
+      note: USD from the US site. Standard plan for 10 devices, billed $71.76 for the first 27 months, though the page has also shown $80.73. The Windows page sells a 1-device plan at $29.99 for the first year.
+      sources: [product, windows-vpn]
+    best_term:
+      value: 27
+      sources: [product]
+    renewal_increase:
+      value: 213
+      note: Renews at $99.99 a year.
+      sources: [product, renewal]
+    free_tier:
+      value: false
+      note: Only a 30-day free trial, which needs a payment method.
+      sources: [windows-vpn]
+    refund_days:
+      value: 60
+      note: For annual plans. Monthly subscriptions get 14 days.
+      sources: [refund]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: Claims "bank-grade encryption" and that "Even we can't see what you do online".
+      sources: [windows-vpn, no-log-page]
+    affiliates:
+      value: true
+      note: Pays a commission per customer through Impact.
+      sources: [affiliates]
+    activism: null
+
+refs:
+  product:
+    url: https://us.norton.com/products/norton-vpn
+    title: Norton VPN
+  windows-vpn:
+    url: https://us.norton.com/feature/vpn-for-windows-10
+    title: Norton VPN for Windows
+  renewal:
+    url: https://us.norton.com/pricing
+    title: Renewal pricing
+  refund:
+    url: https://support.norton.com/sp/en/us/home/current/solutions/kb20100113164023EN
+    title: Norton cancellation and refund policy
+  vpn-notice:
+    url: https://us.norton.com/privacy/products-privacy-notice
+    title: Products privacy notice, Norton VPN section
+  no-log-page:
+    url: https://us.norton.com/feature/norton-vpn-no-log-policy
+    title: Norton VPN no-log policy
+  privacy-center:
+    url: https://us.norton.com/norton-vpn-privacy-center
+    title: VPN privacy center
+  transparency-report:
+    url: https://us.norton.com/norton-vpn-transparency-report
+    title: Norton VPN transparency report (updated August 2026)
+  audit-2025:
+    url: https://us.norton.com/content/dam/norton/pdfs/other-resources/VS_GenDigital_NortonVPN_ExecSummary_Sep2025.pdf
+    title: VerSprite, Norton VPN technical privacy impact assessment (September 2025)
+  audit-2024:
+    url: https://www.nortonlifelock.com/content/dam/nortonlifelock/pdfs/other-resources/VS_GenDigital_NortonVPN_PIAAttestationLetter_Aug2024.pdf
+    title: VerSprite, Norton Secure VPN technical privacy impact assessment (August 2024)
+  audit-mimic-2025:
+    url: https://us.norton.com/content/dam/norton/pdfs/other-resources/VS_NortonVPN_MimicProtocol_ExecSummary_Nov2025.pdf
+    title: VerSprite, Mimic protocol security assessment (November 2025)
+  locations:
+    url: https://us.norton.com/feature/vpn-server-locations
+    title: Norton VPN server locations
+  terms-of-sale:
+    url: https://us.norton.com/terms-of-sale
+    title: Terms of sale (February 2024)
+  lsa:
+    url: https://us.norton.com/legal/lsa?lsar=americas&lsal=en
+    title: License and services agreement, Americas
+  lsa-emea:
+    url: https://us.norton.com/legal/lsa?lsar=emea&lsal=en
+    title: License and services agreement, Europe, Middle East and Africa
+  gen-privacy:
+    url: https://privacy.gendigital.com/en/
+    title: Gen general privacy notice
+  gen-leadership:
+    url: https://www.gendigital.com/us/en/leadership/
+    title: Gen leadership
+  gen-advisories:
+    url: https://www.gendigital.com/us/en/contact-us/security-advisories/
+    title: Gen security advisories
+  talos-2025-2276:
+    url: https://www.talosintelligence.com/vulnerability_reports/TALOS-2025-2276
+    title: Cisco Talos, Norton Secure VPN installer privilege escalation (TALOS-2025-2276)
+  play:
+    url: https://play.google.com/store/apps/details?id=com.symantec.securewifi
+    title: Norton VPN on Google Play
+  security:
+    url: https://www.gendigital.com/us/en/contact-us/report-a-potential-security-vulnerability/
+    title: Gen, report a potential security vulnerability
+  affiliates:
+    url: https://us.norton.com/affiliates
+    title: Norton affiliate program
+  nll-rename:
+    url: https://newsroom.gendigital.com/2019-11-07-NortonLifeLock-Delivers-Solid-Execution-for-Fiscal-Second-Quarter-2020
+    title: NortonLifeLock fiscal Q2 2020 results, on the name change from Symantec
+  gen-avast-merger:
+    url: https://newsroom.gendigital.com/2022-09-12-NortonLifeLock-Completes-Merger-with-Avast
+    title: NortonLifeLock completes merger with Avast
+  hma:
+    url: https://www.hidemyass.com/en-us/index
+    title: HMA VPN
+  avast-vpn:
+    url: https://www.avast.com/premium-vpn
+    title: Avast Premium VPN (formerly SecureLine VPN)
+  avg-vpn:
+    url: https://www.avg.com/en-us/secure-vpn
+    title: AVG Secure VPN
+  avira-vpn:
+    url: https://www.avira.com/en/free-vpn
+    title: Avira Phantom VPN
