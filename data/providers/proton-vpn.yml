@@ -170,8 +170,8 @@ criteria:
     protocols:
       value: [wireguard, openvpn, ikev2, proprietary]
       note: >-
-        Among the apps, OpenVPN is only on Linux and IKEv2 only on macOS. Stealth, Proton's own
-        WireGuard-over-TLS protocol, counts as proprietary.
+        Among the apps, OpenVPN is only on Linux and IKEv2 only on macOS. Its own protocol is Stealth,
+        WireGuard over TLS.
       sources: [protocols, stealth]
     post_quantum:
       value: none

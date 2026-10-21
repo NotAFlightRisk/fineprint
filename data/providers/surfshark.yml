@@ -165,7 +165,7 @@ criteria:
   security:
     protocols:
       value: [wireguard, openvpn, ikev2, proprietary]
-      note: Proprietary is Dausos, Surfshark's own protocol, in beta in the macOS App Store app only.
+      note: Its own protocol, Dausos, is in beta in the macOS App Store app only.
       sources: [protocols, dausos, protocols-page]
     post_quantum:
       value: optional

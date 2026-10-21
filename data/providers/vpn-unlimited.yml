@@ -119,7 +119,7 @@ criteria:
   security:
     protocols:
       value: [wireguard, openvpn, ikev2, proprietary, other]
-      note: Proprietary is KeepSolid Wise, built on OpenVPN. Other is L2TP for manual setups.
+      note: Its own protocol is KeepSolid Wise, built on OpenVPN. Other is L2TP for manual setups.
       sources: [protocols, wise]
     post_quantum:
       value: none
