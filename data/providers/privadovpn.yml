@@ -1,0 +1,376 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: PrivadoVPN
+icon: privadovpn.svg
+checked: 2026-10-21
+
+criteria:
+  identity:
+    website:
+      value: https://privadovpn.com
+      sources: [about]
+    legal_entity:
+      value: Privado Networks ehf
+      note: It took over the service from Privado Networks AG, in Zug, on 1 May 2026.
+      sources: [terms]
+    owner:
+      value: Thomas Steven Miller
+      note: Iceland's company register names this US citizen as its beneficial owner, through indirect control.
+      sources: [is-register]
+    founded:
+      value: 2019
+      sources: [about]
+    team:
+      value: partial
+      note: >-
+        Its site names nobody, but the Icelandic and Swiss company registers list its directors and
+        beneficial owner.
+      sources: [is-register, ch-register]
+    sister_brands:
+      value: null
+      note: Its careers page mentions marketing for "eight brands" without naming them.
+      sources: [careers]
+    acquisitions:
+      value: []
+      note: Its 2026 move from the Swiss company to the Icelandic one was between affiliated companies.
+      sources: [terms]
+
+  jurisdiction:
+    hq:
+      value: IS
+      note: It was Swiss until May 2026, and several of its pages still say it's based in Switzerland.
+      sources: [terms, is-register, no-log-page]
+    entities:
+      value: [IS, CH, US]
+      note: The Swiss AG and a Delaware LLC process payments on the Icelandic company's behalf.
+      sources: [terms, ch-register]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [privacy-policy, no-log-kb]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [privacy-policy, no-log-kb]
+    timestamps:
+      value: null
+      note: The policy lists what it keeps without mentioning connection times either way.
+      sources: [privacy-policy]
+    bandwidth:
+      value: aggregate
+      evidence: claimed
+      note: It keeps a running data total per account, which also enforces the free plan's 10GB limit.
+      sources: [privacy-policy]
+    source_ip:
+      value: none
+      evidence: claimed
+      sources: [privacy-policy, no-log-kb]
+    proven:
+      value: []
+      note: No audit, court case or server seizure has tested the no-logs claim.
+    policy: https://privadovpn.com/privacy-policy/
+
+  transparency:
+    audits:
+      value: []
+      note: No independent audit of the servers, apps or no-logs policy has been published.
+    report:
+      value: none
+      sources: [legal-requests]
+    canary:
+      value: none
+    bug_bounty:
+      value: false
+      note: Its help centre just says to email bug reports, with no reward or disclosure policy.
+      sources: [bug-report]
+    incidents:
+      value: []
+
+  account:
+    email:
+      value: required
+      sources: [privacy-policy, data-kb]
+    personal_data:
+      value: []
+      sources: [data-kb]
+    payment:
+      value: [card, paypal, bank, app_store, bitcoin, other_crypto]
+      note: Bank means SEPA direct debit and iDEAL, shown to European visitors. It added Coinbase crypto payments in 2022.
+      sources: [pricing, coinbase, terms]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn, ikev2]
+      sources: [protocols-kb, protocols]
+    post_quantum:
+      value: none
+      note: Its protocol pages and app changelogs don't mention post-quantum key exchange.
+      sources: [protocols-kb, windows-log]
+    kill_switch:
+      value: system
+      note: >-
+        An optional setting that blocks all traffic outside the VPN, straight away on macOS and once
+        the app has started on Windows.
+      sources: [kill-switch-mac, torrent-leaks]
+    dns:
+      value: first_party
+      evidence: claimed
+      sources: [dns-pfsense, doh]
+
+  infra:
+    ram_only:
+      value: null
+      note: PrivadoVPN doesn't say its servers run from RAM.
+      sources: [features, premium-network]
+    hosting:
+      value: mixed
+      evidence: claimed
+      note: It says it owns "a lot of our own equipment", without saying how much.
+      sources: [features]
+    virtual_locations:
+      value: null
+      note: It doesn't say whether any of its locations are virtual.
+      sources: [servers]
+    servers:
+      value: 233
+      note: On the list its website reads, on 2026-10-21. Free users get 41 of them, in 10 countries.
+      sources: [server-list, servers]
+    countries:
+      value: 49
+      sources: [server-list, servers]
+
+  features:
+    connections:
+      value: 10
+      note: Free accounts get one.
+      sources: [connections-kb, pricing]
+    multihop:
+      value: true
+      note: >-
+        SmartRoute, added to the Windows and macOS apps in 2026, picks the entry server for you. Until
+        March 2026 the apps used the name SmartRoute for split tunnelling.
+      sources: [smart-route, smartroute-kb, windows-log, macos-log]
+    obfuscation:
+      value: [proprietary]
+      note: Scramble disguises OpenVPN traffic, and a WireGuard "protocol inspection bypass" option isn't explained.
+      sources: [censorship, config-generator]
+    port_forwarding:
+      value: null
+      note: Its site and help centre don't say either way.
+    split_tunnel:
+      value: true
+      note: By app on Windows, macOS and Android. The iOS app splits by website or IP address instead.
+      sources: [split-tunneling, android-log, ios-log]
+    blocking:
+      value: [ads, trackers, malware]
+      note: Through Control Tower, its filtering DNS, on paid plans.
+      sources: [control-tower, pricing]
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android, browser]
+      note: >-
+        Linux and routers need manual setup with config files, on paid plans only. The browser
+        extensions are proxies that don't encrypt traffic.
+      sources: [software, linux, web-proxy]
+    open_source:
+      value: none
+      note: Its GitHub organisation holds no app code.
+      sources: [github]
+    telemetry:
+      value: null
+      note: >-
+        The policy lists crash reports, install and active-user counts and the advertising ID, without
+        saying whether the apps let you turn them off. Windows crash reports are opt-in.
+      sources: [privacy-policy, windows-log, exodus]
+    trackers:
+      value: 2
+      note: Sentry and Snowplow, in version 3.37 from December 2025, the newest report that would load.
+      sources: [exodus]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 10.99, currency: USD }
+      note: The page switches to EUR, GBP or CHF by location, at the same figures.
+      sources: [pricing]
+    best:
+      value: { amount: 1.11, currency: USD }
+      note: $30 for the first 27 months.
+      sources: [pricing, checkout-2y]
+    best_term:
+      value: 27
+      sources: [pricing, checkout-2y]
+    renewal_increase:
+      value: 259
+      note: The 27-month plan is $30, then renews at $95.76 every 2 years ($3.99 a month).
+      sources: [checkout-2y, terms]
+    free_tier:
+      value: true
+      note: >-
+        10GB every 30 days on one device, then 1 Mbps. Its free VPN page says devices aren't
+        limited, but the pricing page and help centre say one.
+      sources: [pricing, free-plans, freevpn]
+    refund_days:
+      value: 30
+      note: Only on 1 and 2-year plans bought direct, once per person, and not on crypto payments.
+      sources: [terms, refund-kb]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        Its no-logs page says it keeps "None. Zip. Zero. Nada." on you, though its policy keeps your
+        email, payments and data totals. A help article calls its servers "100% anonymous, safe, and untraceable".
+      sources: [no-log-page, privacy-policy, torrents]
+    affiliates:
+      value: true
+      sources: [affiliates]
+    review_sites:
+      value: null
+      note: No sign it owns any, but its owner's other businesses aren't published.
+    activism:
+      value: false
+      note: Its pages talk up free speech, but name no campaigns, donations or groups it backs.
+      sources: [media]
+
+refs:
+  about:
+    url: https://privadovpn.com/about-us/
+    title: About PrivadoVPN
+  privacy-policy:
+    url: https://privadovpn.com/privacy-policy/
+    title: Privacy policy
+  terms:
+    url: https://privadovpn.com/terms-of-service/
+    title: Terms of service
+  is-register:
+    url: https://www.skatturinn.is/fyrirtaekjaskra/leit/kennitala/6507231630
+    title: Privado Networks ehf. in Iceland's company register
+  ch-register:
+    url: https://zg.chregister.ch/cr-portal/auszug/auszug.xhtml?uid=CHE-203.001.971
+    title: Privado Networks AG in the Zug commercial register
+  careers:
+    url: https://privadovpn.com/company/careers/
+    title: Careers
+  no-log-page:
+    url: https://privadovpn.com/features/no-log-vpn/
+    title: No-log VPN service
+  no-log-kb:
+    url: https://support.privadovpn.com/kb/article/346-is-privadovpn-a-no-log-vpn/
+    title: Is PrivadoVPN a no log VPN?
+  data-kb:
+    url: https://support.privadovpn.com/kb/article/352-what-data-do-you-collect-from-me/
+    title: What data do you collect from me?
+  legal-requests:
+    url: https://support.privadovpn.com/kb/article/347-what-happens-if-privadovpn-receives-a-legal-request-for-user-information/
+    title: What happens if PrivadoVPN receives a legal request for user information?
+  bug-report:
+    url: https://support.privadovpn.com/kb/article/350-how-do-i-report-a-bug/
+    title: How do I report a bug?
+  pricing:
+    url: https://privadovpn.com/pricing/?currency=USD
+    title: PrivadoVPN pricing in US dollars
+  checkout-2y:
+    url: https://signup.privadovpn.com/?currency=USD&coupon=bf26-20-f-12mo&biannualcoupon=bf26-30-f-24mo&monthcoupon=bf26-1099-f-1mo&plan=PREMIUM240&antivirus=false
+    title: PrivadoVPN checkout, 2-year plan in USD, as linked from the pricing page
+  coinbase:
+    url: https://blog.privadovpn.com/privadovpn-announces-coinbase-integration/
+    title: PrivadoVPN announces Coinbase integration
+  protocols-kb:
+    url: https://support.privadovpn.com/kb/article/345-what-vpn-protocols-does-privadovpn-utilize/
+    title: What VPN protocols does PrivadoVPN utilize?
+  protocols:
+    url: https://privadovpn.com/features/secure-encryption-protocols/
+    title: Secure encryption protocols
+  kill-switch-mac:
+    url: https://support.privadovpn.com/kb/article/916-privadovpn-for-mac-features-overview/
+    title: PrivadoVPN for Mac features overview
+  torrent-leaks:
+    url: https://support.privadovpn.com/kb/article/1071-torrent-leaks-prevention/
+    title: Torrent leaks prevention
+  dns-pfsense:
+    url: https://support.privadovpn.com/kb/article/510-pfsense-openvpn-manual-setup/
+    title: pfSense OpenVPN manual setup
+  doh:
+    url: https://support.privadovpn.com/kb/article/557-dns-over-https-doh-configuration/
+    title: DNS over HTTPS (DoH) configuration
+  features:
+    url: https://privadovpn.com/features/
+    title: PrivadoVPN features
+  premium-network:
+    url: https://privadovpn.com/company/premium-network/
+    title: Benefits of our premium network
+  servers:
+    url: https://privadovpn.com/what-is-a-vpn/servers/
+    title: VPN servers
+  server-list:
+    url: https://check.privadovpn.com/servers
+    title: PrivadoVPN server counts (the list its website reads)
+  connections-kb:
+    url: https://support.privadovpn.com/kb/article/384-how-many-simultaneous-connections-can-run-on-an-account/
+    title: How many simultaneous connections can run on an account?
+  smart-route:
+    url: https://privadovpn.com/smart-route/
+    title: VPN SmartRoute
+  smartroute-kb:
+    url: https://support.privadovpn.com/kb/article/1993-use-smartroute-in-the-privadovpn-app/
+    title: Use SmartRoute in the PrivadoVPN app
+  windows-log:
+    url: https://blog.privadovpn.com/privadovpn-windows-app-version-log/
+    title: PrivadoVPN Windows app version log
+  macos-log:
+    url: https://blog.privadovpn.com/privadovpn-macos-app-version-log/
+    title: PrivadoVPN macOS app version log
+  android-log:
+    url: https://blog.privadovpn.com/privadovpn-android-app-version-log/
+    title: PrivadoVPN Android app version log
+  ios-log:
+    url: https://blog.privadovpn.com/privadovpn-ios-app-version-log/
+    title: PrivadoVPN iOS app version log
+  censorship:
+    url: https://support.privadovpn.com/kb/article/1008-connect-from-a-country-with-internet-restrictions-and-censorship/
+    title: Connect from a country with internet restrictions and censorship
+  config-generator:
+    url: https://support.privadovpn.com/kb/article/1130-how-to-generate-a-wireguard-or-openvpn-configuration-file-for-manual-setups/
+    title: How to generate a WireGuard or OpenVPN configuration file for manual setups
+  split-tunneling:
+    url: https://privadovpn.com/split-tunneling/
+    title: VPN split tunneling
+  control-tower:
+    url: https://privadovpn.com/control-tower/
+    title: Control Tower
+  software:
+    url: https://privadovpn.com/software/
+    title: PrivadoVPN apps
+  linux:
+    url: https://support.privadovpn.com/kb/article/874-is-there-linux-support/
+    title: Is there Linux support?
+  web-proxy:
+    url: https://support.privadovpn.com/kb/article/1157-privadovpn-web-proxy-extension-for-browsers/
+    title: PrivadoVPN web proxy extension for browsers
+  github:
+    url: https://github.com/privadovpn
+    title: PrivadoVPN on GitHub
+  exodus:
+    url: https://reports.exodus-privacy.eu.org/en/reports/io.privado.android/latest/
+    title: Exodus Privacy report for io.privado.android
+  free-plans:
+    url: https://support.privadovpn.com/kb/article/875-what-is-the-difference-between-the-free-and-paid-vpn-plans/
+    title: What is the difference between the free and paid VPN plans?
+  freevpn:
+    url: https://privadovpn.com/freevpn/
+    title: Free VPN
+  refund-kb:
+    url: https://support.privadovpn.com/kb/article/349-how-do-i-request-a-refund/
+    title: How do I request a refund?
+  torrents:
+    url: https://support.privadovpn.com/kb/article/351-can-i-use-torrents-safely-and-anonymously/
+    title: Can I use torrents safely and anonymously?
+  affiliates:
+    url: https://privadovpn.com/affiliates/
+    title: Join the PrivadoVPN affiliate program
+  media:
+    url: https://privadovpn.com/company/media/
+    title: Press and media
