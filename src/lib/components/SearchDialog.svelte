@@ -24,6 +24,7 @@
   });
 
   function move(event: KeyboardEvent) {
+    if (event.isComposing) return;
     const step = steps[event.key];
     if (step && shown.length) {
       event.preventDefault();
