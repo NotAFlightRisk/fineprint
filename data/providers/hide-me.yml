@@ -1,0 +1,373 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: hide.me VPN
+icon: hide-me.svg
+checked: 2026-10-21
+
+criteria:
+  identity:
+    website: https://hide.me
+    legal_entity:
+      value: eVenture Limited
+      note: Registered in Labuan, Malaysia, under number LL09685.
+      sources: [terms]
+    owner:
+      value: null
+      note: Its help centre calls eVenture Ltd the parent company and names nothing above it. hide.me doesn't say who holds the shares.
+      sources: [company-overview]
+    founded:
+      value: 2012
+      sources: [about]
+    team:
+      value: partial
+      note: There's no leadership page, but its blog names founder Sebastian Schaub, who writes its announcements.
+      sources: [founder, edge]
+    sister_brands: []
+    acquisitions:
+      value: []
+      sources: [is-it-safe]
+
+  jurisdiction:
+    hq:
+      value: MY
+      sources: [terms]
+    entities:
+      value: [MY]
+      evidence: claimed
+      note: Its founder is German, but hide.me says it isn't incorporated anywhere outside Malaysia.
+      sources: [is-it-safe, edge]
+
+  logging:
+    traffic:
+      value: none
+      evidence: verified
+      sources: [privacy-policy, securitum-2024]
+    dns:
+      value: none
+      evidence: verified
+      note: Its policy doesn't mention DNS, but Securitum found no DNS logging on the VPN servers.
+      sources: [securitum-2024]
+    timestamps:
+      value: temporary
+      evidence: claimed
+      note: A troubleshooting log of your random username and internal IP address is wiped every few hours.
+      sources: [privacy-policy]
+    bandwidth:
+      value: aggregate
+      evidence: claimed
+      note: Keeps a running monthly total of each account's data for billing.
+      sources: [privacy-policy]
+    source_ip:
+      value: none
+      evidence: claimed
+      sources: [privacy-policy]
+    proven:
+      value: [audit]
+      evidence: verified
+      sources: [securitum-2024]
+    policy: https://hide.me/en/privacy
+
+  transparency:
+    audits:
+      value:
+        - date: 2024-06-06
+          auditor: Securitum
+          scope: no_logs
+          source: securitum-2024
+        - date: 2023-12-01
+          auditor: MASA lab, not named
+          scope: apps
+          source: masa-2023
+      evidence: verified
+      note: >-
+        hide.me also cites an earlier no-logs check by Leon Juranic of DefenseCode, which it dates to
+        2015, but no report is public. The Android MASA check is dated by its announcement.
+      sources: [no-logs, press]
+    report:
+      value: regular
+      note: One report a year, each covering every request since 2013. The latest covers 2025.
+      sources: [about, transparency-2025, about-2023, about-2025]
+    canary:
+      value: none
+      sources: [about, transparency-2025]
+    bug_bounty:
+      value: null
+      note: Its site and help centre don't mention a bug bounty or a way to report security flaws.
+      sources: [help-centre]
+    incidents:
+      value: []
+      note: >-
+        Local privilege escalation flaws were published in its Windows app in 2016 and its macOS app in
+        2019 (CVE-2019-12174). The macOS one was fixed in 2.4.4, but there's no record of how hide.me
+        responded to either.
+      sources: [exploit-db-40071, cve-2019-12174]
+
+  account:
+    email:
+      value: required
+      note: The free plan needs no account, and paying customers can delete their email afterwards.
+      sources: [privacy-policy, pricing]
+    personal_data:
+      value: []
+      sources: [privacy-policy]
+    payment:
+      value: [card, paypal, bank, app_store, bitcoin, other_crypto]
+      sources: [pricing, terms]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn, ikev2, other]
+      note: The others are SoftEther and SSTP.
+      sources: [protocols]
+    post_quantum:
+      value: none
+      note: >-
+        Each WireGuard connection gets a fresh pre-shared key, but hide.me doesn't claim the channel
+        it's sent over is quantum-safe.
+      sources: [wireguard-keys]
+    kill_switch:
+      value: system
+      note: >-
+        The Windows and macOS apps block traffic outside the tunnel with a firewall, on by default, and
+        StealthGuard can block all traffic whenever the VPN is off. Mobile apps use the system's
+        always-on VPN.
+      sources: [kill-switch, stealth-guard]
+    dns:
+      value: first_party
+      note: Each VPN server runs its own resolver.
+      sources: [zero-logging-dns, securitum-2024]
+
+  infra:
+    ram_only:
+      value: all
+      evidence: claimed
+      sources: [ram-only, company-overview]
+    hosting:
+      value: null
+      note: It says it runs and maintains every server itself, without outsiders, but not whether it owns or rents the hardware.
+      sources: [network, server-count]
+    virtual_locations:
+      value: null
+      note: Its network page explains what a virtual location is, but doesn't say whether any of its own are.
+      sources: [network]
+    servers:
+      value: 2600
+      note: Listed as more than 2,600 across 92+ locations.
+      sources: [pricing]
+    countries:
+      value: 57
+      sources: [network, press]
+
+  features:
+    connections:
+      value: 10
+      sources: [pricing]
+    multihop:
+      value: true
+      sources: [multihop]
+    obfuscation:
+      value: [proprietary]
+      note: >-
+        The iOS, macOS and Android apps have a WireGuard obfuscation option that hide.me doesn't
+        document. Its OpenVPN setup also uses tls-crypt, which it counts as obfuscation.
+      sources: [ios-release-notes, android-release-notes, openvpn-obfuscation]
+    port_forwarding:
+      value: true
+      note: Dynamic, opened on request through UPnP or NAT-PMP.
+      sources: [port-forwarding]
+    split_tunnel:
+      value: true
+      sources: [split-tunnel]
+    blocking:
+      value: [ads, trackers, malware]
+      note: SmartGuard, a DNS filter.
+      sources: [smartguard]
+
+  clients:
+    platforms:
+      value: [windows, macos, linux_cli, ios, android, router, browser]
+      sources: [software, linux, github]
+    open_source:
+      value: some
+      note: Only the Linux command line, OpenWrt router and Ubuntu Touch clients are on GitHub.
+      sources: [github, linux]
+    telemetry:
+      value: opt_in
+      note: Anonymised crash reports and connection diagnostics, only with your consent.
+      sources: [privacy-policy]
+    trackers:
+      value: 0
+      note: In version 4.1.0 from September 2023, the newest archived report.
+      sources: [exodus]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 11.99, currency: USD }
+      sources: [pricing-usd]
+    best:
+      value: { amount: 2.69, currency: USD }
+      note: >-
+        $69.99 for 26 months. The 36-month plan is $119.99, or $3.33 a month.
+      sources: [pricing-usd, checkout-plans]
+    best_term:
+      value: 26
+      sources: [pricing-usd]
+    renewal_increase:
+      value: 0
+      note: Its pricing page promises every plan renews at the same price and length.
+      sources: [pricing-usd]
+    free_tier:
+      value: true
+      note: >-
+        One device and 8 locations. The pricing and free VPN pages say there's no data cap, but its
+        homepage FAQ says 10 GB a month.
+      sources: [pricing, free-vpn, home]
+    refund_days:
+      value: 30
+      note: First order only. App store purchases follow the store's own refund rules.
+      sources: [terms]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        Its network page says you'll be "completely invisible on the internet" and "no one can track
+        your digital footprint". A help centre page says it doesn't record bandwidth use, which its
+        privacy policy says it totals monthly.
+      sources: [network, company-overview, privacy-policy]
+    affiliates:
+      value: true
+      sources: [affiliates]
+    review_sites: false
+    activism:
+      value: true
+      note: It says it donates to the Electronic Frontier Foundation, without saying how much.
+      sources: [about]
+
+refs:
+  privacy-policy:
+    url: https://hide.me/en/privacy
+    title: hide.me privacy policy
+  terms:
+    url: https://hide.me/en/legal
+    title: hide.me terms of service
+  about:
+    url: https://hide.me/en/about
+    title: About hide.me
+  no-logs:
+    url: https://hide.me/en/features/no-logs-policy
+    title: hide.me no-logs policy
+  press:
+    url: https://hide.me/en/press
+    title: hide.me press page
+  securitum-2024:
+    url: https://hide.me/downloads/Securitum_Hide.me_no-log-policy_20240607.pdf
+    title: Securitum, audit of hide.me's no-log policy compliance (2024)
+  pricing:
+    url: https://hide.me/en/pricing
+    title: hide.me pricing
+  pricing-usd:
+    url: https://hide.me/en/pricing?currency=USD
+    title: hide.me pricing in US dollars
+  home:
+    url: https://hide.me/en/
+    title: hide.me homepage
+  free-vpn:
+    url: https://hide.me/en/free-vpn
+    title: hide.me free VPN
+  protocols:
+    url: https://hide.me/en/features/vpn-protocols
+    title: hide.me VPN protocols
+  multihop:
+    url: https://hide.me/en/multihop-double-vpn
+    title: hide.me Multihop
+  port-forwarding:
+    url: https://hide.me/en/vpn-port-forwarding
+    title: Dynamic port forwarding with hide.me VPN
+  split-tunnel:
+    url: https://hide.me/en/features/vpn-split-tunnel
+    title: hide.me split tunnelling
+  smartguard:
+    url: https://hide.me/en/smart-guard
+    title: 'SmartGuard: block ads, trackers and malicious websites'
+  software:
+    url: https://hide.me/en/software
+    title: hide.me VPN apps
+  linux:
+    url: https://hide.me/en/software/linux
+    title: hide.me VPN client for Linux
+  github:
+    url: https://github.com/eventure
+    title: eventure on GitHub
+  affiliates:
+    url: https://hide.me/en/affiliates
+    title: hide.me affiliate programme
+  checkout-plans:
+    url: https://member.hide.me/en/checkout?plan=promo3636&coupon=EWA-B7R-PLA&filter=2&currency=USD
+    title: hide.me checkout for the 3, 6 and 36-month plans, in US dollars
+  transparency-2025:
+    url: https://hide.me/downloads/hide.me-transparency-report-2025.pdf
+    title: hide.me transparency report 2025
+  about-2023:
+    url: https://web.archive.org/web/20230130234321/https://hide.me/en/about
+    title: About hide.me (archived January 2023, linking the 2022 report)
+  about-2025:
+    url: https://web.archive.org/web/20250123183619/https://hide.me/en/about
+    title: About hide.me (archived January 2025, linking the 2023 report)
+  exodus:
+    url: https://reports.exodus-privacy.eu.org/en/reports/hideme.android.vpn/latest/
+    title: Exodus Privacy report for hideme.android.vpn
+  company-overview:
+    url: https://hide.me/en/help/about-hide-me-vpn-company-overview-background/
+    title: About hide.me VPN, company overview and background
+  is-it-safe:
+    url: https://hide.me/en/blog/is-hide-me-safe/
+    title: Is hide.me safe? Audits, jurisdiction, and track record explained
+  founder:
+    url: https://hide.me/en/blog/author/sebastian/
+    title: hide.me blog posts by Sebastian Schaub
+  edge:
+    url: https://theedgemalaysia.com/article/edgy-business-online-hide-and-seek
+    title: 'The business of online hide-and-seek (The Edge Malaysia)'
+  masa-2023:
+    url: https://hide.me/en/blog/hide-me-vpn-passes-independent-masa-audit/
+    title: hide.me VPN passes independent MASA audit (December 2023)
+  help-centre:
+    url: https://hide.me/en/help/
+    title: hide.me knowledge base
+  exploit-db-40071:
+    url: https://www.exploit-db.com/exploits/40071
+    title: Hide.Me VPN Client 1.2.4 local privilege escalation (Exploit Database, 2016)
+  cve-2019-12174:
+    url: https://nvd.nist.gov/vuln/detail/CVE-2019-12174
+    title: NVD, CVE-2019-12174 (hide.me for macOS before 2.4.4)
+  wireguard-keys:
+    url: https://hide.me/en/blog/how-hide-me-manages-wireguard-keys/
+    title: How hide.me manages WireGuard keys before, during and after a connection
+  kill-switch:
+    url: https://hide.me/en/features/vpn-kill-switch
+    title: hide.me VPN kill switch
+  stealth-guard:
+    url: https://hide.me/en/features/stealth-guard
+    title: hide.me StealthGuard
+  zero-logging-dns:
+    url: https://hide.me/en/features/zero-logging-dns
+    title: hide.me zero logging DNS
+  ram-only:
+    url: https://hide.me/en/blog/diskless-ram-only-volatile-memory/
+    title: Diskless, RAM-only and volatile memory (hide.me blog)
+  network:
+    url: https://hide.me/en/network
+    title: hide.me worldwide VPN locations
+  server-count:
+    url: https://hide.me/en/blog/why-server-count-is-not-a-good-metric-for-a-vpn-service/
+    title: Why server count is not a good metric for a VPN service
+  ios-release-notes:
+    url: https://hide.me/en/help/hide-me-vpn-for-apple-ios-release-notes/
+    title: hide.me VPN for iOS release notes
+  android-release-notes:
+    url: https://hide.me/en/help/hide-me-vpn-for-android-release-notes/
+    title: hide.me VPN for Android release notes
+  openvpn-obfuscation:
+    url: https://hide.me/en/blog/security-hardened-openvpn-config-with-traffic-obfuscation/
+    title: Security-hardened OpenVPN config with traffic obfuscation
