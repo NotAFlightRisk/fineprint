@@ -1,19 +1,11 @@
-<script module lang="ts">
-  import type { Index } from '#lib/search.ts';
-
-  // kept between visits, so going back to results keeps their scroll position
-  let cached: Index | undefined;
-</script>
-
 <script lang="ts">
   import { onMount } from 'svelte';
   import { afterNavigate, goto } from '$app/navigation';
-  import { loadData } from '#lib/api.ts';
+  import { searchIndex } from '#lib/api.svelte.ts';
   import MustHave from '#lib/components/MustHave.svelte';
   import SearchResult from '#lib/components/SearchResult.svelte';
   import Seo from '#lib/components/Seo.svelte';
   import {
-    buildIndex,
     filter,
     order,
     parse,
@@ -29,12 +21,11 @@
   const { stats } = $derived(data);
 
   let filters = $state<Filters>(readFilters(new URLSearchParams()));
-  let index = $state.raw(cached);
-  let failed = $state(false);
   let announced = $state('');
   let input = $state<HTMLInputElement>();
   let synced = false;
 
+  const index = $derived(searchIndex.current);
   const idle = $derived(!parse(filters.q).terms.length && !filters.must.length);
   const scored = $derived(index && score(index, filters.q));
   const ignored = $derived(
@@ -58,11 +49,7 @@
 
   onMount(() => {
     read();
-    if (index) return;
-    loadData().then(
-      ({ providers, categories }) => (index = cached = buildIndex(providers, categories)),
-      () => (failed = true)
-    );
+    searchIndex.load();
   });
 
   afterNavigate(({ type }) => {
@@ -78,7 +65,13 @@
   });
 
   $effect(() => {
-    const text = idle ? '' : failed ? "The search didn't load." : index ? heading : 'Loading';
+    const text = idle
+      ? ''
+      : searchIndex.failed
+        ? "The search didn't load."
+        : index
+          ? heading
+          : 'Loading';
     const timer = setTimeout(() => (announced = text), 600);
     return () => clearTimeout(timer);
   });
@@ -180,7 +173,7 @@
       <p class="note">Nothing matched {quote(ignored)}, so it's left out.</p>
     {/if}
 
-    {#if failed}
+    {#if searchIndex.failed}
       <p class="empty">
         The search didn't load.
         <button type="button" class="link" onclick={() => location.reload()}>Try again</button>

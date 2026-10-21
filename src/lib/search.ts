@@ -287,6 +287,13 @@ export function order(results: Result[], sort: Sort, lookup: Index['lookup']) {
   );
 }
 
+export const search = (
+  index: Index,
+  query: string,
+  must: string[] = [],
+  sort: Sort = 'relevance'
+) => order(filter(score(index, query), must), sort, index.lookup);
+
 interface Piece {
   text: string;
   hit: boolean;

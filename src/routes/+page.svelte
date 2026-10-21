@@ -2,7 +2,7 @@
   import { onMount } from 'svelte';
   import { MediaQuery } from 'svelte/reactivity';
   import { fade } from 'svelte/transition';
-  import { loadData } from '#lib/api.ts';
+  import { loadData } from '#lib/api.svelte.ts';
   import GradeMark from '#lib/components/GradeMark.svelte';
   import ProviderCard from '#lib/components/ProviderCard.svelte';
   import Seo from '#lib/components/Seo.svelte';

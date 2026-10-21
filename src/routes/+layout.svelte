@@ -13,8 +13,20 @@
     { href: '/contributing', label: 'Contribute' }
   ];
 
+  let searching = $state(false);
+  let SearchDialog = $state<typeof import('#lib/components/SearchDialog.svelte').default>();
+
+  async function shortcut(event: KeyboardEvent) {
+    if (!/^k$/i.test(event.key) || !(event.metaKey || event.ctrlKey)) return;
+    event.preventDefault();
+    SearchDialog ??= (await import('#lib/components/SearchDialog.svelte')).default;
+    searching = !searching;
+  }
+
   onMount(() => loadPlausible());
 </script>
+
+<svelte:window onkeydown={shortcut} />
 
 <a class="skip" href="#main">Skip to content</a>
 
@@ -42,6 +54,8 @@
     <li><a href={site.repo} target="_blank" rel="noopener external">Source on GitHub</a></li>
   </ul>
 </footer>
+
+{#if SearchDialog}<SearchDialog bind:open={searching} />{/if}
 
 <style>
   .skip {
