@@ -1,0 +1,422 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Kaspersky VPN
+icon: kaspersky-vpn.svg
+checked: 2026-10-21
+
+criteria:
+  identity:
+    website:
+      value: https://www.kaspersky.com/vpn-secure-connection
+      sources: [product]
+    legal_entity:
+      value: AO Kaspersky Lab
+      note: >-
+        Signs the licence agreement and privacy policy from Moscow. Nexway SAS sells it on Kaspersky's
+        sites, and Kaspersky Lab Switzerland GmbH on the App Store.
+      sources: [eula, privacy-policy, uk-terms, app-store]
+    owner:
+      value: Eugene Kaspersky
+      note: >-
+        The US Commerce Department's 2024 ruling calls him Kaspersky's founder, majority owner and CEO.
+        Kaspersky itself doesn't publish its group structure.
+      sources: [bis-2024]
+    founded:
+      value: 2017
+      note: Only the year is known. Kaspersky's blog described Secure Connection as free with limited traffic in November 2017.
+      sources: [blog-2017]
+    team:
+      value: partial
+      note: Kaspersky's founder and CEO, Eugene Kaspersky, is named, but no one running the VPN is.
+      sources: [about, eugene-about]
+    sister_brands:
+      value: []
+      note: >-
+        Kaspersky sells no other VPN brand, though the service itself mostly runs on PureVPN's network.
+      sources: [product, vpn-statement-android]
+    acquisitions:
+      value: []
+      sources: [about]
+
+  jurisdiction:
+    hq:
+      value: RU
+      sources: [eula, privacy-policy]
+    entities:
+      value: [RU, CH, DE]
+      note: >-
+        Only the companies named in the VPN's paperwork: AO Kaspersky Lab in Moscow, Kaspersky Lab
+        Switzerland GmbH on the App Store and Kaspersky Labs GmbH, its EU data protection representative.
+      sources: [eula, app-store, privacy-policy]
+
+  logging:
+    traffic:
+      value: null
+      evidence: claimed
+      note: >-
+        Kaspersky says it has a "strict no-logging policy", but the service usually runs on PureVPN's
+        white-label network, whose partners can opt into a track with logging. Kaspersky doesn't say
+        which one it uses.
+      sources: [vpn-statement-windows, vpn-statement-android, purevpn-privacy, android-page]
+    dns:
+      value: null
+      evidence: claimed
+      note: >-
+        Kaspersky says it has a "strict no-logging policy", but the service usually runs on PureVPN's
+        white-label network, whose partners can opt into a track with logging. Kaspersky doesn't say
+        which one it uses.
+      sources: [vpn-statement-windows, vpn-statement-android, purevpn-privacy, android-page]
+    timestamps:
+      value: null
+      evidence: claimed
+      note: >-
+        Kaspersky says it has a "strict no-logging policy", but the service usually runs on PureVPN's
+        white-label network, whose partners can opt into a track with logging. Kaspersky doesn't say
+        which one it uses.
+      sources: [vpn-statement-windows, vpn-statement-android, purevpn-privacy, android-page]
+    bandwidth:
+      value: null
+      evidence: claimed
+      note: >-
+        Kaspersky's VPN statements list account and session set-up data, not data use or how long
+        anything is kept. Its Android data list includes a "Traffic limit".
+      sources: [vpn-statement-windows, android-data]
+    source_ip:
+      value: null
+      evidence: claimed
+      note: >-
+        Kaspersky says it has a "strict no-logging policy", but the service usually runs on PureVPN's
+        white-label network, whose partners can opt into a track with logging. Kaspersky doesn't say
+        which one it uses.
+      sources: [vpn-statement-windows, vpn-statement-android, purevpn-privacy, android-page]
+    proven:
+      value: []
+      note: Kaspersky's own audits cover its antivirus and threat data systems, not the VPN.
+      sources: [transparency-center]
+    policy: https://products.s.kaspersky-labs.com/homeuser/ksecwin5.0/21.27.6.532a/english-GB-0.172.0/2be179ad40c9406e941367fb2f9f1c23/ksde_vpn_statement_gdpr_pure_en-gb.txt
+
+  transparency:
+    audits:
+      value: []
+      note: >-
+        Kaspersky's SOC 2 audit covers its antivirus database updates and its ISO 27001 certificate its
+        threat data services. Neither covers the VPN.
+      sources: [soc2, iso27001]
+    report:
+      value: regular
+      note: Half-yearly reports on government and law enforcement requests, for Kaspersky as a whole.
+      sources: [transparency-center, le-report-2026]
+    canary:
+      value: none
+      sources: [transparency-center]
+    bug_bounty:
+      value: true
+      note: On Yogosha, with Kaspersky VPN Secure Connection in scope and rewards at Kaspersky's discretion.
+      sources: [bug-bounty]
+    incidents:
+      value:
+        - date: 2024-06-24
+          summary: >-
+            The US Commerce Department barred Kaspersky's software and services in the US from 29
+            September 2024, citing national security. Kaspersky then swapped US users over to Pango's
+            UltraAV, and some VPN subscribers found UltraVPN installed. Many users said it arrived without warning, though
+            Pango said Kaspersky had emailed customers and shown in-app notices.
+          handled: poorly
+          source: bis-2024
+        - date: 2022-08-05
+          summary: >-
+            The Windows app let a local attacker delete any file through a crafted link (CVE-2022-27535).
+            Kaspersky fixed it in 21.6 and published an advisory crediting the researcher.
+          handled: well
+          source: advisories
+        - date: 2021-11-22
+          summary: >-
+            The Windows installer could be made to delete any file. Kaspersky fixed it in 21.3 and published
+            an advisory.
+          handled: well
+          source: advisories
+        - date: 2020-07-29
+          summary: >-
+            The Windows installer could be made to delete any file (CVE-2020-25043). Kaspersky fixed it in
+            5.0 and published an advisory.
+          handled: well
+          source: advisories
+        - date: 2019-12-02
+          summary: >-
+            A DLL hijacking flaw needing admin rights (CVE-2019-15689). Kaspersky rated it low, fixed it in
+            4.0 (2020) patch E and credited the researcher.
+          handled: well
+          source: advisories
+      sources: [advisories, bis-2024, bleepingcomputer-2024]
+
+  account:
+    email:
+      value: optional
+      note: >-
+        On Windows the paid version has to be linked to a My Kaspersky account. On Android you can buy
+        in the app without one.
+      sources: [windows-account, android-account]
+    personal_data:
+      value: []
+      sources: [windows-account, android-account]
+    payment:
+      value: [card, app_store]
+      note: Visa, Mastercard, Eurocard and American Express on its website, or in the iOS and Android apps.
+      sources: [nexway-faq, app-store]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn, other]
+      note: >-
+        The Windows app offers WireGuard and AmneziaWG. OpenVPN is only for setting up routers and other
+        devices by hand.
+      sources: [protocols, routers]
+    post_quantum:
+      value: none
+      note: Nothing in its help or product pages mentions post-quantum key exchange.
+      sources: [protocols, windows-account]
+    kill_switch:
+      value: app
+      note: >-
+        Off by default. Kaspersky says data goes over the open connection while split tunnelling
+        reconnects, even with the kill switch on.
+      sources: [kill-switch-windows, kill-switch-android, split-tunnel-windows]
+    dns:
+      value: null
+      note: Its help doesn't say whose DNS servers answer inside the tunnel.
+      sources: [protocols, windows-account]
+
+  infra:
+    ram_only:
+      value: null
+      note: Kaspersky doesn't say how the servers are run.
+      sources: [locations, android-terms]
+    hosting:
+      value: null
+      note: Kaspersky says it isn't a VPN provider itself, and its VPN statements say the service is provided by PureVPN.
+      sources: [android-terms, vpn-statement-windows]
+    virtual_locations:
+      value: null
+      note: >-
+        It lists places like Kabul, Thimphu and Caracas without saying whether any are virtual. Its help
+        calls every server a "virtual server".
+      sources: [locations, virtual-server]
+    servers:
+      value: 6000
+      note: Kaspersky says 6,000+.
+      sources: [pricing]
+    countries:
+      value: 93
+      note: Including territories such as Hong Kong, Puerto Rico and Bermuda. The app is limited to 8+ locations in Russia.
+      sources: [locations, app-store]
+
+  features:
+    connections:
+      value: 5
+      note: The plans on sale cover 5 devices, though the same page's FAQ says up to 10.
+      sources: [pricing]
+    multihop:
+      value: null
+      note: >-
+        The page's search data lists "Double VPN", but none of its visible pages or help articles
+        mention it.
+      sources: [product, protocols]
+    obfuscation:
+      value: [amneziawg]
+      note: AmneziaWG, which Kaspersky calls "designed for stable connections in challenging networks", on Windows.
+      sources: [protocols]
+    port_forwarding:
+      value: false
+      note: Not mentioned anywhere in its help.
+      sources: [protocols, windows-account]
+    split_tunnel:
+      value: true
+      note: Per app on Windows 10 and later and Android, but not with WireGuard on Windows.
+      sources: [split-tunnel-windows, split-tunnel-android, protocols]
+    blocking:
+      value: []
+      note: Its help and product pages don't mention any blocklists in the VPN itself.
+      sources: [windows-account, product]
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android]
+      note: Routers need manual setup with its OpenVPN or WireGuard files.
+      sources: [product, routers]
+    open_source:
+      value: none
+      sources: [eula]
+    telemetry:
+      value: forced
+      note: >-
+        The licence agreement has the Windows app send an install ID and version details to Google
+        Analytics to count users, or you can't use it. Sharing with Kaspersky Security Network is optional.
+      sources: [data-provision-windows, ksn-windows]
+    trackers:
+      value: 7
+      note: >-
+        AppsFlyer, Facebook, Crashlytics, Firebase Analytics and Huawei, in version 1.62.0.22 from
+        November 2022, the newest archived report. The app is no longer on Google Play.
+      sources: [exodus, android-page]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 8.99, currency: USD }
+      note: Kaspersky's global site, prices before VAT, for 5 devices. It isn't sold in the US.
+      sources: [pricing]
+    best:
+      value: { amount: 3.42, currency: USD }
+      note: An intro price of $40.99 for the first year, renewing at $47.99 a year.
+      sources: [pricing]
+    best_term:
+      value: 12
+      sources: [pricing]
+    renewal_increase:
+      value: 17
+      note: The 1-year plan is $40.99, then renews at $47.99 a year.
+      sources: [pricing]
+    free_tier:
+      value: false
+      note: Only a 7-day free trial. Its help describes only the paid, unlimited version.
+      sources: [pricing, windows-account]
+    refund_days:
+      value: 30
+      sources: [pricing, uk-terms]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        It promises you'll stay "completely anonymous" with "military-grade encryption", and its router
+        page says a VPN hides your MAC address from your router.
+      sources: [product, android-page, routers]
+    affiliates:
+      value: true
+      note: It pays affiliates a 20% commission or more.
+      sources: [affiliates]
+    review_sites:
+      value: false
+      note: Nothing found linking Kaspersky to a VPN review site.
+    activism:
+      value: null
+      note: Kaspersky co-founded the Coalition Against Stalkerware, but that isn't about online privacy.
+      sources: [stalkerware]
+
+refs:
+  product:
+    url: https://www.kaspersky.com/vpn-secure-connection
+    title: Kaspersky VPN
+  pricing:
+    url: https://www.kaspersky.com/vpn-secure-connection?ignoreredirects=true
+    title: Kaspersky VPN, global site with prices
+  android-page:
+    url: https://www.kaspersky.com/vpn-secure-connection/vpn-for-android?ignoreredirects=true
+    title: Kaspersky VPN for Android
+  routers:
+    url: https://www.kaspersky.com/vpn-secure-connection/vpn-for-routers?ignoreredirects=true
+    title: Kaspersky VPN for routers
+  about:
+    url: https://www.kaspersky.com/about?ignoreredirects=true
+    title: About Kaspersky
+  eugene-about:
+    url: https://eugene.kaspersky.com/about/
+    title: Eugene Kaspersky, about
+  app-store:
+    url: https://apps.apple.com/gb/app/secure-vpn-proxy-kaspersky/id1278886362
+    title: Secure VPN & Proxy - Kaspersky on the App Store
+  eula:
+    url: https://products.s.kaspersky-labs.com/homeuser/ksecwin5.0/21.27.6.532a/english-GB-0.172.0/2cc87921ffc445eeb7c781f5ced72240/ksde_eula_gdpr_en-gb.txt
+    title: Kaspersky VPN for Windows, end user licence agreement
+  privacy-policy:
+    url: https://www.kaspersky.co.uk/products-and-services-privacy-policy
+    title: Kaspersky products and services privacy policy
+  uk-terms:
+    url: https://www.kaspersky.co.uk/terms-and-conditions
+    title: Kaspersky UK terms and conditions
+  vpn-statement-windows:
+    url: https://products.s.kaspersky-labs.com/homeuser/ksecwin5.0/21.27.6.532a/english-GB-0.172.0/2be179ad40c9406e941367fb2f9f1c23/ksde_vpn_statement_gdpr_pure_en-gb.txt
+    title: Kaspersky VPN for Windows, VPN statement
+  vpn-statement-android:
+    url: https://products.s.kaspersky-labs.com/homeuser/ksecandroid1.0/11.134.4.16207/multilanguage-INT-20260916.18.43/english-US/206d15241391421bac1c18b0a80c4b20/vpn_statement_pure.html
+    title: Kaspersky VPN for Android, VPN statement
+  purevpn-privacy:
+    url: https://www.purevpn.com/privacy-policy.php
+    title: PureVPN privacy policy, including its white-label partner terms
+  android-data:
+    url: https://support.kaspersky.com/help/KSDE/Android_11.134/en-US/information_provision.html
+    title: Kaspersky VPN for Android, information provision
+  android-terms:
+    url: https://support.kaspersky.com/ksec-for-android/11.134/140386
+    title: Kaspersky VPN for Android, terms of use
+  transparency-center:
+    url: https://www.kaspersky.com/transparency-center
+    title: Kaspersky Transparency Center
+  windows-account:
+    url: https://support.kaspersky.com/ksec-for-windows/5.27/127799
+    title: Kaspersky VPN for Windows, about the application
+  android-account:
+    url: https://support.kaspersky.com/ksec-for-android/11.134/183845
+    title: Kaspersky VPN for Android, getting the unlimited version
+  nexway-faq:
+    url: https://support.kaspersky.com/faq-sales-nexway
+    title: Kaspersky, FAQ about purchasing
+  protocols:
+    url: https://support.kaspersky.com/ksec-for-windows/5.27/236273
+    title: Kaspersky VPN for Windows, selecting a VPN protocol
+  kill-switch-windows:
+    url: https://support.kaspersky.com/ksec-for-windows/5.27/196379
+    title: Kaspersky VPN for Windows, Kill Switch
+  kill-switch-android:
+    url: https://support.kaspersky.com/ksec-for-android/11.134/201442
+    title: Kaspersky VPN for Android, Kill Switch
+  split-tunnel-windows:
+    url: https://support.kaspersky.com/ksec-for-windows/5.27/232827
+    title: Kaspersky VPN for Windows, split tunnelling
+  split-tunnel-android:
+    url: https://support.kaspersky.com/ksec-for-android/11.134/241774
+    title: Kaspersky VPN for Android, about split tunnelling
+  locations:
+    url: https://support.kaspersky.com/ksec/common/214424
+    title: Kaspersky VPN locations
+  virtual-server:
+    url: https://support.kaspersky.com/ksec-for-windows/5.27/127067
+    title: Kaspersky VPN for Windows, about the virtual server
+  data-provision-windows:
+    url: https://support.kaspersky.com/ksec-for-windows/5.27/144995
+    title: Kaspersky VPN for Windows, data provision under the licence agreement
+  ksn-windows:
+    url: https://support.kaspersky.com/ksec-for-windows/5.27/127350
+    title: Kaspersky VPN for Windows, installing the application
+  blog-2017:
+    url: https://www.kaspersky.com/blog/secure-connection-android-ios/20255/
+    title: Kaspersky blog, The train is watching you (2017)
+  soc2:
+    url: https://www.kaspersky.com/about/compliance-soc2?ignoreredirects=true
+    title: Kaspersky SOC 2 audit
+  iso27001:
+    url: https://www.kaspersky.com/about/iso-27001?ignoreredirects=true
+    title: Kaspersky ISO 27001 certification
+  le-report-2026:
+    url: https://content.kaspersky-labs.com/se/media/en/reports/kaspersky-law-enforcement-requests-report-h1-2026.pdf
+    title: Kaspersky law enforcement and government requests report, H1 2026
+  bug-bounty:
+    url: https://support.kaspersky.com/vulnerability/report-a-vulnerability/12429
+    title: Kaspersky, report a vulnerability and bug bounty
+  advisories:
+    url: https://support.kaspersky.com/vulnerability/list-of-advisories/12430
+    title: Kaspersky security advisories
+  bis-2024:
+    url: https://www.federalregister.gov/documents/2024/06/24/2024-13532/final-determination-case-no-icts-2021-002-kaspersky-lab-inc
+    title: 'Final determination: Case No. ICTS-2021-002, Kaspersky Lab, Inc. (Federal Register)'
+  bleepingcomputer-2024:
+    url: https://www.bleepingcomputer.com/news/security/kaspersky-deletes-itself-installs-ultraav-antivirus-without-warning/
+    title: Kaspersky deletes itself, installs UltraAV antivirus without warning (BleepingComputer)
+  exodus:
+    url: https://web.archive.org/web/20221126063536/https://reports.exodus-privacy.eu.org/en/reports/com.kaspersky.secure.connection/latest/
+    title: Exodus Privacy report for com.kaspersky.secure.connection (archived)
+  affiliates:
+    url: https://www.kaspersky.com/partners/affiliate?ignoreredirects=true
+    title: Kaspersky affiliate program
+  stalkerware:
+    url: https://stopstalkerware.org/about/
+    title: Coalition Against Stalkerware, about
