@@ -159,6 +159,10 @@ criteria:
     protocols:
       value: [wireguard, openvpn, ikev2]
       sources: [features]
+    post_quantum:
+      value: none
+      note: None of its protocols offer it, and its protocol guide only mentions post-quantum as an industry trend.
+      sources: [protocols-help, vpn-protocols]
     kill_switch:
       value: null
       note: It has an automatic kill switch, but CyberGhost's pages don't say whether it works at system level.
@@ -193,6 +197,16 @@ criteria:
       value: 7
       note: The terms mention abuse of "unlimited simultaneous devices", but the pricing page and homepage say 7.
       sources: [pricing, home, tos]
+    multihop:
+      value: false
+      sources: [features, double-vpn]
+    obfuscation:
+      value: null
+      note: Its help centre says Dedicated IP servers don't support obfuscated traffic, but nothing says which servers do.
+      sources: [dedicated-ip-faq, features]
+    port_forwarding:
+      value: false
+      sources: [p2p-help]
     split_tunnel:
       value: true
       sources: [features]
@@ -208,6 +222,10 @@ criteria:
         Routers are only supported by setting them up by hand with OpenVPN. The Chrome and Firefox
         extensions are free proxies for the browser alone.
       sources: [download, linux, router, chrome]
+    open_source:
+      value: none
+      note: Its GitHub organisation only holds a fork of a small C# library.
+      sources: [github]
     telemetry:
       value: null
       note: >-
@@ -248,6 +266,12 @@ criteria:
       sources: [tos]
 
   ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        Its US page says you can "stay untraceable and anonymous online" with "military-grade" encryption,
+        while its homepage says no VPN can make you completely anonymous and untraceable.
+      sources: [us, home]
     affiliates:
       value: true
       note: Its affiliate page offers up to 100% commission.
@@ -256,11 +280,18 @@ criteria:
       value: true
       note: Its owner, Kape, also owns VPN review sites such as vpnMentor and Safety Detectives, which disclose it.
       sources: [kape-brands, vpnmentor, safety-detectives]
+    activism:
+      value: true
+      note: Offers free accounts to journalists and NGOs that campaign for a free internet, and donated to WireGuard in 2020.
+      sources: [freedom, wireguard-donation]
 
 refs:
   home:
     url: https://www.cyberghostvpn.com/
     title: CyberGhost VPN homepage
+  us:
+    url: https://www.cyberghostvpn.com/us
+    title: CyberGhost VPN, US homepage
   about:
     url: https://www.cyberghostvpn.com/about
     title: About CyberGhost
@@ -276,6 +307,30 @@ refs:
   features:
     url: https://www.cyberghostvpn.com/features
     title: CyberGhost VPN features
+  protocols-help:
+    url: https://support.cyberghostvpn.com/hc/en-us/articles/213983829-Which-VPN-Protocols-Do-You-Support
+    title: Which VPN protocols do you support?
+  vpn-protocols:
+    url: https://www.cyberghostvpn.com/features/vpn-protocols
+    title: How to choose the best VPN protocol
+  double-vpn:
+    url: https://www.cyberghostvpn.com/privacyhub/what-is-double-vpn/
+    title: What is a double VPN, and when should you use it?
+  dedicated-ip-faq:
+    url: https://support.cyberghostvpn.com/hc/en-us/articles/29828587148956-Dedicated-IP-FAQ
+    title: CyberGhost Dedicated IP FAQ
+  p2p-help:
+    url: https://support.cyberghostvpn.com/hc/en-us/articles/213982169-Why-Are-My-P2P-Download-Rates-So-Low
+    title: Why are my P2P download rates so low?
+  github:
+    url: https://github.com/cyberghost-vpn
+    title: CyberGhost on GitHub
+  freedom:
+    url: https://www.cyberghostvpn.com/freedom
+    title: CyberGhost's digital freedom programme
+  wireguard-donation:
+    url: https://www.cyberghostvpn.com/privacyhub/cyberghost-vpn-donates-wireguard/
+    title: CyberGhost VPN makes a donation to WireGuard
   server-list:
     url: https://www.cyberghostvpn.com/vpn-server
     title: CyberGhost VPN server locations
