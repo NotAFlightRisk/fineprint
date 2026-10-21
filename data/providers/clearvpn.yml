@@ -1,0 +1,340 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: ClearVPN
+icon: clearvpn.png
+checked: 2026-10-21
+
+criteria:
+  identity:
+    website:
+      value: https://clearvpn.com
+      sources: [home]
+    legal_entity:
+      value: MacPaw Way Ltd
+      note: Apps downloaded from Google Play are provided by MacPaw Inc. instead.
+      sources: [privacy, terms]
+    owner:
+      value: null
+      note: MacPaw Way Ltd is the MacPaw company behind CleanMyMac. MacPaw doesn't publish its group structure or shareholders.
+      sources: [trust-center, leadership]
+    founded:
+      value: 2020
+      note: Launched by MacPaw on 17 November 2020.
+      sources: [launch]
+    team:
+      value: public
+      note: MacPaw names its founder and CEO, Oleksandr Kosovan, and the rest of its leadership.
+      sources: [leadership]
+    sister_brands:
+      value: []
+      note: MacPaw's other apps include CleanMyMac and Setapp, but no other VPN.
+      sources: [trust-center]
+    acquisitions: []
+
+  jurisdiction:
+    hq:
+      value: CY
+      note: MacPaw Way Ltd is registered in Limassol and the terms are governed by Cypriot law, but MacPaw calls Kyiv its headquarters.
+      sources: [terms, trust-center]
+    entities:
+      value: [CY, US]
+      note: MacPaw Inc., which provides the Google Play app, gives an address in Cambridge, Massachusetts.
+      sources: [terms]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [privacy, no-logs]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [servers, no-logs]
+    timestamps:
+      value: none
+      evidence: claimed
+      sources: [privacy]
+    bandwidth:
+      value: null
+      note: The policy doesn't mention data use. It does collect anonymised connection events, like a success or failure, for support.
+      sources: [privacy]
+    source_ip:
+      value: none
+      evidence: claimed
+      sources: [no-logs, servers]
+    proven:
+      value: []
+      note: No court case, raid or no-logs audit has tested the policy.
+      sources: [court-order]
+    policy: https://clearvpn.com/privacy-policy/
+
+  transparency:
+    audits:
+      value: []
+      note: MacPaw holds ISO 27001 and SOC 2 Type I company-wide, but the reports are only available on request and no ClearVPN audit has been published.
+      sources: [trust-center]
+    report:
+      value: none
+      note: No transparency report could be found on ClearVPN's or MacPaw's sites.
+    canary:
+      value: none
+    bug_bounty:
+      value: true
+      note: ClearVPN's security.txt points to MacPaw's disclosure policy, which rewards reports through a MacPaw bug bounty you have to ask to join.
+      sources: [security-txt, vdp]
+    incidents:
+      value: []
+      note: No breaches, CVEs or legal cases involving ClearVPN could be found in its help centre, MacPaw's newsroom or the NVD.
+      sources: [help-centre, macpaw-news]
+
+  account:
+    email:
+      value: optional
+      note: You may not need an account for one device bought through the App Store or Google Play. Buying on the website or adding a second device needs one.
+      sources: [terms]
+    personal_data:
+      value: []
+      sources: [privacy]
+    payment:
+      value: [card, app_store]
+      note: The website only takes cards since PayPal was dropped.
+      sources: [payment-methods, payment-update]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn, ikev2, proprietary, other]
+      note: The app picks one for you. Android lists IKEv2, WireGuard and Hysteria2 (Other), and iOS lists IKEv2, OpenVPN and its own custom protocol.
+      sources: [protocols, play, app-store]
+    post_quantum:
+      value: none
+      note: Its protocol and encryption pages don't mention post-quantum key exchange.
+      sources: [protocols, encryption]
+    kill_switch:
+      value: app
+      note: You turn it on in the app's settings, on desktop and mobile.
+      sources: [kill-switch]
+    dns:
+      value: null
+      note: DNS goes through the tunnel and gets filtered by its DNS Adblock, but it doesn't say whose resolvers answer.
+      sources: [dns-leak, app-store]
+
+  infra:
+    ram_only:
+      value: null
+      note: ClearVPN doesn't say whether its servers run from RAM.
+      sources: [server-locations]
+    hosting:
+      value: rented
+      note: It says it rents its VPN servers from service providers.
+      sources: [abuse]
+    virtual_locations:
+      value: disclosed
+      note: A help article says its India servers are physically in Singapore, though the server list shows them as Bengaluru.
+      sources: [server-locations, servers]
+    servers:
+      value: null
+      note: It lists 63 cities but doesn't publish a server count.
+      sources: [servers]
+    countries:
+      value: 55
+      note: Counted from its live server list, including India. Its other pages say 40+, 45+ or 50+.
+      sources: [servers, home, affiliates]
+
+  features:
+    connections:
+      value: 6
+      sources: [pricing, multiple-devices]
+    multihop:
+      value: false
+      note: Not mentioned in any of its 60 help articles or its app store listings.
+      sources: [help-centre, app-store]
+    obfuscation:
+      value: []
+      note: It doesn't describe any protocol as disguising VPN traffic, though the Android app lists Hysteria2, which runs over QUIC.
+      sources: [help-centre, play]
+    port_forwarding:
+      value: false
+      sources: [port-forwarding]
+    split_tunnel:
+      value: true
+      note: Android only, per its own blog. Its help articles don't mention it.
+      sources: [split-tunnel-blog, help-centre]
+    blocking:
+      value: [ads, trackers, malware]
+      note: DNS Adblock covers ads and trackers, and its malware protection blocks harmful domains.
+      sources: [app-store, router]
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android]
+      note: There are Apple TV and Android TV apps too. Routers use an OpenVPN config file rather than an app, and there's no Linux app.
+      sources: [home, router, linux]
+    open_source:
+      value: none
+      note: MacPaw's GitHub has no ClearVPN code, and the terms say MacPaw owns the app outright.
+      sources: [github, terms]
+    telemetry:
+      value: null
+      note: Android setup asks whether to share anonymous analytics, but the policy collects crash logs and internal analytics on legitimate interests with no stated way to turn them off.
+      sources: [android-install, privacy]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 7.99, currency: GBP }
+      note: The pricing page shows prices in your local currency, here as seen from the UK.
+      sources: [pricing]
+    best:
+      value: { amount: 3, currency: GBP }
+      note: The yearly plan, at £35.99 a year. It's also included in a Setapp subscription.
+      sources: [pricing, setapp]
+    best_term:
+      value: 12
+      sources: [pricing]
+    renewal_increase:
+      value: 0
+      sources: [pricing]
+    free_tier:
+      value: false
+      note: The free plan was removed in March 2024, leaving a 3-day trial that needs a payment method. Ukrainian citizens get Premium free through Diia.
+      sources: [free-removed, trial, diia]
+    refund_days:
+      value: 30
+      note: Only for purchases on its own site or the MacPaw Store. App Store and Google Play refunds are up to them.
+      sources: [refund, terms]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: It says "We don't store, share, or even collect users' online activity, personal info, IP address", while its policy collects your email, device ID, country and usage data, some of it for marketing and third-party analytics if you consent.
+      sources: [play, macos, privacy]
+    affiliates:
+      value: true
+      note: Run through Impact, with a 180-day cookie.
+      sources: [affiliates]
+    review_sites:
+      value: true
+      note: MacPaw's Setapp runs an app reviews section whose "Best VPN for Mac" list puts ClearVPN first, without saying MacPaw makes it.
+      sources: [setapp-review]
+    activism:
+      value: false
+      note: It gives Ukrainian citizens Premium for free, but doesn't fund or campaign for privacy causes.
+      sources: [diia]
+
+refs:
+  home:
+    url: https://clearvpn.com/
+    title: ClearVPN
+  privacy:
+    url: https://clearvpn.com/privacy-policy/
+    title: ClearVPN privacy notice
+  terms:
+    url: https://clearvpn.com/terms-of-service/
+    title: ClearVPN terms of service
+  servers:
+    url: https://clearvpn.com/servers/
+    title: ClearVPN servers
+  pricing:
+    url: https://order.clearvpn.com/pricing/
+    title: Buy ClearVPN
+  affiliates:
+    url: https://clearvpn.com/affiliates/
+    title: ClearVPN affiliate program
+  router:
+    url: https://support.clearvpn.com/hc/en-us/articles/18459229236508-Installing-ClearVPN-on-a-router
+    title: Installing ClearVPN on a router
+  no-logs:
+    url: https://support.clearvpn.com/hc/en-us/articles/360017360600-Do-you-keep-any-logs-of-my-internet-activities
+    title: Do you keep any logs of my internet activities?
+  court-order:
+    url: https://support.clearvpn.com/hc/en-us/articles/8016605303964-What-if-a-court-orders-you-to-identify-an-active-or-former-user-of-your-service
+    title: What if a court orders you to identify an active or former user of your service?
+  abuse:
+    url: https://support.clearvpn.com/hc/en-us/articles/8016602532508-What-tools-are-used-to-monitor-and-mitigate-abuse-of-your-service
+    title: What tools are used to monitor and mitigate abuse of your service?
+  server-locations:
+    url: https://support.clearvpn.com/hc/en-us/articles/360017360680-Where-are-your-servers-located
+    title: Where are your servers located?
+  protocols:
+    url: https://support.clearvpn.com/hc/en-us/articles/360021720759-What-VPN-protocols-does-ClearVPN-use
+    title: What VPN protocols does ClearVPN use?
+  encryption:
+    url: https://support.clearvpn.com/hc/en-us/articles/360017483360-What-encryption-do-you-use-to-secure-the-connection
+    title: What encryption do you use to secure the connection?
+  kill-switch:
+    url: https://support.clearvpn.com/hc/en-us/articles/360021691660-What-is-Kill-Switch-and-does-ClearVPN-have-it
+    title: What is Kill Switch and does ClearVPN have it?
+  multiple-devices:
+    url: https://support.clearvpn.com/hc/en-us/articles/360010638180-How-to-use-ClearVPN-on-multiple-devices
+    title: How to use ClearVPN on multiple devices?
+  port-forwarding:
+    url: https://support.clearvpn.com/hc/en-us/articles/8016626603036-Do-you-provide-port-forwarding-services-Are-any-ports-blocked
+    title: Do you provide port forwarding services? Are any ports blocked?
+  linux:
+    url: https://support.clearvpn.com/hc/en-us/articles/4902835013650-Is-there-a-ClearVPN-Linux-version
+    title: Is there a ClearVPN Linux version?
+  android-install:
+    url: https://support.clearvpn.com/hc/en-us/articles/360017559639-Installing-ClearVPN-on-Android
+    title: Installing ClearVPN on Android
+  payment-methods:
+    url: https://support.clearvpn.com/hc/en-us/articles/360017551219-What-payment-methods-do-you-accept
+    title: What payment methods do you accept?
+  payment-update:
+    url: https://support.clearvpn.com/hc/en-us/articles/10595547185820-How-to-update-your-payment-method
+    title: How to update your payment method?
+  free-removed:
+    url: https://support.clearvpn.com/hc/en-us/articles/360010638200-Why-can-t-I-access-my-free-version-of-ClearVPN
+    title: Why can't I access my free version of ClearVPN?
+  trial:
+    url: https://support.clearvpn.com/hc/en-us/articles/360017499960-Do-you-have-a-trial
+    title: Do you have a trial?
+  diia:
+    url: https://support.clearvpn.com/hc/en-us/articles/5031145116060-How-to-get-ClearVPN-Premium-for-free-with-Diia
+    title: How to get ClearVPN Premium for free with Diia?
+  refund:
+    url: https://support.clearvpn.com/hc/en-us/articles/360017378860-How-can-I-request-a-refund
+    title: How can I request a refund?
+  setapp:
+    url: https://support.clearvpn.com/hc/en-us/articles/4903062652690-Is-there-a-ClearVPN-Setapp-version
+    title: Is there a ClearVPN Setapp version?
+  play:
+    url: https://play.google.com/store/apps/details?id=com.macpaw.clearvpn.android
+    title: ClearVPN on Google Play
+  security-txt:
+    url: https://clearvpn.com/.well-known/security.txt
+    title: ClearVPN security.txt
+  vdp:
+    url: https://macpaw.com/vulnerability-disclosure-policy
+    title: MacPaw vulnerability disclosure policy
+  trust-center:
+    url: https://security.macpaw.com/
+    title: MacPaw Trust Center
+  leadership:
+    url: https://macpaw.com/leadership
+    title: MacPaw leadership
+  app-store:
+    url: https://apps.apple.com/us/app/clearvpn-secure-and-fast-vpn/id1532377665
+    title: ClearVPN - Secure and Fast VPN on the App Store
+  macos:
+    url: https://clearvpn.com/macos/
+    title: ClearVPN for macOS
+  dns-leak:
+    url: https://clearvpn.com/dns-leak-test/
+    title: ClearVPN DNS leak test
+  split-tunnel-blog:
+    url: https://clearvpn.com/blog/what-is-split-tunneling/
+    title: What is split tunneling and how it works (August 2024)
+  help-centre:
+    url: https://support.clearvpn.com/hc/en-us
+    title: ClearVPN help centre
+  macpaw-news:
+    url: https://macpaw.com/news
+    title: MacPaw newsroom
+  setapp-review:
+    url: https://setapp.com/app-reviews/best-vpn-for-mac
+    title: 'Setapp, Best VPN for Mac: Top apps for speed and security'
+  github:
+    url: https://github.com/MacPaw
+    title: MacPaw on GitHub
+  launch:
+    url: https://macpaw.com/news/new-vpn-app-clearvpn
+    title: MacPaw launches ClearVPN, the first effortless VPN
