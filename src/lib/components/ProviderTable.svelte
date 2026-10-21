@@ -12,6 +12,8 @@
   let { providers, categories }: { providers: Provider[]; categories: Category[] } = $props();
 
   const criteria = $derived(byId(categories));
+  // red flag counts sort orange before red, as shown, then by size
+  const red = (provider: Provider) => Number(seriousFlags(provider, criteria) > 0);
 
   let query = $state('');
   let sort = $state<{ id: string; direction: 1 | -1 }>({ id: 'name', direction: 1 });
@@ -34,7 +36,7 @@
       id === 'name'
         ? direction * a.name.localeCompare(b.name)
         : id === 'flags'
-          ? direction * (a.flags.length - b.flags.length)
+          ? direction * (red(a) - red(b) || a.flags.length - b.flags.length)
           : compare(criteria.get(id)!, a.criteria[id], b.criteria[id], direction)
     );
   });
@@ -173,7 +175,7 @@
           <td
             class="flags"
             class:none={!provider.flags.length}
-            data-grade={seriousFlags(provider, criteria) ? 'bad' : 'ok'}
+            data-grade={red(provider) ? 'bad' : 'ok'}
           >
             {#if provider.flags.length}
               <button
@@ -439,14 +441,19 @@
     font-size: var(--text-xs);
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    border-left: var(--rule-thin) solid var(--rule-faint);
+
+    &[scope='colgroup'] {
+      border-left: var(--rule-thin) solid var(--rule-faint);
+    }
   }
 
   thead tr + tr th {
     top: calc(var(--text-xs) * 1.5 + var(--space-2) * 2 + var(--rule-thin));
   }
 
-  th:first-child {
+  /* the provider column stays put while the rest scrolls past */
+  .groups th:first-child,
+  tbody th {
     position: sticky;
     left: 0;
     z-index: 1;
@@ -454,7 +461,7 @@
     border-right: var(--rule-thin) solid var(--rule);
   }
 
-  thead th:first-child {
+  .groups th:first-child {
     z-index: 3;
   }
 
@@ -478,6 +485,10 @@
 
     &:hover {
       text-decoration: underline;
+    }
+
+    @media (max-width: 40rem) {
+      white-space: normal;
     }
   }
 
