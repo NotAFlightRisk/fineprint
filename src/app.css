@@ -21,6 +21,7 @@
   --on-grade: light-dark(#ffffff, #121212);
 
   --font: 'Geist Variable', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --mono: ui-monospace, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
 
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;
@@ -118,6 +119,10 @@ a {
 :where(button, input, select) {
   font: inherit;
   color: inherit;
+}
+
+:where(code, pre) {
+  font-family: var(--mono);
 }
 
 .visually-hidden {
@@ -262,6 +267,32 @@ a[target='_blank'] {
 }
 [data-grade='na'] {
   --grade: var(--na);
+}
+
+/* a page's title, with its opening paragraphs beside it */
+.preface {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--space-5);
+  padding-bottom: var(--space-7);
+
+  & h1 {
+    grid-column: 1 / span 5;
+  }
+
+  & .prose {
+    grid-column: 7 / -1;
+    display: grid;
+    gap: var(--space-4);
+    max-width: 62ch;
+  }
+
+  @media (max-width: 56rem) {
+    & h1,
+    & .prose {
+      grid-column: 1 / -1;
+    }
+  }
 }
 
 /* a ruled page section, with its heading and intro beside the content */

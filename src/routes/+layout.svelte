@@ -9,7 +9,8 @@
 
   const nav = [
     { href: '/', label: 'Compare' },
-    { href: '/methodology', label: 'Methodology' }
+    { href: '/methodology', label: 'Methodology' },
+    { href: '/contributing', label: 'Contribute' }
   ];
 
   onMount(() => loadPlausible());
@@ -23,9 +24,6 @@
     {#each nav as { href, label } (href)}
       <a {href} aria-current={page.url.pathname === href ? 'page' : undefined}>{label}</a>
     {/each}
-    <a href="{site.repo}/blob/main/.github/CONTRIBUTING.md" target="_blank" rel="noopener external"
-      >Contribute</a
-    >
   </nav>
 </header>
 

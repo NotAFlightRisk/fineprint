@@ -37,6 +37,7 @@ export const GET = () => {
     '## Optional',
     '',
     `- [Source and data on GitHub](${site.repo}): MIT licensed, and anyone can suggest a correction`,
+    link('How to contribute', '/contributing', 'fixing a value, adding a source or a new provider'),
     ''
   ];
   return new Response(lines.join('\n'), {
