@@ -1,0 +1,408 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: IPVanish
+icon: ipvanish.png
+checked: 2026-10-21
+
+criteria:
+  identity:
+    website: https://www.ipvanish.com
+    legal_entity:
+      value: IPVanish, Inc.
+      note: The policies just say "IPVanish", but the 2025 audit report and Ziff Davis's filings name IPVanish, Inc.
+      sources: [schellman-2025, zd-subsidiaries]
+    owner:
+      value: Ziff Davis
+      note: A US listed company, called J2 Global until October 2021.
+      sources: [zd-10k-2025, privacy-policy]
+    founded:
+      value: 2012
+      note: The earliest archived copy of its site with the service running is from March 2012.
+      sources: [wayback-2012]
+    team:
+      value: partial
+      note: >-
+        Its site names no one who runs IPVanish, but its owner Ziff Davis is a listed company with
+        named executives.
+      sources: [press, zd-10k-2025]
+    sister_brands:
+      value: [StrongVPN]
+      note: Encrypt.me, another Ziff Davis VPN, is being folded into StrongVPN and sends new customers there.
+      sources: [strongvpn, encrypt-me, zd-subsidiaries]
+    acquisitions:
+      value:
+        - date: 2019-04-02
+          acquirer: J2 Global
+          source: j2-10k-2019
+        - date: 2017-02-06
+          acquirer: StackPath
+          source: stackpath-2017
+      note: >-
+        StackPath bought Highwinds, IPVanish's parent. J2 Global bought the VPN business from StackPath
+        and renamed itself Ziff Davis in 2021.
+      sources: [stackpath-2017, torrentfreak-2018, j2-10k-2019, zd-10k-2025]
+
+  jurisdiction:
+    hq:
+      value: US
+      sources: [privacy-policy, zd-subsidiaries]
+    entities:
+      value: [US]
+      note: IPVanish, Inc. is registered in Florida. Its EU representative is J2 Global Ireland, a sister company.
+      sources: [zd-subsidiaries, privacy-policy]
+
+  logging:
+    traffic:
+      value: none
+      evidence: verified
+      sources: [privacy-policy, no-logs, schellman-2025]
+    dns:
+      value: none
+      evidence: verified
+      sources: [no-logs, schellman-2025]
+    timestamps:
+      value: temporary
+      evidence: verified
+      note: >-
+        Session start times and durations are used in memory to stop abuse. Schellman found in 2025
+        that only aggregate statistics were kept.
+      sources: [no-logs, schellman-2025]
+    bandwidth:
+      value: temporary
+      evidence: verified
+      note: Traffic volume per session is used in memory to stop abuse, with only aggregate statistics kept.
+      sources: [no-logs, schellman-2025]
+    source_ip:
+      value: temporary
+      evidence: verified
+      note: >-
+        Your starting IP address is used in memory to stop abuse. Schellman found no IP addresses in
+        server logs in 2025.
+      sources: [no-logs, schellman-2025]
+    proven:
+      value: [audit]
+      evidence: verified
+      note: >-
+        Schellman checked it in 2025. In 2016, under a previous owner, it gave US investigators a
+        user's real IP address and connection details despite claiming no logs.
+      sources: [schellman-2025, torrentfreak-2018]
+    policy: https://www.ipvanish.com/privacy-policy/
+
+  transparency:
+    audits:
+      value:
+        - date: 2025-02-21
+          auditor: Schellman
+          scope: no_logs
+          source: schellman-2025
+        - date: 2022-04-01
+          auditor: Leviathan Security Group
+          scope: no_logs
+          source: audit-2022-post
+      evidence: verified
+      note: >-
+        Leviathan's 2022 report is only given to customers, so its date is the month IPVanish
+        published it.
+      sources: [trust, audit-2025-post, audit-2022-post]
+    report:
+      value: regular
+      note: Quarterly since late 2024. The newest archived copy runs to March 2026.
+      sources: [trust]
+    canary:
+      value: none
+      sources: [trust]
+    bug_bounty:
+      value: false
+      note: Reports go through Ziff Davis's disclosure programme on Bugcrowd, which pays no rewards.
+      sources: [vdp, bugcrowd]
+    incidents:
+      value:
+        - date: 2026-03-02
+          summary: >-
+            SecureLayer7 published a flaw in the macOS app's helper that let any local process run code
+            as root, much like one VerSprite reported in 2018. IPVanish fixed it in version 4.10 three
+            days later.
+          handled: well
+          source: securelayer7-2026
+        - date: 2016-06-21
+          summary: >-
+            Under its then owner Highwinds, IPVanish gave US Homeland Security a user's name, email
+            address, real IP address and details of when he connected in a criminal case, despite
+            claiming it kept no logs. It came out in 2018, and StackPath, which bought it in 2017,
+            said it couldn't speak for the old team.
+          handled: poorly
+          source: torrentfreak-2018
+      sources: [securelayer7-2026, cyberinsider-2026, versprite-2018, torrentfreak-2018, gevirtz-docket]
+
+  account:
+    email:
+      value: required
+      sources: [privacy-policy, checkout]
+    personal_data:
+      value: []
+      note: Checkout asks for an email. Card payments also take the cardholder's name, country and postcode.
+      sources: [checkout, privacy-policy]
+    payment:
+      value: [card, paypal, app_store]
+      note: >-
+        Cards, PayPal, Apple Pay and Google Pay at checkout, with Amazon Pay also in the pricing FAQ,
+        plus app store purchases. There's no crypto or cash option.
+      sources: [pricing, checkout, privacy-policy]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn, ikev2]
+      sources: [protocols]
+    post_quantum:
+      value: none
+      note: Its protocols page and help centre don't mention a post-quantum option.
+      sources: [protocols]
+    kill_switch:
+      value: system
+      note: >-
+        An optional setting in the desktop and mobile apps, which the help centre warns can block the
+        internet even with the app closed. Android relies on the OS's always-on VPN.
+      sources: [kill-switch]
+    dns:
+      value: first_party
+      sources: [no-logs]
+
+  infra:
+    ram_only:
+      value: partial
+      note: >-
+        Moving to RAM-only servers, with the whole network due by 2027. Its pricing page already says
+        the network uses RAM-only technology.
+      sources: [trust, servers, pricing]
+    hosting:
+      value: null
+      note: Its current pages don't say whether it owns or rents its servers.
+      sources: [servers, trust]
+    virtual_locations:
+      value: disclosed
+      note: The pricing page says the apps label physical and virtual locations, though the website's list doesn't.
+      sources: [pricing]
+    servers:
+      value: 3400
+      note: The servers page says 3,400+, without a count per location.
+      sources: [servers]
+    countries:
+      value: 112
+      note: Counted from the location list on its servers page, which includes territories like Jersey and Puerto Rico.
+      sources: [servers]
+
+  features:
+    connections:
+      value: unlimited
+      note: The terms say it doesn't meter connections but can limit them to keep its systems working.
+      sources: [tos, pricing]
+    multihop:
+      value: true
+      sources: [features]
+    obfuscation:
+      value: [proprietary]
+      note: Scramble, which disguises OpenVPN traffic, in the Windows and macOS apps.
+      sources: [windows-guide, macos-guide]
+    port_forwarding:
+      value: false
+      sources: [port-forwarding]
+    split_tunnel:
+      value: true
+      sources: [features]
+    blocking:
+      value: [ads, trackers, malware]
+      note: Through Threat Protection's DNS filtering.
+      sources: [features]
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android]
+      note: >-
+        Also Fire TV, Apple TV, Android TV and Chrome OS. Linux and routers have to be set up by hand
+        with OpenVPN, WireGuard or IKEv2.
+      sources: [setup, linux, routers]
+    open_source:
+      value: none
+      sources: [github]
+    telemetry:
+      value: null
+      note: >-
+        Analytics and crash reports can be turned off in the Windows, macOS and iOS apps, and iOS asks
+        first. The guides don't say whether it's on by default elsewhere.
+      sources: [windows-guide, ios-guide, privacy-policy]
+    trackers:
+      value: 3
+      note: >-
+        Adjust, Google Crashlytics and Firebase Analytics in version 4.0.8 from June 2023, the newest
+        archived report. The Play Store version is now 4.1.22.
+      sources: [exodus]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 14.99, currency: USD }
+      sources: [checkout, pricing]
+    best:
+      value: { amount: 2.39, currency: USD }
+      note: An intro price for the first 2 years of the Essential plan. It then renews at $99.99 a year.
+      sources: [pricing, renewal]
+    best_term:
+      value: 24
+      sources: [pricing]
+    renewal_increase:
+      value: 249
+      note: The 2-year plan is $57.36, then renews at $99.99 a year.
+      sources: [pricing, renewal]
+    free_tier:
+      value: false
+      sources: [pricing]
+    refund_days:
+      value: 30
+      note: On yearly and 2-year plans only.
+      sources: [refund, tos]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        Its no-logs page says US law protects it from any compulsory data sharing, and a help article
+        says shared IPs make users untraceable.
+      sources: [no-logs, port-forwarding]
+    affiliates:
+      value: true
+      sources: [partners]
+    review_sites:
+      value: true
+      note: >-
+        Ziff Davis also owns tech review sites including PCMag, CNET, Mashable and ZDNET. PCMag's
+        IPVanish review discloses the link.
+      sources: [zd-10k-2025, pcmag-review]
+    activism:
+      value: true
+      evidence: claimed
+      note: Its no-logs page says it has supported the EFF, Fight for the Future, Access Now and the ACLU, without saying how.
+      sources: [no-logs]
+
+refs:
+  privacy-policy:
+    url: https://www.ipvanish.com/privacy-policy/
+    title: IPVanish privacy policy
+  no-logs:
+    url: https://www.ipvanish.com/no-log-vpn-policy/
+    title: IPVanish no-log VPN policy
+  tos:
+    url: https://www.ipvanish.com/tos/
+    title: IPVanish terms of service
+  trust:
+    url: https://www.ipvanish.com/trust/
+    title: IPVanish Trust Center
+  press:
+    url: https://www.ipvanish.com/press/
+    title: IPVanish press kit
+  pricing:
+    url: https://www.ipvanish.com/pricing/
+    title: IPVanish plans and pricing
+  checkout:
+    url: https://checkout.ipvanish.com/checkout/address-payment-method?flow=essential-biennial&currency=USD&lang=EN
+    title: IPVanish checkout, Essential 2-year plan (USD)
+  renewal:
+    url: https://www.ipvanish.com/renewal-price/
+    title: IPVanish subscription renewal price
+  refund:
+    url: https://www.ipvanish.com/money-back-guarantee/
+    title: IPVanish money-back guarantee
+  features:
+    url: https://www.ipvanish.com/vpn-features/
+    title: IPVanish VPN features
+  servers:
+    url: https://www.ipvanish.com/servers/
+    title: IPVanish VPN servers
+  protocols:
+    url: https://www.ipvanish.com/vpn-protocols/
+    title: IPVanish VPN protocols
+  setup:
+    url: https://www.ipvanish.com/vpn-setup/
+    title: IPVanish VPN setup guides
+  linux:
+    url: https://www.ipvanish.com/vpn-setup/linux/
+    title: IPVanish Linux VPN
+  routers:
+    url: https://www.ipvanish.com/vpn-setup/routers/
+    title: IPVanish VPN router setup
+  partners:
+    url: https://www.ipvanish.com/partners/
+    title: IPVanish VPN affiliate program
+  vdp:
+    url: https://www.ipvanish.com/vulnerability-disclosure-program/
+    title: Ziff Davis vulnerability disclosure program (IPVanish)
+  bugcrowd:
+    url: https://bugcrowd.com/engagements/ziffdavis-vdp-pro
+    title: Ziff Davis vulnerability disclosure program (Bugcrowd)
+  kill-switch:
+    url: https://support.ipvanish.com/hc/en-us/articles/6494085521307-Kill-Switch
+    title: IPVanish help, Kill Switch
+  port-forwarding:
+    url: https://support.ipvanish.com/hc/en-us/articles/115002080173-Port-Forwarding
+    title: IPVanish help, Port Forwarding
+  windows-guide:
+    url: https://support.ipvanish.com/hc/en-us/articles/6241037226779-How-to-use-IPVanish-Windows
+    title: IPVanish help, how to use IPVanish on Windows
+  macos-guide:
+    url: https://support.ipvanish.com/hc/en-us/articles/360009187934-How-to-use-IPVanish-for-macOS
+    title: IPVanish help, how to use IPVanish on macOS
+  ios-guide:
+    url: https://support.ipvanish.com/hc/en-us/articles/360009797374-How-to-Use-IPVanish-iOS
+    title: IPVanish help, how to use IPVanish on iOS
+  schellman-2025:
+    url: https://www.ipvanish.com/wp-content/uploads/2025/04/J2-Global-Ventures-2025-IPVanish-No-Log-Assessment-Report.pdf
+    title: Schellman, IPVanish no-log functionality validation assessment (February 2025)
+  audit-2025-post:
+    url: https://www.ipvanish.com/blog/no-log-vpn-audit/
+    title: IPVanish completes new independent no-log VPN audit
+  audit-2022-post:
+    url: https://www.ipvanish.com/blog/ipvanish-no-logs-vpn-audit-2022/
+    title: IPVanish "no-logs" VPN certified through an independent audit (2022)
+  torrentfreak-2018:
+    url: https://torrentfreak.com/ipvanish-no-logging-vpn-led-homeland-security-to-comcast-user-180505/
+    title: IPVanish "no-logging" VPN led Homeland Security to Comcast user (TorrentFreak)
+  gevirtz-docket:
+    url: https://www.courtlistener.com/docket/4267019/united-states-v-gevirtz/
+    title: United States v. Gevirtz, 1:16-mj-00487 (S.D. Ind.), docket
+  securelayer7-2026:
+    url: https://blog.securelayer7.net/ipvanish-vpn-macos-privilege-escalation/
+    title: IPVanish VPN macOS privilege escalation (SecureLayer7)
+  cyberinsider-2026:
+    url: https://cyberinsider.com/flaw-in-ipvanish-for-macos-allows-attackers-to-gain-root-access/
+    title: Flaw in IPVanish for macOS allows attackers to gain root access (CyberInsider)
+  versprite-2018:
+    url: https://github.com/VerSprite/research/blob/master/advisories/VS-2018-020.md
+    title: VerSprite, IPVanish for macOS root privilege escalation (CVE-2018-10192)
+  stackpath-2017:
+    url: https://www.einpresswire.com/article/365369962/stackpath-acquires-highwinds-to-accelerate-the-delivery-of-a-global-enterprise-security-platform
+    title: StackPath acquires Highwinds (press release, February 2017)
+  j2-10k-2019:
+    url: https://www.sec.gov/Archives/edgar/data/1084048/000108404820000012/jcom2019123110-k.htm
+    title: J2 Global, annual report on Form 10-K for 2019
+  zd-10k-2025:
+    url: https://www.sec.gov/Archives/edgar/data/1084048/000108404826000005/zd-20251231.htm
+    title: Ziff Davis, annual report on Form 10-K for 2025
+  zd-subsidiaries:
+    url: https://www.sec.gov/Archives/edgar/data/1084048/000108404826000005/zd20251231ex-211.htm
+    title: Ziff Davis, list of subsidiaries (exhibit 21.1, 2025 10-K)
+  strongvpn:
+    url: https://strongvpn.com/
+    title: StrongVPN homepage
+  encrypt-me:
+    url: https://encrypt.me/
+    title: Encrypt.me is becoming StrongVPN
+  pcmag-review:
+    url: https://www.pcmag.com/reviews/ipvanish-vpn
+    title: IPVanish VPN review (PCMag)
+  exodus:
+    url: https://reports.exodus-privacy.eu.org/en/reports/com.ixolit.ipvanish/latest/
+    title: Exodus Privacy report for com.ixolit.ipvanish
+  wayback-2012:
+    url: https://web.archive.org/web/20120321163227/http://ipvanish.com/
+    title: IPVanish homepage, archived March 2012
+  github:
+    url: https://github.com/ipvanish
+    title: IPVanish on GitHub
