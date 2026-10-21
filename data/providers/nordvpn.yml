@@ -1,0 +1,557 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: NordVPN
+icon: nordvpn.svg
+checked: 2026-10-20
+
+criteria:
+  identity:
+    website: https://nordvpn.com
+    legal_entity:
+      value: nordvpn S.A.
+      sources: [privacy-policy, owners]
+    owner:
+      value: Nord Security
+      note: >-
+        Founded by Tomas Okmanas and Eimantas Sabaliauskas and based in Lithuania. It has shared a
+        holding company with Surfshark since 2022, and Warburg Pincus, Novator and Burda are investors.
+      sources: [nord-security, about, surfshark-about, funding-2023]
+    founded:
+      value: 2012
+      sources: [about, owners]
+    team:
+      value: public
+      sources: [nord-security, owners]
+    sister_brands:
+      value: [Surfshark, NordLayer]
+      note: >-
+        NordLayer is the group's business VPN. Atlas VPN, also Nord Security's, closed in April 2024
+        and moved its paid users to NordVPN.
+      sources: [surfshark-about, nordlayer, atlas]
+    acquisitions:
+      value: []
+      note: >-
+        Still run by its founders' group. Nord Security took outside investment in 2022 and 2023, and
+        merged with Surfshark under one holding company in 2022.
+      sources: [nord-security, surfshark-about, funding-2023]
+
+  jurisdiction:
+    hq:
+      value: PA
+      sources: [privacy-policy, terms]
+    entities:
+      value: [PA, LT, NL, GB, US, CA, BR, JP, AU]
+      note: >-
+        The group companies its terms and privacy policy name, plus Nord Security's base in
+        Lithuania. NordVPN also lists offices in Poland, Germany and Switzerland.
+      sources: [terms, privacy-policy, about, moonflash]
+
+  logging:
+    traffic:
+      value: none
+      evidence: verified
+      note: Nord's general privacy policy adds that it may look into suspicious network patterns to stop abuse such as scraping.
+      sources: [vpn-notice, vpn-terms, audit-2025, privacy-policy]
+    dns:
+      value: none
+      evidence: verified
+      sources: [vpn-notice, audit-2025]
+    timestamps:
+      value: temporary
+      evidence: claimed
+      note: >-
+        Last-session details are deleted within 15 minutes of disconnecting. It also keeps whether
+        you've used the VPN in the past 90 days, to fight abuse and chargebacks.
+      sources: [vpn-notice]
+    bandwidth:
+      value: none
+      evidence: verified
+      sources: [vpn-notice, audit-2024]
+    source_ip:
+      value: none
+      evidence: verified
+      note: Card payments can record the payer's IP, and Smart DNS stores your IP if you turn it on.
+      sources: [vpn-notice, privacy-policy, audit-2024]
+    proven:
+      value: [audit]
+      note: >-
+        NordVPN says a 2024 Panamanian warrant got only a user's payment details and confirmation of
+        their account, as it had no activity logs. Only NordVPN has published that case.
+      sources: [transparency, audit-2025]
+    policy: https://my.nordaccount.com/legal/privacy-policy/nordvpn/
+
+  transparency:
+    audits:
+      value:
+        - date: 2025-12-12
+          auditor: Deloitte
+          scope: no_logs
+          source: audit-2025
+        - date: 2025-10-24
+          auditor: Cure53
+          scope: infra
+          source: cure53-infra-2025
+        - date: 2025-06-27
+          auditor: Cure53
+          scope: apps
+          source: cure53-apps-2025
+        - date: 2024-12-20
+          auditor: Deloitte
+          scope: no_logs
+          source: audit-2024
+        - date: 2024-06-01
+          auditor: Cure53
+          scope: apps
+          source: cure53-apps-2024
+        - date: 2023-12-07
+          auditor: Deloitte
+          scope: no_logs
+          source: audit-2023
+        - date: 2022-12-10
+          auditor: Deloitte
+          scope: no_logs
+          source: audit-2022
+        - date: 2022-10-07
+          auditor: Cure53
+          scope: infra
+          source: cure53-infra-2022
+        - date: 2022-08-05
+          auditor: Cure53
+          scope: apps
+          source: cure53-apps-2022
+        - date: 2020-05-28
+          auditor: PwC
+          scope: no_logs
+          source: audit-2020
+        - date: 2019-10-01
+          auditor: VerSprite
+          scope: apps
+          source: versprite-2019
+        - date: 2018-11-01
+          auditor: PwC
+          scope: no_logs
+          source: audit-2018
+      evidence: verified
+      note: >-
+        Most of Deloitte's and PwC's reports are only shown to logged-in customers. Cure53 tests are
+        dated to the Friday of their last test week, its unpublished 2024 one to the month it started,
+        and VerSprite's 2019 one to the month its results came out.
+      sources: [cure53-infra-2025]
+    report:
+      value: regular
+      note: Quarterly counts of government inquiries and DMCA requests since 2024.
+      sources: [transparency, trust]
+    canary:
+      value: maintained
+      note: >-
+        Kept inside the transparency report, whose daily counter read 15 October 2026 on the 20th.
+        NordVPN has said it plans to phase the canary out.
+      sources: [transparency]
+    bug_bounty:
+      value: null
+      note: >-
+        Its trust centre still promises researchers rewards, but the HackerOne programme it links to
+        no longer exists publicly.
+      sources: [trust]
+    incidents:
+      value:
+        - date: 2026-10-16
+          summary: >-
+            CERT Polska published a Windows app flaw (CVE-2026-106030) that let a local user stop
+            other Windows services. It was fixed in version 8.12 through coordinated disclosure.
+          handled: well
+          source: cve-2026
+        - date: 2024-10-01
+          summary: >-
+            A Panamanian prosecutor's warrant made NordVPN hand over a user's payment details and
+            confirm their account existed. It says it had no activity logs to give, and published the
+            case in its transparency report.
+          handled: well
+          source: transparency
+        - date: 2019-12-04
+          summary: >-
+            A researcher found an API that showed other customers' emails and payment details without
+            logging in. NordVPN fixed it two days later and paid a bounty, saying rate limiting kept
+            it to a handful of users.
+          handled: well
+          source: payment-api
+        - date: 2018-09-07
+          summary: >-
+            Cisco Talos found the Windows app could be made to run commands as SYSTEM
+            (CVE-2018-3952), getting round NordVPN's fix for a similar bug VerSprite reported that
+            April. NordVPN patched it before it went public.
+          handled: well
+          source: talos-2018
+        - date: 2018-03-27
+          summary: >-
+            VerSprite found the macOS app's helper let other apps run code as root (CVE-2018-9105).
+            NordVPN fixed it within ten days of the report.
+          handled: well
+          source: versprite-2018
+        - date: 2018-03-01
+          summary: >-
+            An intruder got into a rented server in Finland through a remote management tool the
+            datacentre hadn't disclosed, exposing an expired private key. NordVPN only confirmed it in
+            October 2019, months after finding out and once the key had leaked online.
+          handled: poorly
+          source: breach
+      note: The warrant and the Finnish breach are dated to the month, as no day was given.
+      sources: [payment-api-register, breach]
+
+  account:
+    email:
+      value: required
+      sources: [terms]
+    personal_data:
+      value: []
+      note: Card payments also take the cardholder's name, and Brazil requires a national ID number.
+      sources: [privacy-policy, checkout-monthly]
+    payment:
+      value: [card, paypal, bank, app_store, bitcoin, other_crypto, gift_card]
+      note: >-
+        Gift cards here are prepaid NordVPN cards sold for cash in shops. Other crypto includes
+        Ethereum, Litecoin and stablecoins.
+      sources: [pricing, payment-help]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn, ikev2, proprietary]
+      note: >-
+        NordLynx is its WireGuard setup and NordWhisper its own protocol. IKEv2 now only works
+        through manual setup, not in the apps.
+      sources: [protocols-help, ios-protocols, ikev2-manual, macos-versions]
+    post_quantum:
+      value: optional
+      note: A toggle in every app, and it only works with NordLynx.
+      sources: [pq-help, pq-launch]
+    kill_switch:
+      value: system
+      note: >-
+        Windows, Linux and Android can block everything when the VPN drops, as can the App Store
+        builds on macOS and iOS. The macOS website build only has a per-app kill switch.
+      sources: [kill-switch, macos-versions]
+    dns:
+      value: first_party
+      sources: [dns-help, trust]
+
+  infra:
+    ram_only:
+      value: all
+      evidence: claimed
+      sources: [trust]
+    hosting:
+      value: mixed
+      note: Nord says a big chunk of its servers are its own, with the rest hosted by partners.
+      sources: [trust]
+    virtual_locations:
+      value: disclosed
+      note: >-
+        95 of its 150 countries had only virtual servers on 2026-10-20. Its server list marks them as
+        Virtual.
+      sources: [server-api, servers, server-list-help]
+    servers:
+      value: 7186
+      note: Servers in NordVPN's API on 2026-10-20. Its own pages quote anything from 7,200 to 8,400.
+      sources: [server-api, servers, server-list-help]
+    countries:
+      value: 150
+      note: Only 55 have physical servers. The rest are virtual locations.
+      sources: [server-api, servers]
+
+  features:
+    connections:
+      value: 10
+      sources: [vpn-terms, session-limit]
+    multihop:
+      value: true
+      note: Double VPN servers, though not every protocol supports them.
+      sources: [double-vpn, server-categories]
+    obfuscation:
+      value: [proprietary]
+      note: NordWhisper, which makes VPN traffic look like web traffic. It now runs the obfuscated servers too.
+      sources: [obfuscated-upgrade, nordwhisper]
+    port_forwarding:
+      value: false
+      note: Only with the paid Dedicated Server add-on.
+      sources: [port-forwarding, port-forwarding-ds]
+    split_tunnel:
+      value: true
+      note: By app on Windows and Android, and by site in the browser extensions. Linux can only exclude ports and subnets.
+      sources: [split-tunnel, split-tunnel-extension]
+    blocking:
+      value: [ads, trackers, malware]
+      sources: [vpn-notice]
+
+  clients:
+    platforms:
+      value: [windows, macos, linux_gui, linux_cli, ios, android, browser]
+      note: Also Android TV and Apple TV. Routers need manual setup.
+      sources: [download, linux-gui]
+    open_source:
+      value: some
+      note: Only the Linux app (GPL-3.0), along with libraries such as libtelio.
+      sources: [github-linux, trust]
+    telemetry:
+      value: forced
+      note: >-
+        Basic diagnostic data is always sent, which Nord says can't be tied to you. Analytics and ad
+        measurement are asked for at first launch.
+      sources: [vpn-notice, privacy-policy, ios-setup]
+    trackers:
+      value: 3
+      note: AppsFlyer, Crashlytics and Firebase Analytics. The newest report that would load was for version 8.31.2, from February 2026.
+      sources: [exodus]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 14.99, currency: USD }
+      note: >-
+        Prices change by location. These are the US dollar ones from Nord's checkout, for the
+        cheapest Basic plan.
+      sources: [pricing, checkout-monthly]
+    best:
+      value: { amount: 3.49, currency: USD }
+      note: Basic plan, $94.23 for the first two years plus three free months.
+      sources: [pricing, checkout-2y]
+    best_term:
+      value: 27
+      sources: [checkout-2y]
+    renewal_increase:
+      value: 232
+      note: Then renews at $139.08 a year ($11.59 a month).
+      sources: [checkout-2y, renewal-prices]
+    free_tier:
+      value: false
+      sources: [vpn-terms]
+    refund_days:
+      value: 30
+      note: First purchase only. App Store purchases go through Apple.
+      sources: [subscription-terms, terms]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        The UK ad regulator ruled a 2019 TV ad misleading for exaggerating public Wi-Fi risks. Its
+        about page says it has nothing to share if asked about you, yet it handed over payment details in 2024.
+      sources: [asa-2019, about, transparency]
+    affiliates:
+      value: true
+      note: Up to 100% of the first payment and 30% of renewals.
+      sources: [partners, affiliate]
+    review_sites:
+      value: true
+      note: Cybernews, which reviews VPNs, says its owner Mediatech is backed by Nord Security's founders.
+      sources: [cybernews]
+    activism:
+      value: true
+      note: >-
+        Donated 5,521 accounts to over 360 non-profits in 2025, for journalists, rights defenders and
+        educators, and partners with Internews.
+      sources: [trust, internews]
+
+refs:
+  privacy-policy:
+    url: https://my.nordaccount.com/legal/privacy-policy/
+    title: Nord privacy policy
+  vpn-notice:
+    url: https://my.nordaccount.com/legal/privacy-policy/nordvpn/
+    title: NordVPN privacy notice
+  terms:
+    url: https://my.nordaccount.com/legal/terms-of-service/
+    title: Nord general terms
+  vpn-terms:
+    url: https://my.nordaccount.com/legal/terms-of-service/nordvpn/
+    title: NordVPN additional terms
+  subscription-terms:
+    url: https://my.nordaccount.com/legal/terms-of-service/subscription/
+    title: Nord subscription terms
+  renewal-prices:
+    url: https://my.nordaccount.com/legal/pricing/
+    title: Subscription renewal prices
+  about:
+    url: https://nordvpn.com/about-us/
+    title: About NordVPN
+  owners:
+    url: https://support.nordvpn.com/hc/en-us/articles/20911146148113-The-founders-and-owners-of-NordVPN
+    title: The founders and owners of NordVPN
+  nord-security:
+    url: https://nordsecurity.com/about-us/
+    title: About Nord Security
+  moonflash:
+    url: https://find-and-update.company-information.service.gov.uk/company/11549467/persons-with-significant-control
+    title: Moonflash Limited, persons with significant control (Companies House)
+  surfshark-about:
+    url: https://surfshark.com/about-us
+    title: About Surfshark
+  funding-2023:
+    url: https://tech.eu/2023/09/28/nordvpns-parent-company-nord-security-valued-at-3b-after-latest-funding-round/
+    title: NordVPN's parent company, Nord Security, valued at $3B after latest funding round (Tech.eu)
+  atlas:
+    url: https://nordvpn.com/blog/atlas-vpn-migrates-to-nordvpn/
+    title: Atlas VPN is closing, what it means and what's next
+  audit-2025:
+    url: https://nordvpn.com/blog/nordvpn-no-logs-assurance-engagement-2025/
+    title: NordVPN passes its no-logs assessment for the sixth time
+  audit-2024:
+    url: https://nordsecurity.com/press-area/nordvpn-verifies-its-no-logs-assurance-assessment-for-the-fifth-time/
+    title: NordVPN verifies its no-logs assurance assessment for the fifth time
+  audit-2023:
+    url: https://nordvpn.com/blog/nordvpn-no-logs-audit-2023/
+    title: NordVPN verifies its no-logs claim for the fourth time
+  audit-2022:
+    url: https://s1.nordcdn.com/nord/misc/0.58.0/vpn/brand/ISAE_3000-NordVPN_report_20dec2022.pdf
+    title: Deloitte, no-logs assurance report for nordvpn S.A. (2022)
+  audit-2020:
+    url: https://nordvpn.com/blog/nordvpn-audit/
+    title: NordVPN's no-logs policy aces test second time in a row
+  audit-2018:
+    url: https://nordvpn.com/de/blog/nordvpn-pruefung/
+    title: NordVPN hat eine branchenweit erste Prüfung seiner No-Logs-Policy abgeschlossen (2018)
+  cure53-infra-2025:
+    url: https://sb.nordcdn.com/m/698dd484b2f47d7d/original/Pentest-Report_NordVPN_VPN_Servers_-_Infra.pdf
+    title: Cure53, VPN servers and infrastructure pentest (2025)
+  cure53-apps-2025:
+    url: https://sb.nordcdn.com/m/62f4965cc189532b/original/Pentest-Report_NordVPN_Apps_UIs_Addons_APIs_-_IdP.pdf
+    title: Cure53, apps, add-ons, APIs and Nord Account pentest (2025)
+  cure53-apps-2024:
+    url: https://nordvpn.com/es/blog/auditoria-seguridad-vpn-cure53/
+    title: 'Auditoría a NordVPN: Cure53 certifica su seguridad (2025)'
+  cure53-infra-2022:
+    url: https://sb.nordcdn.com/m/6cd8259aba3a2ddf/original/Pentest-Report_NordVPN_Server-Infra_09-10-2022.pdf
+    title: Cure53, server and infrastructure pentest (2022)
+  cure53-apps-2022:
+    url: https://sb.nordcdn.com/m/4ffb298da3b61ed1/original/Pentest-Report_NordVPN_Apps-Add-ons_07-08-2022.pdf
+    title: Cure53, apps and add-ons pentest (2022)
+  versprite-2019:
+    url: https://www.newswire.com/news/nordvpn-has-completed-an-app-security-audit-21013258
+    title: NordVPN has completed an app security audit (2019 press release)
+  transparency:
+    url: https://nordvpn.com/blog/nordvpn-introduces-transparency-reports/
+    title: NordVPN transparency reports
+  trust:
+    url: https://nordvpn.com/trust/
+    title: NordVPN Trust Center
+  cve-2026:
+    url: https://cert.pl/en/posts/2026/10/CVE-2026-106030
+    title: Vulnerability in NordVPN software (CERT Polska)
+  payment-api:
+    url: https://www.welivesecurity.com/2020/03/10/flaw-popular-vpn-service-customer-data/
+    title: Flaw in popular VPN service may have exposed customer data (WeLiveSecurity)
+  payment-api-register:
+    url: https://www.theregister.com/2020/03/06/nordvpn_no_auth_needed_view_user_payments/
+    title: NordVPN quietly fixes bug that let anyone see users' payment details (The Register)
+  talos-2018:
+    url: https://talosintelligence.com/vulnerability_reports/TALOS-2018-0622
+    title: NordVPN privilege escalation (TALOS-2018-0622)
+  versprite-2018:
+    url: https://github.com/VerSprite/research/blob/master/advisories/VS-2018-015.md
+    title: VerSprite, NordVPN macOS privilege escalation (VS-2018-015)
+  breach:
+    url: https://techcrunch.com/2019/10/21/nordvpn-confirms-it-was-hacked/
+    title: NordVPN confirms it was hacked (TechCrunch)
+  pricing:
+    url: https://nordvpn.com/pricing/
+    title: NordVPN pricing
+  checkout-monthly:
+    url: https://order.nordvpn.com/payment/?product_group=nordvpn&product_period=1_month&currency=USD&bundle_type=basic
+    title: NordVPN checkout, Basic monthly in USD
+  checkout-2y:
+    url: https://order.nordvpn.com/payment/?product_group=nordvpn&product_period=2_year&currency=USD&bundle_type=basic
+    title: NordVPN checkout, Basic two-year in USD
+  payment-help:
+    url: https://support.nordvpn.com/hc/en-us/articles/19685782821265-What-payment-methods-does-NordVPN-accept
+    title: What payment methods does NordVPN accept
+  protocols-help:
+    url: https://support.nordvpn.com/hc/en-us/articles/19482810153745-Which-NordVPN-protocol-should-I-choose
+    title: Which NordVPN protocol should I choose
+  ios-protocols:
+    url: https://support.nordvpn.com/hc/en-us/articles/20459436694801-How-to-change-the-VPN-protocol-on-the-NordVPN-iOS-app
+    title: How to change the VPN protocol on the NordVPN iOS app
+  ikev2-manual:
+    url: https://support.nordvpn.com/hc/en-us/articles/20371657885329-How-to-connect-to-NordVPN-with-a-manual-IKEv2-IPSec-connection-on-an-iOS-device
+    title: Manual IKEv2/IPsec connection on iOS
+  macos-versions:
+    url: https://support.nordvpn.com/hc/en-us/articles/19445793501585-NordVPN-macOS-application-versions-website-vs-App-Store
+    title: 'NordVPN macOS app versions: website vs App Store'
+  pq-help:
+    url: https://support.nordvpn.com/hc/en-us/articles/30046321712529-NordVPN-Post-quantum-encryption-explained
+    title: NordVPN post-quantum encryption explained
+  pq-launch:
+    url: https://nordsecurity.com/press-area/nordvpn-launches-post-quantum-encryption-across-all-its-applications/
+    title: NordVPN launches post-quantum encryption across all its applications
+  kill-switch:
+    url: https://support.nordvpn.com/hc/en-us/articles/19509682644369-NordVPN-Kill-Switch-how-does-it-work
+    title: 'NordVPN Kill Switch: how does it work'
+  dns-help:
+    url: https://support.nordvpn.com/hc/en-us/articles/19587726859793-What-are-NordVPN-DNS-server-addresses
+    title: What are NordVPN DNS server addresses?
+  servers:
+    url: https://nordvpn.com/servers/
+    title: NordVPN server locations
+  server-api:
+    url: https://api.nordvpn.com/v1/servers?limit=10000
+    title: NordVPN server API, full list
+  server-list-help:
+    url: https://support.nordvpn.com/hc/en-us/articles/19383127694225-Where-can-I-find-the-NordVPN-server-list
+    title: Where can I find the NordVPN server list
+  session-limit:
+    url: https://support.nordvpn.com/hc/en-us/articles/47181405478417-I-get-the-Session-Limit-Reached-error-on-NordVPN
+    title: I get the Session Limit Reached error on NordVPN
+  double-vpn:
+    url: https://nordvpn.com/features/double-vpn/
+    title: Double VPN
+  server-categories:
+    url: https://support.nordvpn.com/hc/en-us/articles/19479130821521-Different-NordVPN-server-categories-explained
+    title: Different NordVPN server categories explained
+  obfuscated-upgrade:
+    url: https://support.nordvpn.com/hc/en-us/articles/46609126551697-NordVPN-Obfuscated-Servers-are-getting-an-upgrade-what-changed
+    title: NordVPN Obfuscated Servers are getting an upgrade
+  nordwhisper:
+    url: https://nordsecurity.com/press-area/nordvpn-introduces-nordwhisper-a-new-solution-for-restricted-networks/
+    title: 'NordVPN introduces NordWhisper: a new solution for restricted networks'
+  port-forwarding:
+    url: https://support.nordvpn.com/hc/en-us/articles/19483392309649-Does-NordVPN-offer-port-forwarding
+    title: Does NordVPN offer port forwarding
+  port-forwarding-ds:
+    url: https://support.nordvpn.com/hc/en-us/articles/46022896056593-How-to-configure-port-forwarding-on-your-NordVPN-Dedicated-Server
+    title: How to configure port forwarding on your NordVPN Dedicated Server
+  split-tunnel:
+    url: https://support.nordvpn.com/hc/en-us/articles/19618692366865-What-is-Split-Tunneling-and-how-to-use-it-with-NordVPN
+    title: What is split tunneling and how to use it with NordVPN?
+  split-tunnel-extension:
+    url: https://support.nordvpn.com/hc/en-us/articles/20321703651985-How-to-use-the-Exclude-from-VPN-Split-Tunneling-feature-on-the-NordVPN-extension
+    title: Exclude from VPN (split tunnelling) in the NordVPN extension
+  nordlayer:
+    url: https://nordlayer.com/business-vpn/
+    title: NordLayer business VPN
+  download:
+    url: https://nordvpn.com/download/
+    title: Download NordVPN
+  linux-gui:
+    url: https://nordsecurity.com/press-area/nordvpn-launches-full-gui-for-its-linux-app/
+    title: NordVPN launches full GUI for its Linux app
+  github-linux:
+    url: https://github.com/NordSecurity/nordvpn-linux
+    title: NordSecurity/nordvpn-linux on GitHub
+  ios-setup:
+    url: https://support.nordvpn.com/hc/en-us/articles/19451338152849-How-to-download-and-install-the-NordVPN-app-on-an-iPhone-or-iPad
+    title: How to download and install the NordVPN app on an iPhone or iPad
+  exodus:
+    url: https://reports.exodus-privacy.eu.org/en/reports/com.nordvpn.android/latest/
+    title: Exodus Privacy report for com.nordvpn.android
+  asa-2019:
+    url: https://www.asa.org.uk/rulings/tefincom-sa-a19-547668.html
+    title: ASA ruling on Tefincom SA t/a NordVPN (2019)
+  partners:
+    url: https://nordvpn.com/become-a-partner/
+    title: NordVPN partnership program
+  affiliate:
+    url: https://nordvpn.com/affiliate/
+    title: NordVPN affiliate program
+  cybernews:
+    url: https://cybernews.com/editorial-policy/
+    title: Cybernews editorial policy
+  internews:
+    url: https://nordsecurity.com/press-area/nordvpn-and-internews-launch-partnership-to-strengthen-digital-safety-for-journalists-and-at-risk-communities/
+    title: NordVPN and Internews launch partnership

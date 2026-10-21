@@ -1,0 +1,421 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: PureVPN
+icon: purevpn.png
+checked: 2026-10-21
+
+criteria:
+  identity:
+    website: https://www.purevpn.com
+    legal_entity:
+      value: GZ Systems Limited
+      sources: [tos, privacy-policy]
+    owner:
+      value: Disrupt
+      note: >-
+        Disrupt, a UAE-based group run by PureVPN's founders, lists PureSquare (PureVPN) among its
+        companies, and gaditek.com now redirects to it. The shareholding isn't published.
+      sources: [disrupt, about]
+    founded:
+      value: 2007
+      sources: [about]
+    team:
+      value: partial
+      note: >-
+        There's no leadership page, but its transparency report quotes CEO Uzair Gadit, and Disrupt
+        names him and his brothers as founders.
+      sources: [transparency, disrupt, about]
+    sister_brands:
+      value: [Ivacy VPN]
+      note: >-
+        PureVPN's help centre says Ivacy merged with PureVPN as "Ivacy Powered by PureVPN" and moved its
+        users over.
+      sources: [ivacy-merge]
+    acquisitions:
+      value: []
+      sources: [about, disrupt]
+
+  jurisdiction:
+    hq:
+      value: VG
+      note: It moved from Hong Kong to the British Virgin Islands in 2021.
+      sources: [tos, hq-move]
+    entities:
+      value: [VG, CY]
+      note: >-
+        The terms name GZT Associates Limited in Cyprus as an associated company. Disrupt, the group
+        behind it, says it's headquartered in the UAE.
+      sources: [tos, disrupt]
+
+  logging:
+    traffic:
+      value: none
+      evidence: verified
+      sources: [privacy-policy, kpmg-2023]
+    dns:
+      value: none
+      evidence: claimed
+      note: >-
+        With the Tracker and Ad Blocker on, it briefly keeps the names and counts of blocked trackers in
+        memory, without user details.
+      sources: [privacy-policy]
+    timestamps:
+      value: aggregate
+      evidence: claimed
+      note: >-
+        Keeps the day each user connected, for support, though not the time. KPMG checked that exact
+        connection times aren't logged.
+      sources: [privacy-policy, kpmg-2023]
+    bandwidth:
+      value: aggregate
+      evidence: claimed
+      note: Keeps a total of the data each user transfers, to enforce fair use.
+      sources: [privacy-policy, tos]
+    source_ip:
+      value: none
+      evidence: verified
+      note: >-
+        It does keep your ISP's name for support. A Dedicated IP add-on stays on record for 25 days after
+        the subscription ends.
+      sources: [privacy-policy, kpmg-2023]
+    proven:
+      value: [audit]
+      evidence: verified
+      note: >-
+        KPMG last checked the setup in early 2023. In 2017 PureVPN's records helped the FBI identify a
+        customer, before its current no-logs policy.
+      sources: [kpmg-2023, torrentfreak-2017]
+    policy: https://www.purevpn.com/privacy-policy
+
+  transparency:
+    audits:
+      value:
+        - date: 2023-04-17
+          auditor: KPMG
+          scope: no_logs
+          source: kpmg-2023
+        - date: 2021-01-01
+          auditor: KPMG
+          scope: no_logs
+          source: kpmg-2021
+        - date: 2020-01-01
+          auditor: KPMG
+          scope: no_logs
+          source: kpmg-2020
+        - date: 2019-06-28
+          auditor: Altius IT
+          scope: no_logs
+          source: altius-2019
+      evidence: verified
+      note: >-
+        Only KPMG's 2023 letter and Altius IT's 2019 report have been published. The 2020 and 2021 KPMG
+        checks are known from announcements, so they're dated by year.
+      sources: [kpmg-2023, no-log-assessment, kpmg-2021, kpmg-2020, altius-2019]
+    report:
+      value: regular
+      note: Quarterly, with figures up to Q2 2026 when checked.
+      sources: [transparency, transparency-court, transparency-subpoena]
+    canary:
+      value: stale
+      note: >-
+        The Trust Center says it has had no court orders or subpoenas, but its own transparency report
+        lists 14 court orders and 53 subpoenas since 2021.
+      sources: [trust-center, transparency-court, transparency-subpoena]
+    bug_bounty:
+      value: false
+      note: >-
+        Its paid Bugcrowd programme from 2018 is gone, and in 2025 it said it was still setting up a
+        disclosure process.
+      sources: [bugcrowd-2018, advisory-2025]
+    incidents:
+      value:
+        - date: 2025-09-17
+          summary: >-
+            A researcher found the Linux apps leaked IPv6 traffic after a network change and wiped the
+            system's firewall rules (CVE-2025-59691 and CVE-2025-59692). PureVPN confirmed both two days
+            later and sent the researcher a fixed Linux build on 19 October.
+          handled: well
+          source: anagogistis-2025
+        - date: 2023-11-01
+          summary: >-
+            In November 2023 Rafay Baloch reported that the Linux app leaked DNS queries outside the VPN
+            (CVE-2023-48957), which PureVPN fixed within days. It declined to fix a local code execution
+            flaw he also found, saying it was down to Chromium.
+          handled: well
+          source: baloch-2023
+        - date: 2018-09-27
+          summary: >-
+            Trustwave found the Windows app stored login details in plain text, readable by any local
+            user. It was reported in August 2017 and fixed in June 2018, and a second flaw that reveals
+            the saved password was left as an accepted risk.
+          handled: poorly
+          source: trustwave-2018
+        - date: 2017-10-06
+          summary: >-
+            An FBI affidavit in a cyberstalking case said PureVPN linked a customer to his home and work
+            IP addresses. PureVPN advertised no logs at the time, though its policy admitted to keeping
+            connection times.
+          handled: poorly
+          source: torrentfreak-2017
+      sources: [anagogistis-2025, advisory-2025, baloch-2023, trustwave-2018, securityaffairs-2018, torrentfreak-2017, doj-2017]
+
+  account:
+    email:
+      value: required
+      sources: [pricing]
+    personal_data:
+      value: [name]
+      note: The privacy policy says signup asks for your name, though checkout itself only asks for an email and password.
+      sources: [pricing, privacy-policy]
+    payment:
+      value: [card, paypal, app_store, bitcoin, other_crypto]
+      note: Crypto goes through CoinPayments, and those payments can't be refunded.
+      sources: [pricing, refund]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn, ikev2, other]
+      note: Other covers L2TP, SSTP and PPTP for manual setup.
+      sources: [protocols, servers]
+    post_quantum:
+      value: null
+      note: >-
+        It offers "quantum-resistant" servers in five countries, but describes them as using keys made
+        by a quantum computer, not a post-quantum key exchange.
+      sources: [trust-center, servers]
+    kill_switch:
+      value: null
+      note: It has an Internet Kill Switch, but PureVPN's pages don't say whether it works at system level.
+      sources: [kill-switch]
+    dns:
+      value: first_party
+      sources: [dns-leak]
+
+  infra:
+    ram_only:
+      value: null
+      note: PureVPN doesn't say its servers run from RAM.
+      sources: [trust-center]
+    hosting:
+      value: null
+      note: PureVPN doesn't say whether it owns or rents its servers.
+      sources: [trust-center]
+    virtual_locations:
+      value: disclosed
+      note: >-
+        A help article updated in February 2026 lists the locations that are still virtual. It's not clear
+        whether the apps mark them.
+      sources: [virtual-locations]
+    servers:
+      value: 6000
+      note: Listed as 6,000+.
+      sources: [servers]
+    countries:
+      value: 65
+      note: Listed as 65+, though the manual setup table on the same page still names 94 countries.
+      sources: [servers]
+
+  features:
+    connections:
+      value: 10
+      note: More with the paid Multi Login add-on.
+      sources: [home]
+    obfuscation:
+      value: [proprietary]
+      note: Obfuscated servers, which PureVPN says disguise VPN traffic as HTTPS without naming the method.
+      sources: [home]
+    port_forwarding:
+      value: true
+      note: A paid add-on, $1.49 a month on the 2-year plan.
+      sources: [port-forwarding, pricing]
+    split_tunnel:
+      value: true
+      note: On Windows, Android, Fire TV and Android TV only.
+      sources: [split]
+    blocking:
+      value: [ads, trackers]
+      note: Through its Tracker and Ad Blocker, included in every plan.
+      sources: [pricing, privacy-policy]
+
+  clients:
+    platforms:
+      value: [windows, macos, linux_gui, linux_cli, ios, android, router, browser]
+      note: >-
+        Routers get a DD-WRT applet or manual setup. The Chrome, Firefox and Edge extensions are proxies
+        for the browser alone.
+      sources: [download, linux, router]
+    open_source:
+      value: none
+      note: Only its leak-testing tools are open source, not the apps.
+      sources: [trust-center, tos]
+    telemetry:
+      value: null
+      note: >-
+        The policy lists the tools used for app analytics and crash reports, among them Google Analytics,
+        Firebase, Mixpanel, Facebook Pixel and Sentry. It doesn't say whether you can turn this off.
+      sources: [privacy-policy]
+    trackers:
+      value: 9
+      note: >-
+        Adjust, Facebook Login, Facebook Share, Crashlytics, Firebase Analytics, Huawei Mobile Services,
+        Insider, Mixpanel and Sentry, in version 8.86.129 from August 2025, the newest archived report.
+      sources: [exodus]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 12.95, currency: USD }
+      note: The Standard plan. Plus and Max add extras such as a password manager.
+      sources: [pricing, renewal]
+    best:
+      value: { amount: 2.16, currency: USD }
+      note: >-
+        An intro price on the 2-year Standard plan, which PureVPN rounds to $2.15. It then renews at about
+        $4 a month.
+      sources: [pricing, renewal]
+    best_term:
+      value: 27
+      note: A 2-year plan with 3 months added.
+      sources: [pricing]
+    renewal_increase:
+      value: 85
+      note: The 27-month plan is $58.20, then renews at $47.95 a year.
+      sources: [pricing, renewal]
+    free_tier:
+      value: false
+      note: There's a 7-day trial, which renews into a paid plan unless cancelled.
+      sources: [refund]
+    refund_days:
+      value: 31
+      note: Not for renewals, or for crypto, App Store or Google Play payments.
+      sources: [refund]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        Its privacy policy calls crypto through CoinPayments "100% anonymous" and says "even we can't see
+        what you do online", and its server page promises "complete anonymity".
+      sources: [privacy-policy, servers]
+    affiliates:
+      value: true
+      note: Its affiliate page offers 100% of the first month's price, or 40% on longer plans plus 35% recurring.
+      sources: [affiliates]
+
+refs:
+  home:
+    url: https://www.purevpn.com/
+    title: PureVPN homepage
+  about:
+    url: https://www.purevpn.com/about.php
+    title: About PureVPN
+  privacy-policy:
+    url: https://www.purevpn.com/privacy-policy
+    title: PureVPN privacy policy
+  tos:
+    url: https://www.purevpn.com/term.php
+    title: PureVPN terms of service
+  refund:
+    url: https://www.purevpn.com/refund-policy.php
+    title: PureVPN refund policy
+  pricing:
+    url: https://www.purevpn.com/order
+    title: PureVPN pricing
+  renewal:
+    url: https://www.purevpn.com/subscription-renewal-plan
+    title: PureVPN subscription renewal prices
+  trust-center:
+    url: https://www.purevpn.com/trust-center
+    title: PureVPN Trust Center
+  no-log-assessment:
+    url: https://www.purevpn.com/no-log-assessment
+    title: PureVPN no-log assessment
+  kpmg-2023:
+    url: https://www.purevpn.com/wp-content/uploads/2023/07/KPMG_PureVPN_TPA_Letter_2023-04-FINAL-2.pdf
+    title: KPMG, technical privacy assessment letter for PureVPN (2023)
+  kpmg-2021:
+    url: https://www.prnewswire.com/news-releases/purevpn-the-first-no-log-vpn-with-an-always-on-audit-passes-second-kpmg-evaluation-301349340.html
+    title: PureVPN passes second KPMG evaluation (PR Newswire, 2021)
+  kpmg-2020:
+    url: https://www.purevpn.com/blog/kpmg-validates-purevpn-no-log-claims/
+    title: KPMG validates PureVPN no-log claims
+  altius-2019:
+    url: https://web.archive.org/web/20240213202956/https://my.purevpn.com/pdf/Privacy_No_Log_Audit_Report.pdf
+    title: Altius IT, PureVPN privacy and no-log audit report (2019, archived)
+  hq-move:
+    url: https://www.purevpn.com/blog/purevpn-hq-migration/
+    title: PureVPN moves from Hong Kong to British Virgin Islands
+  transparency:
+    url: https://www.purevpn.com/vpn-transparency-report
+    title: PureVPN transparency report
+  transparency-court:
+    url: https://www.purevpn.com/vpn-transparency-report/court-orders
+    title: PureVPN transparency report, court orders
+  transparency-subpoena:
+    url: https://www.purevpn.com/vpn-transparency-report/subpoena
+    title: PureVPN transparency report, subpoenas
+  disrupt:
+    url: https://www.disrupt.com/
+    title: Disrupt homepage
+  ivacy-merge:
+    url: https://intercom.help/purevpn-support/en/articles/9947280-how-to-port-my-ivacy-account-to-purevpn
+    title: How to port my Ivacy account to PureVPN
+  servers:
+    url: https://www.purevpn.com/servers
+    title: PureVPN server list
+  virtual-locations:
+    url: https://purevpn2.helpjuice.com/en_US/general-articles/important-announcement-we-are-removing-virtual-locations-from-the-purevpn-service
+    title: We are removing virtual locations from the PureVPN service
+  dns-leak:
+    url: https://www.purevpn.com/features/dns-leak-protection
+    title: PureVPN DNS leak protection
+  kill-switch:
+    url: https://www.purevpn.com/features/vpn-kill-switch
+    title: PureVPN kill switch
+  split:
+    url: https://www.purevpn.com/features/split-tunneling
+    title: PureVPN split tunnelling
+  protocols:
+    url: https://www.purevpn.com/what-is-vpn/protocols
+    title: PureVPN, VPN protocols compared
+  port-forwarding:
+    url: https://www.purevpn.com/port-forwarding
+    title: PureVPN port forwarding add-on
+  download:
+    url: https://www.purevpn.com/download
+    title: Download PureVPN
+  linux:
+    url: https://www.purevpn.com/download/linux-vpn
+    title: PureVPN for Linux
+  router:
+    url: https://www.purevpn.com/download/router-vpn
+    title: PureVPN for routers
+  affiliates:
+    url: https://www.purevpn.com/affiliates
+    title: PureVPN affiliate program
+  exodus:
+    url: https://reports.exodus-privacy.eu.org/en/reports/com.gaditek.purevpnics/latest/
+    title: Exodus Privacy report for com.gaditek.purevpnics
+  bugcrowd-2018:
+    url: https://www.bugcrowd.com/blog/purevpn-tasks-bugcrowd-for-greater-assurance-of-user-security/
+    title: PureVPN tasks Bugcrowd for greater assurance of user security (2018)
+  advisory-2025:
+    url: https://www.purevpn.com/blog/security-advisory-linux-client-ipv6-leak-firewall-rule-reset/
+    title: 'PureVPN security advisory: Linux client IPv6 leak and firewall rule reset'
+  baloch-2023:
+    url: https://www.rafaybaloch.com/2023/11/Multiple%20Critical-Vulnerabilities-in-PureVPN.html
+    title: Multiple critical vulnerabilities in PureVPN (Rafay Baloch)
+  anagogistis-2025:
+    url: https://anagogistis.com/posts/purevpn-ipv6-leak/
+    title: PureVPN IPv6 leak (Anagogistis)
+  trustwave-2018:
+    url: https://web.archive.org/web/20201221181840/https://www.trustwave.com/en-us/resources/blogs/spiderlabs-blog/credential-leak-flaws-in-windows-purevpn-client/
+    title: Credential leak flaws in Windows PureVPN client (Trustwave SpiderLabs, archived)
+  securityaffairs-2018:
+    url: https://securityaffairs.com/76660/hacking/windows-purevpn-client-flaws.html
+    title: Trustwave expert found 2 credential leak issues in Windows PureVPN client (Security Affairs)
+  torrentfreak-2017:
+    url: https://torrentfreak.com/purevpn-logs-helped-fbi-net-alleged-cyberstalker-171009/
+    title: PureVPN logs helped FBI net alleged cyberstalker (TorrentFreak)
+  doj-2017:
+    url: https://www.justice.gov/usao-ma/pr/massachusetts-man-arrested-and-charged-cyberstalking-former-roommate
+    title: Massachusetts man arrested and charged with cyberstalking former roommate (US Department of Justice)
