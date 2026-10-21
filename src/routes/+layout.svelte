@@ -122,15 +122,17 @@
   }
 
   .colophon {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
-    gap: var(--space-5);
-    padding-block: var(--space-5) var(--space-7);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--space-3) var(--space-6);
+    padding-block: var(--space-4);
     border-top: var(--rule-heavy) solid var(--rule);
     font-size: var(--text-sm);
     color: var(--text-muted);
 
     & p {
+      flex: 1 1 18rem;
       max-width: 44ch;
     }
 
@@ -141,7 +143,6 @@
       margin: 0;
       padding: 0;
       list-style: none;
-      justify-self: end;
     }
   }
 </style>
