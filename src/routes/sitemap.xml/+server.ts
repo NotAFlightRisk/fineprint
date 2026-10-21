@@ -8,6 +8,7 @@ export const GET = () => {
   const pages = [
     { path: '/', modified: stats().updated },
     { path: '/methodology' },
+    { path: '/contributing' },
     ...data().providers.map(({ id, checked }) => ({ path: `/${id}`, modified: checked }))
   ];
   const urls = pages

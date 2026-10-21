@@ -8,6 +8,7 @@ export const prerender = true;
 export const entries = () => [
   { page: 'index' },
   { page: 'methodology' },
+  { page: 'contributing' },
   ...data().providers.map(({ id }) => ({ page: id }))
 ];
 

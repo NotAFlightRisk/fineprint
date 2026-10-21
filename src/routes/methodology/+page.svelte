@@ -33,7 +33,7 @@
   crumb="How grading works"
 />
 
-<section class="intro">
+<section class="preface">
   <h1>How grading works</h1>
   <div class="prose">
     <p>
@@ -111,31 +111,6 @@
 {/each}
 
 <style>
-  .intro {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    gap: var(--space-5);
-    padding-bottom: var(--space-7);
-
-    & h1 {
-      grid-column: 1 / span 5;
-    }
-
-    & .prose {
-      grid-column: 7 / -1;
-      display: grid;
-      gap: var(--space-4);
-      max-width: 62ch;
-    }
-
-    @media (max-width: 56rem) {
-      & h1,
-      & .prose {
-        grid-column: 1 / -1;
-      }
-    }
-  }
-
   .legend {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));

@@ -98,6 +98,13 @@ const headline = (text: string, size = 88) =>
     text
   );
 
+const lede = (title: string, text: string) =>
+  div(
+    { flexDirection: 'column', gap: 24, paddingTop: 44 },
+    headline(title),
+    div({ fontSize: 34, color: colour.muted, width: 860, lineHeight: 1.3 }, text)
+  );
+
 const flagCount = (count: number, size: number) =>
   div(
     { fontSize: size, fontWeight: 600, color: count ? colour.bad : colour.muted },
@@ -200,13 +207,9 @@ function homeImage(summaries: Summary[], counts: ReturnType<typeof stats>) {
 function methodologyImage(categories: number, counts: ReturnType<typeof stats>) {
   return frame(
     `${counts.criteria} criteria in ${categories} categories`,
-    div(
-      { flexDirection: 'column', gap: 24, paddingTop: 44 },
-      headline('How grading works'),
-      div(
-        { fontSize: 34, color: colour.muted, width: 860, lineHeight: 1.3 },
-        'Every provider measured on the same published rules, with a source for every value.'
-      )
+    lede(
+      'How grading works',
+      'Every provider measured on the same published rules, with a source for every value.'
     ),
     div(
       { flexWrap: 'wrap', rowGap: 18 },
@@ -215,6 +218,32 @@ function methodologyImage(categories: number, counts: ReturnType<typeof stats>) 
           { width: '33.3%', alignItems: 'center', gap: 16, fontSize: 30 },
           mark(key, 34),
           gradeNames[key]
+        )
+      )
+    )
+  );
+}
+
+function contributingImage(counts: ReturnType<typeof stats>) {
+  return frame(
+    `${counts.providers} providers · ${counts.sources} sources`,
+    lede(
+      'How to contribute',
+      "Every provider is one YAML file. Fix a value, add a source, and the checks point at anything that's off."
+    ),
+    div(
+      { gap: 24 },
+      ...['Edit the file', 'Add a source', 'Open a pull request'].map((step, index) =>
+        div(
+          {
+            flex: 1,
+            flexDirection: 'column',
+            gap: 8,
+            paddingTop: 16,
+            borderTop: `4px solid ${colour.text}`
+          },
+          div({ fontSize: 24, color: colour.muted }, String(index + 1)),
+          div({ fontSize: 30, fontWeight: 600 }, step)
         )
       )
     )
@@ -243,7 +272,7 @@ async function rasterise(svg: string, width?: number) {
   return Buffer.from(new Resvg(svg, { fitTo }).render().asPng());
 }
 
-/** The PNG for a page: index, methodology, or a provider's id */
+/** The PNG for a page: index, methodology, contributing, or a provider's id */
 export async function drawPage(page: string) {
   const { categories, providers } = data();
   const criteria = byId(categories);
@@ -251,6 +280,7 @@ export async function drawPage(page: string) {
   const index = providers.findIndex(({ id }) => id === page);
   if (page === 'index') return render(homeImage(summaries, stats()));
   if (page === 'methodology') return render(methodologyImage(categories.length, stats()));
+  if (page === 'contributing') return render(contributingImage(stats()));
   if (index >= 0) return render(providerImage(summaries[index], providers[index].checked));
 }
 
