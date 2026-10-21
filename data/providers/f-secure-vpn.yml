@@ -1,0 +1,318 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: F-Secure VPN
+icon: f-secure-vpn.svg
+checked: 2026-10-21
+
+criteria:
+  identity:
+    website:
+      value: https://www.f-secure.com/en/vpn
+      sources: [home]
+    legal_entity:
+      value: F-Secure Corporation
+      note: Sales in F-Secure's web store go through the reseller Cleverbridge GmbH.
+      sources: [privacy, store]
+    owner:
+      value: null
+      note: >-
+        F-Secure Corporation has no parent company and is listed on Nasdaq Helsinki. Its largest
+        shareholder is co-founder Risto Siilasmaa, with 34.36% on 30 September 2026.
+      sources: [about, shareholders]
+    founded:
+      value: 2014
+      note: Launched as F-Secure FREEDOME. F-Secure's own timeline lists FREEDOME under both 2013 and 2014.
+      sources: [story]
+    team:
+      value: public
+      note: A listed company whose board and CEO are named on its investor and company pages.
+      sources: [board, story]
+    sister_brands:
+      value: []
+      note: The VPN is also bundled into F-Secure Total, under the same name.
+      sources: [home]
+    acquisitions:
+      value: []
+      note: >-
+        In a 2022 partial demerger the consumer business, VPN included, was split into a new
+        F-Secure Corporation listed on Nasdaq Helsinki, and the old company was renamed WithSecure.
+        It was split off rather than sold, so it isn't counted as changing hands.
+      sources: [story]
+
+  jurisdiction:
+    hq:
+      value: FI
+      sources: [privacy]
+    entities:
+      value: [FI]
+      note: The privacy notice names only F-Secure Corporation in Helsinki, and mentions group companies without naming them.
+      sources: [privacy]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      note: >-
+        It says it keeps no logs of connections to external addresses, but it scans traffic and
+        collects the web addresses it blocks. Newer app versions run on an unnamed third-party
+        provider that processes the same data.
+      sources: [privacy, home]
+    dns:
+      value: null
+      note: The DNS help page defers to the privacy notice, which doesn't mention DNS lookups.
+      sources: [help-dns, privacy]
+    timestamps:
+      value: 'yes'
+      evidence: claimed
+      note: Connection timestamps and session lengths are kept for 90 days to deal with abuse.
+      sources: [privacy]
+    bandwidth:
+      value: 'yes'
+      evidence: claimed
+      note: The amount of data transferred in each session is kept for 90 days.
+      sources: [privacy]
+    source_ip:
+      value: 'yes'
+      evidence: claimed
+      note: Your public IP and hostname are kept in session logs for 90 days, and your IP in provisioning logs for a year.
+      sources: [privacy]
+    proven:
+      value: []
+      note: No independent audit, court case or seizure has tested the logging policy.
+      sources: [security, privacy]
+    policy: https://www.f-secure.com/en/legal/privacy/total
+
+  transparency:
+    audits:
+      value: []
+      note: F-Secure says it holds ISO 27001 certification, but no audit of the VPN has been published.
+      sources: [security]
+    report:
+      value: none
+      note: The privacy notice says it answers lawful warrants and court orders, but no figures are published.
+      sources: [privacy]
+    canary:
+      value: none
+      sources: [privacy]
+    bug_bounty:
+      value: true
+      note: F-Secure says it runs a bug bounty programme open to the public.
+      sources: [security]
+    incidents:
+      value:
+        - date: 2019-01-15
+          summary: >-
+            Finland's police seized FREEDOME logs for one IP address at Germany's request, including a
+            device ID, connection times and data used. F-Secure went to court to get the seizure
+            quashed and the data destroyed, and won in May 2019 and again on appeal in October 2020.
+          handled: well
+          source: seizure-2019
+
+  account:
+    email:
+      value: required
+      note: Every user needs a My F-Secure account, trial included.
+      sources: [home, store]
+    personal_data:
+      value: [name]
+      note: The web store asks for a first and last name.
+      sources: [store]
+    payment:
+      value: [card, paypal, app_store]
+      sources: [store, help-buy]
+
+  security:
+    protocols:
+      value: [openvpn, ikev2, wireguard, other]
+      note: >-
+        The older app uses OpenVPN and IPSec/IKEv2, the newer one Hydra, WireGuard and IPSec. Hydra
+        belongs to the third-party provider behind the newer app.
+      sources: [privacy, help-encryption]
+    post_quantum:
+      value: none
+      note: Not mentioned on the product page or in the help guide.
+      sources: [help-encryption, help-what]
+    kill_switch:
+      value: app
+      note: Windows, Mac and Android only. On by default on Android.
+      sources: [home, help-killswitch]
+    dns:
+      value: first_party
+      sources: [help-dns]
+
+  infra:
+    ram_only:
+      value: null
+      note: Not mentioned on the product page, in the help guide or in the privacy notice.
+      sources: [help-what, privacy]
+    hosting:
+      value: null
+      note: Not stated. The BitTorrent help page says some gateways are hosted by US-based companies.
+      sources: [help-bittorrent]
+    virtual_locations:
+      value: none
+      evidence: claimed
+      note: F-Secure calls every server location a virtual location, but says the app connects directly to the server in each one.
+      sources: [help-locations, help-direct]
+    servers:
+      value: null
+      note: No server count is published.
+      sources: [help-locations]
+    countries:
+      value: 24
+      note: The help guide lists 24 countries, the product page says over 20.
+      sources: [help-locations, home]
+
+  features:
+    connections:
+      value: 5
+      note: The plans on sale cover 1, 3 or 5 devices.
+      sources: [home]
+    multihop:
+      value: false
+      sources: [help-direct]
+    obfuscation:
+      value: []
+      note: Not mentioned on the product page or in the help guide.
+      sources: [help-encryption, help-what]
+    port_forwarding:
+      value: false
+      note: Not mentioned on the product page or in the help guide.
+      sources: [help-buy, help-bittorrent]
+    split_tunnel:
+      value: true
+      note: Apps can bypass the VPN on Android. Windows and Android can also skip the VPN on trusted Wi-Fi networks.
+      sources: [help-split, home]
+    blocking:
+      value: [trackers, malware]
+      sources: [help-tracking, help-what]
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android]
+      sources: [home]
+    open_source:
+      value: none
+      sources: [home]
+    telemetry:
+      value: null
+      note: >-
+        The privacy notice collects analytics on installs, performance, connections and features
+        used, and says identifiable analytics can be turned off in the app, without saying whether
+        it's on by default.
+      sources: [privacy]
+    fdroid:
+      value: false
+      note: Sold through F-Secure's site, Google Play and the App Store only.
+      sources: [help-buy]
+
+  pricing:
+    monthly:
+      value: null
+      note: Only one and two year plans are sold.
+      sources: [home]
+    best:
+      value: { amount: 6.04, currency: EUR }
+      note: >-
+        Prices from the global English page including VAT, for 5 devices at €144.99 for two years.
+        One device is €89.99 for two years. The US page charges in USD at different prices.
+      sources: [home, home-us]
+    best_term:
+      value: 24
+      sources: [home]
+    renewal_increase:
+      value: 0
+      note: The store says the subscription renews at the price shown in the cart.
+      sources: [store]
+    free_tier:
+      value: false
+      note: Only a free trial, which the product page gives as 30 days in one place and 5 in another.
+      sources: [home]
+    refund_days:
+      value: 30
+      sources: [home, store]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        The Google Play listing calls it "like an anonymous proxy" that "hides your tracks", while
+        session logs with your IP are kept for 90 days.
+      sources: [play, privacy]
+    affiliates:
+      value: true
+      note: Up to 30% commission, run through Cleverbridge.
+      sources: [affiliates]
+    review_sites:
+      value: false
+      sources: [about]
+    activism:
+      value: false
+      sources: [about]
+
+refs:
+  seizure-2019:
+    url: https://yle.fi/a/3-11605233
+    title: Yle, Finnish police seized F-Secure VPN data at Germany's request and the court overturned it (2020, in Finnish)
+  home:
+    url: https://www.f-secure.com/en/vpn
+    title: F-Secure VPN, product page with prices
+  home-us:
+    url: https://www.f-secure.com/us-en/vpn
+    title: F-Secure VPN, US product page with prices
+  store:
+    url: https://onlineshop.f-secure.com/789/purl-vpn-buynow?cart=248276&plans=12M,24M&quantities=1,2,3,5,7,10,15,20,25&quantity=1&currency=EUR&language=en&x-myaccount-promotionid=529&packagediscount=fixedregular2024&x-option=VPN-VPN-PP&scope=checkout
+    title: F-Secure online shop (Cleverbridge), the product page's Buy now link
+  privacy:
+    url: https://www.f-secure.com/en/legal/privacy/total
+    title: F-Secure Total privacy notice, May 2026, VPN feature section
+  about:
+    url: https://company.f-secure.com/en
+    title: About F-Secure
+  story:
+    url: https://company.f-secure.com/en/about-us/our-story
+    title: F-Secure, our story
+  shareholders:
+    url: https://investors.f-secure.com/en/share_and_shareholders/share_information/shareholders
+    title: F-Secure investors, shareholders
+  board:
+    url: https://investors.f-secure.com/en/corporate_governance/governing_model/board_of_directors
+    title: F-Secure investors, Board of Directors
+  security:
+    url: https://company.f-secure.com/en/about-us/security-and-compliance
+    title: F-Secure security principles
+  affiliates:
+    url: https://www.f-secure.com/en/partners/affiliate-program
+    title: F-Secure affiliate program
+  play:
+    url: https://play.google.com/store/apps/details?id=com.fsecure.freedome.vpn.security.privacy.android
+    title: F-Secure FREEDOME VPN on Google Play
+  help-buy:
+    url: https://help.f-secure.com/product.html#home/freedome/latest/en/concept_256260A46C8040388A34EDE7C61D5EB7-freedome-latest-en
+    title: 'F-Secure VPN help: Where can I buy F-Secure VPN?'
+  help-what:
+    url: https://help.f-secure.com/product.html#home/freedome/latest/en/concept_3263107A01EC49FF892C6D4D64172AD2-freedome-latest-en
+    title: 'F-Secure VPN help: What happens when you use VPN'
+  help-locations:
+    url: https://help.f-secure.com/product.html#home/freedome/latest/en/id_80778-freedome-latest-en
+    title: 'F-Secure VPN help: What are the virtual locations for F-Secure VPN?'
+  help-direct:
+    url: https://help.f-secure.com/product.html#home/freedome/latest/en/id_81931-freedome-latest-en
+    title: 'F-Secure VPN help: Does F-Secure VPN communicate directly with the VPN server of each country?'
+  help-tracking:
+    url: https://help.f-secure.com/product.html#home/freedome/latest/en/id_81930-freedome-latest-en
+    title: 'F-Secure VPN help: How are the tracking cookies and sites blocked?'
+  help-split:
+    url: https://help.f-secure.com/product.html#home/freedome/latest/en/task_902BF56C2ADF493EB8FE92839D36A4B1-freedome-latest-en
+    title: 'F-Secure VPN help: Setting apps to connect directly to the internet'
+  help-killswitch:
+    url: https://help.f-secure.com/product.html#home/freedome/latest/en/id_110707-freedome-latest-en
+    title: 'F-Secure VPN help: Killswitch functionality'
+  help-bittorrent:
+    url: https://help.f-secure.com/product.html#home/freedome/latest/en/id_65934-freedome-latest-en
+    title: 'F-Secure VPN help: Is BitTorrent allowed with F-Secure VPN?'
+  help-dns:
+    url: https://help.f-secure.com/product.html#home/freedome/latest/en/id_120010-freedome-latest-en
+    title: 'F-Secure VPN help: Does DNS-over-HTTPS work with F-Secure VPN?'
+  help-encryption:
+    url: https://help.f-secure.com/product.html#home/freedome/latest/en/id_81881-freedome-latest-en
+    title: 'F-Secure VPN help: What encryption does F-Secure VPN use?'
