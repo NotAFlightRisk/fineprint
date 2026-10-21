@@ -1,0 +1,295 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Astrill VPN
+icon: astrill.png
+checked: 2026-10-21
+
+criteria:
+  identity:
+    website:
+      value: https://www.astrill.com
+      sources: [about]
+    legal_entity:
+      value: Veloxee Corp.
+      sources: [terms]
+    owner:
+      value: null
+      note: Astrill doesn't name who owns Veloxee Corp.
+      sources: [terms, about]
+    founded:
+      value: 2009
+      sources: [about]
+    team:
+      value: partial
+      note: Its site names nobody, but Liechtenstein's company register names Veloxee's board member and managing director.
+      sources: [about, register]
+    sister_brands: []
+    acquisitions:
+      value: []
+      note: Veloxee Corp. moved its registered seat from Seychelles to Liechtenstein in December 2021. Nothing public says Astrill changed hands.
+      sources: [register, terms]
+
+  jurisdiction:
+    hq:
+      value: LI
+      sources: [terms, about]
+    entities:
+      value: [LI]
+      note: >-
+        Veloxee moved from Seychelles to Liechtenstein in December 2021, though its About page said
+        Seychelles until mid-2022 and its terms used Seychelles law until late 2025.
+      sources: [register, about-2022, terms-2025]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [privacy-policy]
+    dns:
+      value: none
+      evidence: claimed
+      note: The policy doesn't mention DNS, only that its servers can't see which sites each user visits.
+      sources: [privacy-policy]
+    timestamps:
+      value: 'yes'
+      evidence: claimed
+      note: The last 20 connections per account are kept with time, duration and country, with no time limit, and longer on suspected misuse. The FAQ still says they go after 30 days idle, which the policy dropped in 2026.
+      sources: [privacy-policy, faq, privacy-policy-2025]
+    bandwidth:
+      value: aggregate
+      evidence: claimed
+      note: Counts each account's total bytes transferred, for network planning.
+      sources: [privacy-policy]
+    source_ip:
+      value: temporary
+      evidence: claimed
+      note: Held only while connected, to enforce the device limit. The kept connection records list a country but no IP.
+      sources: [privacy-policy]
+    proven: []
+    policy: https://www.astrill.com/privacy-policy
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty:
+      value: true
+      note: Pays in Bitcoin at its discretion, with no published amounts. The apps are out of scope and reporters may never disclose.
+      sources: [bug-bounty]
+    incidents: []
+
+  account:
+    email:
+      value: required
+      sources: [pricing]
+    personal_data:
+      value: [name]
+      sources: [pricing]
+    payment:
+      value: [card, paypal, bank, app_store, bitcoin, monero, other_crypto]
+      note: The FAQ also lists Alipay, WeChat Pay and Perfect Money. Other crypto includes Ethereum, Dash and PIVX, and the App Store plan works on iOS only.
+      sources: [pricing, faq, kill-switch, ios-plan]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn, proprietary]
+      note: Proprietary is StealthVPN and OpenWeb, which only work in Astrill's apps.
+      sources: [protocols]
+    post_quantum:
+      value: none
+      note: No post-quantum key exchange is mentioned for any of its protocols.
+      sources: [protocols]
+    kill_switch:
+      value: app
+      note: Desktop apps only. On Windows, App Guard can also block chosen apps when the VPN drops, even with Astrill closed.
+      sources: [kill-switch]
+    dns:
+      value: first_party
+      sources: [stealth-vpn]
+
+  infra:
+    ram_only:
+      value: all
+      evidence: claimed
+      note: Only claimed in one August 2026 blog post. Its servers page explains RAM-only servers without saying it uses them.
+      sources: [security-stack]
+    hosting:
+      value: null
+      note: It says its servers are physical bare-metal machines, but not whether it owns or rents them.
+      sources: [special, servers]
+    virtual_locations:
+      value: none
+      evidence: claimed
+      sources: [special]
+    servers:
+      value: 300
+      note: The FAQ says over 300.
+      sources: [faq]
+    countries:
+      value: 54
+      note: Countries in its server table on 2026-10-21. The same page's headline says 58.
+      sources: [servers]
+
+  features:
+    connections:
+      value: 5
+      note: >-
+        The pricing page says unlimited devices in one household, but only five can connect at once, with
+        at most one router. The App Store plan allows one iOS device.
+      sources: [faq, pricing, ios-plan]
+    multihop:
+      value: true
+      note: Needs the paid VIP add-on.
+      sources: [multi-hop]
+    obfuscation:
+      value: [proprietary]
+      note: StealthVPN and OpenWeb, its own closed protocols, are built to get past deep packet inspection.
+      sources: [protocols, stealth-vpn]
+    port_forwarding:
+      value: true
+      note: On selected servers, one preset port on a shared IP or any port on a paid dedicated IP. Desktop apps and routers only.
+      sources: [port-forwarding]
+    split_tunnel:
+      value: true
+      note: By app on Windows, macOS, Linux and Android, not iOS.
+      sources: [app-filter]
+    blocking:
+      value: [ads]
+      sources: [download-linux]
+
+  clients:
+    platforms:
+      value: [windows, macos, linux_gui, linux_cli, ios, android, router]
+      sources: [download-linux, download-ios, download-android, routers]
+    open_source:
+      value: none
+      note: The apps are built in house and the terms forbid reverse engineering them.
+      sources: [special, terms]
+    telemetry:
+      value: null
+      note: Neither the privacy policy nor the app pages say whether the apps send usage or crash data.
+      sources: [privacy-policy]
+    trackers:
+      value: 0
+      note: The newest report the Wayback Machine holds, from February 2023, covers version 3.12.9 from December 2022.
+      sources: [exodus]
+    fdroid:
+      value: false
+      sources: [download-android]
+
+  pricing:
+    monthly:
+      value: { amount: 30, currency: USD }
+      sources: [pricing]
+    best:
+      value: { amount: 12.5, currency: USD }
+      sources: [pricing]
+    best_term:
+      value: 24
+      sources: [pricing]
+    renewal_increase:
+      value: 0
+      note: Every plan is billed at the same price each term.
+      sources: [pricing]
+    free_tier:
+      value: false
+      note: The FAQ says there are no free trials, though another answer there still mentions a 7-day one.
+      sources: [faq]
+    refund_days:
+      value: 0
+      note: All sales are final.
+      sources: [refund-policy, faq]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: Feature pages promise "complete anonymity" from "military grade encryption" and "zero logging", while the policy keeps each account's last 20 connections.
+      sources: [kill-switch, faq, privacy-policy]
+    affiliates:
+      value: true
+      note: Pays affiliates an average of $21 a sale, though another page says it doesn't invest in affiliate schemes.
+      sources: [affiliates, special]
+    review_sites: false
+    activism: false
+
+refs:
+  about:
+    url: https://www.astrill.com/about-us
+    title: About Astrill VPN
+  about-2022:
+    url: https://web.archive.org/web/20220704222753/https://www.astrill.com/about-us
+    title: About Astrill VPN (archived July 2022)
+  privacy-policy:
+    url: https://www.astrill.com/privacy-policy
+    title: Privacy Notice
+  privacy-policy-2025:
+    url: https://web.archive.org/web/20250609033021/https://www.astrill.com/privacy-policy
+    title: Privacy Notice (archived June 2025)
+  register:
+    url: https://www.moneyhouse.ch/de/company/veloxee-corp-13118371119
+    title: Veloxee Corp., Liechtenstein commercial register entry (Moneyhouse)
+  terms:
+    url: https://www.astrill.com/terms-of-service
+    title: Terms of service
+  terms-2025:
+    url: https://web.archive.org/web/20251202040807/https://www.astrill.com/terms-of-service
+    title: Terms of service (archived December 2025)
+  refund-policy:
+    url: https://www.astrill.com/refund-policy
+    title: Refund policy
+  bug-bounty:
+    url: https://www.astrill.com/bug-bounty
+    title: Bug Bounty Program
+  faq:
+    url: https://www.astrill.com/faq
+    title: Frequently Asked Questions
+  pricing:
+    url: https://www.astrill.com/pricing
+    title: Pricing
+  ios-plan:
+    url: https://www.astrill.com/ios-vpn
+    title: iOS VPN plan
+  special:
+    url: https://www.astrill.com/what-makes-astrill-special
+    title: What makes Astrill VPN special?
+  security-stack:
+    url: https://www.astrill.com/blog/why-astrills-security-stack-matters/
+    title: Why Astrill's Security Stack Matters in 2026
+  protocols:
+    url: https://www.astrill.com/features/vpn-protocols
+    title: VPN Protocols
+  stealth-vpn:
+    url: https://www.astrill.com/features/vpn-protocols/stealth-vpn
+    title: StealthVPN
+  kill-switch:
+    url: https://www.astrill.com/features/kill-switch
+    title: Kill switch and App Guard
+  port-forwarding:
+    url: https://www.astrill.com/features/port-forwarding
+    title: Port forwarding
+  app-filter:
+    url: https://www.astrill.com/features/website-and-app-filter
+    title: Website and app filter
+  multi-hop:
+    url: https://www.astrill.com/network/multi-hop-vpn
+    title: Multi-hop VPN
+  servers:
+    url: https://www.astrill.com/network/vpn-servers
+    title: AstrillVPN Servers
+  affiliates:
+    url: https://www.astrill.com/affiliates
+    title: AstrillVPN Affiliate Program
+  routers:
+    url: https://www.astrill.com/astrill-vpn-routers
+    title: Astrill VPN routers
+  download-linux:
+    url: https://www.astrill.com/download/linux
+    title: Download Astrill VPN for Linux
+  download-ios:
+    url: https://www.astrill.com/download/ios
+    title: Download Astrill VPN for iOS
+  download-android:
+    url: https://www.astrill.com/download/android
+    title: Download Astrill VPN for Android
+  exodus:
+    url: https://reports.exodus-privacy.eu.org/en/reports/com.astrill.astrillvpn/latest/
+    title: Exodus Privacy report for com.astrill.astrillvpn
