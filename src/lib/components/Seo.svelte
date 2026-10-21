@@ -34,7 +34,12 @@
       name: site.name,
       description: site.description,
       inLanguage: 'en-GB',
-      publisher: { '@id': schemaIds.publisher }
+      publisher: { '@id': schemaIds.publisher },
+      potentialAction: {
+        '@type': 'SearchAction',
+        target: { '@type': 'EntryPoint', urlTemplate: `${absolute('/search')}?q={query}` },
+        'query-input': 'required name=query'
+      }
     },
     {
       '@type': 'Organization',

@@ -13,8 +13,20 @@
     { href: '/contributing', label: 'Contribute' }
   ];
 
+  let searching = $state(false);
+  let SearchDialog = $state<typeof import('#lib/components/SearchDialog.svelte').default>();
+
+  async function shortcut(event: KeyboardEvent) {
+    if (!/^k$/i.test(event.key) || !(event.metaKey || event.ctrlKey)) return;
+    event.preventDefault();
+    SearchDialog ??= (await import('#lib/components/SearchDialog.svelte')).default;
+    searching = !searching;
+  }
+
   onMount(() => loadPlausible());
 </script>
+
+<svelte:window onkeydown={shortcut} />
 
 <a class="skip" href="#main">Skip to content</a>
 
@@ -37,11 +49,14 @@
     check, and anyone can correct it.
   </p>
   <ul>
+    <li><a href="/search">Search</a></li>
     <li><a href="/methodology">How grading works</a></li>
     <li><a href="/api/providers.json">Data as JSON</a></li>
     <li><a href={site.repo} target="_blank" rel="noopener external">Source on GitHub</a></li>
   </ul>
 </footer>
+
+{#if SearchDialog}<SearchDialog bind:open={searching} />{/if}
 
 <style>
   .skip {
@@ -107,15 +122,17 @@
   }
 
   .colophon {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
-    gap: var(--space-5);
-    padding-block: var(--space-5) var(--space-7);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--space-3) var(--space-6);
+    padding-block: var(--space-4);
     border-top: var(--rule-heavy) solid var(--rule);
     font-size: var(--text-sm);
     color: var(--text-muted);
 
     & p {
+      flex: 1 1 18rem;
       max-width: 44ch;
     }
 
@@ -126,7 +143,6 @@
       margin: 0;
       padding: 0;
       list-style: none;
-      justify-self: end;
     }
   }
 </style>

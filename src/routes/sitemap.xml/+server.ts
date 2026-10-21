@@ -9,6 +9,7 @@ export const GET = () => {
     { path: '/', modified: stats().updated },
     { path: '/methodology' },
     { path: '/contributing' },
+    { path: '/search' },
     ...data().providers.map(({ id, checked }) => ({ path: `/${id}`, modified: checked }))
   ];
   const urls = pages

@@ -9,6 +9,7 @@ export const entries = () => [
   { page: 'index' },
   { page: 'methodology' },
   { page: 'contributing' },
+  { page: 'search' },
   ...data().providers.map(({ id }) => ({ page: id }))
 ];
 

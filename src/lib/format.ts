@@ -10,6 +10,10 @@ export const formatDate = (iso: string, short = false) =>
 export const money = ({ amount, currency }: Price) =>
   new Intl.NumberFormat('en-GB', { style: 'currency', currency }).format(amount);
 
+// TODO: rough, hard-coded rates for the currencies needed so far; any others count as USD
+const rates: Record<string, number> = { USD: 1, EUR: 1.08, GBP: 1.27, CHF: 1.12 };
+export const inUsd = ({ amount, currency }: Price) => amount * (rates[currency] ?? 1);
+
 const number = (value: number) =>
   value >= 10_000 ? new Intl.NumberFormat('en-GB').format(value) : String(value);
 
