@@ -1,0 +1,303 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Bitdefender VPN
+icon: bitdefender-vpn.png
+checked: 2026-10-21
+
+criteria:
+  identity:
+    website: https://www.bitdefender.com/en-us/consumer/vpn
+    legal_entity:
+      value: Bitdefender S.R.L.
+      sources: [privacy-policy, play]
+    owner:
+      value: Florin and Măriuca Talpeș
+      note: >-
+        The co-founders kept a majority of Bitdefender Holding BV when Vitruvian Partners bought about
+        30% in 2017, the last time Bitdefender said who holds it. Florin Talpeș is CEO.
+      sources: [vitruvian-2017, about]
+    founded:
+      value: 2018
+      note: The earliest archived copy of its VPN page is from August 2018.
+      sources: [wayback-2018]
+    team:
+      value: public
+      sources: [about]
+    sister_brands:
+      value: []
+      note: It also makes NETGEAR VPN by Bitdefender, the same service under NETGEAR's name.
+      sources: [netgear-vpn]
+    acquisitions:
+      value: []
+      sources: [about]
+
+  jurisdiction:
+    hq:
+      value: RO
+      sources: [privacy-policy]
+    entities:
+      value: [RO]
+      note: The privacy policy only names the Bucharest company. Bitdefender also lists offices in 14 other countries.
+      sources: [privacy-policy, about]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      note: The policy says it doesn't store details of your online activity.
+      sources: [privacy-policy, no-log]
+    dns:
+      value: none
+      evidence: claimed
+      note: It says it doesn't record the websites you visit.
+      sources: [no-log]
+    timestamps:
+      value: none
+      evidence: claimed
+      note: It says it doesn't store connection timestamps, though the app shows your own connection time.
+      sources: [no-log, mac-settings]
+    bandwidth:
+      value: null
+      note: >-
+        Neither the policy nor the no-log page mentions data use. The standard version's 200 MB daily cap
+        per device means usage is counted, but not where or for how long.
+      sources: [privacy-policy, no-log, faq]
+    source_ip:
+      value: temporary
+      evidence: claimed
+      note: >-
+        Your IP is processed to set up the connection, and it says no identifiable data is kept once the
+        session ends.
+      sources: [privacy-policy, no-log]
+    proven:
+      value: []
+      note: Bitdefender says the VPN's infrastructure passed a no-logs audit in 2025, but names no auditor and publishes no report.
+      sources: [no-log]
+    policy: https://www.bitdefender.com/en-us/site/view/legal-privacy-policy-for-home-users-solutions
+
+  transparency:
+    audits:
+      value: []
+      evidence: claimed
+      note: Bitdefender says the infrastructure behind the VPN was independently audited in 2025, without naming the auditor or publishing the report.
+      sources: [no-log, play]
+    report:
+      value: none
+      note: Bitdefender doesn't publish a transparency report for its consumer products.
+    canary: none
+    bug_bounty:
+      value: false
+      note: >-
+        Bitdefender's bug bounty takes reports on all its products but only pays for listed targets,
+        which include Total Security and its websites, not the VPN app.
+      sources: [bug-bounty]
+    incidents:
+      value: []
+      note: Its security advisories list no VPN flaws. It says its kill switch stops TunnelVision, which hit VPNs in general.
+      sources: [advisories, tunnelvision]
+
+  account:
+    email:
+      value: required
+      note: Activating it needs a Bitdefender Central account.
+      sources: [privacy-policy, faq]
+    personal_data:
+      value: [name]
+      note: The policy says a name and email address are the minimum for the account you need to use it.
+      sources: [privacy-policy]
+    payment:
+      value: [card, paypal, app_store]
+      note: Card payments go through Adyen. The apps are also sold through Google Play.
+      sources: [privacy-policy, play]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn, ikev2]
+      note: >-
+        OpenVPN only on Windows and Android. The VPN page still says it uses Hydra, Pango's protocol,
+        on all platforms, but the newer help article doesn't list it.
+      sources: [protocols, pricing, features-availability]
+    post_quantum:
+      value: none
+      note: Nothing on its VPN page or help centre mentions post-quantum key exchange.
+      sources: [protocols]
+    kill_switch:
+      value: app
+      note: A setting called Internet Kill-Switch, which Bitdefender says needs to stay on for TunnelVision protection on macOS and iOS.
+      sources: [windows-guide, mac-settings, tunnelvision]
+    dns:
+      value: null
+      note: It doesn't say whose DNS servers answer your lookups.
+      sources: [protocols, faq]
+
+  infra:
+    ram_only:
+      value: null
+      note: Bitdefender doesn't say whether its servers run from RAM.
+      sources: [no-log, faq]
+    hosting:
+      value: null
+      note: The privacy policy names IPVanish as the processor that runs the VPN service for Bitdefender.
+      sources: [privacy-policy]
+    virtual_locations:
+      value: null
+      note: >-
+        Its FAQ speaks of "virtual locations" and lists 110 countries, but doesn't say whether any servers
+        sit outside the country they're named for.
+      sources: [faq]
+    servers:
+      value: 3000
+      note: Its page says more than 3,000.
+      sources: [pricing]
+    countries:
+      value: 110
+      note: From the FAQ's country list. The VPN page says 100+.
+      sources: [faq, pricing]
+
+  features:
+    connections:
+      value: 10
+      note: The standard version bundled with Bitdefender's security products follows that product's device count.
+      sources: [pricing, faq]
+    multihop:
+      value: true
+      note: Called Double Hop, on Windows, Android and iOS, and not with every protocol.
+      sources: [double-hop, features-availability]
+    obfuscation:
+      value: [proprietary]
+      note: A Scramble switch for OpenVPN on Windows and Android.
+      sources: [protocols]
+    port_forwarding:
+      value: false
+      note: None of its settings guides mention it.
+      sources: [windows-guide, mac-settings]
+    split_tunnel:
+      value: true
+      note: Website split tunnelling doesn't work with every protocol.
+      sources: [windows-guide, features-availability]
+    blocking:
+      value: [ads, trackers]
+      note: Not with WireGuard or OpenVPN.
+      sources: [mac-settings, features-availability]
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android]
+      note: The FAQ says it can't be installed on routers.
+      sources: [faq]
+    open_source:
+      value: none
+      sources: [protocols]
+    telemetry:
+      value: null
+      note: >-
+        The Windows app has a "Help improve Bitdefender VPN" setting that sends anonymous product reports,
+        but its default isn't stated.
+      sources: [windows-guide]
+    trackers:
+      value: 3
+      note: Facebook Login, Crashlytics and Firebase Analytics, in version 1.2.9.109 from February 2023, the newest archived report.
+      sources: [exodus]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: null
+      note: The US page only sells a yearly plan, though the help centre mentions monthly subscriptions.
+      sources: [pricing, refund-monthly]
+    best:
+      value: { amount: 2.92, currency: USD }
+      note: >-
+        Premium VPN for a year at $34.99, then $69.99 a year. Premium Security and Ultimate Security
+        bundle it with antivirus.
+      sources: [pricing]
+    best_term:
+      value: 12
+      sources: [pricing]
+    renewal_increase:
+      value: 100
+      note: The first year is $34.99, then $69.99 a year.
+      sources: [pricing]
+    free_tier:
+      value: null
+      note: >-
+        A standard version with 200 MB a day per device comes with Bitdefender's security products. The
+        standalone app has a 7-day trial.
+      sources: [faq, play]
+    refund_days:
+      value: 30
+      sources: [pricing]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: It promises "total anonymity on public & shared WI-FIs" and that your activities "vanish without a trace".
+      sources: [pricing, play]
+    affiliates:
+      value: true
+      sources: [affiliates]
+    review_sites:
+      value: false
+      sources: [about]
+    activism: false
+
+refs:
+  vitruvian-2017:
+    url: https://www.bitdefender.com/es-es/news/bitdefender-anuncia-una-inversi%C3%B3n-por-parte-de-vitruvian-partners-inversor-de-capital-que-valora-la-empresa-en-m%C3%A1s-de-600-millones-de-d%C3%B3lares
+    title: Bitdefender announces Vitruvian Partners' investment (November 2017, in Spanish)
+  pricing:
+    url: https://www.bitdefender.com/en-us/consumer/vpn
+    title: Bitdefender Premium VPN
+  privacy-policy:
+    url: https://www.bitdefender.com/en-us/site/view/legal-privacy-policy-for-home-users-solutions
+    title: Bitdefender privacy policy for Home User Solutions, section 7.3 VPN services
+  no-log:
+    url: https://www.bitdefender.com/consumer/support/answer/116380/
+    title: Bitdefender VPN no-log policy
+  faq:
+    url: https://www.bitdefender.com/consumer/support/answer/7126/
+    title: 'Bitdefender VPN: frequently asked questions'
+  protocols:
+    url: https://www.bitdefender.com/consumer/support/answer/131796/
+    title: 'Bitdefender VPN protocols explained: WireGuard, OpenVPN, IKEv2'
+  features-availability:
+    url: https://www.bitdefender.com/consumer/support/answer/96952/
+    title: Bitdefender VPN features availability
+  double-hop:
+    url: https://www.bitdefender.com/consumer/support/answer/94033/
+    title: A guide to Bitdefender VPN's Double Hop
+  windows-guide:
+    url: https://www.bitdefender.com/consumer/support/answer/7127/
+    title: How to use Bitdefender VPN for Windows
+  mac-settings:
+    url: https://www.bitdefender.com/consumer/support/answer/125857/
+    title: How to access and use VPN settings in the Bitdefender app (macOS)
+  tunnelvision:
+    url: https://www.bitdefender.com/consumer/support/answer/102840/
+    title: Bitdefender VPN unaffected by TunnelVision vulnerability (CVE-2024-3661)
+  refund-monthly:
+    url: https://www.bitdefender.com/consumer/support/answer/10121/
+    title: How do I get a refund for Premium VPN monthly subscription?
+  netgear-vpn:
+    url: https://www.bitdefender.com/consumer/support/answer/104228/
+    title: Install NETGEAR VPN by Bitdefender on Windows
+  about:
+    url: https://www.bitdefender.com/en-us/company/
+    title: About Bitdefender
+  play:
+    url: https://play.google.com/store/apps/details?id=com.bitdefender.vpn
+    title: 'Bitdefender VPN: Fast & Secure on Google Play'
+  wayback-2018:
+    url: https://web.archive.org/web/20180827050510/https://www.bitdefender.com/solutions/vpn.html
+    title: Bitdefender VPN page, August 2018 (archived)
+  bug-bounty:
+    url: https://www.bitdefender.com/en-us/site/view/bug-bounty
+    title: Bitdefender bug bounty program
+  advisories:
+    url: https://www.bitdefender.com/support/security-advisories/
+    title: Bitdefender security advisories
+  exodus:
+    url: https://web.archive.org/web/20230925033834/https://reports.exodus-privacy.eu.org/en/reports/com.bitdefender.vpn/latest/
+    title: Exodus Privacy report for com.bitdefender.vpn (archived)
+  affiliates:
+    url: https://www.bitdefender.com/en-us/partners/affiliate-partners/
+    title: Bitdefender affiliate program
