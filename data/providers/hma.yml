@@ -1,0 +1,299 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: HMA VPN
+icon: hma.png
+checked: 2026-10-21
+
+criteria:
+  identity:
+    website:
+      value: https://www.hidemyass.com
+      sources: [home]
+    legal_entity:
+      value: Avast Software s.r.o.
+      note: Controller under the privacy policy. Who sells it depends on where you live, such as Gen Digital Inc. in the Americas and NortonLifeLock Ireland Limited in the UK and Ireland.
+      sources: [privacy-policy, terms]
+    owner:
+      value: Gen Digital
+      sources: [gen-avast-merger, terms]
+    founded:
+      value: 2005
+      note: Began in 2005 as a free web proxy. The year the VPN itself launched isn't stated.
+      sources: [about, lulzsec-blog]
+    team:
+      value: partial
+      note: Staff are named by first name only, and no one running HMA is named in full.
+      sources: [about]
+    sister_brands:
+      value: [Norton VPN, Avast Premium VPN, AVG Secure VPN, Avira Phantom VPN]
+      note: Avast Premium VPN was called SecureLine VPN until recently.
+      sources: [norton-vpn, avast-vpn, avg-vpn, avira-vpn]
+    acquisitions:
+      value:
+        - date: 2022-09-12
+          acquirer: NortonLifeLock (now Gen Digital)
+          source: gen-avast-merger
+        - date: 2016-09-30
+          acquirer: Avast
+          source: avast-avg
+        - date: 2015-05-06
+          acquirer: AVG Technologies
+          source: avg-privax
+      note: AVG bought Privax, HMA's original company, and came with it when Avast bought AVG. NortonLifeLock renamed itself Gen Digital after merging with Avast.
+
+  jurisdiction:
+    hq:
+      value: CZ
+      note: Avast Software s.r.o. in Prague controls the data. Its parent, Gen Digital Inc., is in the US.
+      sources: [terms]
+    entities:
+      value: [CZ, US, IE, GB, JP, SG]
+      sources: [privacy-policy, terms]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [privacy-policy, no-log-page]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [privacy-policy, no-log-page]
+    timestamps:
+      value: aggregate
+      evidence: claimed
+      note: The no-log page says it keeps the day and rough time of day for 35 days. The newer privacy policy keeps the apps' connect and disconnect events for 12 months under an ID it says isn't paired with users.
+      sources: [privacy-policy, no-log-page]
+    bandwidth:
+      value: aggregate
+      evidence: claimed
+      note: A running total of data transferred is kept for 18 months to spot heavy users, longer than the 35 days the no-log page still states.
+      sources: [privacy-policy, no-log-page]
+    source_ip:
+      value: none
+      evidence: claimed
+      note: In 2011 HMA kept connection logs and handed data over under a court order. It says it stopped logging IPs in 2020.
+      sources: [privacy-policy, lulzsec-blog]
+    proven:
+      value: [audit]
+      evidence: claimed
+      note: >-
+        VerSprite audited the no-logs claim in 2020, but the report was never published, and today's
+        policy keeps more for longer than the one it checked.
+      sources: [versprite-audit, privacy-policy]
+    policy: https://www.hidemyass.com/en-us/legal/privacy
+
+  transparency:
+    audits:
+      value:
+        - date: 2020-08-01
+          auditor: VerSprite
+          scope: no_logs
+          source: versprite-audit
+      evidence: claimed
+      note: Dated to the month HMA announced the result. Only HMA's blog post about it is public, not the report.
+      sources: [versprite-audit]
+    report:
+      value: none
+      note: The privacy policy says it hands over data when served with valid legal orders, but no figures are published.
+      sources: [privacy-policy]
+    canary:
+      value: none
+      sources: [legal]
+    bug_bounty:
+      value: true
+      note: Through Gen Digital's vulnerability programme, which says not every report qualifies for a reward.
+      sources: [security]
+    incidents:
+      value:
+        - date: 2011-09-23
+          summary: Data HMA handed over under a court order helped the FBI identify LulzSec member Cody Kretsinger over the Sony Pictures hack. HMA explained its part on its blog the same week and said it would keep cooperating with court orders.
+          handled: well
+          source: lulzsec-blog
+      sources: [register-lulzsec, lulzsec-original]
+
+  account:
+    email:
+      value: required
+      sources: [privacy-policy]
+    personal_data:
+      value: []
+      note: Card payments take your billing details, which the privacy policy says HMA keeps for up to 10 years after you leave.
+      sources: [privacy-policy]
+    payment:
+      value: [card, paypal, app_store]
+      note: Varies by country. Bank options such as iDEAL and Sofort were offered in a few countries in 2021. No crypto option is listed.
+      sources: [payment-options]
+
+  security:
+    protocols:
+      value: [openvpn, ikev2]
+      note: OpenVPN on Windows and Android, IKEv2 on iOS and macOS.
+      sources: [servers, features]
+    post_quantum: null
+    kill_switch:
+      value: app
+      sources: [features]
+    dns:
+      value: first_party
+      sources: [no-log-page]
+
+  infra:
+    ram_only: null
+    hosting: null
+    virtual_locations:
+      value: disclosed
+      note: The server page says a few locations are virtual, routing through a server in a nearby country.
+      sources: [servers]
+    servers:
+      value: 3400
+      note: The server page says 3400+, but the features page still says over 2500.
+      sources: [servers, features]
+    countries:
+      value: 65
+      note: The server page says 65+ countries across 100+ locations.
+      sources: [servers]
+
+  features:
+    connections:
+      value: 5
+      note: Ten on the dearer plan.
+      sources: [pricing, home]
+    multihop: null
+    obfuscation: null
+    split_tunnel:
+      value: true
+      sources: [features]
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android]
+      note: Also Android TV. Linux and routers get OpenVPN config files, not an app.
+      sources: [downloads]
+    open_source:
+      value: none
+      sources: [downloads]
+    telemetry:
+      value: forced
+      evidence: claimed
+      note: The apps send usage events kept for 18 months. Firebase analytics can be turned off in settings, but Crashlytics can't.
+      sources: [privacy-policy, no-log-page]
+    trackers:
+      value: 3
+      note: AppsFlyer, Crashlytics and Firebase Analytics in version 5.69.6519 from January 2023, the newest report that would load. The current policy names Singular instead of AppsFlyer.
+      sources: [exodus]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: null
+      note: The pricing page has no monthly plan, only 1, 2 and 3 years.
+      sources: [pricing]
+    best:
+      value: { amount: 2.99, currency: USD }
+      note: USD, as the price changes with your location. For 5 devices, billed $107.64 for 3 years.
+      sources: [pricing]
+    best_term:
+      value: 36
+      sources: [pricing]
+    renewal_increase:
+      value: 301
+      note: Renews at the undiscounted price, $431.64 for another 3 years.
+      sources: [pricing, subscription]
+    free_tier:
+      value: false
+      note: Only a 7-day free trial.
+      sources: [pricing]
+    refund_days:
+      value: 30
+      sources: [refund, home]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: Claims "military-grade encryption" and that you're "anonymous even to us".
+      sources: [features, no-log-page]
+    affiliates:
+      value: true
+      note: Its about page names an affiliate manager.
+      sources: [about]
+    activism: null
+
+refs:
+  home:
+    url: https://www.hidemyass.com/en-us/index
+    title: HMA VPN
+  about:
+    url: https://www.hidemyass.com/en-us/about-us
+    title: About us
+  privacy-policy:
+    url: https://www.hidemyass.com/en-us/legal/privacy
+    title: Privacy policy (January 2025)
+  no-log-page:
+    url: https://www.hidemyass.com/en-us/no-log-policy
+    title: HMA is a no-log VPN
+  terms:
+    url: https://www.hidemyass.com/en-us/legal/vpn-terms
+    title: VPN terms
+  legal:
+    url: https://www.hidemyass.com/en-us/legal
+    title: Legal documents
+  subscription:
+    url: https://www.hidemyass.com/en-us/legal/subscription
+    title: Subscription terms
+  refund:
+    url: https://www.hidemyass.com/en-us/legal/cancellation-refund-policy
+    title: Cancellation and refund policy
+  pricing:
+    url: https://www.hidemyass.com/en-us/pricing
+    title: Pricing
+  features:
+    url: https://www.hidemyass.com/en-us/features
+    title: Features
+  servers:
+    url: https://www.hidemyass.com/en-us/servers
+    title: Server locations
+  downloads:
+    url: https://www.hidemyass.com/en-us/downloads
+    title: Downloads
+  security:
+    url: https://www.gendigital.com/us/en/contact-us/report-a-potential-security-vulnerability/
+    title: Gen, report a potential security vulnerability
+  versprite-audit:
+    url: https://blog.hidemyass.com/en/hma-is-now-a-no-log-vpn
+    title: HMA is now a certified no-log VPN (August 2020)
+  lulzsec-blog:
+    url: https://blog.hidemyass.com/en/lulzsec-fiasco
+    title: Lulzsec fiasco (2011, updated April 2020)
+  lulzsec-original:
+    url: https://web.archive.org/web/20110924035620/http://blog.hidemyass.com/2011/09/23/lulzsec-fiasco/
+    title: Lulzsec fiasco, as posted on 23 September 2011 (archived)
+  register-lulzsec:
+    url: https://www.theregister.com/2011/09/26/hidemyass_lulzsec_controversy/
+    title: The Register, HideMyAss defends role in LulzSec hack arrest
+  payment-options:
+    url: https://blog.hidemyass.com/en/payment-options
+    title: Clearing the air about payment options (January 2021)
+  avg-privax:
+    url: https://newsroom.gendigital.com/2015-05-06-avg-acquires-privax
+    title: AVG acquires Privax, a global leader in personal privacy solutions
+  avast-avg:
+    url: https://newsroom.gendigital.com/2016-09-30-avast-closes-acquisition-of-avg-technologies
+    title: Avast closes acquisition of AVG Technologies
+  gen-avast-merger:
+    url: https://newsroom.gendigital.com/2022-09-12-NortonLifeLock-Completes-Merger-with-Avast
+    title: NortonLifeLock completes merger with Avast
+  norton-vpn:
+    url: https://us.norton.com/products/norton-vpn
+    title: Norton VPN
+  avast-vpn:
+    url: https://www.avast.com/premium-vpn
+    title: Avast Premium VPN (formerly SecureLine VPN)
+  avg-vpn:
+    url: https://www.avg.com/en-us/secure-vpn
+    title: AVG Secure VPN
+  avira-vpn:
+    url: https://www.avira.com/en/free-vpn
+    title: Avira Phantom VPN
+  exodus:
+    url: https://reports.exodus-privacy.eu.org/en/reports/com.hidemyass.hidemyassprovpn/latest/
+    title: Exodus Privacy report for com.hidemyass.hidemyassprovpn 5.69.6519

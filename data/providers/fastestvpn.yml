@@ -1,0 +1,334 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: FastestVPN
+icon: fastestvpn.png
+checked: 2026-10-21
+
+criteria:
+  identity:
+    website:
+      value: https://fastestvpn.com
+      sources: [home]
+    legal_entity:
+      value: Fast Technology Limited
+      note: >-
+        The terms and privacy policy name no company. Altius IT's audit was done for Fast Technology
+        Limited, which the App Store listing also credits.
+      sources: [audit-report, app-store]
+    owner:
+      value: null
+      note: >-
+        The App Store seller is Fastest Technology Pty Ltd and Google Play names Fastest Technology LLC,
+        at a Houston address. Nothing published says who owns any of them.
+      sources: [app-store, google-play]
+    founded:
+      value: 2017
+      note: >-
+        The domain was for sale in January 2016, and the earliest archived copy of the live VPN site is
+        from October 2017.
+      sources: [wayback-2016, wayback-2017]
+    team:
+      value: anonymous
+      note: Its site, terms and privacy policy name nobody behind the company.
+      sources: [about, contact]
+    sister_brands:
+      value: []
+      note: Its App Store developer account lists only FastestVPN and its FastestPass password manager.
+      sources: [app-store-dev]
+    acquisitions:
+      value: null
+      note: Its ownership isn't published, so there's no way to tell whether it has changed hands.
+
+  jurisdiction:
+    hq:
+      value: KY
+      evidence: claimed
+      note: Its own word, with no Cayman company named alongside it.
+      sources: [about, privacy-policy]
+    entities:
+      value: [KY, US]
+      note: >-
+        Google Play lists Fastest Technology LLC in Houston, Texas. The App Store seller, Fastest
+        Technology Pty Ltd, matches an Australian company whose business number was cancelled in 2025.
+      sources: [about, google-play, app-store, abn]
+
+  logging:
+    traffic:
+      value: none
+      evidence: verified
+      sources: [privacy-policy, audit-report]
+    dns:
+      value: none
+      evidence: verified
+      sources: [privacy-policy, audit-report]
+    timestamps:
+      value: aggregate
+      evidence: claimed
+      note: >-
+        The policy says it notes only the day you connect, but also lists connection duration among what
+        it collects. The FAQ says it saves your login attempts to its servers to stop account sharing.
+      sources: [privacy-policy, faq]
+    bandwidth:
+      value: aggregate
+      evidence: claimed
+      note: >-
+        The policy says the bandwidth you use is stored "for maintenance purposes", though not per
+        session, while its no-logs section says the amount you download isn't logged.
+      sources: [privacy-policy]
+    source_ip:
+      value: none
+      evidence: verified
+      sources: [privacy-policy, audit-report]
+    proven:
+      value: [audit]
+      evidence: verified
+      note: >-
+        Altius IT checked a sample of servers and their log files between December 2022 and January
+        2023, and found nothing that could identify a user or their activity.
+      sources: [audit-report]
+    policy: https://fastestvpn.com/privacy-policy
+
+  transparency:
+    audits:
+      value:
+        - date: 2023-01-29
+          auditor: Altius IT
+          scope: no_logs
+          source: audit-report
+      evidence: verified
+      note: >-
+        The only published audit. It sampled server configurations and logs, and didn't test security
+        safeguards.
+      sources: [audit-page]
+    report:
+      value: irregular
+      note: One report, covering January 2016 to October 2022, with no newer figures since.
+      sources: [transparency]
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: required
+      sources: [privacy-policy]
+    personal_data:
+      value: [name]
+      note: Checkout asks for your name as well as your email.
+      sources: [pricing]
+    payment:
+      value: [card, paypal, app_store, bitcoin, other_crypto]
+      note: Other crypto is Bitcoin Cash, Litecoin, Ethereum and Dash, through NOWPayments.
+      sources: [pricing, app-store, google-play]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn, ikev2, other]
+      note: Other is OpenConnect in the apps, plus L2TP, IPSec and PPTP for manual setups.
+      sources: [features, server-locations, windows-guide, android-settings]
+    post_quantum:
+      value: none
+      sources: [features]
+    kill_switch:
+      value: app
+      note: A setting in the apps. On Android it needs version 8 or later.
+      sources: [windows-guide, android-settings]
+    dns:
+      value: first_party
+      evidence: claimed
+      note: Its setup guides point devices at its own resolvers inside the tunnel, 10.8.8.8 and 10.9.9.9.
+      sources: [ios-dns]
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say how its servers store data.
+    hosting:
+      value: null
+      note: It doesn't say whether it owns or rents its servers.
+    virtual_locations:
+      value: null
+      note: It doesn't say whether any of its locations are virtual.
+    servers:
+      value: 800
+      note: Advertised as "800+", with no list to count.
+      sources: [server-locations, faq]
+    countries:
+      value: 49
+      note: The server list names 49, counting Hong Kong. The FAQ says "50+".
+      sources: [server-locations, faq]
+
+  features:
+    connections:
+      value: 10
+      note: Extra devices cost $1 each.
+      sources: [pricing]
+    multihop:
+      value: true
+      note: Its Double VPN servers send traffic through two servers.
+      sources: [android-setup]
+    obfuscation:
+      value: []
+      sources: [features]
+    port_forwarding:
+      value: true
+      note: A paid add-on, at $1.20 a month.
+      sources: [pricing]
+    split_tunnel:
+      value: true
+      note: Its homepage lists it for Windows and Android, and "Smart Tunneling" for iOS.
+      sources: [home, android-settings]
+    blocking:
+      value: [ads, malware]
+      sources: [features]
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android, browser]
+      note: >-
+        Browser means proxy extensions for Chrome, Firefox and Edge. Linux and routers are set up by
+        hand with config files, not an app.
+      sources: [download, linux, routers]
+    open_source:
+      value: none
+      note: Its GitHub organisation has no public repositories.
+      sources: [github]
+    telemetry:
+      value: null
+      note: >-
+        The policy names Firebase for app analytics and BugSnag for errors, without saying whether you
+        can turn them off. The iOS listing says usage data may be used to track you.
+      sources: [privacy-policy, app-store]
+    trackers:
+      value: 2
+      note: >-
+        Crashlytics and Firebase Analytics, in version 3.3.8 from December 2024, the newest report we
+        could read. Its Play listing says it collects no data.
+      sources: [exodus, google-play]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 5, currency: USD }
+      sources: [pricing]
+    best:
+      value: { amount: 0.83, currency: USD }
+      note: $19.95 for two years. A lifetime plan costs $40 once.
+      sources: [pricing]
+    best_term:
+      value: 24
+      sources: [pricing]
+    renewal_increase:
+      value: 0
+      note: >-
+        The pricing page bills the 2-year plan at $19.95 every two years, with no other renewal price
+        given. The terms still list older prices, $10 a month.
+      sources: [pricing, terms]
+    free_tier:
+      value: false
+      sources: [download]
+    refund_days:
+      value: 31
+      note: No refunds on crypto payments.
+      sources: [terms]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        It sells "military-grade" encryption and "the best solution for anonymity", and a banner on every
+        page says "All apps are audited", though the only published audit covers its no-logs policy.
+      sources: [features, about, audit-page]
+    affiliates:
+      value: true
+      note: Affiliates are offered 100% commission.
+      sources: [affiliate-program]
+    review_sites:
+      value: null
+      note: No sign it owns any, but who owns it isn't published.
+    activism: false
+
+refs:
+  home:
+    url: https://fastestvpn.com/
+    title: FastestVPN
+  about:
+    url: https://fastestvpn.com/about
+    title: About FastestVPN
+  contact:
+    url: https://fastestvpn.com/contact
+    title: Contact
+  privacy-policy:
+    url: https://fastestvpn.com/privacy-policy
+    title: Privacy policy
+  terms:
+    url: https://fastestvpn.com/terms-of-service
+    title: Terms of service
+  faq:
+    url: https://fastestvpn.com/faq
+    title: FAQs
+  pricing:
+    url: https://fastestvpn.com/buy-vpn
+    title: Buy VPN
+  features:
+    url: https://fastestvpn.com/features
+    title: VPN features
+  server-locations:
+    url: https://fastestvpn.com/server-locations
+    title: VPN server locations
+  download:
+    url: https://fastestvpn.com/download
+    title: Download VPN
+  linux:
+    url: https://fastestvpn.com/download/vpn-for-linux
+    title: VPN for Linux
+  routers:
+    url: https://fastestvpn.com/download/vpn-for-router
+    title: VPN for routers
+  audit-page:
+    url: https://fastestvpn.com/fastestvpn-no-logs-audit-report
+    title: No-logs certified, FastestVPN passes security audit by Altius IT
+  audit-report:
+    url: https://fastestvpn.com/pdfs/no-log%20audit_report.pdf
+    title: Altius IT, privacy no log audit report for Fast Technology Limited (2023)
+  affiliate-program:
+    url: https://fastestvpn.com/affiliate-program
+    title: Affiliate program
+  windows-guide:
+    url: https://support.fastestvpn.com/how-to-set-up-fastestvpn-app-on-windows-7810-and-11/
+    title: How to set up FastestVPN app on Windows 7, 8, 10 and 11
+  android-settings:
+    url: https://support.fastestvpn.com/tutorials/android/how-to-adjust-or-tweak-android-app-settings/
+    title: How to adjust or tweak Android app settings
+  ios-dns:
+    url: https://support.fastestvpn.com/tutorials/iphone/change-your-dns-servers-on-ios-via-manual-vpn-configuration/
+    title: Change your DNS servers on iOS
+  app-store:
+    url: https://apps.apple.com/us/app/fastestvpn-security-for-wifi/id1332852583
+    title: FastestVPN on the App Store
+  app-store-dev:
+    url: https://apps.apple.com/us/developer/fastest-technology-pty-ltd/id1628534686
+    title: Fastest Technology Pty Ltd on the App Store
+  google-play:
+    url: https://play.google.com/store/apps/details?id=com.vpn.fastestvpnservice
+    title: FastestVPN on Google Play
+  github:
+    url: https://github.com/fastestvpn
+    title: fastestvpn on GitHub
+  exodus:
+    url: https://reports.exodus-privacy.eu.org/en/reports/com.vpn.fastestvpnservice/latest/
+    title: Exodus Privacy report for com.vpn.fastestvpnservice 3.3.8
+  wayback-2016:
+    url: https://web.archive.org/web/20160111224144/http://fastestvpn.com/
+    title: fastestvpn.com, archived January 2016
+  wayback-2017:
+    url: https://web.archive.org/web/20171013014220/http://fastestvpn.com/
+    title: fastestvpn.com, archived October 2017
+  android-setup:
+    url: https://support.fastestvpn.com/tutorials/android/how-to-set-up-fastestvpn-on-android-smartphone-v5-0-and-later/
+    title: How to set up FastestVPN on Android (v5.0 and later)
+  transparency:
+    url: https://fastestvpn.com/transparency-report
+    title: FastestVPN transparency report 2016-2022
+  abn:
+    url: https://abr.business.gov.au/AbnHistory/View?id=61658034336
+    title: FASTEST TECHNOLOGY PTY LTD in the Australian Business Register

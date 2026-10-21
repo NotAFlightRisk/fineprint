@@ -1,0 +1,313 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: VeePN
+icon: veepn.svg
+checked: 2026-10-21
+
+criteria:
+  identity:
+    website:
+      value: https://veepn.com
+      sources: [about]
+    legal_entity:
+      value: VeePN Corp.
+      note: Card payments may be taken by Laraun Limited (Cyprus) or IT Research LLC (Florida), which the terms call independent payment partners.
+      sources: [privacy, terms]
+    owner:
+      value: null
+      note: VeePN names no parent company or shareholders, and the Panama, Cyprus and Florida registers wouldn't load to check.
+      sources: [about, terms]
+    founded:
+      value: 2017
+      sources: [about]
+    team:
+      value: anonymous
+      note: The About page names nobody who runs it.
+      sources: [about]
+    sister_brands:
+      value: []
+      note: The Google Play and App Store developer accounts, both VeePN Corp., list only VeePN apps.
+      sources: [play-dev, appstore-dev]
+    acquisitions:
+      value: []
+      sources: [about]
+
+  jurisdiction:
+    hq:
+      value: PA
+      sources: [terms]
+    entities:
+      value: [PA]
+      note: Payments can also go through Laraun Limited in Cyprus, named as an authorised reseller, and IT Research LLC in the US, which the terms describe as independent.
+      sources: [terms, pricing]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [privacy]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [no-log]
+    timestamps:
+      value: 'yes'
+      evidence: claimed
+      note: The no-logs page lists session time for each session as a service log, with no retention period. The privacy policy doesn't mention it.
+      sources: [no-log]
+    bandwidth:
+      value: 'yes'
+      evidence: claimed
+      note: The no-logs page lists the MB transferred in each session as a service log, then says lower down that it doesn't collect used bandwidth.
+      sources: [no-log]
+    source_ip:
+      value: none
+      evidence: claimed
+      sources: [privacy, no-log]
+    proven:
+      value: []
+      note: The only published audit covers the browser extensions, not logging or the servers.
+      sources: [audit-cure53-2021]
+    policy: https://veepn.com/privacy-policy/
+
+  transparency:
+    audits:
+      value:
+        - date: 2021-04-02
+          auditor: Cure53
+          scope: apps
+          source: audit-cure53-2021
+      evidence: verified
+      note: The Chrome and Firefox extensions only. Testing ran in calendar week 13 of 2021, so the date is the end of that week. No Deloitte audit or other report turned up.
+      sources: [about, audit-blog]
+    report:
+      value: none
+      note: The privacy policy says it hasn't had any government requests, but there's no report.
+      sources: [privacy]
+    canary:
+      value: maintained
+      note: Dated by year only and unsigned. The 2025 statement was renewed as 2026 by 1 January 2026.
+      sources: [canary]
+    incidents:
+      value:
+        - date: 2025-10-27
+          summary: An unquoted service path in the Windows app's antivirus service let a local user run code with higher privileges (CVE-2025-12286). VulDB says VeePN never replied to the disclosure.
+          handled: poorly
+          source: cve-2025-12286
+      note: A second unquoted service path bug in version 1.6.1 (CVE-2025-66575) is left out, as there's no record of how VeePN handled it.
+      sources: [cve-2025-66575]
+
+  account:
+    email:
+      value: required
+      sources: [privacy]
+    personal_data:
+      value: [name]
+      evidence: claimed
+      note: The no-logs page says signing up on desktop asks for a name as well as an email address.
+      sources: [no-log]
+    payment:
+      value: [card, paypal, bank, app_store, other_crypto]
+      note: The pricing FAQ lists cryptocurrencies without naming which. Bank here is Giropay, Sofort and iDEAL. WebMoney and UnionPay are also taken.
+      sources: [pricing, terms]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn, ikev2, other]
+      note: Other is OpenConnect, listed on the About page. Shadowsocks is counted under obfuscation.
+      sources: [protocols, about]
+    post_quantum:
+      value: none
+      note: Its protocol and feature pages don't mention post-quantum key exchange.
+      sources: [protocols]
+    kill_switch:
+      value: app
+      evidence: claimed
+      note: A setting in the app. VeePN doesn't say whether it blocks traffic at system level.
+      sources: [kill-switch]
+    dns:
+      value: first_party
+      evidence: claimed
+      sources: [no-log]
+
+  infra:
+    ram_only:
+      value: all
+      evidence: claimed
+      note: The servers page says all its 'regular' servers run from RAM.
+      sources: [servers]
+    hosting:
+      value: rented
+      evidence: claimed
+      note: The privacy policy names AWS, Google Cloud and DigitalOcean as hosting its servers and networking equipment.
+      sources: [privacy]
+    virtual_locations:
+      value: null
+      note: It lists 148 countries, including Afghanistan and Bhutan, but doesn't say whether any are virtual.
+      sources: [servers]
+    servers:
+      value: 2600
+      note: Given as 2,600+.
+      sources: [servers]
+    countries:
+      value: 148
+      sources: [servers]
+
+  features:
+    connections:
+      value: 5
+      note: On Basic, the cheapest tier. Pro allows 10 and Max 20. The terms still say 10 for every subscription.
+      sources: [pricing, terms]
+    multihop:
+      value: true
+      sources: [double-vpn]
+    obfuscation:
+      value: [shadowsocks]
+      sources: [protocols]
+    port_forwarding:
+      value: null
+      note: Not mentioned on its feature pages.
+      sources: [features]
+    split_tunnel:
+      value: true
+      note: Documented for Windows and Android.
+      sources: [split-tunnel]
+    blocking:
+      value: [ads, trackers, malware]
+      note: NetGuard. On iOS it only works with OpenVPN and WireGuard.
+      sources: [netguard]
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android, browser]
+      note: A Linux app is advertised but its page doesn't say whether it's a GUI or command line. Routers use manual OpenVPN setup rather than an app.
+      sources: [apps, linux, router]
+    open_source:
+      value: none
+      sources: [apps]
+    telemetry:
+      value: null
+      note: >-
+        The policy lists usage analytics through AppsFlyer, Amplitude, Google Analytics and Clarity, some
+        of it only after you approve tracking, with other opt-outs through device settings or by email.
+        The no-logs page says crash data can be switched off in the app.
+      sources: [no-log, privacy]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 11.99, currency: USD }
+      note: Basic, the cheapest tier, in US dollars. The pricing page shows your local currency.
+      sources: [pricing, pricing-usd]
+    best:
+      value: { amount: 1.99, currency: USD }
+      note: Basic, $55.72 for the first 28 months (a 2-year plan with 4 extra months).
+      sources: [pricing-usd]
+    best_term:
+      value: 28
+      sources: [pricing-usd]
+    renewal_increase:
+      value: null
+      note: Prices are 'for the first 28 months', but neither the pricing page nor the terms give the renewal price.
+      sources: [pricing-usd, terms]
+    free_tier:
+      value: true
+      note: One random location and a two-hour session limit.
+      sources: [free-vpn]
+    refund_days:
+      value: 30
+      note: On plans of 6 months or more. Monthly and weekly plans get 14 days, and renewals or discounted trials aren't refunded.
+      sources: [terms]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: Promises '100% safe browsing', 'military-grade encryption' and 'the ultimate form of online anonymity'.
+      sources: [netguard, free-vpn]
+    affiliates:
+      value: true
+      note: Pays 40% of new sales or $30 per sale.
+      sources: [affiliate]
+    review_sites:
+      value: null
+      note: No sign it owns any, but who owns it isn't published.
+    activism:
+      value: false
+      note: Names no campaigns, donations or groups it backs.
+      sources: [about]
+
+refs:
+  about:
+    url: https://veepn.com/about-us/
+    title: About Us
+  privacy:
+    url: https://veepn.com/privacy-policy/
+    title: VeePN Privacy Policy
+  terms:
+    url: https://veepn.com/terms-of-service/
+    title: VeePN Terms of Service
+  no-log:
+    url: https://veepn.com/vpn-features/no-log-vpn/
+    title: No Logs VPN
+  canary:
+    url: https://veepn.com/warrant-canary/
+    title: Warrant Canary
+  play-dev:
+    url: https://play.google.com/store/apps/dev?id=5156818656729332686
+    title: VeePN Corp. on Google Play
+  appstore-dev:
+    url: https://apps.apple.com/us/developer/veepn-corp/id1517590938
+    title: Veepn Corp on the App Store
+  audit-cure53-2021:
+    url: https://cure53.de/pentest-report_veepn.pdf
+    title: Cure53, VeePN browser extensions audit (2021)
+  audit-blog:
+    url: https://veepn.com/blog/veepn-browser-extensions-results-from-independent-audit-about-robust-security/
+    title: VeePN browser extensions audit results
+  cve-2025-12286:
+    url: https://nvd.nist.gov/vuln/detail/CVE-2025-12286
+    title: CVE-2025-12286
+  cve-2025-66575:
+    url: https://nvd.nist.gov/vuln/detail/CVE-2025-66575
+    title: CVE-2025-66575
+  pricing:
+    url: https://veepn.com/vpn-pricing/
+    title: Compare our VPN plans
+  pricing-usd:
+    url: https://web.archive.org/web/20260920100456/https://veepn.com/vpn-pricing/
+    title: Compare our VPN plans, US dollar prices (archived 2026-09-20)
+  protocols:
+    url: https://veepn.com/protocols/
+    title: VPN protocols supported by VeePN
+  kill-switch:
+    url: https://veepn.com/vpn-features/kill-switch/
+    title: Kill Switch
+  servers:
+    url: https://veepn.com/vpn-servers/
+    title: VPN Servers
+  double-vpn:
+    url: https://veepn.com/vpn-features/double-vpn/
+    title: Double VPN
+  features:
+    url: https://veepn.com/vpn-features/
+    title: VeePN features
+  split-tunnel:
+    url: https://veepn.com/vpn-features/split-tunneling/
+    title: Split tunneling
+  netguard:
+    url: https://veepn.com/vpn-features/netguard/
+    title: NetGuard
+  apps:
+    url: https://veepn.com/vpn-apps/
+    title: VeePN apps
+  linux:
+    url: https://veepn.com/vpn-apps/vpn-for-linux/
+    title: VPN for Linux
+  router:
+    url: https://veepn.com/vpn-apps/vpn-for-router/
+    title: VPN for router
+  free-vpn:
+    url: https://veepn.com/free-vpn/
+    title: Free VPN
+  affiliate:
+    url: https://veepn.com/affiliate/
+    title: VeePN affiliate program

@@ -244,8 +244,7 @@ criteria:
     protocols:
       value: [wireguard, openvpn, ikev2, proprietary]
       note: >-
-        Lightway, ExpressVPN's own protocol, counts as proprietary and is the default. IKEv2 is only in
-        some of the apps.
+        Lightway, its own open source protocol, is the default. IKEv2 is only in some of the apps.
       sources: [lightway, wireguard, server-list]
     post_quantum:
       value: default

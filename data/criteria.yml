@@ -287,7 +287,7 @@ categories:
           wireguard: WireGuard
           openvpn: OpenVPN
           ikev2: IKEv2
-          proprietary: Proprietary
+          proprietary: Own protocol
           other: Other
         rules:
           good: { any: [wireguard, openvpn] }
@@ -409,7 +409,7 @@ categories:
           stunnel: Stunnel
           v2ray: V2Ray
           amneziawg: AmneziaWG
-          proprietary: Proprietary
+          proprietary: Own method
         rules:
           good: { min: 1 }
           ok: {}
@@ -462,7 +462,7 @@ categories:
       - key: telemetry
         label: Telemetry
         type: enum
-        description: Usage or crash data the apps send home.
+        description: Usage or crash data the apps send home. Update checks don't count.
         options:
           none: None
           opt_in: Opt-in
@@ -548,7 +548,7 @@ categories:
           good: { is: [false] }
           ok: {}
       - key: review_sites
-        label: Owns review sites
+        label: Funds review sites
         serious: true
         type: bool
         description: Owns or funds sites that review VPNs.

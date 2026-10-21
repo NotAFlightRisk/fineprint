@@ -1,0 +1,338 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: VPN Unlimited
+icon: vpn-unlimited.svg
+checked: 2026-10-21
+
+criteria:
+  identity:
+    website:
+      value: https://www.vpnunlimited.com
+      sources: [home]
+    legal_entity:
+      value: KeepSolid Inc.
+      sources: [privacy, eua]
+    owner:
+      value: null
+      note: KeepSolid doesn't publish who holds its shares. It names Vasyl Ivanov as founder and CEO and Oleg Bocharnikov as a co-founder.
+      sources: [about, history]
+    founded:
+      value: 2013
+      note: Launched on iOS in November 2013 by Simplex Solutions, which renamed itself KeepSolid in 2015.
+      sources: [history]
+    team:
+      value: public
+      note: The founder and CEO, CTO and CFO are named.
+      sources: [about]
+    sister_brands:
+      value: [VPN Lite]
+      note: VPN Lite is a free KeepSolid VPN for iOS that needs no account. It's still listed but hasn't been updated since April 2020.
+      sources: [privacy, vpn-lite]
+    acquisitions:
+      value: []
+      note: The 2015 change from Simplex Solutions to KeepSolid was a rename, not a sale.
+      sources: [history]
+
+  jurisdiction:
+    hq:
+      value: US
+      note: Its terms are governed by New York law, with arbitration in New York.
+      sources: [eua, home]
+    entities:
+      value: [US]
+      note: Most of its staff work in Ukraine, but a Ukrainian company couldn't be confirmed.
+      sources: [eua, history]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [privacy, no-log]
+    dns:
+      value: none
+      evidence: claimed
+      note: It may keep anonymised statistics on DNS queries for threat detection, which it says aren't linked to users.
+      sources: [privacy, no-log]
+    timestamps:
+      value: none
+      evidence: claimed
+      sources: [privacy, no-log]
+    bandwidth:
+      value: none
+      evidence: claimed
+      note: Only Personal Server and Personal IP users have their monthly traffic total recorded.
+      sources: [privacy, no-log]
+    source_ip:
+      value: temporary
+      evidence: claimed
+      note: Held in server memory while you're connected and removed when the session ends.
+      sources: [privacy, no-log]
+    proven:
+      value: []
+      note: Its no-log page calls the policy "proven" and mentions "regular audits", but no audit has been published.
+      sources: [no-log]
+    policy: https://www.keepsolid.com/privacy-policy
+
+  transparency:
+    audits:
+      value: []
+    report:
+      value: none
+      note: A 2016 page promised quarterly transparency reports, then became the warrant canary by 2017.
+      sources: [transparency-archived, canary-archived]
+    canary:
+      value: stale
+      note: Promised quarterly, but the last one archived is dated 1 January 2017 and the page has since been taken down.
+      sources: [canary-archived]
+    bug_bounty:
+      value: false
+      note: No bug bounty or security disclosure page could be found.
+    incidents:
+      value:
+        - date: 2022-01-27
+          summary: >-
+            Film studios sued KeepSolid in Virginia over piracy by its users. It settled without
+            admitting liability, agreed to block BitTorrent and several piracy sites on its US servers,
+            and told customers so.
+          handled: well
+          source: lawsuit-2022
+        - date: 2018-03-04
+          summary: >-
+            VerSprite reported a flaw in the macOS app's helper that let any app run commands as root
+            (CVE-2018-8739). KeepSolid replied the next day, and it was fixed in version 4.2.0.
+          handled: well
+          source: cve-2018-8739
+      sources: [lawsuit-2022, cve-2018-8739]
+
+  account:
+    email:
+      value: required
+      note: A KeepSolid ID needs an email address, or a Google, Facebook or Apple sign-in.
+      sources: [faq, account-faq]
+    personal_data:
+      value: []
+      sources: [privacy]
+    payment:
+      value: [card, paypal, app_store, bitcoin, other_crypto, gift_card]
+      note: Crypto goes through BitPay, which also takes Bitcoin Cash, Ethereum and stablecoins. KeepSolid's own KS Coin token, Klarna and Telegram Stars are accepted too.
+      sources: [payment-methods, account-faq, refund]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn, ikev2, proprietary, other]
+      note: Its own protocol is KeepSolid Wise, built on OpenVPN. Other is L2TP for manual setups.
+      sources: [protocols, wise]
+    post_quantum:
+      value: none
+      note: Its protocol pages don't mention post-quantum key exchange.
+      sources: [protocols, protocol-comparison]
+    kill_switch:
+      value: app
+      note: On by default on iOS and the App Store macOS app (IKEv2 only), opt-in on Windows, and Android's own setting on Android. Not in the standalone macOS app.
+      sources: [kill-switch, app-faq]
+    dns:
+      value: first_party
+      sources: [dns-leak]
+
+  infra:
+    ram_only:
+      value: null
+      note: VPN Unlimited doesn't say its servers run from RAM.
+      sources: [server-locations]
+    hosting:
+      value: null
+      note: It doesn't say whether it owns or rents its servers.
+      sources: [server-locations]
+    virtual_locations:
+      value: null
+      note: It doesn't say whether any of its locations are virtual.
+      sources: [server-locations]
+    servers:
+      value: 3000
+      note: Listed as "3000+". The full server list is only in the app.
+      sources: [server-locations]
+    countries:
+      value: null
+      note: Its pages say "80+ locations" and, once, "80+ countries", and the list is only in the app.
+      sources: [server-locations, linux]
+
+  features:
+    connections:
+      value: 5
+      note: Extra device slots are sold separately.
+      sources: [account-faq, additional-devices]
+    multihop: false
+    obfuscation:
+      value: [proprietary]
+      note: KeepSolid Wise wraps OpenVPN to look like HTTPS traffic.
+      sources: [wise]
+    port_forwarding: false
+    split_tunnel:
+      value: true
+      note: Windows 10 and 11, and Android (App Exceptions).
+      sources: [split-tunnel, android]
+    blocking:
+      value: []
+      note: Ad and malware blocking moved to KeepSolid's separate DNS Firewall app in 2021.
+      sources: [payment-blog]
+
+  clients:
+    platforms:
+      value: [windows, macos, linux_gui, ios, android, browser]
+      note: Routers use configuration files generated in the account area rather than an app.
+      sources: [home, linux, routers]
+    open_source:
+      value: none
+      note: The terms grant no licence to the source code. KeepSolid's GitHub only holds old OpenVPN forks.
+      sources: [eua, github]
+    telemetry:
+      value: null
+      note: The policy lists app usage data for statistics and product planning, and the Android app includes Firebase Analytics, AppsFlyer and Crashlytics. Neither says whether you can turn it off.
+      sources: [privacy, exodus]
+    trackers:
+      value: 6
+      note: The newest Exodus report that would load was for version 9.1.25, from December 2024.
+      sources: [exodus]
+    fdroid:
+      value: false
+      sources: [exodus]
+
+  pricing:
+    monthly:
+      value: { amount: 9.99, currency: USD }
+      sources: [pricing]
+    best:
+      value: { amount: 4.5, currency: USD }
+      note: >-
+        The 3-year plan, at $161.99 paid once. A lifetime plan was listed at $5,599.99 until at least
+        September 2026; its page now redirects to the pricing page, which shows no lifetime option.
+      sources: [pricing, lifetime-archived]
+    best_term:
+      value: 36
+      sources: [pricing]
+    renewal_increase:
+      value: 0
+      note: The monthly and yearly plans renew at the same price, and the 3-year plan is a one-off payment.
+      sources: [pricing]
+    free_tier:
+      value: false
+      note: There's a 7-day free trial.
+      sources: [account-faq]
+    refund_days:
+      value: 30
+      note: Not for renewals, or for anything paid with gift cards or redemption codes.
+      sources: [refund, eua]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: It says the app grants "complete online anonymity", calls PayPal an anonymous payment method and promises torrenting "absolutely anonymously".
+      sources: [no-log, payment-methods, kill-switch]
+    affiliates:
+      value: true
+      sources: [partnership]
+    review_sites: false
+    activism:
+      value: false
+      note: It gave Ukrainians free VPN access after the 2022 invasion and donated to Ukraine's army, but doesn't fund or campaign for privacy causes.
+      sources: [history]
+
+refs:
+  home:
+    url: https://www.vpnunlimited.com/
+    title: VPN Unlimited
+  privacy:
+    url: https://www.keepsolid.com/privacy-policy
+    title: KeepSolid Inc. privacy policy
+  eua:
+    url: https://www.keepsolid.com/eua
+    title: KeepSolid Inc. end user agreement
+  refund:
+    url: https://www.keepsolid.com/refund-policy
+    title: KeepSolid Inc. refund policy
+  no-log:
+    url: https://www.vpnunlimited.com/help/more-about-vpn/best-no-log-vpn
+    title: No-log VPN app
+  faq:
+    url: https://www.vpnunlimited.com/help/faq
+    title: FAQ
+  account-faq:
+    url: https://www.vpnunlimited.com/help/faq/account-and-payment-questions
+    title: 'FAQ: account and payment questions'
+  app-faq:
+    url: https://www.vpnunlimited.com/help/faq/work-with-the-application
+    title: 'FAQ: work with the application'
+  payment-methods:
+    url: https://www.vpnunlimited.com/help/specials/vpn-payment-methods
+    title: 'Payment methods: how to pay for VPN Unlimited'
+  payment-blog:
+    url: https://www.vpnunlimited.com/blog/how-to-pay-for-vpn-unlimited
+    title: VPN Unlimited, VPN that accepts Perfect Money payment
+  protocols:
+    url: https://www.vpnunlimited.com/help/vpn-protocols/multi-protocol-vpn
+    title: Multi-protocol VPN
+  protocol-comparison:
+    url: https://www.vpnunlimited.com/help/vpn-protocols/comparison
+    title: VPN protocol comparison
+  wise:
+    url: https://www.vpnunlimited.com/help/specials/keepsolid-wise
+    title: What is KeepSolid Wise
+  kill-switch:
+    url: https://www.vpnunlimited.com/help/specials/killswitch
+    title: Kill Switch
+  dns-leak:
+    url: https://www.vpnunlimited.com/help/specials/dns-leak-test
+    title: DNS leak test
+  server-locations:
+    url: https://www.vpnunlimited.com/help/specials/server-locations
+    title: VPN Unlimited server locations
+  additional-devices:
+    url: https://www.vpnunlimited.com/extras/additional-devices
+    title: Additional devices
+  split-tunnel:
+    url: https://www.vpnunlimited.com/blog/split-tunneling-on-vpn-unlimited-for-windows
+    title: How split tunneling in VPN Unlimited can enhance your online life
+  android:
+    url: https://www.vpnunlimited.com/downloads/android
+    title: VPN Unlimited for Android
+  linux:
+    url: https://www.vpnunlimited.com/downloads/linux
+    title: VPN Unlimited for Linux
+  routers:
+    url: https://www.vpnunlimited.com/help/manuals/vpn-routers
+    title: VPN on routers
+  github:
+    url: https://github.com/keepsolid
+    title: keepsolid on GitHub
+  exodus:
+    url: https://web.archive.org/web/20250109005135/https://reports.exodus-privacy.eu.org/en/reports/com.simplexsolutionsinc.vpn_unlimited/latest/
+    title: Exodus Privacy report for com.simplexsolutionsinc.vpn_unlimited 9.1.25 (archived)
+  pricing:
+    url: https://www.vpnunlimited.com/pricing
+    title: Pricing
+  lifetime-archived:
+    url: https://web.archive.org/web/20260908163912/https://www.vpnunlimited.com/lifetime
+    title: Lifetime VPN subscription (archived September 2026)
+  about:
+    url: https://www.vpnunlimited.com/about
+    title: About VPN Unlimited
+  history:
+    url: https://www.keepsolid.com/history
+    title: KeepSolid history
+  partnership:
+    url: https://www.keepsolid.com/partnership
+    title: KeepSolid partnership
+  transparency-archived:
+    url: https://web.archive.org/web/20161122170806/https://www.keepsolid.com/transparency
+    title: KeepSolid transparency report (archived November 2016)
+  canary-archived:
+    url: https://web.archive.org/web/20170203113421/https://www.keepsolid.com/warrant-canary
+    title: KeepSolid warrant canary (archived February 2017)
+  cve-2018-8739:
+    url: https://github.com/VerSprite/research/blob/master/advisories/VS-2018-014.md
+    title: VerSprite, VPN Unlimited for macOS privilege escalation (CVE-2018-8739)
+  lawsuit-2022:
+    url: https://www.vpnunlimited.com/blog/official-announcement-on-copyright-lawsuit
+    title: Official announcement on a copyright lawsuit in the United States involving KeepSolid
+  vpn-lite:
+    url: https://apps.apple.com/us/app/vpn-lite-without-registration/id1424247267
+    title: VPN Lite Without Registration on the App Store
