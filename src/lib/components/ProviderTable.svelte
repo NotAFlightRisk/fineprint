@@ -3,22 +3,23 @@
   import External from '#lib/components/External.svelte';
   import Flag from '#lib/components/Flag.svelte';
   import GradeMark from '#lib/components/GradeMark.svelte';
+  import MustHave from '#lib/components/MustHave.svelte';
   import type { Category, Entry, Provider } from '#lib/data/types.ts';
   import { showEntry } from '#lib/format.ts';
-  import { byId, checklist, checks, flagged, seriousFlags } from '#lib/summary.ts';
-  import { compare, toCsv, download } from '#lib/table.ts';
+  import { byId, checklist, flagged, seriousFlags } from '#lib/summary.ts';
+  import { byFlags, compare, toCsv, download } from '#lib/table.ts';
   import { tip } from '#lib/tip.ts';
 
   let { providers, categories }: { providers: Provider[]; categories: Category[] } = $props();
 
   const criteria = $derived(byId(categories));
-  // red flag counts sort orange before red, as shown, then by size
-  const red = (provider: Provider) => Number(seriousFlags(provider, criteria) > 0);
+  const flagOrder = $derived(byFlags(criteria));
+  const red = (provider: Provider) => seriousFlags(provider, criteria) > 0;
 
   let query = $state('');
   let sort = $state<{ id: string; direction: 1 | -1 }>({ id: 'name', direction: 1 });
   let active = $state<string>();
-  const required = new SvelteSet<string>();
+  let required = $state<string[]>([]);
   const hidden = new SvelteSet<string>();
 
   const shown = $derived(categories.filter((category) => !hidden.has(category.id)));
@@ -29,14 +30,14 @@
     const list = providers.filter((provider) => {
       if (words && !provider.name.toLowerCase().includes(words)) return false;
       const passed = checklist(provider, criteria);
-      return [...required].every((id) => passed.find((check) => check.id === id)?.grade === 'good');
+      return required.every((id) => passed.find((check) => check.id === id)?.grade === 'good');
     });
     const { id, direction } = sort;
     return list.toSorted((a, b) =>
       id === 'name'
         ? direction * a.name.localeCompare(b.name)
         : id === 'flags'
-          ? direction * (red(a) - red(b) || a.flags.length - b.flags.length)
+          ? direction * flagOrder(a, b)
           : compare(criteria.get(id)!, a.criteria[id], b.criteria[id], direction)
     );
   });
@@ -79,16 +80,7 @@
     <input type="search" placeholder="Find a provider" bind:value={query} />
   </label>
 
-  <fieldset class="chips">
-    <legend>Must have</legend>
-    {#each checks as check (check.id)}
-      <button
-        type="button"
-        aria-pressed={required.has(check.id)}
-        onclick={() => toggle(required, check.id)}>{check.label}</button
-      >
-    {/each}
-  </fieldset>
+  <MustHave bind:selected={required} />
 
   <details class="columns">
     <summary>
@@ -120,7 +112,7 @@
 <p class="count" role="status">
   Showing {rows.length} of {providers.length} providers
   {#if rows.length < providers.length}
-    <button type="button" class="reset" onclick={() => ((query = ''), required.clear())}>
+    <button type="button" class="reset" onclick={() => ((query = ''), (required = []))}>
       Clear filters
     </button>
   {/if}
@@ -250,42 +242,7 @@
     background: var(--surface);
   }
 
-  fieldset {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-2);
-    margin: 0;
-    padding: 0;
-    border: 0;
-  }
-
-  .chips {
-    min-inline-size: 0;
-
-    @media (max-width: 40rem) {
-      flex-wrap: nowrap;
-      overflow-x: auto;
-      width: 100%;
-
-      & button {
-        flex: none;
-      }
-    }
-  }
-
-  .chips legend {
-    float: left;
-    margin-right: var(--space-2);
-    padding-block: var(--space-1);
-    color: var(--text-muted);
-
-    @media (max-width: 40rem) {
-      float: none;
-      padding-block: 0 var(--space-2);
-    }
-  }
-
-  .tools button {
+  .export button {
     padding: var(--space-1) var(--space-3);
     border: var(--rule-thin) solid var(--rule);
     background: var(--surface);
@@ -293,11 +250,6 @@
 
     &:hover {
       background: var(--surface-hover);
-    }
-
-    &[aria-pressed='true'] {
-      background: var(--text);
-      color: var(--surface);
     }
   }
 
@@ -335,6 +287,8 @@
 
     & fieldset {
       display: grid;
+      margin: 0;
+      border: 0;
       grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
       gap: var(--space-1) var(--space-4);
       min-width: min(34rem, 80vw);

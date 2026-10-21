@@ -228,6 +228,23 @@ function methodologyImage(categories: number, counts: ReturnType<typeof stats>) 
   );
 }
 
+function searchImage(counts: ReturnType<typeof stats>) {
+  const loupe = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="${colour.text}" stroke-width="2"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg>`;
+  return frame(
+    `${counts.providers} providers · ${counts.criteria} criteria`,
+    lede(
+      'Search the fine print',
+      'Any feature, country, company or way to pay, across every provider.'
+    ),
+    div(
+      { alignItems: 'center', gap: 22, padding: '20px 28px', border: `6px solid ${colour.text}` },
+      img(`data:image/svg+xml,${encodeURIComponent(loupe)}`, 44),
+      div({ fontSize: 44, fontWeight: 600, letterSpacing: '-0.02em' }, 'monero wireguard'),
+      div({ width: 3, height: 50, background: colour.text })
+    )
+  );
+}
+
 function contributingImage(counts: ReturnType<typeof stats>) {
   return frame(
     `${counts.providers} providers · ${counts.sources} sources`,
@@ -276,7 +293,7 @@ async function rasterise(svg: string, width?: number) {
   return Buffer.from(new Resvg(svg, { fitTo }).render().asPng());
 }
 
-/** The PNG for a page: index, methodology, contributing, or a provider's id */
+/** The PNG for a page: index, methodology, contributing, search, or a provider's id */
 export async function drawPage(page: string) {
   const { categories, providers } = data();
   const criteria = byId(categories);
@@ -285,6 +302,7 @@ export async function drawPage(page: string) {
   if (page === 'index') return render(homeImage(summaries, stats()));
   if (page === 'methodology') return render(methodologyImage(categories.length, stats()));
   if (page === 'contributing') return render(contributingImage(stats()));
+  if (page === 'search') return render(searchImage(stats()));
   if (index >= 0) return render(providerImage(summaries[index], providers[index].checked));
 }
 

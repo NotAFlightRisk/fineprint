@@ -1,5 +1,6 @@
 import type { Criterion, Entry, Grade, Price, Provider, Value } from '#lib/data/types.ts';
 import { formatValue, showEntry } from '#lib/format.ts';
+import { seriousFlags } from '#lib/summary.ts';
 
 const rank: Record<string, number> = { good: 0, ok: 1, bad: 2, na: 3 };
 // TODO: rough, hard-coded rates for the currencies needed so far; any others sort as USD
@@ -32,6 +33,12 @@ export function compare(
   const [x, y] = [measure(criterion, a!.value), measure(criterion, b!.value)];
   return direction * (typeof x === 'number' ? x - (y as number) : x.localeCompare(y as string));
 }
+
+// red flag counts sort orange before red, as shown, then by size
+export const byFlags = (criteria: Map<string, Criterion>) => {
+  const red = (provider: Provider) => Number(seriousFlags(provider, criteria) > 0);
+  return (a: Provider, b: Provider) => red(a) - red(b) || a.flags.length - b.flags.length;
+};
 
 const quote = (cell: string) => (/[",\n]/.test(cell) ? `"${cell.replaceAll('"', '""')}"` : cell);
 

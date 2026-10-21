@@ -2,10 +2,10 @@
   import { onMount } from 'svelte';
   import { MediaQuery } from 'svelte/reactivity';
   import { fade } from 'svelte/transition';
+  import { loadData } from '#lib/api.ts';
   import GradeMark from '#lib/components/GradeMark.svelte';
   import ProviderCard from '#lib/components/ProviderCard.svelte';
   import Seo from '#lib/components/Seo.svelte';
-  import type { Category, Provider } from '#lib/data/types.ts';
   import { gradeNames } from '#lib/marks.ts';
   import { absolute, schemaIds } from '#lib/site.ts';
 
@@ -18,20 +18,13 @@
   let view = $state<'cards' | 'table'>('cards');
   let table = $state<ReturnType<typeof loadTable>>();
 
-  async function json<T>(path: string): Promise<T> {
-    const response = await fetch(path);
-    if (!response.ok) throw new Error(`${path} answered ${response.status}`);
-    return response.json();
-  }
-
   // the table and every value it shows only load once someone asks for it
   async function loadTable() {
-    const [{ default: ProviderTable }, { providers }, { categories }] = await Promise.all([
+    const [{ default: ProviderTable }, loaded] = await Promise.all([
       import('#lib/components/ProviderTable.svelte'),
-      json<{ providers: Provider[] }>('/api/providers.json'),
-      json<{ categories: Category[] }>('/api/criteria.json')
+      loadData()
     ]);
-    return { ProviderTable, providers, categories };
+    return { ProviderTable, ...loaded };
   }
 
   function prepare() {

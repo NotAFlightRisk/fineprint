@@ -2,14 +2,11 @@
   import Checklist from '#lib/components/Checklist.svelte';
   import External from '#lib/components/External.svelte';
   import Flag from '#lib/components/Flag.svelte';
-  import GradeMark from '#lib/components/GradeMark.svelte';
-  import { redFlags, type Summary } from '#lib/summary.ts';
-  import { tip } from '#lib/tip.ts';
+  import RedFlags from '#lib/components/RedFlags.svelte';
+  import type { Summary } from '#lib/summary.ts';
 
   let { summary }: { summary: Summary } = $props();
   const { id, name, icon, website, hq, where, checks, flags, serious, price } = $derived(summary);
-  // red if any flag is serious, otherwise orange
-  const tone = $derived(serious ? 'bad' : 'ok');
 </script>
 
 <article class="card">
@@ -29,16 +26,7 @@
   <footer>
     <div class="facts">
       <span>{price ? `From ${price}` : 'Price unknown'}</span>
-      {#if flags.length}
-        <span class="flags" data-grade={tone}>
-          <GradeMark grade={tone} label="" />
-          <button type="button" class="noted" {@attach tip(flags.join('\n'))}>
-            {redFlags(flags.length)}
-          </button>
-        </span>
-      {:else}
-        <span class="none">{redFlags(0)}</span>
-      {/if}
+      <RedFlags {flags} {serious} />
     </div>
     <a class="more" href="/{id}">Full picture<span class="visually-hidden"> of {name}</span></a>
   </footer>
@@ -109,19 +97,6 @@
     justify-content: space-between;
     gap: var(--space-1) var(--space-4);
     font-size: var(--text-sm);
-  }
-
-  .flags {
-    --mark: 1rem;
-    display: flex;
-    align-items: baseline;
-    gap: var(--space-2);
-    color: var(--grade);
-    font-weight: 600;
-  }
-
-  .none {
-    color: var(--text-muted);
   }
 
   .more {
