@@ -99,7 +99,9 @@
     <div class="facts">
       <Checklist {checks} />
       <div class="flags">
-        <h3 class:none={!provider.flags.length}>{redFlags(provider.flags.length)}</h3>
+        <h3 class:none={!provider.flags.length} data-grade={summary.serious ? 'bad' : 'ok'}>
+          {redFlags(provider.flags.length)}
+        </h3>
         {#if provider.flags.length}
           <ul>
             {#each provider.flags as id (id)}
@@ -110,7 +112,8 @@
                   ><a href="#{id}">{criterion.label}</a>: {formatValue(
                     criterion,
                     provider.criteria[id].value
-                  )}</span
+                  )}
+                  {#if criterion.serious}<span class="tag serious">Serious</span>{/if}</span
                 >
               </li>
             {/each}
@@ -146,7 +149,7 @@
                 <span class:unknown={!entry || entry.value === null}
                   >{showEntry(criterion, entry)}</span
                 >
-                {#if entry?.evidence}<span class="evidence">{entry.evidence}</span>{/if}
+                {#if entry?.evidence}<span class="tag">{entry.evidence}</span>{/if}
                 {#each entry?.sources ?? [] as ref (ref)}
                   <a class="cite" href="#ref-{ref}" {@attach tip(provider.refs[ref].title)}
                     ><span class="visually-hidden">Source </span>{cited.get(ref)}</a
@@ -336,7 +339,7 @@
 
     & h3 {
       font-size: var(--text-md);
-      color: var(--bad);
+      color: var(--grade);
 
       &.none {
         color: var(--text-muted);
@@ -405,15 +408,6 @@
   }
 
   .unknown {
-    color: var(--text-muted);
-  }
-
-  .evidence {
-    padding: 0 var(--space-2);
-    border: var(--rule-thin) solid var(--rule-faint);
-    font-size: var(--text-xs);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
     color: var(--text-muted);
   }
 

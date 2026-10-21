@@ -5,13 +5,15 @@
   import GradeMark from '#lib/components/GradeMark.svelte';
   import type { Category, Entry, Provider } from '#lib/data/types.ts';
   import { showEntry } from '#lib/format.ts';
-  import { byId, checklist, checks } from '#lib/summary.ts';
+  import { byId, checklist, checks, flagged, seriousFlags } from '#lib/summary.ts';
   import { compare, toCsv, download } from '#lib/table.ts';
   import { tip } from '#lib/tip.ts';
 
   let { providers, categories }: { providers: Provider[]; categories: Category[] } = $props();
 
   const criteria = $derived(byId(categories));
+  // red flag counts sort orange before red, as shown, then by size
+  const red = (provider: Provider) => Number(seriousFlags(provider, criteria) > 0);
 
   let query = $state('');
   let sort = $state<{ id: string; direction: 1 | -1 }>({ id: 'name', direction: 1 });
@@ -34,7 +36,7 @@
       id === 'name'
         ? direction * a.name.localeCompare(b.name)
         : id === 'flags'
-          ? direction * (a.flags.length - b.flags.length)
+          ? direction * (red(a) - red(b) || a.flags.length - b.flags.length)
           : compare(criteria.get(id)!, a.criteria[id], b.criteria[id], direction)
     );
   });
@@ -143,7 +145,11 @@
           {@render heading('name', 'Provider')}
         </th>
         <th rowspan="2" scope="col" aria-sort={ariaSort('flags')}>
-          {@render heading('flags', 'Red flags', 'How many things graded red')}
+          {@render heading(
+            'flags',
+            'Red flags',
+            'How many things graded red. Red if any are serious, orange if not'
+          )}
         </th>
         {#each shown as category (category.id)}
           <th colspan={category.criteria.length} scope="colgroup">{category.label}</th>
@@ -166,12 +172,31 @@
               {provider.name}
             </a>
           </th>
-          <td class="flags" class:none={!provider.flags.length}>{provider.flags.length}</td>
+          <td
+            class="flags"
+            class:none={!provider.flags.length}
+            data-grade={red(provider) ? 'bad' : 'ok'}
+          >
+            {#if provider.flags.length}
+              <button
+                type="button"
+                class="noted"
+                {@attach tip(flagged(provider, criteria).join('\n'))}
+              >
+                {provider.flags.length}
+              </button>
+            {:else}
+              0
+            {/if}
+          </td>
           {#each columns as column (column.id)}
             {@const entry = provider.criteria[column.id]}
             {@const text = showEntry(column, entry)}
             {@const note = cellTip(entry, text)}
-            {@const source = entry?.sources[0] && provider.refs[entry.sources[0]]}
+            {@const source =
+              column.type === 'url' && typeof entry?.value === 'string'
+                ? { url: entry.value, title: text }
+                : entry?.sources[0] && provider.refs[entry.sources[0]]}
             <td
               onpointerenter={() => (active = column.id)}
               onfocusin={() => (active = column.id)}
@@ -419,14 +444,19 @@
     font-size: var(--text-xs);
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    border-left: var(--rule-thin) solid var(--rule-faint);
+
+    &[scope='colgroup'] {
+      border-left: var(--rule-thin) solid var(--rule-faint);
+    }
   }
 
   thead tr + tr th {
     top: calc(var(--text-xs) * 1.5 + var(--space-2) * 2 + var(--rule-thin));
   }
 
-  th:first-child {
+  /* the provider column stays put while the rest scrolls past */
+  .groups th:first-child,
+  tbody th {
     position: sticky;
     left: 0;
     z-index: 1;
@@ -434,7 +464,7 @@
     border-right: var(--rule-thin) solid var(--rule);
   }
 
-  thead th:first-child {
+  .groups th:first-child {
     z-index: 3;
   }
 
@@ -459,11 +489,15 @@
     &:hover {
       text-decoration: underline;
     }
+
+    @media (max-width: 40rem) {
+      white-space: normal;
+    }
   }
 
   .flags {
     font-weight: 600;
-    color: var(--bad);
+    color: var(--grade);
 
     &.none {
       color: var(--text-muted);

@@ -81,6 +81,9 @@ const describeEntry = (provider: Provider, criterion: Criterion) =>
 export const flagged = (provider: Provider, criteria: Map<string, Criterion>) =>
   provider.flags.map((id) => describeEntry(provider, criteria.get(id)!));
 
+export const seriousFlags = (provider: Provider, criteria: Map<string, Criterion>) =>
+  provider.flags.filter((id) => criteria.get(id)!.serious).length;
+
 export const located = (provider: Provider, criteria: Map<string, Criterion>) =>
   ['jurisdiction.hq', 'jurisdiction.eyes']
     .filter((id) => provider.criteria[id])
@@ -100,14 +103,22 @@ export function summarise(provider: Provider, criteria: Map<string, Criterion>) 
     where: located(provider, criteria),
     checks: checklist(provider, criteria),
     flags: flagged(provider, criteria),
+    serious: seriousFlags(provider, criteria),
     price: best ? formatValue(criteria.get('pricing.best')!, best) : undefined
   };
 }
 
 export type Summary = ReturnType<typeof summarise>;
 
-export function verdict({ name, where, checks, flags }: Summary) {
+export function verdict({ name, where, checks, flags, serious }: Summary) {
   const passed = checks.filter((check) => check.grade === 'good').length;
-  const red = redFlags(flags.length).toLowerCase();
+  // "1 serious and 3 minor red flags", "2 minor red flags", "no red flags"
+  const kinds = [
+    serious && `${serious} serious`,
+    flags.length - serious && `${flags.length - serious} minor`
+  ];
+  const red = flags.length
+    ? `${kinds.filter(Boolean).join(' and ')} red flag${flags.length === 1 ? '' : 's'}`
+    : 'no red flags';
   return `${name} (${where.join(', ')}) passes ${passed} of ${checks.length} privacy checks, with ${red}.`;
 }

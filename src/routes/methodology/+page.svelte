@@ -23,6 +23,15 @@
     ['Tested', 'We checked it ourselves.']
   ];
 
+  const flags = [
+    [
+      'bad',
+      'Serious',
+      "A bad grade that can expose you, or shows the provider can't be trusted. One turns the total red."
+    ],
+    ['ok', 'Minor', 'Any other bad grade, like a missing safeguard or a price rise.']
+  ] as const;
+
   const levels = ['good', 'ok', 'bad'] as const;
 </script>
 
@@ -64,6 +73,17 @@
     </dl>
   </div>
   <div>
+    <h2>Red flags</h2>
+    <dl>
+      {#each flags as [grade, name, meaning] (name)}
+        <div>
+          <dt><GradeMark {grade} label="" /> {name}</dt>
+          <dd>{meaning}</dd>
+        </div>
+      {/each}
+    </dl>
+  </div>
+  <div>
     <h2>Evidence</h2>
     <dl>
       {#each evidence as [name, meaning] (name)}
@@ -97,6 +117,9 @@
                   <li>
                     <GradeMark grade={level} />
                     {describeRule(criterion, criterion.rules[level])}
+                    {#if level === 'bad' && criterion.serious}
+                      <span class="tag serious">Serious</span>
+                    {/if}
                   </li>
                 {/if}
               {/each}

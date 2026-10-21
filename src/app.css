@@ -253,6 +253,21 @@ a[target='_blank'] {
   }
 }
 
+/* a small label beside a value, like its evidence */
+.tag {
+  padding: 0 var(--space-2);
+  border: var(--rule-thin) solid var(--rule-faint);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+
+  &.serious {
+    border-color: currentColor;
+    color: var(--bad);
+  }
+}
+
 [data-grade='good'] {
   --grade: var(--good);
 }

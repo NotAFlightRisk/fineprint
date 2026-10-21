@@ -105,10 +105,14 @@ const lede = (title: string, text: string) =>
     div({ fontSize: 34, color: colour.muted, width: 860, lineHeight: 1.3 }, text)
   );
 
-const flagCount = (count: number, size: number) =>
+const flagCount = ({ flags, serious }: Summary, size: number) =>
   div(
-    { fontSize: size, fontWeight: 600, color: count ? colour.bad : colour.muted },
-    redFlags(count)
+    {
+      fontSize: size,
+      fontWeight: 600,
+      color: serious ? colour.bad : flags.length ? colour.ok : colour.muted
+    },
+    redFlags(flags.length)
   );
 
 function providerImage(summary: Summary, checked: string) {
@@ -148,7 +152,7 @@ function providerImage(summary: Summary, checked: string) {
         fontSize: 30
       },
       summary.price ? `From ${summary.price}` : 'Price unknown',
-      flagCount(summary.flags.length, 30)
+      flagCount(summary, 30)
     )
   );
 }
@@ -161,7 +165,7 @@ function homeImage(summaries: Summary[], counts: ReturnType<typeof stats>) {
     div({ paddingTop: 44 }, headline('The VPN fine\u00a0print, side by side')),
     div(
       { gap: 24 },
-      ...shown.map(({ name, icon: logo, checks, flags }) =>
+      ...shown.map((summary) =>
         div(
           {
             flex: 1,
@@ -173,7 +177,7 @@ function homeImage(summaries: Summary[], counts: ReturnType<typeof stats>) {
           },
           div(
             { alignItems: 'center', gap: 12 },
-            img(icon(logo), 36),
+            img(icon(summary.icon), 36),
             div(
               {
                 fontSize: 24,
@@ -182,11 +186,11 @@ function homeImage(summaries: Summary[], counts: ReturnType<typeof stats>) {
                 whiteSpace: 'nowrap',
                 textOverflow: 'ellipsis'
               },
-              name
+              summary.name
             )
           ),
-          div({ gap: 6 }, ...checks.map((check) => mark(check.grade ?? 'unknown', 24))),
-          flagCount(flags.length, 20)
+          div({ gap: 6 }, ...summary.checks.map((check) => mark(check.grade ?? 'unknown', 24))),
+          flagCount(summary, 20)
         )
       ),
       summaries.length > shown.length &&

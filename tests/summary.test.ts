@@ -35,8 +35,17 @@ describe('provider summary', () => {
 
   it('counts red flags in words', () => {
     expect([0, 1, 2].map(redFlags)).toEqual(['No red flags', '1 red flag', '2 red flags']);
-    const flagged = { ...provider, flags: ['jurisdiction.eyes'] };
-    expect(verdict(summarise(flagged, criteria))).toMatch(/with 1 red flag\.$/);
+    const said = (...flags: string[]) => verdict(summarise({ ...provider, flags }, criteria));
+    expect(said('jurisdiction.eyes')).toMatch(/with 1 serious red flag\.$/);
+    expect(said('account.email')).toMatch(/with 1 minor red flag\.$/);
+    expect(said('jurisdiction.eyes', 'account.email', 'account.payment')).toMatch(
+      /with 1 serious and 2 minor red flags\.$/
+    );
+  });
+
+  it('counts the serious red flags', () => {
+    const flagged = { ...provider, flags: ['jurisdiction.eyes', 'account.email'] };
+    expect(summarise(flagged, criteria).serious).toBe(1);
   });
 });
 
