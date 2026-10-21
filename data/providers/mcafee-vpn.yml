@@ -1,0 +1,315 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: McAfee VPN
+icon: mcafee-vpn.png
+checked: 2026-10-21
+
+criteria:
+  identity:
+    website: https://www.mcafee.com/en-us/vpn.html
+    legal_entity:
+      value: McAfee, LLC
+      sources: [mcafee-subsidiaries, connection-help]
+    owner:
+      value: McAfee
+      note: >-
+        McAfee has been privately held since March 2022 by an investor group led by Advent International
+        and Permira.
+      sources: [mcafee-10k-2020, mcafee-private-2022]
+    founded:
+      value: null
+      note: McAfee doesn't say when its VPN launched. It was sold on its own as Safe Connect until August 2026.
+      sources: [safe-connect-eol]
+    team:
+      value: partial
+      note: McAfee names its chief executive, but no one running the VPN is named.
+      sources: [mcafee-private-2022]
+    sister_brands:
+      value: [TunnelBear]
+      note: McAfee bought TunnelBear in 2018 and still runs it as a separate VPN.
+      sources: [mcafee-10k-2020, mcafee-subsidiaries]
+    acquisitions:
+      value:
+        - date: 2022-03-01
+          acquirer: Investor group led by Advent International and Permira
+          source: mcafee-private-2022
+      note: >-
+        Earlier changes of hands at McAfee are left out, as the VPN's launch date isn't public.
+      sources: [mcafee-private-2022]
+
+  jurisdiction:
+    hq:
+      value: US
+      note: Headquartered in San Jose, California.
+      sources: [mcafee-10k-2020]
+    entities:
+      value: [US, AU, IN, IE, JP, NL, SG, GB]
+      note: From its last public list of subsidiaries, filed in 2022 just before it went private.
+      sources: [mcafee-subsidiaries]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      note: >-
+        Its privacy notice says the VPN doesn't collect the apps, services or websites you use while
+        connected.
+      sources: [privacy-notice]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [privacy-notice]
+    timestamps:
+      value: null
+      note: The privacy notice says the VPN may collect certain telemetry, without saying what.
+      sources: [privacy-notice]
+    bandwidth:
+      value: null
+      note: The privacy notice says the VPN may collect certain telemetry, without saying what.
+      sources: [privacy-notice]
+    source_ip:
+      value: none
+      evidence: claimed
+      sources: [privacy-notice]
+    proven:
+      value: []
+      note: The VPN page says it's independently reviewed and audited, but no audit has been published.
+      sources: [vpn]
+    policy: https://www.mcafee.com/en-us/consumer-support/policy/legal.html
+
+  transparency:
+    audits:
+      value: []
+      note: The VPN page says it's independently reviewed and audited, but names no auditor or report.
+      sources: [vpn]
+    report:
+      value: none
+      note: Neither its privacy and legal pages nor its VPN help mention a transparency report.
+      sources: [privacy-notice, vpn-faq]
+    canary:
+      value: none
+      sources: [vpn-faq]
+    bug_bounty:
+      value: false
+      note: Its vulnerability disclosure programme gives a certificate and a digital badge, not money.
+      sources: [vdp]
+    incidents:
+      value:
+        - date: 2024-06-06
+          summary: >-
+            Two flaws in how the Android app handled deep links let a malicious link open any web page
+            in it or crash it (CVE-2024-34405, CVE-2024-34406). McAfee fixed them in version 8.3.0 and
+            published a security bulletin.
+          handled: well
+          source: bulletin-2024
+        - date: 2023-04-28
+          summary: >-
+            A researcher reported, through ZDI, that the Windows Safe Connect app loaded an OpenSSL config
+            from an unsecured folder, letting a local program run code as SYSTEM (CVE-2023-40352). McAfee
+            shipped a fix before the coordinated advisory on 21 August 2023.
+          handled: well
+          source: zdi-2023
+      sources: [zdi-2023, bulletin-2024]
+
+  account:
+    email:
+      value: required
+      sources: [card-help, safe-connect-eol]
+    personal_data:
+      value: [name]
+      note: >-
+        Its privacy notice lists name, email and country or state for a new account, and an address or ZIP
+        code with purchases.
+      sources: [privacy-notice]
+    payment:
+      value: [card, app_store]
+      note: Its billing help only covers cards. The Android and iOS app also sell plans in-app.
+      sources: [card-help, play]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn]
+      note: No WireGuard on macOS. Only Android and iOS let you pick the protocol.
+      sources: [protocols]
+    post_quantum:
+      value: none
+      note: Its protocol and VPN help pages don't mention post-quantum key exchange.
+      sources: [protocols]
+    kill_switch:
+      value: app
+      note: >-
+        Windows has a Safe reconnect setting that pauses your connection if the VPN drops. The help pages
+        don't mention one on other platforms.
+      sources: [windows-help]
+    dns:
+      value: null
+      note: McAfee doesn't say whose DNS servers the VPN uses.
+      sources: [protocols]
+
+  infra:
+    ram_only:
+      value: null
+      note: McAfee doesn't say whether its VPN servers run from RAM.
+      sources: [vpn-faq]
+    hosting:
+      value: null
+      note: McAfee doesn't say who owns or runs its VPN servers.
+      sources: [locations]
+    virtual_locations:
+      value: null
+      note: Its help calls every location a virtual location, without saying where the servers physically sit.
+      sources: [locations]
+    servers:
+      value: null
+      note: McAfee doesn't publish a server count.
+      sources: [locations]
+    countries:
+      value: 47
+      note: India and Hong Kong were dropped in 2022.
+      sources: [locations]
+
+  features:
+    connections:
+      value: 1
+      note: The cheapest plan with the VPN covers one device. Essential covers five, and Advanced is unlimited.
+      sources: [vpn]
+    multihop:
+      value: false
+      sources: [vpn-faq, windows-help]
+    obfuscation:
+      value: []
+      note: Its help suggests trying another network where VPNs are blocked.
+      sources: [protocols, connection-help]
+    port_forwarding:
+      value: false
+      sources: [vpn-faq, windows-help]
+    split_tunnel:
+      value: true
+      note: >-
+        Android splits by app and iOS by website. The Windows help lists a split tunnelling setting but
+        doesn't yet say which apps it covers.
+      sources: [split-tunnel, windows-help]
+    blocking:
+      value: []
+      note: Web Protection and Tracker Remover are separate McAfee features, not blocklists in the VPN.
+      sources: [safe-connect-eol]
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android]
+      note: >-
+        Built into the McAfee apps rather than a separate VPN app. No Linux app, router support or browser
+        extension.
+      sources: [vpn-faq, locations]
+    open_source:
+      value: none
+      note: McAfee's GitHub holds a single Hello-World repository, not its apps.
+      sources: [github]
+    telemetry:
+      value: null
+      note: >-
+        The privacy notice says the VPN may collect certain telemetry, and doesn't say whether you can turn
+        it off.
+      sources: [privacy-notice]
+    trackers:
+      value: 5
+      note: >-
+        In McAfee Security 7.6.2.15, the newest version in an archived Exodus list from November 2023. The
+        Android VPN lives in that app.
+      sources: [exodus]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: null
+      note: The VPN page only sells yearly plans.
+      sources: [vpn]
+    best:
+      value: { amount: 2.5, currency: USD }
+      note: >-
+        $29.99 for the first year of McAfee Basic, which bundles the VPN with antivirus for one device. The
+        VPN is no longer sold on its own.
+      sources: [vpn, safe-connect-eol]
+    best_term: 12
+    renewal_increase:
+      value: 200
+      note: The $29.99 first year renews at $89.99.
+      sources: [vpn]
+    free_tier:
+      value: false
+      note: The free version of the McAfee Security app doesn't include the VPN.
+      sources: [play]
+    refund_days:
+      value: 30
+      note: Within 30 days of buying or 60 days of a renewal charge, but not on monthly plans.
+      sources: [vpn]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        The VPN page says to "stay anonymous" and that it's independently audited, while its FAQ says it
+        "does not make you fully anonymous online" and no audit is published.
+      sources: [vpn, vpn-faq]
+    affiliates:
+      value: null
+      note: McAfee's own site doesn't describe an affiliate scheme.
+    activism: false
+
+refs:
+  bulletin-2024:
+    url: https://www.mcafee.com/support/s/article/000002403
+    title: "McAfee Security Bulletin: McAfee Security: Antivirus VPN update fixes two vulnerabilities (June 2024)"
+  vpn:
+    url: https://www.mcafee.com/en-us/vpn.html
+    title: McAfee VPN
+  privacy-notice:
+    url: https://www.mcafee.com/en-us/consumer-support/policy/legal.html
+    title: McAfee privacy notice (January 2026)
+  vpn-faq:
+    url: https://www.mcafee.com/support/s/article/000001911
+    title: McAfee Secure VPN FAQ
+  safe-connect-eol:
+    url: https://www.mcafee.com/support/s/article/000002666
+    title: 'End of life for McAfee Safe Connect VPN: FAQ'
+  locations:
+    url: https://www.mcafee.com/support/s/article/000001789
+    title: Virtual locations available in McAfee VPN products
+  protocols:
+    url: https://www.mcafee.com/support/s/article/000002146
+    title: VPN protocols in McAfee security software for Android, iOS and Windows
+  windows-help:
+    url: https://www.mcafee.com/support/s/article/000001913
+    title: Turn on and set up McAfee Secure VPN on Windows
+  split-tunnel:
+    url: https://www.mcafee.com/support/s/article/000002451
+    title: Disable VPN for certain apps using split tunneling
+  connection-help:
+    url: https://www.mcafee.com/support/s/article/000001826
+    title: Fix McAfee Secure VPN connection issues
+  card-help:
+    url: https://www.mcafee.com/support/s/article/000001751
+    title: Update your credit card on your McAfee account
+  vdp:
+    url: https://www.mcafee.com/en-us/consumer-corporate/mcafee-labs/product-security-bulletins.html
+    title: McAfee vulnerability disclosure program
+  zdi-2023:
+    url: https://www.zerodayinitiative.com/advisories/ZDI-23-1158/
+    title: ZDI-23-1158, McAfee Safe Connect VPN local privilege escalation (CVE-2023-40352)
+  play:
+    url: https://play.google.com/store/apps/details?id=com.wsandroid.suite
+    title: 'McAfee: Stay Secure & Private on Google Play'
+  exodus:
+    url: https://web.archive.org/web/20231129160710/https://reports.exodus-privacy.eu.org/en/reports/search/com.wsandroid.suite/
+    title: Exodus Privacy reports for com.wsandroid.suite (archived November 2023)
+  github:
+    url: https://github.com/mcafee
+    title: McAfee on GitHub
+  mcafee-10k-2020:
+    url: https://www.sec.gov/Archives/edgar/data/1783317/000156459021009891/mcfe-10k_20201226.htm
+    title: McAfee Corp. annual report (Form 10-K) for fiscal 2020
+  mcafee-subsidiaries:
+    url: https://www.sec.gov/Archives/edgar/data/1783317/000095017022001804/mcfe-ex21_1.htm
+    title: McAfee Corp. subsidiaries (Form 10-K exhibit 21.1, fiscal 2021)
+  mcafee-private-2022:
+    url: https://www.sec.gov/Archives/edgar/data/1783317/000119312522060146/d319834dex991.htm
+    title: Investor group led by Advent International and Permira completes acquisition of McAfee (2022)
