@@ -1,0 +1,310 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Avira Phantom VPN
+icon: avira-phantom-vpn.png
+checked: 2026-10-21
+
+criteria:
+  identity:
+    website:
+      value: https://www.avira.com/en/free-vpn
+      sources: [home]
+    legal_entity:
+      value: Avira Holding GmbH
+      note: Sells it and controls the data outside the Americas, where Avira Inc. in Arizona sells it. NortonLifeLock UK Limited is its UK representative.
+      sources: [terms-of-sale, lsa, privacy-centre]
+    owner:
+      value: Gen Digital
+      sources: [lsa, nll-avira-closed]
+    founded:
+      value: null
+      note: Avira itself dates from 1986, but none of its pages say when Phantom VPN launched.
+      sources: [investcorp-2020]
+    team:
+      value: partial
+      note: Gen's executives are named, but no one running the VPN is.
+      sources: [gen-leadership]
+    sister_brands:
+      value: [HMA VPN, Norton VPN, Avast Premium VPN, AVG Secure VPN]
+      sources: [hma-vpn, norton-vpn, avast-vpn, avg-vpn]
+    acquisitions:
+      value:
+        - date: 2021-01-08
+          acquirer: NortonLifeLock (now Gen Digital)
+          source: nll-avira-closed
+        - date: 2020-04-09
+          acquirer: Investcorp Technology Partners
+          source: investcorp-2020
+      note: The Investcorp date is when it announced its purchase. NortonLifeLock renamed itself Gen Digital after merging with Avast.
+      sources: [investcorp-2020-sale]
+
+  jurisdiction:
+    hq:
+      value: DE
+      note: Avira Holding GmbH is in Tettnang. Its parent, Gen Digital Inc., is in the US.
+      sources: [terms-of-sale, lsa]
+    entities:
+      value: [DE, US, GB]
+      sources: [lsa, privacy-centre]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [product-privacy, tracking-info]
+    dns:
+      value: none
+      evidence: claimed
+      note: DNS isn't named, but the privacy notice says it collects nothing about the sites you visit.
+      sources: [product-privacy, tracking-info]
+    timestamps:
+      value: null
+      note: Neither the privacy notice nor the help articles say whether connect and disconnect times are kept.
+      sources: [product-privacy, tracking-info]
+    bandwidth:
+      value: aggregate
+      evidence: claimed
+      note: A count of bytes transferred, which also runs the free plan's monthly cap.
+      sources: [product-privacy, tracking-info]
+    source_ip:
+      value: null
+      note: >-
+        The VPN's privacy notice lists your IP address among the data it processes, to pick a server,
+        for research and to stop abuse, without saying how long it's kept. A help article says your
+        real IP isn't tracked.
+      sources: [product-privacy, tracking-info]
+    proven:
+      value: []
+      note: No no-logs audit, court case or raid has tested the claim.
+      sources: [tracking-info, data-stored]
+    policy: https://www.avira.com/en/privacy-policy/product
+
+  transparency:
+    audits:
+      value: []
+      note: Avira hasn't published an audit of the VPN.
+      sources: [product-privacy, data-stored]
+    report:
+      value: none
+      note: Its answer to government requests is that it can't share what it doesn't know, but no figures are published.
+      sources: [vpn-pro]
+    canary:
+      value: none
+      sources: [legal]
+    bug_bounty:
+      value: true
+      note: Through Gen Digital's vulnerability programme, which says not every report qualifies for a reward.
+      sources: [security]
+    incidents: []
+
+  account:
+    email:
+      value: required
+      note: The free plan works without an account, but Pro is tied to an Avira account with an email address.
+      sources: [upgrade, free-limits]
+    personal_data:
+      value: []
+      note: Card payments go through Cleverbridge, and Avira keeps the last four digits and expiry date with your licence.
+      sources: [product-privacy]
+    payment:
+      value: [card, paypal, app_store]
+      note: Varies by country. The terms also allow bank transfer or direct debit in some places. No crypto option is listed.
+      sources: [terms-of-sale, play-store]
+
+  security:
+    protocols:
+      value: [openvpn, other]
+      note: OpenVPN over TCP on Windows, Mac and Android. The iOS, Mac App Store and Microsoft Store apps use IPsec, without saying which version of IKE.
+      sources: [ports]
+    post_quantum:
+      value: none
+      note: Not mentioned on its VPN pages or help articles.
+      sources: [ports, windows]
+    kill_switch:
+      value: app
+      note: A Pro feature on Windows. The Android app's store listing mentions one too.
+      sources: [windows, play-store]
+    dns:
+      value: null
+      note: It advertises DNS leak prevention, but doesn't say whose DNS servers answer.
+      sources: [windows]
+
+  infra:
+    ram_only:
+      value: null
+      note: Not stated.
+      sources: [mac, locations]
+    hosting:
+      value: null
+      note: Not stated, though a help article mentions server providers that may store national-level metadata.
+      sources: [third-parties]
+    virtual_locations:
+      value: null
+      note: Avira calls every server a virtual location, meaning where you appear to be, and doesn't say whether any sit in another country.
+      sources: [locations, home]
+    servers:
+      value: 1400
+      sources: [vpn-pro]
+    countries:
+      value: 36
+      note: The Pro page lists 36 countries, the help article 35 (no Isle of Man), and the Android listing says 38 locations.
+      sources: [vpn-pro, locations, play-store]
+
+  features:
+    connections:
+      value: unlimited
+      sources: [windows]
+    multihop:
+      value: false
+      sources: [mac]
+    obfuscation:
+      value: []
+      sources: [mac, ports]
+    port_forwarding:
+      value: false
+      sources: [mac]
+    split_tunnel:
+      value: false
+      sources: [windows]
+    blocking:
+      value: []
+      sources: [windows]
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android]
+      note: One help article also mentions Chrome, but the VPN pages offer no browser extension.
+      sources: [home, secure-connection]
+    open_source:
+      value: none
+      sources: [home]
+    telemetry:
+      value: opt_out
+      evidence: claimed
+      note: Diagnostic data is sent unless you switch it off in settings.
+      sources: [tracking-info, data-stored]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 10, currency: USD }
+      note: USD, as the price changes with your location.
+      sources: [vpn-pro]
+    best:
+      value: { amount: 6.5, currency: USD }
+      note: Billed $78 a year. A mobile-only plan bought in the app costs less.
+      sources: [vpn-pro]
+    best_term:
+      value: 12
+      sources: [vpn-pro]
+    renewal_increase:
+      value: 0
+      note: No intro discount is shown, though the small print says renewal prices may be higher and can change.
+      sources: [home]
+    free_tier:
+      value: true
+      note: 500 MB a month, or 1 GB if you register an account.
+      sources: [free-limits, home]
+    refund_days:
+      value: 60
+      note: For yearly plans. Monthly plans get 14 days.
+      sources: [refund]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: Calls Pro "Unhackable" and "Untraceable", and says "nothing you do can be traced back to you".
+      sources: [vpn-pro]
+    affiliates:
+      value: true
+      note: Pays affiliates 25% of each qualifying purchase.
+      sources: [affiliates]
+    activism: null
+
+refs:
+  home:
+    url: https://www.avira.com/en/free-vpn
+    title: Avira Phantom VPN
+  vpn-pro:
+    url: https://www.avira.com/en/vpn-pro
+    title: Avira Phantom VPN Pro
+  windows:
+    url: https://www.avira.com/en/free-vpn-windows
+    title: Free VPN for Windows
+  mac:
+    url: https://www.avira.com/en/free-vpn-mac
+    title: Free VPN for Mac
+  product-privacy:
+    url: https://www.avira.com/en/privacy-policy/product
+    title: Product privacy notice, Avira Phantom VPN section
+  privacy-centre:
+    url: https://www.avira.com/en/privacy-policy/homepage
+    title: Privacy policy, homepage
+  terms-of-sale:
+    url: https://www.avira.com/en/avira-terms-of-sale
+    title: Terms of sale (EMEA)
+  lsa:
+    url: https://www.avira.com/en/avira-license-services-agreement
+    title: License and services agreement
+  legal:
+    url: https://www.avira.com/en/legal-terms
+    title: Legal terms
+  refund:
+    url: https://www.avira.com/en/cancellation-and-refund-policy
+    title: Cancellation and refund policy
+  tracking-info:
+    url: https://support.avira.com/hc/en-us/articles/360016394298-Avira-VPN-tracking-information
+    title: Avira VPN tracking information
+  data-stored:
+    url: https://support.avira.com/hc/en-us/articles/360001180345-Which-customer-data-is-stored-when-using-Avira-Phantom-VPN
+    title: Which customer data is stored when using Avira Phantom VPN?
+  third-parties:
+    url: https://support.avira.com/hc/en-us/articles/360016291377-VPN-data-collection-by-third-parties
+    title: VPN data collection by third parties
+  ports:
+    url: https://support.avira.com/hc/en-us/articles/360007046037-Which-ports-is-Phantom-VPN-using
+    title: Which ports is Phantom VPN using?
+  secure-connection:
+    url: https://support.avira.com/hc/en-us/articles/360000784229-Secure-your-Internet-connection-with-Avira-Phantom-VPN
+    title: Secure your Internet connection with Avira Phantom VPN
+  locations:
+    url: https://support.avira.com/hc/en-us/articles/360016291777-Virtual-locations-of-Avira-VPN
+    title: Virtual locations of Avira VPN
+  free-limits:
+    url: https://support.avira.com/hc/en-us/articles/360000309334-What-are-the-limitations-to-the-free-Avira-VPN-version
+    title: What are the limitations to the free Avira VPN version?
+  upgrade:
+    url: https://support.avira.com/hc/en-us/articles/360000793445-How-do-I-upgrade-my-Avira-Phantom-VPN-Free-to-VPN-Pro-after-the-purchase
+    title: How do I upgrade my Avira Phantom VPN Free to VPN Pro after the purchase?
+  play-store:
+    url: https://play.google.com/store/apps/details?id=com.avira.vpn
+    title: Avira Phantom VPN on Google Play
+  affiliates:
+    url: https://www.avira.com/en/partner-affiliate
+    title: Avira affiliate partner program
+  security:
+    url: https://www.gendigital.com/us/en/contact-us/report-a-potential-security-vulnerability/
+    title: Gen, report a potential security vulnerability
+  gen-leadership:
+    url: https://www.gendigital.com/us/en/leadership/
+    title: Gen leadership
+  nll-avira-closed:
+    url: https://www.sec.gov/Archives/edgar/data/849399/000084939921000010/R12.htm
+    title: NortonLifeLock annual report for fiscal 2021, acquisitions note (SEC filing)
+  investcorp-2020:
+    url: https://www.investcorp.com/investcorp-acquires-germanys-leading-cybersecurity-company-avira/
+    title: Investcorp acquires Germany's leading cybersecurity company, Avira (April 2020)
+  investcorp-2020-sale:
+    url: https://www.investcorp.com/investcorp-announces-the-sale-of-leading-cybersecurity-provider-avira-to-nortonlifelock-for-us-360-million/
+    title: Investcorp announces the sale of Avira to NortonLifeLock (December 2020)
+  hma-vpn:
+    url: https://www.hidemyass.com/en-us/index
+    title: HMA VPN
+  norton-vpn:
+    url: https://us.norton.com/products/norton-vpn
+    title: Norton VPN
+  avast-vpn:
+    url: https://www.avast.com/premium-vpn
+    title: Avast Premium VPN (formerly SecureLine VPN)
+  avg-vpn:
+    url: https://www.avg.com/en-us/secure-vpn
+    title: AVG Secure VPN
