@@ -1,0 +1,497 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Private Internet Access
+icon: private-internet-access.png
+checked: 2026-10-21
+
+criteria:
+  identity:
+    website: https://www.privateinternetaccess.com
+    legal_entity:
+      value: PIA Private Internet Access, Inc.
+      sources: [tos]
+    owner:
+      value: Kape Technologies
+      note: >-
+        Kape is controlled by Teddy Sagi through Unikmind Holdings, which held 98.5% when it took Kape
+        private in 2023.
+      sources: [kape-holding-2023, kape-brands]
+    founded:
+      value: 2009
+      sources: [kape-proposed]
+    team:
+      value: partial
+      note: There's no leadership page, but the privacy policy names the data protection officer.
+      sources: [privacy-policy, about]
+    sister_brands:
+      value: [ExpressVPN, CyberGhost, EventVPN]
+      note: >-
+        EventVPN is a free app built by ExpressVPN's team. ZenMate's users were moved to CyberGhost in
+        2023.
+      sources: [kape-brands, eventvpn-launch, zenmate]
+    acquisitions:
+      value:
+        - date: 2019-12-16
+          acquirer: Kape Technologies
+          source: kape-completion
+      note: >-
+        Announced in November 2019, when Kape agreed to buy LTMI Holdings, PIA's parent, from its
+        co-founders for about $95.5 million.
+      sources: [kape-proposed, kape-completion]
+
+  jurisdiction:
+    hq:
+      value: US
+      sources: [about, tos]
+    entities:
+      value: [US]
+      note: >-
+        PIA Private Internet Access, Inc., based in Colorado, is the only PIA company named. Its parent,
+        Kape, is incorporated in the Isle of Man.
+      sources: [tos, about, companies-house]
+
+  logging:
+    traffic:
+      value: none
+      evidence: verified
+      sources: [privacy-policy, no-logs, audit-deloitte-2025]
+    dns:
+      value: none
+      evidence: verified
+      sources: [no-logs, audit-deloitte-2025]
+    timestamps:
+      value: none
+      evidence: verified
+      sources: [no-logs, audit-deloitte-2025]
+    bandwidth:
+      value: none
+      evidence: verified
+      sources: [no-logs, audit-deloitte-2025]
+    source_ip:
+      value: none
+      evidence: verified
+      sources: [no-logs, audit-deloitte-2025]
+    proven:
+      value: [court, audit]
+      evidence: verified
+      note: >-
+        A 2016 FBI complaint said a subpoena got PIA's owner to say only that the IPs were on the US east
+        coast, and its lawyer told a 2018 trial it keeps no activity logs. Deloitte last checked the
+        servers as of October 2025.
+      sources: [fbi-2016, colby-2018, audit-deloitte-2025]
+    policy: https://www.privateinternetaccess.com/privacy-policy
+
+  transparency:
+    audits:
+      value:
+        - date: 2025-10-31
+          auditor: Deloitte
+          scope: no_logs
+          source: audit-deloitte-2025
+        - date: 2024-01-31
+          auditor: Deloitte
+          scope: no_logs
+          source: audit-deloitte-2024
+        - date: 2023-11-01
+          auditor: MASA lab, not named
+          scope: apps
+          source: masa-2023
+        - date: 2022-06-30
+          auditor: Deloitte
+          scope: no_logs
+          source: audit-2022-post
+      evidence: verified
+      note: >-
+        Each Deloitte report checks the setup at a single date, and the 2022 one was only shared with
+        customers. The Android app's MASA review is dated by PIA's November 2023 announcement.
+      sources: [audit-2025-post, audit-2024-post, audit-2022-post, masa-2023]
+    report:
+      value: regular
+      note: Quarterly, with figures up to mid-2026 when checked.
+      sources: [transparency, transparency-q2-2026]
+    canary:
+      value: none
+      note: It explained in 2016 why it doesn't run one.
+      sources: [canary-post]
+    bug_bounty:
+      value: true
+      note: Run through YesWeHack, with rewards from $50 to $1,250.
+      sources: [yeswehack, vdp]
+    incidents:
+      value:
+        - date: 2020-07-07
+          summary: >-
+            A researcher found the Linux app's kill switch didn't stop forwarded traffic, such as from
+            Docker containers, leaving outside the VPN. PIA first said it wasn't a vulnerability, then
+            fixed it in version 2.4.0 on 9 September 2020.
+          handled: well
+          source: killswitch-2020
+        - date: 2018-12-16
+          summary: >-
+            Rich Mirch reported several flaws in the Windows, macOS and Linux apps that let local
+            software gain admin or root rights. PIA acknowledged them and fixed them in its rewritten
+            desktop app, version 1.2.1, before he went public in June 2019.
+          handled: well
+          source: mirch-2019
+        - date: 2018-03-23
+          summary: >-
+            VerSprite reported a Windows app flaw that let a local user run programs as administrator.
+            PIA offered a bounty, sent a fix for testing within five days and released it on 5 April 2018.
+          handled: well
+          source: versprite-2018
+        - date: 2017-10-18
+          summary: >-
+            Nightwatch Cybersecurity found that someone on your network could crash the Android app by
+            swapping its server list for a huge file (CVE-2017-15882). PIA confirmed it in two days, paid
+            a bounty and shipped a fix within a week.
+          handled: well
+          source: nightwatch-2017
+        - date: 2016-07-01
+          summary: >-
+            PIA told users some of its Russian servers had been seized without notice, said it kept no
+            logs for them to find, and pulled out of Russia.
+          handled: well
+          source: russia-2016
+        - date: 2013-11-18
+          summary: >-
+            Its forum was hacked and the attacker reached the forum's database. PIA posted about it the
+            same day, emailed forum users to change reused passwords and moved to a new forum, kept apart
+            from the VPN.
+          handled: well
+          source: forum-2013
+      sources: [killswitch-2020, mirch-2019, versprite-2018, nightwatch-2017, russia-2016, forum-2013]
+
+  account:
+    email:
+      value: required
+      sources: [privacy-policy]
+    personal_data:
+      value: []
+      note: US buyers paying by card or similar also give their state and ZIP code for sales tax.
+      sources: [privacy-policy]
+    payment:
+      value: [card, paypal, app_store, gift_card]
+      note: >-
+        Also Apple Pay, Google Pay, Amazon Pay in some countries, and wallets like iDEAL through
+        Paymentwall. The privacy policy still mentions crypto through BitPay, but the payments page
+        doesn't list it.
+      sources: [payments, gift-cards, privacy-policy]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn, ikev2]
+      note: IKEv2 is only in the Apple TV app.
+      sources: [windows, apple-tv]
+    post_quantum:
+      value: none
+      note: Nothing on its site, help centre or open source apps mentions post-quantum key exchange.
+      sources: [settings-advanced, github]
+    kill_switch:
+      value: system
+      note: >-
+        Firewall-based and on by default on desktop, with an option to block traffic whenever the VPN's
+        off. On iOS it only covers reconnects.
+      sources: [kill-switch-windows, settings-basic, settings-ios]
+    dns:
+      value: first_party
+      sources: [settings-advanced]
+
+  infra:
+    ram_only:
+      value: all
+      evidence: verified
+      sources: [server-list, audit-deloitte-2025]
+    hosting:
+      value: mixed
+      note: In 2022 it said it was slowly moving its fleet to colocated servers of its own, without saying how far it's got.
+      sources: [audit-2022-post]
+    virtual_locations:
+      value: disclosed
+      note: >-
+        Labelled as geo-located regions in the apps. The server list the apps use marks 63 of the 113
+        countries as virtual only.
+      sources: [server-list, serverlist-api, settings-android]
+    servers:
+      value: null
+      note: PIA lists 180 locations in 113 countries, but no server count.
+      sources: [server-list]
+    countries:
+      value: 113
+      sources: [server-list, serverlist-api]
+
+  features:
+    connections:
+      value: unlimited
+      note: The terms let it step in if it thinks unlimited devices are being abused, such as by resale.
+      sources: [devices, tos]
+    multihop:
+      value: true
+      note: On desktop, through a PIA-run Shadowsocks proxy or a SOCKS5 proxy in front of the VPN server.
+      sources: [multi-hop]
+    obfuscation:
+      value: [shadowsocks, amneziawg]
+      note: Shadowsocks on desktop, plus AmneziaWG on Linux and macOS since version 3.8.0 in October 2026.
+      sources: [multi-hop, desktop-changelog]
+    port_forwarding:
+      value: true
+      note: Not on its US servers.
+      sources: [settings-android, serverlist-api]
+    split_tunnel:
+      value: true
+      note: Not in the iOS app.
+      sources: [settings-basic, settings-android, settings-ios]
+    blocking:
+      value: [ads, trackers, malware]
+      note: Through MACE, its DNS blocklist, which isn't in the iOS app.
+      sources: [mace]
+
+  clients:
+    platforms:
+      value: [windows, macos, linux_gui, linux_cli, ios, android, browser]
+      note: >-
+        Routers are only supported by setting them up by hand with OpenVPN. The Chrome and Firefox
+        extensions are proxies for the browser alone.
+      sources: [download, cli, router, extensions]
+    open_source:
+      value: all
+      note: >-
+        The desktop, Android and iOS apps are MIT licensed on GitHub. The browser extensions' published
+        source stops at version 3.1.0 from 2021.
+      sources: [github, extension-source]
+    telemetry:
+      value: opt_in
+      note: >-
+        Anonymous connection statistics are only sent if you tick "Help improve PIA", though its no-logs
+        page talks of opting out.
+      sources: [privacy-policy, settings-basic, no-logs]
+    trackers:
+      value: 0
+      note: In version 4.0.18 from October 2024, the newest archived report.
+      sources: [exodus]
+    fdroid:
+      value: true
+      sources: [fdroid]
+
+  pricing:
+    monthly:
+      value: { amount: 11.95, currency: USD }
+      sources: [pricing]
+    best:
+      value: { amount: 2.03, currency: USD }
+      note: An intro price for the first 39 months. It then renews at about $2.19 a month.
+      sources: [pricing]
+    best_term:
+      value: 39
+      note: A 3-year plan with 3 months added.
+      sources: [pricing]
+    renewal_increase:
+      value: 8
+      note: The 39-month plan is $79, then renews at $79 every 3 years.
+      sources: [pricing]
+    free_tier:
+      value: false
+      sources: [pricing]
+    refund_days:
+      value: 30
+      note: >-
+        The pricing page limits it to new subscribers, while the terms also allow it on renewals. App
+        store and gift card purchases are refunded by whoever sold them.
+      sources: [tos, pricing]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: Its features page promises "unbreakable VPN encryption".
+      sources: [features]
+    affiliates:
+      value: true
+      note: Its affiliate page offers up to 33% commission on new sales.
+      sources: [affiliates]
+    review_sites:
+      value: true
+      note: Its owner, Kape, also owns VPN review sites such as vpnMentor and Safety Detectives, which disclose it.
+      sources: [kape-brands, vpnmentor, safety-detectives]
+    activism:
+      value: true
+      note: >-
+        It lists groups it has backed, such as the EFF, Fight for the Future and the Free Software
+        Foundation, without saying when or how much.
+      sources: [supported, about]
+
+refs:
+  about:
+    url: https://www.privateinternetaccess.com/about-us
+    title: About Private Internet Access
+  privacy-policy:
+    url: https://www.privateinternetaccess.com/privacy-policy
+    title: Private Internet Access privacy policy
+  tos:
+    url: https://www.privateinternetaccess.com/terms-of-service
+    title: Private Internet Access terms of service
+  no-logs:
+    url: https://www.privateinternetaccess.com/vpn-features/no-logs-vpn
+    title: 'No-logs VPN: PIA never records your online activity'
+  pricing:
+    url: https://www.privateinternetaccess.com/buy-vpn-online
+    title: Private Internet Access pricing
+  features:
+    url: https://www.privateinternetaccess.com/vpn-features
+    title: PIA VPN features
+  server-list:
+    url: https://www.privateinternetaccess.com/vpn-server
+    title: PIA VPN server locations
+  serverlist-api:
+    url: https://serverlist.piaservers.net/vpninfo/servers/v6
+    title: PIA server list used by its apps
+  download:
+    url: https://www.privateinternetaccess.com/download
+    title: Download PIA VPN
+  windows:
+    url: https://www.privateinternetaccess.com/download/windows-vpn
+    title: PIA VPN for Windows
+  router:
+    url: https://helpdesk.privateinternetaccess.com/hc/en-us/articles/46776937191963-Can-I-Use-the-Private-Internet-Access-Service-with-My-Router
+    title: Can I use the Private Internet Access service with my router?
+  cli:
+    url: https://helpdesk.privateinternetaccess.com/hc/en-us/articles/46815372532123-PIA-Desktop-Command-Line-Interface
+    title: 'PIA desktop: command line interface'
+  extensions:
+    url: https://helpdesk.privateinternetaccess.com/hc/en-us/articles/46701445998235-How-Do-Your-Browser-Extensions-Work
+    title: How do your browser extensions work?
+  apple-tv:
+    url: https://helpdesk.privateinternetaccess.com/hc/en-us/articles/53597731472027-How-to-Install-and-Use-PIA-on-Apple-TV
+    title: How to install and use PIA on Apple TV
+  settings-basic:
+    url: https://helpdesk.privateinternetaccess.com/hc/en-us/articles/46777033424923-Understanding-Basic-Settings-on-the-PIA-Client
+    title: Understanding basic settings on the PIA client
+  settings-advanced:
+    url: https://helpdesk.privateinternetaccess.com/hc/en-us/articles/46813740976667-Understanding-Advanced-Settings-on-the-Desktop-PIA-Client
+    title: Understanding advanced settings on the desktop PIA client
+  settings-android:
+    url: https://helpdesk.privateinternetaccess.com/hc/en-us/articles/46817064763035-Understanding-Android-Settings-and-Protocols
+    title: Understanding Android settings and protocols
+  settings-ios:
+    url: https://helpdesk.privateinternetaccess.com/hc/en-us/articles/46816425727259-Understanding-iOS-Settings-and-Protocols-in-the-PIA-App
+    title: Understanding iOS settings and protocols in the PIA app
+  kill-switch-windows:
+    url: https://helpdesk.privateinternetaccess.com/hc/en-us/articles/46776990337947-Windows-Kill-Switch-Settings
+    title: 'Windows: kill switch settings'
+  multi-hop:
+    url: https://helpdesk.privateinternetaccess.com/hc/en-us/articles/46776477273627-Understanding-the-Multi-Hop-Feature
+    title: Understanding the Multi-Hop feature
+  mace:
+    url: https://helpdesk.privateinternetaccess.com/hc/en-us/articles/46612472289819-What-Is-MACE
+    title: What is MACE?
+  devices:
+    url: https://helpdesk.privateinternetaccess.com/hc/en-us/articles/46610823773851-How-many-devices-can-I-use-simultaneously-while-connected-to-the-VPN-service
+    title: How many devices can I use simultaneously?
+  payments:
+    url: https://helpdesk.privateinternetaccess.com/hc/en-us/articles/46701550179995-What-Payment-Methods-Do-You-Accept
+    title: What payment methods do you accept?
+  gift-cards:
+    url: https://helpdesk.privateinternetaccess.com/hc/en-us/articles/46776692872475-How-Do-I-Redeem-a-Gift-Card-Code-for-My-Subscription
+    title: How do I redeem a gift card code for my subscription?
+  desktop-changelog:
+    url: https://github.com/pia-foss/desktop/blob/master/CHANGELOG.md
+    title: PIA desktop app changelog (GitHub)
+  github:
+    url: https://github.com/pia-foss
+    title: pia-foss on GitHub
+  extension-source:
+    url: https://github.com/pia-foss/extension-firefox
+    title: pia-foss/extension-firefox on GitHub
+  fdroid:
+    url: https://f-droid.org/en/packages/com.privateinternetaccess.android/
+    title: Private Internet Access VPN on F-Droid
+  exodus:
+    url: https://reports.exodus-privacy.eu.org/en/reports/com.privateinternetaccess.android/latest/
+    title: Exodus Privacy report for com.privateinternetaccess.android
+  affiliates:
+    url: https://www.privateinternetaccess.com/affiliate-program
+    title: PIA affiliate program
+  supported:
+    url: https://www.privateinternetaccess.com/companies-we-support
+    title: Companies PIA has supported
+  transparency:
+    url: https://www.privateinternetaccess.com/transparency-report
+    title: Private Internet Access transparency report
+  transparency-q2-2026:
+    url: https://www.privateinternetaccess.com/blog/transparency-report-q2-2026/
+    title: Private Internet Access transparency report Q2 2026
+  canary-post:
+    url: https://www.privateinternetaccess.com/blog/why-pia-doesnt-fly-a-warrant-canary-its-solving-the-wrong-problem/
+    title: "Why PIA doesn't fly a warrant canary: it's solving the wrong problem"
+  vdp:
+    url: https://www.privateinternetaccess.com/vulnerability-disclosure-program
+    title: PIA vulnerability disclosure program
+  yeswehack:
+    url: https://yeswehack.com/programs/private-internet-access-bug-bounty-program
+    title: Private Internet Access bug bounty program (YesWeHack)
+  audit-deloitte-2025:
+    url: https://assets-cms.privateinternetaccess.com/files/reports/CON-003_PIA_Report_ISAE_3000_(signed).pdf
+    title: Deloitte, independent limited assurance report on PIA's no-logs safeguards (2025)
+  audit-2025-post:
+    url: https://www.privateinternetaccess.com/blog/security-audit-2025/
+    title: Third Deloitte audit highlights PIA's transparency commitment
+  audit-deloitte-2024:
+    url: https://www.privateinternetaccess.com/audit/DeloitteNoLogsAudit2024.pdf
+    title: Deloitte, independent limited assurance report on PIA's no-logs safeguards (2024)
+  masa-2023:
+    url: https://www.privateinternetaccess.com/blog/pia-masa-verified/
+    title: "PIA's Android app assessed in Google security audit"
+  nightwatch-2017:
+    url: https://wwws.nightwatchcybersecurity.com/2017/10/25/advisory-pia-android-app-cve-2017-15882/
+    title: Nightwatch Cybersecurity, PIA Android app can be crashed via large download (CVE-2017-15882)
+  forum-2013:
+    url: https://www.privateinternetaccess.com/blog/an-eventful-morning/
+    title: An eventful morning (PIA, 2013)
+  audit-2024-post:
+    url: https://www.privateinternetaccess.com/blog/security-audit-2024/
+    title: PIA concludes second security audit
+  audit-2022-post:
+    url: https://www.privateinternetaccess.com/blog/privacy-audit/
+    title: PIA announces completion of independent audit conducted by a Big Four firm
+  fbi-2016:
+    url: https://torrentfreak.com/vpn-providers-no-logging-claims-tested-in-fbi-case-160312/
+    title: VPN provider's no-logging claims tested in FBI case (TorrentFreak)
+  colby-2018:
+    url: https://torrentfreak.com/private-internet-access-no-logging-claims-proven-true-again-in-court-180606/
+    title: Private Internet Access' "no-logging" claims proven true again in court (TorrentFreak)
+  killswitch-2020:
+    url: https://github.com/sickcodes/security/blob/master/advisories/SICK-2020-001.md
+    title: SICK-2020-001, PIA Linux kill switch bypass (CVE-2020-15590)
+  mirch-2019:
+    url: https://github.com/mirchr/security-research/blob/master/vulnerabilities/PIA/CVE-2019-12572.txt
+    title: Rich Mirch, PIA Windows privilege escalation (CVE-2019-12572)
+  versprite-2018:
+    url: https://github.com/VerSprite/research/blob/master/advisories/VS-2018-019.md
+    title: VerSprite, PIA for Windows privilege escalation (CVE-2018-10190)
+  russia-2016:
+    url: https://www.theregister.com/2016/07/13/the_exodus_begins_vpn_provider_leaves_russia_after_servers_seized/
+    title: VPN provider claims Russia seized its servers (The Register)
+  kape-proposed:
+    url: https://www.investegate.co.uk/announcement/rns/kape-technologies--kape/proposed-acquisition-of-private-internet-access/5976643
+    title: Kape Technologies, proposed acquisition of Private Internet Access (RNS, 2019)
+  kape-completion:
+    url: https://www.investegate.co.uk/announcement/rns/kape-technologies--kape/completion-of-private-internet-access-acquisition/5834879
+    title: Kape Technologies, completion of Private Internet Access acquisition (RNS, 2019)
+  kape-holding-2023:
+    url: https://www.investegate.co.uk/announcement/rns/kape-technologies--kape/holding-s-in-company/7541123
+    title: Kape Technologies, holding(s) in company (RNS, May 2023)
+  kape-brands:
+    url: https://www.kape.com/our-brands/
+    title: Kape, our brands
+  companies-house:
+    url: https://find-and-update.company-information.service.gov.uk/company/FC038564
+    title: Kape Technologies (Companies House)
+  eventvpn-launch:
+    url: https://www.expressvpn.com/blog/free-vpn-eventvpn/
+    title: 'EventVPN: A free VPN from the team behind ExpressVPN'
+  zenmate:
+    url: https://zenmate.com/blog/zenmate-changes
+    title: Important changes to ZenMate
+  vpnmentor:
+    url: https://www.vpnmentor.com/about-us/
+    title: About vpnMentor
+  safety-detectives:
+    url: https://www.safetydetectives.com/
+    title: Safety Detectives homepage
