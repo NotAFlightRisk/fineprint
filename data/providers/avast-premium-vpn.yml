@@ -1,0 +1,290 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Avast Premium VPN
+icon: avast-premium-vpn.svg
+checked: 2026-10-21
+
+criteria:
+  identity:
+    website:
+      value: https://www.avast.com/premium-vpn
+      sources: [home]
+    legal_entity:
+      value: Avast Software s.r.o.
+      note: Controller under the privacy policy in Europe. Who sells it depends on where you live, such as Gen Digital Inc. in the Americas and NortonLifeLock Ireland Limited in the UK and Ireland.
+      sources: [privacy-policy, eula]
+    owner:
+      value: Gen Digital
+      sources: [gen-avast-merger, about]
+    founded:
+      value: 2013
+      note: Launched as Avast SecureLine in June 2013. Avast itself dates from 1988.
+      sources: [launch-2013, about]
+    team:
+      value: partial
+      note: Gen's executives are named, but no one running the VPN is.
+      sources: [about, gen-leadership]
+    sister_brands:
+      value: [HMA VPN, Norton VPN, AVG Secure VPN, Avira Phantom VPN]
+      sources: [hma, norton-vpn, avg-vpn, avira-vpn]
+    acquisitions:
+      value:
+        - date: 2022-09-12
+          acquirer: NortonLifeLock (now Gen Digital)
+          source: gen-avast-merger
+      note: NortonLifeLock renamed itself Gen Digital after merging with Avast.
+
+  jurisdiction:
+    hq:
+      value: CZ
+      note: Avast Software s.r.o. in Prague controls the data. Its parent, Gen Digital Inc., is in the US.
+      sources: [privacy-policy, eula]
+    entities:
+      value: [CZ, US, IE, GB, JP, SG]
+      sources: [privacy-policy, eula]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [vpn-policy]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [vpn-policy]
+    timestamps:
+      value: aggregate
+      evidence: claimed
+      note: The apps' connect and disconnect events are kept for 12 months. The policy says it could only tie them to you if you add personal data, such as in a crash report.
+      sources: [vpn-policy]
+    bandwidth:
+      value: aggregate
+      evidence: claimed
+      note: A running total of data transferred is kept for 18 months to spot heavy users.
+      sources: [vpn-policy]
+    source_ip:
+      value: none
+      evidence: claimed
+      sources: [vpn-policy]
+    proven:
+      value: []
+      note: No audit, court case or raid has tested the no-logs claim.
+    policy: https://www.avast.com/en-us/vpn-policy
+
+  transparency:
+    audits:
+      value: []
+      note: No audit of the VPN has been published.
+    report:
+      value: none
+      note: Its transparency report only counts customers' own privacy requests, not the legal demands Gen's privacy notice says it answers.
+      sources: [transparency, gen-privacy]
+    canary:
+      value: none
+      sources: [legal]
+    bug_bounty:
+      value: true
+      note: Through Gen Digital's vulnerability programme, which says not every report qualifies for a reward.
+      sources: [security]
+    incidents:
+      value:
+        - date: 2024-06-27
+          summary: The FTC charged that Avast sold browsing data from its antivirus and browser extensions to more than 100 third parties through its Jumpshot subsidiary, while claiming its software blocked tracking. Avast began winding Jumpshot down in January 2020 once users questioned it, and in 2024 agreed to pay $16.5 million and stop selling browsing data for advertising.
+          handled: poorly
+          source: ftc-order
+        - date: 2019-09-23
+          summary: Attackers got into Avast's internal network with stolen credentials through a temporary VPN profile left enabled without 2FA, which Avast believed was aimed at CCleaner. Avast spotted it on 23 September, worked with Czech intelligence, re-signed CCleaner and disclosed it in detail on 21 October.
+          handled: well
+          source: abiss
+      sources: [ftc-complaint, jumpshot-wind-down]
+
+  account:
+    email:
+      value: required
+      sources: [vpn-policy]
+    personal_data:
+      value: []
+      note: Card payments take billing and contact details, and Gen's privacy notice says some countries outside the US also take a national ID or tax number.
+      sources: [gen-privacy]
+    payment:
+      value: [card, paypal, app_store]
+      note: Gen's privacy notice names cards and PayPal, and the iOS and Android apps are sold through their app stores.
+      sources: [gen-privacy, store]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn, proprietary, other]
+      note: Mimic is Avast's own protocol for networks that block VPNs. Apple devices also get IPsec.
+      sources: [faq, mimic]
+    post_quantum:
+      value: optional
+      note: On by default with the Mimic protocol, and a setting with WireGuard.
+      sources: [faq]
+    kill_switch:
+      value: app
+      sources: [faq]
+    dns:
+      value: first_party
+      sources: [vpn-policy]
+
+  infra:
+    ram_only: null
+    hosting:
+      value: null
+      note: Says it runs on "dedicated hardware", but not whether it owns it.
+      sources: [home]
+    virtual_locations:
+      value: disclosed
+      note: Eight of the listed locations are marked virtual.
+      sources: [home]
+    servers:
+      value: null
+      note: Only says 100+ server locations, with no server count.
+      sources: [home]
+    countries:
+      value: 74
+      note: The location list has 116 cities across 74 countries.
+      sources: [home]
+
+  features:
+    connections:
+      value: 10
+      sources: [faq]
+    multihop:
+      value: true
+      note: Called Double VPN.
+      sources: [home]
+    obfuscation:
+      value: [proprietary]
+      note: The Mimic protocol, for countries that restrict VPNs.
+      sources: [faq, mimic]
+    split_tunnel:
+      value: true
+      sources: [faq]
+    blocking:
+      value: [trackers]
+      sources: [faq]
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android]
+      note: Also Android TV, plus Chrome and Firefox extensions that only control the desktop app.
+      sources: [home, vpn-policy]
+    open_source: none
+    telemetry:
+      value: forced
+      evidence: claimed
+      note: The apps send connection and usage events kept for 12 and 18 months. Firebase and AppsFlyer can be turned off in settings, but the policy offers no opt-out for the rest.
+      sources: [vpn-policy]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: null
+      note: The pricing page has no monthly plan, only 1, 2 and 3 years.
+      sources: [home]
+    best:
+      value: { amount: 3.99, currency: USD }
+      note: USD, as the price changes with your location. For 10 devices, billed $95.76 for 2 years. The 3-year plan works out the same per month, and the store page asks $4.39 for both.
+      sources: [home, store]
+    best_term:
+      value: 24
+      sources: [home]
+    renewal_increase:
+      value: 109
+      note: Renews at $99.99 a year, the renewal price the page quotes for every plan.
+      sources: [home, subscription]
+    free_tier:
+      value: false
+      note: Only a 60-day free trial, which needs payment details.
+      sources: [home]
+    refund_days:
+      value: 30
+      sources: [subscription]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: Claims "bank-grade encryption" and that it blocks "governments, hackers, and anyone else from spying on you".
+      sources: [home]
+    affiliates:
+      value: true
+      note: Pays affiliates commission on all Avast product sales.
+      sources: [affiliates]
+    activism: null
+
+refs:
+  home:
+    url: https://www.avast.com/en-us/premium-vpn
+    title: Avast Premium VPN (formerly SecureLine VPN)
+  vpn-policy:
+    url: https://www.avast.com/en-us/vpn-policy
+    title: VPN Policy (May 2026)
+  privacy-policy:
+    url: https://www.avast.com/en-us/privacy-policy
+    title: Avast Privacy Center
+  gen-privacy:
+    url: https://privacy.gendigital.com/en/
+    title: Gen General Privacy Notice (March 2026)
+  eula:
+    url: https://www.avast.com/en-us/eula
+    title: End User License Agreement
+  store:
+    url: https://www.avast.com/en-us/store
+    title: Avast store
+  transparency:
+    url: https://www.avast.com/transparency-report
+    title: Transparency report (August 2025)
+  legal:
+    url: https://www.avast.com/en-us/legal
+    title: Legal
+  subscription:
+    url: https://www.avast.com/subscription-details
+    title: Subscription details
+  faq:
+    url: https://support.avast.com/en-us/article/secureline-vpn-faq/
+    title: Avast VPN FAQs
+  mimic:
+    url: https://businesshelp.avast.com/Content/Products/AfB_Antivirus/ConfiguringSettings/SecureLineVPN.htm
+    title: Avast Business help, SecureLine VPN settings
+  about:
+    url: https://www.avast.com/en-us/about
+    title: About Avast
+  gen-leadership:
+    url: https://www.gendigital.com/us/en/leadership/
+    title: Gen leadership
+  security:
+    url: https://www.gendigital.com/us/en/contact-us/report-a-potential-security-vulnerability/
+    title: Gen, report a potential security vulnerability
+  affiliates:
+    url: https://www.avast.com/en-us/business/affiliates
+    title: Join the Avast Affiliate Program
+  launch-2013:
+    url: https://web.archive.org/web/20160818192455/https://press.avast.com/avast-secureline-answers-high-demand-for-secure-wifi
+    title: avast! SecureLine answers high demand for secure WiFi (June 2013, archived)
+  gen-avast-merger:
+    url: https://newsroom.gendigital.com/2022-09-12-NortonLifeLock-Completes-Merger-with-Avast
+    title: NortonLifeLock completes merger with Avast
+  ftc-order:
+    url: https://www.ftc.gov/news-events/news/press-releases/2024/06/ftc-finalizes-order-avast-banning-it-selling-or-licensing-web-browsing-data-advertising-requiring-it
+    title: FTC finalizes order with Avast banning it from selling or licensing web browsing data for advertising (June 2024)
+  ftc-complaint:
+    url: https://www.ftc.gov/news-events/news/press-releases/2024/02/ftc-order-will-ban-avast-selling-browsing-data-advertising-purposes-require-it-pay-165-million-over
+    title: FTC order will ban Avast from selling browsing data for advertising purposes (February 2024)
+  jumpshot-wind-down:
+    url: https://newsroom.gendigital.com/2020-01-30-Avast-to-Commence-Wind-Down-of-Subsidiary-Jumpshot
+    title: Avast to commence wind down of subsidiary Jumpshot (January 2020)
+  abiss:
+    url: https://blog.avast.com/ccleaner-fights-off-cyberespionage-attempt-abiss
+    title: Avast fights off cyber-espionage attempt, Abiss (October 2019)
+  hma:
+    url: https://www.hidemyass.com/en-us/index
+    title: HMA VPN
+  norton-vpn:
+    url: https://us.norton.com/products/norton-vpn
+    title: Norton VPN
+  avg-vpn:
+    url: https://www.avg.com/en-us/secure-vpn
+    title: AVG Secure VPN
+  avira-vpn:
+    url: https://www.avira.com/en/free-vpn
+    title: Avira Phantom VPN
