@@ -37,6 +37,7 @@
   );
   const unfiltered = $derived(scored && filters.must.length ? filter(scored, []) : []);
 
+  const examples = new Intl.ListFormat('en-GB', { type: 'disjunction' }).format(suggestions);
   const plural = (count: number, noun: string) => `${count} ${noun}${count === 1 ? '' : 's'}`;
   const quote = (words: string[]) => words.map((word) => `“${word}”`).join(' or ');
   const heading = $derived(
@@ -99,14 +100,6 @@
 
 <svelte:window onkeydown={shortcut} />
 
-{#snippet tries()}
-  <ul class="suggestions">
-    {#each suggestions as suggestion (suggestion)}
-      <li><a href="?q={encodeURIComponent(suggestion.toLowerCase())}">{suggestion}</a></li>
-    {/each}
-  </ul>
-{/snippet}
-
 <Seo
   title="Search every VPN, value and source"
   description="Search {stats.providers} VPN providers on {stats.criteria} privacy criteria. Find who takes Monero, runs WireGuard or has been audited, with a source behind every value."
@@ -126,7 +119,7 @@
   <input
     id="query"
     type="search"
-    placeholder="Try monero, wireguard or switzerland"
+    placeholder="Try {examples}"
     autocomplete="off"
     autocapitalize="off"
     spellcheck="false"
@@ -145,15 +138,7 @@
   <MustHave bind:selected={filters.must} />
 </div>
 
-{#if idle}
-  <section class="section try" aria-labelledby="try">
-    <div class="lead">
-      <h2 id="try">Try</h2>
-      <p>Or anything you'd look for on a provider's page.</p>
-    </div>
-    {@render tries()}
-  </section>
-{:else}
+{#if !idle}
   <section class="results" aria-labelledby="count">
     <header>
       <h2 id="count">{index ? heading : 'Searching'}</h2>
@@ -190,7 +175,11 @@
     {:else}
       <div class="empty">
         <p>Nothing matches. Check the spelling, or try one of these.</p>
-        {@render tries()}
+        <ul class="suggestions">
+          {#each suggestions as suggestion (suggestion)}
+            <li><a href="?q={encodeURIComponent(suggestion.toLowerCase())}">{suggestion}</a></li>
+          {/each}
+        </ul>
       </div>
     {/if}
   </section>
@@ -232,6 +221,7 @@
       font-size: var(--text-lg);
       font-weight: 500;
       letter-spacing: -0.02em;
+      text-overflow: ellipsis;
 
       @media (max-width: 40rem) {
         font-size: var(--text-md);
@@ -294,14 +284,9 @@
     margin-left: auto;
   }
 
-  .try {
-    margin-top: var(--space-6);
-  }
-
   .suggestions {
     display: flex;
     flex-wrap: wrap;
-    align-content: start;
     gap: var(--space-2);
     margin: 0;
     padding: 0;

@@ -9,7 +9,7 @@ type Sort = keyof typeof sorts;
 export const suggestions = [
   'Monero',
   'WireGuard',
-  'Port forwarding',
+  'port forwarding',
   'Switzerland',
   'Kape',
   'Cure53'
