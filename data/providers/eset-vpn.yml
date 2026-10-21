@@ -1,0 +1,313 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: ESET VPN
+icon: eset-vpn.png
+checked: 2026-10-21
+
+criteria:
+  identity:
+    website:
+      value: https://www.eset.com/us/home/eset-vpn/
+      sources: [home]
+    legal_entity:
+      value: ESET, spol. s r.o.
+      note: Licenses the app and controls the data under its EULA and privacy policy. In the US you buy from ESET North America in San Diego.
+      sources: [eula, privacy-policy, returns]
+    owner:
+      value: null
+      note: No parent company. The Slovak business register lists six people as its owners, among them CEO Richard Marko.
+      sources: [register, about]
+    founded:
+      value: 2023
+      note: Announced on 15 November 2023 as part of ESET HOME Security Ultimate. Premium plans got it in October 2025.
+      sources: [launch, premium-launch]
+    team:
+      value: public
+      note: ESET's CEO is named on its site, and its owners and directors in the Slovak business register.
+      sources: [about, register]
+    sister_brands:
+      value: []
+      sources: [legal-hub]
+    acquisitions:
+      value: []
+      note: ESET, spol. s r.o. has been registered in Bratislava since 1992 and is still owned by individuals.
+      sources: [register]
+
+  jurisdiction:
+    hq:
+      value: SK
+      sources: [eula, register]
+    entities:
+      value: [SK, US]
+      note: ESET has offices in many more countries. Only the companies named in the VPN's own documents are listed.
+      sources: [eula, returns]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      note: The VPN page says its no-logs policy "guarantees that your online activities are never tracked or stored".
+      sources: [nologs-policy, no-logs]
+    dns:
+      value: none
+      evidence: claimed
+      note: Its no-logs policy says the sites you visit aren't stored. DNS isn't mentioned on its own.
+      sources: [nologs-policy]
+    timestamps:
+      value: temporary
+      evidence: claimed
+      note: Connection times sit in server memory while you're connected and are discarded when you disconnect.
+      sources: [nologs-policy]
+    bandwidth:
+      value: aggregate
+      evidence: claimed
+      note: A running total of bytes uploaded and downloaded over 30 days is kept centrally.
+      sources: [nologs-policy]
+    source_ip:
+      value: none
+      evidence: claimed
+      note: The VPN doesn't store it, though the privacy policy records your IP each time you log in to the ESET HOME account you need to activate it.
+      sources: [nologs-policy, privacy-policy, faq-download]
+    proven:
+      value: []
+      note: No audit, court case or raid involving ESET VPN was found.
+      sources: [vpn-help]
+    policy:
+      value: https://help.eset.com/evpn/1/en-US/nologs_policy.html
+      note: ESET VPN's own no-logs policy. Its privacy policy link on ESET's legal hub redirects to the general ESET HOME policy.
+      sources: [legal-hub]
+
+  transparency:
+    audits:
+      value: []
+      sources: [vpn-help]
+    report:
+      value: none
+      sources: [privacy-policy]
+    canary:
+      value: none
+      sources: [legal-hub]
+    bug_bounty:
+      value: false
+      note: ESET takes vulnerability reports, but confirmed ones are rewarded with a goodie bag rather than money.
+      sources: [vuln]
+    incidents:
+      value: []
+      note: None found involving the VPN or its users.
+      sources: [changelog]
+
+  account:
+    email:
+      value: required
+      note: Activation codes are sent from an ESET HOME account, which needs an email address.
+      sources: [faq-download, privacy-policy]
+    personal_data:
+      value: [name]
+      note: The ESET HOME account asks for your full name and country.
+      sources: [privacy-policy]
+    payment:
+      value: null
+      note: Neither the VPN page, the plans page nor the refund policy lists the ways to pay.
+      sources: [plans, returns]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn, ikev2]
+      note: OpenVPN can also run inside Stunnel ("Stealth") or a WebSocket ("Wstunnel").
+      sources: [home]
+    post_quantum:
+      value: none
+      note: Not mentioned on the VPN page or in the app's changelog.
+      sources: [changelog, home]
+    kill_switch:
+      value: system
+      note: Desktop apps only. It's a firewall that blocks all traffic if the VPN drops, with an Always On setting.
+      sources: [kill-switch, changelog]
+    dns:
+      value: null
+      note: The VPN page promises DNS leak protection but doesn't say whose DNS servers answer.
+      sources: [no-logs]
+
+  infra:
+    ram_only:
+      value: null
+      sources: [vpn-help]
+    hosting:
+      value: null
+      note: ESET doesn't say who runs the VPN servers, and its subprocessor list names no VPN provider.
+      sources: [processors]
+    virtual_locations:
+      value: null
+      note: The location list includes one called "Fake Antarctica", but ESET doesn't say where any server physically sits.
+      sources: [countries]
+    servers:
+      value: null
+      note: ESET lists countries, not a server count.
+      sources: [countries]
+    countries:
+      value: 70
+      note: On Ultimate. ESET says 71, counting a location called Fake Antarctica. Premium lists 41 countries.
+      sources: [countries, faq-locations]
+
+  features:
+    connections:
+      value: 3
+      note: On Premium for up to 10 devices. Ultimate allows 10, or 25 when bought for more than 10 devices.
+      sources: [faq-devices]
+    multihop:
+      value: false
+      sources: [vpn-help, launch]
+    obfuscation:
+      value: [stunnel]
+      note: OpenVPN can also be wrapped in a WebSocket with Wstunnel.
+      sources: [home]
+    port_forwarding:
+      value: false
+      sources: [vpn-help, launch]
+    split_tunnel:
+      value: true
+      note: Desktop and Android only.
+      sources: [split-tunnel, vpn-help]
+    blocking:
+      value: []
+      sources: [launch, vpn-help]
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android, router]
+      note: Routers get a WireGuard or OpenVPN config from ESET HOME, and only on Ultimate.
+      sources: [faq-platforms, router]
+    open_source:
+      value: none
+      note: The EULA says the software is supplied only as executable object code.
+      sources: [eula]
+    telemetry:
+      value: opt_in
+      evidence: claimed
+      note: Crash reports and the Customer Experience Improvement Program are opt-in. The policy also says ESET processes aggregated usage statistics.
+      sources: [privacy-policy]
+    fdroid:
+      value: false
+      sources: [play]
+
+  pricing:
+    monthly:
+      value: null
+      note: Not sold on its own, and the bundles that include it only come in 1 to 3 year terms.
+      sources: [faq-separately, plans]
+    best:
+      value: { amount: 5.33, currency: USD }
+      note: ESET VPN isn't sold separately. This is ESET HOME Security Premium for one device, $191.98 for 3 years, which covers the VPN on 3 devices.
+      sources: [plans, faq-separately, faq-devices]
+    best_term:
+      value: 36
+      sources: [plans]
+    renewal_increase:
+      value: null
+      note: The plans page says prices are "valid for the first term only" but doesn't give the renewal price.
+      sources: [plans]
+    free_tier:
+      value: false
+      sources: [plans]
+    refund_days:
+      value: 30
+      sources: [returns]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: Promises "complete privacy and anonymity" and that online activity is "never tracked or stored".
+      sources: [no-logs]
+    affiliates:
+      value: true
+      note: Affiliates get 20% or more of each sale.
+      sources: [affiliates]
+    review_sites:
+      value: false
+      sources: [about]
+    activism:
+      value: null
+      note: ESET's about page points to education and science work. No privacy causes were found.
+      sources: [about]
+
+refs:
+  nologs-policy:
+    url: https://help.eset.com/evpn/1/en-US/nologs_policy.html
+    title: ESET VPN no logs policy
+  home:
+    url: https://www.eset.com/us/home/eset-vpn/
+    title: ESET VPN
+  no-logs:
+    url: https://www.eset.com/us/home/eset-vpn/#enhanced-privacy--anonymity
+    title: ESET VPN, enhanced privacy and anonymity
+  kill-switch:
+    url: https://www.eset.com/us/home/eset-vpn/#robust-security
+    title: ESET VPN, robust security
+  split-tunnel:
+    url: https://www.eset.com/us/home/eset-vpn/#user-control--customization
+    title: ESET VPN, user control and customisation
+  faq-download:
+    url: https://www.eset.com/us/home/eset-vpn/#how-to-download-eset-vpn
+    title: ESET VPN FAQ, how to download ESET VPN
+  faq-locations:
+    url: https://www.eset.com/us/home/eset-vpn/#how-many-different-vpn-server-locations-does-eset-vpn-offer
+    title: ESET VPN FAQ, server locations
+  faq-devices:
+    url: https://www.eset.com/us/home/eset-vpn/#how-many-vpns-will-i-get-after-purchasing
+    title: ESET VPN FAQ, how many VPNs you get
+  faq-platforms:
+    url: https://www.eset.com/us/home/eset-vpn/#what-devices-does-eset-vpn-support
+    title: ESET VPN FAQ, supported devices
+  faq-separately:
+    url: https://www.eset.com/us/home/eset-vpn/#can-i-buy-eset-vpn-separately
+    title: ESET VPN FAQ, buying ESET VPN separately
+  vpn-help:
+    url: https://help.eset.com/evpn/1/en-US/
+    title: ESET VPN online help
+  eula:
+    url: https://help.eset.com/evpn/1/en-US/eula.html
+    title: ESET VPN End User License Agreement (November 2023)
+  privacy-policy:
+    url: https://help.eset.com/home_eset/en-US/privacy_policy.html
+    title: ESET HOME privacy policy (September 2024)
+  legal-hub:
+    url: https://legal.eset.com/?lang=en-US
+    title: ESET Legal Hub, legal documents by product
+  processors:
+    url: https://legal.eset.com/privacy-policy/processors/?lang=en-US
+    title: ESET subprocessors
+  register:
+    url: https://www.orsr.sk/vypis.asp?ID=5994&SID=2&P=0
+    title: Slovak business register extract for ESET, spol. s r.o.
+  about:
+    url: https://www.eset.com/us/about/
+    title: About ESET
+  launch:
+    url: https://www.eset.com/us/about/newsroom/press-releases/eset-launches-all-in-one-protection-including-vpn-identity-protection-and-a-new-look-for-consumer/
+    title: ESET launches all-in-one protection, including VPN (November 2023)
+  premium-launch:
+    url: https://www.eset.com/us/about/newsroom/products/this-cybersecurity-awareness-month-eset-updates-its-home-security-portfolio-for-advanced-ransomware-and-scams/
+    title: ESET updates its HOME Security portfolio (October 2025)
+  plans:
+    url: https://www.eset.com/us/home/protection-plans/
+    title: ESET HOME Security plans
+  countries:
+    url: https://www.eset.com/us/home/eset-vpn/learn-more-about-available-countries/
+    title: ESET VPN server locations
+  returns:
+    url: https://www.eset.com/us/policy-hub/return-policy/
+    title: ESET North America refund policy
+  changelog:
+    url: https://help.eset.com/changelogs/?product=evpn
+    title: ESET VPN changelog
+  router:
+    url: https://support.eset.com/en/kb8892-eset-vpn-for-router
+    title: ESET VPN for Router
+  vuln:
+    url: https://www.eset.com/us/security-vulnerability-reporting/
+    title: ESET security vulnerability reporting
+  affiliates:
+    url: https://www.eset.com/us/business/partner/online-affiliates/
+    title: ESET affiliate program
+  play:
+    url: https://play.google.com/store/apps/details?id=com.eset.vpn
+    title: ESET VPN on Google Play
