@@ -1,0 +1,449 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: TunnelBear
+icon: tunnelbear.png
+checked: 2026-10-21
+
+criteria:
+  identity:
+    website: https://www.tunnelbear.com
+    legal_entity:
+      value: TunnelBear LLC
+      sources: [tos]
+    owner:
+      value: McAfee
+      note: >-
+        McAfee has been privately held since March 2022 by an investor group led by Advent International
+        and Permira.
+      sources: [mcafee-10k-2020, mcafee-private-2022]
+    founded:
+      value: 2011
+      note: TunnelBear said it had been running for six and a half years when McAfee bought it in 2018.
+      sources: [joins-mcafee]
+    team:
+      value: partial
+      note: Its about page lists staff by first name and last initial, with no named leadership.
+      sources: [about]
+    sister_brands:
+      value: [McAfee VPN]
+      note: >-
+        McAfee's own VPN, called Safe Connect in its 2020 annual report and now sold as McAfee VPN or
+        Secure VPN.
+      sources: [mcafee-10k-2020, mcafee-vpn]
+    acquisitions:
+      value:
+        - date: 2018-02-26
+          acquirer: McAfee
+          source: mcafee-10k-2020
+      note: >-
+        McAfee bought TunnelBear Inc.'s business for a $25 million purchase price, announced on 8 March
+        2018. TunnelBear LLC took over from the Canadian TunnelBear Inc. later that year.
+      sources: [mcafee-10k-2020, joins-mcafee, transparency-2018]
+
+  jurisdiction:
+    hq:
+      value: US
+      note: >-
+        TunnelBear LLC is a Delaware company owned by McAfee, though it's run from Toronto and its privacy
+        policy keeps your data in Canada under Canadian law.
+      sources: [privacy-policy, jurisdiction-post, mcafee-subsidiaries]
+    entities:
+      value: [US, CA]
+      note: >-
+        Tunnelbear, LLC is registered in Delaware. Its recent audits were commissioned by McAfee ULC in
+        Canada, where TunnelBear is run from.
+      sources: [mcafee-subsidiaries, cure53-2023, transparency-2018]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [privacy-policy]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [privacy-policy]
+    timestamps:
+      value: aggregate
+      evidence: claimed
+      note: >-
+        Keeps whether each account was active this month, though not when it connected, plus account and
+        payment events.
+      sources: [privacy-policy, transparency-2023]
+    bandwidth:
+      value: aggregate
+      evidence: claimed
+      note: Keeps a running total of each account's data for the current month, reset monthly, to meter free plans.
+      sources: [privacy-policy, transparency-2023]
+    source_ip:
+      value: none
+      evidence: claimed
+      note: It does keep a rough location, down to the city, for performance and abuse checks.
+      sources: [privacy-policy]
+    proven:
+      value: [audit]
+      evidence: verified
+      note: >-
+        Cure53's yearly audits test the servers' security, last in late 2024, but don't check the
+        logging policy.
+      sources: [audit-2024-post, cure53-2023]
+    policy: https://www.tunnelbear.com/privacy-policy
+
+  transparency:
+    audits:
+      value:
+        - date: 2024-11-01
+          auditor: Cure53
+          scope: full
+          source: audit-2024-post
+        - date: 2023-11-12
+          auditor: Cure53
+          scope: full
+          source: cure53-2023
+        - date: 2022-11-13
+          auditor: Cure53
+          scope: full
+          source: cure53-2022
+        - date: 2021-11-28
+          auditor: Cure53
+          scope: full
+          source: cure53-2021
+        - date: 2020-10-01
+          auditor: Cure53
+          scope: full
+          source: cure53-2020
+        - date: 2019-11-17
+          auditor: Cure53
+          scope: full
+          source: cure53-2019
+        - date: 2018-06-01
+          auditor: Cure53
+          scope: full
+          source: cure53-2018
+        - date: 2017-06-01
+          auditor: Cure53
+          scope: full
+          source: cure53-2017
+        - date: 2016-12-01
+          auditor: Cure53
+          scope: full
+          source: cure53-2017
+      evidence: verified
+      note: >-
+        Only TunnelBear's summary of the 2024 audit is public, not the report, and the 2025 one isn't out
+        yet. The 2016 and 2017 rounds share one report.
+      sources: [audit-2024-post, audit-2017-post]
+    report:
+      value: irregular
+      note: Four reports since 2018, the latest in November 2023 covering 2021 to 2023.
+      sources: [transparency-2023, transparency-2018]
+    canary:
+      value: none
+      sources: [transparency-2023]
+    bug_bounty:
+      value: null
+      note: Its site and help centre don't mention a bug bounty or a way to report security flaws.
+      sources: [help-centre]
+    incidents:
+      value:
+        - date: 2018-04-17
+          summary: >-
+            VerSprite reported a Windows app flaw that let any installed program run code as SYSTEM
+            (CVE-2018-10381). TunnelBear replied the next day and sent a fix that VerSprite confirmed on
+            20 April.
+          handled: well
+          source: versprite-2018
+      sources: [versprite-2018]
+
+  account:
+    email:
+      value: required
+      sources: [help-email]
+    personal_data:
+      value: []
+      note: Card payments also store your last name and card's last four digits for fraud checks.
+      sources: [privacy-policy]
+    payment:
+      value: [card, app_store]
+      note: Cards through Stripe on the website. It dropped PayPal, except through the app stores.
+      sources: [help-payment, help-paypal, transparency-2023]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn, ikev2]
+      note: No IKEv2 on Android.
+      sources: [help-protocols]
+    post_quantum:
+      value: none
+      note: In February 2026 it said it was working on quantum-safe connections, with nothing announced since.
+      sources: [harvest-now]
+    kill_switch:
+      value: app
+      note: >-
+        VigilantBear blocks traffic with firewall rules while the app reconnects, but not once you
+        disconnect.
+      sources: [help-vigilant, vigilantbear-post]
+    dns:
+      value: first_party
+      sources: [help-dns]
+
+  infra:
+    ram_only:
+      value: null
+      note: TunnelBear doesn't say whether its servers run from RAM.
+      sources: [features]
+    hosting:
+      value: null
+      note: TunnelBear doesn't say whether it owns or rents its servers.
+      sources: [features]
+    virtual_locations:
+      value: none
+      evidence: claimed
+      note: It says every server is physically in the country you pick.
+      sources: [features]
+    servers:
+      value: 8000
+      note: Listed as more than 8,000.
+      sources: [features, help-locations]
+    countries:
+      value: 47
+      note: Its country lists name 47, though it advertises 46+.
+      sources: [features, help-locations]
+
+  features:
+    connections:
+      value: unlimited
+      sources: [help-connections, pricing]
+    multihop:
+      value: false
+      sources: [features]
+    obfuscation:
+      value: [proprietary]
+      note: >-
+        GhostBear, which it says makes VPN traffic harder to spot without naming the method. Not on iOS
+        or the newer macOS app.
+      sources: [help-ghostbear]
+    port_forwarding:
+      value: false
+      sources: [features]
+    split_tunnel:
+      value: true
+      note: Paid plans only since late 2025. Android splits by app, iOS and macOS by website, Windows by both.
+      sources: [help-splitbear, free-changes, pricing]
+    blocking:
+      value: []
+      note: Its tracker blocker is a separate Chrome extension, not part of the VPN.
+      sources: [blocker]
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android, browser]
+      note: >-
+        No Linux app or router support. The Chrome, Firefox and Edge extensions only cover the browser.
+      sources: [help-devices, help-router, edge-extension]
+    open_source:
+      value: none
+      note: Its GitHub holds libraries and forks, not the apps.
+      sources: [github]
+    telemetry:
+      value: null
+      note: >-
+        The apps send crash reports and device details, and the policy doesn't say whether you can turn
+        this off.
+      sources: [privacy-policy]
+    trackers:
+      value: 0
+      note: In version 4.0.9 from March 2023, the newest archived report.
+      sources: [exodus]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 10.99, currency: USD }
+      sources: [pricing, pricing-data]
+    best:
+      value: { amount: 3.33, currency: USD }
+      sources: [pricing, pricing-data]
+    best_term:
+      value: 36
+      sources: [pricing-data]
+    renewal_increase:
+      value: 0
+      note: The 3-year plan is a one-off $120 payment that doesn't renew. The yearly plan is $69.99.
+      sources: [pricing-data, help-cancel]
+    free_tier:
+      value: true
+      note: >-
+        2GB a month, or 10GB in some censored countries. Since late 2025 it can't pick a country or split
+        tunnel.
+      sources: [pricing, help-free-data, bandwidth-program, free-changes]
+    refund_days:
+      value: 30
+      note: Only on the first year of an annual plan bought on its website, not monthly or app store plans.
+      sources: [tos]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        Its pricing page says it's "the only consumer VPN provider to perform annual security audits",
+        which others also do.
+      sources: [pricing]
+    affiliates:
+      value: true
+      note: Run through Impact, paying commission on each sale.
+      sources: [affiliate]
+    activism:
+      value: true
+      note: >-
+        It gives free accounts to activists through groups like Access Now and the Freedom of the Press
+        Foundation, and extra free data in censored countries.
+      sources: [freedom-hub, bandwidth-program]
+
+refs:
+  help-cancel:
+    url: https://help.tunnelbear.com/hc/en-us/articles/360007372431-How-do-I-cancel-my-subscription
+    title: How do I cancel my subscription?
+  about:
+    url: https://www.tunnelbear.com/about
+    title: About TunnelBear
+  privacy-policy:
+    url: https://www.tunnelbear.com/privacy-policy
+    title: TunnelBear privacy policy
+  tos:
+    url: https://www.tunnelbear.com/terms-of-service
+    title: TunnelBear terms of service
+  pricing:
+    url: https://www.tunnelbear.com/pricing
+    title: TunnelBear pricing
+  pricing-data:
+    url: https://prod-api-core.tunnelbear.com/core/web/api/getPricingDetails
+    title: TunnelBear plan prices used by its checkout
+  features:
+    url: https://www.tunnelbear.com/features
+    title: TunnelBear features
+  blocker:
+    url: https://www.tunnelbear.com/apps/blocker
+    title: TunnelBear Blocker for Chrome
+  edge-extension:
+    url: https://www.tunnelbear.com/blog/tunnelbear-accidentally-installs-edge/
+    title: TunnelBear accidentally installs Edge (browser extension)
+  affiliate:
+    url: https://www.tunnelbear.com/affiliate
+    title: TunnelBear affiliate program
+  freedom-hub:
+    url: https://www.tunnelbear.com/internet-freedom-hub
+    title: TunnelBear internet freedom hub
+  github:
+    url: https://github.com/TunnelBear
+    title: TunnelBear on GitHub
+  help-centre:
+    url: https://help.tunnelbear.com/hc/en-us
+    title: TunnelBear help centre
+  help-email:
+    url: https://help.tunnelbear.com/hc/en-us/articles/360059027051-Why-do-I-need-an-email-address-to-use-TunnelBear
+    title: Why do I need an email address to use TunnelBear?
+  help-payment:
+    url: https://help.tunnelbear.com/hc/en-us/articles/360059783972-What-payment-platforms-do-you-offer
+    title: What payment platforms do you offer?
+  help-paypal:
+    url: https://help.tunnelbear.com/hc/en-us/articles/360061431731-Do-you-accept-PayPal
+    title: Do you accept PayPal?
+  help-protocols:
+    url: https://help.tunnelbear.com/hc/en-us/articles/5907031724443-VPN-Protocol-Choosing-how-you-connect-to-TunnelBear
+    title: 'VPN protocol: choosing how you connect to TunnelBear'
+  help-vigilant:
+    url: https://help.tunnelbear.com/hc/en-us/articles/360006974672-VigilantBear-Strengthen-privacy-when-connecting
+    title: 'VigilantBear: strengthen privacy when connecting'
+  help-dns:
+    url: https://help.tunnelbear.com/hc/en-us/articles/360007120871-Does-TunnelBear-protect-against-DNS-leaks
+    title: Does TunnelBear protect against DNS leaks?
+  help-ghostbear:
+    url: https://help.tunnelbear.com/hc/en-us/articles/360007243291-GhostBear-Fight-censorship-on-restrictive-networks
+    title: 'GhostBear: fight censorship on restrictive networks'
+  help-splitbear:
+    url: https://help.tunnelbear.com/hc/en-us/articles/360007244451-SplitBear-Complete-control-over-your-network-traffic
+    title: 'SplitBear: complete control over your network traffic'
+  help-connections:
+    url: https://help.tunnelbear.com/hc/en-us/articles/360007082411-How-many-connections-can-I-make
+    title: How many connections can I make?
+  help-locations:
+    url: https://help.tunnelbear.com/hc/en-us/articles/360007004351-Where-can-I-tunnel-to-and-from
+    title: Where can I tunnel to and from?
+  help-devices:
+    url: https://help.tunnelbear.com/hc/en-us/articles/360006708972-What-devices-will-TunnelBear-work-on
+    title: What devices will TunnelBear work on?
+  help-router:
+    url: https://help.tunnelbear.com/hc/en-us/articles/360061142331-Can-I-use-TunnelBear-on-my-router
+    title: Can I use TunnelBear on my router?
+  help-free-data:
+    url: https://help.tunnelbear.com/hc/en-us/articles/360007004411-How-much-data-do-free-users-get
+    title: How much data do free users get?
+  bandwidth-program:
+    url: https://help.tunnelbear.com/hc/en-us/articles/34767952636571-TunnelBear-s-Bandwidth-Program-Supporting-Internet-Freedom-Around-the-World
+    title: "TunnelBear's Bandwidth Program: supporting internet freedom around the world"
+  free-changes:
+    url: https://www.tunnelbear.com/blog/important-changes-to-tunnelbear-free-user-accounts/
+    title: Important changes to TunnelBear free user accounts (2025)
+  vigilantbear-post:
+    url: https://www.tunnelbear.com/blog/vigilantbear-quietly-protecting-you-from-data-leaks-since-2014/
+    title: 'VigilantBear: quietly protecting you from data leaks since 2014'
+  harvest-now:
+    url: https://www.tunnelbear.com/blog/harvest-now-decrypt-later-the-internets-next-big-privacy-threat/
+    title: 'Harvest now, decrypt later: the internet''s next big privacy threat (2026)'
+  jurisdiction-post:
+    url: https://www.tunnelbear.com/blog/debunking-the-myth-of-jurisdiction/
+    title: Debunking the myth of jurisdiction (TunnelBear, 2025)
+  transparency-2018:
+    url: https://www.tunnelbear.com/blog/tunnelbear-transparency-report/
+    title: TunnelBear transparency report (2018)
+  transparency-2023:
+    url: https://www.tunnelbear.com/blog/tunnelbear-transparency-report-for-2023/
+    title: TunnelBear transparency report for 2023
+  joins-mcafee:
+    url: https://www.tunnelbear.com/blog/tunnelbear_joins_mcafee/
+    title: TunnelBear joins McAfee (2018)
+  mcafee-10k-2020:
+    url: https://www.sec.gov/Archives/edgar/data/1783317/000156459021009891/mcfe-10k_20201226.htm
+    title: McAfee Corp. annual report (Form 10-K) for fiscal 2020
+  mcafee-subsidiaries:
+    url: https://www.sec.gov/Archives/edgar/data/1783317/000095017022001804/mcfe-ex21_1.htm
+    title: McAfee Corp. subsidiaries (Form 10-K exhibit 21.1, fiscal 2021)
+  mcafee-private-2022:
+    url: https://www.sec.gov/Archives/edgar/data/1783317/000119312522060146/d319834dex991.htm
+    title: Investor group led by Advent International and Permira completes acquisition of McAfee (2022)
+  mcafee-vpn:
+    url: https://web.archive.org/web/20260922075815/https://www.mcafee.com/en-us/vpn.html
+    title: McAfee VPN (archived September 2026)
+  audit-2017-post:
+    url: https://www.tunnelbear.com/blog/tunnelbear_public_security_audit/
+    title: TunnelBear completes the consumer VPN industry's first public security audit (2017)
+  audit-2024-post:
+    url: https://www.tunnelbear.com/blog/tunnelbear-completes-8th-annual-independent-security-audit/
+    title: TunnelBear completes 8th annual independent security audit
+  cure53-2023:
+    url: https://cure53.de/pentest-report_tunnelbear_2023.pdf
+    title: Cure53, TunnelBear apps, VPN infrastructure and backend pentest (2023)
+  cure53-2022:
+    url: https://cure53.de/pentest-report_tunnelbear_2022.pdf
+    title: Cure53, TunnelBear apps, VPN infrastructure and backend pentest (2022)
+  cure53-2021:
+    url: https://cure53.de/pentest-report_tunnelbear_2021.pdf
+    title: Cure53, TunnelBear apps, SDKs and VPN infrastructure pentest (2021)
+  cure53-2020:
+    url: https://cure53.de/pentest-report_tunnelbear_2020.pdf
+    title: Cure53, TunnelBear apps, VPN infrastructure and backend pentest (2020)
+  cure53-2019:
+    url: https://cure53.de/summary-report_tunnelbear_2019.pdf
+    title: Cure53, TunnelBear security audit summary (2019)
+  cure53-2018:
+    url: https://cure53.de/summary-report_tunnelbear_2018.pdf
+    title: Cure53, TunnelBear security audit summary (2018)
+  cure53-2017:
+    url: https://cure53.de/summary-report_tunnelbear.pdf
+    title: Cure53, TunnelBear security audit summary (2016 and 2017)
+  versprite-2018:
+    url: https://github.com/VerSprite/research/blob/master/advisories/VS-2018-022.md
+    title: VerSprite, TunnelBear for Windows privilege escalation (CVE-2018-10381)
+  exodus:
+    url: https://reports.exodus-privacy.eu.org/en/reports/com.tunnelbear.android/latest/
+    title: Exodus Privacy report for com.tunnelbear.android
