@@ -1,0 +1,445 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: VyprVPN
+icon: vyprvpn.png
+checked: 2026-10-21
+
+criteria:
+  identity:
+    website:
+      value: https://www.vyprvpn.com
+      sources: [home]
+    legal_entity:
+      value: Certida LLC
+      note: Took over from Swiss company Golden Frog GmbH in 2023. The Android app is still listed under Golden Frog on Google Play.
+      sources: [privacy-policy, terms, eula, play]
+    owner:
+      value: null
+      note: Certida calls itself VyprVPN's parent but doesn't say who owns Certida.
+      sources: [certida-faq, certida]
+    founded:
+      value: 2010
+      note: Golden Frog was founded in 2009 and first offered VyprVPN to Giganews customers in March 2010.
+      sources: [giganews-launch, no-log-2018]
+    team:
+      value: anonymous
+      note: >-
+        The site still names Golden Frog's founders, Ron and Carolyn Yokubaitis, but neither VyprVPN
+        nor Certida names anyone running it now.
+      sources: [our-commitment, certida, certida-faq]
+    sister_brands:
+      value: []
+      note: Certida also runs the Usenet services Giganews and SuperNews, but no other VPN.
+      sources: [certida]
+    acquisitions:
+      value:
+        - date: 2023-05-01
+          acquirer: Certida LLC
+          source: wayback-2023-05-25
+      note: >-
+        There was no public announcement. The site's footer changed from Golden Frog GmbH to Certida
+        between 18 and 25 May 2023, so only the month is known.
+      sources: [wayback-2023-05-18, wayback-2023-05-25, certida-faq]
+
+  jurisdiction:
+    hq:
+      value: US
+      note: Certida is a Texas company. VyprVPN was Swiss, under Golden Frog GmbH, until 2023.
+      sources: [jurisdiction, terms, goldenfrog-about]
+    entities:
+      value: [US]
+      note: The terms list VAT registrations in Norway, Australia, the UK, the EU and Switzerland, but no company outside Texas.
+      sources: [terms]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [no-log-faq, activity-logs]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [vyprdns, no-log-faq]
+    timestamps:
+      value: none
+      evidence: claimed
+      sources: [no-log-faq, server-logs]
+    bandwidth:
+      value: none
+      evidence: claimed
+      sources: [activity-logs, server-logs]
+    source_ip:
+      value: none
+      evidence: claimed
+      sources: [no-log-faq, wireguard-ip]
+    proven:
+      value: [audit]
+      evidence: verified
+      note: >-
+        Leviathan's 2018 audit came as Golden Frog dropped its 30-day connection logs, and found a few
+        identifying logs that were fixed before the retest. It predates the Certida takeover and hasn't
+        been repeated.
+      sources: [audit-leviathan-2018, no-log-2018]
+    policy:
+      value: https://www.vyprvpn.com/policy/privacy
+      note: Certida's privacy policy doesn't mention VPN logging at all. The no-log promise is in the help centre.
+      sources: [privacy-policy, no-log-faq]
+
+  transparency:
+    audits:
+      value:
+        - date: 2018-11-09
+          auditor: Leviathan Security Group
+          scope: no_logs
+          source: audit-leviathan-2018
+      evidence: verified
+      note: >-
+        Hired in September 2018. The report gives no test dates, so this is the date of its final
+        version with retest results. It covered Golden Frog's servers and apps.
+      sources: [our-commitment, no-log-2018]
+    report:
+      value: none
+      note: It says it only hands over personal data under a court order, and publishes no figures.
+      sources: [share-info]
+    canary: none
+    bug_bounty:
+      value: null
+      note: Its site and help centre don't mention a bug bounty or a way to report security flaws.
+      sources: [help-centre]
+    incidents:
+      value:
+        - date: 2021-02-22
+          summary: >-
+            A researcher showed its Chameleon servers could be used to amplify DDoS attacks. VyprVPN
+            patched it within an hour of ZDNet's report and said no customer data was affected.
+          handled: well
+          source: ddos-2021
+        - date: 2018-06-20
+          summary: Fortinet found a flaw in the Windows installer (CVE-2018-13133). Golden Frog shipped a fix and credited the researcher publicly.
+          handled: well
+          source: installer-fix-2018
+        - date: 2018-04-09
+          summary: >-
+            VerSprite reported a Windows bug letting local users run code as SYSTEM (CVE-2018-10645).
+            Golden Frog first said it was already fixed, then scheduled a fix once VerSprite showed it wasn't.
+          handled: well
+          source: cve-2018-10645
+        - date: 2017-12-08
+          summary: VerSprite reported a macOS bug letting local users run code as root (CVE-2017-17809). Golden Frog shipped a fix 12 days later.
+          handled: well
+          source: cve-2017-17809
+
+  account:
+    email:
+      value: required
+      sources: [pricing, vpn-apps]
+    personal_data:
+      value: []
+      note: Card payments also take your name, country, state and postcode.
+      sources: [pricing, privacy-policy]
+    payment:
+      value: [card, paypal, app_store]
+      note: Cards include UnionPay, plus Apple Pay and Google Pay. It takes no crypto.
+      sources: [payment-methods, crypto, pricing]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn, ikev2, other]
+      note: Other is L2TP/IPsec and the deprecated PPTP, for manual setups. Chameleon is under obfuscation.
+      sources: [protocols, protocol-compare]
+    post_quantum:
+      value: none
+      sources: [protocol-compare, features]
+    kill_switch:
+      value: system
+      note: >-
+        System level is an option on Windows and macOS, where app level is the default. Android's
+        works at app level and the iOS app doesn't have one.
+      sources: [kill-switch, kill-switch-windows, features-android, features-ios]
+    dns:
+      value: first_party
+      note: The Windows, Mac and Android apps can be set to use third-party DNS instead.
+      sources: [vyprdns, vyprdns-when]
+
+  infra:
+    ram_only:
+      value: null
+      note: VyprVPN doesn't say its servers run from RAM.
+      sources: [our-commitment, locations]
+    hosting:
+      value: owned
+      evidence: claimed
+      sources: [our-commitment, locations]
+    virtual_locations:
+      value: undisclosed
+      note: >-
+        It says it uses virtual servers in restrictive countries and to trial new locations, but its
+        locations list doesn't say which ones.
+      sources: [virtual-servers, locations]
+    servers:
+      value: 700
+      note: Its locations page says 700+.
+      sources: [locations]
+    countries:
+      value: 64
+      note: 73 locations. Counts Bratislava as Slovakia, as the help centre does, though the locations page files it under Slovenia.
+      sources: [locations, server-addresses]
+
+  features:
+    connections:
+      value: 10
+      sources: [connections, features]
+    multihop:
+      value: false
+      sources: [features]
+    obfuscation:
+      value: [proprietary]
+      note: Chameleon, its own scrambling of OpenVPN packet metadata.
+      sources: [chameleon, protocol-compare]
+    port_forwarding:
+      value: true
+      note: There's no per-port forwarding, but turning off the NAT Firewall in your account opens every inbound port.
+      sources: [port-forwarding]
+    split_tunnel:
+      value: true
+      note: Windows, macOS and Android.
+      sources: [split-tunnel]
+    blocking:
+      value: []
+      sources: [features]
+
+  clients:
+    platforms:
+      value: [windows, macos, linux_cli, ios, android]
+      note: >-
+        Linux gets a WireGuard command-line client. Routers use manual OpenVPN setups, and there are
+        apps for Android TV, Fire TV and Apple TV.
+      sources: [devices, wireguard-go, routers, tv]
+    open_source:
+      value: none
+      sources: [eula]
+    telemetry:
+      value: opt_out
+      evidence: claimed
+      note: Crash reports are opt-in, but anonymous usage data ("Improve VyprVPN") and status reporting are on unless you turn them off.
+      sources: [crash-android, crash-windows, audit-leviathan-2018]
+    trackers:
+      value: 4
+      note: >-
+        Adjust, Google Analytics, Crashlytics and Google Tag Manager. The newest Exodus report that
+        would load was for version 5.0.1, from July 2023.
+      sources: [exodus, trackers-faq]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 10, currency: USD }
+      note: Prices change with your location. These are from the pricing page's USD option.
+      sources: [pricing]
+    best:
+      value: { amount: 3, currency: USD }
+      note: $72 every two years.
+      sources: [pricing]
+    best_term:
+      value: 24
+      sources: [pricing]
+    renewal_increase:
+      value: 0
+      note: Every plan renews at the price you first pay.
+      sources: [pricing]
+    free_tier:
+      value: false
+      note: Signups through Apple's or Google's app store get a 3-day free trial instead of the money-back guarantee.
+      sources: [what-is-vyprvpn, money-back]
+    refund_days:
+      value: 30
+      note: Only for signups on its website. App store purchases are refunded through Apple or Google.
+      sources: [money-back, refund]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: Says your activity "cannot be tracked or intercepted" and that you're "100% hidden from prying eyes".
+      sources: [home, certida-faq]
+    affiliates:
+      value: true
+      sources: [affiliates]
+    review_sites: false
+    activism:
+      value: false
+      note: >-
+        Golden Frog worked with the Center for Democracy & Technology on its 2018 signals of a
+        trustworthy VPN, but there's nothing since Certida took over.
+      sources: [our-commitment, no-log-2018]
+
+refs:
+  home:
+    url: https://www.vyprvpn.com/
+    title: VyprVPN
+  privacy-policy:
+    url: https://www.vyprvpn.com/policy/privacy
+    title: Privacy policy (Certida LLC)
+  terms:
+    url: https://www.vyprvpn.com/resources/terms-of-service
+    title: Terms of use
+  eula:
+    url: https://www.vyprvpn.com/policy/end-user-license-agreement
+    title: End user license agreement
+  play:
+    url: https://play.google.com/store/apps/details?id=com.goldenfrog.vyprvpn.app
+    title: VyprVPN on Google Play
+  certida:
+    url: https://certida.com/
+    title: Certida
+  certida-faq:
+    url: https://support.vyprvpn.com/hc/en-us/articles/15903991797645-Certida-FAQ
+    title: Certida FAQ
+  jurisdiction:
+    url: https://support.vyprvpn.com/hc/en-us/articles/360040528292-What-jurisdiction-does-VyprVPN-operate-in
+    title: What jurisdiction does VyprVPN operate in?
+  goldenfrog-about:
+    url: https://www.goldenfrog.com/about-us
+    title: About Golden Frog
+  our-commitment:
+    url: https://www.vyprvpn.com/our-commitment
+    title: Our commitment
+  giganews-launch:
+    url: https://www.vyprvpn.com/blog/post/giganews-unveils-vyprvpn-to-all-customers
+    title: Giganews unveils VyprVPN to all customers (2011)
+  wayback-2023-05-18:
+    url: https://web.archive.org/web/20230518030412/https://www.vyprvpn.com/
+    title: VyprVPN homepage, 18 May 2023 (archived)
+  wayback-2023-05-25:
+    url: https://web.archive.org/web/20230525042014/https://www.vyprvpn.com/
+    title: VyprVPN homepage, 25 May 2023 (archived)
+  no-log-faq:
+    url: https://support.vyprvpn.com/hc/en-us/articles/360038426771-What-does-No-Log-mean
+    title: What does "No Log" mean?
+  activity-logs:
+    url: https://support.vyprvpn.com/hc/en-us/articles/360038096191-Does-VyprVPN-store-logs-of-my-VPN-activity
+    title: Does VyprVPN store logs of my VPN activity?
+  server-logs:
+    url: https://support.vyprvpn.com/hc/en-us/articles/360038057272-What-information-is-retained-in-VyprVPN-server-logs
+    title: What information is retained in VyprVPN server logs?
+  wireguard-ip:
+    url: https://support.vyprvpn.com/hc/en-us/articles/360044677511-How-does-VyprVPN-prevent-my-IP-address-from-being-stored-while-using-WireGuard
+    title: How does VyprVPN prevent my IP address from being stored while using WireGuard?
+  share-info:
+    url: https://support.vyprvpn.com/hc/en-us/articles/360040962791-Are-there-any-circumstances-where-VyprVPN-would-share-user-information
+    title: Are there any circumstances where VyprVPN would share user information?
+  vyprdns:
+    url: https://www.vyprvpn.com/features/vyprdns
+    title: VyprDNS
+  vyprdns-when:
+    url: https://support.vyprvpn.com/hc/en-us/articles/360038806292-When-is-VyprDNS-used
+    title: When is VyprDNS used?
+  audit-leviathan-2018:
+    url: https://www.vyprvpn.com/audit.pdf
+    title: Leviathan Security Group, VyprVPN no log assessment (2018)
+  no-log-2018:
+    url: https://www.vyprvpn.com/blog/post/no-log-vpn-service
+    title: VyprVPN is the world's first publicly audited no log VPN service (2018)
+  help-centre:
+    url: https://support.vyprvpn.com/hc/en-us
+    title: VyprVPN help centre
+  ddos-2021:
+    url: https://www.vyprvpn.com/blog/post/vyprvpns-response-to-article-on-server-bug
+    title: VyprVPN's response to article on server bug (2021)
+  installer-fix-2018:
+    url: https://www.vyprvpn.com/blog/post/vyprvpn-secured-installation-vulnerability
+    title: VyprVPN secured from installation vulnerability (2018)
+  cve-2018-10645:
+    url: https://github.com/VerSprite/research/blob/master/advisories/VS-2018-025.md
+    title: VerSprite, VyprVPN for Windows privilege escalation (CVE-2018-10645)
+  cve-2017-17809:
+    url: https://github.com/VerSprite/research/blob/master/advisories/VS-2017-007.md
+    title: VerSprite, VyprVPN for macOS privilege escalation (CVE-2017-17809)
+  pricing:
+    url: https://www.vyprvpn.com/pricing
+    title: Pricing
+  vpn-apps:
+    url: https://www.vyprvpn.com/vpn-apps
+    title: VyprVPN apps
+  payment-methods:
+    url: https://support.vyprvpn.com/hc/en-us/articles/360037728972-What-payment-methods-are-accepted
+    title: What payment methods are accepted?
+  crypto:
+    url: https://support.vyprvpn.com/hc/en-us/articles/360039200071-Do-you-accept-Cryptocurrency-as-a-form-of-payment
+    title: Do you accept cryptocurrency as a form of payment?
+  protocols:
+    url: https://support.vyprvpn.com/hc/en-us/articles/360038096091-Which-VPN-protocols-does-VyprVPN-support
+    title: Which VPN protocols does VyprVPN support?
+  protocol-compare:
+    url: https://support.vyprvpn.com/hc/en-us/articles/360038094131-What-is-the-difference-between-the-available-VPN-Protocols
+    title: What is the difference between the available VPN protocols?
+  features:
+    url: https://www.vyprvpn.com/features
+    title: Features
+  kill-switch:
+    url: https://support.vyprvpn.com/hc/en-us/articles/360037729112-What-is-Kill-Switch
+    title: What is Kill Switch?
+  kill-switch-windows:
+    url: https://support.vyprvpn.com/hc/en-us/articles/4413404143501-What-are-the-App-and-System-level-settings-for-Kill-Switch-on-Windows
+    title: App and System level settings for Kill Switch on Windows
+  features-android:
+    url: https://support.vyprvpn.com/hc/en-us/articles/360038081111-What-Features-Are-Available-On-VyprVPN-For-Android
+    title: What features are available on VyprVPN for Android?
+  features-ios:
+    url: https://support.vyprvpn.com/hc/en-us/articles/360037715592-What-Features-Are-Available-on-VyprVPN-For-iOS
+    title: What features are available on VyprVPN for iOS?
+  locations:
+    url: https://www.vyprvpn.com/server-locations
+    title: Server locations
+  server-addresses:
+    url: https://support.vyprvpn.com/hc/en-us/articles/360037728912-What-are-the-VyprVPN-server-addresses
+    title: What are the VyprVPN server addresses?
+  virtual-servers:
+    url: https://support.vyprvpn.com/hc/en-us/articles/360039201131-Why-don-t-you-offer-server-locations-in-certain-countries
+    title: Why don't you offer server locations in certain countries?
+  connections:
+    url: https://support.vyprvpn.com/hc/en-us/articles/360040964191-What-are-simultaneous-connections-and-how-many-devices-can-I-use
+    title: What are simultaneous connections and how many devices can I use?
+  chameleon:
+    url: https://www.vyprvpn.com/features/chameleon
+    title: Chameleon protocol
+  port-forwarding:
+    url: https://support.vyprvpn.com/hc/en-us/articles/360039668472-Can-I-Open-Specific-Ports-also-known-as-Port-Forwarding-on-my-VyprVPN-Connection
+    title: Can I open specific ports (port forwarding) on my VyprVPN connection?
+  split-tunnel:
+    url: https://support.vyprvpn.com/hc/en-us/articles/360038603911-What-is-Connection-Per-App
+    title: What is Connection Per App?
+  devices:
+    url: https://support.vyprvpn.com/hc/en-us/articles/360038095811-What-devices-are-supported-by-VyprVPN
+    title: What devices are supported by VyprVPN?
+  wireguard-go:
+    url: https://support.vyprvpn.com/hc/en-us/articles/43814149850765-VyprVPN-WireGuard-Go-Client
+    title: VyprVPN WireGuard Go client
+  routers:
+    url: https://support.vyprvpn.com/hc/en-us/articles/360037728952-Does-VyprVPN-support-router-setups
+    title: Does VyprVPN support router setups?
+  tv:
+    url: https://support.vyprvpn.com/hc/en-us/articles/29041181856781-VyprVPN-for-TV-Overview
+    title: VyprVPN for TV overview
+  crash-android:
+    url: https://support.vyprvpn.com/hc/en-us/articles/360038803072-How-can-I-send-crash-reports-for-VyprVPN-on-Android
+    title: How can I send crash reports for VyprVPN on Android?
+  crash-windows:
+    url: https://support.vyprvpn.com/hc/en-us/articles/360038803032-How-do-I-send-crash-reports-to-VyprVPN-on-Windows
+    title: How do I send crash reports to VyprVPN on Windows?
+  trackers-faq:
+    url: https://support.vyprvpn.com/hc/en-us/articles/360039433632-Does-the-VyprVPN-application-use-any-trackers
+    title: Does the VyprVPN application use any "trackers"?
+  exodus:
+    url: https://reports.exodus-privacy.eu.org/en/reports/com.goldenfrog.vyprvpn.app/latest/
+    title: Exodus Privacy report for com.goldenfrog.vyprvpn.app (5.0.1, July 2023)
+  what-is-vyprvpn:
+    url: https://support.vyprvpn.com/hc/en-us/articles/360038096151-What-is-VyprVPN
+    title: What is VyprVPN?
+  money-back:
+    url: https://support.vyprvpn.com/hc/en-us/articles/360038081211-What-is-your-30-Day-Money-Back-Guarantee-Policy
+    title: What is your 30-day money-back guarantee policy?
+  refund:
+    url: https://support.vyprvpn.com/hc/en-us/articles/360038081191-How-can-I-request-a-refund
+    title: How can I request a refund?
+  affiliates:
+    url: https://support.vyprvpn.com/hc/en-us/articles/360040962571-I-m-interested-in-becoming-an-affiliate-Who-do-I-contact
+    title: I'm interested in becoming an affiliate. Who do I contact?
