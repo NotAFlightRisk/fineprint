@@ -1,0 +1,284 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: AVG Secure VPN
+icon: avg-secure-vpn.png
+checked: 2026-10-21
+
+criteria:
+  identity:
+    website:
+      value: https://www.avg.com/en-us/secure-vpn
+      sources: [home]
+    legal_entity:
+      value: Avast Software s.r.o.
+      note: Controls your data in the EEA, per AVG's privacy centre. Who sells it depends on where you live, such as Gen Digital Inc. in the Americas and NortonLifeLock Ireland Limited in the UK and Ireland.
+      sources: [privacy-center, eula]
+    owner:
+      value: Gen Digital
+      sources: [gen-avast-merger, home]
+    founded:
+      value: null
+      note: AVG's VPN page, VPN policy and support FAQ don't give the year the VPN launched.
+    team:
+      value: partial
+      note: Gen's executives are named, but no one running the VPN is.
+      sources: [gen-leadership]
+    sister_brands:
+      value: [HMA VPN, Norton VPN, Avast Premium VPN, Avira Phantom VPN]
+      note: Avast Premium VPN was called SecureLine VPN until recently.
+      sources: [hma, norton-vpn, avast-vpn, avira-vpn]
+    acquisitions:
+      value:
+        - date: 2022-09-12
+          acquirer: NortonLifeLock (now Gen Digital)
+          source: gen-avast-merger
+        - date: 2016-09-30
+          acquirer: Avast
+          source: avast-avg
+      note: NortonLifeLock renamed itself Gen Digital after merging with Avast.
+
+  jurisdiction:
+    hq:
+      value: CZ
+      note: Avast Software s.r.o. in Prague controls the data. Its parent, Gen Digital Inc., is in the US.
+      sources: [privacy-center, eula]
+    entities:
+      value: [CZ, US, IE, GB, JP, SG]
+      sources: [eula, privacy-center]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [vpn-policy, faq]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [vpn-policy]
+    timestamps:
+      value: aggregate
+      evidence: claimed
+      note: >-
+        The VPN policy keeps connect and disconnect events for 12 months, and says it could only tie
+        them to you if you add personal data. Its support FAQ goes further, saying it logs when you
+        connect and disconnect and for how long.
+      sources: [faq, vpn-policy]
+    bandwidth:
+      value: aggregate
+      evidence: claimed
+      note: The VPN policy keeps a running total of data transferred for 18 months, but the support FAQ lists bandwidth among what the connection logs record.
+      sources: [vpn-policy, faq]
+    source_ip:
+      value: none
+      evidence: claimed
+      sources: [vpn-policy]
+    proven:
+      value: []
+      note: No audit, court case or raid has tested the no-logs claim.
+    policy: https://www.avg.com/en-us/vpn-policy
+
+  transparency:
+    audits:
+      value: []
+      note: No audit of the VPN has been published.
+    report:
+      value: none
+      note: Its transparency report only counts customers' own privacy requests, not legal demands.
+      sources: [transparency, policies]
+    canary:
+      value: none
+      sources: [policies]
+    bug_bounty:
+      value: true
+      note: Through Gen Digital's vulnerability programme, which says not every report qualifies for a reward.
+      sources: [security]
+    incidents:
+      value: []
+      note: None found that involve the VPN.
+
+  account:
+    email:
+      value: required
+      sources: [refund]
+    personal_data:
+      value: []
+      note: Card payments take your billing details, which AVG's payment providers handle.
+      sources: [vpn-policy]
+    payment:
+      value: [card, paypal, app_store]
+      note: Through AVG's site, Google Play or the App Store. No crypto option is listed.
+      sources: [subscription, refund]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn, proprietary]
+      note: OpenVPN, WireGuard and Mimic on Windows. The mobile guide lets you choose a protocol but doesn't name them.
+      sources: [faq, mobile-guide]
+    post_quantum:
+      value: none
+      note: Not mentioned on the VPN page, in the support FAQ or in the setup guides.
+      sources: [desktop-guide, mobile-guide]
+    kill_switch:
+      value: app
+      sources: [desktop-guide, mobile-guide]
+    dns:
+      value: first_party
+      sources: [vpn-policy]
+
+  infra:
+    ram_only:
+      value: null
+      note: Not mentioned on the VPN page, in the VPN policy or in the support FAQ.
+    hosting:
+      value: null
+      note: The support FAQ names data centre locations, but not whether AVG owns the servers.
+    virtual_locations:
+      value: null
+      note: The VPN page and support FAQ don't say whether any locations are virtual.
+    servers:
+      value: null
+      note: Claims more than 100 server locations, but gives no server count.
+      sources: [home]
+    countries:
+      value: null
+      note: The VPN page gives no country count.
+
+  features:
+    connections:
+      value: 10
+      sources: [home]
+    multihop:
+      value: false
+      sources: [desktop-guide, mobile-guide]
+    obfuscation:
+      value: [proprietary]
+      note: The Mimic protocol, for countries where OpenVPN is blocked.
+      sources: [faq]
+    port_forwarding:
+      value: false
+      sources: [faq]
+    split_tunnel:
+      value: true
+      note: The mobile guide lets you exclude chosen apps. The desktop FAQ only mentions letting local network traffic bypass the VPN.
+      sources: [mobile-guide, faq]
+    blocking:
+      value: []
+      sources: [desktop-guide, mobile-guide]
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android]
+      sources: [desktop-guide, mobile-guide]
+    open_source:
+      value: none
+      sources: [eula]
+    telemetry:
+      value: forced
+      evidence: claimed
+      note: The apps send connection and app events, kept for 12 and 18 months. Firebase Analytics and AppsFlyer can be turned off in settings, but no opt-out is given for Crashlytics, Singular or the events.
+      sources: [vpn-policy]
+    fdroid:
+      value: false
+      sources: [play]
+
+  pricing:
+    monthly:
+      value: null
+      note: No monthly plan, only 1, 2 and 3 years.
+      sources: [store]
+    best:
+      value: { amount: 3.75, currency: USD }
+      note: USD, for 10 devices, billed $134.99 for 3 years on AVG's store page. The VPN's own page sells the same plan for $158.04.
+      sources: [store, home]
+    best_term:
+      value: 36
+      sources: [store]
+    renewal_increase:
+      value: 144
+      note: Renews at $109.99 a year, the price the store page compares against.
+      sources: [store, subscription]
+    free_tier:
+      value: false
+      note: Only a 60-day free trial from AVG's site, or 7 days on Google Play.
+      sources: [home, play]
+    refund_days:
+      value: 30
+      sources: [refund]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: Claims "military-grade encryption" and "anonymous browsing".
+      sources: [home]
+    affiliates:
+      value: true
+      note: Pays affiliates up to 30% commission on sales.
+      sources: [affiliate]
+    activism: null
+
+refs:
+  transparency:
+    url: https://www.avast.com/transparency-report
+    title: Avast transparency report, with AVG's figures (August 2025)
+  home:
+    url: https://www.avg.com/en-us/secure-vpn
+    title: AVG Secure VPN
+  store:
+    url: https://www.avg.com/en-us/store
+    title: AVG store
+  vpn-policy:
+    url: https://www.avg.com/en-us/vpn-policy
+    title: VPN policy (October 2026)
+  privacy-center:
+    url: https://www.avg.com/en-us/privacy
+    title: Privacy center
+  policies:
+    url: https://www.avg.com/en-us/policies
+    title: Terms and policies
+  eula:
+    url: https://www.avg.com/en-us/eula
+    title: End user license agreement (January 2026)
+  subscription:
+    url: https://www.avg.com/en-us/subscription-details
+    title: Subscription details
+  faq:
+    url: https://support.avg.com/SupportArticleView?l=en&urlname=avg-secure-vpn-faq
+    title: AVG Secure VPN FAQs
+  desktop-guide:
+    url: https://support.avg.com/SupportArticleView?l=en&urlname=use-avg-secure-vpn
+    title: AVG Secure VPN for Windows and Mac, getting started
+  mobile-guide:
+    url: https://support.avg.com/SupportArticleView?l=en&urlname=use-mobile-avg-secure-vpn
+    title: AVG Secure VPN for Android and iOS, getting started
+  refund:
+    url: https://support.avg.com/SupportArticleView?l=en&urlname=avg-refund-request
+    title: Requesting a refund for an AVG subscription
+  affiliate:
+    url: https://www.avg.com/en-us/affiliate/become-an-avg-affiliate
+    title: Become an AVG affiliate
+  play:
+    url: https://play.google.com/store/apps/details?id=com.avg.android.vpn
+    title: AVG Secure VPN on Google Play
+  security:
+    url: https://www.gendigital.com/us/en/contact-us/report-a-potential-security-vulnerability/
+    title: Gen, report a potential security vulnerability
+  gen-leadership:
+    url: https://www.gendigital.com/us/en/leadership/
+    title: Gen leadership
+  avast-avg:
+    url: https://newsroom.gendigital.com/2016-09-30-avast-closes-acquisition-of-avg-technologies
+    title: Avast closes acquisition of AVG Technologies
+  gen-avast-merger:
+    url: https://newsroom.gendigital.com/2022-09-12-NortonLifeLock-Completes-Merger-with-Avast
+    title: NortonLifeLock completes merger with Avast
+  hma:
+    url: https://www.hidemyass.com/en-us/index
+    title: HMA VPN
+  norton-vpn:
+    url: https://us.norton.com/products/norton-vpn
+    title: Norton VPN
+  avast-vpn:
+    url: https://www.avast.com/premium-vpn
+    title: Avast Premium VPN (formerly SecureLine VPN)
+  avira-vpn:
+    url: https://www.avira.com/en/free-vpn
+    title: Avira Phantom VPN
