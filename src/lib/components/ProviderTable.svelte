@@ -5,7 +5,7 @@
   import GradeMark from '#lib/components/GradeMark.svelte';
   import type { Category, Entry, Provider } from '#lib/data/types.ts';
   import { showEntry } from '#lib/format.ts';
-  import { byId, checklist, checks, seriousFlags } from '#lib/summary.ts';
+  import { byId, checklist, checks, flagged, seriousFlags } from '#lib/summary.ts';
   import { compare, toCsv, download } from '#lib/table.ts';
   import { tip } from '#lib/tip.ts';
 
@@ -175,7 +175,17 @@
             class:none={!provider.flags.length}
             data-grade={seriousFlags(provider, criteria) ? 'bad' : 'ok'}
           >
-            {provider.flags.length}
+            {#if provider.flags.length}
+              <button
+                type="button"
+                class="noted"
+                {@attach tip(flagged(provider, criteria).join('\n'))}
+              >
+                {provider.flags.length}
+              </button>
+            {:else}
+              0
+            {/if}
           </td>
           {#each columns as column (column.id)}
             {@const entry = provider.criteria[column.id]}
