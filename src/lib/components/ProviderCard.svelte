@@ -16,44 +16,49 @@
       <h2>{name}</h2>
     </a>
     <External href={website} label="{name} website" />
+    <p class="where"><Flag code={hq} />{where.join(' · ')}</p>
   </header>
-
-  <p class="where"><Flag code={hq} />{where.join(' · ')}</p>
 
   <div class="checks">
     <Checklist {checks} />
   </div>
 
   <footer>
-    <span>{price ? `From ${price}` : 'Price unknown'}</span>
-    {#if flags.length}
-      <button type="button" class="noted flags" {@attach tip(flags.join('\n'))}>
-        {redFlags(flags.length)}
-      </button>
-    {:else}
-      <span class="none">{redFlags(0)}</span>
-    {/if}
+    <div class="facts">
+      <span>{price ? `From ${price}` : 'Price unknown'}</span>
+      {#if flags.length}
+        <button type="button" class="noted flags" {@attach tip(flags.join('\n'))}>
+          {redFlags(flags.length)}
+        </button>
+      {:else}
+        <span class="none">{redFlags(0)}</span>
+      {/if}
+    </div>
     <a class="more" href="/{id}">Full picture<span class="visually-hidden"> of {name}</span></a>
   </footer>
 </article>
 
 <style>
+  /* shares its row's tracks, so every card's sections line up with its neighbours' */
   .card {
     display: grid;
-    grid-template-rows: auto auto 1fr auto;
+    grid-row: span 3;
+    grid-template-rows: subgrid;
     gap: var(--space-4);
     padding-top: var(--space-4);
     border-top: var(--rule-heavy) solid var(--rule);
   }
 
   header {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-content: start;
     align-items: start;
-    justify-content: space-between;
-    gap: var(--space-3);
+    gap: var(--space-4) var(--space-3);
   }
 
   .title {
+    justify-self: start;
     display: flex;
     align-items: center;
     gap: var(--space-3);
@@ -74,23 +79,29 @@
   }
 
   .where {
+    grid-column: 1 / -1;
     font-size: var(--text-sm);
     color: var(--text-muted);
   }
 
   .checks {
-    display: grid;
     padding-top: var(--space-3);
     border-top: var(--rule-thin) solid var(--rule-faint);
   }
 
   footer {
+    display: grid;
+    gap: var(--space-3);
+    padding-top: var(--space-3);
+    border-top: var(--rule-thin) solid var(--rule-faint);
+  }
+
+  .facts {
     display: flex;
     flex-wrap: wrap;
     align-items: baseline;
-    gap: var(--space-2) var(--space-4);
-    padding-top: var(--space-3);
-    border-top: var(--rule-thin) solid var(--rule-faint);
+    justify-content: space-between;
+    gap: var(--space-1) var(--space-4);
     font-size: var(--text-sm);
   }
 
@@ -104,7 +115,25 @@
   }
 
   .more {
-    margin-left: auto;
+    display: flex;
+    justify-content: space-between;
+    padding: var(--space-2) var(--space-4);
+    border: var(--rule-thin) solid var(--rule);
     font-weight: 600;
+    text-decoration: none;
+    transition: background-color var(--quick) var(--ease);
+
+    &::after {
+      content: '→' / '';
+      transition: translate var(--quick) var(--ease);
+    }
+
+    &:hover {
+      background: var(--surface-hover);
+
+      &::after {
+        translate: var(--space-1) 0;
+      }
+    }
   }
 </style>
