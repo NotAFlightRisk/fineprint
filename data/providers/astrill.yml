@@ -92,7 +92,7 @@ criteria:
   security:
     protocols:
       value: [wireguard, openvpn, proprietary]
-      note: Proprietary is StealthVPN and OpenWeb, which only work in Astrill's apps.
+      note: StealthVPN and OpenWeb are its own, and only work in Astrill's apps.
       sources: [protocols]
     post_quantum:
       value: none
