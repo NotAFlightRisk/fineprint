@@ -1,0 +1,337 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: PrivateVPN
+icon: privatevpn.png
+checked: 2026-10-21
+
+criteria:
+  identity:
+    website:
+      value: https://privatevpn.com
+      sources: [about]
+    legal_entity:
+      value: PrivateVPN Global AB
+      note: Swedish company 559282-2182, registered in November 2020.
+      sources: [privacy-policy, terms, register-privatevpn]
+    owner:
+      value: Miss Group
+      note: >-
+        A web hosting group backed by private equity firm Perwyn. The registered chain runs up through
+        three Meralm companies in Sweden to PW Realm SARL in Luxembourg and PW Realm Ltd in the Bahamas.
+      sources: [acquisition, register-privatevpn, register-topco, group]
+    founded:
+      value: 2009
+      sources: [acquisition]
+    team:
+      value: partial
+      note: The site names no one. The Swedish register lists a board member for the company and each parent, and founder Martin Müller left after the 2022 sale.
+      sources: [about, register-privatevpn, acquisition]
+    sister_brands:
+      value: []
+      note: Miss Group's other businesses are web hosts and domain registrars.
+      sources: [acquisition]
+    acquisitions:
+      value:
+        - date: 2022-06-17
+          acquirer: Miss Group
+          source: acquisition
+      note: Dated by the press report of the completed deal. Terms weren't disclosed.
+      sources: [acquisition]
+
+  jurisdiction:
+    hq:
+      value: SE
+      sources: [terms, register-privatevpn]
+    entities:
+      value: [SE]
+      note: The company and its three Meralm parents are Swedish. The group's top companies are in Luxembourg and the Bahamas.
+      sources: [register-privatevpn, register-bidco, register-topco, group]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [privacy-policy]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [privacy-policy]
+    timestamps:
+      value: none
+      evidence: claimed
+      sources: [privacy-policy]
+    bandwidth:
+      value: none
+      evidence: claimed
+      sources: [privacy-policy]
+    source_ip:
+      value: none
+      evidence: claimed
+      sources: [privacy-policy]
+    proven:
+      value: []
+      note: No audit, court case or raid has tested the no-logs claim that we could find.
+      sources: [no-log, faq]
+    policy: https://privatevpn.com/privacy-policy/
+
+  transparency:
+    audits:
+      value: []
+      note: Its site and help centre mention no independent audit.
+      sources: [no-log]
+    report:
+      value: none
+      note: Neither its site nor any of its 185 help centre articles mentions one.
+      sources: [no-log, help-centre]
+    canary:
+      value: none
+      sources: [no-log, help-centre]
+    bug_bounty:
+      value: false
+      note: No bounty or disclosure policy on its site or in its help centre.
+      sources: [help-centre]
+    incidents:
+      value:
+        - date: 2018-02-20
+          summary: >-
+            VerSprite reported root privilege escalation bugs in the macOS app's helper tool
+            (CVE-2018-7311, CVE-2018-7715, CVE-2018-7716). PrivateVPN called one an acceptable part of
+            its software and disputed the advisory. It shipped an update within days, but VerSprite said
+            two were still open when it published in March 2018.
+          handled: poorly
+          source: versprite-004
+      sources: [versprite-004, versprite-005]
+
+  account:
+    email:
+      value: required
+      note: The email address is the account username.
+      sources: [privacy-policy]
+    personal_data:
+      value: []
+      note: Only an email and password. Payment processors collect billing details such as name and card.
+      sources: [privacy-policy]
+    payment:
+      value: [card, paypal, app_store, bitcoin]
+      note: Cards go through Stripe, Apple Pay or Google Pay. Bitcoin payments can't be refunded.
+      sources: [privacy-policy, terms, faq]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn, ikev2, other]
+      note: Other is Cisco AnyConnect, L2TP/IPsec and PPTP.
+      sources: [faq, protocols-help]
+    kill_switch:
+      value: system
+      note: An optional setting in the Windows, macOS and Android apps that blocks all traffic. On iOS it relies on IKEv2's built-in kill switch.
+      sources: [kill-switch-help, kill-switch]
+    dns:
+      value: first_party
+      note: Its own resolvers at 10.35.53.1 and 10.35.53.2 answer inside the tunnel, which the FAQ calls no-log DNS.
+      sources: [dns-leak-linux, faq]
+    post_quantum:
+      value: none
+      note: Not mentioned on its protocol pages or anywhere in its help centre.
+      sources: [protocols-help, help-centre]
+
+  infra:
+    ram_only:
+      value: null
+      note: Its site and help centre don't say whether servers run from RAM.
+      sources: [no-log, help-centre]
+    hosting:
+      value: null
+      note: It says it buys bandwidth straight from transit providers, but not whether it owns the servers.
+      sources: [download]
+    virtual_locations:
+      value: null
+      note: The server list doesn't say whether any location is virtual.
+      sources: [server-list]
+    servers:
+      value: 200
+      note: It says "over 200 servers".
+      sources: [home]
+    countries:
+      value: 62
+      note: Counted from the server list, 83 cities in all. The home page says 63 countries and the help centre FAQ 43.
+      sources: [server-list, home, faq]
+
+  features:
+    connections:
+      value: 10
+      sources: [terms]
+    multihop:
+      value: false
+      sources: [help-centre]
+    obfuscation:
+      value: [shadowsocks]
+      note: Its StealthVPN mode wraps OpenVPN in Shadowsocks, and is in all four apps.
+      sources: [stealth-help, stealth-linux]
+    port_forwarding:
+      value: true
+      note: On selected protocols and locations.
+      sources: [port-forwarding, faq]
+    split_tunnel:
+      value: false
+      note: Its apps don't offer it. The help centre's split tunnelling guides all use third-party clients or a Chrome proxy extension.
+      sources: [split-tunnel-wireguard, application-guard]
+    blocking:
+      value: []
+      sources: [apps, help-centre]
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android]
+      note: Linux, Chrome OS and routers use manual OpenVPN or WireGuard setups rather than an app.
+      sources: [download, faq, linux-guides]
+    open_source:
+      value: none
+      note: The terms forbid modifying or reverse engineering the apps, and no source is published.
+      sources: [terms]
+    telemetry:
+      value: null
+      note: Neither the privacy policy nor the help centre says whether the apps send usage or crash data.
+      sources: [privacy-policy, help-centre]
+    trackers:
+      value: 2
+      note: The newest Exodus report that would load was for version 4.1.9, from November 2022.
+      sources: [exodus]
+    fdroid:
+      value: false
+      sources: [google-play]
+
+  pricing:
+    monthly:
+      value: { amount: 9.9, currency: USD }
+      note: Prices follow your location, so this is the US view of the plans on the home page. A UK visitor sees 9.29 GBP. The pricing page itself blocks automated requests.
+      sources: [home]
+    best:
+      value: { amount: 2, currency: USD }
+      note: 72 USD for 36 months, sold as 12 months plus 24 free.
+      sources: [home]
+    best_term:
+      value: 36
+      sources: [home]
+    renewal_increase:
+      value: 200
+      note: Renews at 72 USD every 12 months, so the monthly cost triples.
+      sources: [home]
+    free_tier:
+      value: false
+      sources: [home]
+    refund_days:
+      value: 30
+      note: New customers only, and not on crypto payments, App Store purchases, renewals or orders under 400 SEK (45 USD).
+      sources: [terms, money-back]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: Promises to make you "100% anonymous" and "guarantee you the 100% privacy you deserve".
+      sources: [apps, no-log]
+    affiliates:
+      value: true
+      note: Runs its own affiliate programme, plus a referral scheme that pays in free days.
+      sources: [faq, recruit]
+    review_sites:
+      value: null
+      note: Nothing ties it or Miss Group to a review site, but that isn't something a provider would announce.
+      sources: [acquisition]
+    activism:
+      value: false
+      note: No campaigns, donations or sponsorships on its site.
+      sources: [about, home]
+
+refs:
+  home:
+    url: https://privatevpn.com/
+    title: PrivateVPN home page
+  about:
+    url: https://privatevpn.com/why-privatevpn/about-us/
+    title: About PrivateVPN
+  apps:
+    url: https://privatevpn.com/features/apps/
+    title: VPN apps
+  privacy-policy:
+    url: https://privatevpn.com/privacy-policy/
+    title: Privacy Policy (last updated 16 October 2023)
+  terms:
+    url: https://privatevpn.com/terms-of-use/
+    title: Terms of Use
+  register-privatevpn:
+    url: https://www.allabolag.se/foretag/privatevpn-global-ab/ytterby/konsulter/2KHTL7QI5YF3I
+    title: PrivateVPN Global AB on Allabolag
+  register-bidco:
+    url: https://www.allabolag.se/foretag/meralm-bidco-ab/kung%C3%A4lv/kontorstj%C3%A4nster/2KHKFBQI63II9
+    title: Meralm Bidco AB on Allabolag
+  register-topco:
+    url: https://www.allabolag.se/foretag/meralm-topco-ab/kung%C3%A4lv/finansbolag-finansiella-tj%C3%A4nster/2KHKFB0I5YE9Q
+    title: Meralm Topco AB on Allabolag
+  acquisition:
+    url: https://www.privateequitywire.co.uk/perwyn-backed-miss-group-acquires-privatevpn/
+    title: Perwyn-backed Miss Group acquires PrivateVPN (Private Equity Wire, 2022)
+  faq:
+    url: https://help.privatevpn.com/en/articles/302435-frequently-asked-questions
+    title: Frequently Asked Questions
+  protocols-help:
+    url: https://help.privatevpn.com/en/articles/302314-understanding-vpn-protocols-which-one-is-the-right-one-for-you
+    title: 'Understanding VPN protocols: Which one is the RIGHT one for you?'
+  kill-switch-help:
+    url: https://help.privatevpn.com/en/articles/302305-how-to-setup-kill-switch-compilation
+    title: How to Setup Kill Switch Compilation
+  kill-switch:
+    url: https://privatevpn.com/features/kill-switch/
+    title: VPN kill switch
+  stealth-help:
+    url: https://help.privatevpn.com/en/articles/724176-how-to-setup-stealthvpn-compilation
+    title: How to Setup StealthVPN Compilation
+  stealth-linux:
+    url: https://help.privatevpn.com/en/articles/522853-manual-stealthvpn-guide-for-ubuntu-linux
+    title: Manual StealthVPN Guide for Ubuntu Linux
+  linux-guides:
+    url: https://help.privatevpn.com/en/collections/670721-linux-setup-guides
+    title: Linux setup guides
+  server-list:
+    url: https://privatevpn.com/serverlist/
+    title: Server list
+  port-forwarding:
+    url: https://privatevpn.com/features/vpn-port-forwarding/
+    title: VPN port forwarding
+  money-back:
+    url: https://privatevpn.com/money-back-guarantee/
+    title: 30-day money-back guarantee
+  no-log:
+    url: https://privatevpn.com/features/no-log-vpn/
+    title: No log VPN
+  download:
+    url: https://privatevpn.com/download/
+    title: Download
+  recruit:
+    url: https://privatevpn.com/recruit-and-earn/
+    title: Recruit and earn
+  versprite-004:
+    url: https://github.com/VerSprite/research/blob/master/advisories/VS-2018-004.md
+    title: VerSprite advisory VS-2018-004, PrivateVPN for macOS
+  versprite-005:
+    url: https://github.com/VerSprite/research/blob/master/advisories/VS-2018-005.md
+    title: VerSprite advisory VS-2018-005, PrivateVPN for macOS
+  exodus:
+    url: https://web.archive.org/web/20230928053812/https://reports.exodus-privacy.eu.org/en/reports/com.pvpn.privatevpn/latest/
+    title: Exodus Privacy report for com.pvpn.privatevpn 4.1.9 (archived)
+  google-play:
+    url: https://play.google.com/store/apps/details?id=com.pvpn.privatevpn
+    title: PrivateVPN on Google Play
+  group:
+    url: https://www.hitta.se/f%C3%B6retagsinformation/privatevpn%2Bglobal%20ab/5592822182
+    title: PrivateVPN Global AB, company and group structure (hitta.se)
+  help-centre:
+    url: https://help.privatevpn.com/en/
+    title: PrivateVPN Help Center
+  dns-leak-linux:
+    url: https://help.privatevpn.com/en/articles/302306-how-to-fix-dns-leak-on-linux
+    title: How to fix DNS Leak on Linux
+  split-tunnel-wireguard:
+    url: https://help.privatevpn.com/en/articles/320423-how-to-setup-split-tunneling-with-wireguard
+    title: How to setup split tunneling with WireGuard
+  application-guard:
+    url: https://help.privatevpn.com/en/articles/517209-how-to-setup-application-guard-on-privatevpn-app-for-windows
+    title: How to setup Application Guard on PrivateVPN app for Windows
