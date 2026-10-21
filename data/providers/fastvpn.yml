@@ -1,0 +1,324 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: FastVPN
+icon: fastvpn.svg
+checked: 2026-10-21
+
+criteria:
+  identity:
+    website:
+      value: https://www.namecheap.com/vpn/
+      note: It also has its own site at fastvpn.com.
+      sources: [home, fastvpn-site]
+    legal_entity:
+      value: Namecheap, Inc.
+      sources: [tos]
+    owner:
+      value: null
+      note: >-
+        CVC Capital Partners agreed to buy a majority of Namecheap in 2025, and the deal was filed with
+        Cyprus's competition regulator that November. Neither has announced it closing. Founder
+        Richard Kirkendall kept a large stake.
+      sources: [cvc-cyprus, cvc-deal]
+    founded:
+      value: 2018
+      note: Launched as Namecheap VPN in October 2018 and renamed FastVPN in October 2021.
+      sources: [launch-2018, press-2021]
+    team:
+      value: public
+      note: Namecheap names its founder and leadership team.
+      sources: [about]
+    sister_brands:
+      value: []
+      note: Spaceship's site also sells FastVPN itself, under the same name.
+      sources: [legal, spaceship]
+    acquisitions:
+      value: null
+      note: CVC's 2025 deal for a majority of Namecheap would be the only one. The 2021 change from Namecheap VPN to FastVPN was a rename.
+      sources: [cvc-cyprus, press-2021]
+
+  jurisdiction:
+    hq:
+      value: US
+      note: Namecheap is based in Phoenix, Arizona.
+      sources: [about]
+    entities:
+      value: [US]
+      note: The terms mention subsidiaries and sister companies but don't name them.
+      sources: [tos, about]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [privacy]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [privacy, tos]
+    timestamps:
+      value: null
+      note: The current policy doesn't mention connection times. The 2018 launch post said it kept track of how many times you connect.
+      sources: [privacy, launch-2018]
+    bandwidth:
+      value: null
+      note: The current policy doesn't say. The 2018 launch post said it kept track of how much data you use.
+      sources: [privacy, launch-2018]
+    source_ip:
+      value: null
+      note: The policy doesn't say whether your IP address is kept, by FastVPN or by the upstream network provider it shares your user ID with.
+      sources: [privacy]
+    proven:
+      value: []
+      note: No audit of the no-logs claim has been published.
+    policy: https://www.namecheap.com/legal/apps/vpn-privacy-policy/
+
+  transparency:
+    audits:
+      value: []
+    report:
+      value: none
+      note: Namecheap's legal pages include no transparency report.
+      sources: [legal]
+    canary:
+      value: none
+      note: Namecheap's legal pages include no warrant canary.
+      sources: [legal]
+    bug_bounty:
+      value: true
+      note: Only mentioned in its data processing addendum, with no public page for its rules or rewards.
+      sources: [dpa]
+    incidents:
+      value: []
+
+  account:
+    email:
+      value: required
+      note: Buying on the website needs a Namecheap account.
+      sources: [signup]
+    personal_data:
+      value: [name]
+      note: Namecheap's signup asks for a first and last name.
+      sources: [signup]
+    payment:
+      value: null
+      note: FastVPN's pages don't list payment methods. Namecheap takes cards, PayPal and crypto (through account funds) for its other products.
+      sources: [payment-methods]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn, ikev2]
+      sources: [protocols, compare]
+    post_quantum:
+      value: none
+      note: Its protocol pages don't mention post-quantum key exchange.
+      sources: [protocols, protocols-windows]
+    kill_switch:
+      value: app
+      note: A toggle in the Windows, macOS and iOS apps (WireGuard only on macOS and iOS). On Android it points you to the system's Always-on VPN setting.
+      sources: [kill-switch, macos-setup]
+    dns:
+      value: null
+      note: It promises DNS leak protection but doesn't say whose DNS servers answer inside the tunnel.
+      sources: [launch-2018, spaceship]
+
+  infra:
+    ram_only:
+      value: null
+      note: FastVPN doesn't say whether its servers run from RAM.
+      sources: [privacy, fastvpn-help]
+    hosting:
+      value: null
+      note: >-
+        Its policy says an unnamed upstream provider runs the network. Server hostnames in its help
+        centre are on wlvpn.com, the IPVanish-powered white-label VPN service owned by Ziff Davis.
+      sources: [tos, china, wlvpn]
+    virtual_locations:
+      value: null
+      note: It doesn't say whether any of its locations are virtual.
+      sources: [fastvpn-site, fastvpn-help]
+    servers:
+      value: 2700
+      note: Listed as "over 2,700".
+      sources: [fastvpn-site]
+    countries:
+      value: null
+      note: Namecheap says "100+ locations" rather than countries. Spaceship's FastVPN page says "100+ countries".
+      sources: [home, spaceship]
+
+  features:
+    connections:
+      value: unlimited
+      note: Only on what it calls privacy servers.
+      sources: [compare]
+    multihop:
+      value: null
+      note: A November 2024 post promised multi-hop for 2025, but no current FastVPN page mentions it.
+      sources: [blog-2024, compare]
+    obfuscation:
+      value: [proprietary]
+      note: Scramble, an OpenVPN obfuscation option in the Windows app.
+      sources: [protocols-windows, china]
+    port_forwarding:
+      value: null
+      note: No FastVPN page or help article mentions port forwarding.
+      sources: [fastvpn-help]
+    split_tunnel:
+      value: true
+      note: Windows, Android and iOS.
+      sources: [split-tunnel, blog-2024]
+    blocking:
+      value: [ads, trackers, malware]
+      note: Its Ad Blocker is in the Windows, macOS and iOS apps, and needs WireGuard on Apple devices.
+      sources: [macos-setup, ios-setup, compare]
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android]
+      note: Linux and routers use OpenVPN config files rather than an app. There are TV apps too.
+      sources: [linux, compare]
+    open_source:
+      value: none
+      note: The terms call the source code Namecheap's exclusive property and forbid reverse engineering.
+      sources: [tos]
+    telemetry:
+      value: null
+      note: Feature-use analytics and crash data go to third-party processors, linked to your user ID. The policy doesn't say whether you can turn them off.
+      sources: [privacy, tos]
+    fdroid:
+      value: false
+      sources: [tos, play]
+
+  pricing:
+    monthly:
+      value: { amount: 7.88, currency: USD }
+      note: Spaceship's FastVPN page sells the monthly plan for $5.88.
+      sources: [home, spaceship]
+    best:
+      value: { amount: 1, currency: USD }
+      note: The 1-year plan, at $12.00 for the first year. A Namecheap comparison page lists the same plan at $9.88.
+      sources: [home, compare]
+    best_term:
+      value: 12
+      sources: [home]
+    renewal_increase:
+      value: 188
+      note: The 1-year plan renews at $34.56 a year. The monthly and 3-year plans renew at the same price.
+      sources: [home]
+    free_tier:
+      value: false
+      note: There's a 30-day free trial, capped at 30 GB.
+      sources: [home]
+    refund_days:
+      value: 30
+      note: A one-time 30-day cancellation, with no refunds after that.
+      sources: [tos, compare]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        Its policy says "We ensure our customers remain anonymous when using the service". Its site
+        calls the servers "in-house", while the policy says an upstream third-party provider runs the
+        network.
+      sources: [privacy, home]
+    affiliates:
+      value: true
+      note: Through Namecheap's affiliate programme, which fastvpn.com links to as its VPN affiliate scheme.
+      sources: [affiliates, fastvpn-site]
+    review_sites:
+      value: false
+      note: Nothing ties Namecheap to one. Its network comes from WLVPN, part of Ziff Davis, which owns PCMag.
+      sources: [wlvpn, zd-10k-2025]
+    activism:
+      value: true
+      note: Namecheap lists the EFF and Fight for the Future as causes it supports.
+      sources: [about]
+
+refs:
+  fastvpn-help:
+    url: https://www.namecheap.com/support/knowledgebase/category/2265/fastvpn/
+    title: FastVPN help centre
+  legal:
+    url: https://www.namecheap.com/legal/
+    title: Namecheap legal pages
+  dpa:
+    url: https://www.namecheap.com/legal/universal/data-processing-addendum/
+    title: Namecheap data processing addendum
+  cvc-cyprus:
+    url: https://www.competition.gov.cy/competition/competition.nsf/All/DA16C3084858A165C2258D370022197C?OpenDocument=&print=
+    title: Cyprus competition commission, notification of Domain Bidco's acquisition of Namecheap (November 2025)
+  cvc-deal:
+    url: https://domainnamewire.com/2025/09/12/private-equity-firm-is-buying-namecheap-in-deal-that-values-company-at-1-5-billion/
+    title: Domain Name Wire, Private equity firm is buying Namecheap (September 2025)
+  ios-setup:
+    url: https://www.namecheap.com/support/knowledgebase/article.aspx/10410/2269/how-to-set-up-fastvpn-on-ios/
+    title: How to set up FastVPN on iOS
+  wlvpn:
+    url: https://wlvpn.com/about-wlvpn/
+    title: About WLVPN
+  zd-10k-2025:
+    url: https://www.sec.gov/Archives/edgar/data/1084048/000108404826000005/zd-20251231.htm
+    title: Ziff Davis, annual report on Form 10-K for 2025
+  home:
+    url: https://www.namecheap.com/vpn/
+    title: FastVPN
+  fastvpn-site:
+    url: https://fastvpn.com/
+    title: FastVPN (fastvpn.com)
+  privacy:
+    url: https://www.namecheap.com/legal/apps/vpn-privacy-policy/
+    title: FastVPN privacy policy
+  tos:
+    url: https://www.namecheap.com/legal/apps/vpn-tos/
+    title: FastVPN terms of service
+  about:
+    url: https://www.namecheap.com/about/
+    title: About Namecheap
+  launch-2018:
+    url: https://www.namecheap.com/blog/introducing-namecheap-vpn/
+    title: Introducing Namecheap VPN (October 2018)
+  press-2021:
+    url: https://www.namecheap.com/about/press-releases/21-10-28/namecheap-introduces-fastvpn/
+    title: Namecheap introduces FastVPN (October 2021)
+  blog-2024:
+    url: https://www.namecheap.com/blog/fastvpn-expands-internet-freedom/
+    title: 'FastVPN turns 6: your Internet freedom expands (November 2024)'
+  compare:
+    url: https://www.namecheap.com/vpn/best-vpn-app-reviews/
+    title: FastVPN vs the top VPN apps
+  signup:
+    url: https://www.namecheap.com/myaccount/signup/
+    title: Namecheap account signup
+  payment-methods:
+    url: https://www.namecheap.com/support/knowledgebase/article.aspx/35/7/what-payment-methods-do-you-accept-for-domain-registrations/
+    title: What payment methods do you accept for domain registrations?
+  protocols:
+    url: https://www.namecheap.com/support/knowledgebase/article.aspx/10432/2274/which-protocol-to-choose/
+    title: Which protocol to choose?
+  protocols-windows:
+    url: https://www.namecheap.com/support/knowledgebase/article.aspx/10404/2266/how-to-switch-protocols-for-fastvpn-on-windows/
+    title: How to switch protocols for FastVPN on Windows?
+  kill-switch:
+    url: https://www.namecheap.com/support/knowledgebase/article.aspx/10405/2274/what-is-a-kill-switch/
+    title: What is a Kill Switch?
+  macos-setup:
+    url: https://www.namecheap.com/support/knowledgebase/article.aspx/10443/2268/how-to-set-up-fastvpn-on-macos/
+    title: How to set up FastVPN on macOS
+  china:
+    url: https://www.namecheap.com/support/knowledgebase/article.aspx/10428/2274/how-to-bypass-internet-restrictions-in-china-and-other-countries-that-block-vpn/
+    title: How to bypass internet restrictions in China and other countries that block VPN
+  split-tunnel:
+    url: https://www.namecheap.com/support/knowledgebase/article.aspx/10659/2266/what-is-split-tunneling-in-fastvpn-for-windows/
+    title: What is Split Tunneling in FastVPN for Windows?
+  linux:
+    url: https://www.namecheap.com/vpn/vpn-for-linux/
+    title: FastVPN for Linux
+  play:
+    url: https://play.google.com/store/apps/details?id=com.namecheap.vpn
+    title: 'FastVPN: Secure & Private on Google Play'
+  spaceship:
+    url: https://www.spaceship.com/vpn/
+    title: FastVPN on Spaceship
+  affiliates:
+    url: https://www.namecheap.com/affiliates/
+    title: Namecheap affiliate program
