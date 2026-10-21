@@ -1,0 +1,337 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Speedify
+icon: speedify.png
+checked: 2026-10-21
+
+criteria:
+  identity:
+    website:
+      value: https://speedify.com
+      sources: [about]
+    legal_entity:
+      value: Connectify, Inc.
+      sources: [terms, scc]
+    owner:
+      value: null
+      note: Connectify doesn't say who owns it.
+      sources: [about, press]
+    founded:
+      value: 2014
+      sources: [press]
+    team:
+      value: public
+      note: The CEO, president, CTO and two other leads are named.
+      sources: [about]
+    sister_brands:
+      value: []
+      note: Connectify's other product, Connectify Hotspot, isn't a VPN.
+      sources: [about]
+    acquisitions:
+      value: []
+      sources: [about, press]
+
+  jurisdiction:
+    hq:
+      value: US
+      sources: [terms, scc]
+    entities:
+      value: [US]
+      sources: [scc]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [privacy-policy]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [privacy-policy]
+    timestamps:
+      value: 'yes'
+      evidence: claimed
+      note: The policy records when each connection starts and how long it lasts, and deletes what it collects from connections after six months.
+      sources: [privacy-policy]
+    bandwidth:
+      value: 'yes'
+      evidence: claimed
+      note: The data used on each connection, kept for up to six months.
+      sources: [privacy-policy]
+    source_ip:
+      value: 'yes'
+      evidence: claimed
+      note: The policy takes your IP address and device ID with each connection and deletes them after six months, though its FAQ says it logs no IP addresses.
+      sources: [privacy-policy, features]
+    proven:
+      value: []
+      note: Its only published audit checks the Android app's security, not what's logged.
+      sources: [masa-report]
+    policy: https://speedify.com/privacy-policy/
+
+  transparency:
+    audits:
+      value:
+        - date: 2024-12-12
+          auditor: DEKRA
+          scope: apps
+          source: masa-report
+      evidence: verified
+      note: A MASA check of Android app version 15.4, published in March 2025.
+      sources: [masa-kb]
+    report:
+      value: none
+      note: The policy says it gives governments data only when the law requires it, but publishes no figures.
+      sources: [privacy-policy]
+    canary: none
+    bug_bounty:
+      value: false
+      note: It has a disclosure policy and promises not to sue researchers, but doesn't pay.
+      sources: [vdp]
+    incidents:
+      value:
+        - date: 2025-03-21
+          summary: SecureLayer7 disclosed a flaw in the downloadable macOS app's helper tool that let a local attacker run commands as root (CVE-2025-25364). Connectify says version 15.2 had already fixed it that February, and published the details in April.
+          handled: well
+          source: securelayer7
+      sources: [cve-statement, nvd]
+
+  account:
+    email:
+      value: required
+      note: The free tier needs an account too, made with an email address or an Apple or Google sign-in.
+      sources: [create-account]
+    personal_data:
+      value: [name]
+      note: The privacy policy says buying a plan takes your name and email address.
+      sources: [privacy-policy]
+    payment:
+      value: [card, paypal, app_store]
+      note: Also Venmo, Apple Pay and Google Pay. No crypto.
+      sources: [payment, crypto]
+
+  security:
+    protocols:
+      value: [proprietary]
+      note: Its own bonding protocol, run over DTLS 1.2 with BoringSSL and either AES-256-GCM or ChaCha20-Poly1305.
+      sources: [encryption, transport-mode]
+    post_quantum:
+      value: none
+      note: Keys are agreed with ECDHE, which isn't quantum-resistant.
+      sources: [encryption]
+    kill_switch:
+      value: app
+      note: Off by default, and only on Windows, Android and iOS.
+      sources: [kill-switch, privacy-settings]
+    dns:
+      value: first_party
+      note: The default. Public DNS services like Quad9 or Cloudflare, or a custom server, can be picked instead.
+      sources: [change-dns]
+
+  infra:
+    ram_only:
+      value: null
+      note: Speedify doesn't say whether its servers run from RAM.
+    hosting:
+      value: null
+      note: Its FAQ says it uses a mix of dedicated and virtual servers, but not whether it owns any.
+      sources: [features]
+    virtual_locations:
+      value: null
+      note: Speedify doesn't say whether any server sits somewhere other than its listed location.
+    servers:
+      value: null
+      note: Speedify only says it has hundreds.
+      sources: [home]
+    countries:
+      value: 37
+      note: Counted from its server location list. Other pages say 35 countries, or 82 locations.
+      sources: [speed-servers, features, press]
+
+  features:
+    connections:
+      value: 5
+      sources: [store, terms]
+    multihop: false
+    obfuscation:
+      value: null
+      note: It can tunnel over HTTPS on port 443 for networks that block other ports, but doesn't say whether that disguises the traffic.
+      sources: [transport-mode]
+    port_forwarding:
+      value: true
+      note: Only with a paid Dedicated or Self-Hosted Server add-on.
+      sources: [session-settings, store]
+    split_tunnel:
+      value: true
+      note: By app on Android, Windows and Linux. Elsewhere by domain, IP address or port.
+      sources: [app-bypass, bypass]
+    blocking:
+      value: []
+      note: No blocklists of its own, though AdGuard's ad-blocking DNS is one of the DNS choices.
+      sources: [change-dns]
+
+  clients:
+    platforms:
+      value: [windows, macos, linux_gui, linux_cli, ios, android, router]
+      note: Routers need OpenWrt or a Powered by Speedify router, and a router plan.
+      sources: [download, linux, store]
+    open_source:
+      value: none
+      note: Only a Python library for controlling the app is open source.
+      sources: [github]
+    telemetry:
+      value: null
+      note: The app's privacy settings have no analytics or crash report option, and the privacy policy doesn't mention either.
+      sources: [privacy-settings]
+    trackers:
+      value: null
+      note: The newest Exodus report that would load is for version 12.1.1 from June 2022, which found none. That's too old to stand for today's app.
+      sources: [exodus]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 14.99, currency: USD }
+      sources: [store]
+    best:
+      value: { amount: 5, currency: USD }
+      note: $179.99 every three years, which the store shows as $4.99 a month.
+      sources: [store]
+    best_term:
+      value: 36
+      sources: [store]
+    renewal_increase:
+      value: 0
+      note: Each plan is billed at its listed price every term.
+      sources: [store, subscriptions]
+    free_tier:
+      value: true
+      note: 5 GB a month with a free account. Not on routers.
+      sources: [download, create-account]
+    refund_days:
+      value: 30
+      note: Not on renewals. App Store and Google Play purchases are refunded by Apple or Google.
+      sources: [refund, terms]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: Its FAQ and help centre say it logs no IP addresses, while the privacy policy takes your IP with each connection and deletes it after six months.
+      sources: [features, privacy-settings, privacy-policy]
+    affiliates:
+      value: true
+      note: Its site files discount pages for TechRadar and MacUpdate readers as affiliate pages, and FlexOffers listed a Speedify scheme paying 40% of sales.
+      sources: [affiliate-pages, techradar-offer, flexoffers]
+    review_sites:
+      value: false
+      sources: [about]
+    activism:
+      value: false
+      note: It offers free or discounted accounts in countries with strict internet rules, but nothing on its site funds or campaigns for privacy causes.
+      sources: [about]
+
+refs:
+  home:
+    url: https://speedify.com/
+    title: Speedify
+  about:
+    url: https://speedify.com/about-us/
+    title: About Us
+  press:
+    url: https://speedify.com/press/
+    title: Press Center
+  privacy-policy:
+    url: https://speedify.com/privacy-policy/
+    title: Privacy Policy
+  terms:
+    url: https://speedify.com/terms-of-service/
+    title: Terms of Service
+  scc:
+    url: https://speedify.com/standard-contractual-clauses/
+    title: Standard Contractual Clauses
+  features:
+    url: https://speedify.com/features/
+    title: Features
+  privacy-settings:
+    url: https://support.speedify.com/article/312-privacy
+    title: Speedify Privacy Settings Overview
+  masa-report:
+    url: https://appdefensealliance.dev/reports/com.speedify.speedifyandroid_1741015259688871.pdf
+    title: DEKRA, MASA evaluation report for the Android app (2025)
+  masa-kb:
+    url: https://support.speedify.com/article/983-masa-speedify
+    title: How Secure is Speedify? MASA Certified!
+  vdp:
+    url: https://support.speedify.com/article/765-speedify-vulnerability-disclosure-program
+    title: Speedify Vulnerability Disclosure Program
+  securelayer7:
+    url: https://blog.securelayer7.net/cve-2025-25364-speedify-vpn-macos-escalation/
+    title: 'SecureLayer7, CVE-2025-25364: Speedify VPN macOS privilege escalation'
+  cve-statement:
+    url: https://speedify.com/blog/news/speedify-macos-vpn-application-vulnerability/
+    title: Speedify macOS VPN Application Vulnerability Addressed
+  nvd:
+    url: https://nvd.nist.gov/vuln/detail/CVE-2025-25364
+    title: NVD, CVE-2025-25364
+  create-account:
+    url: https://support.speedify.com/article/1089-create-speedify-account
+    title: How to Create a Speedify Account
+  payment:
+    url: https://support.speedify.com/article/389-pay-speedify
+    title: Speedify Payment Options
+  crypto:
+    url: https://support.speedify.com/article/462-bitcoin-cryptocurrencies
+    title: Can I pay for Speedify in Bitcoin or other cryptocurrencies?
+  encryption:
+    url: https://speedify.com/enterprise/encryption/
+    title: Encryption
+  transport-mode:
+    url: https://support.speedify.com/article/882-transport-mode
+    title: Speedify Transport Mode Overview
+  kill-switch:
+    url: https://support.speedify.com/article/447-speedify-killswitch
+    title: Speedify Internet Kill Switch Overview
+  change-dns:
+    url: https://support.speedify.com/article/548-change-dns
+    title: Changing DNS Settings in Speedify
+  speed-servers:
+    url: https://speedify.com/features/speed-servers/
+    title: Speed Servers
+  store:
+    url: https://speedify.com/store/
+    title: Store
+  subscriptions:
+    url: https://support.speedify.com/article/67-manage-subscriptions
+    title: Modifying or Canceling a Speedify Subscription
+  refund:
+    url: https://support.speedify.com/article/486-refund-policy
+    title: Speedify Refund Policy Guide
+  session-settings:
+    url: https://support.speedify.com/article/310-session-settings
+    title: Speedify Session Settings Overview
+  app-bypass:
+    url: https://support.speedify.com/article/943-app-bypass
+    title: Speedify App Bypass
+  bypass:
+    url: https://support.speedify.com/article/271-speedify-streaming-bypass
+    title: Speedify Bypass Overview
+  download:
+    url: https://speedify.com/download/
+    title: Download Speedify
+  linux:
+    url: https://speedify.com/linux-vpn/
+    title: Speedify for Linux
+  github:
+    url: https://github.com/speedify
+    title: Speedify on GitHub
+  exodus:
+    url: https://reports.exodus-privacy.eu.org/en/reports/com.speedify.speedifyandroid/latest/
+    title: Exodus Privacy report for com.speedify.speedifyandroid
+  affiliate-pages:
+    url: https://speedify.com/wp-json/wp/v2/search?search=AFFILIATE
+    title: Speedify site search for affiliate pages
+  techradar-offer:
+    url: https://speedify.com/spotlight/techradar-exclusive-offer/
+    title: Welcome TechRadar readers!
+  flexoffers:
+    url: https://www.flexoffers.com/affiliate-programs/speedify-affiliate-program/
+    title: FlexOffers, Speedify affiliate program
