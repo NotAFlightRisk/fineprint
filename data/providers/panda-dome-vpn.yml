@@ -1,0 +1,303 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Panda Dome VPN
+icon: panda-dome-vpn.svg
+checked: 2026-10-21
+
+criteria:
+  identity:
+    website: https://www.pandasecurity.com/en/homeusers/vpn/
+    legal_entity:
+      value: Panda Security, S.L.U.
+      sources: [legal-notice]
+    owner:
+      value: Vector Capital
+      note: Panda has been a wholly owned subsidiary of WatchGuard Technologies since 2020, and WatchGuard is owned by Vector Capital.
+      sources: [watchguard-closes, vector-watchguard, watchguard-about]
+    founded:
+      value: null
+      note: Panda doesn't say when its VPN launched.
+    team:
+      value: partial
+      note: WatchGuard names its executives, but no one running Panda's consumer products or the VPN is named.
+      sources: [watchguard-about]
+    sister_brands: []
+    acquisitions:
+      value:
+        - date: 2020-06-02
+          acquirer: WatchGuard Technologies
+          source: watchguard-closes
+      note: Announced in March 2020 and completed in June.
+      sources: [watchguard-announce, watchguard-closes]
+
+  jurisdiction:
+    hq:
+      value: ES
+      note: Registered in Bilbao.
+      sources: [legal-notice]
+    entities:
+      value: [ES]
+      note: The legal notice and privacy policy name only Panda Security, S.L.U., plus its US parent WatchGuard Technologies, Inc.
+      sources: [legal-notice, privacy-policy]
+
+  logging:
+    traffic:
+      value: null
+      note: >-
+        The VPN pages say no browsing information is stored, but Panda's privacy policy doesn't single out
+        the VPN and lists the URLs or domain names of sites you visit and traffic data among what its
+        products collect.
+      sources: [vpn, privacy-policy]
+    dns:
+      value: null
+      note: >-
+        The VPN pages say no browsing information is stored, but Panda's privacy policy lists the URLs or
+        domain names of sites you visit among what its products collect.
+      sources: [vpn, privacy-policy]
+    timestamps:
+      value: null
+      note: The privacy policy lists session data and the date and time of visits, without saying whether that covers the VPN.
+      sources: [privacy-policy]
+    bandwidth:
+      value: null
+      note: The free plan's 150 MB daily cap needs a running count, but Panda doesn't say what it keeps or for how long.
+      sources: [features-vpn]
+    source_ip:
+      value: null
+      note: The privacy policy lists IP addresses among what its products collect, without saying whether the VPN keeps yours.
+      sources: [privacy-policy]
+    proven: []
+    policy: https://www.pandasecurity.com/en/homeusers/media/legal-notice/
+
+  transparency:
+    audits:
+      value: []
+      note: The VPN page shows antivirus lab results from AV-TEST, AV-Comparatives and SE Labs, but no audit of the VPN.
+      sources: [vpn]
+    report: none
+    canary: none
+    bug_bounty:
+      value: false
+      note: WatchGuard's PSIRT takes reports for Panda products but doesn't mention rewards.
+      sources: [psirt]
+    incidents:
+      value:
+        - date: 2024-07-29
+          summary: >-
+            Trend Micro's ZDI published two flaws in the Windows app that let a local program run code as SYSTEM, one a DLL
+            hijack in the VPN process and one in its Hydra SDK service (CVE-2024-7244, CVE-2024-7245). ZDI reported them to
+            WatchGuard's PSIRT in February 2024, got no reply and released them unpatched, and the PSIRT's advisories list
+            neither.
+          handled: poorly
+          source: zdi-24-1014
+        - date: 2023-07-05
+          summary: >-
+            A researcher found the Panda Dome VPN installer for Windows could load a planted DLL, letting a local attacker gain
+            higher privileges (CVE-2023-37849). Panda sent him a fixed build within ten days and later published an advisory
+            crediting him.
+          handled: well
+          source: advisory-2023
+      sources: [zdi-24-1015, heegong-2023, psirt]
+
+  account:
+    email:
+      value: required
+      note: Paid plans are managed through a Panda account, which signs in with your email address.
+      sources: [account]
+    payment:
+      value: [card, paypal, bank, app_store]
+      note: The site lists Visa, Mastercard, Maestro, PayPal, Apple Pay, bank transfer, iDEAL and Klarna, and the Android app sells plans in-app.
+      sources: [vpn, play]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn, other]
+      note: Other is Catapult Hydra on every platform, plus IPsec on Apple devices.
+      sources: [protocols-help]
+    post_quantum:
+      value: none
+      note: None of Panda's VPN pages mention post-quantum key exchange.
+      sources: [features-vpn]
+    kill_switch:
+      value: app
+      evidence: claimed
+      note: Only Panda's blog mentions one, and none of its pages say which apps have it.
+      sources: [blog-gaming]
+    dns:
+      value: null
+      note: Panda doesn't say whose DNS servers the VPN uses.
+      sources: [android-vpn]
+
+  infra:
+    ram_only:
+      value: null
+      note: Panda doesn't say whether its VPN servers run from RAM.
+      sources: [android-vpn]
+    hosting:
+      value: null
+      note: Panda doesn't say who runs its VPN servers, and its privacy policy names no VPN partner.
+      sources: [privacy-policy]
+    virtual_locations:
+      value: null
+      note: Panda calls every location a virtual location, without saying where the servers physically sit.
+      sources: [android-vpn]
+    servers:
+      value: null
+      note: The VPN page claims "thousands of servers" without a count.
+      sources: [vpn]
+    countries:
+      value: null
+      note: Panda says "more than 60" virtual locations without listing them.
+      sources: [android-vpn]
+
+  features:
+    connections:
+      value: 1
+      note: The cheapest plan covers one device. Five devices cost $65.37 for 2 years.
+      sources: [vpn, android-vpn]
+    multihop:
+      value: false
+      sources: [features-vpn]
+    obfuscation:
+      value: []
+      sources: [features-vpn]
+    port_forwarding:
+      value: false
+      note: The VPN page says it supports P2P, but nothing mentions port forwarding.
+      sources: [vpn]
+    blocking:
+      value: []
+      note: Safe Browsing is a separate Panda Dome feature, not a blocklist in the VPN.
+      sources: [features-vpn]
+    split_tunnel:
+      value: false
+      note: Not mentioned on Panda's VPN pages or app listings.
+      sources: [play, app-store]
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android]
+      note: On Android and iOS the VPN is part of the Panda Dome app. No Linux app, router support or browser extension.
+      sources: [android-vpn, play, app-store]
+    open_source: none
+    telemetry:
+      value: forced
+      evidence: claimed
+      note: >-
+        The privacy policy says the apps upload how you use them and error data, with no opt-out stated. The free version
+        also runs Google's ads SDK.
+      sources: [privacy-policy, play]
+    trackers:
+      value: null
+      note: >-
+        Exodus wouldn't load from here, and its only archived report is from 2020, finding 10 trackers in version 3.5.24.
+        The Play listing says the app contains ads.
+      sources: [exodus-2020, play]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: null
+      note: The VPN page only sells 1, 2 and 3-year plans.
+      sources: [vpn]
+    best:
+      value: { amount: 1.07, currency: USD }
+      note: >-
+        USD from the US site, which prices by location. $25.77 for the first 2 years on one device, with 40% off;
+        five devices cost $65.37.
+      sources: [vpn]
+    best_term: 24
+    renewal_increase:
+      value: 67
+      note: >-
+        The 40% off is for the first term only, then the struck-through $42.95 applies. A site-wide banner
+        separately promises to keep the price the same at renewal.
+      sources: [android-vpn]
+    free_tier:
+      value: true
+      note: 150 MB a day on one device, connected to the nearest server with no choice of location.
+      sources: [features-vpn]
+    refund_days:
+      value: 30
+      note: Within 30 days of purchase, for online orders.
+      sources: [refund, account]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        Sells "Online Privacy and Anonymity" and a no-logs policy, while its privacy policy lists the sites
+        you visit among what its products collect.
+      sources: [features-vpn, privacy-policy]
+    affiliates:
+      value: true
+      note: Its affiliate programme pays commission on every sale.
+      sources: [partners]
+    activism: false
+
+refs:
+  protocols-help:
+    url: https://www.pandasecurity.com/homeusers/downloads/docs/product/help/pd/en/028.htm
+    title: Panda Dome help, VPN protocols
+  vpn:
+    url: https://www.pandasecurity.com/en/homeusers/vpn/
+    title: Panda Dome VPN
+  features-vpn:
+    url: https://www.pandasecurity.com/en/features/vpn/
+    title: VPN in Panda Dome
+  android-vpn:
+    url: https://www.pandasecurity.com/en/homeusers/android-vpn/
+    title: Panda Dome VPN for Android
+  legal-notice:
+    url: https://www.pandasecurity.com/en/homeusers/media/legal-notice/
+    title: Legal notice, general terms and conditions
+  privacy-policy:
+    url: https://www.pandasecurity.com/en/homeusers/media/legal-notice/#e10
+    title: Privacy policy (January 2024), section 10 of the legal notice
+  refund:
+    url: https://www.pandasecurity.com/en/homeusers/media/legal-notice/refund/
+    title: Return policy
+  account:
+    url: https://www.pandasecurity.com/en/renewal/
+    title: Panda account and renewals FAQ
+  partners:
+    url: https://www.pandasecurity.com/en/partners/
+    title: Panda partner and affiliate programmes
+  watchguard-announce:
+    url: https://www.pandasecurity.com/en/mediacenter/watchguard-panda/
+    title: WatchGuard to acquire Panda Security (March 2020)
+  watchguard-closes:
+    url: https://www.pandasecurity.com/en/mediacenter/watchguard_panda/
+    title: WatchGuard completes acquisition of Panda Security (June 2020)
+  vector-watchguard:
+    url: https://www.vectorcapital.com/investments/case-study/watchguard
+    title: Vector Capital, WatchGuard case study
+  watchguard-about:
+    url: https://www.watchguard.com/wgrd-about
+    title: About WatchGuard, leadership and board
+  blog-gaming:
+    url: https://www.pandasecurity.com/en/mediacenter/best-vpn-for-gaming/
+    title: Panda blog, best VPNs for gaming (2026)
+  play:
+    url: https://play.google.com/store/apps/details?id=com.pandasecurity.pandaav
+    title: Panda Dome Antivirus and VPN on Google Play
+  app-store:
+    url: https://apps.apple.com/us/app/pandadome/id1459095718
+    title: PandaDome on the App Store
+  exodus-2020:
+    url: https://web.archive.org/web/20201125202832/https://reports.exodus-privacy.eu.org/en/reports/search/com.pandasecurity.pandaav/
+    title: Exodus Privacy reports for com.pandasecurity.pandaav (archived November 2020)
+  psirt:
+    url: https://psirt.watchguard.com/
+    title: WatchGuard PSIRT security advisories
+  zdi-24-1014:
+    url: https://www.zerodayinitiative.com/advisories/ZDI-24-1014/
+    title: ZDI-24-1014, Panda Security Dome VPN DLL hijacking (CVE-2024-7244)
+  zdi-24-1015:
+    url: https://www.zerodayinitiative.com/advisories/ZDI-24-1015/
+    title: ZDI-24-1015, Panda Security Dome Hydra SDK service privilege escalation (CVE-2024-7245)
+  advisory-2023:
+    url: https://web.archive.org/web/20240815194039/https://www.pandasecurity.com/en/support/card?id=100080
+    title: Panda, local privilege escalation in Panda Dome VPN for Windows Installer (archived)
+  heegong-2023:
+    url: https://heegong.github.io/posts/Local-privilege-escalation-in-Panda-Dome-VPN-for-Windows-Installer/
+    title: HeeChan Kim, CVE-2023-37849 write-up and timeline
