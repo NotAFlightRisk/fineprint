@@ -1,0 +1,463 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: OVPN
+icon: ovpn.svg
+checked: 2026-10-22
+
+criteria:
+  identity:
+    website:
+      value: https://www.ovpn.com
+      sources: [home]
+    legal_entity:
+      value: OVPN Inc.
+      note: >-
+        OVPN Integritet AB, the Swedish company that ran it before 2025, went into liquidation in July 2026,
+        though a help article still names it.
+      sources: [tos, press, register, people]
+    owner:
+      value: Point Wild
+      note: >-
+        Pango, then owned by Aura, bought OVPN in 2023. Aura spun Pango Group off in 2024, and it then merged
+        with Total Security, TotalAV's maker, to form Point Wild.
+      sources: [next-chapter, people, aura-split-2024, point-wild-merger]
+    founded:
+      value: 2014
+      note: Its first paying customer signed up on 20 August 2014.
+      sources: [turned-eight, about]
+    team:
+      value: partial
+      note: >-
+        The site names no one in charge. Founder David Wibergh signed the 2023 sale post, and Point Wild
+        names its own executives.
+      sources: [next-chapter, point-wild-team]
+    sister_brands:
+      value: [Hotspot Shield, Betternet, Touch VPN, UltraVPN, VPN 360, TotalAV VPN]
+      note: All owned by Point Wild, through Pango or Total Security.
+      sources: [aura-split-2024, hss-privacy-vpn, point-wild-merger, totalav-vpn]
+    acquisitions:
+      value:
+        - date: 2024-12-12
+          acquirer: Point Wild
+          source: point-wild-merger
+        - date: 2024-09-03
+          acquirer: Pango Group, spun off from Aura
+          source: aura-split-2024
+        - date: 2023-05-08
+          acquirer: Pango, then owned by Aura
+          source: next-chapter
+      note: >-
+        Point Wild was formed when Pango Group merged with Total Security in December 2024. The move to
+        OVPN Inc. in 2025 was within the same group.
+      sources: [next-chapter, aura-split-2024, point-wild-merger, tos]
+
+  jurisdiction:
+    hq:
+      value: US
+      note: >-
+        Swedish until 2025. OVPN Inc. takes notices in Redwood City, California, and the privacy notice says
+        the account and VPN services run in the EU and US.
+      sources: [tos, press, privacy]
+    entities:
+      value: [US, SE]
+      note: OVPN Integritet AB in Stockholm is still registered, in liquidation since July 2026.
+      sources: [tos, register]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [privacy, security]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [privacy, security]
+    timestamps:
+      value: none
+      evidence: claimed
+      note: The device limit is enforced with a bare counter per account, without device IDs, IPs or times.
+      sources: [privacy, device-counter]
+    bandwidth:
+      value: none
+      evidence: claimed
+      note: The monthly transparency reports give traffic per data centre only.
+      sources: [privacy, report-2026-09]
+    source_ip:
+      value: temporary
+      evidence: claimed
+      note: >-
+        On WireGuard your IP is kept in memory until the session ends, and idle peers are wiped after three
+        minutes without a handshake.
+      sources: [privacy, security]
+    proven:
+      value: [court]
+      evidence: verified
+      note: >-
+        In 2020 the Patent and Market Court threw out film companies' demand for the customer behind a Pirate
+        Bay IP, as they couldn't show OVPN held it. That predates the Pango sale, and OVPN told the court a
+        since-deleted database backup could have shown who had that IP.
+      sources: [court-verdict, court-win, torrentfreak]
+    policy:
+      value: https://www.ovpn.com/en/privacy-notice
+      sources: [privacy]
+
+  transparency:
+    audits:
+      value: []
+      note: No independent audit is published on its site, blog or help centre.
+      sources: [transparency, blog-feed]
+    report:
+      value: regular
+      note: >-
+        Monthly reports of data requests and traffic per data centre, though several in 2024 and 2025 came
+        out months late.
+      sources: [transparency, report-2026-09, blog-feed]
+    canary:
+      value: none
+      sources: [transparency, how-secure]
+    bug_bounty:
+      value: true
+      note: >-
+        Its security.txt gives a security and bug bounty contact, and the help centre says it rewards reported
+        vulnerabilities, but no terms or amounts are published.
+      sources: [security-txt, how-secure]
+    incidents:
+      value:
+        - date: 2020-06-23
+          summary: >-
+            Film companies backed by the Rights Alliance asked the Patent and Market Court to make OVPN name the
+            customer behind a Pirate Bay IP address. OVPN fought it, blogged about the case and published the
+            filings, and won with costs in September 2020.
+          handled: well
+          source: court-win
+      sources: [court-update, court-verdict]
+
+  account:
+    email:
+      value: required
+      note: >-
+        Checkout asks for one for the payment provider, with an option for OVPN not to keep it. The security
+        page still says no email is needed.
+      sources: [pricing, security]
+    personal_data:
+      value: []
+      sources: [privacy]
+    payment:
+      value: [card, paypal, app_store, bitcoin, other_crypto]
+      note: >-
+        Other crypto is Ethereum. Cash and Monero were dropped in February 2024, though the security page still
+        offers cash.
+      sources: [payment-methods, crypto-payment, payment-change, app-store, security]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn]
+      note: The mobile apps and Windows on ARM use WireGuard only.
+      sources: [how-secure, wireguard, desktop-218]
+    post_quantum:
+      value: none
+      note: Not mentioned on its security or WireGuard pages, or in its help centre.
+      sources: [wireguard, how-secure]
+    kill_switch:
+      value: system
+      note: >-
+        Optional in the desktop app, with an always-on mode that also blocks traffic while disconnected.
+        Android relies on the system's Always-on VPN.
+      sources: [killswitch-help, killswitch-release, always-on]
+    dns:
+      value: first_party
+      sources: [dns-help, adblock-dns]
+
+  infra:
+    ram_only:
+      value: all
+      evidence: claimed
+      sources: [security, network]
+    hosting:
+      value: owned
+      evidence: claimed
+      note: Colocated hardware in every location, with no rented or virtual servers.
+      sources: [security, network, home]
+    virtual_locations:
+      value: none
+      evidence: claimed
+      sources: [network]
+    servers:
+      value: 96
+      note: The September 2026 transparency report only lists 90 servers, in 26 of the 32 cities.
+      sources: [press, network, report-2026-09]
+    countries:
+      value: 20
+      note: 32 cities, counted from the network page.
+      sources: [network]
+
+  features:
+    connections:
+      value: 4
+      note: >-
+        On a new account. Each year subscribed adds one, so the 12-month plan starts with 5 and the 36-month
+        plan with 7.
+      sources: [connections-help, pricing]
+    multihop:
+      value: true
+      note: Multihop used to be a paid add-on, and the pricing page now includes it free.
+      sources: [multihop, multihop-help, pricing]
+    obfuscation:
+      value: [shadowsocks]
+      note: Stealth VPN in the desktop app runs the connection through a Shadowsocks proxy.
+      sources: [stealth, stealth-help]
+    port_forwarding:
+      value: true
+      note: >-
+        Up to seven ports between 49152 and 65535. A static Public IPv4 address with every port open costs $4
+        a month more.
+      sources: [port-forwarding-help, public-ipv4]
+    split_tunnel:
+      value: true
+      note: Windows x64 only.
+      sources: [split-tunnel, split-tunnel-release]
+    blocking:
+      value: [ads, trackers]
+      sources: [adblock-dns, block-ads]
+
+  clients:
+    platforms:
+      value: [windows, macos, linux_gui, ios, android]
+      note: >-
+        The desktop app covers Ubuntu, Fedora and openSUSE. Routers and NAS boxes use manual OpenVPN or
+        WireGuard setups.
+      sources: [security, guides]
+    open_source:
+      value: none
+      note: No app source is published, and the terms forbid reverse engineering.
+      sources: [tos]
+    telemetry:
+      value: null
+      note: >-
+        Desktop usage statistics are opt-in. The iOS App Store listing says the app collects crash data,
+        without saying whether that can be turned off.
+      sources: [usage-stats-help, usage-stats-release, app-store]
+    trackers:
+      value: 0
+      note: The newest Exodus report that would load was for version 0.9.0, from October 2022.
+      sources: [exodus]
+
+  pricing:
+    monthly:
+      value: { amount: 12, currency: USD }
+      note: The pricing page showed USD here, and also offers EUR and SEK.
+      sources: [pricing]
+    best:
+      value: { amount: 4.22, currency: USD }
+      note: $151.92 for 36 months.
+      sources: [pricing]
+    best_term:
+      value: 36
+      sources: [pricing]
+    renewal_increase:
+      value: null
+      note: Neither the pricing page nor the terms say what longer plans renew at.
+      sources: [pricing, tos]
+    free_tier:
+      value: false
+      sources: [pricing]
+    refund_days:
+      value: 10
+      note: First purchase only, by card or PayPal.
+      sources: [refund]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        Its app store listings promise a "100% completely log-free VPN service" and to "guarantee full data
+        protection".
+      sources: [app-store, play-store]
+    affiliates:
+      value: true
+      sources: [affiliates]
+    review_sites:
+      value: true
+      note: Point Wild also owns Comparitech, a VPN review site, which discloses it.
+      sources: [comparitech-disclosure]
+    activism:
+      value: false
+      note: >-
+        It gave WireGuard's developers a one-off donation in 2020 and people in Ukraine free accounts from 2022,
+        but has backed no privacy causes since.
+      sources: [wireguard-donation, ukraine, about]
+
+refs:
+  home:
+    url: https://www.ovpn.com/en
+    title: OVPN home page
+  about:
+    url: https://www.ovpn.com/en/about
+    title: About OVPN
+  press:
+    url: https://www.ovpn.com/en/press
+    title: Press resources
+  tos:
+    url: https://www.ovpn.com/en/tos
+    title: OVPN Terms of Service (last updated June 2026)
+  privacy:
+    url: https://www.ovpn.com/en/privacy-notice
+    title: Privacy Notice (last updated June 2026)
+  security:
+    url: https://www.ovpn.com/en/security
+    title: Security
+  network:
+    url: https://www.ovpn.com/en/network
+    title: Network
+  guides:
+    url: https://www.ovpn.com/en/guides
+    title: Guides
+  transparency:
+    url: https://www.ovpn.com/en/transparency
+    title: Transparency
+  report-2026-09:
+    url: https://www.ovpn.com/en/blog/transparency-report-september-2026
+    title: 'Transparency report: September 2026'
+  blog-feed:
+    url: https://www.ovpn.com/en/blog/rss
+    title: OVPN blog feed (publication dates)
+  pricing:
+    url: https://www.ovpn.com/en/pricing
+    title: Pricing
+  multihop:
+    url: https://www.ovpn.com/en/features/multihop
+    title: Dynamic Multihop
+  public-ipv4:
+    url: https://www.ovpn.com/en/features/public-ipv4
+    title: Public IPv4
+  wireguard:
+    url: https://www.ovpn.com/en/wireguard
+    title: WireGuard
+  affiliates:
+    url: https://www.ovpn.com/en/affiliates
+    title: Affiliate program
+  security-txt:
+    url: https://www.ovpn.com/.well-known/security.txt
+    title: OVPN security.txt
+  next-chapter:
+    url: https://www.ovpn.com/en/blog/next-chapter-for-ovpn
+    title: Next chapter for OVPN (2023-05-08)
+  turned-eight:
+    url: https://www.ovpn.com/en/blog/ovpn-turned-eight
+    title: OVPN turned eight! (2022)
+  payment-change:
+    url: https://www.ovpn.com/en/blog/update-to-accepted-payment-options
+    title: Update to Accepted Payment Options (2024)
+  usage-stats-release:
+    url: https://www.ovpn.com/en/blog/desktop-client-212-anonymous-usage-statistics
+    title: 'Desktop client 2.12: Anonymous Usage Statistics'
+  stealth:
+    url: https://www.ovpn.com/en/blog/desktop-client-215-stealth-vpn
+    title: 'Desktop client 2.15: Stealth VPN'
+  desktop-218:
+    url: https://www.ovpn.com/en/blog/desktop-client-218
+    title: 'Desktop client 2.18: Windows improvements'
+  killswitch-release:
+    url: https://www.ovpn.com/en/blog/desktop-client-v220-adblock-always-on-killswitch-mtu
+    title: 'Desktop client v2.2.0: Adblock, Always-on Killswitch, MTU'
+  split-tunnel-release:
+    url: https://www.ovpn.com/en/blog/desktop-client-v25-split-tunneling
+    title: 'Desktop client v2.5: Split tunneling on Windows'
+  ukraine:
+    url: https://www.ovpn.com/en/blog/standwithukraine
+    title: '#StandWithUkraine'
+  wireguard-donation:
+    url: https://www.ovpn.com/en/blog/ovpn-donates-to-support
+    title: OVPN donates to support WireGuard (2020-03-23)
+  court-win:
+    url: https://www.ovpn.com/en/blog/ovpn-wins-court-order
+    title: OVPN wins court order (2020-09-10)
+  court-update:
+    url: https://www.ovpn.com/en/blog/update-on-court-order
+    title: Update on court order (2020)
+  court-verdict:
+    url: https://www.ovpn.com/images/blog/court/verdict.pdf
+    title: Patent and Market Court decision PMÄ 10204-20, 2020-09-10 (Swedish)
+  torrentfreak:
+    url: https://torrentfreak.com/ovpn-wins-court-battle-after-pirate-bay-data-demands-rejected-200911
+    title: OVPN wins court battle after Pirate Bay data demands rejected (TorrentFreak)
+  people:
+    url: https://support.ovpn.com/hc/en-us/articles/46236219212307-Who-are-the-people-behind-OVPN
+    title: Who are the people behind OVPN?
+  how-secure:
+    url: https://support.ovpn.com/hc/en-us/articles/46236227522451-How-secure-is-OVPN
+    title: How secure is OVPN?
+  dns-help:
+    url: https://support.ovpn.com/hc/en-us/articles/46236222853523-What-do-you-do-about-DNS-leaks
+    title: What do you do about DNS leaks?
+  adblock-dns:
+    url: https://support.ovpn.com/hc/en-us/articles/46236294866707-What-is-Adblock-DNS
+    title: What is Adblock DNS?
+  block-ads:
+    url: https://support.ovpn.com/hc/en-us/articles/46236280132499-Block-ads-and-Trackers
+    title: Block ads and Trackers
+  killswitch-help:
+    url: https://support.ovpn.com/hc/en-us/articles/46236297871891-Explanation-What-is-Killswitch
+    title: 'Explanation: What is Killswitch?'
+  always-on:
+    url: https://support.ovpn.com/hc/en-us/articles/46236322487571-What-is-Always-on-VPN
+    title: What is Always-on VPN?
+  split-tunnel:
+    url: https://support.ovpn.com/hc/en-us/articles/46236302161811-Split-Tunneling-on-Windows
+    title: Split-Tunneling on Windows
+  port-forwarding-help:
+    url: https://support.ovpn.com/hc/en-us/articles/46236219911315-Do-you-support-port-forwarding
+    title: Do you support port forwarding?
+  multihop-help:
+    url: https://support.ovpn.com/hc/en-us/articles/46236287732883-How-does-Dynamic-Multihop-work
+    title: How does Dynamic Multihop work?
+  stealth-help:
+    url: https://support.ovpn.com/hc/en-us/articles/46236213370387-Explanation-Stealth-VPN
+    title: 'Explanation: Stealth VPN'
+  usage-stats-help:
+    url: https://support.ovpn.com/hc/en-us/articles/46236224489363-Explanation-Collect-anonymous-usage-statistics
+    title: 'Explanation: Collect anonymous usage statistics'
+  connections-help:
+    url: https://support.ovpn.com/hc/en-us/articles/46236227982483-What-is-the-number-of-allowed-connections
+    title: What is the number of allowed connections?
+  device-counter:
+    url: https://support.ovpn.com/hc/en-us/articles/46236275789331-How-does-OVPN-keep-track-of-simultaneous-devices
+    title: How does OVPN keep track of simultaneous devices?
+  refund:
+    url: https://support.ovpn.com/hc/en-us/articles/46236221600147-How-can-I-get-a-refund
+    title: How can I get a refund?
+  payment-methods:
+    url: https://support.ovpn.com/hc/en-us/articles/46236309981843-What-payment-methods-does-OVPN-accept
+    title: What payment methods does OVPN accept?
+  crypto-payment:
+    url: https://support.ovpn.com/hc/en-us/articles/46236278845075-Can-I-make-a-payment-for-my-subscription-anonymously
+    title: Can I make a payment for my subscription anonymously?
+  register:
+    url: https://www.allabolag.se/foretag/ovpn-integritet-ab/stockholm/konsulter/2K48B8LI5YF3I
+    title: OVPN Integritet AB on Allabolag
+  app-store:
+    url: https://apps.apple.com/us/app/ovpn/id1520543719
+    title: OVPN on the App Store (privacy label and seller)
+  play-store:
+    url: https://play.google.com/store/apps/details?id=com.ovpn.android
+    title: OVPN on Google Play
+  exodus:
+    url: https://web.archive.org/web/20230314114204/https://reports.exodus-privacy.eu.org/en/reports/com.ovpn.android/latest/
+    title: Exodus Privacy report for com.ovpn.android 0.9.0 (archived)
+  point-wild-team:
+    url: https://www.pointwild.com/our-team/
+    title: Point Wild, our team
+  aura-split-2024:
+    url: https://www.aura.com/press/release/aura-splits-into-two-world-class-online-safety-companies
+    title: Aura splits into two world-class online safety companies (2024)
+  point-wild-merger:
+    url: https://www.paulweiss.com/insights/client-news/pango-group-merges-with-total-security
+    title: Pango Group merges with Total Security (Paul, Weiss)
+  hss-privacy-vpn:
+    url: https://www.hotspotshield.com/privacy-policy/vpn/
+    title: Hotspot Shield VPN products privacy notice
+  totalav-vpn:
+    url: https://www.totalav.com/security/vpn
+    title: TotalAV VPN
+  comparitech-disclosure:
+    url: https://www.comparitech.com/disclosure/
+    title: Comparitech disclosure
