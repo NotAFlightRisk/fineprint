@@ -1,0 +1,333 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Intego VPN
+icon: intego-vpn.svg
+checked: 2026-10-22
+
+criteria:
+  identity:
+    website: https://www.intego.com/vpn
+    legal_entity:
+      value: Intego, Inc.
+      sources: [tos]
+    owner:
+      value: Kape Technologies
+      note: >-
+        Kape is controlled by Teddy Sagi through Unikmind Holdings, which held 98.5% when it took Kape
+        private in 2023.
+      sources: [kape-holding-2023, kape-brands]
+    founded:
+      value: null
+      note: >-
+        Intego doesn't say when its VPN launched. The current one comes with Intego ONE, introduced in
+        April 2026, which replaced the older Privacy Protection app.
+      sources: [intego-one-launch, one-vs-pp]
+    team:
+      value: partial
+      note: Intego names no one running it, but its owner Kape names its leadership team.
+      sources: [about, kape-leadership]
+    sister_brands:
+      value: [ExpressVPN, CyberGhost, Private Internet Access, EventVPN]
+      note: >-
+        EventVPN is a free app built by ExpressVPN's team. ZenMate's users were moved to CyberGhost in
+        2023.
+      sources: [kape-brands, eventvpn-launch, zenmate]
+    acquisitions:
+      value:
+        - date: 2018-07-24
+          acquirer: Kape Technologies
+          source: kape-acquisition
+      note: Kape bought Neutral Holdings Ltd, trading as Intego, from Bessemer Venture Partners for $16 million.
+      sources: [kape-acquisition]
+
+  jurisdiction:
+    hq:
+      value: US
+      sources: [privacy-policy, tos]
+    entities:
+      value: [US, FR]
+      note: Intego, Inc. signs the terms, and the original Intego is still registered in Paris.
+      sources: [tos, fr-register]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [privacy-policy]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [privacy-policy]
+    timestamps:
+      value: null
+      note: >-
+        The policy says it keeps no logs tying you to when you used the VPN, but the apps' Mixpanel
+        analytics record connection and disconnection events, with no stated retention.
+      sources: [privacy-policy]
+    bandwidth:
+      value: null
+      note: The privacy policy doesn't mention how much data you use.
+      sources: [privacy-policy]
+    source_ip:
+      value: null
+      note: >-
+        The policy says the VPN uses your IP to set up the connection and works out your country, ISP and
+        rough location from it, but not whether or how long that's kept.
+      sources: [privacy-policy]
+    proven:
+      value: []
+      note: No audit of the VPN has been published, and no court case or seizure has tested it in public.
+      sources: [compliance]
+    policy: https://www.intego.com/privacy-policy
+
+  transparency:
+    audits:
+      value: []
+      note: Intego's compliance page only offers an ISO 27001 certificate, which isn't an audit of the VPN.
+      sources: [compliance]
+    report:
+      value: none
+      sources: [compliance]
+    canary: none
+    bug_bounty:
+      value: false
+      note: Kape's vulnerability disclosure programme covers Intego, but doesn't mention any rewards.
+      sources: [kape-vdp]
+    incidents:
+      value: []
+      note: The CVEs filed against Intego in 2026 are in its backup and log reporter tools, not the VPN.
+      sources: [cve-2026-26224, cve-2026-26225]
+
+  account:
+    email:
+      value: required
+      sources: [purchase]
+    personal_data:
+      value: []
+      note: Checkout also asks for the cardholder's name, country and ZIP code for the card payment.
+      sources: [purchase]
+    payment:
+      value: [card]
+      note: Card payments go through Stripe, and the help centre doesn't list any other way to pay.
+      sources: [purchase]
+
+  security:
+    protocols:
+      value: [wireguard, proprietary]
+      note: Lightway, ExpressVPN's open source protocol, on Mac, and WireGuard on iPhone.
+      sources: [protocol-help, ios-guide, lightway]
+    post_quantum:
+      value: default
+      sources: [one-vs-pp, protocol-help]
+    kill_switch:
+      value: app
+      note: A toggle in the Mac app that blocks traffic if the VPN drops unexpectedly. The iPhone guide doesn't mention one.
+      sources: [kill-switch, ios-guide]
+    dns:
+      value: null
+      note: Its VPN page promises encrypted DNS but doesn't say whose servers answer.
+      sources: [vpn]
+
+  infra:
+    ram_only:
+      value: null
+      note: Intego doesn't say whether its servers run from RAM.
+      sources: [vpn]
+    hosting:
+      value: null
+      note: >-
+        The policy says the VPN runs on infrastructure operated within Kape's group, without saying
+        which brand's. The Mac app uses Lightway, ExpressVPN's protocol.
+      sources: [privacy-policy, protocol-help, lightway]
+    virtual_locations:
+      value: null
+      note: >-
+        Its help centre says the old Privacy Protection app had virtual locations, but doesn't say whether
+        Intego ONE does.
+      sources: [one-vs-pp]
+    servers:
+      value: null
+      note: Intego doesn't publish a server count.
+      sources: [vpn, locations-help]
+    countries:
+      value: null
+      note: Intego doesn't publish a country list or count.
+      sources: [vpn, locations-help]
+
+  features:
+    connections:
+      value: 2
+      note: The cheapest plan with the VPN covers one Mac and one iPhone. Plans for 3 or 5 of each cost more.
+      sources: [pricing, plans]
+    multihop:
+      value: false
+      note: Only in the old Privacy Protection app, which isn't sold any more.
+      sources: [one-vs-pp]
+    obfuscation:
+      value: []
+      sources: [one-guide]
+    port_forwarding:
+      value: false
+      note: Only in the old Privacy Protection app.
+      sources: [one-vs-pp]
+    split_tunnel:
+      value: false
+      note: Only in the old Privacy Protection app.
+      sources: [one-vs-pp]
+    blocking:
+      value: []
+      note: The old Privacy Protection app had MACE, PIA's DNS blocklist, but Intego ONE's VPN has no blocking.
+      sources: [one-vs-pp]
+
+  clients:
+    platforms:
+      value: [macos, ios]
+      note: The old Privacy Protection app for Mac and Windows still works for existing Intego X9 subscribers.
+      sources: [one-vs-pp, app-store]
+    open_source: none
+    telemetry:
+      value: opt_out
+      note: >-
+        Mixpanel analytics may be on by default where the law allows, such as the US, and stay off until
+        you agree in the EEA and UK.
+      sources: [privacy-policy]
+    trackers:
+      value: null
+      note: There's no Android app.
+      sources: [one-vs-pp]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: null
+      note: Only 1 and 2-year plans are sold.
+      sources: [pricing, plans]
+    best:
+      value: { amount: 4.06, currency: USD }
+      note: >-
+        Intego ONE Complete for one Mac and one iPhone, $97.49 for the first 2 years. The pricing page
+        shows prices in your local currency, so the USD figures are from Intego's plans article.
+      sources: [pricing, plans]
+    best_term:
+      value: 24
+      sources: [pricing, plans]
+    renewal_increase:
+      value: 54
+      note: The 2-year plan is $97.49, then renews at $149.99 every 2 years.
+      sources: [plans, renewal]
+    free_tier:
+      value: false
+      note: The VPN only comes with the paid Complete plan.
+      sources: [plans]
+    refund_days:
+      value: 30
+      note: Purchases through a third party may have different terms.
+      sources: [tos, pricing]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        Its VPN page says you can "stay private & anonymous online", and the user guide promises
+        "military-grade encryption".
+      sources: [vpn, one-guide]
+    affiliates:
+      value: true
+      note: Its site says it sometimes pays review sites to refer customers.
+      sources: [vpn]
+    review_sites:
+      value: true
+      note: Its owner, Kape, also owns VPN review sites such as vpnMentor and Safety Detectives, which disclose it.
+      sources: [kape-brands, vpnmentor, safety-detectives]
+    activism: false
+
+refs:
+  vpn:
+    url: https://www.intego.com/vpn
+    title: Intego VPN
+  about:
+    url: https://www.intego.com/about-us
+    title: About Intego
+  privacy-policy:
+    url: https://www.intego.com/privacy-policy
+    title: Intego privacy statement
+  tos:
+    url: https://www.intego.com/terms-of-use
+    title: Intego terms of use
+  pricing:
+    url: https://www.intego.com/buynow
+    title: Intego ONE pricing
+  compliance:
+    url: https://www.intego.com/compliance-hub
+    title: Intego compliance certificates
+  intego-one-launch:
+    url: https://www.intego.com/mac-security-blog/introducing-intego-one/
+    title: The new Intego Antivirus is here, everything you need to know about Intego ONE
+  app-store:
+    url: https://apps.apple.com/us/app/intego-vpn-wi-fi-security/id6768555707
+    title: 'Intego: VPN & Wi-Fi Security on the App Store'
+  plans:
+    url: https://integosupport.zendesk.com/hc/en-us/articles/54111250707483-Different-types-of-Intego-ONE-subscription-plans
+    title: Different types of Intego ONE subscription plans
+  renewal:
+    url: https://integosupport.zendesk.com/hc/en-us/articles/43254131381531-How-Much-Does-it-Cost-to-Renew-My-Intego-Subscription
+    title: How much does it cost to renew my Intego subscription?
+  purchase:
+    url: https://integosupport.zendesk.com/hc/en-us/articles/44979703729307-How-to-Purchase-Intego-ONE
+    title: How to purchase Intego ONE
+  one-vs-pp:
+    url: https://integosupport.zendesk.com/hc/en-us/articles/55369752057115-Intego-ONE-VPN-vs-Intego-Privacy-Protection-VPN-What-s-the-Difference
+    title: "Intego ONE VPN vs. Intego Privacy Protection VPN: what's the difference?"
+  one-guide:
+    url: https://integosupport.zendesk.com/hc/en-us/articles/43248693332379-Intego-ONE-VPN-User-Guide
+    title: Intego ONE VPN user guide
+  ios-guide:
+    url: https://integosupport.zendesk.com/hc/en-us/articles/54976930311707-Intego-ONE-iOS-VPN-User-Guide
+    title: Intego ONE iOS VPN user guide
+  protocol-help:
+    url: https://integosupport.zendesk.com/hc/en-us/articles/44711214127643-How-to-change-the-VPN-protocol-in-Intego-ONE
+    title: How to change the VPN protocol in Intego ONE
+  kill-switch:
+    url: https://integosupport.zendesk.com/hc/en-us/articles/44711270158235-How-to-Enable-or-Disable-Kill-Switch-in-Intego-ONE-VPN
+    title: How to enable or disable Kill Switch in Intego ONE VPN
+  locations-help:
+    url: https://integosupport.zendesk.com/hc/en-us/articles/44710947484059-How-to-change-server-locations-in-Intego-ONE-VPN
+    title: How to change server locations in Intego ONE VPN
+  lightway:
+    url: https://www.expressvpn.com/lightway
+    title: 'Lightway: A modern VPN protocol by ExpressVPN'
+  cve-2026-26224:
+    url: https://www.cve.org/CVERecord?id=CVE-2026-26224
+    title: CVE-2026-26224, Intego Log Reporter local privilege escalation
+  cve-2026-26225:
+    url: https://www.cve.org/CVERecord?id=CVE-2026-26225
+    title: CVE-2026-26225, Intego Personal Backup local privilege escalation
+  kape-acquisition:
+    url: https://www.investegate.co.uk/announcement/rns/kape-technologies--kape/acquisition-of-intego-for-16-million/5399486
+    title: Kape Technologies, acquisition of Intego for $16 million (RNS, 2018)
+  kape-holding-2023:
+    url: https://www.investegate.co.uk/announcement/rns/kape-technologies--kape/holding-s-in-company/7541123
+    title: Kape Technologies, holding(s) in company (RNS, May 2023)
+  kape-brands:
+    url: https://www.kape.com/our-brands/
+    title: Kape, our brands
+  kape-leadership:
+    url: https://www.kape.com/our-leadership-team/
+    title: Kape, our leadership team
+  fr-register:
+    url: https://annuaire-entreprises.data.gouv.fr/entreprise/414112771
+    title: Intego, French company register (SIREN 414112771)
+  kape-vdp:
+    url: https://www.kape.com/vulnerability-disclosure-program/
+    title: Kape vulnerability disclosure programme
+  eventvpn-launch:
+    url: https://www.expressvpn.com/blog/free-vpn-eventvpn/
+    title: 'EventVPN: A free VPN from the team behind ExpressVPN'
+  zenmate:
+    url: https://zenmate.com/blog/zenmate-changes
+    title: Important changes to ZenMate
+  vpnmentor:
+    url: https://www.vpnmentor.com/about-us/
+    title: About vpnMentor
+  safety-detectives:
+    url: https://www.safetydetectives.com/
+    title: Safety Detectives homepage
