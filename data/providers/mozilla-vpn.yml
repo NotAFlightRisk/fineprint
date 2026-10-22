@@ -1,0 +1,405 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Mozilla VPN
+icon: mozilla-vpn.png
+checked: 2026-10-22
+
+criteria:
+  identity:
+    website:
+      value: https://www.mozilla.org/en-US/products/vpn/
+      sources: [vpn-page]
+    legal_entity:
+      value: Mozilla Corporation
+      sources: [terms, organizations]
+    owner:
+      value: Mozilla Foundation
+      note: The nonprofit at the top of the Mozilla group. Since June 2026 Mozilla.org runs the group's companies on its behalf.
+      sources: [organizations, mozilla-org]
+    founded:
+      value: 2020
+      note: Launched on 15 July 2020 after months of beta testing. Mullvad dates the partnership to July 2019.
+      sources: [launch-2020, mullvad-partners]
+    team:
+      value: public
+      sources: [leadership]
+    sister_brands:
+      value: []
+      note: Firefox has had its own free VPN for browser traffic since version 149 in 2026, which isn't sold separately.
+      sources: [builtin-vpn]
+    acquisitions:
+      value: []
+      sources: [organizations, launch-2020]
+
+  jurisdiction:
+    hq:
+      value: US
+      sources: [terms]
+    entities:
+      value: [US]
+      note: The terms and privacy notice only name Mozilla Corporation.
+      sources: [terms]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      note: Your traffic only passes through Mullvad's servers, which Mullvad's own server audits found keep no logs of user activity.
+      sources: [privacy-notice, mullvad-audit-relay-2022]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [privacy-notice, mullvad-policy]
+    timestamps:
+      value: none
+      evidence: claimed
+      sources: [privacy-notice, mullvad-policy]
+    bandwidth:
+      value: none
+      evidence: claimed
+      sources: [privacy-notice, mullvad-policy]
+    source_ip:
+      value: none
+      evidence: claimed
+      note: That's for VPN connections. Mozilla's own servers keep the IP you sign up and use the service from in their logs for 90 days.
+      sources: [privacy-notice, mullvad-policy]
+    proven:
+      value: []
+      note: Mullvad's audits cover the servers it runs on, not Mozilla's side. Mozilla's own audits are of its apps.
+      sources: [mullvad-audit-relay-2022, audit-cure53-2023]
+    policy: https://www.mozilla.org/en-US/privacy/subscription-services/
+
+  transparency:
+    audits:
+      value:
+        - date: 2023-06-02
+          auditor: Cure53
+          scope: apps
+          source: audit-cure53-2023
+        - date: 2021-04-02
+          auditor: Cure53
+          scope: apps
+          source: audit-cure53-2021
+      evidence: verified
+      note: >-
+        Both tested the apps on all five platforms, dated to the end of the calendar week testing finished in.
+        Cure53's first review, in August 2020, wasn't published, and Mullvad audits the servers separately.
+      sources: [audit-blog-2023, audit-blog-2021]
+    report:
+      value: regular
+      note: >-
+        Mozilla-wide figures, not broken out for the VPN. The 2025 global report promised for spring 2026
+        hasn't appeared, after a February DSA report that only counts EU government requests.
+      sources: [transparency, transparency-2025]
+    canary:
+      value: none
+      sources: [transparency]
+    bug_bounty:
+      value: true
+      note: Mozilla's HackerOne bounty covers the VPN's backend at vpn.mozilla.org. The apps aren't in its client bounty, which only covers Firefox.
+      sources: [hackerone, client-bounty]
+    incidents:
+      value:
+        - date: 2025-05-30
+          summary: Positive Technologies found a flaw that let a local user on macOS get root (CVE-2025-5687). Mozilla fixed it in version 2.28.0 and published an advisory on 30 May 2025.
+          handled: well
+          source: mfsa-2025-48
+        - date: 2023-05-04
+          summary: >-
+            SUSE found that any local user could set up or switch off the Linux app's VPN through its root
+            daemon (CVE-2023-4104). SUSE said Mozilla never formally replied, broke the embargo with a public
+            pull request and only shared its plans at the 90-day deadline. The fix came in 2.16.1 at the end of
+            August 2023.
+          handled: poorly
+          source: oss-security-2023
+        - date: 2022-02-23
+          summary: The Windows app loaded an OpenSSL config file from an unsecured folder, letting a local user run code as SYSTEM (CVE-2022-0517). Mozilla fixed it in 2.7.1 and published an advisory.
+          handled: well
+          source: mfsa-2022-08
+      note: The macOS and Windows flaws are dated by their advisories, as the bug reports aren't public.
+      sources: [advisories, mfsa-2023-39]
+
+  account:
+    email:
+      value: required
+      note: It needs a Mozilla account.
+      sources: [terms, privacy-notice]
+    personal_data:
+      value: []
+      note: Apart from your card, the checkout asks for a country and postcode, which the privacy notice calls your billing address.
+      sources: [privacy-notice, checkout-src]
+    payment:
+      value: [card, paypal, app_store]
+      note: Through Stripe, PayPal or Google Pay on the website, or in-app through Apple and Google.
+      sources: [privacy-notice, terms]
+
+  security:
+    protocols:
+      value: [wireguard]
+      sources: [features]
+    post_quantum:
+      value: none
+      note: Mullvad's own app has post-quantum tunnels on the same servers, but Mozilla's client has no such option.
+      sources: [source-code, mullvad-pq]
+    kill_switch:
+      value: system
+      note: Always on while connected, on every platform, with no setting to turn it off.
+      sources: [kill-switch]
+    dns:
+      value: first_party
+      note: Mullvad's resolvers on the VPN servers, which also do the ad, tracker and malware blocking. You can set your own instead.
+      sources: [dns-help, dns-src]
+
+  infra:
+    ram_only:
+      value: all
+      evidence: claimed
+      note: Mullvad's servers, which it says all run from RAM.
+      sources: [mullvad-ram-only, mullvad-partners]
+    hosting:
+      value: null
+      note: It runs on Mullvad's servers, which Mullvad partly owns and partly rents.
+      sources: [mullvad-partners, mullvad-server-list]
+    virtual_locations:
+      value: none
+      evidence: claimed
+      note: Its server list is Mullvad's, which has none.
+      sources: [features, mullvad-server-list]
+    servers:
+      value: 500
+      note: Its page says more than 500.
+      sources: [features]
+    countries:
+      value: 30
+      note: Its pages say 30+.
+      sources: [features, what-is-a-vpn]
+
+  features:
+    connections:
+      value: 5
+      sources: [terms, vpn-page]
+    multihop:
+      value: true
+      sources: [multihop]
+    obfuscation:
+      value: [udp2tcp, proprietary]
+      note: Mullvad's LWO and UDP over TCP, added in version 2.40 in October 2026, but not on every platform.
+      sources: [obfuscation-src, release-2-40]
+    port_forwarding:
+      value: false
+      note: None of its pages mention it, and Mullvad dropped it from its servers in 2023.
+      sources: [features, mullvad-port-forwarding]
+    split_tunnel:
+      value: true
+      note: Windows, Android and Linux only.
+      sources: [features, split-tunnel]
+    blocking:
+      value: [ads, trackers, malware]
+      sources: [features, dns-src]
+
+  clients:
+    platforms:
+      value: [windows, macos, linux_gui, ios, android]
+      note: The Firefox extension only works alongside the Windows app, so isn't counted.
+      sources: [download, vpn-page]
+    open_source:
+      value: all
+      note: MPL 2.0, with one codebase for every platform.
+      sources: [source-code, license]
+    telemetry:
+      value: opt_in
+      evidence: claimed
+      note: >-
+        Crash and error reports to Sentry only go if you agree when setting it up, which is off by default.
+        The policy also says mobile installs send campaign data that Mozilla shares with Adjust.
+      sources: [privacy-notice, onboarding-src, data-help]
+    fdroid:
+      value: false
+      note: A version without Google Play services has been on GitHub since April 2026, but not on F-Droid.
+      sources: [fdroid-search, release-2-36]
+
+  pricing:
+    monthly:
+      value: { amount: 9.99, currency: USD }
+      note: USD from the US page, as the price changes with your country.
+      sources: [pricing]
+    best:
+      value: { amount: 4.99, currency: USD }
+      note: $59.88 a year.
+      sources: [pricing]
+    best_term:
+      value: 12
+      sources: [pricing]
+    renewal_increase:
+      value: 0
+      evidence: claimed
+      note: The yearly plan's 50% saving is against the monthly price, not an intro offer.
+      sources: [pricing, terms]
+    free_tier:
+      value: false
+      note: Firefox's separate built-in VPN is free, but only covers the browser and stops at 50 GB a month.
+      sources: [terms, builtin-vpn]
+    refund_days:
+      value: 30
+      note: Only for your first subscription, and not when bought through the app stores.
+      sources: [terms, pricing]
+
+  ethics:
+    misleading_claims:
+      value: false
+      sources: [vpn-page, what-is-a-vpn]
+    affiliates:
+      value: true
+      sources: [affiliate-faq]
+    review_sites:
+      value: false
+      sources: [organizations]
+    activism:
+      value: true
+      note: Mozilla lobbies on privacy, surveillance and encryption laws, as each transparency report's policy section sets out.
+      sources: [transparency-2024b]
+
+refs:
+  vpn-page:
+    url: https://www.mozilla.org/en-US/products/vpn/
+    title: Mozilla VPN
+  pricing:
+    url: https://www.mozilla.org/en-US/products/vpn/pricing/
+    title: Pricing - Mozilla VPN
+  features:
+    url: https://www.mozilla.org/en-US/products/vpn/features/
+    title: Features - Mozilla VPN
+  download:
+    url: https://www.mozilla.org/en-US/products/vpn/download/
+    title: Download Mozilla VPN
+  what-is-a-vpn:
+    url: https://www.mozilla.org/en-US/products/vpn/resource-center/what-is-a-vpn/
+    title: What is a VPN? - Mozilla VPN
+  privacy-notice:
+    url: https://www.mozilla.org/en-US/privacy/subscription-services/
+    title: Mozilla Subscription Services privacy notice, effective 2025-12-17
+  terms:
+    url: https://www.mozilla.org/en-US/about/legal/terms/subscription-services/
+    title: Mozilla Subscription Services terms of service, effective 2026-09-16
+  organizations:
+    url: https://www.mozilla.org/en-US/about/governance/organizations/
+    title: Mozilla organizations
+  mozilla-org:
+    url: https://wiki.mozilla.org/Mozilla_org
+    title: Mozilla.org, how it relates to the Mozilla Foundation
+  leadership:
+    url: https://www.mozilla.org/en-US/about/leadership/
+    title: Mozilla leadership
+  launch-2020:
+    url: https://www.newswire.ca/news-releases/mozilla-vpn-is-available-in-canada-offering-a-trusted-way-to-keep-users-online-lives-safe-and-secure-819011123.html
+    title: Mozilla VPN is available in Canada (Mozilla press release, 2020-07-15)
+  builtin-vpn:
+    url: https://web.archive.org/web/20260323204844/https://support.mozilla.org/en-US/kb/built-in-vpn
+    title: Firefox built-in VPN help article (archived March 2026)
+  mullvad-partners:
+    url: https://mullvad.net/en/help/partnerships-and-resellers
+    title: Mullvad partnerships and resellers
+  mullvad-policy:
+    url: https://mullvad.net/en/help/no-logging-data-policy
+    title: Mullvad no-logging of user activity policy
+  mullvad-audit-relay-2022:
+    url: https://www.assured.se/publications/Assured_Mullvad_relay_server_audit_report_2022.pdf
+    title: Assured, Mullvad VPN server audit (2022)
+  mullvad-ram-only:
+    url: https://mullvad.net/en/blog/we-have-successfully-completed-our-migration-to-ram-only-vpn-infrastructure
+    title: Mullvad completes its migration to RAM-only VPN infrastructure
+  mullvad-server-list:
+    url: https://mullvad.net/en/help/server-list
+    title: About Mullvad's servers
+  mullvad-port-forwarding:
+    url: https://mullvad.net/en/blog/removing-the-support-for-forwarded-ports
+    title: Mullvad removes support for forwarded ports
+  mullvad-pq:
+    url: https://mullvad.net/en/blog/quantum-resistant-tunnels-are-now-the-default-on-desktop
+    title: Mullvad quantum-resistant tunnels are now the default on desktop
+  audit-cure53-2023:
+    url: https://web.archive.org/web/20251128235330/https://blog.mozilla.org/security/files/2023/12/Cure53-Final-Audit-Report.pdf
+    title: Cure53, Mozilla VPN client apps pentest (FVP-03, 2023, archived)
+  audit-cure53-2021:
+    url: https://cure53.de/pentest-report_mozilla-vpn.pdf
+    title: Cure53, Mozilla VPN apps and clients pentest (FVP-02, 2021)
+  audit-blog-2023:
+    url: https://web.archive.org/web/20260102071430/https://blog.mozilla.org/security/2023/12/06/mozilla-vpn-security-audit-2023/
+    title: Mozilla VPN Security Audit 2023 (archived)
+  audit-blog-2021:
+    url: https://web.archive.org/web/20260201010802/https://blog.mozilla.org/security/2021/08/31/mozilla-vpn-security-audit/
+    title: Mozilla VPN Security Audit, 2021 (archived)
+  transparency:
+    url: https://www.mozilla.org/en-US/about/policy/transparency/
+    title: Mozilla transparency reports
+  transparency-2025:
+    url: https://www.mozilla.org/en-US/about/policy/transparency/2025/
+    title: Mozilla 2025 transparency reports
+  transparency-2024b:
+    url: https://www.mozilla.org/en-US/about/policy/transparency/jul-dec-2024/
+    title: Mozilla transparency report, July to December 2024
+  hackerone:
+    url: https://hackerone.com/mozilla
+    title: Mozilla bug bounty on HackerOne (scope lists vpn.mozilla.org)
+  client-bounty:
+    url: https://www.mozilla.org/en-US/security/client-bug-bounty/
+    title: Mozilla Client Bug Bounty Program
+  advisories:
+    url: https://www.mozilla.org/en-US/security/advisories/
+    title: Mozilla Foundation Security Advisories
+  mfsa-2025-48:
+    url: https://www.mozilla.org/en-US/security/advisories/mfsa2025-48/
+    title: MFSA 2025-48, security issue fixed in Mozilla VPN for macOS 2.28.0
+  mfsa-2023-39:
+    url: https://www.mozilla.org/en-US/security/advisories/mfsa2023-39/
+    title: MFSA 2023-39, security issues fixed in Mozilla VPN for Linux 2.16.1
+  mfsa-2022-08:
+    url: https://www.mozilla.org/en-US/security/advisories/mfsa2022-08/
+    title: MFSA 2022-08, Mozilla VPN local privilege escalation via OpenSSL search path
+  oss-security-2023:
+    url: https://www.openwall.com/lists/oss-security/2023/08/03/1
+    title: 'oss-security: Mozilla VPN CVE-2023-4104, Polkit authentication in the Linux daemon'
+  checkout-src:
+    url: https://github.com/mozilla/fxa/blob/main/libs/payments/ui/src/lib/client/components/CheckoutForm/index.tsx
+    title: Mozilla subscription checkout form source (mozilla/fxa)
+  kill-switch:
+    url: https://web.archive.org/web/20260420084545/https://support.mozilla.org/en-US/kb/mozilla-vpn-kill-switch
+    title: Mozilla VPN kill switch help article (archived)
+  multihop:
+    url: https://web.archive.org/web/20260113162128/https://support.mozilla.org/en-US/kb/multi-hop-encrypt-your-data-twice-enhanced-security
+    title: 'Multi-Hop: encrypt your data twice while using Mozilla VPN (archived)'
+  split-tunnel:
+    url: https://web.archive.org/web/20251012180707/https://support.mozilla.org/en-US/kb/split-tunneling-use-mozilla-vpn-specific-apps-wind
+    title: Split tunneling with Mozilla VPN on Windows, Linux and Android (archived)
+  dns-help:
+    url: https://web.archive.org/web/20260306040825/https://support.mozilla.org/en-US/kb/how-do-i-change-my-dns-settings
+    title: How do I change my DNS settings? (Mozilla VPN help, archived)
+  data-help:
+    url: https://web.archive.org/web/20260511172937/https://support.mozilla.org/en-US/kb/what-information-does-mozilla-vpn-collect
+    title: What information does Mozilla VPN collect? (archived)
+  affiliate-faq:
+    url: https://web.archive.org/web/20251012182846/https://support.mozilla.org/en-US/kb/mozilla-vpn-affiliate-program-faq
+    title: Mozilla VPN affiliate program FAQ (archived)
+  source-code:
+    url: https://github.com/mozilla-mobile/mozilla-vpn-client
+    title: mozilla-mobile/mozilla-vpn-client on GitHub
+  license:
+    url: https://github.com/mozilla-mobile/mozilla-vpn-client/blob/main/LICENSE.md
+    title: Mozilla VPN software licenses
+  dns-src:
+    url: https://github.com/mozilla-mobile/mozilla-vpn-client/blob/v2.40.0/src/dnshelper.cpp
+    title: Mozilla VPN DNS helper source, version 2.40.0
+  obfuscation-src:
+    url: https://github.com/mozilla-mobile/mozilla-vpn-client/blob/v2.40.0/src/feature/features.h
+    title: Mozilla VPN feature list source, version 2.40.0
+  onboarding-src:
+    url: https://github.com/mozilla-mobile/mozilla-vpn-client/blob/v2.40.0/src/mozillavpn.cpp#L922-L925
+    title: Mozilla VPN onboarding data collection setting, version 2.40.0
+  release-2-40:
+    url: https://github.com/mozilla-mobile/mozilla-vpn-client/releases/tag/v2.40.0
+    title: Mozilla VPN 2.40.0 release
+  release-2-36:
+    url: https://github.com/mozilla-mobile/mozilla-vpn-client/releases/tag/v2.36.0
+    title: Mozilla VPN 2.36.0 release notes
+  fdroid-search:
+    url: https://search.f-droid.org/?q=mozilla+vpn&lang=en
+    title: F-Droid search for mozilla vpn
