@@ -1,0 +1,270 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: TotalAV VPN
+icon: totalav-vpn.png
+checked: 2026-10-22
+
+criteria:
+  identity:
+    website: https://www.totalav.com/security/vpn
+    legal_entity:
+      value: Total Security Limited
+      note: The terms also name Total Security U.S. LLC in Boston, which takes notices from US users.
+      sources: [terms, privacy-policy]
+    owner:
+      value: Point Wild
+      note: >-
+        Total Security, TotalAV's maker, merged with Pango Group, Hotspot Shield's maker, in December 2024
+        to form Point Wild.
+      sources: [terms, point-wild-merger, comparitech-disclosure]
+    founded:
+      value: null
+      note: TotalAV doesn't say when Total VPN launched. Total Security Limited was incorporated in 2016.
+      sources: [companies-house]
+    team:
+      value: partial
+      note: Point Wild names its executives, but nobody running TotalAV or its VPN.
+      sources: [point-wild-team]
+    sister_brands:
+      value: [Hotspot Shield, Betternet, Touch VPN, UltraVPN, VPN 360]
+      note: Pango's VPNs joined the family when Pango Group merged with Total Security.
+      sources: [point-wild-merger, aura-split-2024, hss-privacy-vpn]
+    acquisitions:
+      value:
+        - date: 2024-12-12
+          acquirer: Point Wild
+          source: point-wild-merger
+      note: Point Wild was formed when Total Security merged with Pango Group in December 2024.
+      sources: [point-wild-merger, comparitech-disclosure]
+
+  jurisdiction:
+    hq:
+      value: GB
+      sources: [terms]
+    entities:
+      value: [GB, US]
+      note: Total Security Limited is incorporated in England and Total Security U.S. LLC is in Boston.
+      sources: [terms]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      note: >-
+        Only a help article says it doesn't track, log or store browsing history. The shared Total
+        Security privacy policy has no VPN section, and its US part lists browsing history among the
+        data it collects.
+      sources: [help-what-is, privacy-policy]
+    dns:
+      value: null
+      note: The no-logs line covers browsing history without mentioning DNS requests.
+      sources: [help-what-is]
+    timestamps:
+      value: null
+      note: The privacy policy mentions collecting the time and date of visits, without saying what applies to VPN sessions.
+      sources: [privacy-policy]
+    bandwidth:
+      value: null
+      sources: [privacy-policy, help-what-is]
+    source_ip:
+      value: null
+      note: The privacy policy says it collects IP addresses, without saying whether that covers the one you connect from.
+      sources: [privacy-policy]
+    proven: []
+    policy: https://legal.totalav.com/privacy
+
+  transparency:
+    audits:
+      value: []
+      note: Point Wild's reports page has audits of its Pango VPNs, but none of Total VPN.
+      sources: [point-wild-reports]
+    report:
+      value: none
+      note: Point Wild publishes Pango's transparency reports, but none for TotalAV.
+      sources: [point-wild-reports]
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: required
+      sources: [pricing]
+    personal_data:
+      value: null
+      note: The privacy policy says signing up collects details like your name, phone number and postal address, without saying which you have to give.
+      sources: [privacy-policy]
+    payment:
+      value: [card, paypal, gift_card]
+      note: Also Apple Pay and Google Pay. Gift cards only work in some countries.
+      sources: [terms]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn, ikev2, proprietary]
+      note: >-
+        Which ones you get depends on the app. The own protocol is Hydra, Hotspot Shield's, from the same
+        group.
+      sources: [help-connection, vpn-page]
+    post_quantum: none
+    kill_switch:
+      value: app
+      note: The VPN page mentions a kill switch without saying how it works.
+      sources: [vpn-page]
+    dns:
+      value: null
+      note: It claims DNS leak protection, but not whose servers answer DNS requests.
+      sources: [vpn-page]
+
+  infra:
+    ram_only:
+      value: null
+      note: TotalAV doesn't say its servers run from RAM.
+      sources: [vpn-page]
+    hosting:
+      value: null
+      note: Neither the VPN page nor the privacy policy says who runs the servers.
+      sources: [privacy-policy]
+    virtual_locations:
+      value: null
+      note: TotalAV doesn't say whether any of its locations are virtual.
+      sources: [vpn-page]
+    servers:
+      value: null
+      note: The VPN page says 50 servers in over 30 countries, but the help centre offers over 90 countries.
+      sources: [vpn-page, help-settings]
+    countries:
+      value: null
+      note: >-
+        The VPN page lists 36 countries and territories and says over 35, but the help centre's settings
+        guide says over 90.
+      sources: [vpn-page, help-settings]
+
+  features:
+    connections:
+      value: null
+      note: Internet Security covers 6 devices, but TotalAV doesn't say how many of them can use the VPN.
+      sources: [renewal-usd]
+    multihop: false
+    obfuscation: []
+    port_forwarding: false
+    split_tunnel:
+      value: true
+      sources: [help-split, help-settings]
+    blocking:
+      value: []
+      note: Ad and scam-site blocking come as separate TotalAV products, Total Adblock and WebShield.
+      sources: [pricing]
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android]
+      note: Also Apple TV.
+      sources: [help-requirements]
+    open_source: none
+    telemetry:
+      value: forced
+      evidence: claimed
+      note: >-
+        The privacy policy says it automatically collects device details and activity on its apps and
+        services, and only offers an opt-out for Google Analytics on its websites.
+      sources: [privacy-policy]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 11.99, currency: USD }
+      note: Internet Security, the cheapest TotalAV plan that includes the VPN, at its regular monthly rate.
+      sources: [renewal-usd, pricing]
+    best:
+      value: { amount: 3.25, currency: USD }
+      note: >-
+        $39 for the first year of Internet Security, an intro offer on TotalAV's own product pages. The
+        main pricing page shows the regular $129.
+      sources: [mac-offer, pricing]
+    best_term:
+      value: 12
+      sources: [mac-offer]
+    renewal_increase:
+      value: 231
+      note: Renews at the regular $129 a year.
+      sources: [mac-offer, renewal-usd]
+    free_tier:
+      value: false
+      sources: [pricing]
+    refund_days:
+      value: 30
+      note: For annual and biannual plans. Monthly and quarterly plans and add-ons get 14 days.
+      sources: [pricing]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: It says the VPN will "leave no digital footprints, making your activities anonymous".
+      sources: [vpn-page]
+    affiliates:
+      value: true
+      sources: [affiliates]
+    review_sites:
+      value: true
+      note: Point Wild also owns Comparitech, a VPN review site, which discloses it.
+      sources: [comparitech-disclosure]
+    activism: false
+
+refs:
+  vpn-page:
+    url: https://www.totalav.com/security/vpn
+    title: TotalAV VPN
+  privacy-policy:
+    url: https://legal.totalav.com/privacy
+    title: TotalAV privacy policy
+  terms:
+    url: https://legal.totalav.com/terms
+    title: TotalAV terms of service
+  pricing:
+    url: https://www.totalav.com/pricing
+    title: TotalAV pricing
+  renewal-usd:
+    url: https://www.totalav.com/subscription-pricing-matrix/active/usd
+    title: TotalAV renewal prices, USD tab of the pricing matrix
+  help-what-is:
+    url: https://help.totalav.com/en/tech/tvpn/-/tvpn-what-is-total-vpn
+    title: What is Total VPN?
+  help-settings:
+    url: https://help.totalav.com/en/tech/tvpn/-/tvpn-settings-guide
+    title: Total VPN settings guide
+  help-connection:
+    url: https://help.totalav.com/en/tech/tvpn/-/tvpn-connection-issues
+    title: Total VPN connection issues (protocols by app)
+  mac-offer:
+    url: https://www.totalav.com/mac-antivirus
+    title: TotalAV for Mac, with first-year prices
+  help-split:
+    url: https://help.totalav.com/en/tech/tvpn/-/tvpn-split-tunneling
+    title: How to use split tunneling
+  help-requirements:
+    url: https://help.totalav.com/en/tech/tvpn/-/tvpn-system-requirements
+    title: Total VPN system requirements
+  affiliates:
+    url: https://www.totalav.com/affiliates
+    title: TotalAV affiliates
+  hss-privacy-vpn:
+    url: https://www.hotspotshield.com/privacy-policy/vpn/
+    title: Hotspot Shield VPN products privacy notice
+  aura-split-2024:
+    url: https://www.aura.com/press/release/aura-splits-into-two-world-class-online-safety-companies
+    title: Aura splits into two world-class online safety companies (2024)
+  point-wild-merger:
+    url: https://www.paulweiss.com/insights/client-news/pango-group-merges-with-total-security
+    title: Pango Group merges with Total Security (Paul, Weiss)
+  companies-house:
+    url: https://find-and-update.company-information.service.gov.uk/company/10161957
+    title: Total Security Limited, Companies House
+  point-wild-team:
+    url: https://www.pointwild.com/our-team/
+    title: Point Wild, our team
+  point-wild-reports:
+    url: https://www.pointwild.com/press/resources/security-reviews-and-reports/
+    title: Point Wild, security reviews and reports
+  comparitech-disclosure:
+    url: https://www.comparitech.com/disclosure/
+    title: Comparitech disclosure
