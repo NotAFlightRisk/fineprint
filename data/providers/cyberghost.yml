@@ -25,7 +25,7 @@ criteria:
         data protection officer.
       sources: [privacy-policy]
     sister_brands:
-      value: [ExpressVPN, Private Internet Access, EventVPN]
+      value: [ExpressVPN, Private Internet Access, EventVPN, Intego VPN]
       note: >-
         EventVPN is a free app built by ExpressVPN's team. ZenMate's users were moved to CyberGhost in
         2023.
