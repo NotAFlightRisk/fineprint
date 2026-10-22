@@ -1,0 +1,324 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Webroot Secure VPN
+icon: webroot-secure-vpn.png
+checked: 2026-10-22
+
+criteria:
+  identity:
+    website: https://www.webroot.com/products/secure-vpn/
+    legal_entity:
+      value: Webroot LLC
+      note: >-
+        Webroot LLC in Broomfield, Colorado sells it in the US and Canada. Everywhere else it's Webroot
+        International Limited in Cork, Ireland.
+      sources: [website-terms, consumer-terms, uk-terms]
+    owner:
+      value: OpenText
+      note: Open Text Corporation, listed in Toronto and on Nasdaq, bought Webroot with Carbonite in 2019.
+      sources: [opentext-2019, privacy-policy]
+    founded:
+      value: 2018
+      note: It launched as Webroot WiFi Security in October 2018, which Webroot now lists as a legacy product.
+      sources: [launch-2018, how-to]
+    team:
+      value: partial
+      note: OpenText's executives are named, but no one running Webroot or the VPN is.
+      sources: [ot-leaders, about]
+    sister_brands:
+      value: []
+      sources: [about]
+    acquisitions:
+      value:
+        - date: 2019-12-24
+          acquirer: OpenText
+          source: opentext-2019
+        - date: 2019-03-26
+          acquirer: Carbonite
+          source: carbonite-2019
+      note: OpenText bought Carbonite, and Webroot with it, nine months after Carbonite bought Webroot.
+      sources: [carbonite-2019, opentext-2019]
+
+  jurisdiction:
+    hq:
+      value: US
+      note: Webroot LLC is in Broomfield, Colorado. OpenText itself is based in Waterloo, Canada.
+      sources: [consumer-terms, opentext-2019]
+    entities:
+      value: [US, IE]
+      note: The two companies its consumer terms name as the seller.
+      sources: [consumer-terms, uk-terms]
+
+  logging:
+    traffic:
+      value: null
+      evidence: claimed
+      note: >-
+        Webroot advertises a "no-log policy" but doesn't publish one, and the OpenText privacy policy its apps
+        link to has no VPN section. The network is PureVPN's white-label one, whose partners can opt into a
+        track with logging.
+      sources: [product, privacy-policy, purevpn-privacy]
+    dns:
+      value: null
+      evidence: claimed
+      note: >-
+        Webroot advertises a "no-log policy" but doesn't publish one, and the OpenText privacy policy its apps
+        link to has no VPN section. The network is PureVPN's white-label one, whose partners can opt into a
+        track with logging.
+      sources: [product, privacy-policy, purevpn-privacy]
+    timestamps:
+      value: null
+      evidence: claimed
+      note: >-
+        Webroot advertises a "no-log policy" but doesn't publish one, and the OpenText privacy policy its apps
+        link to has no VPN section. The network is PureVPN's white-label one, whose partners can opt into a
+        track with logging.
+      sources: [product, privacy-policy, purevpn-privacy]
+    bandwidth:
+      value: null
+      note: Data is unlimited, and Webroot doesn't say whether your use is recorded.
+      sources: [kb-overview, privacy-policy]
+    source_ip:
+      value: null
+      evidence: claimed
+      note: >-
+        Webroot says it hides your IP address but publishes nothing on whether it's kept. Its consumer terms
+        say its services may collect your device's IP address and approximate location.
+      sources: [product, consumer-terms, privacy-policy]
+    proven:
+      value: []
+      note: No audit of the VPN has been published.
+      sources: [kb-overview]
+    policy: https://www.opentext.com/about/privacy
+
+  transparency:
+    audits:
+      value: []
+      note: No security or no-logs audit of Webroot Secure VPN has been published.
+      sources: [kb-overview, play]
+    report:
+      value: none
+      note: OpenText publishes how it handles government requests, but no figures.
+      sources: [le-policy]
+    canary:
+      value: none
+      sources: [le-policy]
+    bug_bounty:
+      value: false
+      note: OpenText takes vulnerability reports and credits researchers, but offers no payment.
+      sources: [security-ack]
+    incidents: []
+
+  account:
+    email:
+      value: required
+      note: You need a Webroot account to sign in to the apps.
+      sources: [kb-install, consumer-terms, play-data]
+    personal_data:
+      value: []
+      note: Google Play's data label lists an email address and approximate location, nothing else personal.
+      sources: [play-data]
+    payment:
+      value: [card, app_store]
+      note: The apps also sell plans in-app.
+      sources: [kb-card, app-store, play]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn, ikev2]
+      sources: [kb-protocols, kb-overview]
+    post_quantum:
+      value: none
+      note: Nothing on its VPN page or help articles mentions post-quantum key exchange.
+      sources: [kb-protocols, kb-overview]
+    kill_switch:
+      value: app
+      note: Sold as "always-on" protection that blocks any connection when the VPN isn't active.
+      sources: [product, app-store]
+    dns:
+      value: null
+      note: Webroot doesn't say whose DNS servers answer your lookups.
+      sources: [kb-overview, kb-faq]
+
+  infra:
+    ram_only:
+      value: null
+      note: Webroot doesn't say whether its servers run from RAM.
+      sources: [kb-overview]
+    hosting:
+      value: null
+      note: >-
+        Webroot doesn't say who runs its servers. Its Android app is built on PureVPN's white-label SDK
+        and ships a server list on PureVPN's pointtoserver.com domain.
+      sources: [play, purevpn-manual, purevpn-privacy]
+    virtual_locations:
+      value: null
+      note: Webroot doesn't say whether any of its locations are virtual.
+      sources: [kb-locations]
+    servers:
+      value: 6000
+      note: Listed as 6,000+. Its help article still says 6,500+ in 70+ countries.
+      sources: [product, kb-overview]
+    countries:
+      value: 65
+      note: Listed as 65+, with 80 locations.
+      sources: [product, play]
+
+  features:
+    connections:
+      value: 3
+      note: The cheapest plan covers 3 devices. Plans for 5 and 10 devices cost more.
+      sources: [product, pricing-table]
+    multihop:
+      value: false
+      sources: [kb-settings, kb-locations]
+    obfuscation:
+      value: []
+      sources: [kb-protocols, kb-faq]
+    port_forwarding:
+      value: false
+      note: None of its help articles mention it.
+      sources: [kb-faq, kb-settings]
+    split_tunnel:
+      value: true
+      note: On Windows and Android only.
+      sources: [kb-split]
+    blocking:
+      value: []
+      sources: [kb-settings, kb-overview]
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android]
+      sources: [product, kb-install]
+    open_source:
+      value: none
+      sources: [kb-install]
+    telemetry:
+      value: null
+      note: >-
+        Webroot doesn't say. Its consumer terms allow collecting the features you use and session length,
+        while its app store labels declare no usage data.
+      sources: [consumer-terms, play-data, app-store]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: null
+      note: The US page only sells yearly plans.
+      sources: [product]
+    best:
+      value: { amount: 3.0, currency: USD }
+      note: USD from the US page. $35.99 for the first year on 3 devices, in a 40% off sale in October 2026.
+      sources: [product]
+    best_term: 12
+    renewal_increase:
+      value: 67
+      note: The $35.99 covers the first year only, against a list price of $59.99 a year.
+      sources: [product]
+    free_tier:
+      value: false
+      note: Only a 7-day free trial in the iOS app.
+      sources: [app-store]
+    refund_days:
+      value: 70
+      note: For purchases from Webroot. App store purchases follow the store's rules.
+      sources: [product, consumer-terms]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: It promises you can "stay secure and anonymous online" and turn any hotspot into a "super-safe connection".
+      sources: [product]
+    affiliates:
+      value: true
+      sources: [affiliates]
+    review_sites:
+      value: false
+      sources: [about]
+    activism: false
+
+refs:
+  product:
+    url: https://www.webroot.com/products/secure-vpn/
+    title: Webroot Secure VPN
+  kb-card:
+    url: https://answers.webroot.com/Webroot/ukp.aspx?pid=17&app=vw&vw=1&solutionid=4033
+    title: Changing your credit card (Webroot)
+  pricing-table:
+    url: https://www.webroot.com/products/pricing/
+    title: Webroot pricing (list prices in USD)
+  website-terms:
+    url: https://www.webroot.com/legal/
+    title: Webroot website terms of service (June 2026)
+  consumer-terms:
+    url: https://prod-cms.webroot.com/globalassets/webroot/images/pdfs/legal/webroot_consumer_terms_and_conditions_v.2025.1.27_-_sps_.pdf
+    title: Webroot consumer terms and conditions (January 2025)
+  uk-terms:
+    url: https://prod-cms.webroot.com/globalassets/webroot/images/pdfs/legal/oc_ukopentext_-_webroot_tos_-_uk_-_9-4-2024_-_clean_final.pdf
+    title: Webroot consumer terms and conditions for UK customers (September 2024)
+  privacy-policy:
+    url: https://www.opentext.com/about/privacy
+    title: OpenText privacy policy (June 2026)
+  about:
+    url: https://www.webroot.com/about/
+    title: About Webroot
+  ot-leaders:
+    url: https://www.opentext.com/about/leadership
+    title: OpenText executive leadership team
+  launch-2018:
+    url: https://www.webroot.com/jp/ja/about/press-room/releases/webroot-enters-vpn-space-launches/
+    title: Webroot enters VPN space, launches Webroot WiFi Security (October 2018)
+  how-to:
+    url: https://www.webroot.com/support/how-to-guides/
+    title: Webroot how-to guides
+  carbonite-2019:
+    url: https://intl.webroot.com/au/en/about/press-room/releases/carbonite-acquires-webroot
+    title: Carbonite closes acquisition of Webroot (March 2019)
+  opentext-2019:
+    url: https://s23.q4cdn.com/197378439/files/doc_news/archive/f38150cd-d667-42cd-841e-ac333faa3f5e.pdf
+    title: OpenText buys Carbonite, Inc. (December 2019)
+  kb-overview:
+    url: https://answers.webroot.com/webroot/ukp.aspx?pid=10&app=vw&vw=1&solutionid=4283
+    title: Webroot Secure VPN overview
+  kb-install:
+    url: https://answers.webroot.com/webroot/ukp.aspx?pid=10&app=vw&vw=1&solutionid=4285
+    title: Installing Webroot Secure VPN
+  kb-faq:
+    url: https://answers.webroot.com/webroot/ukp.aspx?pid=10&app=vw&vw=1&solutionid=4289
+    title: Webroot Secure VPN FAQ
+  kb-locations:
+    url: https://answers.webroot.com/webroot/ukp.aspx?pid=10&app=vw&vw=1&solutionid=4290
+    title: How do I connect and manage locations (Webroot Secure VPN)
+  kb-protocols:
+    url: https://answers.webroot.com/webroot/ukp.aspx?pid=10&app=vw&vw=1&solutionid=4291
+    title: How do I change protocols (Webroot Secure VPN)
+  kb-split:
+    url: https://answers.webroot.com/webroot/ukp.aspx?pid=10&app=vw&vw=1&solutionid=4293
+    title: How do I use split tunneling (Webroot Secure VPN)
+  kb-settings:
+    url: https://answers.webroot.com/webroot/ukp.aspx?pid=10&app=vw&vw=1&solutionid=4511
+    title: Webroot Secure VPN general settings
+  play:
+    url: https://play.google.com/store/apps/details?id=com.webroot.android.vpn
+    title: SecureVPN by Webroot on Google Play
+  play-data:
+    url: https://play.google.com/store/apps/datasafety?id=com.webroot.android.vpn
+    title: SecureVPN by Webroot, Google Play data safety
+  app-store:
+    url: https://apps.apple.com/us/app/webroot-vpn/id6737853665
+    title: Webroot VPN on the App Store
+  purevpn-privacy:
+    url: https://www.purevpn.com/privacy-policy.php
+    title: PureVPN privacy policy, including its white-label partner terms
+  purevpn-manual:
+    url: https://purevpn2.helpjuice.com/en_US/windows-manual-articles/how-to-setup-purevpn-manually-on-windows-11
+    title: How to set up PureVPN manually on Windows 11 (pointtoserver.com server addresses)
+  le-policy:
+    url: https://www.opentext.com/assets/documents/en-US/pdf/opentext-law-enforcement-requests-en.pdf
+    title: OpenText law enforcement requests policy
+  security-ack:
+    url: https://www.opentext.com/about/security-acknowledgements
+    title: OpenText, reporting a security vulnerability
+  affiliates:
+    url: https://www.webroot.com/affiliates/
+    title: Webroot affiliate program
