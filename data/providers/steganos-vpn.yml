@@ -1,0 +1,313 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Steganos VPN Online Shield
+icon: steganos-vpn.svg
+checked: 2026-10-22
+
+criteria:
+  identity:
+    website:
+      value: https://www.steganos.com/en/products/steganos-vpn-online-shield
+      sources: [product]
+    legal_entity:
+      value: Steganos Software GmbH
+      note: >-
+        The VPN privacy policy still gives its old Berlin address. The company moved its seat to Karlsruhe
+        in May 2026.
+      sources: [legal-notice, register, policy]
+    owner:
+      value: Nero AG
+      note: Nero AG of Karlsruhe has held all of Steganos Software GmbH since December 2021, per the shareholder list in the commercial register.
+      sources: [register]
+    founded:
+      value: 2013
+      note: Launched as Steganos Online Shield 365. Its earlier Internet Anonym, from 2002, was folded into it in 2014.
+      sources: [about]
+    team:
+      value: partial
+      note: >-
+        Only the managing director, Patrick Heise, is named. The About page still features the two founders,
+        though the company was sold to Nero AG in 2021.
+      sources: [legal-notice, about, register]
+    sister_brands:
+      value: [OkayFreedom VPN]
+      note: OkayFreedom, Steganos's free and paid VPN for Windows and Android, lists the same 239 server locations in 43 countries.
+      sources: [okayfreedom, licence]
+    acquisitions:
+      value:
+        - date: 2021-12-01
+          acquirer: Nero AG
+          source: register
+      note: >-
+        Before then it had several shareholders, including Hansmann Beteiligungsgesellschaft mbH. Nero AG took
+        every share under a notarised transfer dated 1 December 2021.
+      sources: [register]
+
+  jurisdiction:
+    hq:
+      value: DE
+      sources: [legal-notice, register]
+    entities:
+      value: [DE]
+      note: Steganos Software GmbH and its owner Nero AG are both registered in Germany.
+      sources: [register]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      note: The VPN policy says neither the addresses nor the content you call up are stored.
+      sources: [policy]
+    dns:
+      value: none
+      evidence: claimed
+      note: The policy says the addresses you visit aren't stored, without mentioning DNS lookups separately.
+      sources: [policy]
+    timestamps:
+      value: null
+      note: >-
+        The Online Shield policy doesn't mention connection times. Steganos's newer policy for the OkayFreedom
+        Android app says connection start and end times are kept there for up to 90 days.
+      sources: [policy, okf-policy]
+    bandwidth:
+      value: aggregate
+      evidence: claimed
+      note: The amount of data used is recorded against a pseudonymous user ID, for billing and load balancing.
+      sources: [policy]
+    source_ip:
+      value: none
+      evidence: claimed
+      note: >-
+        The policy says neither your own IP nor the one it assigns you is stored. The newer OkayFreedom Android
+        policy says both are kept there for up to 90 days.
+      sources: [policy, okf-policy]
+    proven:
+      value: []
+      note: >-
+        No audit, seizure or court case has tested the VPN's no-logs claim. Steganos says it won a 2009 case
+        to keep connection data from its older Internet Anonym service confidential, but publishes no details.
+      sources: [about]
+    policy: https://www.steganos.com/sos_privacy_en.txt
+
+  transparency:
+    audits:
+      value: []
+      note: No audit of the VPN has been published.
+      sources: [about]
+    report:
+      value: none
+      sources: [press]
+    canary: none
+    bug_bounty:
+      value: false
+      note: It takes vulnerability reports by email, and doesn't mention a reward.
+      sources: [security]
+    incidents:
+      value: []
+      note: >-
+        CVE-2014-5928, a 2014 flaw where the Android app didn't check server certificates, has no fix or
+        statement from Steganos on record, so it isn't counted.
+      sources: [cve-2014-5928]
+
+  account:
+    email:
+      value: required
+      note: The apps run on a mySteganos account, and the store asks for an email address.
+      sources: [play, checkout]
+    personal_data:
+      value: [name]
+      note: The store, run by Cleverbridge, asks for a first and last name.
+      sources: [checkout]
+    payment:
+      value: [card, paypal, bank, app_store]
+      note: Card, PayPal and direct debit in the web store. The Android app also sells subscriptions through Google Play.
+      sources: [checkout, play]
+
+  security:
+    protocols:
+      value: [openvpn, ikev2]
+      note: >-
+        OpenVPN on Windows, IKEv2 on macOS and iOS. The Android help page says OpenVPN, but the Play listing
+        says IKEv2.
+      sources: [checklist, mac-help, ios-help, android-help, play]
+    post_quantum:
+      value: none
+      note: Not mentioned on the product page or in the help centre.
+      sources: [features]
+    kill_switch:
+      value: app
+      note: The product page says a kill switch is included, without saying how it works or on which platforms.
+      sources: [product]
+    dns:
+      value: null
+      note: Steganos doesn't say whose DNS servers the VPN uses.
+      sources: [features, policy]
+
+  infra:
+    ram_only:
+      value: null
+      note: Not mentioned in the policy or the help centre.
+      sources: [policy, features]
+    hosting:
+      value: rented
+      evidence: claimed
+      note: >-
+        From the OkayFreedom Android policy, which says Steganos rents the servers of its network from hosting
+        providers. The Online Shield policy doesn't say.
+      sources: [okf-policy]
+    virtual_locations:
+      value: null
+      note: The location list doesn't say whether any server sits outside the country it's named for.
+      sources: [product]
+    servers:
+      value: null
+      note: The product page gives 239 "server locations" in 43 countries, but no server count.
+      sources: [product]
+    countries:
+      value: 43
+      sources: [product]
+
+  features:
+    connections:
+      value: 5
+      sources: [licence]
+    multihop:
+      value: false
+      sources: [features]
+    obfuscation:
+      value: []
+      note: Not mentioned. The Windows app needs ports 443 and 1193 to connect.
+      sources: [checklist, features]
+    port_forwarding:
+      value: false
+      note: Not offered. Ports 25, 3389 and 5900 are blocked on its servers.
+      sources: [blocked-ports]
+    split_tunnel:
+      value: false
+      note: Not mentioned on the product page or in the help centre.
+      sources: [features]
+    blocking:
+      value: [ads, trackers]
+      note: Windows only, along with deleting cookies and masking the browser's user agent.
+      sources: [product, features]
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android]
+      sources: [licence]
+    open_source:
+      value: none
+      sources: [play]
+    telemetry:
+      value: null
+      note: The policy says anonymised data on how the software is used is collected, without saying whether you can turn it off.
+      sources: [policy]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 9.95, currency: EUR }
+      sources: [product]
+    best:
+      value: { amount: 2.91, currency: EUR }
+      note: €69.90 for two years, for 5 devices. A year is €34.95. The US Play listing sells it for $7.95 a month or $49.95 a year.
+      sources: [product, play]
+    best_term:
+      value: 24
+      sources: [product]
+    renewal_increase:
+      value: 0
+      note: >-
+        The page promises the same price every year, and the checkout says the two-year plan renews at the same
+        price.
+      sources: [product, checkout]
+    free_tier:
+      value: false
+      note: Only a 7-day free trial. OkayFreedom is Steganos's free VPN.
+      sources: [play, okayfreedom]
+    refund_days:
+      value: 30
+      sources: [product]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: Promises "absolute security and privacy", "maximum anonymity" and that "nobody spies on you".
+      sources: [product, play]
+    affiliates:
+      value: true
+      note: Its sales page pointed to an affiliate programme on CJ until at least June 2026. The redesigned page no longer mentions it.
+      sources: [sales-2026, sales]
+    review_sites:
+      value: false
+      sources: [about]
+    activism:
+      value: false
+      note: It put out press releases against data retention and the German state trojan in 2015 and 2016, but nothing since.
+      sources: [press]
+
+refs:
+  product:
+    url: https://www.steganos.com/en/products/steganos-vpn-online-shield
+    title: Steganos VPN Online Shield, product page with prices
+  legal-notice:
+    url: https://www.steganos.com/en/legal-notice
+    title: Steganos legal notice
+  register:
+    url: https://www.handelsregister.de/rp_web/normalesuche/welcome.xhtml
+    title: >-
+      Handelsregister, Steganos Software GmbH, Amtsgericht Mannheim HRB 758458 (formerly Charlottenburg HRB 121695 B):
+      current entry and shareholder lists of 27 September and 8 December 2021 (search "Steganos Software")
+  about:
+    url: https://www.steganos.com/en/about-steganos
+    title: About Steganos
+  press:
+    url: https://www.steganos.com/de/presse-center
+    title: Steganos press centre (in German)
+  policy:
+    url: https://www.steganos.com/sos_privacy_en.txt
+    title: Steganos Online Shield privacy policy
+  okf-policy:
+    url: https://www.steganos.com/vpn_privacy_en.txt
+    title: OkayFreedom VPN for Android privacy policy
+  okayfreedom:
+    url: https://www.okayfreedom.com/en/
+    title: OkayFreedom VPN
+  checkout:
+    url: https://go.steganos.com/web_sos_productp_bottom_left
+    title: Steganos online store (Cleverbridge), the product page's two-year Buy now link
+  licence:
+    url: https://steganos.zendesk.com/hc/en-us/articles/215443957-On-how-many-devices-can-I-use-my-license
+    title: 'Steganos help: On how many devices can I use my license?'
+  features:
+    url: https://steganos.zendesk.com/hc/en-us/articles/205433858-Steganos-VPN-Online-Shield-Features-Explained
+    title: 'Steganos help: Steganos VPN Online Shield features explained'
+  checklist:
+    url: https://steganos.zendesk.com/hc/en-us/articles/201894386-Checklist-for-connection-issues-VPN-Online-Shield
+    title: 'Steganos help: Checklist for connection issues (VPN Online Shield)'
+  android-help:
+    url: https://steganos.zendesk.com/hc/en-us/articles/202151078-How-does-Steganos-Online-Shield-for-Android-work
+    title: 'Steganos help: How does Steganos Online Shield for Android work?'
+  ios-help:
+    url: https://steganos.zendesk.com/hc/en-us/articles/205445948-How-does-Steganos-VPN-Online-Shield-for-iOS-work
+    title: 'Steganos help: How does Steganos VPN Online Shield for iOS work?'
+  mac-help:
+    url: https://steganos.zendesk.com/hc/en-us/articles/360011022453-How-does-Steganos-Online-Shield-for-macOS-work
+    title: 'Steganos help: How does Steganos Online Shield for macOS work?'
+  blocked-ports:
+    url: https://steganos.zendesk.com/hc/en-us/articles/202655216-Blocked-Ports
+    title: 'Steganos help: Blocked ports'
+  play:
+    url: https://play.google.com/store/apps/details?id=com.steganos.onlineshield2
+    title: Steganos VPN Online Shield on Google Play
+  security:
+    url: https://www.steganos.com/en/security
+    title: Steganos, report a security vulnerability or incident
+  cve-2014-5928:
+    url: https://nvd.nist.gov/vuln/detail/CVE-2014-5928
+    title: NVD, CVE-2014-5928
+  sales:
+    url: https://www.steganos.com/en/service/sales
+    title: Steganos sales contacts
+  sales-2026:
+    url: https://web.archive.org/web/20260608203333/https://www.steganos.com/en/sales
+    title: Steganos sales page, June 2026 (archived)
