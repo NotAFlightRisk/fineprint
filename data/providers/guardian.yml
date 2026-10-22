@@ -1,0 +1,378 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Guardian Firewall + VPN
+icon: guardian.png
+checked: 2026-10-22
+
+criteria:
+  identity:
+    website:
+      value: https://guardianapp.com
+      sources: [home]
+    legal_entity:
+      value: Sudo Security Group, Inc.
+      note: The App Store seller. Guardian has no separate terms, and its privacy policy says it's part of DNSFilter, Inc.
+      sources: [app-store, privacy]
+    owner:
+      value: DNSFilter, Inc.
+      sources: [dnsfilter-acquisition, privacy]
+    founded:
+      value: 2019
+      note: Launched on iOS in 2019.
+      sources: [platforms]
+    team:
+      value: partial
+      note: Guardian's site names no one. DNSFilter's 2022 release names founder and CEO Will Strafach and DNSFilter's CEO Ken Carnesi.
+      sources: [dnsfilter-acquisition]
+    sister_brands:
+      value: []
+      note: Brave VPN runs on Guardian's network, but Brave doesn't share an owner with it.
+      sources: [guardian-brave-pr]
+    acquisitions:
+      value:
+        - date: 2022-08-10
+          acquirer: DNSFilter
+          source: dnsfilter-acquisition
+
+  jurisdiction:
+    hq:
+      value: US
+      sources: [app-store, dnsfilter-acquisition]
+    entities:
+      value: [US]
+      note: Only Sudo Security Group, Inc. and DNSFilter, Inc. are named.
+      sources: [app-store, privacy]
+
+  logging:
+    traffic:
+      value: 'yes'
+      grade: ok
+      evidence: claimed
+      note: >-
+        Only blocked-tracker alerts, which name the tracker, are kept against an anonymous credential until the
+        app downloads them, and Guardian's own app can't turn them off. Graded ok rather than bad as no other traffic is kept.
+      sources: [guardian-policy, privacy]
+    dns:
+      value: none
+      evidence: claimed
+      note: >-
+        Pro users can opt into DNSFilter's resolvers, which keep query data pooled under the server's IP to train
+        threat detection.
+      sources: [guardian-policy, dnsfilter-retention]
+    timestamps:
+      value: aggregate
+      evidence: claimed
+      note: >-
+        Each server keeps the last time a device's anonymous credentials were active, to prune old ones.
+        Guardian says it isn't linked to your account and never leaves the server.
+      sources: [guardian-policy]
+    bandwidth:
+      value: none
+      evidence: claimed
+      sources: [guardian-policy]
+    source_ip:
+      value: none
+      evidence: verified
+      note: >-
+        Assured's 2026 audit found client IPs logged on rare TLS errors and when the API was reached directly,
+        both fixed by its retest.
+      sources: [guardian-policy, audit-2026]
+    proven:
+      value: [audit]
+      evidence: verified
+      note: >-
+        Assured audited logging on the VPN servers in 2024 and 2026. Guardian says it handed over no data for
+        12 legal requests to May 2026, but no court case shows it.
+      sources: [audit-2024-infra, audit-2026, transparency-report]
+    policy:
+      value: https://guardianapp.com/policy/service-policies/
+      sources: [guardian-policy]
+
+  transparency:
+    audits:
+      value:
+        - date: 2026-09-22
+          auditor: Assured
+          scope: infra
+          source: audit-2026
+        - date: 2025-08-29
+          auditor: Assured
+          scope: apps
+          source: audit-2025
+        - date: 2024-07-02
+          auditor: Assured
+          scope: infra
+          source: audit-2024-infra
+        - date: 2024-03-13
+          auditor: Assured
+          scope: apps
+          source: audit-2024-api
+      evidence: verified
+      note: >-
+        All commissioned by Guardian or DNSFilter. The 2024 and 2026 audits covered the VPN servers, the others
+        the web, API and cloud backend. The 2026 report dates its retest 2025-09-21 to 22, which reads as a typo
+        for 2026.
+      sources: [guardian-policy, guardian-audit-2026]
+    report:
+      value: irregular
+      note: >-
+        One page listing every request since March 2024, last updated June 2026, which Guardian says it updates
+        as new requests come in rather than on a schedule.
+      sources: [transparency-report]
+    canary:
+      value: none
+      sources: [transparency-report]
+    bug_bounty:
+      value: false
+      note: Neither Guardian nor DNSFilter publishes a bounty or a security.txt.
+      sources: [home]
+    incidents:
+      value: []
+
+  account:
+    email:
+      value: optional
+      note: App Store and Play Store purchases need no account. Buying on the website makes one with an email.
+      sources: [guardian-policy, device-limits]
+    personal_data:
+      value: []
+      sources: [privacy]
+    payment:
+      value: [card, app_store]
+      note: Cards through Stripe on the website.
+      sources: [pricing, privacy]
+
+  security:
+    protocols:
+      value: [wireguard, ikev2]
+      sources: [pricing, guardian-policy]
+    post_quantum:
+      value: none
+      note: Guardian doesn't mention post-quantum key exchange.
+      sources: [capabilities, app-store]
+    kill_switch:
+      value: app
+      note: An opt-in setting in the iOS app since 2023, and in the Windows app since June 2026.
+      sources: [app-store, windows-killswitch]
+    dns:
+      value: third_party
+      note: >-
+        The VPN frameworks behind Guardian's iOS, macOS, Android and Windows apps default to Cloudflare's 1.1.1.1.
+        DNSFilter's resolvers, from the same owner, are an opt-in for Pro.
+      sources: [guardian-connect-dns, guardian-connect-android-dns, capabilities]
+
+  infra:
+    ram_only:
+      value: none
+      evidence: claimed
+      note: VPN credentials sit on each server's local disk. Assured found those disks unencrypted in 2026.
+      sources: [guardian-policy, audit-2026]
+    hosting:
+      value: null
+      note: Guardian told Assured it always controls the physical servers its VPN machines run on, without saying whether it owns them.
+      sources: [audit-2026]
+    virtual_locations:
+      value: null
+      note: Guardian doesn't say. Its region list gives each region an ISO country code.
+      sources: [locations, regions-api]
+    servers:
+      value: 400
+      note: The pricing page says 400+. Guardian's region list counted 636 on 2026-10-22.
+      sources: [pricing, regions-api]
+    countries:
+      value: 43
+      sources: [locations, regions-api]
+
+  features:
+    connections:
+      value: 6
+      note: The pricing page still says 5.
+      sources: [device-limits, capabilities, pricing]
+    multihop:
+      value: true
+      note: Added to the iOS app in October 2026.
+      sources: [app-store, regions-api]
+    obfuscation:
+      value: []
+      note: >-
+        Stealth Mode only dials the server by IP where DNS is blocked, and Smart Routing Proxy sends some sites
+        through proxies. Neither disguises the tunnel.
+      sources: [app-store, stealth-mode, smart-proxy]
+    port_forwarding:
+      value: false
+      sources: [capabilities, pricing]
+    split_tunnel:
+      value: true
+      note: Its Exceptions feature leaves chosen apps out on Android, and apps or websites on iOS.
+      sources: [exceptions]
+    blocking:
+      value: [ads, trackers, malware]
+      note: >-
+        The firewall blocks trackers and aggressive ads for every app on the device, on Guardian's servers.
+        Malware and phishing blocking through DNSFilter needs Pro.
+      sources: [capabilities, pro]
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android]
+      note: >-
+        Also Fire OS, Android TV and ChromeOS. Linux and GL.iNet routers only get WireGuard config files
+        exported from the app.
+      sources: [platforms, pricing, linux-config, router-config]
+    open_source:
+      value: none
+      note: >-
+        The apps aren't published, but the MIT VPN frameworks under the iOS, macOS, Android and Windows apps are.
+      sources: [guardian-connect, guardian-github]
+    telemetry:
+      value: none
+      evidence: claimed
+      note: The App Store listing says no data is collected, and the policy says nothing is collected automatically.
+      sources: [app-store, privacy]
+    fdroid:
+      value: false
+      sources: [fdroid-search]
+
+  pricing:
+    monthly:
+      value: { amount: 9.99, currency: USD }
+      sources: [pricing, cost]
+    best:
+      value: { amount: 8.33, currency: USD }
+      note: $99.99 a year. Pro, with family sharing, is $124.99 a year on the website.
+      sources: [pricing, cost]
+    best_term:
+      value: 12
+      sources: [pricing]
+    renewal_increase:
+      value: 0
+      sources: [pricing, cost]
+    free_tier:
+      value: false
+      note: Every plan starts with a 7-day free trial, and the iOS app sells $0.99 day passes.
+      sources: [cost]
+    refund_days:
+      value: 30
+      note: For website purchases. App Store purchases follow Apple's refund process.
+      sources: [refund]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        The pricing page promises "Absolute Privacy", and the no-logs policy says its servers "guarantee data
+        encryption and anonymity".
+      sources: [pricing, guardian-policy]
+    affiliates:
+      value: null
+      note: Guardian doesn't say whether it pays anyone for sign-ups.
+    review_sites:
+      value: false
+      sources: [dnsfilter-acquisition]
+    activism:
+      value: true
+      note: Guardian publishes research exposing apps that track people, like AccuWeather sharing location data without permission.
+      sources: [research]
+
+refs:
+  windows-killswitch:
+    url: https://guardianapp.com/blog/2026/06/wireguard-and-killswitch-now-available-on-windows/
+    title: WireGuard and kill switch now available in Guardian Firewall + VPN for Windows (June 2026)
+  exceptions:
+    url: https://help.guardianapp.com/help-center-articles/why-are-certain-apps-or-websites-not-working-while-guardian-is-on
+    title: Why are certain apps or websites not working while Guardian is on?
+  home:
+    url: https://guardianapp.com/
+    title: Guardian Firewall
+  privacy:
+    url: https://guardianapp.com/privacy-policy/
+    title: Guardian Firewall Privacy Policy, effective 2024-11-06
+  guardian-policy:
+    url: https://guardianapp.com/policy/service-policies/
+    title: Guardian Firewall service policies (no-logs policy)
+  transparency-report:
+    url: https://guardianapp.com/policy/transparency-report/
+    title: Guardian Firewall Transparency Report, last updated June 2026
+  pricing:
+    url: https://guardianapp.com/firewall/pricing/
+    title: Guardian Firewall pricing
+  capabilities:
+    url: https://guardianapp.com/firewall/capabilities/
+    title: Guardian Firewall capabilities
+  locations:
+    url: https://guardianapp.com/firewall/locations/
+    title: Guardian Firewall locations
+  pro:
+    url: https://guardianapp.com/pro/
+    title: Guardian Pro
+  research:
+    url: https://guardianapp.com/research/
+    title: Guardian research
+  app-store:
+    url: https://apps.apple.com/us/app/guardian-firewall-vpn/id1363796315
+    title: Guardian Firewall + VPN on the App Store (version history and privacy label)
+  cost:
+    url: https://help.guardianapp.com/help-center-articles/what-is-the-cost-of-guardian-firewall-vpn
+    title: What is the cost of Guardian Firewall + VPN?
+  refund:
+    url: https://help.guardianapp.com/help-center-articles/refund-policy
+    title: Guardian Firewall Refund Policy
+  device-limits:
+    url: https://help.guardianapp.com/help-center-articles/guardian-device-limits-and-sign-in-instructions
+    title: Guardian Device Limits and Sign-In Instructions
+  platforms:
+    url: https://help.guardianapp.com/help-center-articles/on-what-platforms-is-guardian-firewall-vpn-supported
+    title: On what platforms is Guardian Firewall + VPN supported?
+  linux-config:
+    url: https://help.guardianapp.com/help-center-articles/how-to-set-up-a-wireguard-configuration-on-linux
+    title: How to set up a WireGuard Configuration on Linux
+  router-config:
+    url: https://help.guardianapp.com/help-center-articles/how-to-configure-guardian-vpn-on-a-gl-inet-router-using-the-wireguard-vpn-protocol
+    title: How to configure Guardian VPN on a GL.iNet router using WireGuard
+  smart-proxy:
+    url: https://help.guardianapp.com/help-center-articles/what-is-smart-proxy-routing
+    title: What is Smart Proxy Routing?
+  dnsfilter-retention:
+    url: https://help.guardianapp.com/help-center-articles/dnsfilter-data-retention-policy
+    title: DNSFilter Data Retention Policy
+  guardian-brave-pr:
+    url: https://guardianapp.com/newsroom/brave-press-release/
+    title: Brave and Guardian partner to integrate Brave iOS browser with Guardian Firewall + VPN (2020-07-27)
+  dnsfilter-acquisition:
+    url: https://guardianapp.com/newsroom/dnsfilter-acquistion-release/
+    title: DNSFilter provides a better Secure Web Gateway with Guardian (2022-08-10)
+  guardian-audit-2026:
+    url: https://guardianapp.com/blog/2026/10/independent-security-audit-2026-report/
+    title: Independent Security Audit 2026 Report
+  audit-2026:
+    url: https://www.assured.se/publications/assured-dnsfilter-guardian-infrastructure-audit-verification-report-20261002.pdf
+    title: Assured, DNSFilter infrastructure verification test (2026)
+  audit-2025:
+    url: https://www.assured.se/publications/assured-guardian-app-web-api-cloud-security-assessment-verification-report-20250904.pdf
+    title: Assured, Guardian app web, API and cloud security assessment (2025)
+  audit-2024-infra:
+    url: https://www.assured.se/publications/assured-dnsfilter-guardian-infrastructure-audit-verification-report-20240708.pdf
+    title: Assured, Guardian infrastructure verification test (2024)
+  audit-2024-api:
+    url: https://www.assured.se/publications/assured-dnsfilter-guardian-app-api-penetration-test-verification-report-20240319.pdf
+    title: Assured, Guardian app API verification test (2024)
+  regions-api:
+    url: https://connect-api.guardianapp.com/api/v1.3/servers/all-server-regions/country
+    title: Guardian Connect server regions (API)
+  guardian-connect:
+    url: https://github.com/GuardianFirewall/GuardianConnect
+    title: GuardianFirewall/GuardianConnect on GitHub
+  guardian-github:
+    url: https://github.com/GuardianFirewall
+    title: GuardianFirewall on GitHub
+  guardian-connect-dns:
+    url: https://github.com/GuardianFirewall/GuardianConnect/blob/main/GuardianConnect/Classes/GRDVPNHelper.h
+    title: GuardianConnect for iOS and macOS, VPN helper (default DNS servers)
+  guardian-connect-android-dns:
+    url: https://github.com/GuardianFirewall/GuardianConnect-Android/blob/main/guardian/src/main/java/com/guardianconnect/GRDWireGuardConfiguration.kt
+    title: GuardianConnect for Android, WireGuard config (default DNS servers)
+  stealth-mode:
+    url: https://github.com/GuardianFirewall/GuardianConnect-Windows/blob/main/GuardianConnectSDK/GuardianConnect/Credentials/GRDWireGuardConfiguration.cs
+    title: GuardianConnect for Windows, WireGuard config (Stealth Mode endpoint)
+  fdroid-search:
+    url: https://search.f-droid.org/?q=guardian&lang=en
+    title: F-Droid search for guardian
