@@ -1,0 +1,299 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: G DATA VPN
+icon: g-data-vpn.png
+checked: 2026-10-22
+
+criteria:
+  identity:
+    website: https://www.gdata.de/en/consumer/vpn
+    legal_entity:
+      value: G DATA CyberDefense AG
+      note: Registered at the Bochum local court under HRB 6886.
+      sources: [terms, imprint]
+    owner:
+      value: null
+      note: >-
+        G DATA CyberDefense AG heads its own group and its 2024 accounts don't name its shareholders.
+        Co-founders Kai Figge and Andreas Lüning sit on its board.
+      sources: [accounts-2024, who-we-are]
+    founded:
+      value: 2022
+      note: Announced in March 2022. The iOS app's first release was on 21 March 2022.
+      sources: [launch-2022, app-store]
+    team:
+      value: partial
+      note: G DATA's board and supervisory board are named, but no one running the VPN is.
+      sources: [who-we-are, accounts-2024]
+    sister_brands:
+      value: []
+      sources: [who-we-are]
+    acquisitions:
+      value: []
+      note: The company took its current name in 2019 without changing hands.
+      sources: [who-we-are]
+
+  jurisdiction:
+    hq:
+      value: DE
+      sources: [imprint]
+    entities:
+      value: [DE, PL, US, PH, BE]
+      note: Where G DATA and its subsidiaries are registered, per its 2024 accounts. The VPN's policy and terms only name the Bochum company.
+      sources: [accounts-2024]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      note: The policy says it doesn't store the content of your traffic.
+      sources: [policy]
+    dns:
+      value: none
+      evidence: claimed
+      note: It says it doesn't store your browsing history or monitor your internet activity.
+      sources: [policy]
+    timestamps:
+      value: 'yes'
+      evidence: claimed
+      note: >-
+        How long each connection lasts is processed by G DATA and by IPVanish, and kept "as long as
+        necessary" to provide the service or meet legal duties, with no set period.
+      sources: [policy]
+    bandwidth:
+      value: 'yes'
+      evidence: claimed
+      note: The data used per connection, in bytes, is handled the same way.
+      sources: [policy]
+    source_ip:
+      value: 'yes'
+      evidence: claimed
+      note: >-
+        A hash of your IP address is processed with each connection, by IPVanish too, with the same
+        open-ended retention. Updates and licence checks also send your IP.
+      sources: [policy]
+    proven:
+      value: []
+      note: No audit, court case or seizure has tested it.
+      sources: [trust-center]
+    policy: https://www.gdata.de/en/privacy/vpn
+
+  transparency:
+    audits:
+      value: []
+      note: >-
+        G DATA hasn't published an audit of the VPN. Its ISO 27001 certification covers how the
+        company manages information security, not the service.
+      sources: [trust-center]
+    report:
+      value: none
+      sources: [trust-center]
+    canary:
+      value: none
+      sources: [trust-center]
+    bug_bounty:
+      value: false
+      note: Its disclosure policy rewards confirmed reports with gifts sent by post, not money.
+      sources: [vuln-policy]
+    incidents: []
+
+  account:
+    email:
+      value: required
+      note: Every app registration and the free trial need one.
+      sources: [policy]
+    personal_data:
+      value: [name]
+      note: The Windows app's registration asks for your name. The mobile apps only need an email.
+      sources: [policy]
+    payment:
+      value: [card, paypal, bank, app_store]
+      note: >-
+        SEPA direct debit is only for existing customers in Germany and Austria. The shop also takes
+        Apple Pay, and the mobile apps sell plans in-app.
+      sources: [payment, play]
+
+  security:
+    protocols:
+      value: [wireguard, ikev2, openvpn]
+      note: >-
+        As offered in the Windows app. The VPN page names IKEv2, OpenVPN and IPSec depending on the
+        app, without WireGuard.
+      sources: [help-windows-settings, product]
+    post_quantum:
+      value: none
+      note: Not mentioned on the VPN page or in its help.
+      sources: [help-windows-settings]
+    kill_switch:
+      value: app
+      note: Windows only, as a setting in the app.
+      sources: [product, help-windows-settings]
+    dns:
+      value: null
+      note: G DATA doesn't say whose DNS servers the VPN uses.
+      sources: [help-windows-settings]
+
+  infra:
+    ram_only:
+      value: null
+      note: G DATA doesn't say whether the servers run from RAM.
+      sources: [help-index]
+    hosting:
+      value: null
+      note: The privacy policy names IPVanish, Inc. in New York as the sub-processor whose infrastructure runs the VPN.
+      sources: [policy]
+    virtual_locations:
+      value: null
+      note: Its location list doesn't say whether any servers sit outside the country they're named for.
+      sources: [product]
+    servers:
+      value: 1961
+      note: Added up from the per-city counts on its location list. The page itself says nearly 2,000.
+      sources: [product]
+    countries:
+      value: 50
+      note: Counted from the location list, which covers 80 cities.
+      sources: [product]
+
+  features:
+    connections:
+      value: 10
+      sources: [product]
+    multihop:
+      value: false
+      sources: [help-windows-settings]
+    obfuscation:
+      value: []
+      sources: [help-windows-settings]
+    port_forwarding:
+      value: false
+      sources: [help-windows-settings]
+    split_tunnel:
+      value: true
+      note: Documented for Windows, by app or by domain.
+      sources: [help-split]
+    blocking:
+      value: []
+      note: No ad, tracker or malware blocking is mentioned for the VPN.
+      sources: [help-windows-settings]
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android]
+      sources: [help-index]
+    open_source:
+      value: none
+      sources: [product]
+    telemetry:
+      value: null
+      note: >-
+        The policy says crash and error reports are sent automatically. Google Play lists crash logs
+        and diagnostics as optional on Android, and the App Store label lists data used to track you.
+      sources: [policy, play-data-safety, app-store]
+    fdroid:
+      value: false
+      note: The Android app is on Google Play.
+      sources: [play]
+
+  pricing:
+    monthly:
+      value: null
+      note: Only one and two year plans are sold.
+      sources: [product-de]
+    best:
+      value: { amount: 5, currency: EUR }
+      note: >-
+        €59.95 a year for 10 devices, and two years at €119.90 works out the same. Customers with a G DATA
+        antivirus product can add it at half price. The English page charges the same figures in USD.
+      sources: [product-de, product]
+    best_term:
+      value: 12
+      sources: [product-de]
+    renewal_increase:
+      value: 0
+      note: >-
+        There's no intro discount. The terms say a subscription rolls on after its term, cancellable with a
+        month's notice, without stating the renewal price.
+      sources: [product-de, terms]
+    free_tier:
+      value: false
+      note: Only a 7-day trial in the apps.
+      sources: [play]
+    refund_days:
+      value: 30
+      note: Once per customer per product type.
+      sources: [terms, product]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        It says that with the VPN on "all online activity on your device remains anonymous" and you're
+        "effectively invisible" to government agencies, and calls its encryption "absolutely secure and
+        unbreakable".
+      sources: [product]
+    affiliates:
+      value: true
+      note: Commission of 15% to 25%, run through Awin.
+      sources: [affiliates]
+    review_sites:
+      value: false
+      sources: [who-we-are]
+    activism:
+      value: false
+      sources: [who-we-are]
+
+refs:
+  product:
+    url: https://www.gdata.de/en/consumer/vpn
+    title: G DATA VPN, with FAQ and location list
+  product-de:
+    url: https://www.gdata.de/privatperson/vpn
+    title: G DATA VPN, German page with euro prices (in German)
+  policy:
+    url: https://www.gdata.de/en/privacy/vpn
+    title: Privacy policy for G DATA VPN
+  terms:
+    url: https://secure.gd/shop-terms-conditions-en
+    title: G DATA shop terms and conditions
+  payment:
+    url: https://shop.gdata.de/Informationen/Zahlung-und-Versand/
+    title: G DATA shop, payment and delivery (in German)
+  imprint:
+    url: https://www.gdata.de/en/imprint
+    title: G DATA imprint
+  who-we-are:
+    url: https://www.gdata.de/en/who-we-are
+    title: G DATA, who we are
+  accounts-2024:
+    url: https://www.lobbyregister.bundestag.de/media/d9/8d/857096/JA-Offenlegung-31-12-2024.pdf
+    title: G DATA CyberDefense AG annual accounts and management report 2024, filed with the Bundestag lobby register (in German)
+  launch-2022:
+    url: https://web.archive.org/web/20220810142951/https://www.gdatasoftware.co.uk/news/2022/03/37310-safe-private-surfing-with-g-data-vpn
+    title: Safe and private surfing with G DATA VPN, 7 March 2022 (archived)
+  app-store:
+    url: https://apps.apple.com/de/app/g-data-vpn-schnell-sicher/id1581397436
+    title: G DATA VPN on the App Store, with version history and privacy label (in German)
+  play:
+    url: https://play.google.com/store/apps/details?id=de.gdata.vpn
+    title: 'G DATA VPN: Fast and Secure on Google Play'
+  play-data-safety:
+    url: https://play.google.com/store/apps/datasafety?id=de.gdata.vpn
+    title: G DATA VPN data safety on Google Play
+  help-index:
+    url: https://www.gdata.de/help-en/consumer/Products/VPN/vpn_index/
+    title: G DATA VPN help
+  help-windows-settings:
+    url: https://www.gdata.de/help-en/consumer/Products/VPN/Windows/settingsVPN/
+    title: 'G DATA VPN for Windows: Configuration'
+  help-split:
+    url: https://www.gdata.de/help-en/consumer/FAQ/SplittunnelingForVPN/
+    title: What is VPN split tunneling?
+  trust-center:
+    url: https://www.gdata.de/en/trust-center
+    title: G DATA Trust Center
+  vuln-policy:
+    url: https://www.gdata.de/en/privacy/vulnerability-disclosure
+    title: G DATA vulnerability disclosure policy
+  affiliates:
+    url: https://www.gdata-software.com/become-an-advertising-partner
+    title: G DATA affiliate partner program
