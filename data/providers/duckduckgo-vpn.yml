@@ -1,0 +1,372 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: DuckDuckGo VPN
+icon: duckduckgo-vpn.svg
+checked: 2026-10-22
+
+criteria:
+  identity:
+    website:
+      value: https://duckduckgo.com/pro
+      sources: [pro]
+    legal_entity:
+      value: DuckDuckGo Subscription, Inc.
+      note: A subsidiary of Duck Duck Go, Inc., registered in Paoli, Pennsylvania.
+      sources: [privacy-terms, privacy-terms-intl]
+    owner:
+      value: null
+      note: >-
+        Duck Duck Go, Inc. owns the subsidiary that sells it, and says it's majority owned by founder
+        Gabriel Weinberg and its staff. No group sits above it.
+      sources: [privacy-terms, who-owns]
+    founded:
+      value: 2024
+      note: Launched on 11 April 2024 as part of Privacy Pro, which DuckDuckGo now calls the DuckDuckGo subscription.
+      sources: [launch, ai-subscription]
+    team:
+      value: public
+      note: Founder and CEO Gabriel Weinberg is named, and staff sign its blog posts.
+      sources: [who-owns, launch, pro-plan]
+    sister_brands:
+      value: []
+      sources: [who-owns]
+    acquisitions:
+      value: []
+      sources: [who-owns]
+
+  jurisdiction:
+    hq:
+      value: US
+      sources: [privacy-terms-intl]
+    entities:
+      value: [US, GB]
+      note: The terms only name the two American companies. DuckDuckGo UK Limited is registered in England.
+      sources: [privacy-terms, privacy-terms-intl, uk-company]
+
+  logging:
+    traffic:
+      value: none
+      evidence: verified
+      sources: [privacy-terms, audit-2026]
+    dns:
+      value: none
+      evidence: verified
+      note: >-
+        Its resolvers cache lookups in memory for up to 24 hours without tying them to anyone, which
+        the 2026 audit checked.
+      sources: [pro, audit-2026]
+    timestamps:
+      value: none
+      evidence: verified
+      note: It says it keeps no record of session lengths, and the audit found no record linking accounts to connection times.
+      sources: [pro, audit-2026]
+    bandwidth:
+      value: none
+      evidence: claimed
+      note: Not named as such, but the policy says servers only keep generic usage data like CPU load, nothing tied to a person.
+      sources: [privacy-terms]
+    source_ip:
+      value: none
+      evidence: verified
+      sources: [pro, audit-2026]
+    proven:
+      value: [audit]
+      evidence: verified
+      note: Securitum checked live servers, configs and source code against the no-logs policy from October 2025 to January 2026.
+      sources: [audit-2026, audit-2026-summary]
+    policy: https://duckduckgo.com/pro/privacy-terms/us
+
+  transparency:
+    audits:
+      value:
+        - date: 2026-01-19
+          auditor: Securitum
+          scope: no_logs
+          source: audit-2026
+        - date: 2025-03-10
+          auditor: Securitum
+          scope: apps
+          source: audit-2024
+      evidence: verified
+      note: >-
+        Dated to the last day of testing, retests included. DuckDuckGo says the 2024 audit covered its
+        servers, but Securitum's report only lists the apps' VPN feature and the backend API.
+      sources: [security, audit-2026-summary, audit-2024-summary]
+    report:
+      value: none
+      note: Its policy says it fights disclosure and tells you about any request it can, but it publishes no figures.
+      sources: [privacy]
+    canary:
+      value: none
+      sources: [privacy-terms]
+    bug_bounty:
+      value: false
+      note: Its HackerOne programme takes reports on the apps and VPN backend, but doesn't pay.
+      sources: [hackerone]
+    incidents:
+      value: []
+      note: The leaks the 2024 audit found on macOS were fixed, and published with the report.
+      sources: [audit-2024-summary]
+
+  account:
+    email:
+      value: optional
+      note: >-
+        Only needed to use it on more than one device. Paying by card goes through Stripe, which takes
+        an email.
+      sources: [adding-email, privacy-terms]
+    personal_data:
+      value: []
+      note: The subscription gets a random ID instead of an account.
+      sources: [privacy-terms, pro]
+    payment:
+      value: [card, app_store]
+      note: Card through Stripe for US residents only. Everywhere else it's bought through Apple or Google.
+      sources: [payments, regions]
+
+  security:
+    protocols:
+      value: [wireguard]
+      sources: [protocols]
+    post_quantum:
+      value: none
+      note: Neither its help pages nor its open source apps mention post-quantum key exchange.
+      sources: [protocols, apple-source]
+    kill_switch:
+      value: system
+      note: DuckDuckGo says it blocks all traffic whenever the tunnel drops, until it reconnects or you turn the VPN off.
+      sources: [what-is-vpn, troubleshooting]
+    dns:
+      value: first_party
+      note: You can set a custom resolver instead.
+      sources: [dns-blocklists, audit-2026]
+
+  infra:
+    ram_only:
+      value: null
+      note: Neither the policy nor the 2026 audit says whether the servers run from RAM.
+      sources: [privacy-terms, audit-2026]
+    hosting:
+      value: rented
+      note: >-
+        Dedicated bare-metal servers rented from i3D and DataPacket, with the controller that hands out
+        servers on Azure.
+      sources: [privacy-terms, audit-2026]
+    virtual_locations:
+      value: null
+      note: It lists a city for each location, but doesn't say whether every server is really there.
+      sources: [servers]
+    servers:
+      value: null
+      note: It says each of its 44 locations has several servers, without a total.
+      sources: [servers]
+    countries:
+      value: 31
+      sources: [servers]
+
+  features:
+    connections:
+      value: 5
+      sources: [privacy-terms, pro]
+    multihop:
+      value: false
+      sources: [what-is-vpn, servers]
+    obfuscation:
+      value: []
+      note: Its help pages mention no way to disguise VPN traffic, and say TCP isn't supported yet.
+      sources: [protocols]
+    port_forwarding:
+      value: false
+      note: Not allowed, and torrent ports 6881 to 6889 are blocked.
+      sources: [port-forwarding]
+    split_tunnel:
+      value: true
+      note: Apps on Android. One help page also covers apps and websites on desktop, while another still calls that planned.
+      sources: [exclusions, troubleshooting]
+    blocking:
+      value: [malware]
+      note: Scam Blocker drops phishing, malware and scam domains from a Netcraft list, and can be turned off.
+      sources: [dns-blocklists]
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android]
+      note: It only runs inside the DuckDuckGo browser, with no config files for other clients.
+      sources: [pro, protocols]
+    open_source:
+      value: some
+      note: The Android, iOS and macOS browsers are open source, VPN code included. The Windows browser and the server software aren't.
+      sources: [open-source, android-source, apple-source, audit-2026]
+    telemetry:
+      value: forced
+      note: >-
+        The apps send anonymous usage events, VPN ones included, and the Android app has no setting to
+        stop them. Crash reports on iOS are only sent if you agree.
+      sources: [android-vpn-pixels, privacy, ios-strings]
+    trackers:
+      value: 0
+      note: In version 5.270.2 from March 2026.
+      sources: [exodus]
+    fdroid:
+      value: true
+      note: >-
+        The browser is on F-Droid, built without Google Play billing, so you'd have to subscribe
+        elsewhere first.
+      sources: [fdroid, fdroid-build]
+
+  pricing:
+    monthly:
+      value: { amount: 9.99, currency: USD }
+      note: The Plus plan. Pro, at $19.99 a month, only adds AI features.
+      sources: [pro, plans]
+    best:
+      value: { amount: 8.33, currency: USD }
+      note: >-
+        Plus at $99.99 a year. It's sold as a bundle with AI chat and identity theft help, and only in
+        the US, Canada, the UK and the EU.
+      sources: [pro, regions]
+    best_term:
+      value: 12
+      sources: [pro]
+    renewal_increase:
+      value: 0
+      sources: [pro]
+    free_tier:
+      value: false
+      note: Only a free trial for new subscribers.
+      sources: [pro, free-trials]
+    refund_days:
+      value: 0
+      note: >-
+        No refunds unless the law requires one. The UK and EU terms give a 14-day right of withdrawal,
+        through Apple or Google.
+      sources: [privacy-terms, privacy-terms-intl]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: Its launch post, still up, sells "an anonymous VPN". The subscription page sticks to hiding your IP and location.
+      sources: [launch, pro]
+    affiliates:
+      value: false
+      note: Its partnerships page offers no affiliate or referral scheme.
+      sources: [partnerships]
+    review_sites:
+      value: false
+      sources: [who-owns]
+    activism:
+      value: true
+      note: DuckDuckGo gave $1.1 million to privacy and digital rights groups in 2025, including the EFF and Signal.
+      sources: [donations]
+
+refs:
+  pro:
+    url: https://duckduckgo.com/pro
+    title: DuckDuckGo subscription including VPN and advanced AI
+  privacy-terms:
+    url: https://duckduckgo.com/pro/privacy-terms/us
+    title: DuckDuckGo Subscription (U.S.) Privacy Policy and Terms of Service
+  privacy-terms-intl:
+    url: https://duckduckgo.com/pro/privacy-terms/non-us/en
+    title: DuckDuckGo Subscription (non-U.S.) Privacy Policy and Terms of Service
+  privacy:
+    url: https://duckduckgo.com/privacy
+    title: DuckDuckGo Privacy Policy
+  who-owns:
+    url: https://duckduckgo.com/duckduckgo-help-pages/company/who-owns-duckduck-go
+    title: Who owns DuckDuckGo?
+  launch:
+    url: https://spreadprivacy.com/meetprivacypro/
+    title: "Privacy Pro: DuckDuckGo's New 3-in-1 Subscription Service (April 2024)"
+  ai-subscription:
+    url: https://spreadprivacy.com/ai-subscription/
+    title: The DuckDuckGo subscription now includes more advanced AI chat models, along with VPN & more
+  pro-plan:
+    url: https://spreadprivacy.com/pro-subscription/
+    title: "DuckDuckGo's New Pro Plan: 2x AI Limits, More Advanced Models"
+  free-trials:
+    url: https://spreadprivacy.com/privacy-pro-free-trials/
+    title: Try Privacy Pro for 7 Days with New Free Trials
+  what-is-vpn:
+    url: https://duckduckgo.com/duckduckgo-help-pages/privacy-pro/vpn/what-is-vpn
+    title: What is DuckDuckGo VPN?
+  protocols:
+    url: https://duckduckgo.com/duckduckgo-help-pages/privacy-pro/vpn/protocols
+    title: What protocols does DuckDuckGo VPN support?
+  servers:
+    url: https://duckduckgo.com/duckduckgo-help-pages/privacy-pro/vpn/servers
+    title: DuckDuckGo VPN Servers and Locations
+  dns-blocklists:
+    url: https://duckduckgo.com/duckduckgo-help-pages/privacy-pro/vpn/dns-blocklists
+    title: DuckDuckGo VPN Scam Blocker DNS Blocklist
+  port-forwarding:
+    url: https://duckduckgo.com/duckduckgo-help-pages/privacy-pro/vpn/port-forwarding
+    title: DuckDuckGo VPN Port Forwarding and Blocking
+  troubleshooting:
+    url: https://duckduckgo.com/duckduckgo-help-pages/privacy-pro/vpn/troubleshooting
+    title: DuckDuckGo VPN Troubleshooting
+  exclusions:
+    url: https://duckduckgo.com/duckduckgo-help-pages/privacy-pro/vpn/exclude-apps-websites
+    title: How can I exclude apps or websites from the VPN?
+  uk-company:
+    url: https://find-and-update.company-information.service.gov.uk/company/15952220
+    title: DuckDuckGo UK Limited, Companies House
+  security:
+    url: https://duckduckgo.com/duckduckgo-help-pages/privacy-pro/vpn/security
+    title: VPN Security and Privacy Audits
+  audit-2026-summary:
+    url: https://duckduckgo.com/duckduckgo-help-pages/privacy-pro/vpn/security-reports/2025-2026-vpn-no-log-policy-audit
+    title: DuckDuckGo VPN No-Log Policy Audit 2025-2026
+  audit-2026:
+    url: https://duckduckgo.com/duckduckgo-help-pages/static-assets/pdfs/Securitum_DuckDuckGo_VPN-No-Log-Policy-Audit_20260320.pdf
+    title: Securitum, DuckDuckGo VPN No-Log Policy Audit (March 2026)
+  audit-2024-summary:
+    url: https://duckduckgo.com/duckduckgo-help-pages/privacy-pro/vpn/security-reports/2024-audit
+    title: DuckDuckGo VPN Security Audit 2024
+  audit-2024:
+    url: https://duckduckgo.com/duckduckgo-help-pages/static-assets/pdfs/Securitum_DuckDuckGo_retest_20250529.pdf
+    title: Securitum, security report on the DuckDuckGo VPN feature and backend API, with retests (May 2025)
+  plans:
+    url: https://duckduckgo.com/duckduckgo-help-pages/privacy-pro/plus-and-pro-plan-differences
+    title: Plus and Pro plan differences
+  payments:
+    url: https://duckduckgo.com/duckduckgo-help-pages/privacy-pro/payments
+    title: DuckDuckGo Subscription Payments
+  adding-email:
+    url: https://duckduckgo.com/duckduckgo-help-pages/privacy-pro/adding-email
+    title: Adding an email to your subscription
+  regions:
+    url: https://duckduckgo.com/duckduckgo-help-pages/privacy-pro/using-privacy-pro-outside-us
+    title: Is the DuckDuckGo subscription available in my country?
+  open-source:
+    url: https://duckduckgo.com/duckduckgo-help-pages/open-source/opensource-overview
+    title: DuckDuckGo Open Source
+  android-source:
+    url: https://github.com/duckduckgo/Android
+    title: duckduckgo/Android on GitHub
+  apple-source:
+    url: https://github.com/duckduckgo/apple-browsers
+    title: duckduckgo/apple-browsers on GitHub
+  android-vpn-pixels:
+    url: https://github.com/duckduckgo/Android/blob/develop/network-protection/network-protection-impl/src/main/java/com/duckduckgo/networkprotection/impl/pixels/NetworkProtectionPixels.kt
+    title: NetworkProtectionPixels.kt, the Android VPN's usage events
+  ios-strings:
+    url: https://github.com/duckduckgo/apple-browsers/blob/main/iOS/DuckDuckGo/UserInterfaceResources/en.lproj/Localizable.strings
+    title: iOS app strings, including the crash report prompt
+  exodus:
+    url: https://web.archive.org/web/20260308110823/https://reports.exodus-privacy.eu.org/en/reports/com.duckduckgo.mobile.android/latest/
+    title: Exodus Privacy report for com.duckduckgo.mobile.android 5.270.2 (archived)
+  fdroid:
+    url: https://f-droid.org/en/packages/com.duckduckgo.mobile.android/
+    title: DuckDuckGo Privacy Browser on F-Droid
+  fdroid-build:
+    url: https://gitlab.com/fdroid/fdroiddata/-/blob/master/metadata/com.duckduckgo.mobile.android.yml
+    title: F-Droid build metadata for com.duckduckgo.mobile.android
+  hackerone:
+    url: https://hackerone.com/duckduckgo
+    title: DuckDuckGo on HackerOne
+  partnerships:
+    url: https://duckduckgo.com/duckduckgo-help-pages/company/partnerships
+    title: Is DuckDuckGo open to partnerships?
+  donations:
+    url: https://spreadprivacy.com/2025-duckduckgo-charitable-donations/
+    title: '2025 DuckDuckGo Charitable Donations: $1.1M to privacy and digital competition non-profits'
