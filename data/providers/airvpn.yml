@@ -1,0 +1,420 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: AirVPN
+icon: airvpn.png
+checked: 2026-10-22
+
+criteria:
+  identity:
+    website:
+      value: https://airvpn.org
+      sources: [home]
+    legal_entity:
+      value: AirVPN di Paolo Brini
+      note: The privacy notice names the data controller as Air di Paolo Brini, at a different Perugia address.
+      sources: [tos, vies, privacy]
+    owner:
+      value: null
+      note: AirVPN di Paolo Brini is a sole proprietorship, so there's no parent company above it.
+      sources: [tos, vies]
+    founded:
+      value: 2010
+      sources: [aboutus]
+    team:
+      value: partial
+      note: Paolo Brini is named in the privacy notice and speaks for AirVPN in the press. Everyone else posts as "Staff".
+      sources: [privacy, piracy-shield]
+    sister_brands:
+      value: []
+      sources: [aboutus]
+    acquisitions:
+      value: []
+      note: Iridium ran AirVPN until November 2012, when the same people moved it into their own company.
+      sources: [aboutus]
+
+  jurisdiction:
+    hq:
+      value: IT
+      note: >-
+        AirVPN stopped selling to Italian residents in February 2024 rather than apply the blocks Italy's
+        Piracy Shield rules require of services offered there.
+      sources: [tos, vies, italy-termination]
+    entities:
+      value: [IT]
+      sources: [tos, vies]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [privacy, faq-logs]
+    dns:
+      value: none
+      evidence: claimed
+      note: The privacy notice doesn't mention DNS by name, but says activity isn't logged.
+      sources: [privacy, faq-logs]
+    timestamps:
+      value: temporary
+      evidence: claimed
+      note: >-
+        Each live session's start time is held in RAM, and shown on the public status page, until you
+        disconnect. Optional stored statistics, without IPs, are off unless you turn them on.
+      sources: [privacy, status, stats-ram]
+    bandwidth:
+      value: temporary
+      evidence: claimed
+      note: Traffic per session is held in RAM for the status page and lost when you disconnect.
+      sources: [privacy, status, stats-ram]
+    source_ip:
+      value: temporary
+      evidence: claimed
+      note: Held in RAM while connected. With WireGuard it's dropped 180 seconds after the last handshake.
+      sources: [privacy, faq-wireguard]
+    proven:
+      value: []
+      note: >-
+        AirVPN says Canadian police took a Toronto server in 2015 and found no logs on it, but that rests on
+        its own account of informal police contact. It has never been audited.
+      sources: [toronto-seizure, audit-question]
+    policy:
+      value: https://airvpn.org/privacy/
+      sources: [privacy]
+
+  transparency:
+    audits:
+      value: []
+      note: AirVPN has never published an independent audit of its servers, apps or no-logs claim.
+      sources: [audit-question, specs]
+    report:
+      value: none
+      note: Asked in May 2026, staff said AirVPN doesn't publish one and suggested dividing Proton's figures by three.
+      sources: [transparency-reply]
+    canary:
+      value: none
+      sources: [specs]
+    bug_bounty:
+      value: true
+      note: Pays 100 to 300 EUR or more per bug, covering its servers, websites and apps.
+      sources: [security-policy]
+    incidents:
+      value:
+        - date: 2026-01-06
+          summary: >-
+            Fluid Attacks published a root privilege escalation in Eddie for macOS (CVE-2025-14979) after its
+            emails to support and a GitHub issue went unanswered. AirVPN said it hadn't come through the proper
+            channels, posted a workaround on 16 January and fixed it in Eddie 2.25 beta on 25 February 2026.
+          handled: well
+          source: cve-fluid
+        - date: 2015-10-29
+          summary: >-
+            Ukraine's SBU raided the UrDN datacentre in Kyiv and took every server, including two of AirVPN's.
+            AirVPN announced it two days later and said the servers held no logs or databases.
+          handled: well
+          source: urdn
+        - date: 2015-01-01
+          summary: >-
+            Police took a Toronto server from its datacentre in 2015, in a case AirVPN says involved the FBI.
+            AirVPN only revealed it in a forum reply in October 2023, saying it chose to wait at least seven
+            years though no one asked it to keep quiet. That thread now returns a 404.
+          handled: poorly
+          source: toronto-seizure
+      note: AirVPN gives only the year of the Toronto seizure.
+      sources: [eddie-cve-thread, eddie-225, fluid-github-issue]
+
+  account:
+    email:
+      value: optional
+      note: The sign-up form has an email field, but says a random string will do.
+      sources: [register]
+    personal_data:
+      value: []
+      sources: [register, home]
+    payment:
+      value: [card, paypal, bank, bitcoin, monero, other_crypto, gift_card]
+      note: >-
+        Cards and bank methods such as iDEAL and Przelewy24 go through Stripe, and Amazon Pay is offered too.
+        Other crypto is Litecoin, Bitcoin Cash and Dogecoin, taken directly. Vouchers are plan coupons bought
+        for someone else.
+      sources: [buy, faq-bitcoin]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn]
+      sources: [specs, home]
+    post_quantum:
+      value: none
+      note: >-
+        WireGuard configs carry a pre-shared key that AirVPN calls post-quantum resistant, but it doesn't
+        claim the key reaches you over a quantum-safe channel. OpenVPN has nothing similar.
+      sources: [specs]
+    kill_switch:
+      value: system
+      note: >-
+        Network Lock in Eddie and the Linux Suite is a firewall rule set you switch on, and it stays up even
+        if the app crashes. Eddie for Android uses the system's always-on VPN.
+      sources: [network-lock, linux-suite, android-eddie]
+    dns:
+      value: first_party
+      note: Every VPN server runs its own resolver.
+      sources: [specs]
+
+  infra:
+    ram_only:
+      value: all
+      evidence: claimed
+      note: >-
+        A disk holds only the boot loader and kernel. Everything else is downloaded into RAM disks once
+        staff approve each reboot.
+      sources: [ram-disks, toronto-seizure]
+    hosting:
+      value: rented
+      evidence: claimed
+      note: Dedicated servers in third-party datacentres, never virtual servers.
+      sources: [dedicated, aboutus]
+    virtual_locations:
+      value: none
+      evidence: claimed
+      sources: [home, faq-locations]
+    servers:
+      value: 250
+      note: Listed by the status API on 2026-10-22. Leaves out the separate geo-unblocking routing servers.
+      sources: [status, status-api]
+    countries:
+      value: 23
+      sources: [status, status-api]
+
+  features:
+    connections:
+      value: 5
+      sources: [faq-connections, home]
+    multihop:
+      value: false
+      note: Staff say multi-hop is for the client side and point to Eddie's OpenVPN over Tor mode instead.
+      sources: [multihop]
+    obfuscation:
+      value: [stunnel, amneziawg]
+      note: >-
+        Every server also takes OpenVPN over SSH. AmneziaWG is Android only, in Eddie 4.0 and later, with
+        presets that mimic QUIC traffic.
+      sources: [ssl, ssh, eddie-android-400]
+    port_forwarding:
+      value: true
+      note: Up to five ports per account, kept for as long as the plan runs.
+      sources: [faq-port-forwarding]
+    split_tunnel:
+      value: true
+      note: Per app on Android and in the Linux Suite. Eddie on desktop only routes chosen IP ranges outside the tunnel.
+      sources: [android-eddie, linux-suite, network-lock]
+    blocking:
+      value: [ads, trackers, malware]
+      note: Opt-in, from third-party lists. AirVPN doesn't add domains of its own.
+      sources: [specs, home]
+
+  clients:
+    platforms:
+      value: [windows, macos, linux_gui, linux_cli, android]
+      note: >-
+        No iOS app, by choice, so iPhones use WireGuard or OpenVPN apps with generated configs, as routers do.
+        Android TV and Fire OS are supported.
+      sources: [download, faq-ios, linux-suite, android-eddie]
+    open_source:
+      value: all
+      note: Eddie for desktop and Android and the Linux Suite are all GPL-3.0.
+      sources: [eddie-github, eddie-android-gitlab, suite-gitlab]
+    telemetry:
+      value: none
+      evidence: claimed
+      note: The Play Store listing declares no data collected.
+      sources: [play-data-safety]
+    trackers:
+      value: 0
+      note: The newest Exodus report that would load is for version 3.0, from December 2022. The app has since been rebuilt as 4.x.
+      sources: [exodus]
+    fdroid:
+      value: false
+      note: The APK is offered on AirVPN's own site.
+      sources: [fdroid-search, android-eddie]
+
+  pricing:
+    monthly:
+      value: { amount: 7, currency: EUR }
+      sources: [buy]
+    best:
+      value: { amount: 2.75, currency: EUR }
+      note: 99 EUR for three years. A Halloween coupon on the buy page cut that to 64.35 EUR in October 2026.
+      sources: [buy]
+    best_term:
+      value: 36
+      sources: [buy]
+    renewal_increase:
+      value: 0
+      sources: [buy]
+    free_tier:
+      value: false
+      note: The cheapest plan is three days for 2 EUR.
+      sources: [buy]
+    refund_days:
+      value: 30
+      note: Within 30 business days of payment, and only if you haven't used it for more than 30 days.
+      sources: [tos]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        The homepage calls it an "impenetrable tunnel" and says "even the most brutal techniques of monitoring,
+        censorship, throttling and traffic shaping will fail against AirVPN".
+      sources: [home]
+    affiliates:
+      value: true
+      note: Referrers get 20% of a new customer's first purchase as account credit, more with a longer-term deal.
+      sources: [faq-referrals]
+    review_sites:
+      value: false
+      sources: [aboutus]
+    activism:
+      value: true
+      note: Funds 20 Tor exit relays and has given to the EFF, EDRi, Xnet and others.
+      sources: [mission]
+
+refs:
+  home:
+    url: https://airvpn.org/
+    title: AirVPN
+  aboutus:
+    url: https://airvpn.org/aboutus/
+    title: About us - AirVPN, the story so far
+  privacy:
+    url: https://airvpn.org/privacy/
+    title: Privacy Notice and Terms
+  tos:
+    url: https://airvpn.org/tos/
+    title: Terms of Service
+  vies:
+    url: https://ec.europa.eu/taxation_customs/vies/rest-api/ms/IT/vat/03297800546
+    title: EU VIES VAT check for IT03297800546 (AirVPN di Paolo Brini)
+  buy:
+    url: https://airvpn.org/buy/
+    title: Access plans and payment methods
+  specs:
+    url: https://airvpn.org/specs/
+    title: Technical specs
+  status:
+    url: https://airvpn.org/status/
+    title: Servers status
+  status-api:
+    url: https://airvpn.org/api/status/
+    title: Server status API
+  faq-logs:
+    url: https://airvpn.org/faq/logs/
+    title: Do you keep session logs or any other kind of logs?
+  faq-connections:
+    url: https://airvpn.org/faq/multiple_connections/
+    title: How many simultaneous connections can I establish from a single account?
+  faq-port-forwarding:
+    url: https://airvpn.org/faq/port_forwarding/
+    title: You provide Remote Port Forwarding, what is it?
+  faq-wireguard:
+    url: https://airvpn.org/faq/wireguard/
+    title: Does WireGuard pose privacy issues?
+  faq-ios:
+    url: https://airvpn.org/faq/software_ios/
+    title: Why do you not develop software for iOS?
+  faq-referrals:
+    url: https://airvpn.org/faq/referrals/
+    title: What is the referral system?
+  faq-locations:
+    url: https://airvpn.org/faq/locations/
+    title: Why don't you add many more servers locations?
+  faq-bitcoin:
+    url: https://airvpn.org/faq/bitcoin/
+    title: Do you accept Bitcoin?
+  security-policy:
+    url: https://airvpn.org/security_policy/
+    title: Vulnerability Disclosure Policy and Bug Bounty Program
+  mission:
+    url: https://airvpn.org/mission/
+    title: Our mission
+  register:
+    url: https://airvpn.org/register/
+    title: Create an account
+  download:
+    url: https://airvpn.org/download/
+    title: Download
+  linux-suite:
+    url: https://airvpn.org/linux/suite/
+    title: AirVPN Suite for Linux
+  android-eddie:
+    url: https://airvpn.org/android/eddie/
+    title: Using AirVPN with Eddie Android edition
+  ssl:
+    url: https://airvpn.org/ssl/
+    title: Using AirVPN with SSL Tunnel
+  ssh:
+    url: https://airvpn.org/ssh/
+    title: Using AirVPN with SSH Tunnel
+  eddie-android-400:
+    url: https://airvpn.org/forums/topic/79743-eddie-android-edition-400-available/
+    title: Eddie Android edition 4.0.0 available (2026-04-08)
+  network-lock:
+    url: https://eddie.website/support/network-lock/
+    title: Eddie, Network Lock
+  eddie-github:
+    url: https://github.com/AirVPN/Eddie
+    title: AirVPN/Eddie on GitHub
+  eddie-android-gitlab:
+    url: https://gitlab.com/AirVPN/EddieAndroid
+    title: AirVPN/EddieAndroid on GitLab
+  suite-gitlab:
+    url: https://gitlab.com/AirVPN/AirVPN-Suite
+    title: AirVPN/AirVPN-Suite on GitLab
+  exodus:
+    url: https://web.archive.org/web/20221206143113/https://reports.exodus-privacy.eu.org/en/reports/org.airvpn.eddie/latest/
+    title: Exodus Privacy report for org.airvpn.eddie 3.0 (archived)
+  play-data-safety:
+    url: https://play.google.com/store/apps/datasafety?id=org.airvpn.eddie&hl=en
+    title: AirVPN Eddie Client, Google Play data safety
+  fdroid-search:
+    url: https://search.f-droid.org/?q=airvpn&lang=en
+    title: F-Droid search for airvpn
+  ram-disks:
+    url: https://airvpn.org/forums/topic/56149-why-hard-disks/
+    title: Why hard disks? (staff reply on RAM disks, 2023)
+  dedicated:
+    url: https://airvpn.org/forums/topic/14326-question-regarding-airvpns-your-ip/
+    title: Question regarding AirVPN's "your IP" (staff on dedicated servers)
+  stats-ram:
+    url: https://airvpn.org/forums/topic/11954-statistics-vs-no-logging-rule/
+    title: Statistics vs "No logging rule" (staff reply, 2014)
+  transparency-reply:
+    url: https://airvpn.org/forums/topic/80382-question-about-airvpn-transparency-reports-and-legal-requests/
+    title: Question about AirVPN transparency reports and legal requests (staff reply, 2026)
+  audit-question:
+    url: https://airvpn.org/forums/topic/74901-is-an-audit-still-off-the-table/
+    title: Is an audit still off the table? (forum, 2025)
+  toronto-seizure:
+    url: https://web.archive.org/web/20240326121910/https://airvpn.org/forums/topic/56817-court-order-seizing-the-server/
+    title: Court Order, seizing the server (staff replies, October 2023, archived)
+  urdn:
+    url: https://airvpn.org/forums/topic/15857-urdn-servers-stolen/
+    title: UrDN servers stolen (2015-10-31)
+  cve-fluid:
+    url: https://fluidattacks.com/advisories/blink182
+    title: Fluid Attacks, Eddie VPN 2.24.6 local privilege escalation (CVE-2025-14979)
+  fluid-github-issue:
+    url: https://github.com/AirVPN/Eddie/issues/150
+    title: Security Vulnerability Disclosure - Request for Contact Information (Eddie issue 150)
+  eddie-cve-thread:
+    url: https://airvpn.org/forums/topic/78735-eddie-security-issue-please-provide-some-info/
+    title: Eddie security issue - please provide some info (staff reply, 2026-01-16)
+  eddie-225:
+    url: https://airvpn.org/forums/topic/79305-eddie-desktop-edition-225-beta-released/
+    title: Eddie Desktop edition 2.25 beta released (2026-02-25)
+  italy-termination:
+    url: https://airvpn.org/forums/topic/57256-termination-of-service-in-italy/
+    title: Termination of service in Italy (2024-02-05)
+  piracy-shield:
+    url: https://torrentfreak.com/airvpn-stops-serving-italians-due-to-piracy-shield-blocking-requirements-240206/
+    title: AirVPN Stops Serving Italians due to "Piracy Shield" Blocking Requirements (TorrentFreak)
+  multihop:
+    url: https://airvpn.org/forums/topic/68249-multi-hop-daita-like-system/
+    title: multi-hop + DAITA-like system (staff reply, 2025)
