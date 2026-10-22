@@ -1,0 +1,415 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Lockdown Privacy
+icon: lockdown-privacy.png
+checked: 2026-10-22
+
+criteria:
+  identity:
+    website:
+      value: https://lockdownprivacy.com
+      sources: [home]
+    legal_entity:
+      value: Celestian Golden Apps SL
+      note: >-
+        The App Store seller since mid-2025, and its policy is the one the listing links. The website's terms, last
+        updated in 2023, still name Confirmed Technologies, LLC.
+      sources: [app-store, borme-2023, terms]
+    owner:
+      value: null
+      note: >-
+        The Madrid register names Newry Global Media SL as Celestian's sole administrator, which doesn't show who owns
+        it. Lockdown's About page still says Appex Group owns it, but Appex no longer lists the app.
+      sources: [borme-2023, about, appex]
+    founded:
+      value: 2019
+      note: Lockdown and its Secure Tunnel launched in 2019, on the Confirmed VPN servers that went public in 2018.
+      sources: [oo-report, confirmed-about]
+    team:
+      value: partial
+      note: >-
+        Neither Lockdown nor Celestian names anyone. The Madrid register names the administrator company's
+        representative, Félix Sánchez Echevarría.
+      sources: [borme-2023, datoscif]
+    sister_brands:
+      value: []
+      note: Celestian's other apps are wallpaper, font, cleaner, meditation and menu apps, none of them VPNs.
+      sources: [celestian-apps]
+    acquisitions:
+      value:
+        - date: 2025-06-01
+          acquirer: Celestian Golden Apps
+          source: app-store-2025-06
+        - date: 2023-02-23
+          acquirer: Appex Group
+          source: appex-blog
+      note: >-
+        Confirmed's sale to Appex was announced in February 2023. No later sale was announced, but the App Store seller
+        changed from Confirmed, Inc. to Celestian between 4 May and 15 June 2025, so that date is approximate.
+      sources: [appex-blog, app-store-2025-05, app-store-2025-06]
+
+  jurisdiction:
+    hq:
+      value: ES
+      sources: [borme-2023, celestian-legal]
+    entities:
+      value: [ES]
+      note: >-
+        The website's 2023 terms and VPN policy name the US companies Confirmed Technologies, LLC and Confirmed, Inc.,
+        and it's unclear whether they're still involved.
+      sources: [borme-2023, terms, confirmed-privacy]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      note: >-
+        Per Confirmed VPN's 2023 policy, which Lockdown's site still links, bar anti-abuse rule hits kept without your
+        IP. The App Store now links Celestian's generic app policy, which doesn't mention the VPN.
+      sources: [privacy, confirmed-privacy, celestian-privacy]
+    dns:
+      value: none
+      evidence: claimed
+      note: Confirmed's 2023 policy says no website data is stored for any period.
+      sources: [confirmed-privacy]
+    timestamps:
+      value: null
+      note: >-
+        Confirmed's policy doesn't mention connection times. Celestian's app policy collects when you log in and time
+        spent in the app, kept for as long as it's needed.
+      sources: [confirmed-privacy, celestian-privacy]
+    bandwidth:
+      value: aggregate
+      evidence: claimed
+      note: A running total of data used over the last 30 days, to throttle heavy users.
+      sources: [confirmed-privacy]
+    source_ip:
+      value: null
+      note: >-
+        Confirmed's 2023 policy says real IPs aren't logged, but Celestian's app policy, the one the App Store links,
+        lists IP addresses among the data it collects. Which applies to the VPN isn't clear.
+      sources: [confirmed-privacy, celestian-privacy]
+    proven:
+      value: [audit]
+      evidence: verified
+      note: >-
+        Engineers and one firm checked Confirmed's no-logging claims and AWS setup between 2018 and 2020, using
+        an audit kit Confirmed created. Nothing has been checked since the app changed hands in 2023 and 2025.
+      sources: [oo-report, audit-2020-lerman, audit-2018-factor13]
+    policy:
+      value: https://lockdownprivacy.com/privacy
+      sources: [privacy]
+
+  transparency:
+    audits:
+      value:
+        - date: 2020-08-11
+          auditor: Ryan Koven
+          scope: infra
+          source: audit-2020-koven
+        - date: 2020-08-10
+          auditor: Jeff Lerman
+          scope: infra
+          source: audit-2020-lerman
+        - date: 2019-06-11
+          auditor: Kevin Chen
+          scope: infra
+          source: audit-2019-chen
+        - date: 2018-12-06
+          auditor: Factor13 LLC
+          scope: infra
+          source: audit-2018-factor13
+        - date: 2018-11-21
+          auditor: Ryan Koven
+          scope: infra
+          source: audit-2018-koven
+      evidence: verified
+      note: >-
+        All of the Confirmed VPN servers Secure Tunnel runs on, by engineers and one firm working through
+        Confirmed's own audit kit. A 2021 OpenAudit of the app is now behind a login, and the audit Appex promised
+        in 2023 never appeared.
+      sources: [oo-report, openaudit-blog, appex-blog]
+    report:
+      value: none
+      sources: [privacy]
+    canary:
+      value: none
+      sources: [privacy]
+    bug_bounty:
+      value: false
+      note: Neither Lockdown nor Celestian publishes a bounty or a security.txt.
+      sources: [home, celestian-legal]
+    incidents:
+      value: []
+
+  account:
+    email:
+      value: optional
+      note: The VPN is bought in the app through Apple. An account with an email is only needed to share it across devices.
+      sources: [faq]
+    personal_data:
+      value: []
+      sources: [celestian-privacy]
+    payment:
+      value: [app_store]
+      note: Only sold through in-app purchases on the App Store.
+      sources: [secure-tunnel, subscription-code]
+
+  security:
+    protocols:
+      value: [ikev2]
+      note: Per the published code, which stops at version 2.3.
+      sources: [vpn-code]
+    post_quantum:
+      value: none
+      note: The published code uses an IKEv2 key exchange on the P-256 curve (group 19).
+      sources: [vpn-code]
+    kill_switch:
+      value: none
+      note: Not offered. The published code reconnects on demand but doesn't block traffic while the tunnel is down.
+      sources: [vpn-code]
+    dns:
+      value: third_party
+      note: >-
+        In the published code, the firewall that runs alongside the VPN sends every lookup to Cloudflare's
+        DNS-over-HTTPS resolver.
+      sources: [dnscrypt-config]
+
+  infra:
+    ram_only:
+      value: null
+      note: Lockdown doesn't say whether its servers run from RAM.
+      sources: [secure-tunnel]
+    hosting:
+      value: rented
+      note: The servers are AWS instances, per the Openly Operated audit kit and their addresses in AWS's published ranges.
+      sources: [oo-report, aws-ranges]
+    virtual_locations:
+      value: none
+      note: Each of the 13 regions in the app resolves to an AWS address in the matching AWS region.
+      sources: [regions-code, aws-ranges]
+    servers:
+      value: null
+      note: Lockdown doesn't give a server count, only regions.
+      sources: [secure-tunnel]
+    countries:
+      value: 12
+      note: 13 regions, with two in the US.
+      sources: [secure-tunnel, regions-code]
+
+  features:
+    connections:
+      value: null
+      note: >-
+        No limit is stated. The Pro plan covers all your Apple devices, and the FAQ says one account can be shared
+        with family.
+      sources: [faq, paywall-code]
+    multihop:
+      value: false
+      sources: [secure-tunnel]
+    obfuscation:
+      value: []
+      sources: [secure-tunnel, vpn-code]
+    port_forwarding:
+      value: false
+      sources: [secure-tunnel]
+    split_tunnel:
+      value: null
+      note: >-
+        The FAQ says whitelisted domains bypass both the firewall and the tunnel, but the published code only shows
+        them skipping the firewall, and there's no per-app choice.
+      sources: [faq, firewall-code]
+    blocking:
+      value: [ads, trackers, malware]
+      note: An on-device firewall. The advanced ad and malware lists need a subscription.
+      sources: [firewall-page, paywall-code]
+
+  clients:
+    platforms:
+      value: [ios]
+      note: >-
+        iPhone and iPad, and it runs on Vision Pro. The website still links a Mac app the App Store no longer
+        lists.
+      sources: [app-store, home, mac-lookup]
+    open_source:
+      value: none
+      note: >-
+        The iOS app's GPL code on GitHub stops at version 2.3 from March 2025. The releases since, one of which added
+        performance monitoring tools, aren't published.
+      sources: [github-commits, app-store]
+    telemetry:
+      value: null
+      note: >-
+        The App Store label declares analytics, crash data and identifiers used to track you, though the site's
+        firewall policy says there are no analytics. Nothing says whether it can be turned off.
+      sources: [app-store, privacy]
+    trackers:
+      value: null
+      note: There's no Android app.
+      sources: [home]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 12.99, currency: USD }
+      note: The US App Store price for Secure Tunnel plus the advanced firewall. There's no pricing page.
+      sources: [app-store]
+    best:
+      value: { amount: 5, currency: USD }
+      note: >-
+        $59.99 a year. Pro, sold as covering all your Apple devices, is $14.99 a month. Time-limited in-app offers go
+        as low as $39.99 a year.
+      sources: [app-store, subscription-code]
+    best_term:
+      value: 12
+      sources: [subscription-code]
+    renewal_increase:
+      value: 0
+      sources: [app-store]
+    free_tier:
+      value: false
+      note: The basic firewall is free, but Secure Tunnel needs a subscription after its free trial.
+      sources: [home, secure-tunnel]
+    refund_days:
+      value: null
+      note: It's only sold through the App Store, so refunds follow Apple's process.
+      sources: [apple-refund]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        The listing still calls it "the only VPN to prove its Privacy Policy and be fully audited" and "100% open
+        source", though the audits are from 2020 and the current app's code isn't published.
+      sources: [app-store, github-commits]
+    affiliates:
+      value: null
+      note: Lockdown doesn't say whether it pays anyone for sign-ups.
+    review_sites:
+      value: false
+      note: Its Privacy Review site grades the trackers in popular apps, not VPNs.
+      sources: [privacy-review]
+    activism:
+      value: false
+      note: >-
+        Confirmed created Openly Operated and published tracking research up to 2021. There's been nothing since the
+        2023 sale.
+      sources: [blog, att-study]
+
+refs:
+  home:
+    url: https://lockdownprivacy.com/
+    title: Lockdown Privacy
+  about:
+    url: https://lockdownprivacy.com/about
+    title: About Us - Lockdown Privacy
+  firewall-page:
+    url: https://lockdownprivacy.com/firewall
+    title: Firewall - Lockdown Privacy
+  secure-tunnel:
+    url: https://lockdownprivacy.com/secure-tunnel
+    title: Secure Tunnel VPN - Lockdown Privacy
+  faq:
+    url: https://lockdownprivacy.com/faq
+    title: Lockdown Privacy FAQ
+  privacy:
+    url: https://lockdownprivacy.com/privacy
+    title: Lockdown Privacy Policy, last updated 2023-02-23
+  terms:
+    url: https://lockdownprivacy.com/terms
+    title: Lockdown Terms and Conditions, last updated 2023-02-23
+  confirmed-privacy:
+    url: https://confirmedvpn.com/privacy
+    title: Confirmed VPN Privacy Policy, last updated 2023-02-23
+  confirmed-about:
+    url: https://confirmedvpn.com/about-us
+    title: Confirmed VPN, About Us
+  celestian-privacy:
+    url: https://www.celestiangolden.com/privacy-policy-apps.html
+    title: Celestian Golden Apps, Privacy Policy for Apps (linked from the App Store listing)
+  celestian-legal:
+    url: https://www.celestiangolden.com/TermsOfUse.html
+    title: Celestian Golden Apps, legal notice
+  celestian-apps:
+    url: https://apps.apple.com/us/developer/celestian-golden-apps/id1815911753
+    title: CELESTIAN GOLDEN APPS on the App Store
+  app-store:
+    url: https://apps.apple.com/us/app/lockdown-privacy-adblock-vpn/id1469783711
+    title: Lockdown Privacy on the App Store (in-app purchases, version history and privacy label)
+  app-store-2025-05:
+    url: https://web.archive.org/web/20250504071522/https://apps.apple.com/us/app/lockdown-privacy-adblock-vpn/id1469783711
+    title: Lockdown Privacy on the App Store, 2025-05-04 (seller Confirmed, Inc.), Wayback Machine
+  app-store-2025-06:
+    url: https://web.archive.org/web/20250615133225/https://apps.apple.com/us/app/lockdown-privacy-adblock-vpn/id1469783711
+    title: Lockdown Privacy on the App Store, 2025-06-15 (seller Celestian Golden Apps SL), Wayback Machine
+  mac-lookup:
+    url: https://itunes.apple.com/lookup?id=1483255076
+    title: App Store lookup for the Lockdown Mac app (no results)
+  borme-2023:
+    url: https://www.boe.es/borme/dias/2023/05/05/pdfs/BORME-A-2023-84-28.pdf
+    title: BORME, Madrid register, 2023-05-05 (Celestian Golden Apps SL incorporation and administrator)
+  datoscif:
+    url: https://www.datoscif.es/empresa/celestian-golden-apps-sl
+    title: Celestian Golden Apps SL, Madrid company register entries
+  appex-blog:
+    url: https://blog.lockdownprivacy.com/2023/02/23/Lockdown-2-How-Were-Getting-There.html
+    title: "Lockdown 2.0: How We're Getting There (2023-02-23)"
+  appex:
+    url: https://www.joinappex.com/
+    title: Appex, our apps
+  blog:
+    url: https://blog.lockdownprivacy.com/
+    title: Transparency Matters, the Lockdown Privacy blog
+  att-study:
+    url: https://blog.lockdownprivacy.com/2021/09/22/study-effectiveness-of-apples-app-tracking-transparency.html
+    title: "Study: Effectiveness of Apple's App Tracking Transparency (2021-09-22)"
+  openaudit-blog:
+    url: https://blog.lockdownprivacy.com/2021/05/26/april-2021-openaudit-of-lockdown-privacy.html
+    title: "Introducing OpenAudit: Forget Privacy Policies, Get Privacy Proof (2021-05-26)"
+  privacy-review:
+    url: https://privacyreview.co/
+    title: Privacy Review, powered by Lockdown
+  oo-report:
+    url: https://web.archive.org/web/20221127160724/https://openlyoperated.org/report/confirmedvpn
+    title: Openly Operated, Lockdown & Confirmed VPN audit kit and reports (Wayback Machine, 2022)
+  audit-2020-koven:
+    url: https://web.archive.org/web/20210425040154/https://shared-cmsbucket-a1w1o8ixeyd9.s3.amazonaws.com/audit-report-confirmedvpn-july2020-ryankoven.pdf
+    title: Ryan Koven, Lockdown & Confirmed VPN audit report (2020-08-11), Wayback Machine
+  audit-2020-lerman:
+    url: https://web.archive.org/web/20210425040151/https://shared-cmsbucket-a1w1o8ixeyd9.s3.amazonaws.com/audit-report-confirmedvpn-july2020-jefflerman.pdf
+    title: Jeff Lerman, Lockdown & Confirmed VPN audit report (2020-08-10), Wayback Machine
+  audit-2019-chen:
+    url: https://web.archive.org/web/20210211014538/https://shared-cmsbucket-a1w1o8ixeyd9.s3.amazonaws.com/audit-report-confirmedvpn-rev1-kevinchen.pdf
+    title: Kevin Chen, Confirmed VPN audit report (2019-06-11), Wayback Machine
+  audit-2018-factor13:
+    url: https://web.archive.org/web/20201111204918/https://s3.amazonaws.com/confirmed-audits/factor13.pdf
+    title: Factor13 LLC, Confirmed VPN privacy audit (December 2018), Wayback Machine
+  audit-2018-koven:
+    url: https://web.archive.org/web/20201111194230/https://s3.amazonaws.com/confirmed-audits/rkoven.pdf
+    title: Ryan Koven, Confirmed VPN privacy audit and Open Watch analysis (November 2018), Wayback Machine
+  github-commits:
+    url: https://github.com/confirmedcode/Lockdown-iOS/commits/main
+    title: confirmedcode/Lockdown-iOS commit history on GitHub
+  vpn-code:
+    url: https://github.com/confirmedcode/Lockdown-iOS/blob/main/LockdowniOS/VPNController.swift
+    title: Lockdown iOS, VPN controller (IKEv2 settings)
+  regions-code:
+    url: https://github.com/confirmedcode/Lockdown-iOS/blob/main/VPNRegion.swift
+    title: Lockdown iOS, VPN regions
+  dnscrypt-config:
+    url: https://github.com/confirmedcode/Lockdown-iOS/blob/main/dnscrypt-proxy.toml
+    title: Lockdown iOS, firewall DNS resolver config (Cloudflare DoH stamp)
+  firewall-code:
+    url: https://github.com/confirmedcode/Lockdown-iOS/blob/main/Lockdown%20Tunnel/PacketTunnelProvider.swift
+    title: Lockdown iOS, firewall tunnel provider (whitelisted domains)
+  paywall-code:
+    url: https://github.com/confirmedcode/Lockdown-iOS/blob/main/LockdowniOS/PaywallViewModel.swift
+    title: Lockdown iOS, plan descriptions
+  subscription-code:
+    url: https://github.com/confirmedcode/Lockdown-iOS/blob/main/LockdowniOS/VPNSubscription.swift
+    title: Lockdown iOS, subscription products and offers
+  apple-refund:
+    url: https://support.apple.com/en-us/118223
+    title: Request a refund for apps or content that you bought from Apple
+  aws-ranges:
+    url: https://ip-ranges.amazonaws.com/ip-ranges.json
+    title: AWS IP address ranges
