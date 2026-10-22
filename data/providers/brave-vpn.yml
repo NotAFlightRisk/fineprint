@@ -1,0 +1,381 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Brave VPN
+icon: brave-vpn.svg
+checked: 2026-10-22
+
+criteria:
+  identity:
+    website:
+      value: https://brave.com/firewall-vpn/
+      sources: [vpn]
+    legal_entity:
+      value: Brave Software, Inc.
+      sources: [terms, privacy]
+    owner:
+      value: null
+      note: Brave Software is run by its co-founders, Brendan Eich (CEO) and Brian Bondy (CTO), with no parent company named.
+      sources: [about]
+    founded:
+      value: 2020
+      note: Launched on iOS in July 2020 as Brave Firewall + VPN, powered by Guardian.
+      sources: [guardian-brave-pr]
+    team:
+      value: public
+      sources: [about]
+    sister_brands:
+      value: []
+      note: Guardian sells its own Guardian Firewall + VPN on the same network, but Brave doesn't own it.
+      sources: [guardian-home]
+    acquisitions:
+      value: []
+      note: Brave has sold it since 2020. DNSFilter bought Guardian, which runs the network, in August 2022.
+      sources: [guardian-brave-pr, dnsfilter-acquisition]
+
+  jurisdiction:
+    hq:
+      value: US
+      note: Brave is based in San Francisco. Guardian, which runs the servers, is owned by DNSFilter.
+      sources: [terms, vpn, dnsfilter-acquisition]
+    entities:
+      value: [US]
+      note: The terms and privacy policy only name Brave Software, Inc.
+      sources: [terms, privacy]
+
+  logging:
+    traffic:
+      value: 'yes'
+      grade: ok
+      evidence: claimed
+      note: >-
+        Only blocked-tracker alerts, which name the tracker, are kept against an anonymous device ID until the
+        app fetches them, for up to 3 days. Graded ok rather than bad as no other traffic is kept.
+      sources: [privacy, guardian-policy, privacy-hub]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [vpn, guardian-policy]
+    timestamps:
+      value: aggregate
+      evidence: claimed
+      note: >-
+        Each server keeps the last time a device's anonymous credentials were active, to prune old ones.
+        Guardian says it isn't linked to your account and never leaves the server.
+      sources: [guardian-policy]
+    bandwidth:
+      value: none
+      evidence: claimed
+      sources: [vpn, guardian-policy]
+    source_ip:
+      value: none
+      evidence: verified
+      note: >-
+        Assured's 2026 audit found client IPs logged on rare TLS errors and when the API was reached directly,
+        both fixed by its retest.
+      sources: [privacy, guardian-policy, audit-2026]
+    proven:
+      value: [audit]
+      evidence: verified
+      note: Assured audited logging on Guardian's VPN servers in 2024 and 2026.
+      sources: [audit-2024-infra, audit-2026]
+    policy:
+      value: https://brave.com/privacy/browser/
+      note: Brave's policy covers the VPN briefly and its VPN page links Guardian's no-logs policy for the servers.
+      sources: [privacy, guardian-policy]
+
+  transparency:
+    audits:
+      value:
+        - date: 2026-09-22
+          auditor: Assured
+          scope: infra
+          source: audit-2026
+        - date: 2025-08-29
+          auditor: Assured
+          scope: apps
+          source: audit-2025
+        - date: 2024-07-02
+          auditor: Assured
+          scope: infra
+          source: audit-2024-infra
+        - date: 2024-03-13
+          auditor: Assured
+          scope: apps
+          source: audit-2024-api
+      evidence: verified
+      note: >-
+        All commissioned by Guardian or DNSFilter. The 2024 and 2026 audits covered the VPN servers, the others
+        the web, API and cloud backend. The 2026 report dates its retest 2025-09-21 to 22, which reads as a typo
+        for 2026.
+      sources: [guardian-policy, guardian-audit-2026]
+    report:
+      value: none
+      note: >-
+        Brave's transparency page covers user numbers and BAT purchases, not legal requests. Guardian, which runs
+        the network, publishes its own, saying no user data was handed over from March 2024 to May 2026.
+      sources: [transparency, guardian-transparency]
+    canary:
+      value: none
+      sources: [transparency]
+    bug_bounty:
+      value: true
+      note: Brave's HackerOne bounty covers the browser apps the VPN runs in, but not hosts run by other companies.
+      sources: [hackerone]
+    incidents:
+      value: []
+
+  account:
+    email:
+      value: optional
+      note: Buying through the App Store or Google Play needs no Brave account. Desktop purchases need one, made with an email.
+      sources: [vpn, add-device]
+    personal_data:
+      value: []
+      note: Desktop purchases ask for a billing address for the card, held by Stripe.
+      sources: [vpn]
+    payment:
+      value: [card, app_store]
+      note: Cards through Stripe on desktop. Paying with BAT is promised but not yet available.
+      sources: [terms, vpn-faq]
+
+  security:
+    protocols:
+      value: [wireguard, ikev2]
+      note: WireGuard is the default on Windows and iOS.
+      sources: [guardian-policy, desktop-help, ios-vpn-source]
+    post_quantum:
+      value: none
+      note: Neither Brave nor Guardian mentions post-quantum key exchange.
+      sources: [desktop-help, kill-switch]
+    kill_switch:
+      value: app
+      note: Always on with WireGuard on Windows and a setting on iOS. macOS and Android don't have one yet.
+      sources: [kill-switch]
+    dns:
+      value: third_party
+      note: The desktop WireGuard config and Guardian's iOS framework both point lookups at Cloudflare's 1.1.1.1.
+      sources: [wireguard-utils, guardian-connect-dns]
+
+  infra:
+    ram_only:
+      value: none
+      evidence: claimed
+      note: Brave says Guardian chose servers with disks over diskless ones. Assured found those disks unencrypted in 2026.
+      sources: [vpn, audit-2026]
+    hosting:
+      value: null
+      note: >-
+        It runs on Guardian's network, which says it always controls the physical servers its VPN machines run on,
+        without saying whether it owns them.
+      sources: [vpn, audit-2026]
+    virtual_locations:
+      value: none
+      evidence: claimed
+      sources: [vpn]
+    servers:
+      value: 300
+      note: Brave's page says 300+. Guardian's region list, which Brave's apps load, counted 636 on 2026-10-22.
+      sources: [vpn, regions-api, vpn-constants]
+    countries:
+      value: 43
+      note: From Guardian's region list, which Brave's apps load. Brave's page says 40+ regions.
+      sources: [regions-api, vpn-constants, vpn]
+
+  features:
+    connections:
+      value: 10
+      sources: [vpn-faq, add-device]
+    multihop:
+      value: false
+      sources: [desktop-help, android-vpn-prefs]
+    obfuscation:
+      value: []
+      note: Smart Proxy Routing sends some sites through proxies to get past VPN blocks, but doesn't disguise the tunnel.
+      sources: [smart-proxy]
+    port_forwarding:
+      value: false
+      sources: [desktop-help, android-vpn-prefs]
+    split_tunnel:
+      value: true
+      note: Only on Android.
+      sources: [android-vpn-prefs]
+    blocking:
+      value: [ads, trackers]
+      note: The firewall blocks trackers for every app on the device, not just the browser.
+      sources: [vpn, guardian-home]
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android]
+      note: Only inside the Brave browser, though it covers the whole device. Linux is listed as coming soon.
+      sources: [vpn, vpn-faq]
+    open_source:
+      value: all
+      note: The VPN code is part of Brave's MPL-2.0 browser source, and Guardian's client frameworks are MIT. Guardian's server software isn't published.
+      sources: [brave-core, guardian-connect]
+    telemetry:
+      value: opt_out
+      evidence: claimed
+      note: >-
+        Brave's anonymous product analytics, which you can turn off in settings, include how many days a month
+        you used the VPN and for how long.
+      sources: [privacy, p3a, vpn-metrics]
+    trackers:
+      value: 0
+      note: Exodus's April 2026 report on version 1.88.138 of the Brave browser for Android, which the VPN runs in.
+      sources: [exodus]
+    fdroid:
+      value: false
+      sources: [fdroid-search]
+
+  pricing:
+    monthly:
+      value: { amount: 9.99, currency: USD }
+      sources: [checkout, vpn-faq]
+    best:
+      value: { amount: 8.33, currency: USD }
+      note: $99.99 a year.
+      sources: [vpn, checkout]
+    best_term:
+      value: 12
+      sources: [checkout]
+    renewal_increase:
+      value: 0
+      sources: [checkout]
+    free_tier:
+      value: false
+      note: Every subscription starts with a 7-day free trial.
+      sources: [vpn-faq, checkout]
+    refund_days:
+      value: 0
+      note: >-
+        All sales are final, though the 7-day free trial can be cancelled without paying. Refunds are only
+        considered when technical problems block access, and app store purchases follow Apple's and Google's rules.
+      sources: [terms]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        The VPN page says "there's no record of user activity of any kind", while Brave's policy keeps
+        blocked-tracker alerts for up to 3 days.
+      sources: [vpn, privacy]
+    affiliates:
+      value: null
+      note: Brave doesn't say whether it pays anyone for VPN sign-ups.
+    review_sites:
+      value: false
+      sources: [about]
+    activism:
+      value: true
+      note: Brave filed GDPR complaints against Google and the wider adtech industry in 2018.
+      sources: [adtech-complaint]
+
+refs:
+  vpn:
+    url: https://brave.com/firewall-vpn/
+    title: 'Brave VPN: The secure, fast VPN, right in your browser'
+  privacy:
+    url: https://brave.com/privacy/browser/
+    title: Brave Browser Privacy Policy, last updated 2026-09-23
+  terms:
+    url: https://brave.com/terms-of-use/
+    title: Brave Terms of Use
+  about:
+    url: https://brave.com/about/
+    title: About Brave
+  transparency:
+    url: https://brave.com/transparency/
+    title: Brave transparency data feed
+  checkout:
+    url: https://account.brave.com/?intent=checkout&product=vpn
+    title: Brave Premium VPN checkout
+  vpn-faq:
+    url: https://support.brave.app/hc/en-us/articles/19299479052045-Brave-VPN-FAQ
+    title: Brave VPN FAQ
+  kill-switch:
+    url: https://support.brave.app/hc/en-us/articles/32389914657549-What-is-the-Brave-VPN-Kill-Switch
+    title: What is the Brave VPN Kill Switch?
+  desktop-help:
+    url: https://support.brave.app/hc/en-us/articles/9887719385485-How-do-I-use-Brave-s-Firewall-VPN
+    title: How do I use Brave's Firewall + VPN?
+  smart-proxy:
+    url: https://support.brave.app/hc/en-us/articles/32105253704333-What-is-Smart-Proxy-Routing
+    title: What is Smart Proxy Routing?
+  add-device:
+    url: https://support.brave.app/hc/en-us/articles/13405790544653-How-do-I-add-a-new-device-to-an-existing-VPN-subscription
+    title: How do I add a new device to an existing VPN subscription?
+  privacy-hub:
+    url: https://support.brave.app/hc/en-us/articles/360045401211-What-is-the-Privacy-Hub-in-Brave-iOS
+    title: What is the Privacy Hub in Brave [iOS]?
+  p3a:
+    url: https://support.brave.app/hc/en-us/articles/9140465918093-What-is-P3A-in-Brave
+    title: What is P3A in Brave?
+  hackerone:
+    url: https://hackerone.com/brave
+    title: Brave Software bug bounty program on HackerOne
+  guardian-policy:
+    url: https://guardianapp.com/policy/service-policies/
+    title: Guardian Firewall service policies (no-logs policy)
+  guardian-transparency:
+    url: https://guardianapp.com/policy/transparency-report/
+    title: Guardian transparency report (March 2024 to May 2026)
+  guardian-home:
+    url: https://guardianapp.com/
+    title: Guardian Firewall
+  guardian-brave-pr:
+    url: https://guardianapp.com/newsroom/brave-press-release/
+    title: Brave and Guardian partner to integrate Brave iOS browser with Guardian Firewall + VPN (2020-07-27)
+  dnsfilter-acquisition:
+    url: https://guardianapp.com/newsroom/dnsfilter-acquistion-release/
+    title: DNSFilter provides a better Secure Web Gateway with Guardian (2022-08-10)
+  guardian-audit-2026:
+    url: https://guardianapp.com/blog/2026/10/independent-security-audit-2026-report/
+    title: Independent Security Audit 2026 Report
+  audit-2026:
+    url: https://www.assured.se/publications/assured-dnsfilter-guardian-infrastructure-audit-verification-report-20261002.pdf
+    title: Assured, DNSFilter infrastructure verification test (2026)
+  audit-2025:
+    url: https://www.assured.se/publications/assured-guardian-app-web-api-cloud-security-assessment-verification-report-20250904.pdf
+    title: Assured, Guardian app web, API and cloud security assessment (2025)
+  audit-2024-infra:
+    url: https://www.assured.se/publications/assured-dnsfilter-guardian-infrastructure-audit-verification-report-20240708.pdf
+    title: Assured, Guardian infrastructure verification test (2024)
+  audit-2024-api:
+    url: https://www.assured.se/publications/assured-dnsfilter-guardian-app-api-penetration-test-verification-report-20240319.pdf
+    title: Assured, Guardian app API verification test (2024)
+  regions-api:
+    url: https://connect-api.guardianapp.com/api/v1.3/servers/all-server-regions/country
+    title: Guardian Connect server regions (API)
+  vpn-constants:
+    url: https://github.com/brave/brave-core/blob/master/components/brave_vpn/common/brave_vpn_constants.h
+    title: brave-core, Brave VPN constants (Guardian Connect API host)
+  ios-vpn-source:
+    url: https://github.com/brave/brave-core/blob/master/ios/brave-ios/Sources/BraveVPN/BraveVPN.swift
+    title: brave-core, Brave VPN for iOS source
+  wireguard-utils:
+    url: https://github.com/brave/brave-core/blob/master/components/brave_vpn/common/wireguard/wireguard_utils.cc
+    title: brave-core, desktop WireGuard config source
+  guardian-connect-dns:
+    url: https://github.com/GuardianFirewall/GuardianConnect/blob/main/GuardianConnect/Classes/GRDVPNHelper.h
+    title: GuardianConnect for iOS, VPN helper (default DNS servers)
+  android-vpn-prefs:
+    url: https://github.com/brave/brave-core/blob/master/android/java/brave-res/xml/brave_vpn_preferences.xml
+    title: brave-core, Brave VPN settings for Android
+  vpn-metrics:
+    url: https://github.com/brave/brave-core/blob/master/components/brave_vpn/browser/brave_vpn_metrics.h
+    title: brave-core, Brave VPN product analytics metrics
+  brave-core:
+    url: https://github.com/brave/brave-core
+    title: brave/brave-core on GitHub
+  guardian-connect:
+    url: https://github.com/GuardianFirewall/GuardianConnect
+    title: GuardianFirewall/GuardianConnect on GitHub
+  exodus:
+    url: https://web.archive.org/web/20260411012826/https://reports.exodus-privacy.eu.org/en/reports/com.brave.browser/latest/
+    title: Exodus Privacy report for com.brave.browser 1.88.138 (archived April 2026)
+  fdroid-search:
+    url: https://search.f-droid.org/?q=brave&lang=en
+    title: F-Droid search for brave
+  adtech-complaint:
+    url: https://brave.com/blog/adtech-data-breach-complaint/
+    title: Brave files formal GDPR complaint against adtech industry
