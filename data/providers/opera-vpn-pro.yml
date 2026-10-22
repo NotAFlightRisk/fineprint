@@ -1,0 +1,318 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Opera VPN Pro
+icon: opera-vpn-pro.png
+checked: 2026-10-22
+
+criteria:
+  identity:
+    website: https://www.opera.com/features/vpn-pro
+    legal_entity:
+      value: Opera Norway AS
+      sources: [terms, privacy-policy]
+    owner:
+      value: Yahui Zhou
+      note: >-
+        Kunlun Tech, listed in Shenzhen, indirectly owns about 68% of Opera Limited, and Zhou, Opera's
+        executive chairman, is Kunlun's controlling shareholder.
+      sources: [annual-report]
+    founded:
+      value: 2022
+      note: It launched as a beta in Opera for Android in April 2022.
+      sources: [launch]
+    team:
+      value: partial
+      note: Opera's directors and executives are named, but no one running VPN Pro is.
+      sources: [annual-report]
+    sister_brands:
+      value: []
+      note: Opera's free browser VPN is a separate service on Opera's own servers.
+      sources: [audit-post]
+    acquisitions:
+      value: []
+      note: VPN Pro hasn't changed hands. Kunlun's buyout of Opera Norway AS was in 2016, before it launched.
+      sources: [annual-report]
+
+  jurisdiction:
+    hq:
+      value: 'NO'
+      sources: [terms, register]
+    entities:
+      value: ['NO']
+      note: The terms only name Opera Norway AS. Its parent, Opera Limited, is a Cayman Islands company.
+      sources: [terms, annual-report]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      note: The privacy statement says neither Opera nor its provider keeps records of the pages you visit or links you click.
+      sources: [privacy-policy]
+    dns:
+      value: null
+      note: The privacy statement covers the pages you visit and links you click, without mentioning DNS requests.
+      sources: [privacy-policy]
+    timestamps:
+      value: null
+      note: Neither the privacy statement nor the VPN Pro terms mention connection times.
+      sources: [privacy-policy, terms]
+    bandwidth:
+      value: null
+      note: Not mentioned in the privacy statement or terms.
+      sources: [privacy-policy, terms]
+    source_ip:
+      value: none
+      evidence: claimed
+      note: >-
+        Opera's 2025 blog says VPN Pro doesn't collect your originating network address. The privacy
+        statement's VPN Pro section only covers the pages you visit.
+      sources: [revamp-blog, privacy-policy]
+    proven:
+      value: []
+      note: Deloitte's no-logs audit covered only Opera's free browser VPN, and Opera says VPN Pro wasn't part of it.
+      sources: [audit-post]
+    policy: https://www.opera.com/legal/privacy
+
+  transparency:
+    audits:
+      value: []
+      note: >-
+        Deloitte (2024) and Cure53 audited Opera's free browser VPN, not VPN Pro, which runs on a third party's
+        servers. Lightway itself has been audited for ExpressVPN.
+      sources: [audit-post, lightway]
+    report:
+      value: regular
+      note: A half-yearly count of law enforcement requests to Opera Norway AS, not split out for VPN Pro.
+      sources: [transparency]
+    canary: none
+    bug_bounty:
+      value: true
+      note: >-
+        Opera's Bugcrowd programme pays for bugs in Opera for Android, where VPN Pro lives on phones. The
+        desktop VPN Pro client isn't a listed target.
+      sources: [bug-bounty, bugcrowd]
+    incidents:
+      value: []
+      sources: [advisories]
+
+  account:
+    email:
+      value: required
+      note: It needs an Opera account, which takes an email address or a Google, Facebook or X sign-in.
+      sources: [privacy-policy, terms]
+    personal_data:
+      value: []
+      note: An Opera account asks for a username and email. Opera says it only passes a random ID to its VPN provider.
+      sources: [privacy-policy]
+    payment:
+      value: [card, app_store]
+      note: Card on desktop through a payment provider, or Google Play on Android.
+      sources: [terms, subscribe]
+
+  security:
+    protocols:
+      value: [proprietary]
+      note: Lightway, ExpressVPN's open source protocol, since July 2025.
+      sources: [revamp-press, revamp-blog]
+    post_quantum:
+      value: default
+      note: Lightway's hybrid ML-KEM key exchange is on by default.
+      sources: [revamp-blog]
+    kill_switch:
+      value: null
+      note: Opera's VPN Pro pages and help centre don't mention a kill switch.
+      sources: [product, features]
+    dns:
+      value: null
+      note: Opera doesn't say whose DNS servers VPN Pro uses.
+      sources: [product, privacy-policy]
+
+  infra:
+    ram_only:
+      value: null
+      note: Opera doesn't say whether the servers run from RAM.
+      sources: [terms, revamp-blog]
+    hosting:
+      value: null
+      note: >-
+        The terms say a third party owns and runs the servers, without naming it. Opera said in 2024 that they
+        came from Nord, before a 2025 revamp onto new servers using ExpressVPN's Lightway.
+      sources: [terms, audit-post, revamp-blog]
+    virtual_locations:
+      value: null
+      note: >-
+        A help article says VPN Pro uses no virtual servers, but the VPN Pro page talks of virtual locations and
+        lists 47 countries while saying servers are physically in over 30.
+      sources: [physical-servers, locations, product]
+    servers:
+      value: 3000
+      note: Its page says more than 3,000.
+      sources: [product]
+    countries:
+      value: 47
+      note: Counted from its help centre's location list. The VPN Pro page says both 47 and 48 locations.
+      sources: [locations, product]
+
+  features:
+    connections:
+      value: 6
+      sources: [terms, devices]
+    multihop:
+      value: false
+      sources: [product, features]
+    obfuscation:
+      value: []
+      sources: [product, features]
+    port_forwarding:
+      value: false
+      sources: [product, features]
+    split_tunnel:
+      value: false
+      note: Not mentioned on its page or in its help centre.
+      sources: [product, features]
+    blocking:
+      value: []
+      note: The Opera browser has its own ad blocker, but VPN Pro doesn't block anything itself.
+      sources: [product]
+
+  clients:
+    platforms:
+      value: [windows, macos, android]
+      note: >-
+        It works inside Opera or Opera GX on Windows and macOS, plus a client app, and inside Opera for Android.
+        There's no iOS or Linux version.
+      sources: [requirements, revamp-press]
+    open_source:
+      value: none
+      note: Lightway itself is open source, but Opera's browsers and VPN Pro client aren't.
+      sources: [revamp-blog]
+    telemetry:
+      value: opt_out
+      evidence: claimed
+      note: Opera's browsers send usage statistics and crash reports unless you turn them off in settings.
+      sources: [privacy-policy]
+    trackers:
+      value: 10
+      note: >-
+        VPN Pro lives in Opera for Android (com.opera.browser). Counted in version 89.3.4705.84083 from May 2025,
+        the newest archived report.
+      sources: [exodus]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 7.99, currency: USD }
+      sources: [pricing]
+    best:
+      value: { amount: 3.33, currency: USD }
+      note: $39.99 a year.
+      sources: [pricing]
+    best_term:
+      value: 12
+      sources: [pricing]
+    renewal_increase:
+      value: 0
+      note: The page lists the yearly plan at $39.99 every year, and the terms say it renews for the same length.
+      sources: [pricing, terms]
+    free_tier:
+      value: false
+      note: >-
+        Only a 7-day trial. Opera's free VPN is a different service that only covers the browser, on Opera's own
+        servers.
+      sources: [revamp-press, audit-post]
+    refund_days:
+      value: 30
+      note: For the first payment only, not renewals.
+      sources: [terms, refund]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        It says VPN Pro protects you from "DDoS, man-in-the-middle, and hijacking attacks", and that no one, "not
+        even your internet service provider or the government", can see your data.
+      sources: [product, what-is-vpn]
+    affiliates:
+      value: null
+      note: Opera's affiliate programme pays per browser download, and doesn't mention VPN Pro.
+      sources: [affiliate]
+    review_sites:
+      value: false
+      sources: [annual-report]
+    activism: false
+
+refs:
+  product:
+    url: https://www.opera.com/features/vpn-pro
+    title: Opera VPN Pro
+  pricing:
+    url: https://www.opera.com/features/vpn-pro/vpn-pricing-plan
+    title: Opera VPN Pro pricing
+  privacy-policy:
+    url: https://www.opera.com/legal/privacy
+    title: Opera Privacy Statement, VPN Pro section (October 2026)
+  terms:
+    url: https://www.opera.com/legal/terms#vpn-pro
+    title: Opera Terms of Service, VPN Pro terms (January 2024)
+  register:
+    url: https://virksomhet.brreg.no/nb/oppslag/enheter/916368127
+    title: Opera Norway AS in the Brønnøysund Register Centre
+  annual-report:
+    url: https://www.sec.gov/Archives/edgar/data/1737450/000173745026000005/opra-20251231.htm
+    title: Opera Limited annual report on Form 20-F for 2025
+  launch:
+    url: https://press.opera.com/2022/04/05/opera-for-android-vpn-pro-beta/
+    title: Opera launches beta version of VPN Pro (April 2022)
+  revamp-press:
+    url: https://press.opera.com/2025/07/01/opera-unveils-revamped-vpn-pro/
+    title: Opera unveils revamped VPN Pro (July 2025)
+  revamp-blog:
+    url: https://blogs.opera.com/desktop/2025/07/opera-revamped-vpn-pro-lightway/
+    title: Opera's revamped VPN Pro with Lightway (July 2025)
+  audit-post:
+    url: https://blogs.opera.com/security/2024/09/opera-free-browser-vpn-no-log-audit-deloitte/
+    title: Opera has completed an independent no-log audit of its free browser VPN (September 2024)
+  transparency:
+    url: https://security.opera.com/en/opera-transparency-report/
+    title: Opera transparency report
+  bug-bounty:
+    url: https://security.opera.com/en/bug-bounty/
+    title: Opera bug bounty
+  bugcrowd:
+    url: https://bugcrowd.com/engagements/opera
+    title: Opera bug bounty programme on Bugcrowd
+  advisories:
+    url: https://security.opera.com/en/advisories/
+    title: Opera security advisories
+  subscribe:
+    url: https://operavpnpro.freshdesk.com/support/solutions/articles/80001124753-how-do-i-subscribe-to-opera-vpn-pro-
+    title: How do I subscribe to Opera VPN Pro?
+  features:
+    url: https://operavpnpro.freshdesk.com/support/solutions/articles/80001124747-what-are-the-features-of-opera-vpn-pro-
+    title: What are the features of Opera VPN Pro?
+  locations:
+    url: https://operavpnpro.freshdesk.com/support/solutions/articles/80001124748-what-server-locations-are-available-through-vpn-pro-
+    title: What server locations are available through VPN Pro? (May 2026)
+  physical-servers:
+    url: https://operavpnpro.freshdesk.com/support/solutions/articles/80001124889-are-your-servers-virtual-or-physical-
+    title: Are your servers virtual or physical? (December 2023)
+  devices:
+    url: https://operavpnpro.freshdesk.com/support/solutions/articles/80001124888-how-many-devices-can-i-use-opera-vpn-pro-on-in-one-subscription-
+    title: How many devices can I use Opera VPN Pro on in one subscription?
+  requirements:
+    url: https://operavpnpro.freshdesk.com/support/solutions/articles/80001124751-what-are-the-requirements-for-using-vpn-pro-
+    title: What are the requirements for using VPN Pro?
+  refund:
+    url: https://operavpnpro.freshdesk.com/support/solutions/articles/80001124759-what-is-vpn-pro-s-money-back-policy-and-how-to-get-a-refund-
+    title: What is VPN Pro's money-back policy and how to get a refund?
+  what-is-vpn:
+    url: https://operavpnpro.freshdesk.com/support/solutions/articles/80001124743-what-is-a-vpn-and-how-does-it-keep-me-safe-
+    title: What is a VPN, and how does it keep me safe?
+  exodus:
+    url: https://web.archive.org/web/20250523065057/https://reports.exodus-privacy.eu.org/en/reports/com.opera.browser/latest/
+    title: Exodus Privacy report for com.opera.browser (archived)
+  lightway:
+    url: https://www.expressvpn.com/lightway
+    title: 'Lightway: A modern VPN protocol by ExpressVPN'
+  affiliate:
+    url: https://www.opera.com/opera/affiliate
+    title: Opera affiliate programme
