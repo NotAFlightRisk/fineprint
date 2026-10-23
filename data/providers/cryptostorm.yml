@@ -151,7 +151,7 @@ criteria:
       sources: [uptime]
     servers:
       value: 37
-      note: Locations on the status page on 2026-10-22. A busy location can get a second server.
+      note: Counts locations, and a busy one can get a second server.
       sources: [uptime, privacy]
     countries:
       value: 24
