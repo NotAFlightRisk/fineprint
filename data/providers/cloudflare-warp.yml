@@ -153,7 +153,7 @@ criteria:
       sources: [warp-modes, pq]
     kill_switch:
       value: none
-      note: Cloudflare's consumer docs mention no kill switch, and say WebRTC traffic such as video calls bypasses WARP.
+      note: WebRTC traffic such as video calls bypasses WARP.
       sources: [macos, faq]
     dns:
       value: first_party
