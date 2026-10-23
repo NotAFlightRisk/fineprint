@@ -157,7 +157,7 @@ criteria:
   security:
     protocols:
       value: [ikev2]
-      note: Per the published code, which stops at version 2.3.
+      note: From the app's code up to version 2.3, the last one published.
       sources: [vpn-code]
     post_quantum:
       value: none
@@ -181,7 +181,7 @@ criteria:
       sources: [secure-tunnel]
     hosting:
       value: rented
-      note: The servers are AWS instances, per the Openly Operated audit kit and their addresses in AWS's published ranges.
+      note: Amazon Web Services instances.
       sources: [oo-report, aws-ranges]
     virtual_locations:
       value: none
