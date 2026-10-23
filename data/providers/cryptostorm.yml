@@ -1,0 +1,350 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: cryptostorm
+icon: cryptostorm.png
+checked: 2026-10-22
+
+criteria:
+  identity:
+    website: https://cryptostorm.is
+    legal_entity:
+      value: Cryptostorm LLC
+      note: >-
+        Named only in the site footer, with a Dover, Delaware address. The terms and privacy policy
+        don't name a company.
+      sources: [home, tos]
+    owner:
+      value: null
+      note: cryptostorm doesn't say who owns or runs Cryptostorm LLC.
+      sources: [faq]
+    founded:
+      value: 2013
+      note: The site says it was founded "in 2013 or so".
+      sources: [cryptofree]
+    team:
+      value: anonymous
+      note: Staff only go by the handles df and Fermi.
+      sources: [migrating-compression]
+    sister_brands:
+      value: []
+    acquisitions:
+      value: []
+
+  jurisdiction:
+    hq:
+      value: US
+      note: >-
+        The only company it names is in Delaware. The FAQ says it has no head office and keeps the
+        locations of its other companies secret.
+      sources: [home, faq]
+    entities:
+      value: [US]
+      note: The homepage claims "roots in Iceland, entities worldwide", but no other company is named.
+      sources: [home]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [privacy, tos]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [privacy]
+    timestamps:
+      value: none
+      evidence: claimed
+      note: >-
+        The auth database keeps when a token was first used, to expire it, and a live count of open
+        OpenVPN sessions. Nothing per connection.
+      sources: [privacy, wg-privacy]
+    bandwidth:
+      value: none
+      evidence: claimed
+      note: Only each server's total bandwidth is recorded, to spot overloaded servers.
+      sources: [privacy]
+    source_ip:
+      value: temporary
+      evidence: claimed
+      note: >-
+        With WireGuard, the server keeps your last real IP in memory against your key, and a patch stops
+        it being written to disk. Payments aren't linked to tokens, so it isn't tied to who paid.
+      sources: [wg-privacy]
+    proven:
+      value: []
+      note: >-
+        No audit, court case or seizure has tested it. The warrant canary says no searches or seizures
+        have ever happened.
+      sources: [canary]
+    policy: https://cryptostorm.is/privacy
+
+  transparency:
+    audits:
+      value: []
+      note: No independent audit has been published. Server configs and auth scripts are public instead.
+      sources: [privacy]
+    report:
+      value: none
+      note: The terms say it gets hundreds of DMCA letters a week, but it publishes no figures.
+      sources: [tos]
+    canary:
+      value: maintained
+      note: PGP-signed and updated quarterly, last dated 1 October 2026.
+      sources: [canary]
+    bug_bounty:
+      value: false
+      note: No bounty or security.txt.
+    incidents:
+      value: []
+
+  account:
+    email:
+      value: optional
+      note: >-
+        Monero and NOWPayments orders deliver the token in the browser with no email. PayPal and CCBill
+        subscriptions email it, and BitPay orders can opt out.
+      sources: [privacy, faq]
+    personal_data:
+      value: []
+      sources: [privacy]
+    payment:
+      value: [card, paypal, bitcoin, monero, other_crypto]
+      note: Cards through PayPal or CCBill. Other crypto through BitPay and NOWPayments, which takes about 200 coins.
+      sources: [home, refund]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn]
+      sources: [faq, wireguard]
+    post_quantum:
+      value: optional
+      note: >-
+        OpenVPN uses a hybrid ML-KEM key exchange when the client has OpenVPN 2.7 and OpenSSL 3.5 or
+        newer, as the Windows client does. WireGuard doesn't.
+      sources: [pq-openvpn2, widget-src]
+    kill_switch:
+      value: app
+      note: >-
+        Off by default in the Windows client. Elsewhere it's an option in the WireGuard config generator
+        or a Linux firewall script.
+      sources: [widget-client, killswitch, ios]
+    dns:
+      value: first_party
+      note: Its own resolvers, pushed to clients inside the tunnel.
+      sources: [ts, doh]
+
+  infra:
+    ram_only:
+      value: none
+      evidence: claimed
+      note: >-
+        Servers run from disk, but VPN private keys are deleted from it once loaded, /var/log sits in RAM and swap
+        is off.
+      sources: [faq, migrating-compression, hardening]
+    hosting:
+      value: rented
+      note: Dedicated servers leased from data centres, mostly M247.
+      sources: [faq, uptime]
+    virtual_locations:
+      value: none
+      evidence: claimed
+      note: The status page names the data centre behind each city.
+      sources: [uptime]
+    servers:
+      value: 37
+      note: Counts locations, and a busy one can get a second server.
+      sources: [uptime, privacy]
+    countries:
+      value: 24
+      note: Portugal is on the status page but not yet in the WireGuard server list.
+      sources: [uptime, wireguard]
+
+  features:
+    connections:
+      value: 5
+      note: >-
+        Depends on the token. The 2-year token allows 5 devices, a monthly one 1, counted separately for
+        OpenVPN and WireGuard.
+      sources: [faq]
+    multihop:
+      value: true
+      sources: [ssmultihop]
+    obfuscation:
+      value: [obfs4, stunnel, v2ray]
+      note: V2Ray here is Xray with VLESS and REALITY. SSH tunnelling is offered too.
+      sources: [obfs4, https-tunnels, xray, ssh-tunnels]
+    port_forwarding:
+      value: true
+      sources: [portfwd]
+    split_tunnel:
+      value: false
+      note: Neither the Windows client nor the setup guides offer it.
+      sources: [widget-src, windows]
+    blocking:
+      value: [ads, trackers]
+      note: Opt-in DNS filtering with HaGeZi's Pro++ list.
+      sources: [ts]
+
+  clients:
+    platforms:
+      value: [windows]
+      note: >-
+        Other platforms, and routers, use stock OpenVPN or WireGuard apps with its configs. Its Android
+        app only adds Xray obfuscation alongside WireGuard.
+      sources: [windows, android, routers, xray]
+    open_source:
+      value: all
+      note: The Windows client and the Android Xray app are on GitHub, without a licence file.
+      sources: [widget-src, csxray]
+    telemetry:
+      value: none
+      evidence: claimed
+      note: The Windows client only checks for client and server-list updates after connecting.
+      sources: [widget-src]
+    trackers:
+      value: null
+      note: There's no Android VPN app, and the Xray helper isn't on Google Play.
+      sources: [android, xray]
+    fdroid:
+      value: false
+      sources: [fdroid-search]
+
+  pricing:
+    monthly:
+      value: { amount: 6, currency: USD }
+      sources: [home]
+    best:
+      value: { amount: 3.92, currency: USD }
+      note: >-
+        $94 for a 2-year token. A bundle of 25 one-month, one-device tokens works out at $3.88 a month.
+        Lifetime tokens have sold out.
+      sources: [home, doh]
+    best_term: 24
+    renewal_increase:
+      value: 0
+      note: PayPal and CCBill subscriptions renew at the same price.
+      sources: [home]
+    free_tier:
+      value: false
+      note: The free Cryptofree service has been shut down.
+      sources: [cryptofree]
+    refund_days:
+      value: 180
+      note: >-
+        Only if half the token's time or less has been used, which is about 15 days into a monthly token.
+        Lifetime tokens can't be refunded.
+      sources: [refund]
+
+  ethics:
+    misleading_claims:
+      value: false
+      note: >-
+        Boastful in places ("for the truly paranoid"), but the FAQ says plainly that a VPN won't make
+        anyone 100% anonymous.
+      sources: [home, faq]
+    affiliates:
+      value: null
+      note: The site mentions no affiliate or reseller scheme.
+      sources: [map]
+    review_sites:
+      value: false
+    activism:
+      value: true
+      note: >-
+        Runs free public encrypted DNS resolvers, and publicly refuses to build in age or ID checks while
+        arguing against the laws that demand them.
+      sources: [doh, tos]
+
+refs:
+  home:
+    url: https://cryptostorm.is/
+    title: cryptostorm homepage (features, pricing, footer)
+  privacy:
+    url: https://cryptostorm.is/privacy
+    title: Privacy policy (GDPR update, 2024)
+  tos:
+    url: https://cryptostorm.is/tos
+    title: Terms of Service
+  faq:
+    url: https://cryptostorm.is/faq
+    title: Frequently Asked Questions
+  canary:
+    url: https://cryptostorm.is/canary.txt
+    title: Warrant canary (1 October 2026)
+  refund:
+    url: https://cryptostorm.is/refund
+    title: Refund policy
+  cryptofree:
+    url: https://cryptostorm.is/cryptofree
+    title: Cryptofree
+  map:
+    url: https://cryptostorm.is/map
+    title: Site map
+  uptime:
+    url: https://cryptostorm.is/uptime
+    title: Network uptime (server list)
+  wireguard:
+    url: https://cryptostorm.is/wireguard
+    title: WireGuard config generator and server keys
+  wg-privacy:
+    url: https://cryptostorm.is/blog/wireguard-privacy-concerns
+    title: WireGuard privacy concerns (2019)
+  migrating-compression:
+    url: https://cryptostorm.is/blog/migrating-compression
+    title: Migrating compression (and other updates) (2024)
+  hardening:
+    url: https://cryptostorm.is/blog/port-striping-v3
+    title: Port striping v3 (and other hardening) (2025)
+  portfwd:
+    url: https://cryptostorm.is/portfwd
+    title: Port forwarding
+  ts:
+    url: https://cryptostorm.is/ts
+    title: TrackerSmacker
+  doh:
+    url: https://cryptostorm.is/blog/doh
+    title: DNS over HTTPS (April 2026)
+  killswitch:
+    url: https://cryptostorm.is/killswitch
+    title: Linux kill switch
+  windows:
+    url: https://cryptostorm.is/windows
+    title: Windows setup
+  android:
+    url: https://cryptostorm.is/android
+    title: Android setup
+  ios:
+    url: https://cryptostorm.is/ios
+    title: iOS setup
+  routers:
+    url: https://cryptostorm.is/routers
+    title: Routers
+  pq-openvpn2:
+    url: https://cryptostorm.is/blog/pq-openvpn2
+    title: Fully post-quantum OpenVPN (without OpenSSH tunneling) (June 2026)
+  ssmultihop:
+    url: https://cryptostorm.is/blog/ssmultihop
+    title: Server-side multihop (March 2026)
+  xray:
+    url: https://cryptostorm.is/blog/xray
+    title: Xray (w/VLESS+REALITY) support added (November 2025)
+  obfs4:
+    url: https://cryptostorm.is/blog/obfs4
+    title: obfs4 support added
+  https-tunnels:
+    url: https://cryptostorm.is/blog/https-tunnels
+    title: HTTPS tunnels
+  ssh-tunnels:
+    url: https://cryptostorm.is/blog/ssh-tunnels
+    title: SSH tunnels
+  widget-src:
+    url: https://github.com/cryptostorm/cstorm_widget
+    title: cryptostorm/cstorm_widget on GitHub (Windows client)
+  widget-client:
+    url: https://github.com/cryptostorm/cstorm_widget/blob/master/client.pl
+    title: Windows client source, client.pl (kill switch default)
+  csxray:
+    url: https://github.com/cryptostorm/CSXRAY
+    title: cryptostorm/CSXRAY on GitHub (Android Xray app)
+  fdroid-search:
+    url: https://search.f-droid.org/?q=cryptostorm&lang=en
+    title: F-Droid search for cryptostorm
