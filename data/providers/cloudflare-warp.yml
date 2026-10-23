@@ -1,0 +1,380 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Cloudflare WARP
+icon: cloudflare-warp.png
+checked: 2026-10-22
+
+criteria:
+  identity:
+    website:
+      value: https://one.one.one.one
+      sources: [home]
+    legal_entity:
+      value: Cloudflare, Inc.
+      note: A Delaware company based in San Francisco.
+      sources: [terms, sec]
+    owner:
+      value: null
+      note: Cloudflare, Inc. is a public company listed in the US, with no parent above it.
+      sources: [sec]
+    founded:
+      value: 2019
+      note: Announced on 1 April 2019 and opened to everyone on 25 September 2019.
+      sources: [warp-intro, warp-launch]
+    team:
+      value: public
+      note: Co-founder and CEO Matthew Prince launched WARP, and staff sign Cloudflare's blog posts.
+      sources: [warp-launch, kpmg-2026]
+    sister_brands:
+      value: []
+      note: >-
+        Cloudflare also runs relays for iCloud Private Relay and Microsoft Edge Secure Network, but
+        doesn't own them.
+      sources: [masque]
+    acquisitions:
+      value: []
+      sources: [sec]
+
+  jurisdiction:
+    hq:
+      value: US
+      sources: [terms, sec]
+    entities:
+      value: [AE, AU, CA, CN, DE, FR, GB, IN, JP, MX, MY, NL, PT, SE, SG, US]
+      note: The Cloudflare companies named at the end of the app privacy policy.
+      sources: [policy]
+
+  logging:
+    traffic:
+      value: null
+      note: >-
+        The policy lists destination IPs among the data it collects and stores, but says it keeps no
+        link between your IP and the sites you visit. It doesn't say whether they're tied to your
+        pseudonymous account.
+      sources: [policy, warp-privacy]
+    dns:
+      value: none
+      evidence: claimed
+      note: >-
+        Lookups go to the 1.1.1.1 resolver, which keeps query logs without your IP and deletes the
+        truncated IP within 25 hours. KPMG checked that for the resolver, not for WARP.
+      sources: [policy, kpmg-2026]
+    timestamps:
+      value: null
+      note: >-
+        The policy doesn't mention connection times. It keeps account and operational data for up to
+        two years after you last use the app, so it records at least when that was.
+      sources: [policy]
+    bandwidth:
+      value: aggregate
+      evidence: claimed
+      note: A running total of data transferred per installation, used to track WARP+ usage.
+      sources: [warp-privacy]
+    source_ip:
+      value: 'yes'
+      evidence: claimed
+      note: >-
+        The policy lists your source IP among the operational data it "collects and stores", pseudonymised,
+        for up to two years after you last use the app, but says it keeps no link to the sites you visit.
+        A 2022 blog post says the app doesn't log your IP.
+      sources: [policy, geoexit]
+    proven:
+      value: []
+      note: >-
+        WARP has never been audited. KPMG's 2020 and 2026 examinations only covered the 1.1.1.1 DNS
+        resolver.
+      sources: [kpmg-2026, kpmg-2020]
+    policy: https://www.cloudflare.com/application/privacypolicy/
+
+  transparency:
+    audits:
+      value: []
+      note: >-
+        Cloudflare promised in 2019 to hire outside auditors regularly for WARP, but hasn't published
+        any. KPMG examined the 1.1.1.1 resolver's privacy controls for 2019 and for 2024, without
+        covering WARP.
+      sources: [warp-intro, compliance, kpmg-2026, kpmg-2020]
+    report:
+      value: regular
+      note: Twice a year for all of Cloudflare, with no separate figures for WARP.
+      sources: [transparency, legal-h2-2025]
+    canary:
+      value: maintained
+      note: >-
+        Six statements of things Cloudflare has never done, such as handing over keys or installing
+        law enforcement equipment, restated with each report. A seventh, on political terminations,
+        was dropped in 2019.
+      sources: [transparency, legal-h2-2025, canary-2019]
+    bug_bounty:
+      value: true
+      note: Its HackerOne programme takes WARP reports, such as the 2023 DNS leak.
+      sources: [disclosure, hackerone, dns-leak]
+    incidents:
+      value:
+        - date: 2023-11-23
+          summary: >-
+            A suspected nation-state attacker used credentials Cloudflare hadn't rotated after the
+            October 2023 Okta breach to get into its internal wiki, bug tracker and some source code. Cloudflare
+            says no customer data or systems were affected, and published a full account in February
+            2024.
+          handled: well
+          source: breach-2023
+        - date: 2023-08-03
+          summary: >-
+            Mathy Vanhoef found the Windows app could send DNS queries to a device on a rogue
+            IPv6 network. Fixed in version 2023.7.160.0 and disclosed in an advisory.
+          handled: well
+          source: dns-leak
+
+  account:
+    email:
+      value: none
+      note: The app makes a pseudonymous account ID on install. An email is only asked for if you send feedback.
+      sources: [policy]
+    personal_data:
+      value: []
+      sources: [policy]
+    payment:
+      value: [app_store]
+      note: WARP+ is only sold through Apple and Google. Desktop apps take a licence key from a phone.
+      sources: [warp-modes, terms, linux]
+
+  security:
+    protocols:
+      value: [wireguard, other]
+      note: >-
+        The other is MASQUE, an IETF standard that tunnels over HTTP/3, the default since December
+        2024. WireGuard is still a setting.
+      sources: [masque, pq, linux, macos]
+    post_quantum:
+      value: default
+      note: >-
+        On the default MASQUE tunnel for all consumer apps since September 2025, falling back to
+        classical key exchange if the post-quantum handshake fails. WireGuard tunnels don't get it.
+      sources: [warp-modes, pq]
+    kill_switch:
+      value: none
+      note: WebRTC traffic such as video calls bypasses WARP.
+      sources: [macos, faq]
+    dns:
+      value: first_party
+      sources: [macos]
+
+  infra:
+    ram_only:
+      value: none
+      note: WARP runs on Cloudflare's shared edge servers, each with 16 TB of NVMe storage, and Cloudflare makes no RAM-only claim.
+      sources: [gen12, network]
+    hosting:
+      value: owned
+      note: Cloudflare designs its own servers and runs them in colocation data centres.
+      sources: [gen12, kpmg-2026]
+    virtual_locations:
+      value: disclosed
+      note: >-
+        You can't pick a location. Exit IPs are registered to your approximate location even when
+        traffic leaves from a data centre in another country.
+      sources: [geoexit, faq]
+    servers:
+      value: null
+      note: Cloudflare doesn't say how many of its servers carry WARP.
+      sources: [faq]
+    countries:
+      value: null
+      note: >-
+        The network spans 348 cities, but Cloudflare says not every location is WARP enabled, and
+        WARP+ gets more of them than the free tier.
+      sources: [network, faq, home]
+
+  features:
+    connections:
+      value: 5
+      note: A WARP+ licence key works on up to five devices. Free WARP needs no sign-up and states no device limit.
+      sources: [warp-modes]
+    multihop:
+      value: false
+      sources: [warp-modes]
+    obfuscation:
+      value: [quic]
+      note: >-
+        MASQUE runs over HTTP/3, which Cloudflare says looks more like normal web traffic. It isn't
+        sold as a way round blocks.
+      sources: [masque]
+    port_forwarding:
+      value: false
+      sources: [macos]
+    split_tunnel:
+      value: true
+      note: >-
+        Desktop apps exclude IP addresses and domains rather than apps, or run as a local proxy that
+        only the apps you point at it use.
+      sources: [macos, route-traffic, warp-modes]
+    blocking:
+      value: [malware]
+      note: 1.1.1.1 for Families blocks malware, or malware and adult content. There's no ad or tracker blocking.
+      sources: [macos]
+
+  clients:
+    platforms:
+      value: [windows, macos, linux_gui, linux_cli, ios, android]
+      note: The Linux app is run mainly from the command line, and got a tray app in May 2026.
+      sources: [get-started, linux, linux-ui]
+    open_source:
+      value: none
+      note: The terms forbid decompiling or reverse engineering the apps.
+      sources: [terms]
+    telemetry:
+      value: forced
+      note: >-
+        The apps send performance, device and crash data. Only the anonymised connection data can be
+        turned off.
+      sources: [policy, app-store]
+    fdroid:
+      value: false
+      sources: [fdroid-search]
+
+  pricing:
+    monthly:
+      value: { amount: 4.99, currency: USD }
+      note: WARP+ Unlimited on the US App Store. The price varies by country.
+      sources: [app-store]
+    best:
+      value: { amount: 4.99, currency: USD }
+      note: WARP+ is only sold monthly.
+      sources: [app-store, warp-modes]
+    best_term:
+      value: 1
+      sources: [warp-modes]
+    renewal_increase:
+      value: 0
+      sources: [app-store]
+    free_tier:
+      value: true
+      note: WARP itself is free. WARP+ adds more locations to connect to.
+      sources: [home]
+    refund_days:
+      value: null
+      note: WARP+ is only sold through Apple and Google, so refunds are up to them.
+      sources: [terms]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        Its site and App Store listing say WARP "prevents anyone from snooping on you", while its docs say it
+        doesn't provide anonymity and WebRTC traffic bypasses it.
+      sources: [app-store, home, warp-modes, faq]
+    affiliates:
+      value: false
+      note: Only a referral scheme that gives users free WARP+ data.
+      sources: [app-store]
+    review_sites:
+      value: false
+      sources: [about]
+    activism:
+      value: true
+      note: Cloudflare spent nearly four years fighting an FBI National Security Letter gag order in court, with the EFF.
+      sources: [nsl-eff, nsl-ninth]
+
+refs:
+  home:
+    url: https://one.one.one.one/
+    title: 1.1.1.1 with WARP
+  terms:
+    url: https://www.cloudflare.com/application/terms/
+    title: Application Terms of Service, updated 2024-10-18
+  policy:
+    url: https://www.cloudflare.com/application/privacypolicy/
+    title: Application Privacy Policy, updated 2025-04-24
+  warp-privacy:
+    url: https://developers.cloudflare.com/warp-client/privacy/
+    title: WARP client privacy
+  warp-modes:
+    url: https://developers.cloudflare.com/warp-client/warp-modes/
+    title: WARP modes
+  faq:
+    url: https://developers.cloudflare.com/warp-client/known-issues-and-faq/
+    title: WARP client FAQ
+  get-started:
+    url: https://developers.cloudflare.com/warp-client/get-started/
+    title: WARP client, get started
+  macos:
+    url: https://developers.cloudflare.com/warp-client/get-started/macos/
+    title: WARP client for macOS
+  linux:
+    url: https://developers.cloudflare.com/warp-client/get-started/linux/
+    title: WARP client for Linux
+  linux-ui:
+    url: https://developers.cloudflare.com/changelog/post/2026-05-26-warp-linux-ga/
+    title: Cloudflare One Client for Linux 2026.4.1390.0, with the new UI (May 2026)
+  route-traffic:
+    url: https://developers.cloudflare.com/cloudflare-one/team-and-resources/devices/cloudflare-one-client/configure/route-traffic/
+    title: Route traffic (split tunnels)
+  sec:
+    url: https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001477333
+    title: Cloudflare, Inc. on SEC EDGAR
+  warp-intro:
+    url: https://blog.cloudflare.com/1111-warp-better-vpn/
+    title: 'Introducing WARP: fixing mobile Internet performance and security (April 2019)'
+  warp-launch:
+    url: https://blog.cloudflare.com/announcing-warp-plus/
+    title: WARP is here (sorry it took so long) (September 2019)
+  masque:
+    url: https://blog.cloudflare.com/masque-now-powers-1-1-1-1-and-warp-apps-dex-available-with-remote-captures/
+    title: MASQUE now powers 1.1.1.1 & WARP apps (December 2024)
+  pq:
+    url: https://blog.cloudflare.com/post-quantum-warp/
+    title: WARP client now supports post-quantum cryptography (September 2025)
+  geoexit:
+    url: https://blog.cloudflare.com/geoexit-improving-warp-user-experience-larger-network/
+    title: Improving WARP's user experience with a larger network (August 2022)
+  kpmg-2026:
+    url: https://cf-assets.www.cloudflare.com/slt3lc6tev37/7tcP0k0xUM8iDCacah9ARy/5c6b296e2fc24813368f6e2b4e58fd3a/Cloudflare_1.1.1.1_Examination_Report.pdf
+    title: KPMG, 1.1.1.1 Public DNS Resolver examination for 2024 (March 2026)
+  kpmg-2020:
+    url: https://www.cloudflare.com/resources/assets/slt3lc6tev37/5xlHCvvNBrvrIoWbuk1vTy/e1058b0d366adf4e983aef99a6ed2a1f/Cloudflare_1.1.1.1_Public_Resolver_Report_-_03302020__2_.pdf
+    title: KPMG, 1.1.1.1 Public DNS Resolver examination for 2019 (March 2020)
+  compliance:
+    url: https://www.cloudflare.com/trust-hub/compliance-resources/
+    title: Cloudflare certifications and compliance resources
+  transparency:
+    url: https://www.cloudflare.com/transparency/
+    title: Cloudflare Transparency Report
+  legal-h2-2025:
+    url: https://cf-assets.www.cloudflare.com/slt3lc6tev37/zItVXCvbb4LZpYG4Uh10R/7b27bba39755f0a4344acb946977704d/2H_2025_Cloudflare_s_Transparency_Report_Legal-v2.pdf
+    title: Transparency Report H2 2025, legal requests for information
+  canary-2019:
+    url: https://blog.cloudflare.com/first-half-2019-transparency-report-and-an-update-on-a-warrant-canary/
+    title: First Half 2019 Transparency Report and an Update on a Warrant Canary
+  disclosure:
+    url: https://www.cloudflare.com/disclosure/
+    title: Cloudflare Vulnerability Disclosure Policy
+  hackerone:
+    url: https://hackerone.com/cloudflare
+    title: Cloudflare Public Bug Bounty on HackerOne
+  dns-leak:
+    url: https://github.com/cloudflare/advisories/security/advisories/GHSA-mv6g-7577-vq4w
+    title: CVE-2023-2754, plaintext transmission of DNS requests in the Windows WARP client
+  breach-2023:
+    url: https://blog.cloudflare.com/thanksgiving-2023-security-incident/
+    title: Thanksgiving 2023 security incident (February 2024)
+  app-store:
+    url: https://apps.apple.com/us/app/1-1-1-1-faster-internet/id1423538627
+    title: '1.1.1.1: Faster Internet on the US App Store (price, description and privacy label)'
+  gen12:
+    url: https://blog.cloudflare.com/gen-12-servers/
+    title: Cloudflare's 12th Generation servers (September 2024)
+  network:
+    url: https://www.cloudflare.com/network/
+    title: Cloudflare global network
+  fdroid-search:
+    url: https://search.f-droid.org/?q=cloudflare&lang=en
+    title: F-Droid search for cloudflare
+  nsl-eff:
+    url: https://www.eff.org/deeplinks/2017/01/finally-revealed-cloudflare-has-been-fighting-nsls-years
+    title: 'EFF: Finally Revealed: Cloudflare Has Been Fighting NSL for Years (January 2017)'
+  nsl-ninth:
+    url: https://blog.cloudflare.com/ninth-circuit-rules-on-nsl-gag-orders/
+    title: Ninth Circuit Rules on National Security Letter Gag Orders (July 2017)
+  about:
+    url: https://www.cloudflare.com/about-overview/
+    title: About Cloudflare
