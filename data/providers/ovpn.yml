@@ -103,7 +103,6 @@ criteria:
   transparency:
     audits:
       value: []
-      note: No independent audit is published on its site, blog or help centre.
       sources: [transparency, blog-feed]
     report:
       value: regular
@@ -155,7 +154,6 @@ criteria:
       sources: [how-secure, wireguard, desktop-218]
     post_quantum:
       value: none
-      note: Not mentioned on its security or WireGuard pages, or in its help centre.
       sources: [wireguard, how-secure]
     kill_switch:
       value: system
@@ -187,7 +185,7 @@ criteria:
       sources: [press, network, report-2026-09]
     countries:
       value: 20
-      note: 32 cities, counted from the network page.
+      note: Across 32 cities.
       sources: [network]
 
   features:
@@ -244,7 +242,7 @@ criteria:
   pricing:
     monthly:
       value: { amount: 12, currency: USD }
-      note: The pricing page showed USD here, and also offers EUR and SEK.
+      note: Also sold in EUR and SEK.
       sources: [pricing]
     best:
       value: { amount: 4.22, currency: USD }
