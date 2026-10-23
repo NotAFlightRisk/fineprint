@@ -176,7 +176,7 @@ criteria:
       sources: [home, faq-locations]
     servers:
       value: 250
-      note: Listed by the status API on 2026-10-22. Leaves out the separate geo-unblocking routing servers.
+      note: Leaves out the separate geo-unblocking routing servers.
       sources: [status, status-api]
     countries:
       value: 23
