@@ -1,0 +1,323 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: VPN.ac
+icon: vpn-ac.png
+checked: 2026-10-24
+
+criteria:
+  identity:
+    website:
+      value: https://vpn.ac
+      sources: [home]
+    legal_entity:
+      value: Cryptolayer SRL
+      note: >-
+        The terms call it formerly Netsec Interactive Solutions SRL, but that's a separate company from
+        2009. Cryptolayer was registered in Sibiu in May 2015.
+      sources: [tos, vies, nsis]
+    owner:
+      value: Liviu-Horatiu Flesar
+      note: Cryptolayer's sole shareholder and administrator.
+      sources: [register]
+    founded:
+      value: 2012
+      note: Launched at the end of 2012 by Netsec Interactive Solutions, a Romanian security firm.
+      sources: [about]
+    team:
+      value: partial
+      note: The site names nobody, but the company register names its owner.
+      sources: [about, register]
+    sister_brands:
+      value: []
+      sources: [about]
+    acquisitions:
+      value: []
+      note: The service moved from Netsec Interactive Solutions to Cryptolayer, a newer company run from the same Sibiu address.
+      sources: [contact, nsis]
+
+  jurisdiction:
+    hq:
+      value: RO
+      sources: [tos, vies]
+    entities:
+      value: [RO]
+      sources: [vies, contact]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [tos, privacy]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [features, faq]
+    timestamps:
+      value: temporary
+      evidence: claimed
+      note: Connect and disconnect times are kept while you're connected and erased when the session ends.
+      sources: [privacy, faq]
+    bandwidth:
+      value: temporary
+      evidence: claimed
+      note: Data used is kept while you're connected and erased when the session ends.
+      sources: [privacy, tos]
+    source_ip:
+      value: temporary
+      evidence: claimed
+      note: Your real IP is kept while you're connected and erased when the session ends.
+      sources: [privacy, tos]
+    proven:
+      value: []
+      sources: [about]
+    policy:
+      value: https://vpn.ac/privacy-policy
+      sources: [privacy]
+
+  transparency:
+    audits:
+      value: []
+      note: >-
+        Its ISO 27001 and ISO 9001 certificates belonged to Netsec Interactive Solutions and aren't an audit
+        of the VPN.
+      sources: [about]
+    report:
+      value: none
+      note: The terms say it only hands over information when a court orders it.
+      sources: [tos]
+    canary:
+      value: none
+      sources: [legal]
+    bug_bounty:
+      value: false
+      sources: [contact]
+    incidents:
+      value: []
+      sources: [announcements]
+
+  account:
+    email:
+      value: required
+      sources: [checkout, privacy]
+    personal_data:
+      value: []
+      note: Checkout asks for your country, for tax. Name fields are pre-filled as "private user".
+      sources: [checkout, legal]
+    payment:
+      value: [card, paypal, bank, bitcoin, monero, other_crypto]
+      note: >-
+        Cards, Apple Pay, Google Pay and local methods like iDEAL and SEPA go through Stripe. The FAQ also
+        lists gift cards, but checkout offers only Stripe, PayPal and crypto.
+      sources: [checkout, stripe, faq]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn, ikev2, other]
+      note: >-
+        Other is L2TP/IPsec and the TLS-based SecureProxy browser extension. The Windows and Android apps use
+        OpenVPN, so WireGuard and IKEv2 there need third-party apps or the OS's own settings.
+      sources: [faq, tutorials, windows-app]
+    post_quantum:
+      value: none
+      sources: [features]
+    kill_switch:
+      value: app
+      note: The Windows kill switch blocks everything but the VPN server until you turn it off, but doesn't survive a reboot.
+      sources: [kill-switch, linux-app]
+    dns:
+      value: first_party
+      note: Queries go through encrypted tunnels to its own resolvers, which it says don't log them.
+      sources: [features]
+
+  infra:
+    ram_only:
+      value: null
+      note: VPN.ac doesn't claim to run servers from RAM, and lists full disk encryption among its safeguards.
+      sources: [privacy, features]
+    hosting:
+      value: rented
+      evidence: claimed
+      note: Dedicated servers, never virtual ones, with hosting partners.
+      sources: [faq, about]
+    virtual_locations:
+      value: null
+      sources: [status, locations]
+    servers:
+      value: 130
+      sources: [status]
+    countries:
+      value: 26
+      note: Counts Hong Kong and Taiwan. The plans page still says 21.
+      sources: [status, plans]
+
+  features:
+    connections:
+      value: 12
+      note: Six over OpenVPN or IPsec plus six over WireGuard.
+      sources: [plans]
+    multihop:
+      value: true
+      note: Double-hop is offered on OpenVPN.
+      sources: [features, android-app]
+    obfuscation:
+      value: [v2ray]
+      note: >-
+        OpenVPN can run through a V2Ray proxy, optionally via Cloudflare, and there's an OpenVPN XOR scramble
+        mode too.
+      sources: [v2ray, changelog]
+    port_forwarding:
+      value: false
+      sources: [faq]
+    split_tunnel:
+      value: true
+      note: Per app on Android.
+      sources: [android-app]
+    blocking:
+      value: [ads, trackers, malware]
+      note: Off by default, switched on as SecureDNS in the apps.
+      sources: [dns-filtering, changelog]
+
+  clients:
+    platforms:
+      value: [windows, macos, linux_gui, ios, android, browser]
+      note: >-
+        The Linux app is for 64-bit Debian-based distros. The browser extension is SecureProxy, a TLS proxy
+        rather than a VPN. Routers get setup guides, not an app.
+      sources: [tutorials, linux-app, secureproxy]
+    open_source:
+      value: none
+      note: The apps build on OpenVPN and OpenVPN for Android, but VPN.ac's own code isn't published.
+      sources: [tos]
+    telemetry:
+      value: none
+      evidence: claimed
+      note: The Play Store listing declares no data collected.
+      sources: [play-data-safety]
+    fdroid:
+      value: false
+      note: The APK is offered on VPN.ac's own site.
+      sources: [tutorials]
+
+  pricing:
+    monthly:
+      value: { amount: 9, currency: USD }
+      sources: [plans]
+    best:
+      value: { amount: 3.75, currency: USD }
+      note: 90 USD for two years.
+      sources: [plans]
+    best_term:
+      value: 24
+      sources: [plans]
+    renewal_increase:
+      value: 0
+      sources: [plans]
+    free_tier:
+      value: false
+      note: There's a one-week trial for 2 USD.
+      sources: [faq]
+    refund_days:
+      value: 7
+      note: Within seven days of activation or last payment, once only, and support may ask to fix the problem first.
+      sources: [tos]
+
+  ethics:
+    misleading_claims:
+      value: false
+      note: The FAQ says no VPN can promise 100% anonymity, privacy or security.
+      sources: [faq, home]
+    affiliates:
+      value: true
+      note: Pays 30% of every sale and renewal for the life of the account.
+      sources: [affiliates]
+    review_sites:
+      value: false
+      sources: [about]
+    activism:
+      value: false
+      sources: [about]
+
+refs:
+  home:
+    url: https://vpn.ac/
+    title: VPN.AC
+  about:
+    url: https://vpn.ac/about
+    title: About VPN.ac
+  tos:
+    url: https://vpn.ac/tos
+    title: Terms of Service
+  privacy:
+    url: https://vpn.ac/privacy-policy
+    title: Privacy Policy
+  legal:
+    url: https://vpn.ac/legal
+    title: Legal
+  contact:
+    url: https://vpn.ac/contact
+    title: Contact us
+  vies:
+    url: https://ec.europa.eu/taxation_customs/vies/rest-api/ms/RO/vat/34573525
+    title: EU VIES VAT check for RO34573525 (Cryptolayer SRL)
+  register:
+    url: https://www.termene.ro/firma/34573525-CRYPTOLAYER-SRL
+    title: CRYPTOLAYER SRL, Sibiu, CUI 34573525 (Termene.ro, from the trade register)
+  nsis:
+    url: https://nsis.ro/
+    title: Netsec Interactive Solutions (J40/2322/2009)
+  faq:
+    url: https://vpn.ac/faq
+    title: Frequently Asked Questions
+  features:
+    url: https://vpn.ac/features
+    title: VPN Features
+  plans:
+    url: https://vpn.ac/vpn-accounts
+    title: Plans and pricing
+  checkout:
+    url: https://vpn.ac/cart.php?a=add&pid=4
+    title: Order form
+  stripe:
+    url: https://vpn.ac/announcements/64/Stripe-payment-method-added-for-creditordebit-cards.html
+    title: Stripe payment method added for credit/debit cards (2025-10-27)
+  announcements:
+    url: https://vpn.ac/announcements.php
+    title: Announcements
+  status:
+    url: https://vpn.ac/status
+    title: VPN Nodes Status
+  locations:
+    url: https://vpn.ac/knowledgebase/90/What-locations-are-available-with-the-VPNorSecureProxy.html
+    title: What locations are available with the VPN/SecureProxy
+  tutorials:
+    url: https://vpn.ac/tutorials
+    title: Tutorials, App Downloads
+  changelog:
+    url: https://vpn.ac/software-changelog
+    title: Software Changelog
+  windows-app:
+    url: https://vpn.ac/knowledgebase/42/VPNAC-Client-Software-Windows.html
+    title: VPN.AC Client App (Windows)
+  linux-app:
+    url: https://vpn.ac/knowledgebase/114/Linux-VPN-client-app.html
+    title: Linux VPN client app
+  android-app:
+    url: https://vpn.ac/knowledgebase/73/OpenVPN-on-Android-our-app.html
+    title: OpenVPN on Android (our app)
+  kill-switch:
+    url: https://vpn.ac/knowledgebase/119/Windows-beta-client-new-kill-switch-implementation.html
+    title: Windows beta client (new kill switch implementation)
+  v2ray:
+    url: https://vpn.ac/knowledgebase/140/OpenVPN-obfuscation-proxy-support.html
+    title: OpenVPN obfuscation proxy support
+  dns-filtering:
+    url: https://vpn.ac/announcements/60/Introducing-new-feature-DNS-filtering.html
+    title: 'Introducing new feature: DNS filtering (2021-01-07)'
+  secureproxy:
+    url: https://vpn.ac/secureproxy
+    title: SecureProxy
+  affiliates:
+    url: https://vpn.ac/affiliates
+    title: VPN.AC Affiliate Program
+  play-data-safety:
+    url: https://play.google.com/store/apps/datasafety?id=ac.vpn.androidapp&hl=en
+    title: VPN.AC Client, Google Play data safety
