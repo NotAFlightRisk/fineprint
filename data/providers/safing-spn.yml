@@ -1,0 +1,346 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Safing SPN
+icon: safing-spn.png
+checked: 2026-10-24
+
+criteria:
+  identity:
+    website:
+      value: https://safing.io
+      sources: [spn]
+    legal_entity:
+      value: Safing ICS Technologies GmbH
+      sources: [terms, register]
+    owner:
+      value: Nicholas Pestell
+      note: IVPN's owner holds all of Safing ICS Technologies GmbH personally, as he does IVPN Limited.
+      sources: [ivpn-acquisition, register]
+    founded:
+      value: 2021
+      note: Paying customers got SPN access in December 2021, and paid use started in February 2022.
+      sources: [spn-alpha]
+    team:
+      value: public
+      note: Run by the IVPN team since the 2024 takeover. Austria's business register names Nicholas Pestell as its managing director under trade law.
+      sources: [ivpn-acquisition, register, ivpn-team]
+    sister_brands:
+      value: [IVPN]
+      sources: [ivpn-acquisition, ivpn-services]
+    acquisitions:
+      value:
+        - date: 2024-12-03
+          acquirer: Nicholas Pestell, owner of IVPN
+          source: ivpn-acquisition
+      note: The founders, Raphael and Daniel, sold the company and stayed on only as advisers.
+      sources: [new-chapter]
+
+  jurisdiction:
+    hq:
+      value: AT
+      sources: [terms, impressum]
+    entities:
+      value: [AT, GI]
+      note: Safing ICS Technologies GmbH is in Austria. Its owner also holds IVPN Limited in Gibraltar.
+      sources: [register, ivpn-acquisition, ivpn-legal]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [policy, terms]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [policy, terms]
+    timestamps:
+      value: none
+      evidence: claimed
+      sources: [policy, terms]
+    bandwidth:
+      value: none
+      evidence: claimed
+      sources: [policy, terms]
+    source_ip:
+      value: none
+      evidence: claimed
+      note: >-
+        Only the entry node sees it and it isn't logged there. Safing's web services, including the
+        account server Portmaster signs in to, keep IP addresses and user agents for up to 72 hours.
+      sources: [policy]
+    proven:
+      value: []
+      note: Cure53's 2020 audit covered the encryption library, not logging. No court case or seizure has tested it.
+      sources: [jess-audits]
+    policy: https://safing.io/privacy/
+
+  transparency:
+    audits:
+      value:
+        - date: 2020-01-01
+          auditor: Cure53
+          scope: apps
+          source: audit-2020
+      evidence: verified
+      note: >-
+        Testing ran in January 2020, with no exact end date given. It covered Jess, the encryption
+        library the SPN is built on, not Portmaster or the servers.
+      sources: [audit-2020, jess-audits]
+    report: none
+    canary: none
+    bug_bounty:
+      value: false
+      sources: [portmaster-github]
+    incidents:
+      value:
+        - date: 2026-10-15
+          summary: >-
+            Any local program could make Portmaster install an older signed release through an
+            unauthenticated API endpoint (CVE-2026-111664). The endpoint was removed the day it was reported.
+          handled: well
+          source: cve-2026
+      sources: [cve-2026, cve-2026-issue, cve-2026-fix]
+
+  account:
+    email:
+      value: optional
+      sources: [signup]
+    personal_data:
+      value: []
+      note: Signup asks for your country and phone country code for Austrian tax, but not a phone number.
+      sources: [signup]
+    payment:
+      value: [card, paypal, bitcoin, monero, cash]
+      sources: [pricing, price-update]
+
+  security:
+    protocols:
+      value: [proprietary]
+      note: The SPN is Safing's own onion-routed network, using X25519, ChaCha20-Poly1305 and BLAKE2b.
+      sources: [spn-architecture, spn-crypto]
+    post_quantum:
+      value: none
+      sources: [spn-crypto]
+    kill_switch:
+      value: system
+      evidence: claimed
+      note: Portmaster is a firewall, and blocks traffic whenever the SPN isn't connected.
+      sources: [spn-settings, kill-switch]
+    dns:
+      value: third_party
+      note: >-
+        Lookups leave the SPN at your entry node and go to Portmaster's configured resolver, which is
+        Cloudflare by default.
+      sources: [spn-settings, dns-defaults]
+
+  infra:
+    ram_only:
+      value: null
+      sources: [node-list]
+    hosting:
+      value: null
+      note: >-
+        18 of the 51 nodes are run by community volunteers. Unencrypted connections never exit through
+        them, only through a subset of Safing's own nodes.
+      sources: [node-list, community-nodes]
+    virtual_locations:
+      value: null
+      sources: [node-list]
+    servers:
+      value: 51
+      note: 33 run by Safing and 18 by the community, as of the last list Safing published in May 2025.
+      sources: [node-list]
+    countries:
+      value: 22
+      note: Safing's own nodes cover 17 of these.
+      sources: [node-list]
+
+  features:
+    connections:
+      value: 5
+      sources: [pricing]
+    multihop:
+      value: true
+      note: Every connection takes its own route through the network, with a separate exit and IP address.
+      sources: [spn, spn-architecture]
+    obfuscation:
+      value: []
+      sources: [spn-architecture]
+    port_forwarding:
+      value: false
+      note: The SPN only carries connections your device opens.
+      sources: [kill-switch, spn-architecture]
+    split_tunnel:
+      value: true
+      note: Apps and domains can be left out of the SPN, and Portmaster 2.2.1 added routing apps over another interface.
+      sources: [spn-settings, split-tunnel]
+    blocking:
+      value: [ads, trackers, malware]
+      note: Part of Portmaster's free filter lists rather than the SPN itself.
+      sources: [features]
+
+  clients:
+    platforms:
+      value: [windows, linux_gui]
+      note: macOS and mobile apps are planned but not out.
+      sources: [pricing, split-tunnel]
+    open_source:
+      value: all
+      sources: [portmaster-github]
+    telemetry:
+      value: none
+      evidence: claimed
+      note: Bug reports are only sent when you file one from the app.
+      sources: [policy]
+    fdroid:
+      value: false
+      note: An early Android alpha was once on F-Droid, but there's no Android app now.
+      sources: [android]
+
+  pricing:
+    monthly:
+      value: { amount: 8, currency: EUR }
+      note: SPN needs Portmaster Pro. It's also part of IVPN's Pro Suite.
+      sources: [pricing, price-update, ivpn-services]
+    best:
+      value: { amount: 6.67, currency: EUR }
+      note: €80 a year for Portmaster Pro.
+      sources: [pricing, price-update]
+    best_term:
+      value: 12
+      sources: [pricing]
+    renewal_increase:
+      value: 0
+      sources: [pricing, terms]
+    free_tier:
+      value: false
+      note: Portmaster's firewall is free, but the SPN has no free plan or trial.
+      sources: [business-model]
+    refund_days:
+      value: 14
+      note: >-
+        The statutory cooling-off period on a first order only. Time already used and a 15%
+        administration fee are taken off the refund.
+      sources: [terms]
+
+  ethics:
+    misleading_claims:
+      value: false
+      note: Its FAQ says plainly that the SPN only hides your IP address and doesn't stop other tracking.
+      sources: [spn]
+    affiliates:
+      value: false
+      sources: [business-model]
+    review_sites:
+      value: true
+      note: >-
+        It owns none, but its sister IVPN sponsors privacy educators including The New Oil, whose VPN
+        guide recommends IVPN.
+      sources: [ivpn-ethics, new-oil-vpns]
+    activism:
+      value: true
+      note: Through its owner, which funds privacy projects as IVPN.
+      sources: [ivpn-supported-projects]
+
+refs:
+  spn:
+    url: https://safing.io/spn/
+    title: Safing Portmaster - SPN Features
+  pricing:
+    url: https://safing.io/pricing/
+    title: Safing Portmaster - Packages and Pricing
+  price-update:
+    url: https://safing.io/blog/2026/02/24/price-update/
+    title: 'Portmaster Pro price drop: €80/year starting today'
+  business-model:
+    url: https://safing.io/business-model/
+    title: Safing - Business Model
+  features:
+    url: https://safing.io/features/
+    title: Safing Portmaster - Features
+  terms:
+    url: https://safing.io/terms/
+    title: Safing Terms of Service
+  policy:
+    url: https://safing.io/privacy/
+    title: Safing Privacy Policy
+  impressum:
+    url: https://safing.io/contact/
+    title: Safing Legal Disclosure - Impressum
+  register:
+    url: https://firmen.wko.at/safing-ics-technologies-gmbh/wien/?firmaid=5ee3f11f-366f-437a-9c9f-059c04b5854e
+    title: Safing ICS Technologies GmbH - WKO Firmen A-Z
+  signup:
+    url: https://account.safing.io/account/sign_up
+    title: Safing Account - Sign up
+  spn-alpha:
+    url: https://safing.io/blog/2021/12/06/spn-reaches-alpha/
+    title: Safing Privacy Network Reaches "Alpha"
+  new-chapter:
+    url: https://safing.io/blog/2024/12/03/a-new-chapter-begins/
+    title: 'Safing Joins Forces with IVPN: A New Chapter Begins'
+  ivpn-acquisition:
+    url: https://www.ivpn.net/blog/ivpn-acquires-safing-portmaster-spn-network/
+    title: IVPN acquires Safing, operator of Portmaster and the SPN network
+  ivpn-team:
+    url: https://www.ivpn.net/en/team/
+    title: IVPN Team
+  ivpn-services:
+    url: https://www.ivpn.net/en/services/
+    title: IVPN Privacy Stack - Services Overview
+  ivpn-legal:
+    url: https://www.ivpn.net/en/legal-process-guidelines/
+    title: IVPN Law Enforcement Legal Process Guidelines
+  ivpn-ethics:
+    url: https://www.ivpn.net/en/ethics/
+    title: IVPN - Ethical guidelines for privacy protection
+  new-oil-vpns:
+    url: https://thenewoil.org/en/guides/less-important/vpns
+    title: 'The New Oil | Privacy: VPNs'
+  ivpn-supported-projects:
+    url: https://www.ivpn.net/en/supported-projects/
+    title: IVPN Supported Projects
+  spn-architecture:
+    url: https://wiki.safing.io/en/Portmaster/Architecture/SPN
+    title: SPN - Safing Community Wiki
+  spn-settings:
+    url: https://wiki.safing.io/en/Portmaster/App/SPN
+    title: SPN Setup and Configuration - Safing Community Wiki
+  spn-crypto:
+    url: https://wiki.safing.io/en/FAQ/SPNcrypto
+    title: What Cryptography does SPN use? - Safing Community Wiki
+  kill-switch:
+    url: https://wiki.safing.io/en/FAQ/KillSwitch
+    title: Kill Switch - Safing Community Wiki
+  node-list:
+    url: https://wiki.safing.io/en/FAQ/SPN-NodeList
+    title: SPN Node List - Safing Community Wiki
+  community-nodes:
+    url: https://wiki.safing.io/en/FAQ/CommunityNodeInformation
+    title: Can community nodes see my traffic? - Safing Community Wiki
+  dns-defaults:
+    url: https://github.com/safing/portmaster/blob/development/service/resolver/config.go
+    title: Portmaster default DNS resolvers (source code)
+  split-tunnel:
+    url: https://safing.io/blog/2026/07/17/split-tunneling/
+    title: Split Tunneling arrives in Portmaster 2.2.1
+  android:
+    url: https://wiki.safing.io/en/Portmaster/Install/Android
+    title: Install on Android - Safing Community Wiki
+  portmaster-github:
+    url: https://github.com/safing/portmaster
+    title: safing/portmaster on GitHub
+  jess-audits:
+    url: https://github.com/safing/jess/blob/master/docs/AUDITS.md
+    title: Jess - Audits
+  audit-2020:
+    url: https://cure53.de/pentest-report_safing-jess.pdf
+    title: Cure53 - Security Audit-Report Safing Jess Library 01.2020
+  cve-2026:
+    url: https://nvd.nist.gov/vuln/detail/CVE-2026-111664
+    title: NVD - CVE-2026-111664
+  cve-2026-issue:
+    url: https://github.com/safing/portmaster/issues/2292
+    title: Local API's updates/from-url endpoint requires no authentication
+  cve-2026-fix:
+    url: https://github.com/safing/portmaster/commit/f943e1eaf98f45bc48490bf288e1d63c04929ae0
+    title: 'fix(api): remove unauthenticated updates/from-url endpoint'
