@@ -1,0 +1,271 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Njalla VPN
+icon: njalla-vpn.svg
+checked: 2026-10-24
+
+criteria:
+  identity:
+    website:
+      value: https://njal.la/vpn/
+      sources: [vpn]
+    legal_entity:
+      value: Njalla SRL
+      note: Based in Costa Rica. The terms named 1337 Services LLC of Nevis, Saint Kitts and Nevis, until at least late 2023.
+      sources: [tos, tos-2023, about]
+    owner:
+      value: null
+      note: Njalla doesn't say who owns Njalla SRL. Peter Sunde, its public face, says he holds no stake.
+      sources: [about, tf-2020]
+    founded:
+      value: 2009
+      note: Counts IPredator, the same team's VPN, which moved into Njalla in 2020.
+      sources: [vpn, ipredator-move]
+    team:
+      value: partial
+      note: Staff aren't named. Pirate Bay co-founder Peter Sunde set Njalla up in 2017 and is its public face.
+      sources: [faq, tf-2018, tf-2020]
+    sister_brands:
+      value: []
+      note: IPredator was folded into Njalla VPN in November 2020.
+      sources: [ipredator-move]
+    acquisitions:
+      value: []
+      sources: [ipredator-move, about]
+
+  jurisdiction:
+    hq:
+      value: CR
+      sources: [about, tos]
+    entities:
+      value: [CR]
+      sources: [about]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      note: >-
+        There's no VPN logging policy. The terms say Njalla collects nothing beyond your login details
+        and what you give it.
+      sources: [tos-data]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [tos-data]
+    timestamps:
+      value: none
+      evidence: claimed
+      sources: [tos-data]
+    bandwidth:
+      value: none
+      evidence: claimed
+      sources: [tos-data]
+    source_ip:
+      value: none
+      evidence: claimed
+      sources: [tos-data]
+    proven:
+      value: []
+    policy:
+      value: https://njal.la/tos/
+      note: There's no privacy policy, just a short section on your data in the terms.
+      sources: [tos]
+
+  transparency:
+    audits:
+      value: []
+    report:
+      value: none
+      sources: [blog]
+    canary:
+      value: none
+      sources: [blog]
+    bug_bounty:
+      value: false
+      sources: [contact]
+    incidents:
+      value: []
+      note: Njalla's legal fights have been over domains it holds for customers, not the VPN or customer data.
+      sources: [another-win, eu-watchlist]
+
+  account:
+    email:
+      value: required
+      note: An XMPP address can be used instead of an email.
+      sources: [tos-signup, faq]
+    personal_data:
+      value: []
+      sources: [tos-data]
+    payment:
+      value: [paypal, bitcoin, monero, other_crypto]
+      note: Other crypto includes Litecoin and Ethereum. You top up a Njalla wallet and pay from that.
+      sources: [faq, pricing, tos-payments]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn]
+      sources: [vpn, pricing]
+    post_quantum:
+      value: null
+      note: Njalla doesn't say.
+    kill_switch:
+      value: none
+      note: There's no Njalla app, so it's down to the WireGuard or OpenVPN client you use.
+      sources: [vpn, thinkpenguin]
+    dns:
+      value: null
+      note: Njalla runs its own public DNS resolvers but doesn't say which ones the VPN uses.
+      sources: [ipredator-move]
+
+  infra:
+    ram_only:
+      value: null
+      note: Njalla doesn't say.
+    hosting:
+      value: null
+      note: >-
+        In 2019, as IPredator, the team said it ran its own data centres, hardware and network. Njalla
+        hasn't said since the VPN moved over.
+      sources: [sustainability, ipredator-move]
+    virtual_locations:
+      value: null
+      note: Njalla doesn't say where its VPN servers are.
+      sources: [vpn]
+    servers:
+      value: null
+      note: Njalla doesn't publish a server list.
+    countries:
+      value: null
+      note: Njalla doesn't say where its VPN servers are.
+
+  features:
+    connections:
+      value: null
+      note: Each VPN comes with one IPv4 and one IPv6 address, but Njalla doesn't say how many devices can use it.
+      sources: [pricing]
+    multihop:
+      value: false
+    obfuscation:
+      value: []
+    port_forwarding:
+      value: null
+      note: Njalla doesn't say.
+    split_tunnel:
+      value: false
+      note: There's no app, though WireGuard and OpenVPN configs can be edited to route only some traffic.
+      sources: [vpn, thinkpenguin]
+    blocking:
+      value: []
+
+  clients:
+    platforms:
+      value: []
+      note: There are no apps. You download WireGuard or OpenVPN config files from your account and use the standard clients, on anything that runs them.
+      sources: [pricing, thinkpenguin]
+    open_source:
+      value: null
+      note: There are no Njalla apps to publish. The WireGuard and OpenVPN clients it relies on are open source.
+      sources: [thinkpenguin]
+    telemetry:
+      value: none
+      note: There are no Njalla apps.
+    fdroid:
+      value: false
+      sources: [fdroid-search]
+
+  pricing:
+    monthly:
+      value: { amount: 5, currency: EUR }
+      sources: [pricing]
+    best:
+      value: { amount: 5, currency: EUR }
+      sources: [pricing]
+    best_term:
+      value: 1
+      sources: [pricing]
+    renewal_increase:
+      value: 0
+      sources: [pricing]
+    free_tier:
+      value: false
+      sources: [vpn]
+    refund_days:
+      value: 0
+      note: The terms say payments are final unless Njalla decides otherwise.
+      sources: [tos-payments, tos-signup]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: The VPN page says your online activity "can't be connected to your identity by internet service providers, governments or other snooping organisations".
+      sources: [vpn]
+    affiliates:
+      value: false
+      note: There's no affiliate scheme on its site, and the team said in 2019 that it doesn't buy ads anywhere.
+      sources: [sustainability]
+    review_sites:
+      value: false
+      sources: [about]
+    activism:
+      value: true
+      note: It fights legal cases over the domains it holds, such as a 2024 injunction against a journalism site, and campaigns publicly against copyright lobby watch lists.
+      sources: [another-win, eu-watchlist, tf-2020]
+
+refs:
+  vpn:
+    url: https://njal.la/vpn/
+    title: Njalla - VPN
+  about:
+    url: https://njal.la/about/
+    title: About Njalla
+  faq:
+    url: https://njal.la/faq/
+    title: Njalla - Frequently Asked Questions
+  pricing:
+    url: https://njal.la/pricing/
+    title: Njalla - Pricing
+  tos:
+    url: https://njal.la/tos/
+    title: Njalla General Terms and Conditions, last updated 2021-12-02
+  tos-data:
+    url: https://njal.la/tos/#term_6_1
+    title: Njalla General Terms and Conditions - 6. Your data
+  tos-signup:
+    url: https://njal.la/tos/#term_3_1
+    title: Njalla General Terms and Conditions - 3. Registration
+  tos-payments:
+    url: https://njal.la/tos/#term_5_1
+    title: Njalla General Terms and Conditions - 5. Payments
+  tos-2023:
+    url: https://web.archive.org/web/20231129025656/https://njal.la/tos/
+    title: Njalla General Terms and Conditions naming 1337 Services LLC (archived November 2023)
+  contact:
+    url: https://njal.la/contact/
+    title: Njalla - Contact
+  blog:
+    url: https://njal.la/blog/
+    title: Njalla blog
+  ipredator-move:
+    url: https://njal.la/blog/ipredator/
+    title: IPredator is moving to Njalla
+  sustainability:
+    url: https://njal.la/blog/sustainability/
+    title: Sustainability à la Njalla
+  another-win:
+    url: https://njal.la/blog/another-win/
+    title: Another win for Njalla and press freedom!
+  eu-watchlist:
+    url: https://njal.la/blog/eu-attack-on-privacy-and-citizens-rights/
+    title: Due process? An EU attack on privacy and citizens rights
+  tf-2018:
+    url: https://torrentfreak.com/pirate-bay-founders-njalla-criticized-for-protecting-pirate-sites-181019/
+    title: TorrentFreak - Pirate Bay Founder's 'Njalla' Criticized For Protecting Pirate Sites
+  tf-2020:
+    url: https://torrentfreak.com/riaa-and-mpa-want-domain-registries-and-njalla-on-us-piracy-watchlist-201110/
+    title: TorrentFreak - RIAA and MPA Want Domain Registries and Njalla on US Piracy Watchlist
+  thinkpenguin:
+    url: https://thinkpenguin.com/gnu-linux/connecting-njalla-vpn-using-wireguard-and-thinkpenguin-mini-wireless-router
+    title: ThinkPenguin - Connecting to Njalla VPN using WireGuard on a router
+  fdroid-search:
+    url: https://search.f-droid.org/?q=njalla&lang=en
+    title: F-Droid search for njalla
