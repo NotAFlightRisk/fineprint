@@ -1,0 +1,357 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Obscura VPN
+icon: obscura-vpn.svg
+checked: 2026-10-24
+
+criteria:
+  identity:
+    website:
+      value: https://obscura.com
+      note: obscura.net redirects here.
+      sources: [home]
+    legal_entity:
+      value: Sovereign Engineering Inc.
+      note: Trading as Obscura.
+      sources: [legal, play-listing]
+    owner:
+      value: null
+      sources: [play-listing]
+    founded:
+      value: 2025
+      note: The macOS app went on sale on 11 February 2025, after a waitlist from late 2024.
+      sources: [bootstrapping-trust, launch-snapshot]
+    team:
+      value: partial
+      note: Carl Dong signs the site off as head of Obscura and wrote its design post. The rest of the team isn't named.
+      sources: [home, bootstrapping-trust]
+    sister_brands:
+      value: []
+      note: The exit servers are Mullvad's, under a partnership. Mullvad doesn't own Obscura.
+      sources: [relay-and-exit-nodes, bootstrapping-trust]
+    acquisitions:
+      value: []
+      sources: [source-code]
+
+  jurisdiction:
+    hq:
+      value: US
+      note: The terms are under New York law, with a New York mailing address.
+      sources: [legal, play-listing]
+    entities:
+      value: [US]
+      sources: [play-listing]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      note: >-
+        Obscura's relays can't decrypt your traffic, which is encrypted through to a Mullvad exit. The exit sees
+        your traffic but not your IP, so that side rests on Mullvad's no-logging policy.
+      sources: [bootstrapping-trust, relay-and-exit-nodes, mullvad-policy]
+    dns:
+      value: none
+      evidence: claimed
+      note: Lookups go to Mullvad's resolvers through the tunnel, so Obscura's relays can't see them.
+      sources: [dns-options, mullvad-policy]
+    timestamps:
+      value: null
+      note: The privacy policy doesn't say whether connection times are kept.
+      sources: [legal, managing-devices]
+    bandwidth:
+      value: null
+      note: The privacy policy doesn't say whether data use is recorded.
+      sources: [legal]
+    source_ip:
+      value: none
+      evidence: claimed
+      note: Obscura's relays see your IP while you're connected but say they never store it. Mullvad's exits only see the relay's address.
+      sources: [legal, relay-and-exit-nodes]
+    proven:
+      value: []
+      note: Cure53's audit covered the macOS app and the protocol design, not the servers. Mullvad's server audits don't cover Obscura's relays.
+      sources: [audit-cure53-2025, mullvad-audit-relay-2022]
+    policy: https://obscura.com/legal/
+
+  transparency:
+    audits:
+      value:
+        - date: 2025-05-30
+          auditor: Cure53
+          scope: apps
+          source: audit-cure53-2025
+      evidence: verified
+      note: >-
+        A white-box test of the macOS app, its network extension and the two-hop protocol design. It found
+        one medium and one low bug, both since fixed.
+      sources: [audit-blog]
+    report:
+      value: none
+      sources: [legal]
+    canary:
+      value: none
+      sources: [home]
+    bug_bounty:
+      value: false
+      sources: [advisories]
+    incidents:
+      value: []
+      sources: [advisories]
+
+  account:
+    email:
+      value: none
+      note: You log in with a random account number. Card subscriptions through Stripe need an email, which Obscura says it doesn't keep.
+      sources: [home, legal]
+    personal_data:
+      value: []
+      sources: [home]
+    payment:
+      value: [card, app_store, lightning, monero]
+      note: Lightning and Monero only work for one-off top-ups, not subscriptions.
+      sources: [payments]
+
+  security:
+    protocols:
+      value: [wireguard]
+      note: The apps run WireGuard inside QUIC to Obscura's relays. Plain WireGuard configs work too.
+      sources: [bootstrapping-trust, wireguard-guide]
+    post_quantum:
+      value: none
+      note: Mullvad's own app has post-quantum tunnels on the same exit servers, but Obscura's client doesn't use them.
+      sources: [source-code, mullvad-pq]
+    kill_switch:
+      value: app
+      note: >-
+        An experimental "on demand" kill switch in the Apple apps, off by default, and Android's system setting.
+        The Linux app firewalls traffic outside the tunnel while connected, while Windows only uses routes.
+      sources: [kill-switch, traffic-enforcement]
+    dns:
+      value: first_party
+      note: Mullvad's resolvers on the exit servers, which also do the blocking. Apple devices can use a custom DNS profile instead.
+      sources: [dns-options, wireguard-guide]
+
+  infra:
+    ram_only:
+      value: null
+      note: Mullvad says its exit servers all run from RAM. Obscura doesn't say how its relays run.
+      sources: [mullvad-ram-only, relay-and-exit-nodes]
+    hosting:
+      value: rented
+      note: Its relays sit in address space belonging to Datacamp (CDN77) and IT7 Networks. The exits are Mullvad's servers, which Mullvad partly owns and partly rents.
+      sources: [relays-api, as-datacamp, as-it7, mullvad-server-list]
+    virtual_locations:
+      value: none
+      evidence: claimed
+      note: Every exit is a Mullvad server, linked to its entry on Mullvad's own server list.
+      sources: [exits-api, mullvad-server-list]
+    servers:
+      value: 366
+      note: Mullvad exit servers, reached through 44 of Obscura's own relays in 18 countries.
+      sources: [exits-api, relays-api]
+    countries:
+      value: 28
+      note: The pricing page says 33+, but its exit list names 28 countries.
+      sources: [exits-api, relay-and-exit-nodes, pricing]
+
+  features:
+    connections:
+      value: 5
+      note: Raised from three in August 2026. Each WireGuard config holds a slot even when it isn't connected.
+      sources: [managing-devices, windows-launch]
+    multihop:
+      value: true
+      note: Every connection goes through two hops, Obscura's relay and then a Mullvad exit.
+      sources: [relay-and-exit-nodes]
+    obfuscation:
+      value: [quic, proprietary]
+      note: WireGuard inside QUIC by default, with its own TCP and TLS tunnel for networks that block UDP. Neither works with plain WireGuard configs.
+      sources: [bootstrapping-trust, troubleshooting-connection, translations-src]
+    port_forwarding:
+      value: false
+      note: Mullvad, which runs the exits, dropped port forwarding in 2023.
+      sources: [translations-src, mullvad-port-forwarding]
+    split_tunnel:
+      value: false
+      note: Only the local network, Tailscale and other WireGuard tunnels can be set to bypass it.
+      sources: [translations-src]
+    blocking:
+      value: [ads, trackers, malware]
+      note: Mullvad's DNS blocklists, which also cover gambling, adult sites and social media.
+      sources: [dns-options]
+
+  clients:
+    platforms:
+      value: [windows, macos, linux_gui, linux_cli, ios, android]
+      note: The Linux command-line client is marked experimental. Routers can use WireGuard configs.
+      sources: [pricing, linux-launch, wireguard-guide]
+    open_source:
+      value: all
+      note: GPL 3.0 since September 2026, with every app in one repository. It was source-available under the PolyForm Noncommercial licence before that.
+      sources: [source-code, license, linux-launch]
+    telemetry:
+      value: none
+      evidence: claimed
+      note: Debug bundles are only made and sent when you choose to.
+      sources: [debug-bundles, source-code]
+    fdroid:
+      value: false
+      note: The Android app is on Google Play and Obtainium.
+      sources: [fdroid-search, android-launch]
+
+  pricing:
+    monthly:
+      value: { amount: 8, currency: USD }
+      sources: [pricing]
+    best:
+      value: { amount: 8, currency: USD }
+      note: There's only the monthly price, as a subscription or a top-up.
+      sources: [pricing, payments]
+    best_term:
+      value: 1
+      sources: [pricing]
+    renewal_increase:
+      value: 0
+      sources: [pricing]
+    free_tier:
+      value: false
+      sources: [pricing]
+    refund_days:
+      value: 0
+      note: The terms say payments aren't refundable unless the law requires it.
+      sources: [legal]
+
+  ethics:
+    misleading_claims:
+      value: false
+      note: >-
+        Its "can't log" claims hold for Obscura's own relays, which never see your traffic. The exit still does,
+        and the site says so.
+      sources: [home, relay-and-exit-nodes]
+    affiliates:
+      value: false
+      note: There's a refer-a-friend scheme worth a free month each, and partner discounts with Ente and addy.io.
+      sources: [referrals, circle-of-trust]
+    review_sites:
+      value: false
+      sources: [home]
+    activism:
+      value: true
+      note: An organisational member of the EFF.
+      sources: [eff-thanks, circle-of-trust]
+
+refs:
+  home:
+    url: https://obscura.com/
+    title: Obscura VPN
+  legal:
+    url: https://obscura.com/legal/
+    title: Obscura privacy policy and terms of service, last updated 2024-11-14
+  pricing:
+    url: https://obscura.com/pricing/
+    title: Pricing - Obscura VPN
+  play-listing:
+    url: https://play.google.com/store/apps/details?id=net.obscura.vpnclientapp
+    title: Obscura VPN on Google Play (developer details)
+  bootstrapping-trust:
+    url: https://obscura.com/blog/bootstrapping-trust/
+    title: Bootstrapping Trust, Obscura's design post (2025-02-11)
+  launch-snapshot:
+    url: https://web.archive.org/web/20250211165051/https://obscura.net/
+    title: obscura.net on launch day, 11 February 2025 (archived)
+  relay-and-exit-nodes:
+    url: https://obscura.com/knowledge/relay-and-exit-nodes/
+    title: Relay Nodes and Exit Nodes - Obscura
+  relays-api:
+    url: https://v1.api.prod.obscura.net/api/relays
+    title: Obscura relay server list (API)
+  exits-api:
+    url: https://v1.api.prod.obscura.net/api/exits
+    title: Obscura exit server list (API)
+  as-datacamp:
+    url: https://bgp.he.net/AS60068
+    title: AS60068, Datacamp Limited (CDN77)
+  as-it7:
+    url: https://bgp.he.net/AS25820
+    title: AS25820, IT7 Networks
+  dns-options:
+    url: https://obscura.com/knowledge/dns-options/
+    title: DNS Options in Obscura
+  managing-devices:
+    url: https://obscura.com/knowledge/managing-devices/
+    title: Managing Devices - Obscura
+  payments:
+    url: https://obscura.com/knowledge/payments/
+    title: Managing Payments - Obscura
+  kill-switch:
+    url: https://obscura.com/knowledge/kill-switch/
+    title: Obscura's VPN Kill Switch
+  wireguard-guide:
+    url: https://obscura.com/knowledge/using-obscura-via-wireguard/
+    title: Using Obscura via WireGuard
+  troubleshooting-connection:
+    url: https://obscura.com/knowledge/troubleshooting-connection-issues/
+    title: Troubleshooting Connection Issues - Obscura
+  debug-bundles:
+    url: https://obscura.com/knowledge/debug-bundles/
+    title: What is a Debug Bundle - Obscura
+  referrals:
+    url: https://obscura.com/knowledge/referrals/
+    title: Referring a Friend to Obscura
+  circle-of-trust:
+    url: https://obscura.com/circle-of-trust/
+    title: Circle of Trust - Obscura
+  eff-thanks:
+    url: https://www.eff.org/thanks
+    title: EFF organisational members
+  audit-cure53-2025:
+    url: https://obscura.com/obs-01-report.v3.pdf
+    title: Cure53, Obscura protocol and macOS VPN client audit (OBS-01, 2025)
+  audit-blog:
+    url: https://obscura.com/blog/obscuras-first-audit/
+    title: Obscura's first audit
+  windows-launch:
+    url: https://obscura.com/blog/introducing-obscura-windows/
+    title: Introducing Obscura VPN for Windows + 5 Devices (2026-08-25)
+  android-launch:
+    url: https://obscura.com/blog/introducing-obscura-android/
+    title: Introducing Obscura VPN for Android (2026-05-19)
+  linux-launch:
+    url: https://obscura.com/blog/linux-at-long-last/
+    title: Linux at Long Last + GPLv3 (2026-09-22)
+  source-code:
+    url: https://github.com/Sovereign-Engineering/obscuravpn-client
+    title: Sovereign-Engineering/obscuravpn-client on GitHub
+  license:
+    url: https://github.com/Sovereign-Engineering/obscuravpn-client/blob/main/LICENSE
+    title: Obscura VPN client licence (GPL 3.0)
+  translations-src:
+    url: https://github.com/Sovereign-Engineering/obscuravpn-client/blob/038483240c8b2ba4ac8d61e49776719a3a0b3015/obscura-ui/src/translations/en.json
+    title: Obscura app settings text, version 1.184
+  traffic-enforcement:
+    url: https://github.com/Sovereign-Engineering/obscuravpn-client/blob/038483240c8b2ba4ac8d61e49776719a3a0b3015/docs/traffic-enforcement.md
+    title: Obscura traffic enforcement by platform, version 1.184
+  advisories:
+    url: https://github.com/Sovereign-Engineering/obscuravpn-client/security
+    title: Obscura VPN client security overview on GitHub
+  fdroid-search:
+    url: https://search.f-droid.org/?q=obscura&lang=en
+    title: F-Droid search for obscura
+  mullvad-policy:
+    url: https://mullvad.net/en/help/no-logging-data-policy
+    title: Mullvad no-logging of user activity policy
+  mullvad-audit-relay-2022:
+    url: https://www.assured.se/publications/Assured_Mullvad_relay_server_audit_report_2022.pdf
+    title: Assured, Mullvad VPN server audit (2022)
+  mullvad-ram-only:
+    url: https://mullvad.net/en/blog/we-have-successfully-completed-our-migration-to-ram-only-vpn-infrastructure
+    title: Mullvad completes its migration to RAM-only VPN infrastructure
+  mullvad-server-list:
+    url: https://mullvad.net/en/help/server-list
+    title: About Mullvad's servers
+  mullvad-port-forwarding:
+    url: https://mullvad.net/en/blog/removing-the-support-for-forwarded-ports
+    title: Mullvad removes support for forwarded ports
+  mullvad-pq:
+    url: https://mullvad.net/en/blog/quantum-resistant-tunnels-are-now-the-default-on-desktop
+    title: Mullvad quantum-resistant tunnels are now the default on desktop
