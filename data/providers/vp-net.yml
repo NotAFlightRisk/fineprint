@@ -1,0 +1,299 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: VP.NET
+icon: vp-net.png
+checked: 2026-10-24
+
+criteria:
+  identity:
+    website: https://vp.net
+    legal_entity:
+      value: VP.NET LLC
+      sources: [tos, wy-register]
+    owner:
+      value: TCP IP Inc
+      note: >-
+        TCP IP Inc owned VP.NET LLC and its pending patents at launch. It doesn't say who owns TCP IP
+        Inc.
+      sources: [torrentfreak]
+    founded:
+      value: 2025
+      note: The company was registered in Wyoming in March 2025 and the service launched that June.
+      sources: [wy-register, torrentfreak]
+    team:
+      value: public
+      note: >-
+        Andrew Lee, who created Private Internet Access, is chief privacy architect. Co-founder Matt Kim, Mark
+        Karpelès and Roger Ver are also named.
+      sources: [about, faq, torrentfreak]
+    sister_brands:
+      value: [Dissent]
+      note: Dissent is its own censorship-resistant VPN, which a VP.NET subscription unlocks.
+      sources: [dissent, download]
+    acquisitions: []
+
+  jurisdiction:
+    hq:
+      value: US
+      sources: [about, tos, wy-register]
+    entities:
+      value: [US]
+      sources: [tos, wy-register]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [privacy-policy]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [privacy-policy]
+    timestamps:
+      value: none
+      evidence: claimed
+      sources: [privacy-policy]
+    bandwidth:
+      value: none
+      evidence: claimed
+      sources: [privacy-policy]
+    source_ip:
+      value: none
+      evidence: claimed
+      note: It says the link between your IP address and your VPN session only exists inside an Intel SGX enclave.
+      sources: [privacy-policy, technical]
+    proven:
+      value: []
+      evidence: claimed
+      note: >-
+        The apps check through remote attestation that a server runs the published enclave code, but
+        nobody outside the company has published a review of that code or setup.
+      sources: [technical, enclave-source]
+    policy: https://vp.net/l/en-US/privacy
+
+  transparency:
+    audits:
+      value: []
+      evidence: claimed
+      note: Its security policy mentions regular independent audits, but none has been published.
+      sources: [security]
+    report:
+      value: none
+      note: Its freedom policy promises transparency about government requests, but there's no report.
+      sources: [freedom]
+    canary: none
+    bug_bounty:
+      value: true
+      evidence: claimed
+      note: Rewards depend on severity, with no amounts published.
+      sources: [security]
+    incidents: []
+
+  account:
+    email:
+      value: optional
+      note: >-
+        The website and apps sign up with an email address, but the command-line client can create an
+        anonymous account paid in crypto.
+      sources: [privacy-policy, cli]
+    personal_data: []
+    payment:
+      value: [card, app_store, bitcoin, other_crypto]
+      note: Crypto includes Ethereum, Litecoin and USDT. Apple Pay and Google Pay are also taken.
+      sources: [faq, cli, tos]
+
+  security:
+    protocols:
+      value: [wireguard]
+      sources: [technical, server-list]
+    post_quantum:
+      value: none
+      note: It says it's still researching post-quantum cryptography.
+      sources: [security]
+    kill_switch:
+      value: system
+      note: The desktop app's advanced kill switch blocks traffic even when the VPN is off.
+      sources: [desktop-privacy, faq]
+    dns:
+      value: third_party
+      note: >-
+        Its servers pass lookups over DNS over HTTPS to public resolvers such as Google, OpenDNS or
+        Cloudflare, which see the server's address rather than yours.
+      sources: [technical]
+
+  infra:
+    ram_only:
+      value: null
+      note: Keys and session mappings live in enclave memory, but it doesn't say whether the servers run without disks.
+      sources: [technical]
+    hosting:
+      value: null
+      note: It doesn't say whether it owns or rents its servers.
+      sources: [faq]
+    virtual_locations:
+      value: none
+      evidence: claimed
+      sources: [server-list]
+    servers:
+      value: 69
+      sources: [server-list]
+    countries:
+      value: 26
+      sources: [server-list]
+
+  features:
+    connections:
+      value: 5
+      sources: [pricing]
+    multihop:
+      value: false
+      sources: [dissent]
+    obfuscation:
+      value: [proprietary]
+      note: >-
+        Through Dissent, a separate app included with the subscription that makes traffic look like
+        ordinary web browsing.
+      sources: [dissent, download]
+    port_forwarding:
+      value: false
+      sources: [faq]
+    split_tunnel:
+      value: null
+      note: The desktop app doesn't have it, and it doesn't say whether the mobile apps do.
+      sources: [desktop-settings]
+    blocking:
+      value: []
+      sources: [faq]
+
+  clients:
+    platforms:
+      value: [windows, macos, linux_gui, linux_cli, ios, android]
+      sources: [download, cli]
+    open_source:
+      value: all
+      note: >-
+        The desktop app is GPLv3, forked from Private Internet Access's client. The iOS app and CLI are
+        MIT, the Android repo has no licence, and the server enclave is only licensed for inspection.
+      sources: [github, desktop-source, android-source, enclave-source]
+    telemetry:
+      value: null
+      note: The desktop app stopped sending usage stats in version 3.7.1, but it doesn't say whether the mobile apps do.
+      sources: [changelog, privacy-policy]
+    fdroid:
+      value: false
+      sources: [download]
+
+  pricing:
+    monthly:
+      value: { amount: 9.95, currency: USD }
+      sources: [pricing]
+    best:
+      value: { amount: 5.55, currency: USD }
+      note: Billed $199.99 every three years.
+      sources: [pricing]
+    best_term:
+      value: 36
+      sources: [pricing]
+    renewal_increase:
+      value: 0
+      sources: [faq, pricing]
+    free_tier:
+      value: false
+      sources: [faq]
+    refund_days:
+      value: 0
+      note: >-
+        Payments are non-refundable unless the law says otherwise. App store purchases go through
+        Apple's or Google's own refund process.
+      sources: [tos]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        It says spying is "physically impossible" and privacy is "guaranteed by physics", but it still
+        relies on trusting Intel, and in 2025 researchers with physical access broke SGX on server chips.
+      sources: [home, wiretap]
+    affiliates:
+      value: true
+      note: Affiliates get 20% of every payment for the life of the subscription.
+      sources: [affiliates]
+    review_sites:
+      value: false
+      sources: [about]
+    activism:
+      value: false
+      sources: [freedom]
+
+refs:
+  home:
+    url: https://vp.net/l/en-US/
+    title: vp.net homepage
+  about:
+    url: https://vp.net/l/en-US/about
+    title: About vp.net
+  tos:
+    url: https://vp.net/l/en-US/terms
+    title: vp.net terms of service
+  privacy-policy:
+    url: https://vp.net/l/en-US/privacy
+    title: vp.net privacy policy
+  faq:
+    url: https://vp.net/l/en-US/faq
+    title: vp.net frequently asked questions
+  technical:
+    url: https://vp.net/l/en-US/technical
+    title: vp.net technical specifications
+  security:
+    url: https://vp.net/l/en-US/security
+    title: vp.net security policy
+  freedom:
+    url: https://vp.net/l/en-US/freedom
+    title: vp.net freedom policy
+  pricing:
+    url: https://vp.net/l/en-US/pricing
+    title: vp.net pricing
+  download:
+    url: https://vp.net/l/en-US/download
+    title: Download vp.net
+  changelog:
+    url: https://vp.net/l/en-US/pages/changelog
+    title: vp.net changelog
+  affiliates:
+    url: https://vp.net/l/en-US/affiliates
+    title: vp.net affiliate program
+  server-list:
+    url: https://serverlist.vp.net/vpninfo/servers/v6
+    title: vp.net server list (JSON)
+  wy-register:
+    url: https://wyobiz.wyo.gov/Business/FilingDetails.aspx?eFNum=111140171218091255199195085159097208029058042025
+    title: VP.NET LLC, filing 2025-001642445 (Wyoming Secretary of State)
+  torrentfreak:
+    url: https://torrentfreak.com/new-vpn-service-cant-log-users-by-design/
+    title: New VPN service can't log users by design (TorrentFreak)
+  dissent:
+    url: https://godissent.com/
+    title: Dissent, censorship-proof VPN
+  github:
+    url: https://github.com/vpdotnet
+    title: vpdotnet on GitHub
+  desktop-source:
+    url: https://github.com/vpdotnet/vpnet-desktop
+    title: VP.NET desktop client source
+  desktop-privacy:
+    url: https://github.com/vpdotnet/vpnet-desktop/blob/main/client/res/components/settings/pages/privacy/PrivacyPage.qml
+    title: VP.NET desktop client, privacy settings page
+  desktop-settings:
+    url: https://github.com/vpdotnet/vpnet-desktop/blob/main/client/res/components/settings/SettingsWindow.qml
+    title: VP.NET desktop client, settings pages
+  android-source:
+    url: https://github.com/vpdotnet/mobile-android
+    title: VP.NET Android app source
+  enclave-source:
+    url: https://github.com/vpdotnet/vpnetd-sgx
+    title: VP.NET SGX enclave source
+  cli:
+    url: https://github.com/vpdotnet/vpnet-cli
+    title: vpnet-cli, command-line client for VP.NET
+  wiretap:
+    url: https://wiretap.fail/
+    title: 'WireTap: breaking server SGX via DRAM bus interposition'
