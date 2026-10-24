@@ -1,0 +1,292 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: ZoogVPN
+icon: zoogvpn.png
+checked: 2026-10-24
+
+criteria:
+  identity:
+    website: https://zoogvpn.com
+    legal_entity:
+      value: Zoog Services Single Member Private Company
+      note: Also written Zoog Services IKE, registered in Patras, Greece, under GEMI number 145382616000.
+      sources: [privacy-policy, terms, app-store]
+    owner:
+      value: Softoria
+      note: >-
+        Softoria, a Kyiv software group, lists ZoogVPN among its projects, and Softoria LLC is the
+        developer on Google Play. It doesn't say who owns Softoria.
+      sources: [softoria, play-listing]
+    founded:
+      value: 2013
+      sources: [about]
+    team:
+      value: anonymous
+      note: ZoogVPN names nobody who runs it.
+      sources: [about]
+    sister_brands: []
+    acquisitions:
+      value: null
+      note: Its ownership isn't public, so a change of hands wouldn't necessarily show.
+      sources: [about]
+
+  jurisdiction:
+    hq:
+      value: GR
+      sources: [about]
+    entities:
+      value: [GR, UA]
+      note: Zoog Services IKE in Greece, and Softoria LLC in Ukraine, which publishes the Android app.
+      sources: [terms, play-listing]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [privacy-policy]
+    dns:
+      value: none
+      evidence: claimed
+      note: The policy says it keeps no record of the websites or apps you visit, without mentioning DNS by name.
+      sources: [privacy-policy]
+    timestamps:
+      value: none
+      evidence: claimed
+      sources: [privacy-policy]
+    bandwidth:
+      value: aggregate
+      evidence: claimed
+      note: Keeps a running total of each account's upload and download, which it uses to enforce the free plan's cap.
+      sources: [privacy-policy, faq]
+    source_ip:
+      value: none
+      evidence: claimed
+      sources: [privacy-policy]
+    proven: []
+    policy: https://zoogvpn.com/privacy/
+
+  transparency:
+    audits: []
+    report:
+      value: none
+      sources: [warrant-canary]
+    canary:
+      value: maintained
+      note: Dated October 2026, but it has lapsed before, and still read October 2024 in August 2025.
+      sources: [warrant-canary, warrant-canary-2025]
+    bug_bounty:
+      value: null
+      note: It doesn't mention a bug bounty or a way to report security flaws.
+      sources: [faq]
+    incidents: []
+
+  account:
+    email:
+      value: required
+      sources: [terms]
+    personal_data:
+      value: []
+      sources: [privacy-policy]
+    payment:
+      value: [card, paypal, app_store, bitcoin, other_crypto]
+      note: Also WebMoney, Qiwi and Mint. Only card and PayPal payments can be refunded.
+      sources: [pricing, refund, terms]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn, ikev2, other]
+      note: The others are PPTP and L2TP/IPsec, plus its own Shadow and ZoogTLS for censored networks.
+      sources: [faq, network]
+    post_quantum: none
+    kill_switch:
+      value: app
+      note: A setting in the Android, iOS, Windows and macOS apps.
+      sources: [kill-switch]
+    dns:
+      value: null
+      note: Its apps use "other DNS servers" instead of your ISP's, without saying whose.
+      sources: [leak-protection]
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say whether its servers run from RAM.
+      sources: [network]
+    hosting:
+      value: rented
+      note: It calls them dedicated bare metal servers and says it vets the server providers it takes them from.
+      sources: [network]
+    virtual_locations:
+      value: null
+      note: It doesn't say whether any locations are virtual, and lists more countries than its marketing claims.
+      sources: [network]
+    servers:
+      value: null
+      note: It lists 146 locations rather than servers, and its sign-up pop-up claims 200+ servers.
+      sources: [network]
+    countries:
+      value: 81
+      note: Other pages say 35+, 50+ or 55+ countries.
+      sources: [network, faq]
+
+  features:
+    connections:
+      value: 10
+      note: The pricing page says unlimited devices in places and 10 in others. The free plan allows 1.
+      sources: [pricing, features]
+    multihop:
+      value: false
+      sources: [features]
+    obfuscation:
+      value: [proprietary]
+      note: The Shadow protocol, which it describes as an obfuscated proxy combined with a VPN.
+      sources: [shadow]
+    port_forwarding:
+      value: false
+      sources: [features]
+    split_tunnel:
+      value: true
+      sources: [split-tunnel]
+    blocking:
+      value: [ads, trackers, malware]
+      sources: [ad-blocker]
+
+  clients:
+    platforms:
+      value: [windows, macos, linux_cli, ios, android, browser]
+      note: Routers are set up by hand rather than with an app.
+      sources: [downloads, linux, chrome-extension, router]
+    open_source:
+      value: none
+      note: Its terms forbid reverse engineering the proprietary apps.
+      sources: [terms]
+    telemetry:
+      value: null
+      note: >-
+        The Android app includes Amplitude, AppsFlyer, Firebase Analytics and Crashlytics, but the policy
+        doesn't say what they send or whether you can turn them off.
+      sources: [exodus]
+    trackers:
+      value: 30
+      note: In version 4.0.5 from January 2026. Most are ad networks for the free plan's ads.
+      sources: [exodus]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 9.99, currency: USD }
+      sources: [pricing]
+    best:
+      value: { amount: 2.22, currency: USD }
+      note: $59.99 for 27 months, a two-year plan with 3 months added. The 1-year plan is $39.99.
+      sources: [pricing]
+    best_term:
+      value: 27
+      sources: [pricing]
+    renewal_increase:
+      value: null
+      note: It doesn't publish renewal prices, though its terms say price changes don't touch existing recurring subscriptions.
+      sources: [pricing, terms]
+    free_tier:
+      value: true
+      note: >-
+        10 GB a month on one device, with slower speeds and a few locations (5 on the pricing page, 3 on
+        the free VPN page). The Android app shows ads to free users.
+      sources: [pricing, free-vpn, terms]
+    refund_days:
+      value: 7
+      note: First payment only, bought on its own site, with under 10 GB used, and minus a 5% admin fee.
+      sources: [refund]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        Its policy promises you'll "browse with 100% privacy", and its free VPN page says "no ads" while
+        the free Android app shows them.
+      sources: [privacy-policy, free-vpn]
+    affiliates:
+      value: true
+      note: Up to 80% of the first sale and 30% of renewals.
+      sources: [affiliates]
+    review_sites:
+      value: null
+      note: Who owns Softoria isn't public, so ties to review sites can't be ruled out.
+      sources: [about]
+    activism: false
+
+refs:
+  softoria:
+    url: https://softoria.com/developing/
+    title: Softoria, projects
+  play-listing:
+    url: https://play.google.com/store/apps/details?id=com.zoogvpn.android&hl=en
+    title: ZoogVPN on Google Play
+  leak-protection:
+    url: https://zoogvpn.com/features/leak-protection/
+    title: ZoogVPN leak protection
+  privacy-policy:
+    url: https://zoogvpn.com/privacy/
+    title: ZoogVPN privacy policy
+  terms:
+    url: https://zoogvpn.com/terms/
+    title: ZoogVPN terms of service
+  refund:
+    url: https://zoogvpn.com/refund/
+    title: ZoogVPN refund policy
+  about:
+    url: https://zoogvpn.com/about/
+    title: About ZoogVPN
+  app-store:
+    url: https://apps.apple.com/us/app/zoog-vpn-fast-secure-proxy/id1204851407
+    title: Zoog VPN on the App Store
+  pricing:
+    url: https://zoogvpn.com/pricing/
+    title: ZoogVPN pricing
+  free-vpn:
+    url: https://zoogvpn.com/products/free-vpn/
+    title: ZoogVPN free VPN
+  faq:
+    url: https://zoogvpn.com/faq/
+    title: ZoogVPN FAQ
+  warrant-canary:
+    url: https://zoogvpn.com/warrant-canary/
+    title: ZoogVPN warrant canary
+  warrant-canary-2025:
+    url: https://web.archive.org/web/20250811015914/https://zoogvpn.com/warrant-canary/
+    title: ZoogVPN warrant canary (archived August 2025)
+  network:
+    url: https://zoogvpn.com/network/
+    title: ZoogVPN network
+  features:
+    url: https://zoogvpn.com/features/
+    title: ZoogVPN features
+  kill-switch:
+    url: https://zoogvpn.com/features/kill-switch/
+    title: ZoogVPN kill switch
+  split-tunnel:
+    url: https://zoogvpn.com/features/split-tunneling/
+    title: ZoogVPN split tunnelling
+  ad-blocker:
+    url: https://zoogvpn.com/features/ad-blocker/
+    title: ZoogVPN Ad Blocker
+  shadow:
+    url: https://zoogvpn.com/features/zoog-shadowing/
+    title: 'Shadow protocol: circumventing censorship'
+  downloads:
+    url: https://zoogvpn.com/vpn-downloads/
+    title: ZoogVPN downloads
+  linux:
+    url: https://zoogvpn.com/products/vpn-for-linux/
+    title: ZoogVPN for Linux
+  router:
+    url: https://zoogvpn.com/products/vpn-for-router/
+    title: ZoogVPN for routers
+  chrome-extension:
+    url: https://zoogvpn.com/chrome-vpn-extension/
+    title: ZoogVPN extension for Chrome
+  affiliates:
+    url: https://zoogvpn.com/affiliates/
+    title: ZoogVPN affiliate programme
+  exodus:
+    url: https://web.archive.org/web/20260214074453/https://reports.exodus-privacy.eu.org/en/reports/com.zoogvpn.android/latest/
+    title: Exodus Privacy report for com.zoogvpn.android (archived February 2026)
