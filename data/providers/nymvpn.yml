@@ -1,0 +1,372 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: NymVPN
+icon: nymvpn.svg
+checked: 2026-10-24
+
+criteria:
+  identity:
+    website:
+      value: https://nym.com
+      sources: [imprint]
+    legal_entity:
+      value: Nym Technologies SA
+      sources: [terms, zefix]
+    owner:
+      value: Harry Halpin and Alexis Roussel
+      note: Nym says its co-founders own the company. It has also raised funding rounds led by Binance Labs, Polychain and a16z.
+      sources: [trust-center, about]
+    founded:
+      value: 2025
+      note: The paid service launched on 13 March 2025, after free public alpha and beta testing in 2024.
+      sources: [launch, about]
+    team:
+      value: public
+      sources: [about]
+    sister_brands:
+      value: []
+      sources: [about]
+    acquisitions:
+      value: []
+      sources: [trust-center]
+
+  jurisdiction:
+    hq:
+      value: CH
+      sources: [imprint, zefix]
+    entities:
+      value: [CH, FR]
+      note: Nym Technologies SA is president of NYM R&D France, its Paris company.
+      sources: [zefix, fr-register]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      note: Traffic runs through servers of independent operators, who sign an agreement not to log. Nym says it can't audit those servers.
+      sources: [privacy-policy, operator-terms]
+    dns:
+      value: none
+      evidence: claimed
+      note: Lookups go from the exit server to Cloudflare or Quad9, so Cloudflare's 24-hour logs apply on its side.
+      sources: [dns-help]
+    timestamps:
+      value: none
+      evidence: claimed
+      note: Operators agree not to record anything about users' activity. Opt-in app stats include session length, sent through the tunnel.
+      sources: [operator-terms, privacy-policy, anon-stats]
+    bandwidth:
+      value: null
+      note: There's a daily fair-use allowance, but the policy doesn't say how data use is counted or kept.
+      sources: [v2026-11, privacy-policy]
+    source_ip:
+      value: none
+      evidence: claimed
+      note: The entry server sees your IP but not your destination. Nym says the entry and exit operators would both have to log and collude to link you.
+      sources: [privacy-policy, operator-terms]
+    proven:
+      value: []
+      sources: [audits-page]
+    policy: https://nym.com/vpn-privacy-statement
+
+  transparency:
+    audits:
+      value:
+        - date: 2024-07-19
+          auditor: Cure53
+          scope: apps
+          source: audit-cure53-2024
+        - date: 2021-09-13
+          auditor: Jean-Philippe Aumasson
+          scope: infra
+          source: audit-aumasson-2021
+      evidence: verified
+      note: >-
+        Cure53 tested the apps and the source of the node software, API and cryptography in July 2024
+        (calendar weeks 27 to 29), not the servers operators run. Aumasson reviewed the mixnet, gateway and
+        validator code in 2021. Oak Security's 2023 audits of Nym's wallet and smart contracts aren't counted.
+      sources: [audits-page, cure53-response, aumasson-response, audit-oak-contracts, audit-oak-wallet]
+    report:
+      value: none
+      note: The privacy statement promises to make any Swiss requests for user data public.
+      sources: [privacy-policy]
+    canary:
+      value: none
+      sources: [trust-center]
+    bug_bounty:
+      value: true
+      note: Rewards are at Nym's discretion and usually paid in NYM tokens.
+      sources: [vdp]
+    incidents:
+      value: []
+      note: Nym publishes incident reports, but so far they cover network outages, not breaches or leaks.
+      sources: [idp, incident-2025-09, incident-2026-05]
+
+  account:
+    email:
+      value: none
+      note: Signing up generates a 24-word access code on your device.
+      sources: [create-account]
+    personal_data:
+      value: []
+      sources: [create-account]
+    payment:
+      value: [card, app_store, bitcoin, lightning, monero, other_crypto, cash]
+      note: Other crypto includes Zcash, Litecoin, Ether, USDT and its own NYM token, which takes 50% off. It also takes GNU Taler.
+      sources: [pricing, refund]
+
+  security:
+    protocols:
+      value: [wireguard, proprietary]
+      note: Fast mode is two-hop WireGuard (AmneziaWG). Anonymous mode is its own five-hop mixnet with cover traffic.
+      sources: [wireguard-help, torrenting]
+    post_quantum:
+      value: null
+      note: >-
+        Its Lewes Protocol key exchange was an opt-in on Android in April 2026, but the toggle went in May
+        and Nym hasn't said whether it's now on for everyone.
+      sources: [lewes, android-changelog]
+    kill_switch:
+      value: system
+      note: Built in and always on across all apps, with no toggle.
+      sources: [kill-switch]
+    dns:
+      value: third_party
+      note: Cloudflare and Quad9 by default, queried from the exit server. You can set your own.
+      sources: [dns-help]
+
+  infra:
+    ram_only:
+      value: null
+      note: Servers belong to independent operators, and Nym doesn't say whether they run from RAM.
+      sources: [operator-terms]
+    hosting:
+      value: null
+      note: Nym doesn't run the servers. Independent node operators host them, under contract, on whatever hardware they choose.
+      sources: [server-list, operator-terms]
+    virtual_locations:
+      value: none
+      note: Nym places exit servers by IP geolocation rather than trusting where operators say they are.
+      sources: [server-location]
+    servers:
+      value: 621
+      note: VPN gateways in Nym's directory on 2026-10-24, 477 of them usable as exits.
+      sources: [gateways-api, server-list]
+    countries:
+      value: 71
+      note: Countries with a gateway on 2026-10-24. Exit servers were in 59 of them.
+      sources: [gateways-api]
+
+  features:
+    connections:
+      value: 10
+      sources: [terms, pricing-help]
+    multihop:
+      value: true
+      note: Every connection uses at least two servers from different operators.
+      sources: [wireguard-help]
+    obfuscation:
+      value: [amneziawg, quic]
+      sources: [wireguard-help, china]
+    port_forwarding:
+      value: false
+      sources: [torrenting]
+    split_tunnel:
+      value: true
+      note: Android and desktop, in Fast mode only. Not on iOS.
+      sources: [split-tunnel, v2026-12]
+    blocking:
+      value: [ads]
+      note: An ad blocker based on Brave's. Nym says it doesn't block malware.
+      sources: [pricing, malware]
+
+  clients:
+    platforms:
+      value: [windows, macos, linux_gui, linux_cli, ios, android]
+      sources: [download, source-code]
+    open_source:
+      value: all
+      note: GPL-3.0, covering the desktop, Android and Apple apps and the core daemon and CLI.
+      sources: [source-code]
+    telemetry:
+      value: opt_in
+      evidence: claimed
+      note: Sentry crash reports and Nym's own anonymous usage stats are both off by default. Usage stats travel through the tunnel.
+      sources: [privacy-policy, anon-stats, android-changelog]
+    fdroid:
+      value: true
+      sources: [fdroid]
+
+  pricing:
+    monthly:
+      value: { amount: 8, currency: USD }
+      sources: [pricing, v2026-12]
+    best:
+      value: { amount: 4, currency: USD }
+      note: Paying in NYM tokens takes another 50% off.
+      sources: [pricing, v2026-12]
+    best_term:
+      value: 12
+      sources: [pricing, v2026-12]
+    renewal_increase:
+      value: 0
+      note: The year plan's 50% discount is against the monthly rate, not an intro deal. All plans auto-renew.
+      sources: [pricing, pricing-help]
+    free_tier:
+      value: false
+      note: A 7-day free trial comes with card or app store payment on the 6-month and 1-year plans.
+      sources: [free-trial]
+    refund_days:
+      value: 30
+      note: Pro-rata, for the unused days. No refunds on cash payments.
+      sources: [refund]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        Its launch release calls it "the world's most secure VPN" and it says its privacy is "guaranteed
+        by design", while its policy says it can't audit the operators whose servers carry your traffic.
+      sources: [launch, v2026-12, privacy-policy]
+    affiliates:
+      value: true
+      note: Partners get 50% of each subscription, repeating for renewals.
+      sources: [partner-terms]
+    review_sites: false
+    activism:
+      value: true
+      note: Sponsors Tails and co-founded the Universal Privacy Alliance.
+      sources: [trust-center, about]
+
+refs:
+  imprint:
+    url: https://nym.com/imprint
+    title: Imprint
+  terms:
+    url: https://nym.com/vpn-terms
+    title: NymVPN terms of use
+  privacy-policy:
+    url: https://nym.com/vpn-privacy-statement
+    title: Your privacy on NymVPN
+  operator-terms:
+    url: https://nym.com/operators-validators-terms
+    title: Terms for Nym operators and validators
+  anon-stats:
+    url: https://nym.com/anonymous-stats
+    title: Anonymous usage data
+  zefix:
+    url: https://www.zefix.ch/en/search/entity/list/firm/1228407
+    title: NYM Technologies SA in the Swiss commercial register (Zefix)
+  fr-register:
+    url: https://annuaire-entreprises.data.gouv.fr/entreprise/922432471
+    title: NYM R&D France in the French company register
+  trust-center:
+    url: https://nym.com/trust-center
+    title: Nym Trust Center
+  about:
+    url: https://nym.com/about
+    title: About Nym
+  launch:
+    url: https://nym.com/blog/NymVPN-launch-press-release
+    title: Nym launches NymVPN (press release, March 2025)
+  audits-page:
+    url: https://nym.com/trust-center/independently-audited
+    title: Independently audited
+  audit-cure53-2024:
+    url: https://cure53.de/audit-report_nym.pdf
+    title: Cure53, Nym mobile and desktop, VPN, infra and cryptography audit (2024)
+  cure53-response:
+    url: https://nym.com/trust-center/Cure53-security-audit-2024
+    title: Nym response to Cure53 security audit (July 2024)
+  audit-aumasson-2021:
+    url: https://nym.com/nym-audit-report-draft-202109-3.pdf
+    title: JP Aumasson, Nym security review (2021)
+  aumasson-response:
+    url: https://nym.com/trust-center/jp-security-audit-2021
+    title: Nym Security Review (2021)
+  audit-oak-contracts:
+    url: https://github.com/oak-security/audit-reports/blob/main/Nym/2023-03-27%20Audit%20Report%20-%20Nym%20Mixnet%20and%20Vesting%20Contracts%20v1.0.pdf
+    title: Oak Security, Nym mixnet and vesting contracts audit (2023)
+  audit-oak-wallet:
+    url: https://github.com/oak-security/audit-reports/blob/main/Nym/Audit%20Report%20-%20Nym%20Wallet.pdf
+    title: Oak Security, Nym wallet audit (2023)
+  vdp:
+    url: https://nym.com/vdp-bbp
+    title: Vulnerability disclosure policy and bug bounty program
+  idp:
+    url: https://nym.com/idp
+    title: Incident disclosure policy
+  incident-2025-09:
+    url: https://nym.com/blog/incident-report-13-september-2025
+    title: 'Incident report: NymVPN connectivity problem on 13 September 2025'
+  incident-2026-05:
+    url: https://nym.com/blog/incident-report-1-5-2026
+    title: 'NymVPN incident report: 01 May 2026'
+  create-account:
+    url: https://support.nym.com/hc/en-us/articles/27675620700945-How-do-I-create-a-NymVPN-account
+    title: How do I create a NymVPN account?
+  pricing:
+    url: https://nym.com/pricing
+    title: NymVPN pricing
+  pricing-help:
+    url: https://support.nym.com/hc/en-us/articles/31880660962577-How-much-do-NymVPN-subscriptions-cost
+    title: How much do NymVPN subscriptions cost?
+  free-trial:
+    url: https://support.nym.com/hc/en-us/articles/47614672352913-Does-NymVPN-have-a-free-trial
+    title: Does NymVPN have a free trial?
+  refund:
+    url: https://support.nym.com/hc/en-us/articles/32968384284561-How-do-I-get-a-refund-for-my-NymVPN-subscription
+    title: How do I get a refund for my NymVPN subscription?
+  v2026-11:
+    url: https://nym.com/blog/nymvpn-v2026.11
+    title: NymVPN v2026.11
+  v2026-12:
+    url: https://nym.com/blog/nymvpn-v2026.12
+    title: NymVPN v2026.12 is live
+  wireguard-help:
+    url: https://support.nym.com/hc/en-us/articles/28104383231121-How-does-NymVPN-implement-WireGuard
+    title: How does NymVPN implement WireGuard?
+  torrenting:
+    url: https://support.nym.com/hc/en-us/articles/47614663055249-Does-NymVPN-support-torrenting-and-P2P
+    title: Does NymVPN support torrenting and P2P?
+  china:
+    url: https://support.nym.com/hc/en-us/articles/34637081648273-Does-NymVPN-work-in-China
+    title: Does NymVPN work in China?
+  lewes:
+    url: https://nym.com/blog/lewes-protocol-post-quantum
+    title: Introducing post-quantum keys for NymVPN
+  android-changelog:
+    url: https://github.com/nymtech/nym-vpn-client/blob/develop/nym-vpn-android/CHANGELOG.md
+    title: NymVPN Android changelog
+  kill-switch:
+    url: https://support.nym.com/hc/en-us/articles/47614672366481-Does-NymVPN-have-a-kill-switch
+    title: Does NymVPN have a kill switch?
+  dns-help:
+    url: https://support.nym.com/hc/en-us/articles/41140533515665-How-to-use-Domain-Name-System-DNS-privacy-in-NymVPN
+    title: How to use DNS privacy in NymVPN?
+  server-list:
+    url: https://support.nym.com/hc/en-us/articles/22689918792849-Where-can-I-find-the-NymVPN-server-list
+    title: Where can I find the NymVPN server list?
+  server-location:
+    url: https://support.nym.com/hc/en-us/articles/26448676449297-How-is-server-location-determined-by-NymVPN
+    title: How is server location determined by NymVPN?
+  gateways-api:
+    url: https://nymvpn.com/api/public/v1/directory/gateways?show_vpn_only=true
+    title: NymVPN gateway directory (API)
+  split-tunnel:
+    url: https://support.nym.com/hc/en-us/articles/43433924223633-What-is-split-tunneling-and-how-to-use-it-in-NymVPN
+    title: What is split tunneling and how to use it in NymVPN?
+  malware:
+    url: https://support.nym.com/hc/en-us/articles/34637201297681-Does-NymVPN-protect-me-against-malware
+    title: Does NymVPN protect me against malware?
+  source-code:
+    url: https://github.com/nymtech/nym-vpn-client
+    title: nymtech/nym-vpn-client on GitHub
+  fdroid:
+    url: https://f-droid.org/en/packages/net.nymtech.nymvpn/
+    title: NymVPN on F-Droid
+  partner-terms:
+    url: https://nym.com/partner-terms
+    title: Nym partner terms and conditions
+  download:
+    url: https://nym.com/download
+    title: Download NymVPN
