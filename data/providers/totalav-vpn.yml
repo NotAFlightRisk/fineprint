@@ -25,9 +25,9 @@ criteria:
       note: Point Wild names its executives, but nobody running TotalAV or its VPN.
       sources: [point-wild-team]
     sister_brands:
-      value: [Hotspot Shield, Betternet, Touch VPN, UltraVPN, VPN 360]
+      value: [Hotspot Shield, Betternet, Touch VPN, UltraVPN, VPN 360, OVPN]
       note: Pango's VPNs joined the family when Pango Group merged with Total Security.
-      sources: [point-wild-merger, aura-split-2024, hss-privacy-vpn]
+      sources: [point-wild-merger, aura-split-2024, hss-privacy-vpn, ovpn-next-chapter]
     acquisitions:
       value:
         - date: 2024-12-12
@@ -253,6 +253,9 @@ refs:
   aura-split-2024:
     url: https://www.aura.com/press/release/aura-splits-into-two-world-class-online-safety-companies
     title: Aura splits into two world-class online safety companies (2024)
+  ovpn-next-chapter:
+    url: https://www.ovpn.com/en/blog/next-chapter-for-ovpn
+    title: Next chapter for OVPN (2023-05-08)
   point-wild-merger:
     url: https://www.paulweiss.com/insights/client-news/pango-group-merges-with-total-security
     title: Pango Group merges with Total Security (Paul, Weiss)
