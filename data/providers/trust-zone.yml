@@ -1,0 +1,299 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Trust.Zone
+icon: trust-zone.png
+checked: 2026-10-24
+
+criteria:
+  identity:
+    website:
+      value: https://trust.zone
+      sources: [home]
+    legal_entity:
+      value: Internet Privacy Ltd
+      note: >-
+        A Seychelles company. Tersys Group OÜ in Tallinn takes card and PayPal payments as its distributor
+        and publishes the apps.
+      sources: [terms, register]
+    owner:
+      value: null
+      note: >-
+        Nothing published says who owns Internet Privacy Ltd. Estonia's register lists Kostiantyn
+        Kalynovskyi as the sole shareholder of Tersys Group OÜ, the distributor.
+      sources: [terms, register]
+    founded:
+      value: 2015
+      note: The earliest archived copy of the live service is from February 2015.
+      sources: [wayback-2015]
+    team:
+      value: partial
+      note: Its site names nobody, but Estonia's company register names the distributor's board member and owner.
+      sources: [terms, register]
+    sister_brands:
+      value: []
+      note: The App Store developer account behind its apps lists only Trust.Zone's two apps.
+      sources: [app-store-v2, app-store-classic]
+    acquisitions:
+      value: null
+      note: The operator's ownership isn't published, so there's no way to tell whether it has changed hands.
+
+  jurisdiction:
+    hq:
+      value: SC
+      evidence: claimed
+      sources: [terms]
+    entities:
+      value: [SC, EE]
+      note: Internet Privacy Ltd in the Seychelles runs the service, and Tersys Group OÜ in Estonia handles payments.
+      sources: [terms, register]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [privacy-policy]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [privacy-policy]
+    timestamps:
+      value: temporary
+      evidence: claimed
+      note: >-
+        Session details for authentication and connection management are held in RAM on the
+        authentication server and removed when the session ends.
+      sources: [privacy-policy]
+    bandwidth:
+      value: temporary
+      evidence: claimed
+      note: A running traffic counter is held in RAM for the session and removed when it ends.
+      sources: [privacy-policy]
+    source_ip:
+      value: none
+      evidence: claimed
+      note: The policy says it keeps no connection logs, though it doesn't list your IP address by name.
+      sources: [privacy-policy]
+    proven:
+      value: []
+      note: >-
+        No audit or court case has tested the policy. An audit of V2 was announced in October 2026, with no
+        auditor or scope named.
+      sources: [audit-announcement]
+    policy: https://trust.zone/privacy
+
+  transparency:
+    audits:
+      value: []
+      note: An independent audit of V2 was announced on 21 October 2026, with no auditor named yet.
+      sources: [audit-announcement]
+    report: none
+    canary:
+      value: maintained
+      note: A PGP-signed canary, updated daily with that day's BBC headlines.
+      sources: [canary]
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: required
+      sources: [why]
+    personal_data:
+      value: []
+      note: PayPro Global, which handles card and PayPal payments, may ask for more personal details at checkout.
+      sources: [faq, why]
+    payment:
+      value: [card, paypal, app_store, bitcoin, other_crypto]
+      sources: [pricing, app-store-v2]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn, ikev2, other]
+      note: >-
+        Other is VLESS, Trojan and Shadowsocks in the V2 apps, plus L2TP/IPSec, SSTP, PPTP, SOCKS5 and HTTPS
+        proxies for manual setup. Some are only available by hand or on certain platforms.
+      sources: [protocols, setup, v2-launch]
+    post_quantum:
+      value: null
+      note: It announced post-quantum encryption in February 2025, but doesn't say which protocols or apps have it.
+      sources: [pq-post, protocols]
+    kill_switch:
+      value: app
+      sources: [v2-launch, faq]
+    dns:
+      value: null
+      note: V2 lets you pick a DNS provider such as Google or Cloudflare, and it doesn't say which one it uses by default.
+      sources: [v2-launch]
+
+  infra:
+    ram_only:
+      value: null
+      note: Only the authentication server's session data is said to live in RAM. It doesn't say how its VPN servers store data.
+      sources: [privacy-policy]
+    hosting:
+      value: null
+      note: It doesn't say whether it owns or rents its servers.
+    virtual_locations:
+      value: null
+      note: It doesn't say whether any of its locations are virtual.
+    servers:
+      value: 173
+      sources: [servers]
+    countries:
+      value: 36
+      note: The pricing page advertises 173 locations.
+      sources: [servers, pricing]
+
+  features:
+    connections:
+      value: 3
+      note: Five on the 2-year plan. Three more connections cost $2.49 a month.
+      sources: [pricing, faq]
+    multihop: false
+    obfuscation:
+      value: [shadowsocks, v2ray, amneziawg]
+      note: V2ray here means VLESS (with Reality) and Trojan. V2 also offers handshake fragmentation and routing through Cloudflare WARP.
+      sources: [protocols, v2-launch, client-android]
+    port_forwarding:
+      value: true
+      note: A paid add-on with a dedicated IP, from $2.49 a month. It's used through the Classic apps.
+      sources: [port-forwarding, v2-launch]
+    split_tunnel:
+      value: true
+      note: By app and by website in the V2 apps.
+      sources: [v2-launch]
+    blocking:
+      value: []
+      sources: [premium-features]
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android, browser]
+      note: >-
+        Browser means proxy extensions for Chrome and Firefox. Linux and routers are set up by hand. The V2
+        apps were still labelled alpha in October 2026, with the older Classic apps kept alongside.
+      sources: [download, setup, client-android]
+    open_source:
+      value: none
+      note: Its licence forbids reverse engineering the apps, and no source is published.
+      sources: [terms]
+    telemetry:
+      value: null
+      note: >-
+        The policy says the apps use no third-party analytics or tracking SDKs. The Play listing says the V2
+        app may collect personal info and device IDs, without saying what for.
+      sources: [privacy-policy, google-play-v2]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 9.99, currency: USD }
+      sources: [pricing]
+    best:
+      value: { amount: 1.87, currency: USD }
+      note: >-
+        $55.99 for two years plus six free months. The free months change with its deals (a free year for
+        $63.99 in August 2026). A year costs $39.99.
+      sources: [pricing, pricing-2026-08]
+    best_term:
+      value: 30
+      sources: [pricing]
+    renewal_increase:
+      value: null
+      note: You can pay by subscription or manually, but no renewal price is published.
+      sources: [pricing, terms]
+    free_tier:
+      value: false
+      note: A 3-day trial with one connection, capped at 1,000 users a month.
+      sources: [pricing, home]
+    refund_days:
+      value: 10
+      note: First purchase on its website only.
+      sources: [terms]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: It sells itself as "the #1 Anonymous VPN" that makes you "invisible" and "100% anonymous".
+      sources: [home, why]
+    affiliates:
+      value: true
+      note: Up to 50% recurring commission, or up to 100% of the first invoice.
+      sources: [affiliate-program]
+    review_sites:
+      value: null
+      note: No sign it owns any, but who owns it isn't published.
+    activism: false
+
+refs:
+  pq-post:
+    url: https://trust.zone/post/trust.zone-vpn-adopts-post-quantum-encryption
+    title: Trust.Zone VPN adopts post-quantum encryption (February 2025)
+  home:
+    url: https://trust.zone/
+    title: Trust.Zone
+  why:
+    url: https://trust.zone/trustzone-vpn
+    title: Why Trust.Zone?
+  privacy-policy:
+    url: https://trust.zone/privacy
+    title: Privacy policy
+  terms:
+    url: https://trust.zone/terms
+    title: Terms and conditions of use, sale and refund
+  register:
+    url: https://ariregister.rik.ee/eng/company/14499262/Tersys-Group-O%C3%9C
+    title: Tersys Group OÜ in the Estonian e-Business Register
+  wayback-2015:
+    url: https://web.archive.org/web/20150212010907/http://trust.zone/
+    title: trust.zone, archived February 2015
+  canary:
+    url: https://trust.zone/canary
+    title: Trust.Zone warrant canary
+  audit-announcement:
+    url: https://trust.zone/post/independent-security-audit-coming-soon-for-trust.zone-v2
+    title: Independent security audit coming soon for Trust.Zone V2
+  v2-launch:
+    url: https://trust.zone/post/introducing-trust.zone-v2-new-generation-of-vpn
+    title: "Introducing Trust.Zone V2: a new generation of VPN"
+  protocols:
+    url: https://trust.zone/post/vpn-protocols-explained-which-one-should-you-use
+    title: "VPN protocols explained: which one should you use?"
+  setup:
+    url: https://trust.zone/setup
+    title: Setup VPN
+  faq:
+    url: https://trust.zone/faq
+    title: FAQ
+  servers:
+    url: https://trust.zone/servers
+    title: Servers
+  pricing:
+    url: https://trust.zone/prices
+    title: Pricing
+  pricing-2026-08:
+    url: https://web.archive.org/web/20260801190455/https://trust.zone/order
+    title: Trust.Zone order page, archived August 2026
+  port-forwarding:
+    url: https://trust.zone/portforwarding
+    title: Port forwarding
+  premium-features:
+    url: https://trust.zone/premiumfeatures
+    title: Premium VPN features
+  download:
+    url: https://trust.zone/download
+    title: VPN software
+  client-android:
+    url: https://trust.zone/client_android
+    title: Trust.Zone VPN for Android
+  google-play-v2:
+    url: https://play.google.com/store/apps/details?id=zone.trust.vpn2
+    title: "Trust.Zone VPN V2: VPN & Proxy on Google Play"
+  app-store-v2:
+    url: https://apps.apple.com/us/app/trust-zone-vpn-v2-vpn-proxy/id6743800308
+    title: "Trust.Zone VPN V2: VPN & Proxy on the App Store"
+  app-store-classic:
+    url: https://apps.apple.com/us/app/trust-zone-vpn-anonymous-vpn/id1475638796
+    title: Trust.Zone VPN - Anonymous VPN on the App Store
+  affiliate-program:
+    url: https://get-trust-zone.info/
+    title: Trust.Zone affiliate program
