@@ -1,0 +1,299 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: VPNSecure
+icon: vpnsecure.svg
+checked: 2026-10-24
+
+criteria:
+  identity:
+    website:
+      value: https://www.vpnsecure.me
+      sources: [home]
+    legal_entity:
+      value: InfiniteQuant Ltd
+      note: >-
+        A Bahamas company. Its terms named Boost Network Pty Ltd in Australia until 2024, then HOLDXB
+        Trading FZCO in Dubai until mid-2025.
+      sources: [terms, privacy-policy, terms-2024, terms-2025]
+    owner:
+      value: null
+      note: >-
+        InfiniteQuant's CEO is Romain Brabant, but who owns the company isn't published.
+      sources: [register-2025]
+    founded:
+      value: 2010
+      note: The earliest archived copy of the site, selling the service in Australian dollars, is from May 2010.
+      sources: [wayback-2010]
+    team:
+      value: partial
+      note: The site names nobody. The Register named InfiniteQuant's CEO when it tracked him down in 2025.
+      sources: [home, register-2025]
+    sister_brands:
+      value: []
+      note: InfiniteQuant's App Store account lists VPN Secure and one game. Its white label partners resell the network under their own names.
+      sources: [app-store-dev, white-label]
+    acquisitions:
+      value:
+        - date: 2023-05-01
+          acquirer: InfiniteQuant Ltd
+          source: ars-2025
+      note: >-
+        An asset-only purchase from Boost Network Pty Ltd through Flippa in May 2023.
+      sources: [ars-2025, register-2025]
+
+  jurisdiction:
+    hq:
+      value: BS
+      sources: [terms, privacy-policy]
+    entities:
+      value: [BS]
+      note: >-
+        HOLDXB Trading FZCO in Dubai was the named company from 2024 until mid-2025, and nothing says
+        whether it still has a role.
+      sources: [terms, terms-2025]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [privacy-policy, no-logging]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [privacy-policy, no-logging]
+    timestamps:
+      value: none
+      evidence: claimed
+      sources: [no-logging, terms]
+    bandwidth:
+      value: none
+      evidence: claimed
+      sources: [no-logging, terms]
+    source_ip:
+      value: none
+      evidence: claimed
+      sources: [no-logging, terms]
+    proven: []
+    policy: https://www.vpnsecure.me/privacy-policy
+
+  transparency:
+    audits: []
+    report: none
+    canary:
+      value: maintained
+      note: >-
+        Signed and dated 19 July 2026. The copy it replaced, still served in March 2026, was dated
+        October 2018.
+      sources: [canary, canary-2026-03]
+    bug_bounty: false
+    incidents:
+      value:
+        - date: 2025-04-28
+          summary: >-
+            Deactivated every lifetime account sold by the previous owner, saying it hadn't been told
+            about them, and offered discounted plans until 31 May 2025 instead of refunds.
+          handled: poorly
+          source: ars-2025
+      sources: [ars-2025, register-2025, techspot-2025]
+
+  account:
+    email:
+      value: required
+      note: The terms say a temporary address will do.
+      sources: [checkout, privacy-policy, terms]
+    personal_data:
+      value: []
+      sources: [checkout]
+    payment:
+      value: [card, paypal, app_store, bitcoin, other_crypto]
+      note: Other crypto includes Ethereum, Litecoin, Dogecoin and stablecoins, through Cryptomus.
+      sources: [pricing, features, affiliates]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn, other]
+      note: Other is an HTTP proxy, used by the browser extensions.
+      sources: [download, locations]
+    post_quantum:
+      value: none
+      sources: [how-vpn-works]
+    kill_switch:
+      value: app
+      note: The iOS app lists a kill switch. On Android it points you to the system's Always-on VPN setting.
+      sources: [app-store, google-play]
+    dns:
+      value: first_party
+      evidence: claimed
+      note: It says DNS lookups go through the tunnel and that it doesn't log them, without naming the resolvers.
+      sources: [no-logging]
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say how its servers store data.
+    hosting:
+      value: owned
+      evidence: claimed
+      note: It says it owns and operates its network, but names no data centres.
+      sources: [features]
+    virtual_locations:
+      value: null
+      note: It doesn't say whether any of its locations are virtual.
+    servers:
+      value: 57
+      sources: [locations]
+    countries:
+      value: 25
+      note: The locations page lists 25, while the features and pricing pages still say 40.
+      sources: [locations, features, pricing]
+
+  features:
+    connections:
+      value: 10
+      sources: [pricing]
+    multihop: false
+    obfuscation:
+      value: [proprietary]
+      note: Stealth VPN, on Windows, macOS, Linux and Android, which it doesn't describe further.
+      sources: [features, google-play]
+    port_forwarding:
+      value: false
+      sources: [features]
+    split_tunnel:
+      value: false
+      sources: [features]
+    blocking:
+      value: [ads, trackers]
+      note: Done by picking an ad-blocking server location.
+      sources: [home, google-play]
+
+  clients:
+    platforms:
+      value: [windows, macos, linux_gui, ios, android, browser]
+      note: >-
+        Browser means proxy extensions for Chrome and Firefox. Routers are set up by hand with OpenVPN
+        configs, not an app.
+      sources: [download, linux, features]
+    open_source:
+      value: none
+      sources: [download]
+    telemetry:
+      value: null
+      note: >-
+        The policy doesn't mention app analytics, but the Play listing says the app may collect app
+        info and performance data.
+      sources: [privacy-policy, google-play]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 9.95, currency: USD }
+      note: The first month costs $1 when you pay with PayPal.
+      sources: [pricing, checkout]
+    best:
+      value: { amount: 2.99, currency: USD }
+      note: $107.64 for three years. A one-week pass costs $5 and doesn't renew.
+      sources: [pricing]
+    best_term:
+      value: 36
+      sources: [pricing]
+    renewal_increase:
+      value: null
+      note: >-
+        The 1-year and 3-year prices are billed "for the first" term, with no renewal price given.
+        Crypto payments don't auto-renew.
+      sources: [pricing, checkout]
+    free_tier: false
+    refund_days:
+      value: 30
+      note: The terms say 90 days, after you've been through troubleshooting with support.
+      sources: [pricing, checkout, terms]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        It sells encryption "used by banks and military", says your activity "cannot be linked to your
+        account", and promises you can "operate anonymously, without detection".
+      sources: [how-vpn-works, privacy-policy, features]
+    affiliates:
+      value: true
+      note: 20% to 35% of every payment, renewals included, pitched at VPN review sites.
+      sources: [affiliates]
+    review_sites:
+      value: null
+      note: No sign it owns any, but who owns it isn't published.
+    activism: false
+
+refs:
+  home:
+    url: https://www.vpnsecure.me/
+    title: VPN Secure
+  terms:
+    url: https://www.vpnsecure.me/terms-of-service
+    title: Terms of service
+  privacy-policy:
+    url: https://www.vpnsecure.me/privacy-policy
+    title: Privacy policy
+  no-logging:
+    url: https://www.vpnsecure.me/no-logging
+    title: No logging policy
+  features:
+    url: https://www.vpnsecure.me/features
+    title: Features
+  how-vpn-works:
+    url: https://www.vpnsecure.me/how-vpn-works
+    title: How VPN works
+  pricing:
+    url: https://www.vpnsecure.me/pricing
+    title: Pricing
+  checkout:
+    url: https://www.vpnsecure.me/checkout/27
+    title: Checkout
+  locations:
+    url: https://www.vpnsecure.me/locations
+    title: VPN server locations
+  download:
+    url: https://www.vpnsecure.me/download
+    title: Download VPN Secure
+  linux:
+    url: https://www.vpnsecure.me/download/linux
+    title: Download VPN for Linux
+  affiliates:
+    url: https://www.vpnsecure.me/become-an-affiliate
+    title: Become an affiliate
+  white-label:
+    url: https://www.vpnsecure.me/white-label-vpn
+    title: White label VPN
+  canary:
+    url: https://www.vpnsecure.me/files/canary.txt
+    title: Warrant canary
+  canary-2026-03:
+    url: https://web.archive.org/web/20260312162925/https://www.vpnsecure.me/files/canary.txt
+    title: Warrant canary (archived March 2026)
+  terms-2024:
+    url: https://web.archive.org/web/20240210235318/https://www.vpnsecure.me/terms-of-service/
+    title: Terms of service, naming Boost Network Pty Ltd (archived February 2024)
+  terms-2025:
+    url: https://web.archive.org/web/20250513055127/https://www.vpnsecure.me/terms-of-service/
+    title: Terms of service, naming HOLDXB Trading FZCO (archived May 2025)
+  wayback-2010:
+    url: https://web.archive.org/web/20100516021601/http://www.vpnsecure.me/
+    title: vpnsecure.me, archived May 2010
+  google-play:
+    url: https://play.google.com/store/apps/details?id=me.vpnsecure.androidclient
+    title: VPN Secure on Google Play
+  app-store:
+    url: https://apps.apple.com/us/app/vpn-secure-vpn-s/id945570678
+    title: VPN Secure (VPN-S) on the App Store
+  app-store-dev:
+    url: https://apps.apple.com/us/developer/infinitequant-ltd/id1669873416
+    title: InfiniteQuant Ltd on the App Store
+  ars-2025:
+    url: https://arstechnica.com/gadgets/2025/05/vpn-firm-says-it-didnt-know-customers-had-lifetime-subscriptions-cancels-them/
+    title: VPN firm says it didn't know customers had lifetime subscriptions, cancels them (Ars Technica)
+  register-2025:
+    url: https://www.theregister.com/on-prem/2025/05/14/vpn-secure-parent-co-ceo-explains-why-lifetime-deals-axed/533610
+    title: VPN Secure parent co CEO explains why lifetime deals were axed (The Register)
+  techspot-2025:
+    url: https://www.techspot.com/news/107896-vpn-service-cancels-lifetime-subscriptions-after-takeover-new.html
+    title: VPN service cancels customers' lifetime subscriptions after takeover (TechSpot)
