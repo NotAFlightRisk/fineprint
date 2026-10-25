@@ -1,0 +1,278 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: LetsVPN
+icon: letsvpn.png
+checked: 2026-10-25
+
+criteria:
+  identity:
+    website:
+      value: https://letsvpn.world
+      sources: [home]
+    legal_entity:
+      value: LGN Global Tech Inc.
+      note: The terms only name "the LetsVPN Team". The company selling the apps was called LetsGo Network Incorporated until June 2026.
+      sources: [terms, register, play, app-store]
+    owner:
+      value: Hong Lei
+      note: Sole director, holding over 75% of the shares since June 2021.
+      sources: [register]
+    founded:
+      value: 2018
+      note: The site was live by June 2018 with a 2017 copyright, so it may be a year older.
+      sources: [site-2018, cdt-exit]
+    team:
+      value: partial
+      note: The site names nobody, and the CEO's 2026 letter is unsigned, but Canada's register names the director.
+      sources: [register, ceo-apology]
+    sister_brands: []
+    acquisitions:
+      value: null
+      note: No sale is on record. Its 2018 site named an Australian company, GALNT Event Management Pty Ltd, and the Canadian company's controlling shareholder dates from June 2021.
+      sources: [site-2018, register]
+
+  jurisdiction:
+    hq:
+      value: CA
+      sources: [register, play]
+    entities:
+      value: [CA]
+      sources: [register]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [terms, privacy]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [terms, user-terms]
+    timestamps:
+      value: null
+      note: The terms say it logs "access attempts" to its servers for troubleshooting, without saying what that covers or for how long.
+      sources: [terms, user-terms]
+    bandwidth:
+      value: null
+      note: Plans are billed by time with no data cap, and it doesn't say whether usage is counted.
+      sources: [privacy, play]
+    source_ip:
+      value: null
+      note: A May 2026 notice says it keeps no record of where users connect from, but both sets of terms log "access attempts" to its servers.
+      sources: [billing-notice, terms, user-terms]
+    proven: []
+    policy: https://letsvpn.world/privacy
+
+  transparency:
+    audits:
+      value:
+        - date: 2026-04-09
+          auditor: DEKRA
+          scope: apps
+          source: masa-2026
+        - date: 2025-03-18
+          auditor: DEKRA
+          scope: apps
+          source: masa-2025
+        - date: 2024-01-15
+          auditor: DEKRA
+          scope: apps
+          source: masa-2024
+      evidence: verified
+      note: All three are Google Play MASA checks of the Android app. Its homepage also shows an AppEsteem certificate, which isn't an audit of the VPN.
+      sources: [audit-page, home]
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: none
+      note: The apps work off a device ID, and an account is just a username and password with no email or phone behind it.
+      sources: [help-multi-device, app-store]
+    personal_data: []
+    payment:
+      value: [card, app_store]
+      note: Also Alipay, WeChat Pay and UnionPay.
+      sources: [help-payments]
+
+  security:
+    protocols:
+      value: [proprietary]
+      note: Its own closed protocol, with nothing published about how it works.
+      sources: [play, app-store]
+    post_quantum:
+      value: none
+      note: Nothing is published about its protocol's key exchange.
+      sources: [play]
+    kill_switch:
+      value: null
+      note: It doesn't say whether the apps have one.
+      sources: [help-modes]
+    dns:
+      value: null
+      note: It doesn't say whose DNS servers the apps use.
+      sources: [help-modes]
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say how its servers are run.
+    hosting:
+      value: null
+      note: It doesn't say whether it owns or rents its servers.
+    virtual_locations:
+      value: null
+      note: It publishes no server list, and only Platinum plans can pick a country.
+      sources: [help-tiers]
+    servers:
+      value: null
+      note: No server count is published.
+    countries:
+      value: null
+      note: No country list is published, though Platinum plans can pick from several.
+      sources: [help-tiers]
+
+  features:
+    connections:
+      value: 2
+      sources: [help-connections]
+    multihop: false
+    obfuscation:
+      value: [proprietary]
+      note: Its own protocol is built to get past censorship, but in April 2026 it stopped working in mainland China and the service pulled out.
+      sources: [play, exit-notice]
+    port_forwarding: false
+    split_tunnel:
+      value: null
+      note: Its default smart mode decides by its own rules which traffic goes through the VPN. It doesn't say whether you can pick apps yourself.
+      sources: [help-modes]
+    blocking: []
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android]
+      note: Android covers TVs too, and there's a HarmonyOS build.
+      sources: [help-download, help-harmonyos]
+    open_source:
+      value: none
+      note: The terms forbid reverse engineering the apps.
+      sources: [user-terms]
+    telemetry:
+      value: null
+      note: The privacy policy says crash and interaction data only leave the device if you upload them, but its signup terms say the apps use the Fabric diagnostics service.
+      sources: [privacy, user-terms, play-data-safety]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 6.99, currency: USD }
+      note: The Bronze plan, which can't pick a server country. Platinum is $9.99 a month or $80.99 a year.
+      sources: [app-store, help-tiers]
+    best:
+      value: { amount: 5, currency: USD }
+      sources: [app-store]
+    best_term:
+      value: 12
+      sources: [app-store]
+    renewal_increase:
+      value: 0
+      note: Plans are flat-priced passes by the week, month, quarter or year, with no intro deal.
+      sources: [app-store]
+    free_tier:
+      value: false
+      note: New users get a free trial, given as an hour on Google Play and 72 hours on its homepage.
+      sources: [play, home]
+    refund_days:
+      value: null
+      note: The terms only say it won't accept "unreasonable" refunds, with no set window. It refunded paid time after leaving mainland China in 2026.
+      sources: [user-terms, billing-notice]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: The homepage sells it as "the VPN that always connects", which "erases any trace" and gives your privacy "absolute protection", and presents a Play Store app check as proof of "absolute security".
+      sources: [home, audit-page, exit-notice]
+    affiliates:
+      value: true
+      note: Promoters get up to 5 yuan per install, paid out to Alipay or a bank account.
+      sources: [promoters]
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://letsvpn.world/
+    title: LetsVPN homepage
+  privacy:
+    url: https://letsvpn.world/privacy
+    title: Privacy Policy
+  terms:
+    url: https://letsvpn.world/terms
+    title: Terms of Service
+  user-terms:
+    url: https://letsvpn.world/registerterm
+    title: LetsVPN Terms of Service (signup agreement)
+  audit-page:
+    url: https://letsvpn.world/audit
+    title: Google independent security review
+  masa-2026:
+    url: https://letsvpn.world/040352ccd3649f18ac0eea7d96fe29f5.pdf
+    title: DEKRA, Mobile App Profile Compliance Report 86348RCS.001 (2026)
+  masa-2025:
+    url: https://letsvpn.world/fd0c46c65e6b422b49e2376f3907385d.pdf
+    title: DEKRA, Security Evaluation Report 82495RCS.001 (2025)
+  masa-2024:
+    url: https://letsvpn.world/bc079ce4005dc471aa2232372a66e91e.pdf
+    title: DEKRA, Security Evaluation Report 77971BRCS.001 (2024)
+  register:
+    url: https://ised-isde.canada.ca/cc/lgcy/fdrlCrpDtls.html?corpId=11045334
+    title: LGN Global Tech Inc., Corporations Canada federal register entry
+  play:
+    url: https://play.google.com/store/apps/details?id=world.letsgo.booster.android.pro
+    title: LetsVPN on Google Play
+  play-data-safety:
+    url: https://play.google.com/store/apps/datasafety?id=world.letsgo.booster.android.pro
+    title: LetsVPN data safety on Google Play
+  app-store:
+    url: https://apps.apple.com/us/app/id1471102783
+    title: 快连VPN on the App Store (US)
+  site-2018:
+    url: https://web.archive.org/web/20180615014839/https://letsvpn.world/
+    title: LetsVPN homepage (archived June 2018)
+  exit-notice:
+    url: https://letsvpn.world/blog/c130bd
+    title: 致快连（LetsVPN）用户 (April 2026 notice ending mainland China service)
+  billing-notice:
+    url: https://letsvpn.world/blog/dba00f
+    title: 关于账户时长冻结、自助退款及后续计费安排的说明 (May 2026 refund and billing notice)
+  ceo-apology:
+    url: https://letsvpn.world/blog/h20kxb
+    title: CEO 的一封道歉信 (May 2026)
+  cdt-exit:
+    url: https://chinadigitaltimes.net/chinese/726869.html
+    title: China Digital Times, 一个头部VPN的倒下传出明确信号：防火墙正在加高
+  help-connections:
+    url: https://intercom.help/letsvpn-world/en/articles/2926044-what-if-i-reached-maximum-connection-limit
+    title: What if I reached maximum connection limit
+  help-multi-device:
+    url: https://intercom.help/letsvpn-world/en/articles/2925976-use-one-subscription-on-multiple-devices
+    title: Use one subscription on multiple devices
+  help-download:
+    url: https://intercom.help/letsvpn-world/en/articles/2925752-how-to-download-letsvpn
+    title: How to download LetsVPN
+  help-harmonyos:
+    url: https://intercom.help/letsvpn-world/en/articles/10264389
+    title: HarmonyOS NEXT 如何下载快连 VPN
+  help-payments:
+    url: https://intercom.help/letsvpn-world/en/articles/2914987
+    title: 如何查找快连 VPN 支付详情信息 (payment methods)
+  help-tiers:
+    url: https://intercom.help/letsvpn-world/en/articles/2926217
+    title: 青铜会员&铂金会员区别 (Bronze and Platinum plans)
+  help-modes:
+    url: https://intercom.help/letsvpn-world/en/articles/8141243
+    title: 快连VPN功能介绍-极速模式 V.S 安全模式 (smart and full modes)
+  promoters:
+    url: https://letsvpn.world/promoters
+    title: 推广赚现金 (promoter programme)
