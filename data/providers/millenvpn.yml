@@ -1,0 +1,279 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: MillenVPN
+icon: millenvpn.png
+checked: 2026-10-25
+
+criteria:
+  identity:
+    website:
+      value: https://millenvpn.jp
+      sources: [home]
+    legal_entity:
+      value: AzPocket, Inc. (アズポケット株式会社)
+      sources: [tos, commerce, gbiz]
+    owner:
+      value: null
+      note: AzPocket, which also runs the mixhost web host, names no parent company.
+      sources: [azpocket, commerce]
+    founded:
+      value: 2020
+      note: The earliest archived copy of its site, with the service on sale, is from August 2020.
+      sources: [launch-2020]
+    team:
+      value: partial
+      note: Only its representative director, Hiroshi Itami, is named.
+      sources: [azpocket, commerce]
+    sister_brands:
+      value: []
+    acquisitions:
+      value: []
+
+  jurisdiction:
+    hq:
+      value: JP
+      note: AzPocket is based in Osaka and registered with Japan's communications ministry as a telecoms carrier (E-28-03926).
+      sources: [azpocket, commerce]
+    entities:
+      value: [JP]
+      sources: [azpocket, gbiz]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [privacy]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [privacy]
+    timestamps:
+      value: none
+      evidence: claimed
+      note: That's for the MillenVPN apps. The MillenVPN Native service, included in every plan, keeps connection times.
+      sources: [privacy, services]
+    bandwidth:
+      value: aggregate
+      evidence: claimed
+      note: It keeps a monthly total of the data you transfer.
+      sources: [privacy]
+    source_ip:
+      value: none
+      evidence: claimed
+      note: >-
+        That's for the MillenVPN apps, whose servers come from WLVPN, and the policy doesn't say what
+        WLVPN keeps. The included MillenVPN Native service keeps your IP address.
+      sources: [privacy, services, play]
+    proven:
+      value: []
+    policy: https://millenvpn.jp/privacy-policy/
+
+  transparency:
+    audits:
+      value: []
+    report:
+      value: none
+    canary:
+      value: none
+    bug_bounty:
+      value: false
+    incidents:
+      value: []
+
+  account:
+    email:
+      value: required
+      sources: [order]
+    personal_data:
+      value: [name]
+      note: The order form asks for your first and last name and country of residence whichever way you pay.
+      sources: [order]
+    payment:
+      value: [card, paypal, bank]
+      note: PayPal and bank transfer only in yen.
+      sources: [commerce]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn, ikev2, other]
+      note: WireGuard, OpenVPN and IKEv2 in the apps, plus OpenConnect and native IKEv2 through the included Native services.
+      sources: [services]
+    post_quantum:
+      value: none
+      sources: [services, app-store]
+    kill_switch:
+      value: app
+      note: In the Windows app, and in the iOS app since November 2025.
+      sources: [windows-guide, app-store]
+    dns:
+      value: null
+      note: It promises DNS leak protection on some platforms but doesn't say whose DNS servers answer.
+      sources: [pricing]
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say whether its servers run from RAM.
+      sources: [features, locations]
+    hosting:
+      value: null
+      note: >-
+        The Android app's package name is com.wlvpn.consumervpn, the base app of WLVPN, the
+        IPVanish-powered white-label VPN service owned by Ziff Davis. The Native services run on its own
+        servers in Tokyo and Osaka.
+      sources: [play, wlvpn, services]
+    virtual_locations:
+      value: disclosed
+      note: The locations page marks 52 countries as virtual, served from somewhere else.
+      sources: [locations]
+    servers:
+      value: 2000
+      note: Listed as over 2,000 in more than 140 locations. Its app store listings still say over 1,300 in 75 locations.
+      sources: [locations, play, app-store]
+    countries:
+      value: 109
+      note: 52 of them are virtual, leaving 57 with a server in the country.
+      sources: [locations]
+
+  features:
+    connections:
+      value: unlimited
+      note: Subject to a fair use policy that rules out sharing one account among many people.
+      sources: [features]
+    multihop:
+      value: true
+      note: Double hop arrived in the iOS app in August 2026.
+      sources: [app-store]
+    obfuscation:
+      value: []
+      note: For China it offers OpenConnect, a VPN protocol over TLS, rather than an obfuscation layer.
+      sources: [services]
+    port_forwarding:
+      value: null
+      note: It doesn't say whether it offers port forwarding.
+      sources: [features]
+    split_tunnel:
+      value: true
+      note: By app or domain in the Windows app, and in the iOS app since August 2026.
+      sources: [windows-guide, app-store]
+    blocking:
+      value: [ads, trackers, malware]
+      note: Threat Protection in the Windows app, which reached iOS in August 2026.
+      sources: [windows-guide, app-store]
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android]
+      note: There are Android TV and Fire TV apps too. Native IKEv2 and OpenConnect also work without an app.
+      sources: [apps, services]
+    open_source:
+      value: none
+      note: The terms say the rights in its software belong to the software's owners.
+      sources: [tos, apps]
+    telemetry:
+      value: null
+      note: >-
+        The iOS privacy label lists usage analytics and crash data linked to you, while its Play listing
+        says no data is collected. Neither says whether you can turn it off.
+      sources: [app-store, play]
+    fdroid:
+      value: false
+      sources: [apps]
+
+  pricing:
+    monthly:
+      value: null
+      note: There's no rolling monthly plan. A one-off 30-day pass costs ¥1,738 including tax.
+      sources: [pricing]
+    best:
+      value: { amount: 396, currency: JPY }
+      note: Including Japanese consumption tax (¥360 before tax), paid as ¥9,504 for the first two years.
+      sources: [pricing, home]
+    best_term:
+      value: 24
+      sources: [pricing]
+    renewal_increase:
+      value: 164
+      note: Both the 1-year and 2-year plans renew at ¥1,045 a month including tax.
+      sources: [pricing, home]
+    free_tier:
+      value: false
+      sources: [pricing]
+    refund_days:
+      value: 30
+      note: Only on the 1-year and 2-year plans. The 7, 15 and 30-day passes can't be refunded.
+      sources: [commerce, pricing]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: Its features page says you can use the internet "safely and anonymously" and claims "the world's highest level" of privacy protection.
+      sources: [features]
+    affiliates:
+      value: true
+      sources: [affiliate]
+    review_sites:
+      value: false
+      note: Nothing ties AzPocket to one. Its app network comes from WLVPN, part of Ziff Davis, which owns PCMag.
+      sources: [wlvpn, zd-10k-2025]
+    activism:
+      value: false
+      sources: [features]
+
+refs:
+  home:
+    url: https://millenvpn.jp/
+    title: MillenVPN
+  pricing:
+    url: https://millenvpn.jp/pricing/
+    title: Pricing
+  privacy:
+    url: https://millenvpn.jp/privacy-policy/
+    title: Privacy policy
+  tos:
+    url: https://millenvpn.jp/tos/
+    title: Terms of service
+  commerce:
+    url: https://millenvpn.jp/commerce/
+    title: Notice under the Specified Commercial Transactions Act
+  features:
+    url: https://millenvpn.jp/features/
+    title: Features and uses
+  services:
+    url: https://millenvpn.jp/millenvpn-and-millenvpnnative/
+    title: The three services included with MillenVPN
+  locations:
+    url: https://millenvpn.jp/locations/
+    title: Server locations
+  apps:
+    url: https://millenvpn.jp/app/
+    title: Installing the VPN apps
+  windows-guide:
+    url: https://web.archive.org/web/20250326042031/https://support.millenvpn.jp/en/54
+    title: How to use the Windows app (archived March 2025)
+  affiliate:
+    url: https://millenvpn.jp/affiliate/
+    title: Affiliate programme
+  order:
+    url: https://accounts.millenvpn.jp/index.php/store/millenvpn
+    title: MillenVPN order page
+  azpocket:
+    url: https://www.azpocket.co.jp/company/
+    title: AzPocket, Inc. company profile
+  gbiz:
+    url: https://info.gbiz.go.jp/hojin/ichiran?hojinBango=9120001197641
+    title: gBizINFO corporate record for AzPocket, Inc. (corporate number 9120001197641)
+  launch-2020:
+    url: https://web.archive.org/web/20200814011432/https://millenvpn.jp/
+    title: MillenVPN homepage, archived August 2020
+  play:
+    url: https://play.google.com/store/apps/details?id=com.wlvpn.consumervpn
+    title: MillenVPN on Google Play
+  app-store:
+    url: https://apps.apple.com/jp/app/millenvpn/id1514053309
+    title: MillenVPN on the App Store, with version history
+  wlvpn:
+    url: https://wlvpn.com/about-wlvpn/
+    title: About WLVPN
+  zd-10k-2025:
+    url: https://www.sec.gov/Archives/edgar/data/1084048/000108404826000005/zd-20251231.htm
+    title: Ziff Davis, annual report on Form 10-K for 2025
