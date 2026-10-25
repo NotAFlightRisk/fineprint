@@ -1,0 +1,254 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: WiTopia personalVPN
+icon: witopia.svg
+checked: 2026-10-25
+
+criteria:
+  identity:
+    website: https://www.personalvpn.com
+    legal_entity:
+      value: Witopia, Inc.
+      sources: [policy, play]
+    owner:
+      value: Bill Bullock and Steven Shippa
+      note: The two founders held 47% each before a 2021 crowdfunding round.
+      sources: [sec-2021, our-story]
+    founded:
+      value: 2005
+      note: The company started as Full Mesh Networks in June 2003 and launched personalVPN in March 2005.
+      sources: [our-story]
+    team:
+      value: partial
+      note: The site names no one, but its 2021 SEC filing names Bill Bullock as CEO and Steven Shippa as CTO.
+      sources: [about, sec-2021]
+    sister_brands:
+      value: []
+      note: WiTopia also sells SecureMyEmail, an email encryption service, but no other VPN.
+      sources: [pricing]
+    acquisitions:
+      value: []
+      sources: [our-story]
+
+  jurisdiction:
+    hq:
+      value: US
+      sources: [policy, play]
+    entities:
+      value: [US]
+      sources: [policy, play]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [policy, faq]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [faq]
+    timestamps:
+      value: none
+      evidence: claimed
+      note: WiTopia says it keeps no logs that would let anyone match an IP address and a time to a user.
+      sources: [faq]
+    bandwidth:
+      value: none
+      evidence: claimed
+      sources: [faq]
+    source_ip:
+      value: none
+      evidence: claimed
+      note: WiTopia says it keeps no logs that would let anyone match an IP address and a time to a user.
+      sources: [faq]
+    proven:
+      value: []
+      sources: [policy]
+    policy: https://www.personalvpn.com/privacy
+
+  transparency:
+    audits:
+      value: []
+      sources: [legal]
+    report:
+      value: none
+      sources: [legal]
+    canary:
+      value: none
+      sources: [legal]
+    bug_bounty:
+      value: false
+      sources: [legal]
+    incidents:
+      value: []
+
+  account:
+    email:
+      value: required
+      note: The email address is the username. The policy says an alias or a temporary address is fine.
+      sources: [policy]
+    personal_data:
+      value: []
+      note: The policy says a name is stored with the account, but signup only asks for one as the cardholder's name.
+      sources: [policy]
+    payment:
+      value: [card, paypal, app_store]
+      note: Cards go through Stripe. The iOS app sells subscriptions in-app.
+      sources: [policy, app-store]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn, ikev2, other]
+      note: The others are IPsec with IKEv1, L2TP, PPTP and SSTP.
+      sources: [why-best, network]
+    post_quantum:
+      value: none
+      sources: [network]
+    kill_switch: null
+    dns:
+      value: first_party
+      evidence: claimed
+      note: You can pick someone else's DNS servers in the app instead.
+      sources: [why-best, play]
+
+  infra:
+    ram_only: null
+    hosting:
+      value: null
+      note: WiTopia says it runs its own FreeBSD-based hardware servers in data centres, but not whether it owns them.
+      sources: [why-best, london]
+    virtual_locations:
+      value: none
+      evidence: claimed
+      sources: [london]
+    servers:
+      value: null
+      note: WiTopia lists 60 city gateways but not how many servers sit behind them.
+      sources: [network]
+    countries:
+      value: 38
+      sources: [network]
+
+  features:
+    connections:
+      value: 8
+      note: The 2011 terms of service still say five for the personalVPN Pro plan it sells today.
+      sources: [why-best, play, terms]
+    multihop:
+      value: false
+      sources: [network]
+    obfuscation:
+      value: [proprietary]
+      note: WiTopia calls its two Stealth modes Tor-based but doesn't say which method they use.
+      sources: [why-best, play]
+    port_forwarding: null
+    split_tunnel:
+      value: true
+      note: Only in the iOS app, for WireGuard, since version 2.6.0 in October 2026.
+      sources: [app-store]
+    blocking:
+      value: []
+      sources: [play]
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android, router]
+      note: Routers means the CloakBox, a preconfigured ASUS router sold with the service. Linux has manual setup guides only.
+      sources: [support, pricing, play, app-store]
+    open_source:
+      value: none
+      sources: [eula, third-party]
+    telemetry:
+      value: null
+      note: The iOS privacy label says the app collects crash, performance and other diagnostic data. WiTopia doesn't say whether it can be turned off.
+      sources: [app-store]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 9.99, currency: USD }
+      sources: [pricing]
+    best:
+      value: { amount: 2.49, currency: USD }
+      sources: [pricing]
+    best_term:
+      value: 24
+      sources: [pricing]
+    renewal_increase:
+      value: 60
+      note: The 2-year plan renews as a yearly plan at $47.88, which works out at $3.99 a month.
+      sources: [pricing]
+    free_tier:
+      value: false
+      sources: [pricing, faq]
+    refund_days:
+      value: 30
+      note: The pricing page offers the guarantee on every VPN plan, but the older FAQ leaves the monthly plan out.
+      sources: [pricing, faq]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: It says users are completely anonymous, calls its encryption military-grade, and guarantees it is the fastest VPN.
+      sources: [home, why-best, network]
+    affiliates:
+      value: true
+      note: Commissions run up to 100% of the first payment.
+      sources: [affiliates]
+    review_sites: false
+    activism: false
+
+refs:
+  sec-2021:
+    url: https://www.sec.gov/Archives/edgar/data/1878334/000166516021001595/offeringmemoformc.pdf
+    title: WiTopia, Inc. Form C offering memorandum (SEC, 2021)
+  home:
+    url: https://www.personalvpn.com/
+    title: personalVPN home page
+  about:
+    url: https://www.personalvpn.com/about-witopia/
+    title: About Witopia
+  our-story:
+    url: https://www.witopia.com/our-story
+    title: Our story
+  policy:
+    url: https://www.personalvpn.com/privacy
+    title: Privacy policy
+  terms:
+    url: https://www.personalvpn.com/terms
+    title: Terms of service
+  eula:
+    url: https://www.personalvpn.com/eula
+    title: End user licence agreement
+  third-party:
+    url: https://www.personalvpn.com/third-party
+    title: Third party licences
+  legal:
+    url: https://www.personalvpn.com/legal/
+    title: Legal
+  faq:
+    url: https://www.personalvpn.com/support/faqs/
+    title: General FAQ
+  why-best:
+    url: https://www.personalvpn.com/why-we-are-the-best-vpn/
+    title: Why is personalVPN the best VPN service?
+  network:
+    url: https://www.personalvpn.com/network/
+    title: Witopia global VPN network
+  london:
+    url: https://www.personalvpn.com/network/united-kingdom-vpn-server-gateways/london/
+    title: London VPN service
+  support:
+    url: https://www.personalvpn.com/support/
+    title: Support
+  pricing:
+    url: https://www.witopia.com/pricing
+    title: WiTopia products and services pricing
+  affiliates:
+    url: https://www.witopia.com/witopia-affiliate-programs
+    title: WiTopia affiliate programs
+  play:
+    url: https://play.google.com/store/apps/details?id=com.witopia.personalvpn
+    title: personalVPN on Google Play
+  app-store:
+    url: https://apps.apple.com/us/app/witopia-personalvpn/id1492111686
+    title: WiTopia personalVPN on the App Store
