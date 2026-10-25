@@ -1,0 +1,266 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Le VPN
+icon: le-vpn.svg
+checked: 2026-10-25
+
+criteria:
+  identity:
+    website:
+      value: https://www.le-vpn.com
+      sources: [about]
+    legal_entity:
+      value: VTNV Solutions Limited
+      note: The terms still give an older Kowloon address; the register and the Google Play listing have the company at 49 Austin Road.
+      sources: [terms, hk-register, play]
+    owner:
+      value: null
+      note: Who owns VTNV Solutions Limited isn't published.
+      sources: [hk-register]
+    founded:
+      value: 2010
+      sources: [about, story]
+    team:
+      value: partial
+      note: Its own site names nobody. Press profiles name Ksenia Votinova Arnaud as a co-founder.
+      sources: [about, techround]
+    sister_brands:
+      value: []
+      sources: [about]
+    acquisitions:
+      value: []
+      note: It bought and merged My Private Network in 2019, but has never changed hands itself.
+      sources: [story]
+
+  jurisdiction:
+    hq:
+      value: HK
+      note: Founded in Paris and described on its own server page as a European provider, but the company has been registered in Hong Kong since 2012.
+      sources: [hk-register, servers]
+    entities:
+      value: [HK]
+      sources: [hk-register]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      note: The policy says it may filter traffic to find the account behind a copyright complaint.
+      sources: [terms]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [terms, threat-protection]
+    timestamps:
+      value: 'yes'
+      evidence: claimed
+      note: Connect and disconnect times are kept with your IP address for an unstated period.
+      sources: [terms]
+    bandwidth:
+      value: 'yes'
+      evidence: claimed
+      note: Data sent and received is kept per session, with the VPN server's IP address.
+      sources: [terms]
+    source_ip:
+      value: 'yes'
+      evidence: claimed
+      sources: [terms]
+    proven: []
+    policy: https://www.le-vpn.com/vpn-terms-of-use/
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty:
+      value: false
+      note: The terms forbid security testing of the service.
+      sources: [terms]
+    incidents:
+      value: []
+
+  account:
+    email:
+      value: optional
+      note: Normal plans need one. Its x402 passes, paid in USDC, need no account or email.
+      sources: [terms, x402]
+    personal_data:
+      value: []
+      note: It may ask for a copy of your passport or ID before activating an account, or if it suspects fraud.
+      sources: [terms]
+    payment:
+      value: [card, app_store, bitcoin, other_crypto]
+      note: Crypto payments, app store purchases and renewals can't be refunded.
+      sources: [terms, pricing, appstore]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn, ikev2, other]
+      note: L2TP/IPSec and PPTP are still offered for manual setup.
+      sources: [protocols]
+    post_quantum:
+      value: none
+      sources: [protocols]
+    kill_switch:
+      value: system
+      evidence: claimed
+      note: Always on in the new Windows and macOS apps. The Linux app's firewall goes if its service stops, and the legacy Windows app has it as an option.
+      sources: [windows-v2, mac, linux, kill-switch]
+    dns:
+      value: first_party
+      sources: [appstore, linux]
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say how its servers are run.
+      sources: [servers]
+    hosting:
+      value: null
+      note: It doesn't say whether it owns or rents its servers.
+      sources: [servers]
+    virtual_locations:
+      value: null
+      note: It lists servers in places like China, Iraq and Venezuela without saying whether any are virtual.
+      sources: [servers]
+    servers:
+      value: null
+      sources: [servers]
+    countries:
+      value: 81
+      sources: [servers]
+
+  features:
+    connections:
+      value: 10
+      note: Some older help pages and the Google Play listing still say five.
+      sources: [pricing, linux, devices-kb, play]
+    multihop:
+      value: false
+      note: The terms forbid running one VPN connection inside another.
+      sources: [terms]
+    obfuscation:
+      value: [proprietary]
+      note: Stealth is its own obfuscated WireGuard, on by default in the newer apps.
+      sources: [stealth, linux]
+    port_forwarding: null
+    split_tunnel:
+      value: false
+      note: The new Windows app can allow local network connections, but there's no per-app split.
+      sources: [windows-v2]
+    blocking:
+      value: [ads, trackers, malware]
+      sources: [threat-protection, linux, appstore]
+
+  clients:
+    platforms:
+      value: [windows, macos, linux_gui, ios, android]
+      note: Routers are supported through manual WireGuard, OpenVPN or L2TP setup rather than an app.
+      sources: [protocols, linux, router]
+    open_source:
+      value: none
+      sources: [protocols]
+    telemetry:
+      value: null
+      note: The App Store listing declares analytics and crash data, and the Play listing says app performance data and device IDs are shared with third parties. Whether you can turn it off isn't stated.
+      sources: [appstore, play]
+    fdroid:
+      value: false
+      sources: [protocols]
+
+  pricing:
+    monthly:
+      value: { amount: 9.95, currency: USD }
+      sources: [pricing]
+    best:
+      value: { amount: 4.95, currency: USD }
+      sources: [pricing]
+    best_term:
+      value: 12
+      sources: [pricing]
+    renewal_increase:
+      value: 0
+      sources: [pricing]
+    free_tier:
+      value: false
+      sources: [pricing]
+    refund_days:
+      value: 30
+      note: First purchases only, and not for crypto or app store payments.
+      sources: [terms, pricing]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: It promises "military-grade" encryption and that it doesn't record your online activity, "Period", while its policy keeps connection times, IP addresses and data use.
+      sources: [about, terms]
+    affiliates:
+      value: true
+      sources: [terms]
+    review_sites:
+      value: false
+      evidence: claimed
+      sources: [about]
+    activism:
+      value: true
+      evidence: claimed
+      note: It says it backs Reporters Without Borders and the Open Rights Group, and gives free accounts to journalists.
+      sources: [about]
+
+refs:
+  x402:
+    url: https://support.le-vpn.com/le-vpn-launches-x402-vpn-passes/
+    title: Le VPN launches x402 VPN passes
+  about:
+    url: https://www.le-vpn.com/about-us/
+    title: Who we are
+  story:
+    url: https://www.le-vpn.com/our-story/
+    title: Our Story
+  terms:
+    url: https://www.le-vpn.com/vpn-terms-of-use/
+    title: Privacy Policy & Terms of Use
+  hk-register:
+    url: https://data.cr.gov.hk/cr/api/api/v1/api_builder/json/local/search?query[0][key1]=Comp_name&query[0][key2]=begins_with&query[0][key3]=VTNV
+    title: Hong Kong Companies Registry, VTNV Solutions Limited
+  play:
+    url: https://play.google.com/store/apps/details?id=com.levpn.app.levpn
+    title: Le VPN on Google Play
+  appstore:
+    url: https://apps.apple.com/us/app/le-vpn-fast-secure/id792864867
+    title: Le VPN on the App Store
+  techround:
+    url: https://techround.co.uk/vpns/52-le-vpn/
+    title: TechRound, 52. Le VPN (2023)
+  servers:
+    url: https://www.le-vpn.com/our-vpn-servers/
+    title: Our VPN Servers
+  protocols:
+    url: https://www.le-vpn.com/le-vpn-protocols/
+    title: Le VPN Protocols
+  stealth:
+    url: https://www.le-vpn.com/stealth-vpn/
+    title: Stealth VPN Protocol
+  threat-protection:
+    url: https://www.le-vpn.com/threat-protection/
+    title: Threat Protection
+  windows-v2:
+    url: https://www.le-vpn.com/le-vpn-for-windows-built-from-scratch-built-for-whats-next/
+    title: "All-New Le VPN for Windows: Built From Scratch, Built for What's Next"
+  mac:
+    url: https://www.le-vpn.com/download/mac/
+    title: Le VPN for Mac
+  linux:
+    url: https://www.le-vpn.com/download/linux/
+    title: Le VPN for Linux
+  router:
+    url: https://www.le-vpn.com/vpn-router/
+    title: VPN for Router
+  kill-switch:
+    url: https://www.le-vpn.com/clients/index.php/knowledgebase/731/Disabling-the-Internet-connection-on-Le-VPN-disconnection.html
+    title: Disabling the Internet connection on Le VPN disconnection
+  devices-kb:
+    url: https://www.le-vpn.com/clients/index.php/knowledgebase/5/Can-I-use-Le-VPN-on-different-computers.html
+    title: Can I use Le VPN on different computers?
+  pricing:
+    url: https://www.le-vpn.com/buy-vpn/
+    title: Buy Le VPN - Plans & Pricing
