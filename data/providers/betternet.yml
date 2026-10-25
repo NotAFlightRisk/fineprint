@@ -1,0 +1,370 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Betternet
+icon: betternet.svg
+checked: 2026-10-25
+
+criteria:
+  identity:
+    website: https://www.betternet.co
+    legal_entity:
+      value: Betternet LLC
+      note: The privacy policy calls it a division of Pango Group.
+      sources: [tos, privacy-policy]
+    owner:
+      value: Point Wild
+      note: >-
+        AnchorFree, Hotspot Shield's maker, took over Betternet in 2018. Aura bought AnchorFree, by then
+        called Pango, in 2020 and spun Pango off in 2024, and Pango Group then merged with Total Security
+        to form Point Wild.
+      sources: [policy-2018, aura-pango-2020, aura-split-2024, point-wild-merger, comparitech-disclosure]
+    founded:
+      value: null
+      note: Betternet doesn't say when it launched. Its website was already offering the free VPN in March 2015.
+      sources: [home-2015]
+    team:
+      value: partial
+      note: There's no Betternet leadership page, but Pango's site names its president and other executives.
+      sources: [pango-team]
+    sister_brands:
+      value: [Hotspot Shield, Touch VPN, UltraVPN, VPN 360, TotalAV VPN, OVPN]
+      note: TotalAV's VPN joined the family when Pango Group merged with TotalAV's maker, Total Security.
+      sources: [aura-split-2024, privacy-vpn, point-wild-merger, totalav-vpn, ovpn-next-chapter]
+    acquisitions:
+      value:
+        - date: 2024-12-12
+          acquirer: Point Wild
+          source: point-wild-merger
+        - date: 2024-09-03
+          acquirer: Pango Group, spun off from Aura
+          source: aura-split-2024
+        - date: 2020-07-07
+          acquirer: Aura
+          source: aura-pango-2020
+        - date: 2018-01-01
+          acquirer: AnchorFree, now Pango
+          source: policy-2018
+      note: >-
+        Only the year of the AnchorFree takeover is known: Betternet's policy named Betternet LLC in
+        December 2017 and AnchorFree by August 2018. Point Wild was formed when Pango Group merged with
+        Total Security in December 2024.
+      sources: [policy-2017, policy-2018, aura-pango-2020, aura-split-2024, point-wild-merger]
+
+  jurisdiction:
+    hq:
+      value: US
+      sources: [tos]
+    entities:
+      value: [US]
+      note: Betternet LLC is in Boston. The policy says data may go to group companies, including Pango GmbH in Switzerland.
+      sources: [tos, privacy-policy]
+
+  logging:
+    traffic:
+      value: aggregate
+      evidence: verified
+      note: >-
+        It doesn't inspect what you send, but it logs the domains people visit, without full URLs or
+        anything that identifies them, and aggregates them about monthly.
+      sources: [privacy-vpn, audit-aon-2023]
+    dns:
+      value: aggregate
+      evidence: verified
+      note: Domains visited are logged without a user or device attached and aggregated about monthly.
+      sources: [privacy-vpn, audit-aon-2023]
+    timestamps:
+      value: 'yes'
+      evidence: claimed
+      note: >-
+        It logs how long each VPN session lasts and ties usage data to a hash of your device, without
+        saying how long it keeps it.
+      sources: [privacy-vpn, privacy-policy]
+    bandwidth:
+      value: 'yes'
+      evidence: claimed
+      note: >-
+        It logs the data each session uses and measures it against a device hash, partly to enforce the
+        free plan's limits, without saying how long it keeps it.
+      sources: [privacy-vpn]
+    source_ip:
+      value: temporary
+      evidence: verified
+      note: >-
+        Kept encrypted until the session ends. It also uses your IP to work out your rough location and
+        ISP, and to attribute ads.
+      sources: [privacy-vpn, audit-aon-2023]
+    proven:
+      value: [audit]
+      evidence: verified
+      note: Aon's 2023 review checked that browsing activity isn't logged with your IP or another identifier.
+      sources: [audit-aon-2023]
+    policy: https://www.pango.co/legal/vpn-products-privacy-notice
+
+  transparency:
+    audits:
+      value:
+        - date: 2023-08-25
+          auditor: Aon
+          scope: no_logs
+          source: audit-aon-2023
+      evidence: verified
+      note: Only a four-page summary of Aon's review is published, dated by the report.
+      sources: [security-audit, audit-aon-2023]
+    report:
+      value: irregular
+      note: The newest is Pango's group-wide report for 2023, published by Point Wild, which doesn't break out Betternet.
+      sources: [pango-transparency-2023, point-wild-reports]
+    canary: none
+    bug_bounty: false
+    incidents:
+      value: []
+      note: >-
+        A 2016 study of Android VPN apps found 14 tracking libraries in the free app, and 13 antivirus
+        engines flagged it as malware.
+      sources: [csiro-2016]
+
+  account:
+    email:
+      value: required
+      note: The free app works without an account.
+      sources: [home, free-version]
+    personal_data:
+      value: null
+      note: The privacy policy says creating an account may collect your name as well as your email, without saying which you have to give.
+      sources: [privacy-policy]
+    payment:
+      value: [card, paypal, app_store]
+      sources: [cancel-renewal, refund-policy]
+
+  security:
+    protocols:
+      value: [proprietary, wireguard, ikev2]
+      note: >-
+        Hydra, Pango's own protocol, is the default, and IKEv2 isn't offered on Android. Aon also found
+        OpenVPN in 2023, but the apps' settings no longer list it.
+      sources: [features-settings, android-settings, protocol, audit-aon-2023]
+    post_quantum: none
+    kill_switch:
+      value: app
+      note: A setting in the Windows, macOS, iOS and Android apps that stops traffic if the VPN drops.
+      sources: [features-settings, ios-settings, mac-settings]
+    dns:
+      value: null
+      note: It claims DNS leak protection, but not whose servers answer DNS requests.
+      sources: [security-audit]
+
+  infra:
+    ram_only:
+      value: null
+      note: Betternet doesn't say its servers run from RAM.
+      sources: [security-audit]
+    hosting:
+      value: rented
+      sources: [privacy-vpn]
+    virtual_locations:
+      value: disclosed
+      note: >-
+        The locations list shows India as served via Singapore. It doesn't say whether any of its other
+        locations are virtual.
+      sources: [features]
+    servers:
+      value: 1000
+      note: The features page says 1,000+.
+      sources: [features]
+    countries:
+      value: 80
+      note: Including India via Singapore.
+      sources: [features]
+
+  features:
+    connections:
+      value: 10
+      note: Free accounts get one.
+      sources: [devices, free-version]
+    multihop:
+      value: true
+      note: Android only.
+      sources: [multihop]
+    obfuscation:
+      value: [proprietary]
+      note: Betternet says its Hydra protocol can make traffic look like other traffic to get past VPN blocks.
+      sources: [features]
+    port_forwarding: false
+    split_tunnel:
+      value: true
+      note: On iOS it only works for websites, not apps.
+      sources: [features-settings, ios-settings]
+    blocking:
+      value: [malware]
+      note: It warns about or blocks sites known for malware or phishing, not ads or trackers.
+      sources: [security-audit]
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android, browser]
+      note: The help centre says Linux and routers aren't supported. The Chrome extension only covers the browser.
+      sources: [platforms, devices-supported]
+    open_source: none
+    telemetry:
+      value: null
+      note: >-
+        The policy says it ties how you use the app to a hash of your device for analytics and marketing,
+        but doesn't mention a way to turn this off.
+      sources: [privacy-vpn, privacy-policy]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 12.99, currency: USD }
+      note: Premium, shown as $1.99 for the first month and $12.99 a month after.
+      sources: [features]
+    best:
+      value: { amount: 8.00, currency: USD }
+      note: $95.99 a year for Premium.
+      sources: [premium-trial, home]
+    best_term:
+      value: 12
+      sources: [premium-trial]
+    renewal_increase:
+      value: 0
+      note: The yearly plan renews at the same $95.99. Only the monthly plan has an intro price, $1.99 for the first month.
+      sources: [features, home]
+    free_tier:
+      value: true
+      note: >-
+        Ad-supported, with one device, a few locations and 500 MB of data a day, although the features
+        page promises unlimited data on the free plan.
+      sources: [free-version, bandwidth-limit, free-vs-premium, features]
+    refund_days:
+      value: 45
+      note: Apple and Microsoft Store purchases go through the store's own refund process.
+      sources: [refund-policy]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        It promises "military-grade encryption", and a help article says it doesn't log any data, while its
+        privacy notice lists session lengths, bandwidth and domains.
+      sources: [home, no-logs-faq, privacy-vpn]
+    affiliates:
+      value: null
+      note: Betternet doesn't publish an affiliate scheme of its own, though its sister Hotspot Shield runs one.
+      sources: [hss-affiliates]
+    review_sites:
+      value: true
+      note: Point Wild also owns Comparitech, a VPN review site, which discloses it.
+      sources: [comparitech-disclosure]
+    activism: false
+
+refs:
+  home:
+    url: https://www.betternet.co/
+    title: Betternet
+  features:
+    url: https://www.betternet.co/features/
+    title: Betternet VPN features, server locations and pricing
+  security-audit:
+    url: https://www.betternet.co/security-audit/
+    title: Betternet security audit
+  audit-aon-2023:
+    url: https://www.betternet.co/wp-content/uploads/2024/07/Pango-Betternet-VPN-Privacy-Policy-Review-Summary-Report.pdf
+    title: Aon, technical security review of Betternet's VPN privacy policy, summary (2023)
+  tos:
+    url: https://legal.betternet.co/documents/terms_of_service
+    title: Betternet terms of service
+  privacy-policy:
+    url: https://legal.betternet.co/documents/privacy_policy
+    title: Betternet privacy policy
+  privacy-vpn:
+    url: https://www.pango.co/legal/vpn-products-privacy-notice
+    title: Pango VPN products privacy notice (Hotspot Shield, Betternet, VPN360, Ultra VPN)
+  policy-2017:
+    url: https://web.archive.org/web/20171224143558/https://www.betternet.co/privacy-policy
+    title: Betternet privacy policy, December 2017 (archived)
+  policy-2018:
+    url: https://web.archive.org/web/20181005040107/https://www.betternet.co/privacy-policy
+    title: Betternet privacy policy naming AnchorFree, August 2018 (archived)
+  home-2015:
+    url: https://web.archive.org/web/20150314204136/https://www.betternet.co/
+    title: Betternet homepage, March 2015 (archived)
+  features-settings:
+    url: https://support.betternet.co/en/faq-s/general-questions/betternet-app-features-and-settings
+    title: Betternet app features and settings
+  android-settings:
+    url: https://support.betternet.co/en/android/general-questions/what-do-all-these-settings-mean-on-my-android-device
+    title: What do all these settings mean on my Android device?
+  ios-settings:
+    url: https://support.betternet.co/en/ios/general-product-information/what-do-all-these-settings-mean-in-betternet-on-ios
+    title: What do all these settings mean in Betternet on iOS?
+  mac-settings:
+    url: https://support.betternet.co/en/mac-os/other-issues/what-do-these-settings-mean-on-my-mac-device
+    title: What do these settings mean on my Mac device?
+  protocol:
+    url: https://support.betternet.co/en/faq-s/about-betternet/what-s-the-protocol-used-by-betternet
+    title: What's the protocol used by Betternet?
+  multihop:
+    url: https://support.betternet.co/en/android/general-questions/what-is-multi-hop-on-android
+    title: What is Multi-hop on Android?
+  devices:
+    url: https://support.betternet.co/en/faq-s/payments-subscriptions/how-many-devices-can-use-a-single-premium-account-simultaneously
+    title: How many devices can use a single Premium account simultaneously?
+  free-version:
+    url: https://support.betternet.co/en/faq-s/about-betternet/what-exactly-is-the-free-version-of-betternet
+    title: What exactly is the free version of Betternet?
+  bandwidth-limit:
+    url: https://support.betternet.co/en/faq-s/about-betternet/does-betternet-have-a-bandwidth-limit
+    title: Does Betternet have a bandwidth limit?
+  free-vs-premium:
+    url: https://support.betternet.co/en/faq-s/general-questions/what-are-the-differences-between-the-free-vs-the-premium
+    title: What are the differences between the Free vs the Premium?
+  premium-trial:
+    url: https://support.betternet.co/en/faq-s/payments-subscriptions/can-i-test-betternet-premium-service-before-i-purchase
+    title: Can I test Betternet Premium before I purchase? (with plan prices)
+  refund-policy:
+    url: https://support.betternet.co/en/faq-s/payments-subscriptions/what-is-betternet-s-refund-policy
+    title: What is Betternet's refund policy?
+  cancel-renewal:
+    url: https://support.betternet.co/en/faq-s/general-questions/how-do-i-cancel-my-auto-renewal-of-my-premium-subscription
+    title: How do I cancel my auto-renewal of my Premium subscription?
+  platforms:
+    url: https://support.betternet.co/en/faq-s/about-betternet/what-platforms-does-betternet-support
+    title: What platforms does Betternet support?
+  devices-supported:
+    url: https://support.betternet.co/en/faq-s/general-questions/what-devices-are-supported-by-betternet
+    title: What devices are supported by Betternet?
+  no-logs-faq:
+    url: https://support.betternet.co/en/faq-s/general-questions/do-you-keep-logs-of-when-i-m-browsing
+    title: Do you keep logs of when I'm browsing?
+  csiro-2016:
+    url: https://research.csiro.au/isp/wp-content/uploads/sites/106/2016/08/paper-1.pdf
+    title: Ikram et al., An analysis of the privacy and security risks of Android VPN permission-enabled apps (IMC 2016)
+  pango-team:
+    url: https://www.pango.co/team
+    title: Pango, our team
+  pango-transparency-2023:
+    url: https://www.pointwild.com/wp-content/uploads/2026/01/pango_transparency_report_2023.pdf
+    title: Pango transparency report 2023
+  point-wild-reports:
+    url: https://www.pointwild.com/press/resources/security-reviews-and-reports/
+    title: Point Wild, security reviews and reports
+  hss-affiliates:
+    url: https://www.hotspotshield.com/affiliates/
+    title: Hotspot Shield VPN affiliate program
+  totalav-vpn:
+    url: https://www.totalav.com/security/vpn
+    title: TotalAV VPN
+  aura-pango-2020:
+    url: https://www.aura.com/press/release/aura-acquires-digital-privacy-and-security-company-pango
+    title: Aura acquires digital privacy and security company Pango (2020)
+  aura-split-2024:
+    url: https://www.aura.com/press/release/aura-splits-into-two-world-class-online-safety-companies
+    title: Aura splits into two world-class online safety companies (2024)
+  ovpn-next-chapter:
+    url: https://www.ovpn.com/en/blog/next-chapter-for-ovpn
+    title: Next chapter for OVPN (2023-05-08)
+  point-wild-merger:
+    url: https://www.paulweiss.com/insights/client-news/pango-group-merges-with-total-security
+    title: Pango Group merges with Total Security (Paul, Weiss)
+  comparitech-disclosure:
+    url: https://www.comparitech.com/disclosure/
+    title: Comparitech disclosure
