@@ -1,0 +1,286 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Goose VPN
+icon: goose-vpn.png
+checked: 2026-10-25
+
+criteria:
+  identity:
+    website:
+      value: https://goosevpn.com
+      sources: [home]
+    legal_entity:
+      value: Goose B.V.
+      note: The terms still give an old Rotterdam address, while the register and the rest of the site have it in Rijswijk. The iOS app is sold by Robru B.V.
+      sources: [terms, kvk, play]
+    owner:
+      value: Gizmo Cyber Group
+      sources: [gizmo]
+    founded:
+      value: 2016
+      sources: [story]
+    team:
+      value: public
+      note: The two co-founders, CEO Joeri van de Watering and COO Anouk ter Harmsel, are named.
+      sources: [gizmo, story]
+    sister_brands:
+      value: [Guardey]
+      note: Guardey is the group's business VPN and security training brand.
+      sources: [gizmo, guardey]
+    acquisitions:
+      value: []
+      sources: [kvk]
+
+  jurisdiction:
+    hq:
+      value: NL
+      sources: [terms, kvk]
+    entities:
+      value: [NL]
+      sources: [terms, kvk]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      note: Goose says it can start logging a specific user if a government agency suspects them of crimes such as terrorism. The paid Cyber Alarm add-on keeps traffic metadata for a year.
+      sources: [privacy, no-log-faq]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [privacy]
+    timestamps:
+      value: none
+      evidence: claimed
+      sources: [privacy]
+    bandwidth:
+      value: aggregate
+      evidence: claimed
+      note: It records how much data each account uses, which its fair use policy relies on.
+      sources: [privacy, terms]
+    source_ip:
+      value: none
+      evidence: claimed
+      note: The IP address used to sign up is recorded once, and the last one used to log in to the website is kept.
+      sources: [privacy, logs-faq]
+    proven: []
+    policy: https://goosevpn.com/privacy-policy
+
+  transparency:
+    audits: []
+    report:
+      value: none
+      note: Goose says it cooperates fully with agencies that bring a court order, but publishes no figures.
+      sources: [data-sharing-faq]
+    canary: none
+    bug_bounty: false
+    incidents:
+      value: []
+
+  account:
+    email:
+      value: required
+      note: The email address is the account's username.
+      sources: [signup, personal-data-faq]
+    personal_data:
+      value: []
+      sources: [signup, personal-data-faq]
+    payment:
+      value: [card, paypal, bank, app_store]
+      note: Bank is iDEAL, for the Netherlands. App store covers subscriptions through Apple and Google Play.
+      sources: [payment-faq, signup, refund]
+
+  security:
+    protocols:
+      value: [openvpn, ikev2, other]
+      note: Other is L2TP/IPsec and PPTP. IKEv2 is the default in the apps.
+      sources: [protocols-faq]
+    post_quantum:
+      value: none
+      sources: [protocols-faq]
+    kill_switch:
+      value: app
+      note: It only works in Autopilot mode, not when connecting manually. IPv6 isn't supported, and Goose advises turning it off so it doesn't bypass the tunnel.
+      sources: [autopilot, kill-switch-faq, ipv6-faq]
+    dns:
+      value: null
+      note: Goose doesn't say whose DNS servers answer lookups inside the tunnel.
+
+  infra:
+    ram_only:
+      value: null
+      note: Goose says its servers hold no user data, but not whether they run from RAM.
+      sources: [privacy]
+    hosting:
+      value: rented
+      note: The privacy policy calls the network Goose's own property, but its servers' addresses belong to hosting firms such as M247 and UK Dedicated Servers.
+      sources: [privacy, server-list, ip-nl-24, ip-uk-12]
+    virtual_locations:
+      value: null
+      note: Goose doesn't say whether any of its locations are virtual.
+      sources: [server-list]
+    servers:
+      value: 33
+      note: Other pages still claim over 100.
+      sources: [server-list, story]
+    countries:
+      value: 22
+      note: Brazil is also on the list, with no server. The homepage claims 30 countries.
+      sources: [server-list, home]
+
+  features:
+    connections:
+      value: unlimited
+      note: Subject to a fair use policy. Lifetime plans are capped at 1, 5 or 10 devices.
+      sources: [devices-faq, multi-device-faq, terms]
+    multihop: false
+    obfuscation:
+      value: []
+      sources: [protocols-faq]
+    port_forwarding: false
+    split_tunnel: false
+    blocking:
+      value: []
+      note: The paid Cyber Alarm add-on scans traffic for malware, ransomware and viruses and sends alerts.
+      sources: [cyber-alarm]
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android]
+      note: Android TV uses the Android app. Linux and routers take manual OpenVPN, IKEv2 or L2TP setups. Neither mobile app has been updated since 2023.
+      sources: [home, linux, linux-ikev2, play, app-store]
+    open_source: none
+    telemetry:
+      value: null
+      note: The App Store listing declares usage and crash data for analytics, with no word on turning it off.
+      sources: [play-data-safety, app-store]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 9.99, currency: EUR }
+      sources: [pricing]
+    best:
+      value: { amount: 4.99, currency: EUR }
+      note: €59.88 a year. A lifetime plan costs €159 once, or €129 and €89 with a five or one device cap.
+      sources: [pricing, home]
+    best_term:
+      value: 12
+      sources: [pricing]
+    renewal_increase:
+      value: 0
+      sources: [pricing, multi-device-faq]
+    free_tier:
+      value: false
+      sources: [pricing]
+    refund_days:
+      value: 30
+      note: Only on new accounts that have used less than 100 MB, and not on renewals.
+      sources: [refund, money-back-faq]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: Claims military-grade encryption, "100% anonymous" browsing and to be the only VPN based in the EU.
+      sources: [home, play, story]
+    affiliates:
+      value: true
+      evidence: claimed
+      note: Its privacy policy lists referral tracking cookies from Post Affiliate Pro, an affiliate platform.
+      sources: [privacy]
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://goosevpn.com/
+    title: GOOSE VPN
+  story:
+    url: https://goosevpn.com/our-mission-2
+    title: Our story
+  terms:
+    url: https://goosevpn.com/terms-of-service
+    title: Terms of Service
+  privacy:
+    url: https://goosevpn.com/privacy-policy
+    title: Privacy Policy
+  refund:
+    url: https://goosevpn.com/refund-policy
+    title: Refund Policy
+  pricing:
+    url: https://goosevpn.com/prices-packages-2
+    title: Prices and Packages
+  signup:
+    url: https://my.goosevpn.com/sign-up
+    title: Sign up
+  linux:
+    url: https://goosevpn.com/linux-vpn
+    title: VPN for Linux
+  kvk:
+    url: https://www.openkvk.nl/kvk/34278975
+    title: Goose B.V. in the Dutch business register (OpenKvK)
+  gizmo:
+    url: https://gizmocybergroup.com/
+    title: Gizmo Cyber Group
+  guardey:
+    url: https://guardey.com/
+    title: Guardey
+  no-log-faq:
+    url: https://goosevpn.com/faq/no-log-policy-mean
+    title: What does your no-log policy mean?
+  logs-faq:
+    url: https://support.goosevpn.com/hc/en-us/articles/4629161796114-Do-you-store-logs
+    title: Do you store logs?
+  data-sharing-faq:
+    url: https://support.goosevpn.com/hc/en-us/articles/4629186430994-Do-you-pass-on-my-user-data-to-other-organizations
+    title: Do you pass on my user data to other organizations?
+  personal-data-faq:
+    url: https://support.goosevpn.com/hc/en-us/articles/4410175174930-What-personal-data-do-you-store
+    title: What personal data do you store?
+  payment-faq:
+    url: https://support.goosevpn.com/hc/en-us/articles/4404431899026-What-payment-methods-are-there
+    title: What payment methods are there?
+  protocols-faq:
+    url: https://goosevpn.com/faq/protocols-supported-goose
+    title: Which protocols are supported by GOOSE VPN?
+  autopilot:
+    url: https://support.goosevpn.com/hc/en-us/articles/4410756873874-What-is-Autopilot-in-and-how-do-I-use-it
+    title: What is Autopilot and how do I use it?
+  kill-switch-faq:
+    url: https://support.goosevpn.com/hc/en-us/articles/4410240916882-What-is-a-kill-switch-and-how-do-I-activate-it
+    title: What is a kill switch and how do I activate it?
+  ipv6-faq:
+    url: https://support.goosevpn.com/hc/en-us/articles/4411569085842-Do-you-support-IPv6
+    title: Do you support IPv6?
+  server-list:
+    url: https://support.goosevpn.com/hc/en-us/articles/19714224294802-Serverlist
+    title: Serverlist
+  ip-nl-24:
+    url: https://bgp.he.net/ip/2.58.44.66
+    title: nl-24.goosevpn.com's address on M247's network (Hurricane Electric BGP Toolkit)
+  ip-uk-12:
+    url: https://bgp.he.net/ip/78.157.208.202
+    title: uk-12.goosevpn.com's address on UK Dedicated Servers' network (Hurricane Electric BGP Toolkit)
+  devices-faq:
+    url: https://goosevpn.com/faq/can-use-goose-multiple-devices
+    title: Can I use GOOSE VPN on multiple devices?
+  multi-device-faq:
+    url: https://support.goosevpn.com/hc/en-us/articles/4419079488914-Can-I-set-up-GOOSE-VPN-on-multiple-devices-at-the-same-time
+    title: Can I set up GOOSE VPN on multiple devices at the same time?
+  money-back-faq:
+    url: https://support.goosevpn.com/hc/en-us/articles/4409430144530-What-does-your-money-back-guarantee-include
+    title: What does your money back guarantee include?
+  cyber-alarm:
+    url: https://support.goosevpn.com/hc/en-us/articles/5243282468114-What-is-Cyber-Alarm
+    title: What is Cyber Alarm?
+  linux-ikev2:
+    url: https://support.goosevpn.com/hc/en-us/articles/7287925953042-Configure-GOOSE-VPN-via-IKEv2-on-Linux-Console-via-terminal
+    title: Configure GOOSE VPN via IKEv2 on Linux
+  play:
+    url: https://play.google.com/store/apps/details?id=com.goosevpn.gooseandroid&hl=en
+    title: GOOSE VPN on Google Play
+  play-data-safety:
+    url: https://play.google.com/store/apps/datasafety?id=com.goosevpn.gooseandroid&hl=en
+    title: GOOSE VPN data safety on Google Play
+  app-store:
+    url: https://apps.apple.com/us/app/goose-vpn/id1122473789
+    title: GOOSE VPN on the App Store
