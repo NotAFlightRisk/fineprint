@@ -1,0 +1,257 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: PandaVPN
+icon: pandavpn.png
+checked: 2026-10-25
+
+criteria:
+  identity:
+    website:
+      value: https://www.pandavpnpro.com
+      sources: [home, faq-privacy]
+    legal_entity:
+      value: MOPUBI LIMITED
+      note: The App Store and Google Play still name Wildfire Inc., a Seychelles company that ran the site until mid-2026, as the seller.
+      sources: [terms, appstore, play]
+    owner:
+      value: null
+      note: Nothing public names who owns MOPUBI LIMITED or Wildfire Inc.
+      sources: [appstore, play]
+    founded:
+      value: 2019
+      note: Its iOS app first came out in March 2019.
+      sources: [appstore]
+    team:
+      value: anonymous
+      sources: [terms, play]
+    sister_brands:
+      value: []
+      note: PandaVPN Lite is the free, ad-supported version of the same service, not a separate brand.
+      sources: [download-ios]
+    acquisitions:
+      value: null
+      note: The site's operator changed from Wildfire Inc. to Hong Kong's MOPUBI LIMITED between May and June 2026. Nothing public says whether that was a sale.
+      sources: [terms-2026-05, terms]
+
+  jurisdiction:
+    hq:
+      value: HK
+      note: The terms give a Wan Chai address for MOPUBI LIMITED, while the privacy policy says it is registered in Seychelles and the terms choose Seychelles law.
+      sources: [terms, privacy-policy]
+    entities:
+      value: [HK, SC]
+      note: MOPUBI LIMITED sells on the website and Seychelles-based Wildfire Inc. sells through the app stores.
+      sources: [terms, play]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [privacy-policy, faq-privacy]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [privacy-policy]
+    timestamps:
+      value: null
+      note: The policy rules out activity and DNS logs but doesn't say whether connection times are kept.
+      sources: [privacy-policy]
+    bandwidth:
+      value: null
+      note: The policy doesn't say whether data use is counted per account.
+      sources: [privacy-policy]
+    source_ip:
+      value: null
+      note: The policy doesn't say whether the IP you connect from is kept.
+      sources: [privacy-policy]
+    proven: []
+    policy: https://www.pandavpnpro.com/privacy-policy
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: optional
+      note: Signing up gives you a random account ID, and linking an email is optional.
+      sources: [privacy-policy, download-linux]
+    personal_data: []
+    payment:
+      value: [card, paypal, app_store, bitcoin, other_crypto]
+      note: Other crypto includes USDT, and some regions get local wallets or UnionPay.
+      sources: [faq-billing, faq-privacy]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn, proprietary]
+      note: The default mode picks between WireGuard and its own PandaVPN protocol. The CLI docs don't recommend OpenVPN.
+      sources: [faq-privacy, faq-cli]
+    post_quantum: none
+    kill_switch:
+      value: app
+      note: Off by default, in the desktop apps and CLI. On Windows it uses firewall filters that stay in place if the app crashes.
+      sources: [faq-cli, download-windows]
+    dns:
+      value: null
+      note: It doesn't say whose resolvers answer lookups inside the tunnel.
+      sources: [faq-cli]
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say whether its servers run from RAM.
+      sources: [server-locations]
+    hosting:
+      value: null
+      note: Server names carry the carriers they run on, such as HKT, PCCW and SoftBank, but it doesn't say whether it owns any hardware.
+      sources: [faq-app]
+    virtual_locations:
+      value: null
+      note: It doesn't say whether any of its locations are virtual.
+      sources: [server-locations]
+    servers:
+      value: 6000
+      sources: [server-locations, home]
+    countries:
+      value: 103
+      note: Countries and territories, including Hong Kong, Taiwan and Puerto Rico. The headline says 102.
+      sources: [server-locations]
+
+  features:
+    connections:
+      value: 10
+      note: The 7-day plan allows 3. The FAQ says the yearly plan allows 20 and that the apps may still show older limits.
+      sources: [pricing, faq-billing, play]
+    multihop: false
+    obfuscation:
+      value: [shadowsocks]
+      note: Its own PandaVPN protocol is built on Shadowsocks.
+      sources: [faq-cli]
+    port_forwarding:
+      value: false
+      note: Some servers are marked for BitTorrent, but there's no port forwarding.
+      sources: [faq-app]
+    split_tunnel:
+      value: true
+      note: Per app on mobile and by rule on desktop. The CLI has a GFWList mode and Chinese DNS examples, though the terms say it isn't offered in mainland China.
+      sources: [faq-app, faq-cli, terms]
+    blocking:
+      value: [ads]
+      note: Android and iOS only.
+      sources: [faq-privacy]
+
+  clients:
+    platforms:
+      value: [windows, macos, linux_gui, linux_cli, ios, android]
+      note: There are also Android TV and Apple TV apps.
+      sources: [download-linux, download-windows, download-ios, faq-getting-started]
+    open_source:
+      value: none
+      note: Its GitHub repository holds only a readme, and the terms forbid reverse engineering the apps.
+      sources: [github, terms]
+    telemetry:
+      value: null
+      note: The apps collect crash logs and performance data, and the Android app includes Crashlytics and Firebase Analytics. Nothing says whether you can turn this off.
+      sources: [privacy-policy, exodus]
+    trackers:
+      value: 7
+      note: Version 9.7.1, the current Android release.
+      sources: [exodus]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 9.99, currency: USD }
+      sources: [pricing]
+    best:
+      value: { amount: 2.5, currency: USD }
+      note: $59.99 for the first 24 months, for first-time buyers.
+      sources: [pricing]
+    best_term:
+      value: 24
+      sources: [pricing]
+    renewal_increase:
+      value: 100
+      note: After the first 24 months it renews at $59.99 a year.
+      sources: [pricing]
+    free_tier:
+      value: true
+      note: Free servers in both apps, with ads in PandaVPN Lite.
+      sources: [faq-billing, download-ios]
+    refund_days:
+      value: 7
+      note: Not for the 7-day plan or renewals. App store purchases follow Apple's or Google's rules.
+      sources: [terms, pricing]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: It promises "complete anonymity" and that with its encryption "no one can snoop your data".
+      sources: [server-locations, home]
+    affiliates:
+      value: true
+      sources: [affiliates]
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://www.pandavpnpro.com/
+    title: PandaVPN home page
+  terms:
+    url: https://www.pandavpnpro.com/terms-of-service
+    title: Terms of Service
+  terms-2026-05:
+    url: https://web.archive.org/web/20260506230225/https://www.pandavpnpro.com/terms-of-service
+    title: Terms of Service (archived May 2026)
+  privacy-policy:
+    url: https://www.pandavpnpro.com/privacy-policy
+    title: Privacy Policy
+  pricing:
+    url: https://www.pandavpnpro.com/pricing
+    title: Pricing
+  server-locations:
+    url: https://www.pandavpnpro.com/server-details
+    title: VPN server locations
+  affiliates:
+    url: https://www.pandavpnpro.com/affiliate-program
+    title: PandaVPN Affiliate Program
+  faq-privacy:
+    url: https://www.pandavpnpro.com/faq/privacy-security
+    title: Privacy and security FAQ
+  faq-billing:
+    url: https://www.pandavpnpro.com/faq/account-billing
+    title: Account and billing FAQ
+  faq-app:
+    url: https://www.pandavpnpro.com/faq/product-app-behavior
+    title: Product and app behaviour FAQ
+  faq-cli:
+    url: https://www.pandavpnpro.com/faq/cli
+    title: PandaVPN CLI FAQ
+  faq-getting-started:
+    url: https://www.pandavpnpro.com/faq/getting-started
+    title: Getting started FAQ
+  download-linux:
+    url: https://www.pandavpnpro.com/download/linux
+    title: Download PandaVPN for Linux
+  download-windows:
+    url: https://www.pandavpnpro.com/download/windows
+    title: Download PandaVPN for Windows
+  download-ios:
+    url: https://www.pandavpnpro.com/download/ios
+    title: Download PandaVPN for iOS
+  appstore:
+    url: https://apps.apple.com/us/app/id1450910298
+    title: PandaVPN on the App Store
+  play:
+    url: https://play.google.com/store/apps/details?id=com.pandavpn.androidproxy
+    title: PandaVPN on Google Play
+  github:
+    url: https://github.com/PandaVPN/PandaVPN
+    title: PandaVPN on GitHub
+  exodus:
+    url: https://web.archive.org/web/20261015045546/https://reports.exodus-privacy.eu.org/en/reports/com.pandavpn.androidproxy/latest/
+    title: Exodus Privacy report for com.pandavpn.androidproxy (archived October 2026)
