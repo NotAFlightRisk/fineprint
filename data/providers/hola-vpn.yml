@@ -1,0 +1,290 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Hola VPN
+icon: hola-vpn.png
+checked: 2026-10-25
+
+criteria:
+  identity:
+    website: https://hola.org
+    legal_entity:
+      value: Hola VPN Ltd.
+      note: An Israeli company in Netanya, wholly owned by Bright Data Ltd since December 2020.
+      sources: [terms, policy, accounts-2025]
+    owner:
+      value: EMK Capital
+      note: >-
+        Bright Data Ltd owns Hola VPN Ltd. The London private equity firm EMK Capital controls Bright
+        Data through IPPN Group Limited and its subsidiaries, which hold 96.03% of it.
+      sources: [accounts-2025, emk-portfolio]
+    founded:
+      value: 2012
+      sources: [about]
+    team:
+      value: partial
+      note: >-
+        Hola's own site names nobody. Its parent Bright Data names its leadership and Hola's founders,
+        Ofer Vilenski and Derry Shribman.
+      sources: [about, bright-data-about]
+    sister_brands:
+      value: [Bright VPN]
+      sources: [bright-vpn]
+    acquisitions:
+      value:
+        - date: 2020-12-16
+          acquirer: Bright Data Ltd (then Luminati Networks Ltd)
+          source: accounts-2020
+      note: >-
+        Bright Data paid $15.35 million for it. Bright Data began as Luminati, the proxy business Hola
+        built on its free users' connections, and EMK Capital bought a majority of it in 2017.
+      sources: [accounts-2020, emk-luminati]
+
+  jurisdiction:
+    hq:
+      value: IL
+      sources: [terms, accounts-2025]
+    entities:
+      value: [IL]
+      note: Its parent group also has companies in the UK, Jersey, the US and Cyprus.
+      sources: [accounts-2025]
+
+  logging:
+    traffic:
+      value: 'yes'
+      evidence: claimed
+      note: The policy says log data from the browser extension may include browsing history, and it keeps log data for up to 12 months.
+      sources: [policy]
+    dns:
+      value: null
+      note: The policy doesn't mention DNS lookups, though the extension's browsing history covers the sites you visit.
+      sources: [policy]
+    timestamps:
+      value: 'yes'
+      evidence: claimed
+      note: Log data includes access times and dates, kept for up to 12 months.
+      sources: [policy]
+    bandwidth:
+      value: null
+      sources: [policy]
+    source_ip:
+      value: 'yes'
+      evidence: claimed
+      note: Log data includes your IP address, kept for up to 12 months and shared with authorities when the law requires it.
+      sources: [policy]
+    proven: []
+    policy: https://hola.org/legal/privacy
+
+  transparency:
+    audits:
+      value: []
+      note: Hola says it has had internal and external security audits, but it hasn't published any.
+      sources: [faq]
+    report: none
+    canary: none
+    bug_bounty:
+      value: true
+      note: Rewards run from $50 to $200, with more at Hola's discretion for severe bugs.
+      sources: [bug-bounty]
+    incidents:
+      value:
+        - date: 2026-06-01
+          summary: >-
+            The Windows Hola Browser was hit by a supply chain attack that shipped an undeclared
+            cryptominer, caught in AppEsteem's certification checks. Hola confirmed it, said about 0.1%
+            of users were affected, and rebuilt its distribution pipeline with code-signing checks.
+          handled: well
+          source: bleeping-2026
+        - date: 2018-07-09
+          summary: >-
+            An attacker got into Hola's Chrome Web Store account and pushed a malicious extension that
+            sent MyEtherWallet users to a phishing page for five hours. Hola admitted it and replaced
+            the extension.
+          handled: well
+          source: bleeping-2018
+        - date: 2015-05-01
+          summary: >-
+            Someone attacked 8chan with a DDoS through Luminati, the paid service Hola then sold on top
+            of its free users' connections. Hola admitted the attacker got past its customer checks, and
+            only then made its install flow say that free users share their bandwidth.
+          handled: poorly
+          source: threatpost-2015
+        - date: 2015-05-01
+          summary: >-
+            The Adios, Hola! researchers disclosed six flaws in the Windows client, browser extensions and
+            Android app, including remote code execution and a persistent tracking ID. Hola said it had
+            fixed two within hours, and the researchers said the fixes were incomplete.
+          handled: poorly
+          source: securityweek-2015
+      note: After the May 2015 pair, Hola promised a security chief, an outside audit and a bug bounty.
+      sources: [threatpost-2015, securityweek-2015, bleeping-2018, bleeping-2026]
+
+  account:
+    email:
+      value: required
+      note: A Premium account needs an email address, or a Google or Facebook sign-in.
+      sources: [terms]
+    personal_data: []
+    payment:
+      value: [card, paypal, app_store]
+      sources: [billing-faq]
+
+  security:
+    protocols:
+      value: [ikev2, other]
+      note: >-
+        The desktop and iOS apps default to IKEv2 with SHA1 integrity checks and also offer PPTP and L2TP.
+        The extension and Android app are a proxy for the sites you unblock, with a plain HTTP fallback.
+      sources: [faq]
+    post_quantum: none
+    kill_switch:
+      value: app
+      evidence: claimed
+      note: It stops apps you pick when the connection drops, rather than blocking all traffic.
+      sources: [kill-switch]
+    dns: null
+
+  infra:
+    ram_only: null
+    hosting: null
+    virtual_locations: null
+    servers:
+      value: 700
+      sources: [locations]
+    countries:
+      value: null
+      note: Hola advertises 190+ countries, counting other users' devices as exits, and doesn't say how many countries its own servers are in.
+      sources: [locations, faq]
+
+  features:
+    connections:
+      value: 10
+      note: A subscription bought in a mobile app only covers that device.
+      sources: [faq]
+    multihop: false
+    obfuscation: []
+    port_forwarding: false
+    split_tunnel:
+      value: true
+      note: The Android app only routes the apps you pick, and the extension only the sites you unblock.
+      sources: [policy, faq]
+    blocking: []
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android, browser]
+      note: >-
+        Extensions for Chrome, Edge and Opera, plus its own Hola Browser. Smart TVs, consoles and routers
+        need Premium's Smart DNS or manual setup.
+      sources: [faq, desktop]
+    open_source: none
+    telemetry:
+      value: null
+      note: The policy's log data covers your IP, operating system and access times, but it doesn't say what usage or crash data the apps send.
+      sources: [policy]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 14.99, currency: USD }
+      sources: [pricing]
+    best:
+      value: { amount: 2.99, currency: USD }
+      note: $107.55 billed every three years.
+      sources: [pricing]
+    best_term:
+      value: 36
+      sources: [pricing]
+    renewal_increase:
+      value: null
+      note: The yearly and three-year plans are marked down from the monthly rate, and Hola doesn't say what they renew at.
+      sources: [pricing, refunds]
+    free_tier:
+      value: true
+      note: >-
+        Free use is time-limited each day. In return your device may be used as an exit node for Bright
+        Data's customers, on the Windows app and Android builds from outside Google Play. Premium users
+        are never used as peers.
+      sources: [faq, terms]
+    refund_days:
+      value: 14
+      note: >-
+        Only if you haven't used Premium at all. The terms promise a pro-rata refund when you cancel, which
+        the help pages contradict, and in-app purchases aren't refunded.
+      sources: [refunds, terms]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        The FAQ says Hola doesn't collect any of your personal information, while its privacy policy lists
+        IP address, name, email and, from the extension, browsing history.
+      sources: [faq, policy]
+    affiliates:
+      value: null
+      note: Hola has run affiliate schemes through ad networks, but no longer has a public affiliate page.
+    review_sites: false
+    activism: false
+
+refs:
+  policy:
+    url: https://hola.org/legal/privacy
+    title: Hola Privacy Policy (April 14, 2026)
+  terms:
+    url: https://hola.org/legal/sla
+    title: Hola End User License Agreement
+  about:
+    url: https://hola.org/about
+    title: About Hola
+  faq:
+    url: https://hola.org/faq
+    title: Hola FAQ
+  billing-faq:
+    url: https://hola.org/faq_billing
+    title: Hola billing FAQ
+  refunds:
+    url: https://hola.org/faq#billing
+    title: Hola refund and cancellation policy
+  pricing:
+    url: https://hola.org/pricing
+    title: Hola VPN Premium plans and pricing
+  locations:
+    url: https://hola.org/vpn/
+    title: Hola VPN locations
+  desktop:
+    url: https://hola.org/products/desktop
+    title: Hola desktop app for Windows and macOS
+  kill-switch:
+    url: https://support.hola.org/en/articles/9636412-what-is-the-kill-switch-feature
+    title: What is the kill switch feature? (Hola Help Center)
+  bug-bounty:
+    url: https://hola.org/security-vulnerabilities-reward-program
+    title: Hola security vulnerabilities reward program
+  accounts-2025:
+    url: https://find-and-update.company-information.service.gov.uk/company/10897981/filing-history/MzU0NDEyNjg2MWFkaXF6a2N4/document?format=pdf&download=0
+    title: IPPN Group Limited, group accounts to 31 December 2025 (Companies House)
+  accounts-2020:
+    url: https://find-and-update.company-information.service.gov.uk/company/10897981/filing-history/MzMyNTcwODQxNGFkaXF6a2N4/document?format=pdf&download=0
+    title: IPPN Group Limited, group accounts to 31 December 2020 (Companies House)
+  emk-luminati:
+    url: https://www.emkcapital.com/news/emk-acquires-luminati-the-worlds-largest-ip-proxy-network-which-brings-transparency-to-the-internet
+    title: EMK acquires Luminati (EMK Capital, August 10, 2017)
+  emk-portfolio:
+    url: https://www.emkcapital.com/our-portfolio/bright-data
+    title: Bright Data in EMK Capital's portfolio
+  bright-data-about:
+    url: https://brightdata.com/about
+    title: About Bright Data
+  bright-vpn:
+    url: https://brightvpn.com/
+    title: Bright VPN
+  bleeping-2026:
+    url: https://www.bleepingcomputer.com/news/security/hola-browser-for-windows-compromised-to-deliver-cryptominer/
+    title: "Hola Browser for Windows compromised to deliver cryptominer (BleepingComputer, June 4, 2026)"
+  bleeping-2018:
+    url: https://www.bleepingcomputer.com/news/security/hacker-breaches-hola-vpn-chrome-extension-to-go-after-cryptocurrency-wallet-site/
+    title: "Hacker breaches Hola VPN Chrome extension to go after cryptocurrency wallet site (BleepingComputer, July 10, 2018)"
+  threatpost-2015:
+    url: https://threatpost.com/researchers-hola-fixes-incomplete/113080/
+    title: "Researchers: Hola fixes incomplete (Threatpost, June 1, 2015)"
+  securityweek-2015:
+    url: https://www.securityweek.com/hola-vpn-vulnerabilities-still-unfixed-researchers/
+    title: "Hola VPN vulnerabilities still unfixed: researchers (SecurityWeek, June 1, 2015)"
