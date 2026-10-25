@@ -1,0 +1,232 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: BolehVPN
+icon: bolehvpn.png
+checked: 2026-10-25
+
+criteria:
+  identity:
+    website:
+      value: https://www.bolehvpn.net
+      sources: [home]
+    legal_entity:
+      value: BV Internet Services Limited
+      note: The terms don't name a company. The account and checkout site is run by BV Internet Services Limited, while the main site credits BolehVPN Sdn Bhd in Kuala Lumpur.
+      sources: [portal, about]
+    owner:
+      value: null
+      sources: [about]
+    founded:
+      value: 2007
+      sources: [home]
+    team:
+      value: partial
+      note: The co-founder and director, Dato' Roselyna Abdul Latiff, is named in full. Other staff go by nicknames or first names.
+      sources: [about]
+    sister_brands:
+      value: []
+      sources: [about]
+    acquisitions:
+      value: []
+      sources: [about]
+
+  jurisdiction:
+    hq:
+      value: MY
+      note: It says it operates from Malaysia and is subject to Malaysian law, but its terms are governed by the law of Seychelles.
+      sources: [policy, canary-archived, terms]
+    entities:
+      value: [MY]
+      note: Where BV Internet Services Limited is registered isn't stated.
+      sources: [about, portal]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      note: If a server shows signs of abuse it may switch on logging there for a few hours to find the user, then wipes the logs.
+      sources: [policy, terms]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [policy]
+    timestamps:
+      value: none
+      evidence: claimed
+      sources: [policy]
+    bandwidth:
+      value: none
+      evidence: claimed
+      note: Only each server's overall traffic and connection count are monitored.
+      sources: [policy, terms]
+    source_ip:
+      value: none
+      evidence: claimed
+      sources: [policy]
+    proven: []
+    policy: https://www.bolehvpn.net/privacy-policy/
+
+  transparency:
+    audits: []
+    report: none
+    canary:
+      value: stale
+      note: Promised monthly, but the last one is dated 23 December 2024 and the canary link now returns a 404.
+      sources: [canary-archived]
+    bug_bounty: false
+    incidents:
+      value: []
+      note: Every page of the main website currently carries hundreds of hidden links to gambling sites.
+      sources: [home]
+
+  account:
+    email:
+      value: required
+      sources: [portal]
+    personal_data:
+      value: []
+      sources: [policy]
+    payment:
+      value: [card, bitcoin, monero, other_crypto]
+      note: Dash, Monero, Zcash and Zcoin get 10% off.
+      sources: [crypto, policy, terms]
+
+  security:
+    protocols:
+      value: [openvpn, other]
+      note: Also L2TP/IPsec, set up by hand.
+      sources: [clients, windows, l2tp]
+    post_quantum:
+      value: none
+      sources: [home]
+    kill_switch:
+      value: null
+      sources: [windows, android]
+    dns: null
+
+  infra:
+    ram_only: null
+    hosting: null
+    virtual_locations: null
+    servers: null
+    countries:
+      value: 12
+      sources: [clients, canary-archived]
+
+  features:
+    connections:
+      value: 3
+      sources: [terms]
+    multihop:
+      value: false
+      sources: [home]
+    obfuscation:
+      value: [shadowsocks, proprietary]
+      note: Its Cloak servers use the XOR scramble patch for OpenVPN. Shadowsocks is only for paying users who can't use OpenVPN, by request to support.
+      sources: [windows, shadowsocks]
+    port_forwarding: null
+    split_tunnel:
+      value: true
+      note: Done through Proxied servers, where only apps set to use its SOCKS proxy go through the VPN.
+      sources: [clients]
+    blocking:
+      value: []
+      sources: [home]
+
+  clients:
+    platforms:
+      value: [windows, macos, android]
+      note: The apps date from 2017, the Mac one supports up to macOS 10.12 and the Android one is a sideloaded APK. iOS, Linux and routers use stock OpenVPN clients with its configs.
+      sources: [windows, mac, android, ios, linux]
+    open_source:
+      value: none
+      note: The Windows and Mac apps are its own closed front ends for OpenVPN. The Android app is a modified build of the open source OpenVPN for Android, with no published source of its own.
+      sources: [windows, mac, android]
+    telemetry:
+      value: null
+      sources: [windows, android]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 9.99, currency: USD }
+      sources: [order]
+    best:
+      value: { amount: 5.79, currency: USD }
+      note: The two-year plan at US$139 is sold as a limited-time offer.
+      sources: [order]
+    best_term:
+      value: 24
+      sources: [order]
+    renewal_increase:
+      value: null
+      note: Plans are fixed prepaid terms, and the two-year offer has no stated renewal price.
+      sources: [order, terms]
+    free_tier:
+      value: false
+      note: There's a free one-day trial limited to two or three servers.
+      sources: [crypto, portal]
+    refund_days:
+      value: 14
+      note: Not for renewals, and crypto payments only case by case. Support must get a chance to fix the problem first.
+      sources: [terms]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: Sells itself as "Secure. Private. Anonymous." with "military grade" encryption.
+      sources: [home]
+    affiliates:
+      value: null
+      sources: [home]
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://www.bolehvpn.net/
+    title: BolehVPN home page
+  about:
+    url: https://www.bolehvpn.net/about-us/
+    title: About Us
+  portal:
+    url: https://users.bolehvpn.net/
+    title: BolehVPN customer portal (sign-up and login)
+  order:
+    url: https://users.bolehvpn.net/order-now
+    title: Order Now
+  terms:
+    url: https://www.bolehvpn.net/terms-of-service/
+    title: Terms of Service (last updated 3 February 2017)
+  policy:
+    url: https://www.bolehvpn.net/privacy-policy/
+    title: Privacy Policy
+  canary-archived:
+    url: https://web.archive.org/web/20260302213528/https://www.bolehvpn.net/canary.txt
+    title: Warrant canary dated 23 December 2024 (Wayback Machine, March 2026)
+  crypto:
+    url: https://www.bolehvpn.net/paywithcrypto/
+    title: Pay for your VPN with cryptocurrency
+  clients:
+    url: https://www.bolehvpn.net/clients-installations/
+    title: Clients Installation
+  windows:
+    url: https://www.bolehvpn.net/windows-installations/
+    title: Windows Installation
+  mac:
+    url: https://www.bolehvpn.net/mac-os-installation/
+    title: Mac OS X and MacOS Installation
+  android:
+    url: https://www.bolehvpn.net/android-installations/
+    title: Android Installation
+  ios:
+    url: https://www.bolehvpn.net/ios-installations/
+    title: iOS Installation
+  linux:
+    url: https://www.bolehvpn.net/linux-installations/
+    title: Linux Installation
+  l2tp:
+    url: https://www.bolehvpn.net/l2tpipsec-vpn/
+    title: L2TP/IPSec VPN
+  shadowsocks:
+    url: https://www.bolehvpn.net/shadowsocks-setup-guide-windows/
+    title: Shadowsocks Setup Guide (Windows)
