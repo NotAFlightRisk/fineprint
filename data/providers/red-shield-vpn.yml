@@ -1,0 +1,292 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Red Shield VPN
+icon: red-shield-vpn.png
+checked: 2026-10-25
+
+criteria:
+  identity:
+    website:
+      value: https://redshieldvpn.com
+      sources: [about]
+    legal_entity:
+      value: Private Network Labs LLC
+      sources: [policy, ny-register, play]
+    owner:
+      value: Vladislav Zdolnikov
+      note: The LLC's authorised member.
+      sources: [fl-register]
+    founded:
+      value: 2019
+      note: Launched in December 2019 by the team behind TgVPN, which it replaced.
+      sources: [launch]
+    team:
+      value: partial
+      note: Its site names nobody, but the Florida register names the company's member.
+      sources: [about, fl-register]
+    sister_brands:
+      value: []
+      note: TgVPN was its predecessor and its old domain now redirects here.
+      sources: [launch, canary]
+    acquisitions:
+      value: []
+      sources: [launch]
+
+  jurisdiction:
+    hq:
+      value: US
+      note: A Florida LLC formed in 2020 and registered in New York since 2023, which Florida dissolved in September 2026 for a missed annual report. The terms also claim an EU legal framework and name Panamanian law.
+      sources: [policy, ny-register, fl-register, terms]
+    entities:
+      value: [US]
+      note: Its FAQ refers to "countries where our companies are registered", but names no others.
+      sources: [ny-register, faq]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      note: The FAQ says it doesn't "typically" record traffic, and may use technical measures to identify and block abusive users.
+      sources: [terms, faq]
+    dns:
+      value: null
+      note: It runs its own resolvers, but nothing says whether lookups are logged.
+      sources: [dns-leak, policy]
+    timestamps:
+      value: none
+      evidence: claimed
+      note: Yet refunds hinge on usage data from its apps and servers showing an account never connected.
+      sources: [terms, refunds]
+    bandwidth:
+      value: aggregate
+      evidence: claimed
+      note: The terms cap each account at 1 TB a month, which needs a running total per account.
+      sources: [terms]
+    source_ip:
+      value: none
+      evidence: claimed
+      note: The policy says your IP address is analysed for diagnostics and deleted straight away.
+      sources: [policy]
+    proven: []
+    policy: https://redshieldvpn.com/en/pp
+
+  transparency:
+    audits: []
+    report:
+      value: none
+      sources: [canary]
+    canary:
+      value: none
+      note: Its canary page is an undated one-line statement that no user data has ever been handed over, not a regularly updated canary.
+      sources: [canary]
+    bug_bounty:
+      value: true
+      note: Pays $100 to $5,000 or more for reports covering its sites, apps and servers.
+      sources: [bug-bounty]
+    incidents:
+      value:
+        - date: 2024-07-01
+          summary: In early July 2024 Apple pulled the iOS app from the Russian App Store at Roskomnadzor's demand. Red Shield published Apple's notice, condemned the removal and told users how to switch App Store region.
+          handled: well
+          source: app-store-removal
+      sources: [app-store-removal]
+
+  account:
+    email:
+      value: required
+      sources: [android-install]
+    personal_data:
+      value: []
+      note: The privacy policy says a name is needed for an account, but signing up only asks for an email and password.
+      sources: [android-install, policy]
+    payment:
+      value: [card, app_store, bitcoin, other_crypto]
+      note: Other crypto is DASH. Telegram Stars are also accepted.
+      sources: [about, auto-renewal, refunds]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn, proprietary, other]
+      note: The apps use its own RedLink protocols, built on AmneziaWG and VLESS. WireGuard, OpenVPN, AmneziaWG, VLESS and PPTP are there as manual configs.
+      sources: [redlink, faq]
+    post_quantum: none
+    kill_switch:
+      value: app
+      note: A setting on Windows, plus a Kill Switch or always-on VPN Only Access mode on macOS. iOS and Android rely on the system's own options.
+      sources: [kill-switch, macos-kill-switch, faq]
+    dns:
+      value: first_party
+      sources: [dns-leak]
+
+  infra:
+    ram_only:
+      value: null
+      note: It says each server is encrypted, but not that they run from RAM.
+      sources: [about]
+    hosting:
+      value: mixed
+      evidence: claimed
+      note: It says it uses its own or rented physical servers, without saying how many of each.
+      sources: [about]
+    virtual_locations:
+      value: none
+      evidence: claimed
+      sources: [faq]
+    servers: null
+    countries:
+      value: 36
+      note: 37 locations, two of them in the US. Seven "Safe" locations, such as Russia and Belarus, are reached through Double VPN.
+      sources: [home]
+
+  features:
+    connections:
+      value: 10
+      sources: [home]
+    multihop:
+      value: true
+      note: Double VPN is fixed on the "Safe" locations rather than something you can turn on elsewhere.
+      sources: [double-vpn]
+    obfuscation:
+      value: [amneziawg, v2ray, proprietary]
+      note: The RedLink protocols disguise traffic as random UDP or TLS. VLESS is also offered as a manual config.
+      sources: [redlink, vless]
+    port_forwarding:
+      value: null
+      note: Torrents may be blocked in some or all locations.
+      sources: [faq]
+    split_tunnel:
+      value: true
+      note: Per app on Windows and Android, per site in the browser extensions.
+      sources: [split-tunnel, faq, extension-split]
+    blocking:
+      value: [ads, trackers, malware]
+      sources: [news-59]
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android, browser]
+      note: Also Apple TV and Android TV. Linux and routers use manual configs.
+      sources: [home, android-tv, faq]
+    open_source:
+      value: none
+      sources: [about]
+    telemetry:
+      value: null
+      note: The Android app's Play listing declares crash logs and diagnostics collected for analytics, without saying whether they can be turned off.
+      sources: [play-data-safety]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 11.9, currency: USD }
+      sources: [home]
+    best:
+      value: { amount: 5.95, currency: USD }
+      note: $71.40 a year.
+      sources: [home]
+    best_term:
+      value: 12
+      sources: [home]
+    renewal_increase:
+      value: 0
+      sources: [auto-renewal]
+    free_tier:
+      value: false
+      sources: [home]
+    refund_days:
+      value: 14
+      note: Only for card payments on an account that never managed to connect, and refunds "may be rejected without any explanation".
+      sources: [refunds]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: It sells "unlimited bandwidth" and calls itself "truly unlimited", while the terms cap each account at 1 TB a month.
+      sources: [home, about, terms]
+    affiliates:
+      value: true
+      sources: [policy]
+    review_sites: false
+    activism:
+      value: false
+      note: It campaigned against Apple pulling its own app in Russia, but doesn't fund privacy causes.
+      sources: [app-store-removal]
+
+refs:
+  fl-register:
+    url: https://search.sunbiz.org/Inquiry/corporationsearch/SearchResultDetail?inquirytype=DocumentNumber&directionType=Initial&searchNameOrder=L20000139395&aggregateId=flal-l20000139395-25c1913a-e867-405f-96af-160ea043ae3f
+    title: Private Network Labs LLC, Florida Division of Corporations (L20000139395)
+  news-59:
+    url: https://redshieldvpn.com/en/news/59
+    title: AD and Malware blocking
+  home:
+    url: https://redshieldvpn.com/en/
+    title: Red Shield VPN
+  about:
+    url: https://redshieldvpn.com/en/help/description/about
+    title: About
+  policy:
+    url: https://redshieldvpn.com/en/pp
+    title: Privacy Policy
+  terms:
+    url: https://redshieldvpn.com/en/tos
+    title: Terms of Service
+  refunds:
+    url: https://redshieldvpn.com/en/help/description/rp
+    title: Refund Policy
+  auto-renewal:
+    url: https://redshieldvpn.com/en/help/description/art
+    title: Auto-renewal Terms
+  faq:
+    url: https://redshieldvpn.com/en/help/faq/service
+    title: Answers to frequently asked questions
+  canary:
+    url: https://redshieldvpn.com/en/help/description/warrant_canary
+    title: Warrant Canary
+  bug-bounty:
+    url: https://redshieldvpn.com/en/help/description/bb
+    title: Bug Bounty
+  launch:
+    url: https://redshieldvpn.com/en/news/3
+    title: TgVPN team presents Red Shield VPN!
+  ny-register:
+    url: https://apps.dos.ny.gov/publicInquiry/
+    title: New York Department of State, Private Network Labs LLC (DOS ID 6997710)
+  play:
+    url: https://play.google.com/store/apps/details?id=com.redshieldvpn.app
+    title: Red Shield VPN on Google Play
+  play-data-safety:
+    url: https://play.google.com/store/apps/datasafety?id=com.redshieldvpn.app
+    title: Red Shield VPN data safety on Google Play
+  android-install:
+    url: https://redshieldvpn.com/en/help/apps/android/install
+    title: Android installation and use
+  redlink:
+    url: https://redshieldvpn.com/en/help/features/redlink
+    title: RedLink Protocols
+  vless:
+    url: https://redshieldvpn.com/en/news/81
+    title: VLESS (XTLS) configurator in the Personal Area
+  dns-leak:
+    url: https://redshieldvpn.com/en/help/features/dnsleak
+    title: DNS leak protection
+  kill-switch:
+    url: https://redshieldvpn.com/en/help/features/killswitch
+    title: Kill Switch
+  macos-kill-switch:
+    url: https://redshieldvpn.com/en/help/apps/macos/killswitch
+    title: Kill Switch and VPN Only Access
+  double-vpn:
+    url: https://redshieldvpn.com/en/help/features/double_vpn
+    title: Double VPN
+  split-tunnel:
+    url: https://redshieldvpn.com/en/help/apps/windows/split_tunneling
+    title: Split Tunneling on Windows
+  extension-split:
+    url: https://redshieldvpn.com/en/news/82
+    title: Split tunneling in browser extensions
+  android-tv:
+    url: https://redshieldvpn.com/en/news/73
+    title: The Android TV app is now available!
+  app-store-removal:
+    url: https://therecord.media/apple-app-store-russia-vpns
+    title: Apple reportedly removes 25 VPN services from Russian App Store (The Record, 2024)
