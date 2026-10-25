@@ -1,0 +1,350 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Turbo VPN
+icon: turbo-vpn.png
+checked: 2026-10-25
+
+criteria:
+  identity:
+    website:
+      value: https://turbovpn.com
+      sources: [home]
+    legal_entity:
+      value: Innovative Connecting Pte. Limited
+      note: The same company is the Google Play developer and the App Store seller.
+      sources: [terms, privacy, register, play, app-store]
+    owner:
+      value: null
+      note: >-
+        Its sole shareholder is Lemon Seed Technology Ltd. of the Cayman Islands. Qihoo 360 bought Lemon
+        Seed in 2019 and reported selling it to unnamed parties in 2020, but TTP found its March 2025
+        filings still list one director whose name matches a former Qihoo 360 manager.
+      sources: [ttp-2025, ttp-spot-check-2025]
+    founded:
+      value: 2016
+      note: The Android app was on Google Play by November 2016. Its own pages give 2017 and 2018, and the Singapore company was registered in April 2018.
+      sources: [play-2016, press, about, register]
+    team:
+      value: partial
+      note: The privacy policy names a data protection officer, and Singapore filings name a director. Nobody else is named.
+      sources: [privacy, ttp-2025]
+    sister_brands:
+      value: [VPN Monster]
+      note: >-
+        VPN Monster shares its Google Play developer account. TTP and 2025 research tie VPN Proxy
+        Master, Snap VPN, Robot VPN, Thunder VPN and Signal Secure VPN to the same group, through sister
+        companies Lemon Clove, Autumn Breeze and ALL Connected.
+      sources: [play-dev, ttp-2025, ttp-spot-check-2025, hidden-links-2025]
+    acquisitions:
+      value:
+        - date: 2020-09-01
+          acquirer: Undisclosed buyers
+          source: ttp-2025
+        - date: 2019-12-01
+          acquirer: Qihoo 360
+          source: ttp-2025
+      note: Qihoo 360 bought the parent company, Lemon Seed Technology, in December 2019. The 2020 sale is TTP's reading of an unnamed "Project L" in Qihoo's annual report.
+      sources: [ttp-2025]
+
+  jurisdiction:
+    hq:
+      value: SG
+      sources: [register, play]
+    entities:
+      value: [SG, KY]
+      note: The parent company, Lemon Seed Technology Ltd., is registered in the Cayman Islands.
+      sources: [register, ttp-2025]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [terms, no-logs]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [no-logs, terms]
+    timestamps:
+      value: null
+      note: The terms say it logs "access attempts" to its servers for security and troubleshooting, without saying what that covers or for how long.
+      sources: [terms, privacy]
+    bandwidth:
+      value: aggregate
+      evidence: claimed
+      note: The privacy policy lists the amount of data transferred among diagnostic data it says is anonymised when collected, while its no-logs page says it never collects used bandwidth.
+      sources: [privacy, no-logs]
+    source_ip:
+      value: null
+      note: >-
+        The policy collects your country and internet provider, which it says are anonymised, and the
+        terms log access attempts. 2025 research saw the Android app send the postcode of your IP
+        address to Firebase.
+      sources: [privacy, terms, hidden-links-2025]
+    proven: []
+    policy: https://turbovpn.com/policy
+
+  transparency:
+    audits:
+      value:
+        - date: 2025-09-01
+          auditor: MASA lab, not named
+          scope: apps
+          source: masa-2025
+        - date: 2024-06-01
+          auditor: NCC Group
+          scope: apps
+          source: masa-2024
+      evidence: verified
+      note: >-
+        Both are Google Play MASA checks of the Android app. NCC Group's 2024 letter is public, while
+        the 2025 one was only announced, with no report or lab named.
+      sources: [masa-2024, masa-2025]
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents:
+      value: []
+      grade: ok
+      note: >-
+        In 2025 researchers found the Android apps shared a hard-coded Shadowsocks password that lets an
+        eavesdropper decrypt users' traffic, and sent location data its policy says it doesn't collect.
+        No response or fix from the company is on record, so it's graded ok rather than good.
+      sources: [hidden-links-2025]
+
+  account:
+    email:
+      value: optional
+      note: The free version and app store subscriptions work without an account. Buying on the website needs an email address.
+      sources: [privacy, help-devices]
+    personal_data: []
+    payment:
+      value: [card, app_store, bank, bitcoin, other_crypto, gift_card]
+      note: Also Apple Pay and local e-wallets through third-party processors. Gift card codes are redeemed on its website.
+      sources: [help-payments, pricing, gift-card]
+
+  security:
+    protocols:
+      value: [openvpn, ikev2, other]
+      note: Other is L2TP/IPsec and ShadowsocksR. In 2025 researchers found the OpenVPN option couldn't be selected in the Android app.
+      sources: [help-protocols, encryption, play, hidden-links-2025]
+    post_quantum:
+      value: none
+      note: Nothing is published about its key exchange.
+      sources: [encryption, help-protocols]
+    kill_switch:
+      value: app
+      evidence: claimed
+      sources: [kill-switch, help-kill-switch]
+    dns:
+      value: first_party
+      evidence: claimed
+      sources: [help-leaks]
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say how its servers are run.
+    hosting:
+      value: null
+      note: It doesn't say whether it owns or rents its servers.
+    virtual_locations:
+      value: null
+      note: It doesn't say whether any locations are virtual. Its help centre puts location mismatches down to geolocation databases.
+      sources: [servers, help-geolocation]
+    servers:
+      value: 21000
+      note: Its download page also claims 24,000 servers in over 45 countries.
+      sources: [servers, download]
+    countries:
+      value: 80
+      note: It advertises 111 locations, counting cities.
+      sources: [servers]
+
+  features:
+    connections:
+      value: 10
+      note: The Gold plan allows 10 devices and Platinum 20. Older pages and the press page still say 5, and the free version allows 1.
+      sources: [help-devices, pricing, download, press]
+    multihop:
+      value: true
+      note: Gold and Platinum plans only, on iOS since version 4.2.0 and Android since 4.3.0.
+      sources: [multihop-ios, multihop-android]
+    obfuscation:
+      value: [shadowsocks]
+      note: Its ShadowsocksR mode is offered for networks where other protocols fail. Researchers found it used the deprecated rc4-md5 cipher with obfuscation set to plain.
+      sources: [help-protocols, hidden-links-2025]
+    port_forwarding: false
+    split_tunnel:
+      value: true
+      sources: [split-tunnel, help-subscription]
+    blocking: []
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android, browser]
+      note: The browser extension is for Chrome. There's also a separate Turbo VPN Lite app for Android.
+      sources: [download]
+    open_source:
+      value: none
+      note: The terms forbid reverse engineering the apps.
+      sources: [terms]
+    telemetry:
+      value: null
+      note: >-
+        The policy says the apps send anonymised diagnostics and crash reports through Firebase, without
+        mentioning a way to turn them off. 2025 research saw the Android app upload location data to
+        Firebase.
+      sources: [privacy, play-data-safety, hidden-links-2025]
+    trackers:
+      value: 30
+      note: Version 4.2.9.6, mostly advertising SDKs that pay for the free version.
+      sources: [exodus]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 11.99, currency: USD }
+      sources: [pricing, help-pricing]
+    best:
+      value: { amount: 3.33, currency: USD }
+      note: $89.99 for two years plus three free months.
+      sources: [pricing]
+    best_term:
+      value: 27
+      sources: [pricing]
+    renewal_increase:
+      value: null
+      note: The pricing page bills $89.99 every 27 months, but the terms say introductory prices only cover the first term.
+      sources: [terms, pricing]
+    free_tier:
+      value: true
+      note: Ad-supported, on one device with fewer locations.
+      sources: [download, help-subscription]
+    refund_days:
+      value: 30
+      note: Website purchases only, and first-time buyers only. App store purchases follow the store's own refund rules.
+      sources: [terms, help-refund]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: Its plans are sold as "100% anonymous and untraceable", and the Play listing promises "military-grade" encryption.
+      sources: [gift-card, play]
+    affiliates:
+      value: true
+      note: Run through the Admitad affiliate network.
+      sources: [affiliate]
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://turbovpn.com/
+    title: Turbo VPN homepage
+  privacy:
+    url: https://turbovpn.com/policy
+    title: Privacy Policy (effective 25 April 2025)
+  terms:
+    url: https://turbovpn.com/terms-of-service
+    title: Terms of Service (effective 25 April 2025)
+  about:
+    url: https://turbovpn.com/aboutus
+    title: About Turbo VPN
+  press:
+    url: https://turbovpn.com/press-room
+    title: Turbo VPN press room
+  no-logs:
+    url: https://turbovpn.com/features/no-logs
+    title: No Log VPN
+  encryption:
+    url: https://turbovpn.com/features/encryption
+    title: VPN encryption
+  kill-switch:
+    url: https://turbovpn.com/features/automatic-kill-switch
+    title: Automatic Kill Switch
+  split-tunnel:
+    url: https://turbovpn.com/features/spilt-tunneling
+    title: Split Tunneling VPN
+  servers:
+    url: https://turbovpn.com/vpn-server
+    title: Turbo VPN servers
+  download:
+    url: https://turbovpn.com/download
+    title: Download Turbo VPN
+  pricing:
+    url: https://turbovpn.com/pricing
+    title: Compare VPN plans and pricing
+  gift-card:
+    url: https://turbovpn.com/gift-card
+    title: Gift card redemption and plans
+  affiliate:
+    url: https://turbovpn.com/affiliate-program
+    title: Turbo VPN Affiliate Program
+  masa-2024:
+    url: https://appdefensealliance.dev/reports/free.vpn.unblock.proxy.turbovpn_1718020800000000.pdf
+    title: NCC Group, MASA letter of assessment for TurboVPN 5.0.8.1 (June 2024)
+  masa-2025:
+    url: https://turbovpn.com/blog/reaffirming-security-turbo-vpn-android-once-more-passes-mobile-application-security-assessment
+    title: 'Reaffirming Security: Turbo VPN Android Once More Passes Mobile Application Security Assessment (September 2025)'
+  multihop-ios:
+    url: https://turbovpn.com/blog/upgrade-your-privacy-on-ios-turbo-vpn-4-2-0-introduces-multihop-and-static-ip
+    title: 'Upgrade Your Privacy on iOS: Turbo VPN 4.2.0 Introduces Multihop and Static IP'
+  multihop-android:
+    url: https://turbovpn.com/blog/understanding-double-vpn-benefits-use-cases-and-how-it-works
+    title: 'Understanding Double VPN: Benefits, Use Cases, and How It Works'
+  help-protocols:
+    url: https://support.turbovpn.com/hc/en-sg/articles/900004830483-How-to-change-protocols
+    title: How to change protocols?
+  help-leaks:
+    url: https://support.turbovpn.com/hc/en-sg/articles/40008639227161-Will-Turbo-VPN-leak-my-data
+    title: Will Turbo VPN leak my data?
+  help-kill-switch:
+    url: https://support.turbovpn.com/hc/en-sg/articles/4406028638489-Kill-Switch-Turbo-VPN
+    title: Kill Switch Turbo VPN
+  help-devices:
+    url: https://support.turbovpn.com/hc/en-sg/articles/900004773543-How-many-devices-can-be-connected-to-Turbo-VPN-simultaneously-and-how
+    title: How many devices can be connected to Turbo VPN simultaneously and how?
+  help-payments:
+    url: https://support.turbovpn.com/hc/en-sg/articles/900007186423-What-Payment-Methods-does-Turbo-VPN-offer
+    title: What Payment Methods does Turbo VPN offer?
+  help-pricing:
+    url: https://support.turbovpn.com/hc/en-sg/articles/39918850235929-How-much-does-Turbo-VPN-premium-cost
+    title: How much does Turbo VPN premium cost?
+  help-refund:
+    url: https://support.turbovpn.com/hc/en-sg/articles/900007190943-What-is-Turbo-VPN-s-refund-policy
+    title: What is Turbo VPN's refund policy?
+  help-subscription:
+    url: https://support.turbovpn.com/hc/en-sg/articles/900004773383-What-do-I-get-with-my-Turbo-VPN-subscription
+    title: What do I get with my Turbo VPN subscription?
+  help-geolocation:
+    url: https://support.turbovpn.com/hc/en-sg/articles/39732137594137-Why-does-Google-show-a-different-location-than-my-Turbo-VPN-server
+    title: Why does Google show a different location than my Turbo VPN server?
+  register:
+    url: https://data.gov.sg/api/action/datastore_search?resource_id=d_3f960c10fed6145404ca7b821f263b87&q=201812738K
+    title: Innovative Connecting Pte. Limited (UEN 201812738K), ACRA corporate entities dataset
+  play:
+    url: https://play.google.com/store/apps/details?id=free.vpn.unblock.proxy.turbovpn
+    title: Turbo VPN - Secure VPN Proxy on Google Play
+  play-data-safety:
+    url: https://play.google.com/store/apps/datasafety?id=free.vpn.unblock.proxy.turbovpn
+    title: Turbo VPN data safety on Google Play
+  play-dev:
+    url: https://play.google.com/store/apps/dev?id=7006518471988336602
+    title: Innovative Connecting apps on Google Play
+  play-2016:
+    url: https://web.archive.org/web/20161117121508/https://play.google.com/store/apps/details?id=free.vpn.unblock.proxy.turbovpn
+    title: Turbo VPN on Google Play (archived November 2016)
+  app-store:
+    url: https://apps.apple.com/us/app/turbo-vpn-private-browser/id1365309175
+    title: Turbo VPN Private Browser on the App Store (US)
+  exodus:
+    url: https://web.archive.org/web/20260215191605/https://reports.exodus-privacy.eu.org/en/reports/free.vpn.unblock.proxy.turbovpn/latest/
+    title: Exodus Privacy report for Turbo VPN 4.2.9.6 (February 2026, archived)
+  ttp-2025:
+    url: https://www.techtransparencyproject.org/articles/apple-offers-apps-with-ties-to-chinese-military
+    title: Tech Transparency Project, Apple Offers Apps With Ties to Chinese Military (1 April 2025)
+  ttp-spot-check-2025:
+    url: https://www.techtransparencyproject.org/articles/spot-check-apple-and-google-still-have-a-chinese-vpn-problem
+    title: 'Tech Transparency Project, Spot Check: Apple and Google Still Have a Chinese VPN Problem (12 June 2025)'
+  hidden-links-2025:
+    url: https://www.petsymposium.org/foci/2025/foci-2025-0008.php
+    title: 'Mixon-Baca, Knockel and Crandall, Hidden Links: Analyzing Secret Families of VPN Apps (FOCI 2025)'
