@@ -1,0 +1,291 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Shellfire VPN
+icon: shellfire-vpn.png
+checked: 2026-10-25
+
+criteria:
+  identity:
+    website: https://www.shellfire.net
+    legal_entity:
+      value: Shellfire GmbH
+      note: >-
+        It was Shellfire OHG until it became a GmbH in October 2021. Apple's App Store still names the
+        seller as Shellfire Gattung und Behr GbR, the founders' partnership.
+      sources: [terms, imprint, register, app-store-ios]
+    owner:
+      value: null
+      note: Founders Florian Gattung and Maximilian Behr are its managing directors. The register lists two shareholders without naming them for free.
+      sources: [register, vision]
+    founded:
+      value: 2010
+      note: Shellfire started in 2002 as a hosting firm and added VPN accounts on 15 August 2010.
+      sources: [news-2010, vision]
+    team:
+      value: public
+      sources: [vision, imprint]
+    sister_brands: []
+    acquisitions:
+      value: []
+      note: The 2021 switch from an OHG to a GmbH changed its legal form. It wasn't a sale.
+      sources: [register]
+
+  jurisdiction:
+    hq:
+      value: DE
+      sources: [imprint, terms]
+    entities:
+      value: [DE]
+      sources: [imprint, register]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      note: >-
+        Shellfire says that if served a valid German warrant it would give police access to a named
+        user's live traffic, and that this has never happened.
+      sources: [no-logs, terms]
+    dns:
+      value: none
+      evidence: claimed
+      note: Some app and router setups send lookups to Google's public DNS, which Shellfire doesn't control.
+      sources: [no-logs, privacy-policy, desktop-wireguard]
+    timestamps:
+      value: none
+      evidence: claimed
+      sources: [no-logs, privacy-policy]
+    bandwidth:
+      value: none
+      evidence: claimed
+      sources: [no-logs, privacy-policy]
+    source_ip:
+      value: none
+      evidence: claimed
+      note: The VPN servers keep no IPs, but the account system records the IP and time of sign-ups and logins.
+      sources: [privacy-policy, no-logs]
+    proven: []
+    policy: https://www.shellfire.net/privacy-policy/
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: required
+      sources: [order, cancel]
+    personal_data:
+      value: []
+      note: The terms set a minimum age of 18 and let Shellfire ask for proof, such as an eID or card check.
+      sources: [terms, order]
+    payment:
+      value: [card, paypal, bank, app_store, bitcoin, monero, other_crypto]
+      note: Bank options include Klarna, Przelewy24, EPS, Bancontact and iDEAL.
+      sources: [payment, order, play-store, app-store-ios]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn, other]
+      note: >-
+        The Android app only does OpenVPN, and the Apple apps use WireGuard. IPsec is offered for manual
+        setup.
+      sources: [home, android-source, desktop-source, app-store-ios]
+    post_quantum:
+      value: none
+      sources: [desktop-wireguard, home]
+    kill_switch:
+      value: none
+      note: The Windows and Android apps have none, and Shellfire doesn't mention one for macOS or iOS.
+      sources: [desktop-source, android-source, home]
+    dns:
+      value: third_party
+      note: The Windows app's WireGuard setup and Shellfire's router guide both use Google's 8.8.8.8.
+      sources: [desktop-wireguard, openwrt]
+
+  infra:
+    ram_only:
+      value: null
+      note: Shellfire doesn't say how its servers store data.
+      sources: [privacy-policy]
+    hosting:
+      value: rented
+      note: >-
+        Its server addresses belong to hosting firms such as Hetzner, OVH, M247, OneProvider, Scaleway
+        and DigitalOcean.
+      sources: [server-list]
+    virtual_locations:
+      value: null
+      note: Shellfire doesn't say whether any of its locations are virtual.
+      sources: [locations]
+    servers:
+      value: 55
+      note: Two of them, in Germany and the US, are for the free plan.
+      sources: [server-list]
+    countries:
+      value: 40
+      sources: [locations, server-list]
+
+  features:
+    connections:
+      value: 5
+      sources: [devices]
+    multihop: false
+    obfuscation:
+      value: []
+      sources: [home, desktop-source]
+    port_forwarding:
+      value: false
+      note: Ports 25 and 465 are blocked to stop spam.
+      sources: [port-25, home]
+    split_tunnel:
+      value: false
+      note: The Windows and Android apps have none, and Shellfire doesn't mention it for macOS or iOS.
+      sources: [desktop-source, android-source]
+    blocking: []
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android, router]
+      note: The router app is Shellfire's own Shellfire Box. Other routers need a manual setup.
+      sources: [download, box, openwrt]
+    open_source:
+      value: some
+      note: The Windows and Android apps are on GitHub. The macOS and iOS apps aren't.
+      sources: [github, desktop-source, android-source]
+    telemetry:
+      value: forced
+      note: >-
+        The Play Store build of the Android app sends crash reports to Google's Firebase Crashlytics,
+        with no setting to turn it off.
+      sources: [android-gradle, play-store]
+    fdroid:
+      value: false
+      note: The source has an F-Droid build, but the app isn't on F-Droid.
+      sources: [android-source]
+
+  pricing:
+    monthly:
+      value: { amount: 10.95, currency: EUR }
+      sources: [pricing]
+    best:
+      value: { amount: 3.33, currency: EUR }
+      note: The 2-year plan, at €79.95 up front.
+      sources: [pricing]
+    best_term:
+      value: 24
+      sources: [pricing]
+    renewal_increase:
+      value: 0
+      note: The terms say prices only go up with your express consent.
+      sources: [terms, pricing]
+    free_tier:
+      value: true
+      note: Speed is capped at 1 Mbit/s, with servers in two countries and 128-bit encryption. There's no data cap.
+      sources: [pricing, play-store]
+    refund_days:
+      value: 14
+      note: A 14-day money-back guarantee on top of the EU's 14-day right of withdrawal.
+      sources: [withdrawal, terms]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        The Play listing promises "military-grade" encryption, and the site says not even the government
+        can breach your privacy.
+      sources: [play-store, home]
+    affiliates:
+      value: true
+      note: Affiliates get 100% of a first monthly payment, or 40% on longer plans.
+      sources: [affiliates]
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://www.shellfire.net/
+    title: Shellfire VPN homepage
+  terms:
+    url: https://www.shellfire.net/terms-and-conditions/
+    title: Shellfire GmbH terms and conditions (June 2025)
+  imprint:
+    url: https://www.shellfire.net/imprint/
+    title: Shellfire imprint
+  register:
+    url: https://www.northdata.com/Shellfire+GmbH,+Schmitten/HRB+11030
+    title: Shellfire GmbH, Amtsgericht Königstein HRB 11030 (formerly HRA 4020), register filings via North Data
+  vision:
+    url: https://www.shellfire.net/vision/
+    title: About Shellfire
+  news-2010:
+    url: https://web.archive.org/web/20100821221759/http://www.shellfire.de/news/
+    title: Shellfire news, August 2010 (Wayback Machine)
+  privacy-policy:
+    url: https://www.shellfire.net/privacy-policy/
+    title: Shellfire privacy policy (June 2025)
+  no-logs:
+    url: https://www.shellfire.net/knowledge-base/connection-data-being-logged/
+    title: Is my connection data being logged?
+  order:
+    url: https://www.shellfire.net/order/
+    title: Shellfire VPN order page
+  cancel:
+    url: https://www.shellfire.net/knowledge-base/cancel-subscription/
+    title: How can I cancel my subscription?
+  payment:
+    url: https://www.shellfire.net/knowledge-base/which-payment-options-offer/
+    title: Which payment options do you offer?
+  play-store:
+    url: https://play.google.com/store/apps/details?id=de.shellfire.vpn.android
+    title: Shellfire VPN on Google Play
+  app-store-ios:
+    url: https://apps.apple.com/us/app/shellfire-vpn/id1085477595
+    title: Shellfire VPN on the App Store (iPhone and iPad)
+  github:
+    url: https://github.com/shell-fire
+    title: Shellfire on GitHub
+  desktop-source:
+    url: https://github.com/shell-fire/shellfire-vpn
+    title: Shellfire VPN desktop client source
+  desktop-wireguard:
+    url: https://github.com/shell-fire/shellfire-vpn/blob/master/ShellfireVPN/src/main/java/de/shellfire/vpn/client/Controller.java
+    title: Shellfire VPN desktop client, WireGuard config generation (Controller.java)
+  android-source:
+    url: https://github.com/shell-fire/shellfire-vpn.android
+    title: Shellfire VPN Android app source
+  android-gradle:
+    url: https://github.com/shell-fire/shellfire-vpn.android/blob/main/app/build.gradle
+    title: Shellfire VPN Android app build file
+  openwrt:
+    url: https://www.shellfire.net/knowledge-base/wireguard-vpn-openwrt-step-by-step-guide/
+    title: How to set up WireGuard VPN on OpenWRT
+  server-list:
+    url: https://www.shellfire.de/webservice/serverlist.php/?iLanguageId=2
+    title: Shellfire VPN server list (the apps' data feed)
+  locations:
+    url: https://www.shellfire.net/locations/
+    title: Shellfire VPN server locations
+  devices:
+    url: https://www.shellfire.net/knowledge-base/many-devices-with-shellfire-vpn/
+    title: How many devices can I use with Shellfire VPN?
+  port-25:
+    url: https://www.shellfire.net/knowledge-base/can-t-send-emails-through-port-25-465-shellfire-vpn/
+    title: Why can't I send emails through port 25 or 465?
+  download:
+    url: https://www.shellfire.net/download-now/
+    title: Download Shellfire VPN
+  box:
+    url: https://www.shellfire.net/box/
+    title: Shellfire Box VPN router
+  pricing:
+    url: https://www.shellfire.net/prices/
+    title: Shellfire VPN prices
+  withdrawal:
+    url: https://www.shellfire.net/right-of-withdrawal/
+    title: Right of withdrawal and money-back guarantee
+  affiliates:
+    url: https://www.shellfire.net/affiliate-signup/
+    title: Shellfire affiliate signup
