@@ -1,0 +1,307 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: AdGuard VPN
+icon: adguard-vpn.svg
+checked: 2026-10-25
+
+criteria:
+  identity:
+    website:
+      value: https://adguard-vpn.com
+      sources: [home]
+    legal_entity:
+      value: Adguard Software Limited
+      note: Registered in Cyprus as HE332952 since June 2014. The Google Play listing names the same company.
+      sources: [privacy-policy, eula, register, play]
+    owner:
+      value: null
+      note: Its shareholders aren't public. AdGuard started in Russia and says most staff left the country in 2022.
+      sources: [register, about]
+    founded:
+      value: 2020
+      sources: [about]
+    team:
+      value: partial
+      note: Co-founder Andrey Meshkov and VPN product head Denis Vyazovoy are named, but there's no team page.
+      sources: [masa-blog, contacts]
+    sister_brands:
+      value: []
+      note: AdGuard's ad blocker, DNS and mail products aren't VPNs. Its TrustTunnel app only connects to servers you run yourself.
+      sources: [about]
+    acquisitions:
+      value: []
+      sources: [about, register]
+
+  jurisdiction:
+    hq:
+      value: CY
+      sources: [terms-of-sale, register]
+    entities:
+      value: [CY]
+      sources: [terms-of-sale, register]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [privacy-policy, eula]
+    dns:
+      value: none
+      evidence: claimed
+      note: Lookups go to AdGuard's own DNS service by default.
+      sources: [privacy-policy, dns-leaks]
+    timestamps:
+      value: none
+      evidence: claimed
+      note: Servers report how many apps each account has connected, to enforce the device limit.
+      sources: [privacy-policy, home]
+    bandwidth:
+      value: aggregate
+      evidence: claimed
+      note: A running byte count per account is kept for 90 days, not tied to locations.
+      sources: [privacy-policy]
+    source_ip:
+      value: none
+      evidence: claimed
+      sources: [transparency]
+    proven:
+      value: []
+      note: Its transparency report says it handed nothing over for 27 government requests since 2024, but nobody independent has checked.
+      sources: [transparency]
+    policy: https://adguard-vpn.com/en/privacy.html
+
+  transparency:
+    audits:
+      value:
+        - date: 2025-03-01
+          auditor: Leviathan Security Group
+          scope: apps
+          source: masa-blog
+      evidence: verified
+      note: An App Defense Alliance MASA Level 2 check of the Android app, with no public report or exact dates.
+      sources: [masa-blog]
+    report:
+      value: regular
+      note: Lists requests by country and year, last updated October 2026.
+      sources: [transparency]
+    canary:
+      value: maintained
+      note: Reviewed every January.
+      sources: [transparency]
+    bug_bounty:
+      value: false
+      note: It has a disclosure programme, but rewards are merchandise or vouchers at most, never money.
+      sources: [disclosure]
+    incidents:
+      value:
+        - date: 2026-01-29
+          summary: A flaw in its TrustTunnel server let clients reach private network addresses it should have blocked (CVE-2026-24902). Fixed in 0.9.114 and disclosed in a GitHub advisory.
+          handled: well
+          source: ghsa-24902
+        - date: 2026-01-29
+          summary: A flaw in TrustTunnel let clients slip past a TLS filtering rule (CVE-2026-24904). Fixed in 0.9.115 and disclosed in a GitHub advisory.
+          handled: well
+          source: ghsa-24904
+      sources: [transparency]
+
+  account:
+    email:
+      value: required
+      sources: [eula, privacy-policy]
+    personal_data:
+      value: []
+      sources: [android-privacy]
+    payment:
+      value: [card, paypal, app_store, bitcoin, other_crypto]
+      note: Crypto runs through Cryptomus and covers ETH, LTC, USDT and about 15 more.
+      sources: [pricing, pricing-us, play]
+
+  security:
+    protocols:
+      value: [proprietary, ikev2]
+      note: Its own protocol, TrustTunnel, has been open source since January 2026. IKEv2/IPsec is only for routers and the iOS mode that runs alongside AdGuard's ad blocker.
+      sources: [trusttunnel-blog, trusttunnel-repo, routers, ios-kb]
+    post_quantum:
+      value: optional
+      note: A setting in the Windows, macOS, Android and iOS apps.
+      sources: [pq-blog, windows-kb, android-kb]
+    kill_switch:
+      value: app
+      note: Off by default, and unavailable in the iOS and Android modes that run alongside AdGuard's ad blocker.
+      sources: [windows-kb, android-kb, ios-kb]
+    dns:
+      value: first_party
+      note: AdGuard DNS by default, changeable in the apps.
+      sources: [dns-leaks]
+
+  infra:
+    ram_only: null
+    hosting: null
+    virtual_locations: null
+    servers: null
+    countries:
+      value: 62
+      note: Across 75+ cities.
+      sources: [server-locations]
+
+  features:
+    connections:
+      value: 10
+      note: Two on the free plan.
+      sources: [pricing, home]
+    multihop:
+      value: false
+      sources: [windows-kb, android-kb]
+    obfuscation:
+      value: [proprietary]
+      note: TrustTunnel wraps traffic in TLS over HTTP/2 or HTTP/3 so it looks like ordinary HTTPS.
+      sources: [trusttunnel-blog, trusttunnel-repo]
+    port_forwarding:
+      value: false
+      sources: [windows-kb, android-kb]
+    split_tunnel:
+      value: true
+      note: By app and by website, with a mode that only tunnels the ones you pick.
+      sources: [android-kb, ios-kb]
+    blocking:
+      value: [ads, trackers, malware]
+      note: By picking one of AdGuard's filtering DNS servers in the app.
+      sources: [dns-leaks, adguard-dns]
+
+  clients:
+    platforms:
+      value: [windows, macos, linux_cli, ios, android, router, browser]
+      sources: [github-repos, routers]
+    open_source:
+      value: some
+      note: The browser extension is GPL-3.0 and the protocol is Apache-2.0. The desktop and mobile apps are closed source.
+      sources: [extension-repo, trusttunnel-repo, github-repos]
+    telemetry:
+      value: opt_in
+      evidence: claimed
+      note: Crash reports and usage metrics are only sent if you turn them on.
+      sources: [privacy-policy, android-privacy]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 11.99, currency: USD }
+      sources: [pricing-us]
+    best:
+      value: { amount: 2.99, currency: USD }
+      note: $71.76 for two years.
+      sources: [pricing-us]
+    best_term:
+      value: 24
+      sources: [pricing-us]
+    renewal_increase:
+      value: 0
+      note: Discounts only cover the first term, and the listed 1- and 2-year prices are the plans' standard prices.
+      sources: [terms-of-sale, pricing-us]
+    free_tier:
+      value: true
+      note: 3 GB a month on two devices, with fewer locations.
+      sources: [home]
+    refund_days:
+      value: 30
+      note: Only on 1- and 2-year plans bought direct. Monthly plans aren't refundable.
+      sources: [pricing, terms-of-sale]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: The site says it "makes you anonymous" and lets you download anything "anonymously".
+      sources: [home]
+    affiliates:
+      value: true
+      sources: [affiliates]
+    review_sites: false
+    activism: false
+
+refs:
+  pq-blog:
+    url: https://adguard-vpn.com/en/blog/post-quantum-cryptography-in-apps.html
+    title: Post-quantum cryptography in AdGuard VPN apps
+  ghsa-24902:
+    url: https://github.com/TrustTunnel/TrustTunnel/security/advisories/GHSA-hgr9-frvw-5r76
+    title: TrustTunnel advisory GHSA-hgr9-frvw-5r76 (CVE-2026-24902)
+  ghsa-24904:
+    url: https://github.com/TrustTunnel/TrustTunnel/security/advisories/GHSA-fqh7-r5gf-3r87
+    title: TrustTunnel advisory GHSA-fqh7-r5gf-3r87 (CVE-2026-24904)
+  home:
+    url: https://adguard-vpn.com/en/welcome.html
+    title: AdGuard VPN
+  privacy-policy:
+    url: https://adguard-vpn.com/en/privacy.html
+    title: AdGuard VPN privacy policy
+  android-privacy:
+    url: https://adguard-vpn.com/en/privacy/android.html
+    title: AdGuard VPN for Android privacy notice
+  eula:
+    url: https://adguard-vpn.com/en/eula.html
+    title: AdGuard VPN EULA
+  terms-of-sale:
+    url: https://adguardcheckout.com/terms-of-sale.html?product=vpn
+    title: Terms of sale
+  register:
+    url: https://companieshousecyprus.com/company/C332952
+    title: Adguard Software Limited (HE332952), Cyprus registry record
+  play:
+    url: https://play.google.com/store/apps/details?id=com.adguard.vpn
+    title: AdGuard VPN on Google Play
+  about:
+    url: https://adguard-vpn.com/en/about-us.html
+    title: About AdGuard
+  contacts:
+    url: https://adguard.com/en/contacts.html
+    title: AdGuard contacts
+  transparency:
+    url: https://adguard-vpn.com/en/transparency.html
+    title: AdGuard VPN transparency report
+  masa-blog:
+    url: https://adguard-vpn.com/en/blog/adguard-vpn-independent-security-review-google-play-verification.html
+    title: AdGuard VPN undergoes independent security review and receives verification on Google Play
+  disclosure:
+    url: https://cdn.adguardcdn.com/website/documents/adguard_rdp.pdf
+    title: AdGuard Responsible Disclosure Program
+  pricing:
+    url: https://adguard-vpn.com/en/license.html
+    title: Purchase AdGuard VPN
+  pricing-us:
+    url: https://web.archive.org/web/20261009084219/https://adguard-vpn.com/en/license.html
+    title: Purchase AdGuard VPN, USD prices (archived 2026-10-09)
+  trusttunnel-blog:
+    url: https://adguard-vpn.com/en/blog/adguard-vpn-protocol-goes-open-source-meet-trusttunnel.html
+    title: 'We’ve kept our promise: AdGuard VPN protocol goes open-source, meet TrustTunnel'
+  trusttunnel-repo:
+    url: https://github.com/TrustTunnel/TrustTunnel
+    title: TrustTunnel/TrustTunnel on GitHub
+  routers:
+    url: https://adguard-vpn.com/kb/adguard-vpn-for-routers/overview/
+    title: AdGuard VPN for routers
+  ios-kb:
+    url: https://adguard-vpn.com/kb/adguard-vpn-for-ios/overview/
+    title: AdGuard VPN for iOS overview
+  windows-kb:
+    url: https://adguard-vpn.com/kb/adguard-vpn-for-windows/overview/
+    title: AdGuard VPN for Windows overview
+  android-kb:
+    url: https://adguard-vpn.com/kb/adguard-vpn-for-android/overview/
+    title: AdGuard VPN for Android overview
+  dns-leaks:
+    url: https://adguard-vpn.com/kb/general/dns-leaks/
+    title: What is a DNS leak
+  adguard-dns:
+    url: https://adguard-dns.io/en/public-dns.html
+    title: AdGuard DNS public servers
+  server-locations:
+    url: https://adguard-vpn.com/en/server-locations.html
+    title: AdGuard VPN server locations
+  github-repos:
+    url: https://adguard-vpn.com/kb/miscellaneous/github-repos/
+    title: AdGuard VPN’s GitHub repositories
+  extension-repo:
+    url: https://github.com/AdguardTeam/AdGuardVPNExtension
+    title: AdguardTeam/AdGuardVPNExtension on GitHub
+  affiliates:
+    url: https://adguard-vpn.com/en/vpn-affiliate-program.html
+    title: AdGuard VPN affiliate program
