@@ -1,0 +1,293 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: hidemy.name VPN
+icon: hidemy-name.svg
+checked: 2026-10-25
+
+criteria:
+  identity:
+    website:
+      value: https://hide.mn
+      note: hidemy.name now redirects here, and hidemy.io is a parked domain.
+      sources: [home]
+    legal_entity:
+      value: hidemy.network Limited
+      note: >-
+        Named in the policy, though Belize struck the company off its register on 1 January 2025. The
+        Android and iOS apps are published by a Kyiv company, Cloud Development LLC (Kloud Development
+        TOV on the App Store).
+      sources: [policy, legal-info, bz-gazette, play, app-store]
+    owner: null
+    founded:
+      value: null
+      note: The company dates itself to December 2006, when the site ran as incloak.com, but doesn't say when the VPN launched.
+      sources: [about, trust]
+    team:
+      value: partial
+      note: Its site names nobody, but its chief executive Markus Saar spoke to the press in 2023.
+      sources: [about, rkn-lawsuit]
+    sister_brands: []
+    acquisitions:
+      value: []
+      note: It ran as incloak.com until 2017, under the same company.
+      sources: [trust]
+
+  jurisdiction:
+    hq:
+      value: BZ
+      note: Belize, where the company was struck off in 2025, while the site says it operates under English law.
+      sources: [policy, about, bz-gazette]
+    entities:
+      value: [BZ, UA]
+      note: The Ukrainian company publishes the apps. Nothing says how it relates to the Belize one.
+      sources: [policy, play, app-store]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [policy]
+    dns:
+      value: null
+      note: Lookups go to Cloudflare's 1.1.1.1 by default, and the policy doesn't say whether they're logged.
+      sources: [dns, policy]
+    timestamps:
+      value: temporary
+      evidence: claimed
+      note: A troubleshooting log of each connection, with your username and internal IP address, is cleared every few hours.
+      sources: [policy]
+    bandwidth:
+      value: aggregate
+      evidence: claimed
+      note: Data used is added to a running monthly total per account.
+      sources: [policy]
+    source_ip:
+      value: none
+      evidence: claimed
+      sources: [policy]
+    proven: []
+    policy: https://hide.mn/en/docs/privacy/
+
+  transparency:
+    audits: []
+    report: none
+    canary:
+      value: none
+      note: The policy has an undated line saying it has never had a Patriot Act order, not a regularly updated canary.
+      sources: [policy]
+    bug_bounty: false
+    incidents:
+      value:
+        - date: 2023-07-01
+          summary: Russia blocked the site and the VPN servers from July 2023 without adding it to the register of banned sites. hidemy.name sued Roskomnadzor, and a Moscow court refused to lift the block in December 2023.
+          handled: well
+          source: rkn-lawsuit
+      note: In November 2023 Russia's Ministry of Justice also listed hidemy.network Ltd as a foreign agent.
+      sources: [rkn-lawsuit, rkn-ruling, foreign-agent]
+
+  account:
+    email:
+      value: required
+      note: The policy asks for a valid email address, though the Android app's listing calls it optional. There's no account or password.
+      sources: [policy, pricing, play-data-safety]
+    personal_data:
+      value: []
+      sources: [pricing]
+    payment:
+      value: [card, paypal, app_store, bitcoin, monero, other_crypto]
+      note: Other crypto includes Litecoin, Ethereum, USDT, Tron, TON and Solana.
+      sources: [pricing]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn, ikev2, other]
+      note: WireGuard and AmneziaWG come as manual configs. Others are L2TP and PPTP.
+      sources: [setup, ports]
+    post_quantum: none
+    kill_switch:
+      value: app
+      note: In the Windows, macOS, iOS and Linux apps, and on by default on macOS and iOS.
+      sources: [kill-switch, linux]
+    dns:
+      value: third_party
+      note: Cloudflare's 1.1.1.1.
+      sources: [dns]
+
+  infra:
+    ram_only:
+      value: null
+      note: Nothing says whether servers run from RAM.
+      sources: [home]
+    hosting:
+      value: rented
+      evidence: claimed
+      note: It mentions paying rent on servers around the world, without saying whether it owns any.
+      sources: [paid]
+    virtual_locations:
+      value: null
+      sources: [home]
+    servers:
+      value: 250
+      sources: [what-is-vpn]
+    countries:
+      value: 42
+      note: 74 cities. Some countries are only added on request.
+      sources: [what-is-vpn]
+
+  features:
+    connections:
+      value: 5
+      note: Each one has to be on a different server.
+      sources: [devices, pricing]
+    multihop:
+      value: true
+      note: Set up from a web panel after connecting, by rerouting through a second server.
+      sources: [double-vpn]
+    obfuscation:
+      value: [amneziawg, proprietary]
+      note: Chameleon disguises the OpenVPN handshake in the Windows, Android and Linux apps. AmneziaWG is a manual config.
+      sources: [ports, setup, linux]
+    port_forwarding:
+      value: true
+      note: Ports above 1000 on shared IPs, any port on a rented dedicated IP.
+      sources: [ports-open]
+    split_tunnel:
+      value: true
+      note: Android only.
+      sources: [split-tunnel]
+    blocking: []
+
+  clients:
+    platforms:
+      value: [windows, macos, linux_gui, ios, android]
+      note: Routers use manual configs.
+      sources: [setup, linux, router]
+    open_source:
+      value: none
+      sources: [setup]
+    telemetry:
+      value: null
+      note: Crash reports and diagnostics are opt-in, but the mobile apps also carry AppsFlyer install analytics with no stated way to turn it off.
+      sources: [policy]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 11, currency: USD }
+      sources: [pricing]
+    best:
+      value: { amount: 2, currency: USD }
+      note: $120 for five years.
+      sources: [pricing]
+    best_term:
+      value: 60
+      sources: [pricing]
+    renewal_increase:
+      value: null
+      note: Plans auto-renew at an "applicable" renewal price that isn't published and is subject to change.
+      sources: [pricing, terms]
+    free_tier:
+      value: false
+      note: A free trial lasts up to 24 hours.
+      sources: [refunds]
+    refund_days:
+      value: 30
+      note: With no reason given, only if you've used under 5 GB. Payment fees of up to 15% may be deducted.
+      sources: [refunds]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: It promises "complete anonymity" and that "no one can see which sites you've visited".
+      sources: [linux]
+    affiliates:
+      value: true
+      note: Up to 50% of the first sale and 25% of renewals.
+      sources: [partners]
+    review_sites: false
+    activism: false
+
+refs:
+  bz-gazette:
+    url: https://bccar.bz/wp-content/uploads/2025/01/Gazette-Supplement-no.-3-of-2025.pdf
+    title: Belize Gazette supplement no. 3 of 2025, struck companies (HIDEMY.NETWORK LTD., p. 211)
+  home:
+    url: https://hide.mn/en/
+    title: hidemy.name VPN
+  what-is-vpn:
+    url: https://hide.mn/en/vpn/
+    title: What is a VPN?
+  policy:
+    url: https://hide.mn/en/docs/privacy/
+    title: Privacy Policy
+  terms:
+    url: https://hide.mn/en/docs/agreement/
+    title: Terms of Service
+  refunds:
+    url: https://hide.mn/en/docs/moneyback/
+    title: Moneyback Guarantee
+  pricing:
+    url: https://hide.mn/en/order/vpn/
+    title: VPN rates
+  about:
+    url: https://hide.mn/en/about/
+    title: About the company and contact information
+  legal-info:
+    url: https://hide.mn/en/faq/general-questions/legal-information/
+    title: Legal information
+  trust:
+    url: https://hide.mn/en/faq/general-questions/about-trust-and-logs/can-you-be-trusted/
+    title: Can you be trusted?
+  partners:
+    url: https://hide.mn/en/faq/general-questions/cooperation-with-us/for-partners/
+    title: For partners
+  paid:
+    url: https://hide.mn/en/faq/vpn/general-questions/do-i-have-to-pay/
+    title: Do I have to pay?
+  devices:
+    url: https://hide.mn/en/faq/vpn/usage-specifics/can-i-use-it-on-multiple-devices/
+    title: Can I use it on multiple devices?
+  double-vpn:
+    url: https://hide.mn/en/faq/vpn/usage-specifics/do-you-support-double-vpn/
+    title: Do you support Double VPN?
+  kill-switch:
+    url: https://hide.mn/en/faq/vpn/usage-specifics/how-to-limit-the-internet-when-vpn-breaks/
+    title: How to disable the internet when VPN disconnects?
+  split-tunnel:
+    url: https://hide.mn/en/faq/vpn/usage-specifics/can-i-use-a-vpn-for-a-specific-application-only/
+    title: Can I use a VPN for a specific application only?
+  ports-open:
+    url: https://hide.mn/en/faq/vpn/usage-specifics/how-to-open-ports/
+    title: How to open ports?
+  dns:
+    url: https://hide.mn/en/faq/vpn/usage-specifics/what-dns-are-you-using/
+    title: What DNS are you using?
+  ports:
+    url: https://hide.mn/en/faq/vpn/usage-specifics/how-to-connect-a-vpn-if-internet-access-is-limited/
+    title: How to connect a VPN if internet access is limited?
+  setup:
+    url: https://hide.mn/en/vpn/windows/
+    title: VPN for Windows
+  linux:
+    url: https://hide.mn/en/vpn/linux/
+    title: VPN for Linux
+  router:
+    url: https://hide.mn/en/vpn/router/
+    title: VPN for routers
+  play:
+    url: https://play.google.com/store/apps/details?id=com.fourksoft.openvpn
+    title: hidemy.name VPN on Google Play
+  play-data-safety:
+    url: https://play.google.com/store/apps/datasafety?id=com.fourksoft.openvpn
+    title: hidemy.name VPN data safety on Google Play
+  app-store:
+    url: https://apps.apple.com/us/app/hidemy-name-vpn/id1200692581
+    title: hidemy.name VPN on the App Store
+  rkn-lawsuit:
+    url: https://www.anti-malware.ru/news/2023-10-04-114534/42047
+    title: HideMy.name подал иск к Роскомнадзору из-за блокировки не по регламенту (Anti-Malware, 2023)
+  rkn-ruling:
+    url: https://habr.com/ru/news/780592/
+    title: Суд отказался снять блокировку VPN-провайдера HideMy.name (Habr, 2023)
+  foreign-agent:
+    url: https://theins.ru/news/266880
+    title: Минюст РФ включил в список «иноагентов» VPN-сервис HideMy.name (The Insider, 2023)
