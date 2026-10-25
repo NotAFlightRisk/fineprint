@@ -1,0 +1,387 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: X-VPN
+icon: x-vpn.png
+checked: 2026-10-25
+
+criteria:
+  identity:
+    website:
+      value: https://xvpn.io
+      sources: [home]
+    legal_entity:
+      value: LightningLink Networks Pte. Ltd.
+      note: >-
+        A Singapore company incorporated in July 2025, which took over from Hong Kong's Free Connected
+        Limited by October 2025. It also sells the apps on Google Play and the App Store.
+      sources: [terms, privacy, register, play, app-store, privacy-2025, ttp-2025-06]
+    owner:
+      value: null
+      note: >-
+        In 2025 the Tech Transparency Project found Free Connected Limited's Hong Kong filings showed it
+        "owned by a Chinese tech firm, Chengdu Zhuozhuo Technology Co., Ltd." Who owns the Singapore company
+        isn't public.
+      sources: [ttp-2025-04, register]
+    founded:
+      value: 2017
+      sources: [about, privacy-2025]
+    team:
+      value: anonymous
+      note: Nobody running it is named on its site, and Singapore's open register data only gives a count of officers.
+      sources: [about, register]
+    sister_brands: []
+    acquisitions:
+      value: null
+      note: >-
+        No sale is on record. The service moved from Free Connected Limited in Hong Kong to a new Singapore
+        company in 2025, months after TTP's report, without saying whether the owners changed.
+      sources: [privacy-2025, register, ttp-2025-04]
+
+  jurisdiction:
+    hq:
+      value: SG
+      sources: [terms, register]
+    entities:
+      value: [SG]
+      note: Free Connected Limited in Hong Kong ran it until 2025, and it isn't said whether that company is still involved.
+      sources: [register, privacy-2025]
+
+  logging:
+    traffic:
+      value: none
+      evidence: verified
+      sources: [privacy, audit-2026]
+    dns:
+      value: none
+      evidence: verified
+      sources: [privacy, audit-2026]
+    timestamps:
+      value: none
+      evidence: verified
+      sources: [privacy, audit-2026]
+    bandwidth:
+      value: none
+      evidence: claimed
+      note: Only server-wide bandwidth totals, for capacity planning, though the free plan has a daily data allowance on some platforms.
+      sources: [privacy, free-vpn]
+    source_ip:
+      value: none
+      evidence: verified
+      sources: [privacy, audit-2026]
+    proven:
+      value: [audit]
+      sources: [audit-2026]
+    policy: https://xvpn.io/policy
+
+  transparency:
+    audits:
+      value:
+        - date: 2026-09-24
+          auditor: Vantage Point Security
+          scope: apps
+          source: audit-talaria
+        - date: 2026-02-28
+          auditor: Deloitte & Touche LLP
+          scope: no_logs
+          source: audit-2026
+      evidence: verified
+      note: >-
+        Vantage Point reviewed the source of Talaria, its open source protocol library, and found four
+        informational issues, since fixed. Deloitte's is a limited assurance report on the no-logs setup as of
+        one day, with two control findings.
+      sources: [audit-center, talaria-post]
+    report:
+      value: regular
+      note: First published in late 2025 with yearly figures back to 2017, and quarterly since. It lists 71 law enforcement requests and none answered with data.
+      sources: [transparency, trust-center]
+    canary:
+      value: none
+      note: Its press page says the Trust Center has a warrant canary, but there's only a count of gag orders in its transparency table.
+      sources: [press, trust-center]
+    bug_bounty:
+      value: true
+      note: From $50 to $500 a bug.
+      sources: [bug-bounty]
+    incidents:
+      value:
+        - date: 2026-06-07
+          summary: >-
+            A local privilege escalation bug (CVE-2026-2638) in the Mac app from its website, reported by
+            Fluid Attacks. Fixed in version 77.5.1 and disclosed with a full write-up.
+          handled: well
+          source: cve-statement
+        - date: 2026-06-05
+          summary: >-
+            Malware operators bundled the Windows app with a DLL it would load unchecked, to spread STX RAT.
+            X-VPN fixed the loading in ten days and its own downloads weren't affected.
+          handled: well
+          source: stx-rat
+      sources: [cve-2026-2638]
+
+  account:
+    email:
+      value: required
+      note: The free apps need no account. Premium needs one, and the address isn't verified, so a disposable one works.
+      sources: [create-account, audit-2026]
+    personal_data: []
+    payment:
+      value: [card, paypal, app_store, bitcoin, other_crypto]
+      note: Crypto goes through CoinPayments as a one-off payment that can't be refunded.
+      sources: [payment-methods, pricing]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn, proprietary, other]
+      note: Its own Everest and Talaria protocols, plus V2Ray, and L2TP for routers.
+      sources: [protocols, talaria-post, router]
+    post_quantum:
+      value: optional
+      note: Only on its Everest TLS and TLS-2 protocols.
+      sources: [post-quantum]
+    kill_switch:
+      value: system
+      note: Off until you turn it on, and Premium only.
+      sources: [kill-switch, kill-switch-help, free-vpn]
+    dns:
+      value: first_party
+      evidence: claimed
+      sources: [private-dns]
+
+  infra:
+    ram_only:
+      value: all
+      evidence: verified
+      sources: [ram-only, audit-2026]
+    hosting:
+      value: rented
+      note: Bare metal servers leased in third-party data centres, plus Google Cloud, AWS and Oracle.
+      sources: [transparency, vpn-server]
+    virtual_locations:
+      value: null
+      note: Its list includes Bhutan, Laos, Myanmar and Iraq, but it doesn't say whether any locations are virtual.
+      sources: [servers]
+    servers:
+      value: 10000
+      note: Given as 10,000+. Its transparency report's server counts (62,400 for Q2 2026) are estimates multiplied up from monthly data.
+      sources: [servers, transparency]
+    countries:
+      value: 95
+      note: Countries and territories on its server list. Its own pages say 80+.
+      sources: [servers]
+
+  features:
+    connections:
+      value: 5
+      note: The terms also cap an account at three devices of the same platform.
+      sources: [devices, terms]
+    multihop:
+      value: true
+      note: Called Double VPN.
+      sources: [features]
+    obfuscation:
+      value: [proprietary, v2ray, quic]
+      sources: [obfuscation, protocols, about]
+    port_forwarding: false
+    split_tunnel:
+      value: true
+      sources: [split-tunnel]
+    blocking:
+      value: [ads, trackers, malware]
+      sources: [web-protection]
+
+  clients:
+    platforms:
+      value: [windows, macos, linux_cli, ios, android, router, browser]
+      note: Plus Apple TV, Android TV and Fire TV apps. Routers are set up by hand with OpenVPN or L2TP.
+      sources: [about, linux, router]
+    open_source:
+      value: some
+      note: Only its Talaria protocol library, under the AGPL. The apps are closed.
+      sources: [talaria-repo, everest]
+    telemetry:
+      value: null
+      note: >-
+        The policy says the apps send aggregated usage and crash statistics, with Firebase on mobile and ad
+        SDKs in the free version, without saying whether you can turn this off.
+      sources: [privacy]
+    trackers:
+      value: 3
+      note: Google AdMob, Crashlytics and Firebase Analytics, in version 207.0.5.
+      sources: [exodus]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 11.99, currency: USD }
+      sources: [pricing]
+    best:
+      value: { amount: 2.59, currency: USD }
+      note: $69.99 for the first two years plus three bonus months, then $71.99 a year. A year is $47.99, renewing at $71.99.
+      sources: [pricing, renewal-terms]
+    best_term:
+      value: 27
+      sources: [pricing]
+    renewal_increase:
+      value: 131
+      sources: [pricing, renewal-terms]
+    free_tier:
+      value: true
+      note: 26 locations in 15 countries, with ads in the mobile apps.
+      sources: [free-vpn]
+    refund_days:
+      value: 30
+      note: First purchases only, and not for crypto payments.
+      sources: [terms, pricing]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        It says RAM-only servers make logging "physically impossible", obfuscation gives "complete anonymity",
+        and the free plan has "no ads, and no tracking" while its Android app carries AdMob and Firebase.
+      sources: [ram-only, obfuscation, free-vpn, exodus]
+    affiliates:
+      value: true
+      note: Students who post videos about it get affiliate commission on sales.
+      sources: [ambassador]
+    review_sites: false
+    activism:
+      value: true
+      note: Says it's an EFF supporter and an Internet Society organisation member.
+      sources: [about, trust-center]
+
+refs:
+  renewal-terms:
+    url: https://xvpn.io/terms-service/pricing
+    title: X-VPN pricing and renewal terms
+  vpn-server:
+    url: https://xvpn.io/vpn-server
+    title: X-VPN servers
+  home:
+    url: https://xvpn.io/
+    title: X-VPN homepage
+  privacy:
+    url: https://xvpn.io/policy
+    title: X-VPN Privacy Policy (September 16, 2026)
+  privacy-2025:
+    url: https://web.archive.org/web/20250924140316/https://xvpn.io/policy
+    title: X-VPN Privacy Policy naming Free Connected Limited (archived September 2025)
+  terms:
+    url: https://xvpn.io/terms-service
+    title: X-VPN Terms of Service (August 14, 2026)
+  about:
+    url: https://xvpn.io/about-us
+    title: About X-VPN
+  press:
+    url: https://xvpn.io/press
+    title: X-VPN Press Room
+  register:
+    url: https://data.gov.sg/api/action/datastore_search?resource_id=d_a2141adf93ec2a3c2ec2837b78d6d46e&q=202530186D
+    title: LightningLink Networks Pte. Ltd. (UEN 202530186D), ACRA corporate entities data on data.gov.sg
+  play:
+    url: https://play.google.com/store/apps/details?id=com.security.xvpn.z35kb
+    title: X-VPN on Google Play
+  app-store:
+    url: https://apps.apple.com/us/app/x-vpn-super-vpn-best-proxy/id1250312807
+    title: X-VPN on the App Store (US)
+  ttp-2025-04:
+    url: https://www.techtransparencyproject.org/articles/apple-offers-apps-with-ties-to-chinese-military
+    title: Tech Transparency Project, Apple Offers Apps With Ties to Chinese Military (April 2025)
+  ttp-2025-06:
+    url: https://www.techtransparencyproject.org/articles/spot-check-apple-and-google-still-have-a-chinese-vpn-problem
+    title: 'Tech Transparency Project, Spot Check: Apple and Google Still Have a Chinese VPN Problem (June 2025)'
+  audit-center:
+    url: https://xvpn.io/audit-center
+    title: X-VPN Audit Center
+  audit-2026:
+    url: https://xvpn.io/assets/LightningLink-ISAE-3000-Report.pdf
+    title: Deloitte & Touche LLP, Limited Assurance Report on X-VPN Services as of 28 February 2026
+  audit-talaria:
+    url: https://xvpn.io/assets/Talaria-VPN-Protocol-Security-Test-Final-Report.pdf
+    title: Vantage Point Security, Talaria VPN Protocol Security Test VPQ-2026000549 (2026)
+  talaria-post:
+    url: https://xvpn.io/resources/talaria-open-source-security-audit
+    title: 'Talaria: Open Source and Independently Audited for Security'
+  talaria-repo:
+    url: https://github.com/X-VPN/Talaria
+    title: X-VPN/Talaria on GitHub
+  transparency:
+    url: https://xvpn.io/transparency-report
+    title: X-VPN Transparency Report
+  trust-center:
+    url: https://xvpn.io/trust-center
+    title: X-VPN Trust Center
+  bug-bounty:
+    url: https://xvpn.io/bug-bounty-program
+    title: X-VPN Bug Bounty Program
+  cve-statement:
+    url: https://xvpn.io/resources/statement-local-privilege-escalation-vulnerability
+    title: 'Official Statement: X-VPN Has Fixed a Local Privilege Escalation Vulnerability'
+  cve-2026-2638:
+    url: https://nvd.nist.gov/vuln/detail/CVE-2026-2638
+    title: NVD, CVE-2026-2638
+  stx-rat:
+    url: https://www.cyderes.com/howler-cell/cpuid-hwmonitor-xvpn-dll-sideloading-stx-rat
+    title: Cyderes Howler Cell, CPUID HWMonitor and X-VPN DLL sideloading spreads STX RAT
+  create-account:
+    url: https://xvpn.io/help-center/how-to-create-a-vpn-account
+    title: How to create an X-VPN account?
+  payment-methods:
+    url: https://xvpn.io/help-center/methods-to-pay-for-a-vpn
+    title: What payment methods does X-VPN accept?
+  pricing:
+    url: https://xvpn.io/pricing
+    title: X-VPN Pricing
+  protocols:
+    url: https://xvpn.io/help-center/what-protocols-does-xvpn-support
+    title: What VPN Protocols Does X-VPN Support?
+  everest:
+    url: https://xvpn.io/protocol/everest
+    title: 'Discover Everest: X-VPN''s Premier VPN Protocol'
+  post-quantum:
+    url: https://xvpn.io/help-center/what-is-post-quantum-encryption
+    title: What is Post-quantum Encryption and how it works?
+  kill-switch:
+    url: https://xvpn.io/features/kill-switch
+    title: X-VPN Kill Switch
+  kill-switch-help:
+    url: https://xvpn.io/help-center/what-is-kill-switch-and-how-to-protect-my-privacy-with-it
+    title: What is Kill Switch and how to protect my privacy with it?
+  private-dns:
+    url: https://xvpn.io/features/private-dns
+    title: X-VPN with Private DNS
+  ram-only:
+    url: https://xvpn.io/features/ram-only-servers
+    title: 'RAM-Only Servers: Zero Data Retention'
+  servers:
+    url: https://xvpn.io/vpn-server
+    title: X-VPN server locations
+  devices:
+    url: https://xvpn.io/help-center/one-subscription-for-all-devices
+    title: How many devices can be connected to one subscription?
+  features:
+    url: https://xvpn.io/features
+    title: X-VPN Features
+  obfuscation:
+    url: https://xvpn.io/features/obfuscation
+    title: Obfuscated VPN, Go Unseen
+  split-tunnel:
+    url: https://xvpn.io/help-center/what-is-split-tunneling-and-how-to-divide-my-traffic
+    title: What is Split Tunneling and how to divide my traffic?
+  web-protection:
+    url: https://xvpn.io/help-center/what-is-web-protection-feature
+    title: What is Web Protection feature?
+  linux:
+    url: https://xvpn.io/help-center/use-vpn-on-linux-with-command-line
+    title: How to use X-VPN on Linux (Command Line)?
+  router:
+    url: https://xvpn.io/download/vpn-router
+    title: Best VPN for routers
+  exodus:
+    url: https://web.archive.org/web/20260521050627/https://reports.exodus-privacy.eu.org/en/reports/com.security.xvpn.z35kb/latest/
+    title: Exodus Privacy report for X-VPN 207.0.5 (archived May 2026)
+  free-vpn:
+    url: https://xvpn.io/free-vpn
+    title: X-VPN Free VPN
+  ambassador:
+    url: https://xvpn.io/campus-ambassador
+    title: X-VPN Campus Ambassador Programme
