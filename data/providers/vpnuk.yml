@@ -1,0 +1,317 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: VPNUK
+icon: vpnuk.png
+checked: 2026-10-25
+
+criteria:
+  identity:
+    website:
+      value: https://www.vpnuk.net
+      sources: [home]
+    legal_entity:
+      value: Online Privacy Services Ltd
+      note: The terms only say "VPNUK", and the affiliate terms still name VPNUK Limited, which was dissolved in 2018.
+      sources: [based, register, play, affiliate-tos, vpnuk-limited]
+    owner:
+      value: Daniel Burton
+      note: Its sole director, who holds over 75% of the shares.
+      sources: [register-officers, register-psc]
+    founded:
+      value: 2007
+      sources: [home]
+    team:
+      value: partial
+      note: Its site names nobody, but Companies House names the director and owner.
+      sources: [register-officers, register-psc]
+    sister_brands: []
+    acquisitions:
+      value: []
+      note: VPNUK Limited, owned by Jayne Burton, ran from 2014 to 2018. Online Privacy Services Ltd was set up in 2023, with her as a director until 2024.
+      sources: [vpnuk-limited, vpnuk-limited-psc, register-officers]
+
+  jurisdiction:
+    hq:
+      value: GB
+      sources: [based, register]
+    entities:
+      value: [GB]
+      sources: [register, play]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [terms, privacy, logs-faq]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [terms]
+    timestamps:
+      value: null
+      note: The privacy section says no connection times are stored, but its logs section keeps access attempts and session duration, with no time limit given.
+      sources: [privacy, logs-policy]
+    bandwidth:
+      value: none
+      evidence: claimed
+      sources: [privacy]
+    source_ip:
+      value: null
+      note: The privacy section says no IP addresses are stored, but the logs section keeps access attempts without saying what they record.
+      sources: [privacy, logs-policy]
+    proven:
+      value: []
+      sources: [logs-policy]
+    policy: https://www.vpnuk.net/terms/
+
+  transparency:
+    audits:
+      value: []
+      sources: [privacy, logs-faq]
+    report:
+      value: none
+      sources: [terms]
+    canary:
+      value: none
+      sources: [terms]
+    bug_bounty:
+      value: false
+      sources: [terms]
+    incidents:
+      value: []
+
+  account:
+    email:
+      value: required
+      sources: [privacy]
+    personal_data:
+      value: []
+      note: The terms say it may ask new customers for proof of ID before handing over account details, to fight fraud.
+      sources: [id-check]
+    payment:
+      value: [card, paypal, bank, app_store]
+      note: Bank is direct debit through GoCardless. The policy and checkout also take cryptocurrency through PayGate.to, without saying which coins.
+      sources: [sale, store-api]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn, ikev2, other]
+      note: Other is L2TP/IPsec and PPTP.
+      sources: [compare, vpn-type, windows-app]
+    post_quantum:
+      value: none
+      sources: [compare, windows-app]
+    kill_switch:
+      value: app
+      note: In the Windows and Android apps.
+      sources: [windows-app, play]
+    dns:
+      value: null
+      note: The Windows app can route DNS through a third party provider, but VPNUK doesn't say whose resolvers it uses by default.
+      sources: [windows-app, custom-dns]
+
+  infra:
+    ram_only:
+      value: null
+      sources: [privacy]
+    hosting:
+      value: null
+      sources: [server-status]
+    virtual_locations:
+      value: null
+      sources: [server-status]
+    servers:
+      value: 61
+      note: Servers on the status list on 2026-10-25, 36 shared and 25 for dedicated IPs.
+      sources: [server-status, status-api]
+    countries:
+      value: 30
+      sources: [server-status, status-api]
+
+  features:
+    connections:
+      value: 1
+      note: The prices here are for one user. Shared IP plans go up to 99 users for more, from £5.99 a month for six.
+      sources: [product, devices]
+    multihop:
+      value: false
+      sources: [compare]
+    obfuscation:
+      value: [proprietary]
+      note: An obfuscated OpenVPN mode that disguises traffic as HTTPS, without saying how.
+      sources: [obfuscation]
+    port_forwarding:
+      value: true
+      note: Only on the 1:1 Dedicated IP plan, from £7.50 a month.
+      sources: [port-forwarding, compare]
+    split_tunnel:
+      value: true
+      note: Only in the Android app. Elsewhere routes can be set by hand in an OpenVPN or WireGuard config.
+      sources: [play, split-tunnel]
+    blocking:
+      value: []
+      sources: [windows-app]
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android]
+      note: Also an Apple TV app. Linux and routers use config files or built-in clients.
+      sources: [app-store-ios, app-store-mac, app-store-tv, play, windows-app, linux]
+    open_source:
+      value: some
+      note: The Windows app's source is on GitHub. The Android and Apple apps' isn't.
+      sources: [github, windows-source]
+    telemetry:
+      value: null
+      note: The policy says a third party handles basic app analytics, without saying whether it can be turned off.
+      sources: [privacy]
+    fdroid:
+      value: false
+      sources: [android-app]
+
+  pricing:
+    monthly:
+      value: { amount: 3.5, currency: GBP }
+      sources: [product]
+    best:
+      value: { amount: 2.5, currency: GBP }
+      note: £60 every two years.
+      sources: [product, compare]
+    best_term:
+      value: 24
+      sources: [product]
+    renewal_increase:
+      value: 0
+      sources: [product, sale]
+    free_tier:
+      value: false
+      note: There's a one-month free trial with no card needed.
+      sources: [compare]
+    refund_days:
+      value: 30
+      note: Not for one-off crypto payments.
+      sources: [sale, refund]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: Its pages promise "Complete Online Privacy & Anonymity", "zero logs" and "no trace left behind", while its logs policy keeps access attempts and session duration.
+      sources: [shared, logs-faq, logs-policy]
+    affiliates:
+      value: true
+      note: Pays up to 25% recurring commission.
+      sources: [affiliate, affiliate-tos]
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://www.vpnuk.net/
+    title: VPNUK homepage
+  terms:
+    url: https://www.vpnuk.net/terms/#terms
+    title: Terms of service
+  sale:
+    url: https://www.vpnuk.net/terms/#sale
+    title: Terms of sale
+  id-check:
+    url: https://www.vpnuk.net/terms/#id
+    title: Additional security procedures
+  privacy:
+    url: https://www.vpnuk.net/terms/#privacy
+    title: Privacy policy
+  logs-policy:
+    url: https://www.vpnuk.net/terms/#user
+    title: Logs policy and user information
+  based:
+    url: https://www.vpnuk.net/faq/general/where-are-you-based/
+    title: Where are you based?
+  register:
+    url: https://find-and-update.company-information.service.gov.uk/company/15286152
+    title: Companies House, Online Privacy Services Ltd
+  register-officers:
+    url: https://find-and-update.company-information.service.gov.uk/company/15286152/officers
+    title: Companies House, Online Privacy Services Ltd officers
+  register-psc:
+    url: https://find-and-update.company-information.service.gov.uk/company/15286152/persons-with-significant-control
+    title: Companies House, Online Privacy Services Ltd persons with significant control
+  vpnuk-limited:
+    url: https://find-and-update.company-information.service.gov.uk/company/09048789
+    title: Companies House, VPNUK Limited (dissolved)
+  vpnuk-limited-psc:
+    url: https://find-and-update.company-information.service.gov.uk/company/09048789/persons-with-significant-control
+    title: Companies House, VPNUK Limited persons with significant control
+  affiliate-tos:
+    url: https://www.vpnuk.net/terms-and-conditions/
+    title: Affiliate program terms of service
+  affiliate:
+    url: https://www.vpnuk.net/affiliate-partner-program/
+    title: Affiliate partner program
+  play:
+    url: https://play.google.com/store/apps/details?id=uk.vpn.vpnuk
+    title: VPNUK on Google Play
+  app-store-ios:
+    url: https://apps.apple.com/us/app/vpnuk-fast-secure-vpn/id1485091594
+    title: VPNUK on the App Store (iPhone and iPad)
+  app-store-mac:
+    url: https://apps.apple.com/us/app/vpnuk-fast-secure-vpn/id6772894352
+    title: VPNUK on the Mac App Store
+  app-store-tv:
+    url: https://apps.apple.com/us/app/vpnuk-for-apple-tv/id6769474627
+    title: VPNUK for Apple TV
+  logs-faq:
+    url: https://www.vpnuk.net/faq/about-vpnuk/do-you-store-logs/
+    title: Do you store logs?
+  compare:
+    url: https://www.vpnuk.net/compare-vpn-accounts/
+    title: Compare VPN accounts
+  shared:
+    url: https://www.vpnuk.net/shared-ip-vpn-account/
+    title: Shared IP VPN account
+  product:
+    url: https://www.vpnuk.net/product/shared-ip-vpn-account/
+    title: Shared IP VPN account, order page
+  devices:
+    url: https://www.vpnuk.net/faq/general/number-of-devices/
+    title: Number of devices
+  refund:
+    url: https://www.vpnuk.net/faq/accounts/refund-policy/
+    title: Refund policy
+  store-api:
+    url: https://www.vpnuk.net/wp-json/wc/store/v1/cart
+    title: VPNUK shop, checkout payment methods
+  server-status:
+    url: https://www.vpnuk.net/server-status/
+    title: VPNUK network status
+  status-api:
+    url: https://clientcp.vpnuk.info/server-status-api.php
+    title: VPNUK server status feed
+  vpn-type:
+    url: https://www.vpnuk.net/faq/about-vpnuk/vpn-type/
+    title: VPN type
+  windows-app:
+    url: https://www.vpnuk.net/setup/setup-windows-overview/setup-windows-vpnuk-software/
+    title: VPNUK Software for Windows, setup guide
+  android-app:
+    url: https://www.vpnuk.net/setup/setup-android-overview/setup-android-vpnuk-app/
+    title: VPNUK app for Android, setup guide
+  linux:
+    url: https://www.vpnuk.net/setup/setup-linux/
+    title: Linux VPN setup guides
+  obfuscation:
+    url: https://www.vpnuk.net/support/firewall/obfuscation-dpi/
+    title: Obfuscation and DPI bypass
+  split-tunnel:
+    url: https://www.vpnuk.net/support/config/split-tunnelling/
+    title: Split tunnelling
+  port-forwarding:
+    url: https://www.vpnuk.net/support/bespoke/port-forwarding/
+    title: Port forwarding and incoming connections
+  custom-dns:
+    url: https://www.vpnuk.net/support/config/custom-dns/
+    title: Custom DNS settings
+  github:
+    url: https://github.com/vpnuk
+    title: VPNUK on GitHub
+  windows-source:
+    url: https://github.com/vpnuk/windows
+    title: VPNUK Windows app source
