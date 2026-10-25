@@ -1,0 +1,283 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: FlyVPN
+icon: flyvpn.png
+checked: 2026-10-25
+
+criteria:
+  identity:
+    website:
+      value: https://www.flyvpn.com
+      sources: [home]
+    legal_entity:
+      value: UDITech Limited
+      note: Hong Kong company 2440430, which took this name in January 2020. The App Store still lists the seller as FLYVPN LIMITED.
+      sources: [terms, play, app-store, hk-cr]
+    owner:
+      value: null
+      note: It doesn't say who owns UDITech Limited.
+      sources: [play]
+    founded:
+      value: 2007
+      sources: [home]
+    team:
+      value: anonymous
+      sources: [home]
+    sister_brands: []
+    acquisitions: []
+
+  jurisdiction:
+    hq:
+      value: HK
+      sources: [play, hk-cr]
+    entities:
+      value: [HK]
+      note: >-
+        The terms switched from Hong Kong law to UK law in 2024, but Companies House lists no
+        UDITech or FlyVPN company.
+      sources: [hk-cr, terms, terms-2023, ch-uditech, ch-flyvpn]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      note: The terms say it doesn't log or track user activity "in any way".
+      sources: [terms]
+    dns:
+      value: none
+      evidence: claimed
+      note: Only covered by the terms' general promise not to log user activity.
+      sources: [terms]
+    timestamps:
+      value: null
+      note: Neither the policy nor the terms say whether connection times are kept, and the free plan is metered by time.
+      sources: [policy, terms, free]
+    bandwidth:
+      value: null
+      note: Not addressed, though free accounts have a data cap.
+      sources: [policy, free-usage]
+    source_ip:
+      value: null
+      note: Not addressed beyond the terms' promise not to log user activity.
+      sources: [policy, terms]
+    proven: []
+    policy:
+      value: https://www.flyvpn.com/privacy
+      note: Last updated in May 2020.
+      sources: [policy]
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: required
+      sources: [policy]
+    personal_data: []
+    payment:
+      value: [card, paypal, bank, app_store, bitcoin, gift_card]
+      note: >-
+        Bank transfers are Malaysian, Indonesian, Philippine and Russian banking services, and the
+        voucher is Neosurf. Alipay was greyed out when checked.
+      sources: [pricing, play]
+
+  security:
+    protocols:
+      value: [openvpn, other]
+      note: >-
+        The apps offer unnamed UDP and TCP modes plus an HTTP/SOCKS5 proxy. Only the Linux page
+        says OpenVPN, and the Windows app uses OpenVPN's TAP driver.
+      sources: [protocols, proxy, linux, tap-driver]
+    post_quantum: none
+    kill_switch:
+      value: app
+      note: Called Network Lock, it's in the Windows, macOS, Android and iOS apps.
+      sources: [network-lock, guide-windows, guide-mac, guide-android, guide-ios]
+    dns:
+      value: null
+      note: It doesn't say whose DNS servers the apps use.
+      sources: [vpn-features]
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say whether its servers run from RAM.
+      sources: [servers]
+    hosting:
+      value: null
+      note: It calls its servers self-built, without saying whether it owns or rents them.
+      sources: [pricing, servers]
+    virtual_locations:
+      value: null
+      note: It doesn't say whether any of its locations are virtual.
+      sources: [servers]
+    servers:
+      value: 1273
+      note: >-
+        Paid shared servers. Its 2,240 headline adds 944 dedicated IP servers and the free ones,
+        and its help pages still say 500.
+      sources: [servers, server-count]
+    countries:
+      value: 39
+      note: Hong Kong and Taiwan included. The site says 40 or more.
+      sources: [servers]
+
+  features:
+    connections:
+      value: 1
+      note: Each plan covers one device, and every extra one costs the full price again, up to 2,000.
+      sources: [concurrent, pricing]
+    multihop:
+      value: null
+      note: The Play listing mentions DoubleVPN servers, but the server list doesn't mark any.
+      sources: [play, servers]
+    obfuscation: []
+    port_forwarding: false
+    split_tunnel:
+      value: true
+      note: Android only, as Specify apps.
+      sources: [guide-android]
+    blocking: []
+
+  clients:
+    platforms:
+      value: [windows, macos, linux_cli, ios, android, router]
+      note: The router build is the Linux client for OpenWrt and DD-WRT, for advanced users only.
+      sources: [download, linux, linux-guide]
+    open_source: none
+    telemetry:
+      value: null
+      note: >-
+        The policy allows third-party app analytics and mobile ad identifiers, and Play lists crash
+        logs and device IDs. Its opt-outs only cover website cookies and the phone's own ad ID settings.
+      sources: [policy, play-data-safety]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 9.9, currency: USD }
+      sources: [pricing]
+    best:
+      value: { amount: 4.96, currency: USD }
+      note: $119 for two years, billed once.
+      sources: [pricing]
+    best_term:
+      value: 24
+      sources: [pricing]
+    renewal_increase:
+      value: 0
+      sources: [pricing]
+    free_tier:
+      value: true
+      note: Free servers in seven countries for an hour a day, with capped data. New accounts also get a three-day trial.
+      sources: [free, free-usage]
+    refund_days:
+      value: 30
+      note: The help page limits refunds to card and PayPal, though the terms also cover crypto. App Store purchases go through Apple.
+      sources: [terms, refund, pricing]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        It promises to keep you "secure and anonymous anytime", that encryption would take "even top
+        hackers" thousands of years to crack, and calls itself "the world's #1 trusted" VPN.
+      sources: [home, vpn-features, play]
+    affiliates:
+      value: null
+      note: No public affiliate scheme, but its homepage quotes vpnMentor and Top10VPN as testimonials.
+      sources: [home]
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://www.flyvpn.com/
+    title: FlyVPN homepage
+  terms:
+    url: https://www.flyvpn.com/terms
+    title: Terms of Service (updated 2024-03-26)
+  terms-2023:
+    url: https://web.archive.org/web/20230326080454/https://www.flyvpn.com/terms
+    title: Terms of Service, March 2023 (Wayback Machine)
+  policy:
+    url: https://www.flyvpn.com/privacy
+    title: Privacy Policy
+  play:
+    url: https://play.google.com/store/apps/details?id=com.fvcorp.flyclient
+    title: FlyVPN on Google Play
+  play-data-safety:
+    url: https://play.google.com/store/apps/datasafety?id=com.fvcorp.flyclient
+    title: FlyVPN data safety on Google Play
+  app-store:
+    url: https://apps.apple.com/us/app/flyvpn-secure-fast/id959012446
+    title: FlyVPN on the App Store
+  hk-cr:
+    url: https://www.cr.gov.hk/docs/wrpt/wk_new%26changednamecoys_20191230.pdf
+    title: Hong Kong Companies Registry, companies which changed names, 30 Dec 2019 to 5 Jan 2020 (p. 204)
+  ch-uditech:
+    url: https://find-and-update.company-information.service.gov.uk/search/companies?q=uditech
+    title: Companies House search for UDITech
+  ch-flyvpn:
+    url: https://find-and-update.company-information.service.gov.uk/search/companies?q=flyvpn
+    title: Companies House search for FlyVPN
+  pricing:
+    url: https://www.flyvpn.com/purchase
+    title: Choose your FlyVPN plan
+  concurrent:
+    url: https://www.flyvpn.com/help/how-to-change-connections
+    title: What is concurrent connections? How to increase?
+  refund:
+    url: https://www.flyvpn.com/help/how-to-refund
+    title: How to refund?
+  free:
+    url: https://www.flyvpn.com/help/use-for-free
+    title: How to use it for free?
+  free-usage:
+    url: https://www.flyvpn.com/freetrial
+    title: Free usage
+  servers:
+    url: https://www.flyvpn.com/servers
+    title: FlyVPN server locations
+  server-count:
+    url: https://www.flyvpn.com/help/how-many-servers
+    title: Which countries' servers does FlyVPN provide?
+  protocols:
+    url: https://www.flyvpn.com/help/choose-protocol
+    title: How to choose connection mode?
+  proxy:
+    url: https://www.flyvpn.com/help/http-proxy-socks5-proxy
+    title: Manual proxy tutorial
+  tap-driver:
+    url: https://www.flyvpn.com/help/tap-driver
+    title: What is the TAP driver?
+  network-lock:
+    url: https://www.flyvpn.com/help/network-lock
+    title: Network lock
+  guide-windows:
+    url: https://www.flyvpn.com/help/apps-tutorials-windows
+    title: FlyVPN Windows tutorial
+  guide-mac:
+    url: https://www.flyvpn.com/help/apps-tutorials-mac
+    title: FlyVPN macOS tutorial
+  guide-ios:
+    url: https://www.flyvpn.com/help/apps-tutorials-ios
+    title: FlyVPN iOS tutorial
+  guide-android:
+    url: https://www.flyvpn.com/help/apps-tutorials-android
+    title: FlyVPN Android tutorial
+  vpn-features:
+    url: https://www.flyvpn.com/help/vpn-features
+    title: FlyVPN features
+  download:
+    url: https://www.flyvpn.com/download
+    title: FlyVPN apps
+  linux:
+    url: https://www.flyvpn.com/download?Platform=linux
+    title: FlyVPN for Linux
+  linux-guide:
+    url: https://www.flyvpn.com/help/apps-tutorials-linux
+    title: FlyVPN Linux tutorial
