@@ -1,0 +1,266 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Urban VPN
+icon: urban-vpn.svg
+checked: 2026-10-25
+
+criteria:
+  identity:
+    website: https://www.urban-vpn.com
+    legal_entity:
+      value: Urban Cyber Security Inc.
+      note: A Delaware company, registered number 10158667. Both Android apps on Google Play are published by its parent, B.I Science (2009) Ltd, from Tel Aviv.
+      sources: [policy, terms, play, play-premium, app-store]
+    owner:
+      value: BIScience
+      note: Urban's privacy policy says its parent company is a data broker, without naming it. Koi Security quoted an earlier version that named BIScience as the affiliate it shares browsing data with.
+      sources: [play, policy, koi-2025]
+    founded:
+      value: 2018
+      sources: [about]
+    team:
+      value: anonymous
+      sources: [about]
+    sister_brands:
+      value: null
+      note: Koi Security found 1ClickVPN Proxy running the same collection code, but it's sold by a different company (Sugar - Smart Shopping Inc.) and nothing on either side names a shared owner.
+      sources: [koi-2025, oneclick-policy, oneclick-play]
+    acquisitions: []
+
+  jurisdiction:
+    hq:
+      value: US
+      sources: [policy, cws]
+    entities:
+      value: [US, IL]
+      note: The policy says data goes to Israel, among other places, and the Android apps' developer is the Israeli parent.
+      sources: [policy, play]
+
+  logging:
+    traffic:
+      value: 'yes'
+      evidence: claimed
+      note: >-
+        The policy collects the "URLs viewed or visited", search results and ads seen, plus "AI Inputs
+        and Outputs" from ChatGPT, Gemini, Claude and others, and sells de-identified versions for
+        "market intelligence". Raw data is tied to your Panelist ID for up to 90 days.
+      sources: [policy]
+    dns:
+      value: 'yes'
+      evidence: claimed
+      note: The policy doesn't mention DNS, but it collects every URL you visit, domain included.
+      sources: [policy]
+    timestamps:
+      value: 'yes'
+      evidence: claimed
+      note: Usage logs record "time of access and duration of use", kept for performance and security with no stated limit.
+      sources: [policy]
+    bandwidth: null
+    source_ip:
+      value: temporary
+      evidence: claimed
+      note: The policy says IP addresses are "trimmed and hashed" daily, so the hash is kept after that.
+      sources: [policy]
+    proven: []
+    policy: https://www.urban-vpn.com/about-us/privacy/
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents:
+      value:
+        - date: 2026-05-27
+          summary: >-
+            Researchers showed any website could tell the Chrome extension to disconnect or reroute the
+            VPN, turn off its leak protection and force data collection on. Urban acknowledged the report
+            within minutes, went quiet for over a month, then fixed it in version 5.12.5 before publication.
+          handled: well
+          source: pwned-2026
+        - date: 2025-12-15
+          summary: >-
+            Koi Security found Urban VPN Proxy, and other extensions from the same group, capturing
+            full conversations from ChatGPT, Claude, Gemini and other AI chats since a July 2025
+            update, on by default and whether or not the VPN was connected.
+          handled: poorly
+          source: koi-2025
+      note: Urban disputed Koi's findings three days later, saying AI processing needs explicit opt-in. Its current policy lists AI prompts and replies among the data it collects and sells in de-identified form.
+      sources: [koi-2025, urban-response, policy]
+
+  account:
+    email:
+      value: required
+      note: The free apps and extensions need no account. Premium needs a Google or Apple sign-in.
+      sources: [policy, terms]
+    personal_data:
+      value: []
+      note: Signing in with Google or Apple can also pass your name and profile picture.
+      sources: [policy]
+    payment:
+      value: [card, app_store]
+      note: Website orders go through Paddle; the mobile and Mac apps bill through Apple and Google.
+      sources: [policy, terms]
+
+  security:
+    protocols:
+      value: [openvpn, wireguard]
+      note: >-
+        The FAQ says OpenVPN, and the pricing page lists WireGuard for Premium. The browser extensions
+        only cover traffic in that browser.
+      sources: [faq, pricing, cws]
+    post_quantum: none
+    kill_switch:
+      value: app
+      evidence: claimed
+      note: It's off until you enable it in settings, and only in the mobile apps so far, with desktop "coming soon".
+      sources: [faq, kill-switch]
+    dns: null
+
+  infra:
+    ram_only: null
+    hosting:
+      value: null
+      note: The FAQ only says servers sit in "Tier 1 backbone data centers".
+      sources: [faq]
+    virtual_locations: null
+    servers:
+      value: 632
+      note: The free network. Premium runs separate servers, which the site puts at 652 on one page and 65 on another.
+      sources: [faq, cws, premium, pricing]
+    countries:
+      value: 82
+      note: The FAQ says 80 and the Premium pages 87 or 89.
+      sources: [locations, cws, faq, pricing, premium]
+
+  features:
+    connections:
+      value: unlimited
+      note: The free apps and extensions have no device limit. A Premium account covers 8 devices.
+      sources: [faq, unlimited-devices, pricing]
+    multihop:
+      value: true
+      evidence: claimed
+      note: Double VPN is always on and can't be turned off, with no detail on how it works. The Chrome listing says it's only in selected locations so far.
+      sources: [double-vpn, faq, cws]
+    obfuscation: []
+    port_forwarding: false
+    split_tunnel:
+      value: true
+      note: Premium only, and only on Android.
+      sources: [faq]
+    blocking:
+      value: [ads, malware]
+      note: The extension's optional protection features, which work by sending the URLs you visit to Urban's servers.
+      sources: [cws]
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android, browser]
+      note: The extensions for Chrome, Edge and Firefox are free. The iOS and Mac apps are Premium only, and free Android use is capped at 100MB a day.
+      sources: [faq, why-free, premium, app-store, amo]
+    open_source: none
+    telemetry:
+      value: null
+      note: >-
+        The policy collects usage, crash and analytics data under "legitimate interest". Koi found no
+        way to stop the extension's collection, while 2026 research found its opt-out switch wired backwards.
+      sources: [policy, koi-2025, pwned-2026]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 12.99, currency: USD }
+      sources: [pricing]
+    best:
+      value: { amount: 4.95, currency: USD }
+      note: Billed $59.40 a year.
+      sources: [pricing]
+    best_term:
+      value: 12
+      sources: [pricing]
+    renewal_increase:
+      value: null
+      note: The yearly plan is shown as 68% off without saying what it renews at.
+      sources: [pricing]
+    free_tier:
+      value: true
+      note: The extensions and Windows app are free without a data cap. Android's free tier gets 5 locations and 100MB a day.
+      sources: [why-free, premium]
+    refund_days:
+      value: null
+      note: The pricing page offers a 30-day money-back guarantee, but the FAQ and Premium page say there isn't one and the terms call fees non-refundable.
+      sources: [pricing, faq, premium, terms]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: The pricing page says "Nothing tracked, nothing logged", while the policy collects your browsing and AI chats.
+      sources: [pricing, policy]
+    affiliates: null
+    review_sites: false
+    activism: false
+
+refs:
+  policy:
+    url: https://www.urban-vpn.com/about-us/privacy/
+    title: Urban Privacy Policy (September 4, 2026)
+  terms:
+    url: https://www.urban-vpn.com/about-us/terms-of-service/
+    title: Urban VPN Terms of Use (September 11, 2024)
+  about:
+    url: https://www.urban-vpn.com/about-us/
+    title: About Urban VPN
+  faq:
+    url: https://www.urban-vpn.com/faq/
+    title: Urban VPN FAQ
+  pricing:
+    url: https://www.urban-vpn.com/pricing/
+    title: Urban VPN Premium plans
+  premium:
+    url: https://www.urban-vpn.com/about-us/premium/
+    title: Introducing Urban VPN Premium
+  why-free:
+    url: https://www.urban-vpn.com/about-us/why-free/
+    title: Why is Urban VPN free?
+  locations:
+    url: https://www.urban-vpn.com/features/server-locations/
+    title: Urban VPN server locations
+  kill-switch:
+    url: https://www.urban-vpn.com/features/kill-switch/
+    title: VPN Kill Switch by Urban VPN
+  double-vpn:
+    url: https://www.urban-vpn.com/features/double-vpn/
+    title: Double VPN
+  unlimited-devices:
+    url: https://www.urban-vpn.com/features/unlimited-devices/
+    title: Unlimited devices
+  cws:
+    url: https://chromewebstore.google.com/detail/urban-vpn-proxy/eppiocemhmnlbhjplcgkofciiegomcon
+    title: Urban VPN Proxy on the Chrome Web Store
+  amo:
+    url: https://addons.mozilla.org/en-US/firefox/addon/urban-vpn/
+    title: Urban VPN Proxy for Firefox
+  play:
+    url: https://play.google.com/store/apps/details?id=com.urbanvpn.android&hl=en
+    title: Urban VPN on Google Play
+  play-premium:
+    url: https://play.google.com/store/apps/details?id=com.urbanvpn.premium.android&hl=en
+    title: Urban VPN Premium on Google Play
+  app-store:
+    url: https://apps.apple.com/us/app/urban-vpn/id1517016374
+    title: Urban VPN on the App Store
+  koi-2025:
+    url: https://web.archive.org/web/20251230235210/https://www.koi.ai/blog/urban-vpn-browser-extension-ai-conversations-data-collection
+    title: Koi Security, 8 million users' AI conversations sold for profit by "privacy" extensions (December 15, 2025)
+  urban-response:
+    url: https://www.urban-vpn.com/blog/setting-the-record-straight-how-urban-vpns-ai-protection-feature-actually-works/
+    title: "Setting the record straight: how Urban VPN's AI protection feature actually works (December 18, 2025)"
+  pwned-2026:
+    url: https://amibeingpwned.com/blog/urban-vpn-postmessage-command-injection
+    title: Am I Being Pwned, Urban VPN postMessage command injection (May 27, 2026)
+  oneclick-policy:
+    url: https://www.1clickvpn.com/privacy-policy-extension/
+    title: 1ClickVPN extension privacy policy
+  oneclick-play:
+    url: https://play.google.com/store/apps/details?id=com.oneclickvpn.android&hl=en
+    title: 1ClickVPN on Google Play
