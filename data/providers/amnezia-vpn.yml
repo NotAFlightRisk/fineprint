@@ -1,0 +1,311 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Amnezia VPN
+icon: amnezia-vpn.svg
+checked: 2026-10-25
+
+criteria:
+  identity:
+    website:
+      value: https://amnezia.org
+      sources: [about]
+    legal_entity:
+      value: ANARCHY LAB S.R.L.
+      note: >-
+        The privacy policy's data controller. Billing is EUPHORIATECH LIMITED in Cyprus, the Play app
+        is published by AMNEZIA, UNIPESSOAL, LDA in Portugal and the App Store app by Privacy
+        Technologies OÜ in Estonia.
+      sources: [policy, terms, play, app-store, ee-register]
+    owner:
+      value: null
+      note: No parent company is named over the four companies behind the service.
+      sources: [terms, play, app-store]
+    founded:
+      value: 2022
+      note: The self-hosted app came out of a 2020 hackathon. The free hosted service opened in March 2022.
+      sources: [about, wikipedia]
+    team:
+      value: partial
+      note: Only the founder is named in the press, as Mazay Banzaev.
+      sources: [wired]
+    sister_brands: []
+    acquisitions:
+      value: []
+      sources: [about]
+
+  jurisdiction:
+    hq:
+      value: RO
+      note: The data controller is Romanian, and the policy says it only answers requests valid under Romanian and EU law.
+      sources: [policy]
+    entities:
+      value: [RO, CY, PT, EE]
+      sources: [policy, terms, play, ee-register]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [policy]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [policy]
+    timestamps:
+      value: null
+      note: The policy says limited technical connection data may be kept, without saying what or for how long.
+      sources: [policy]
+    bandwidth:
+      value: null
+      note: The policy says limited technical connection data may be kept, without saying what or for how long.
+      sources: [policy]
+    source_ip:
+      value: 'yes'
+      evidence: claimed
+      note: >-
+        Processed on every connection, and kept with no stated limit for connections from places that
+        need extra measures to stay reachable.
+      sources: [policy]
+    proven:
+      value: []
+      note: Its three audits covered the apps and protocol code, not the servers or the no-logs claim.
+      sources: [audit-2025, audit-2024, audit-2022]
+    policy: https://amnezia.org/policy
+
+  transparency:
+    audits:
+      value:
+        - date: 2025-01-01
+          auditor: 7ASecurity
+          scope: apps
+          source: audit-2025
+        - date: 2024-07-01
+          auditor: 7ASecurity
+          scope: apps
+          source: audit-2024
+        - date: 2022-07-01
+          auditor: 7ASecurity
+          scope: apps
+          source: audit-2022
+      evidence: verified
+      note: >-
+        The reports only give the month testing ended. The 2025 one also covered the supply chain and
+        a threat model, and found a critical flaw in the Premium admin API, since fixed.
+      sources: [otf-summary]
+    report: none
+    canary: none
+    bug_bounty:
+      value: false
+      sources: [source-code]
+    incidents:
+      value:
+        - date: 2026-05-20
+          summary: >-
+            Mass blocking of its IP addresses from 20 May, then a DDoS attack from 1 June, which Amnezia
+            blames on Russia's media regulator, took down Free and Premium for days. It kept users
+            posted and extended Premium subscriptions to make up for it.
+          handled: well
+          source: incident-summary
+      sources: [shutdown-digest]
+
+  account:
+    email:
+      value: required
+      note: Buying through the iOS or Android app goes through the store instead.
+      sources: [pay, terms]
+    personal_data:
+      value: []
+      sources: [pay]
+    payment:
+      value: [card, bank, app_store, bitcoin, other_crypto]
+      note: Bank is Russia's SBP system. Other crypto includes USDT and ETH.
+      sources: [pay, terms, app-store]
+
+  security:
+    protocols:
+      value: [wireguard, other]
+      note: AmneziaWG, its own obfuscated fork of WireGuard, and Xray VLESS Reality.
+      sources: [premium]
+    post_quantum: none
+    kill_switch:
+      value: app
+      note: Off by default and desktop only. Android relies on the system's block connections setting, and iOS has none.
+      sources: [killswitch]
+    dns:
+      value: null
+      note: Who answers DNS on Premium servers isn't stated.
+      sources: [premium, change-dns]
+
+  infra:
+    ram_only:
+      value: all
+      evidence: claimed
+      sources: [premium]
+    hosting:
+      value: rented
+      note: NovoServe says it supplies dedicated servers for the Premium network.
+      sources: [novoserve]
+    virtual_locations: null
+    servers:
+      value: null
+      note: Only locations are listed.
+      sources: [downloads]
+    countries:
+      value: 20
+      sources: [downloads]
+
+  features:
+    connections:
+      value: 7
+      sources: [premium]
+    multihop: false
+    obfuscation:
+      value: [amneziawg, v2ray]
+      note: V2Ray here is Xray with VLESS and Reality.
+      sources: [premium]
+    port_forwarding:
+      value: false
+      note: P2P is only allowed on the Swiss location.
+      sources: [premium]
+    split_tunnel:
+      value: true
+      note: By app on Android and Windows. By IP address on every platform, except on Amnezia Free.
+      sources: [split-tunnel]
+    blocking: []
+
+  clients:
+    platforms:
+      value: [windows, macos, linux_gui, ios, android]
+      note: Keenetic and OpenWrt routers take AmneziaWG configs rather than an app.
+      sources: [downloads]
+    open_source:
+      value: all
+      note: GPL-3.0. The hosted service's backend isn't published.
+      sources: [source-code]
+    telemetry:
+      value: forced
+      evidence: claimed
+      note: >-
+        The app sends its version, OS and an install ID when connecting to Free or Premium, which the
+        policy says feeds internal statistics. The Play listing says no data is collected.
+      sources: [policy, play]
+    fdroid:
+      value: false
+      sources: [fdroid]
+
+  pricing:
+    monthly:
+      value: null
+      note: The website only sells 6, 12 and 24 month plans.
+      sources: [pay]
+    best:
+      value: { amount: 3.33, currency: USD }
+      note: $80 for two years.
+      sources: [pay]
+    best_term:
+      value: 24
+      sources: [pay]
+    renewal_increase:
+      value: 0
+      note: Website purchases are one-off payments that don't renew.
+      sources: [terms]
+    free_tier:
+      value: true
+      note: Amnezia Free only routes a list of sites blocked in certain countries, and everything else goes direct.
+      sources: [free]
+    refund_days:
+      value: 14
+      note: The Premium FAQ also mentions a 7-day guarantee in one answer. App store purchases follow the store's rules.
+      sources: [terms, premium]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        The Premium page says connection IP addresses aren't available to it and asks you to trust it
+        100%, while the policy keeps connection IPs in some cases.
+      sources: [premium, policy]
+    affiliates:
+      value: true
+      sources: [partners]
+    review_sites: false
+    activism:
+      value: true
+      note: Runs Amnezia Free for people in censored countries and publishes monthly digests on Russia's internet blocking.
+      sources: [free, shutdown-digest]
+
+refs:
+  incident-summary:
+    url: https://amnezia.org/ru/blog/amnezia-vpn-may-june-2026-incident-preliminary-summary
+    title: Amnezia VPN May-June 2026 incident, preliminary summary (Russian)
+  about:
+    url: https://amnezia.org/about
+    title: About us
+  policy:
+    url: https://amnezia.org/policy
+    title: Privacy and Acceptable Use Policy
+  terms:
+    url: https://pay.amnezia.org/payment-and-terms-of-use/
+    title: Payment and Terms of Use Policy
+  play:
+    url: https://play.google.com/store/apps/details?id=org.amnezia.vpn
+    title: AmneziaVPN on Google Play
+  app-store:
+    url: https://apps.apple.com/us/app/amneziavpn/id1600529900
+    title: AmneziaVPN on the App Store
+  ee-register:
+    url: https://ariregister.rik.ee/eng/company/16140950/Privacy-Technologies-O%C3%9C
+    title: Privacy Technologies OÜ, Estonian e-Business Register
+  wikipedia:
+    url: https://en.wikipedia.org/wiki/Amnezia_VPN
+    title: Amnezia VPN on Wikipedia
+  wired:
+    url: https://www.wired.com/story/amnezia-vpn-russia-censorship/
+    title: Wired, Free VPN Amnezia Helps Users Avoid Censorship in Russia (2023)
+  premium:
+    url: https://amnezia.org/premium
+    title: Amnezia Premium
+  free:
+    url: https://amnezia.org/free
+    title: Amnezia Free
+  pay:
+    url: https://pay.amnezia.org/
+    title: Buy Amnezia Premium
+  downloads:
+    url: https://amnezia.org/downloads
+    title: Download AmneziaVPN
+  partners:
+    url: https://amnezia.org/partners
+    title: Amnezia Affiliate
+  audit-2025:
+    url: https://7asecurity.com/reports/pentest-report-amneziavpn3-RC1.1.pdf
+    title: 7ASecurity, AmneziaVPN software audit (2025)
+  audit-2024:
+    url: https://7asecurity.com/reports/pentest-report-amneziavpn2.pdf
+    title: 7ASecurity, AmneziaVPN apps, AmneziaWG and XRay audit (2024)
+  audit-2022:
+    url: https://7asecurity.com/reports/pentest-report-amneziavpn.pdf
+    title: 7ASecurity, AmneziaVPN mobile and desktop clients audit (2022)
+  otf-summary:
+    url: https://www.opentech.fund/security-safety-audits/amneziavpn-security-audit-summary/
+    title: Open Technology Fund, AmneziaVPN security audit summary
+  shutdown-digest:
+    url: https://amnezia.org/en/blog/amnezia-shutdown-digest-june-2026-russia
+    title: 'Amnezia VPN Russia Internet Restrictions Digest: June 2026'
+  killswitch:
+    url: https://docs.amnezia.org/documentation/instructions/killswitch
+    title: KillSwitch
+  change-dns:
+    url: https://docs.amnezia.org/documentation/instructions/change-dns
+    title: AmneziaDNS on a server
+  split-tunnel:
+    url: https://docs.amnezia.org/documentation/instructions/vpn-split-tunneling
+    title: Split tunneling
+  novoserve:
+    url: https://novoserve.com/case/amnezia
+    title: NovoServe, Amnezia case study
+  source-code:
+    url: https://github.com/amnezia-vpn/amnezia-client
+    title: amnezia-vpn/amnezia-client on GitHub
+  fdroid:
+    url: https://search.f-droid.org/?q=amnezia&lang=en
+    title: F-Droid search for amnezia
