@@ -1,0 +1,276 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: SwissVPN
+icon: swissvpn.png
+checked: 2026-10-25
+
+criteria:
+  identity:
+    website:
+      value: https://www.swissvpn.net
+      sources: [home]
+    legal_entity:
+      value: Monzoon Networks AG
+      note: SwissVPN is a product of Monzoon, a Swiss internet service provider that also runs public Wi-Fi hotspots.
+      sources: [terms, privacy-policy, imprint, register]
+    owner:
+      value: null
+      note: Monzoon doesn't publish its shareholders.
+      sources: [imprint, management]
+    founded:
+      value: 2007
+      note: Monzoon itself was founded in 2000.
+      sources: [monzoon-about]
+    team:
+      value: public
+      sources: [imprint, management]
+    sister_brands:
+      value: []
+      sources: [about]
+    acquisitions:
+      value: []
+      sources: [register]
+
+  jurisdiction:
+    hq:
+      value: CH
+      sources: [imprint, terms, register]
+    entities:
+      value: [CH, DE]
+      note: Monzoon Networks (Deutschland) GmbH runs its German Wi-Fi business.
+      sources: [imprint, register]
+
+  logging:
+    traffic:
+      value: null
+      note: Monzoon's privacy policy covers all its services and doesn't say whether VPN traffic is recorded.
+      sources: [privacy-policy]
+    dns:
+      value: null
+      sources: [privacy-policy]
+    timestamps:
+      value: null
+      note: >-
+        Monzoon's policy covers all its services. As a Swiss internet provider it keeps identifiers and,
+        "if technically unavoidable", connection information for six months, for police with a court order.
+      sources: [privacy-policy]
+    bandwidth:
+      value: null
+      sources: [privacy-policy]
+    source_ip:
+      value: null
+      note: The same six-month rule may cover the IP addresses it uses to identify customers, but the policy doesn't say so for the VPN.
+      sources: [privacy-policy]
+    proven: []
+    policy: https://global.monzoon.net/public/gdpr/en/
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty:
+      value: false
+      note: A security.txt gives a contact address, with no reward offered.
+      sources: [security-txt]
+    incidents: []
+
+  account:
+    email:
+      value: optional
+      sources: [lost-login]
+    personal_data:
+      value: []
+      note: The optional static IP needs a signed contract under Swiss law.
+      sources: [static-ip]
+    payment:
+      value: [card, paypal, bank]
+      note: Bank is Swiss PostFinance. It also takes Twint, a Swiss mobile payment app.
+      sources: [buy]
+
+  security:
+    protocols:
+      value: [openvpn, other]
+      note: >-
+        Other is L2TP over IPsec, SSTP and PPTP, which SwissVPN itself says is no longer secure. The
+        OpenVPN config uses AES-128-CBC with SHA1, though the OpenVPN page still lists Blowfish.
+      sources: [help, openvpn, pptp, ovpn-config]
+    post_quantum:
+      value: none
+      sources: [ovpn-config, sstp]
+    kill_switch:
+      value: none
+      note: There's no SwissVPN app, so it's down to the client you use. The help pages suggest a separate firewall to block traffic outside the tunnel.
+      sources: [help, instructions]
+    dns:
+      value: null
+      sources: [ovpn-config]
+
+  infra:
+    ram_only:
+      value: null
+      sources: [about, privacy-policy]
+    hosting:
+      value: owned
+      note: The server runs in Monzoon's own Zurich data centre, on addresses registered to Monzoon.
+      sources: [about, privacy-policy, ripe]
+    virtual_locations:
+      value: none
+      sources: [home]
+    servers:
+      value: null
+      note: Everyone connects to one address in Zurich, and SwissVPN doesn't say how many machines sit behind it.
+      sources: [ovpn-config]
+    countries:
+      value: 1
+      sources: [about]
+
+  features:
+    connections:
+      value: 1
+      note: Three with the paid Multi Connect option.
+      sources: [connections]
+    multihop: false
+    obfuscation:
+      value: []
+      note: SSTP and OpenVPN run over TCP port 443, which gets through most firewalls, but neither hides that it's a VPN.
+      sources: [help, sstp]
+    port_forwarding:
+      value: true
+      note: >-
+        Each connection gets its own public IP with no NAT or filtering, so incoming connections reach
+        you on any port unless you add the firewall option. A static IP costs extra.
+      sources: [home, help, static-ip]
+    split_tunnel:
+      value: false
+      note: There's no app, though the built-in VPN clients it relies on can be set to route only some traffic.
+      sources: [instructions]
+    blocking:
+      value: []
+      note: The paid firewall option blocks incoming connections, not ads or trackers.
+      sources: [help]
+
+  clients:
+    platforms:
+      value: []
+      note: >-
+        There are no apps. It uses the VPN clients built into Windows, macOS, iOS, Android and Linux, or
+        OpenVPN clients such as Viscosity, and has router guides for DD-WRT and Asus.
+      sources: [instructions, openvpn]
+    open_source:
+      value: null
+      note: There are no SwissVPN apps to publish.
+      sources: [instructions]
+    telemetry:
+      value: none
+      note: There are no SwissVPN apps.
+      sources: [instructions]
+    fdroid:
+      value: false
+      sources: [fdroid-search]
+
+  pricing:
+    monthly:
+      value: { amount: 6, currency: CHF }
+      sources: [buy]
+    best:
+      value: null
+      note: Accounts can be prepaid for 1 to 12 months, but only the one-month price is published.
+      sources: [buy, autorenew]
+    best_term:
+      value: null
+      sources: [buy, autorenew]
+    renewal_increase:
+      value: 0
+      note: It's prepaid with no intro deals, and optional auto renewal is monthly.
+      sources: [buy, autorenew]
+    free_tier:
+      value: false
+      note: A shared test login only reaches the SwissVPN website.
+      sources: [help]
+    refund_days:
+      value: null
+      sources: [terms, buy]
+
+  ethics:
+    misleading_claims:
+      value: false
+      sources: [home, about]
+    affiliates:
+      value: null
+    review_sites:
+      value: false
+      note: Its reviews page links to vpnMentor and two other review sites, which it doesn't own.
+      sources: [reviews]
+    activism:
+      value: false
+      sources: [about]
+
+refs:
+  monzoon-about:
+    url: https://www.monzoon.net/company/about/?lang=en
+    title: About Monzoon
+  home:
+    url: https://www.swissvpn.net/index.php?lang=en
+    title: SwissVPN home page
+  about:
+    url: https://www.swissvpn.net/about.php
+    title: About us
+  buy:
+    url: https://www.swissvpn.net/buy.php
+    title: Buy
+  help:
+    url: https://www.swissvpn.net/help.php
+    title: Frequently asked questions
+  instructions:
+    url: https://www.swissvpn.net/instructions.php
+    title: Instructions
+  openvpn:
+    url: https://www.swissvpn.net/openvpn.php
+    title: OpenVPN
+  sstp:
+    url: https://www.swissvpn.net/sstp.php
+    title: SSL VPN (SSTP)
+  pptp:
+    url: https://www.swissvpn.net/pptp.php
+    title: PPTP
+  ovpn-config:
+    url: https://www.swissvpn.net/downloads/swissvpn.ovpn
+    title: SwissVPN OpenVPN configuration file
+  connections:
+    url: https://www.swissvpn.net/pages/connections.php
+    title: Is it possible to start several VPN connections at the same time?
+  autorenew:
+    url: https://www.swissvpn.net/pages/autorenew.php
+    title: Is it possible to automatically renew my SwissVPN account?
+  static-ip:
+    url: https://www.swissvpn.net/pages/staticip.php
+    title: Can I have a static IP address?
+  reviews:
+    url: https://www.swissvpn.net/reviews.php
+    title: Reviews
+  lost-login:
+    url: https://payment.monzoon.net/swissvpn_prod/myaccount/lostpass.php?lang=en
+    title: Lost credentials
+  security-txt:
+    url: https://www.swissvpn.net/.well-known/security.txt
+    title: SwissVPN security.txt
+  privacy-policy:
+    url: https://global.monzoon.net/public/gdpr/en/
+    title: Data Protection Regulation of Monzoon Networks AG
+  terms:
+    url: https://global.monzoon.net/public/gtc/en/
+    title: Monzoon Networks General Terms and Conditions
+  imprint:
+    url: https://global.monzoon.net/public/imprint/en/
+    title: Monzoon Networks imprint
+  register:
+    url: https://www.zefix.ch/en/search/entity/list/firm/592051
+    title: Monzoon Networks AG in the Swiss commercial register (Zefix)
+  management:
+    url: https://www.moneyhouse.ch/en/company/monzoon-networks-ag-2589316761/management
+    title: Monzoon Networks AG management (Moneyhouse)
+  ripe:
+    url: https://stat.ripe.net/data/whois/data.json?resource=80.254.79.100
+    title: RIPE whois for connect.swissvpn.net (80.254.79.100)
+  fdroid-search:
+    url: https://search.f-droid.org/?q=swissvpn&lang=en
+    title: F-Droid search for SwissVPN
