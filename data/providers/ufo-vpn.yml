@@ -1,0 +1,295 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: UFO VPN
+icon: ufo-vpn.png
+checked: 2026-10-25
+
+criteria:
+  identity:
+    website:
+      value: https://ufovpn.io
+      sources: [home]
+    legal_entity:
+      value: Dreamfii HK Limited
+      note: >-
+        The terms pair this name with the registration number and Fo Tan address of Future Ideal
+        Hong Kong Limited, a separate company set up in 2023. The Android app on Google Play is
+        listed under Britto App Centers, a US individual, and links NotVPN's privacy policy.
+      sources: [terms, privacy, register-dreamfii, register-future-ideal, app-store, play]
+    owner:
+      value: null
+      note: Who owns Dreamfii HK Limited isn't public.
+      sources: [register-dreamfii]
+    founded:
+      value: 2018
+      sources: [about, app-store]
+    team:
+      value: anonymous
+      sources: [about]
+    sister_brands:
+      value: [FAST VPN, Free VPN, Super VPN, Flash VPN, Secure VPN, Rabbit VPN]
+      note: >-
+        Named in 2020 as sharing UFO VPN's servers, log database and payment recipient, with
+        Dreamfii receiving their sales. Whether they still share an owner isn't known.
+      sources: [register-2020, wls-2020]
+    acquisitions:
+      value: null
+      note: No sale is on record, but the terms give another company's registration number.
+      sources: [terms, register-future-ideal]
+
+  jurisdiction:
+    hq:
+      value: HK
+      sources: [terms, register-dreamfii]
+    entities:
+      value: [HK]
+      sources: [register-dreamfii, register-future-ideal]
+
+  logging:
+    traffic:
+      value: null
+      note: >-
+        It claims none, but its privacy policy hasn't changed since 2018, and under it the logs exposed
+        in 2020 held some records of sites visited, which UFO VPN said were anonymised.
+      sources: [privacy, no-log, register-2020]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [privacy, no-log]
+    timestamps:
+      value: 'yes'
+      evidence: claimed
+      note: >-
+        The Android app's 2024 policy collects connection timestamps and session duration with no time
+        limit, though the no-log page says only the date is kept. Its exposed 2020 logs held timestamps.
+      sources: [android-policy, no-log, register-2020]
+    bandwidth:
+      value: aggregate
+      evidence: claimed
+      note: A daily data total per user.
+      sources: [no-log]
+    source_ip:
+      value: null
+      note: >-
+        It claims none, but its exposed 2020 logs held users' IP addresses under the same policy. In
+        December 2025 it said it had switched off logging on servers and apps, which nobody has checked.
+        The Android app's policy collects your IP "temporarily".
+      sources: [no-log, register-2020, wls-2020, android-policy]
+    proven: []
+    policy: https://ufovpn.io/privacy
+
+  transparency:
+    audits:
+      value: []
+      note: Its site calls its encryption "audited", but no audit is published.
+      sources: [uk-server]
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents:
+      value:
+        - date: 2020-07-01
+          summary: >-
+            An open Elasticsearch database of user logs, shared with six sister apps, held IP
+            addresses, connection times, session tokens and what researchers said were plain-text
+            passwords. UFO VPN didn't answer the first warning, only closed it after its host was told on
+            14 July, blamed COVID-19 staffing, and called the logs anonymous, which the researchers
+            disputed. A newer copy appeared at another address days later and was wiped by a
+            "Meow" attack.
+          handled: poorly
+          source: register-2020
+      sources: [register-2020, wls-2020, betanews-2020]
+
+  account:
+    email:
+      value: optional
+      note: The apps work without an account. Buying on the website needs an email address.
+      sources: [play, app-store, pricing]
+    personal_data: []
+    payment:
+      value: [card, paypal, app_store, bitcoin, other_crypto]
+      note: The website checkout currently offers PayPal and crypto, shown with Bitcoin and Ethereum logos.
+      sources: [faq, pricing]
+
+  security:
+    protocols:
+      value: [openvpn, ikev2, proprietary, other]
+      note: >-
+        Its App Store listing names OpenVPN, IKEv2, V2Ray and its own "Super" protocol. The website
+        only lists unnamed Protocols A to D.
+      sources: [app-store, protocols]
+    post_quantum:
+      value: none
+      note: Nothing is published about its protocols' key exchange.
+      sources: [protocols]
+    kill_switch:
+      value: app
+      sources: [kill-switch]
+    dns:
+      value: null
+      note: It says it prevents DNS leaks without saying whose DNS servers the apps use.
+      sources: [servers]
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say how its servers are run.
+    hosting:
+      value: null
+      note: It doesn't say whether it owns or rents its servers.
+    virtual_locations:
+      value: null
+      note: It lists locations including Iran, Iraq and Pakistan without saying where those servers physically sit.
+      sources: [servers]
+    servers:
+      value: 2000
+      note: Claimed as 2,000+.
+      sources: [servers]
+    countries:
+      value: 58
+      note: It claims 100+ countries, but lists 58 locations.
+      sources: [servers]
+
+  features:
+    connections:
+      value: 5
+      note: The pricing page says 6 devices and another page says 10.
+      sources: [terms, pricing, servers]
+    multihop: false
+    obfuscation:
+      value: [v2ray]
+      note: It also has protocols it says are built to get past Middle East and school firewalls.
+      sources: [app-store, protocols]
+    port_forwarding: false
+    split_tunnel:
+      value: true
+      sources: [servers]
+    blocking:
+      value: [ads, trackers]
+      sources: [servers]
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android]
+      sources: [download]
+    open_source: none
+    telemetry:
+      value: null
+      note: >-
+        It says diagnostics can be turned off in the apps, without saying the default. Its App
+        Store labels say device identifiers are used to track you for ads.
+      sources: [no-log, app-store, play-data-safety]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 11.99, currency: USD }
+      sources: [pricing]
+    best:
+      value: { amount: 3, currency: USD }
+      note: $83.99 for the first 28 months.
+      sources: [pricing]
+    best_term:
+      value: 28
+      sources: [pricing]
+    renewal_increase:
+      value: 39
+      note: It renews yearly at $49.99, or $4.17 a month.
+      sources: [pricing]
+    free_tier:
+      value: true
+      note: Ad-supported, with fewer servers.
+      sources: [app-store, download-android]
+    refund_days:
+      value: 7
+      note: >-
+        The pricing and refund pages promise 30 days, but the terms give 7 days for website
+        purchases, with anything later at its discretion. App store purchases follow the store's rules.
+      sources: [terms, refund]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        It sells "military-grade encryption", calls its encryption "audited" with no audit
+        published, and calls itself zero-logs under the same policy its 2020 log exposure contradicted.
+      sources: [home, uk-server, privacy, register-2020]
+    affiliates:
+      value: null
+      note: It paid affiliates 65 to 80% of a first purchase as recently as June 2025, but that programme's page is gone.
+      sources: [affiliate-2025]
+    review_sites: false
+    activism: false
+
+refs:
+  android-policy:
+    url: https://ufovpn.io/download/androidnew/privacypolicy
+    title: UFO VPN Android app privacy policy (22 November 2024)
+  home:
+    url: https://ufovpn.io/
+    title: UFO VPN homepage
+  privacy:
+    url: https://ufovpn.io/privacy
+    title: Privacy Policy (last updated 10 September 2018)
+  terms:
+    url: https://ufovpn.io/terms
+    title: Terms of Service
+  about:
+    url: https://ufovpn.io/about-us
+    title: About UFO VPN
+  pricing:
+    url: https://ufovpn.io/pricing
+    title: UFO VPN pricing
+  refund:
+    url: https://ufovpn.io/money-back-guarantee
+    title: UFO VPN 30-day Money Back Guarantee
+  no-log:
+    url: https://ufovpn.io/security/no-log
+    title: Strict No-logs Policy
+  protocols:
+    url: https://ufovpn.io/security/protocols
+    title: Guide to UFO VPN Protocols
+  servers:
+    url: https://ufovpn.io/security/servers
+    title: 2,000+ VPN Servers Globally in UFO VPN
+  kill-switch:
+    url: https://ufovpn.io/security/kill-switch
+    title: What is Kill Switch?
+  faq:
+    url: https://ufovpn.io/faq
+    title: UFO VPN Help Center
+  download:
+    url: https://ufovpn.io/download
+    title: Download UFO VPN for All Your Devices
+  download-android:
+    url: https://ufovpn.io/download/androidnew
+    title: Download free VPN for Android
+  uk-server:
+    url: https://ufovpn.io/server/united_kingdom
+    title: Free UK VPN
+  register-dreamfii:
+    url: https://data.cr.gov.hk/cr/api/api/v1/api_builder/json/local/search?query%5B0%5D%5Bkey1%5D=Comp_name&query%5B0%5D%5Bkey2%5D=begins_with&query%5B0%5D%5Bkey3%5D=DREAMFII
+    title: Dreamfii HK Limited, Hong Kong Companies Registry (BRN 66078972)
+  register-future-ideal:
+    url: https://data.cr.gov.hk/cr/api/api/v1/api_builder/json/local/search?query%5B0%5D%5Bkey1%5D=Brn&query%5B0%5D%5Bkey2%5D=equal&query%5B0%5D%5Bkey3%5D=75363257
+    title: Future Ideal Hong Kong Limited, Hong Kong Companies Registry (BRN 75363257)
+  app-store:
+    url: https://apps.apple.com/us/app/ufo-vpn-ultra-fast-secure-vpn/id1436251125
+    title: 'UFO VPN: Ultra Fast Secure VPN on the App Store (US)'
+  play:
+    url: https://play.google.com/store/apps/details?id=com.ufovpn.connect.velnet
+    title: 'UFO VPN : Fastest Secure Proxy on Google Play'
+  play-data-safety:
+    url: https://play.google.com/store/apps/datasafety?id=com.ufovpn.connect.velnet
+    title: UFO VPN data safety on Google Play
+  register-2020:
+    url: https://www.theregister.com/2020/07/17/ufo_vpn_database/
+    title: The Register, Seven 'no log' VPN providers accused of leaking 1.2TB of user logs onto the internet
+  wls-2020:
+    url: https://www.welivesecurity.com/2020/07/20/seven-vpn-services-leaked-data-20million-users-report/
+    title: WeLiveSecurity, 7 VPN services leaked data of over 20 million users, says report (with UFO VPN's 2025 update)
+  betanews-2020:
+    url: https://web.archive.org/web/20250907172141/https://betanews.com/2020/07/23/ufo-vpn-leak-meow-attack/
+    title: BetaNews, UFO VPN user log database leaks online for a second time (archived)
+  affiliate-2025:
+    url: https://web.archive.org/web/20250616003151/https://ufovpn.io/affiliate
+    title: UFO VPN Affiliate Program (archived June 2025)
