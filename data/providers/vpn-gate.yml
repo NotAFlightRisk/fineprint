@@ -1,0 +1,271 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: VPN Gate
+icon: vpn-gate.png
+checked: 2026-10-25
+
+criteria:
+  identity:
+    website:
+      value: https://www.vpngate.net/en/
+      sources: [home]
+    legal_entity:
+      value: University of Tsukuba
+      note: >-
+        An academic project run jointly with SoftEther Corporation, which owns and runs the central
+        log servers and decides when to disclose logs.
+      sources: [about, abuse, abuse-ja]
+    owner:
+      value: null
+      sources: [about]
+    founded:
+      value: 2013
+      note: Launched on 8 March 2013.
+      sources: [home]
+    team:
+      value: public
+      note: Associate Professor Daiyuu Nobori runs the site and co-wrote the 2014 paper describing the system.
+      sources: [about-us, nsdi]
+    sister_brands: []
+    acquisitions: []
+
+  jurisdiction:
+    hq:
+      value: JP
+      sources: [about-us]
+    entities:
+      value: [JP]
+      sources: [about-us, abuse-ja]
+
+  logging:
+    traffic:
+      value: 'yes'
+      evidence: claimed
+      note: >-
+        The central log keeps the hostname, IP and port of every HTTP and HTTPS destination for at least
+        three months, and each volunteer's relay keeps all TCP/IP packet headers for at least two weeks.
+        Plain HTTP requests also get part of your session ID added to the User-Agent.
+      sources: [abuse, abuse-ja]
+    dns:
+      value: 'yes'
+      evidence: claimed
+      note: >-
+        DNS queries aren't listed as such, but the central log keeps the hostname of every HTTP and
+        HTTPS site you connect to.
+      sources: [abuse]
+    timestamps:
+      value: 'yes'
+      evidence: claimed
+      note: Connect and disconnect times, kept for at least three months.
+      sources: [abuse, abuse-ja]
+    bandwidth:
+      value: 'yes'
+      evidence: claimed
+      note: Packets and bytes per connection, kept for at least three months.
+      sources: [abuse]
+    source_ip:
+      value: 'yes'
+      evidence: claimed
+      note: >-
+        Your real IP and hostname are kept for at least three months and disclosed to authorised police,
+        prosecutors, lawyers and courts. Japanese police don't always need a warrant, and foreign police
+        go through Interpol and the Japanese police.
+      sources: [abuse, abuse-ja]
+    proven: []
+    policy: https://www.vpngate.net/en/about_abuse.aspx
+
+  transparency:
+    audits:
+      value: []
+      note: >-
+        Six bugs in the SoftEther VPN code the relays run were fixed with Cisco's help in June 2023, but
+        no audit has covered VPN Gate itself.
+      sources: [se-2023]
+    report: none
+    canary: none
+    bug_bounty:
+      value: false
+      note: SoftEther takes security reports through GitHub, with no reward.
+      sources: [security-policy]
+    incidents: []
+
+  account:
+    email:
+      value: none
+      sources: [faq]
+    personal_data:
+      value: []
+      sources: [faq]
+    payment:
+      value: []
+      note: It's free.
+      sources: [faq]
+
+  security:
+    protocols:
+      value: [openvpn, proprietary, other]
+      note: Own is the SSL-based SoftEther VPN protocol. Other covers L2TP/IPsec and MS-SSTP.
+      sources: [howto]
+    post_quantum: none
+    kill_switch:
+      value: none
+      note: A kill switch for the SoftEther client has been an open feature request since 2022.
+      sources: [kill-switch]
+    dns:
+      value: third_party
+      note: Lookups are forwarded to whichever DNS server the volunteer's computer uses.
+      sources: [warning, virtual-nat]
+
+  infra:
+    ram_only:
+      value: none
+      evidence: claimed
+      note: Each relay keeps packet logs on its disk for at least two weeks.
+      sources: [abuse]
+    hosting:
+      value: null
+      note: >-
+        Relays are volunteers' own computers. The university hosts only the website, and SoftEther
+        Corporation the central log servers.
+      sources: [about-us, overview]
+    virtual_locations:
+      value: none
+      sources: [home, overview]
+    servers:
+      value: 4877
+      note: Volunteer relays come and go, so the count changes by the minute.
+      sources: [home]
+    countries:
+      value: null
+      note: No country count is published, and it shifts as volunteers come and go.
+      sources: [home]
+
+  features:
+    connections:
+      value: unlimited
+      note: There are no accounts, so nothing limits devices.
+      sources: [overview]
+    multihop:
+      value: false
+      sources: [nsdi]
+    obfuscation:
+      value: [proprietary]
+      note: >-
+        The SoftEther protocol is built on SSL to pass most firewalls, and the relay list mixes in decoy IPs and hides relays
+        from detected censor probes.
+      sources: [nsdi, overview]
+    port_forwarding:
+      value: null
+      note: The project doesn't say, and relays route you through a virtual NAT on the volunteer's computer.
+      sources: [warning]
+    split_tunnel:
+      value: null
+      note: The project doesn't document it.
+      sources: [howto]
+    blocking:
+      value: []
+      sources: [faq]
+
+  clients:
+    platforms:
+      value: [windows]
+      note: >-
+        SoftEther VPN Client with the VPN Gate plug-in. Mac, iOS and Android connect through their built-in
+        L2TP/IPsec client or the OpenVPN app.
+      sources: [download, howto]
+    open_source:
+      value: some
+      note: >-
+        SoftEther VPN Client is open source under Apache 2.0, but the VPN Gate plug-in that lists the
+        relays is closed, and its published source is an empty stub.
+      sources: [softether-github, vgate-stub]
+    telemetry:
+      value: null
+      note: The project doesn't say. The connection log does record your client's name, version and ID.
+      sources: [abuse]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 0, currency: USD }
+      note: Free, with no paid plan.
+      sources: [faq]
+    best:
+      value: { amount: 0, currency: USD }
+      sources: [overview]
+    best_term: null
+    renewal_increase:
+      value: 0
+      note: Nothing renews.
+      sources: [faq]
+    free_tier:
+      value: true
+      sources: [overview]
+    refund_days: null
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        Its overview says nobody can trace your real IP and you can email "completely anonymously", while
+        it logs that IP for at least three months and hands it to police. Its own paper says it's not an
+        anonymiser.
+      sources: [overview, abuse, nsdi]
+    affiliates: false
+    review_sites: false
+    activism:
+      value: true
+      note: It exists to get people past government censorship, and published its methods for beating China's firewall.
+      sources: [overview, nsdi]
+
+refs:
+  home:
+    url: https://www.vpngate.net/en/
+    title: VPN Gate Public VPN Relay Servers
+  about:
+    url: https://www.vpngate.net/en/about.aspx
+    title: What is VPN Gate?
+  about-us:
+    url: https://www.vpngate.net/en/about_us.aspx
+    title: About the VPN Gate Academic Project
+  overview:
+    url: https://www.vpngate.net/en/about_overview.aspx
+    title: VPN Gate Overview
+  faq:
+    url: https://www.vpngate.net/en/about_faq.aspx
+    title: VPN Gate FAQ
+  abuse:
+    url: https://www.vpngate.net/en/about_abuse.aspx
+    title: VPN Gate Anti-Abuse Policy
+  abuse-ja:
+    url: https://www.vpngate.net/ja/about_abuse.aspx
+    title: VPN Gate Anti-Abuse Policy, Japanese version with the full disclosure rules
+  howto:
+    url: https://www.vpngate.net/en/howto.aspx
+    title: How to connect to a Public VPN Relay Server of VPN Gate
+  download:
+    url: https://www.vpngate.net/en/download.aspx
+    title: Download VPN Gate Client
+  nsdi:
+    url: https://www.usenix.org/system/files/conference/nsdi14/nsdi14-paper-nobori.pdf
+    title: 'Nobori and Shinjo, VPN Gate: A Volunteer-Organized Public VPN Relay System (NSDI 2014)'
+  warning:
+    url: https://github.com/SoftEtherVPN/SoftEtherVPN_Stable/blob/master/WARNING.TXT
+    title: SoftEther VPN WARNING.TXT, chapter 5 on the VPN Gate service
+  virtual-nat:
+    url: https://www.softether.org/4-docs/1-manual/3._SoftEther_VPN_Server_Manual/3.7_Virtual_NAT_%26_Virtual_DHCP_Servers
+    title: SoftEther VPN manual, Virtual NAT and Virtual DHCP servers
+  softether-github:
+    url: https://github.com/SoftEtherVPN/SoftEtherVPN
+    title: SoftEther VPN source code on GitHub (Apache 2.0)
+  vgate-stub:
+    url: https://github.com/SoftEtherVPN/SoftEtherVPN_Stable/blob/master/src/VGate/VGate.c
+    title: VGate.c, the stub in place of the VPN Gate plug-in source
+  kill-switch:
+    url: https://github.com/SoftEtherVPN/SoftEtherVPN/issues/1634
+    title: 'Feature request: "Kill Switch" option (SoftEther VPN issue 1634)'
+  security-policy:
+    url: https://github.com/SoftEtherVPN/SoftEtherVPN/security/policy
+    title: SoftEther VPN security policy
+  se-2023:
+    url: https://www.softether.org/9-about/News/904-SEVPN202301
+    title: 'SE202301: six SoftEther VPN vulnerabilities fixed with Cisco (June 2023)'
