@@ -1,0 +1,275 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Sekai VPN
+icon: sekai-vpn.png
+checked: 2026-10-25
+
+criteria:
+  identity:
+    website:
+      value: https://www.interlink.or.jp/service/sekaivpn/
+      sources: [home]
+    legal_entity:
+      value: Interlink Co., Ltd. (株式会社インターリンク)
+      note: A Tokyo ISP and domain registrar, corporate number 4013301014250.
+      sources: [tokusho, member-terms, register]
+    owner:
+      value: null
+      note: No parent company is named. Interlink lists three related companies of its own but no owner above it.
+      sources: [company, privacy]
+    founded:
+      value: 2014
+      note: Launched on 22 August 2014. Interlink itself has run as an ISP since 1995.
+      sources: [news-2014, company]
+    team:
+      value: public
+      note: The president, Tadashi Yokoyama, and the other three directors are named.
+      sources: [company, tokusho]
+    sister_brands:
+      value: [My IP, Group VPN]
+      note: Interlink's own fixed-IP VPN (マイIP) and private group VPN servers (グループ専用VPN).
+      sources: [compare-faq, affiliate]
+    acquisitions:
+      value: []
+      sources: [company]
+
+  jurisdiction:
+    hq:
+      value: JP
+      sources: [tokusho, register]
+    entities:
+      value: [JP]
+      sources: [company, register]
+
+  logging:
+    traffic:
+      value: null
+      note: It doesn't say whether it logs what you do over the VPN.
+      sources: [privacy, service-terms]
+    dns:
+      value: null
+      sources: [privacy, service-terms]
+    timestamps:
+      value: null
+      note: >-
+        Interlink's security policy lists authentication logs among the customer data it holds, without saying
+        what's in them or how long they're kept. The service terms also have it contact the user behind a complaint.
+      sources: [security-policy, service-terms]
+    bandwidth:
+      value: null
+      sources: [privacy, service-terms]
+    source_ip:
+      value: null
+      note: The authentication logs in Interlink's security policy may include it, but the text doesn't say.
+      sources: [security-policy, privacy]
+    proven:
+      value: []
+      sources: [privacy]
+    policy: https://www.interlink.or.jp/company/privacy.html
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty:
+      value: false
+      sources: [security-policy]
+    incidents: []
+
+  account:
+    email:
+      value: required
+      sources: [signup-form, flow]
+    personal_data:
+      value: [name]
+      note: >-
+        Signup asks for your name as the account holder, separately from the card. Paying by NTT phone bill also
+        needs an ID document, and direct debit a signed form by post.
+      sources: [signup-form, flow, trial]
+    payment:
+      value: [card, bank, app_store]
+      note: >-
+        Bank is Japanese direct debit. It can also go on an NTT phone bill, and the iOS app sells a weekly plan through
+        Apple.
+      sources: [price, payment, app-store]
+
+  security:
+    protocols:
+      value: [openvpn, ikev2, other]
+      note: Other is PPTP, L2TP, OpenConnect and an iOS-only HTTPS proxy mode. There's no WireGuard.
+      sources: [compare-faq, ios-https]
+    post_quantum: none
+    kill_switch:
+      value: none
+      sources: [windows-app, mac-app, ios-app]
+    dns:
+      value: null
+      note: Which resolver the tunnel uses isn't stated. Its troubleshooting guides have users set Google Public DNS.
+      sources: [dns-mac]
+
+  infra:
+    ram_only: null
+    hosting: null
+    virtual_locations: null
+    servers: null
+    countries:
+      value: 10
+      note: Japan, the US, Germany, Taiwan, South Korea, France, the UK, Thailand, Indonesia and Vietnam.
+      sources: [home]
+
+  features:
+    connections:
+      value: 3
+      sources: [sessions, compare-faq]
+    multihop:
+      value: false
+      sources: [home]
+    obfuscation:
+      value: []
+      note: For censored networks it points users to OpenConnect on TCP 443, the iOS HTTPS mode or the browser extension.
+      sources: [censorship]
+    port_forwarding:
+      value: false
+      note: Shared IPs only, and outgoing mail and SMB ports are blocked.
+      sources: [home]
+    split_tunnel:
+      value: false
+      note: The Sekai Browser extension only tunnels Chrome or Edge, which is the nearest thing.
+      sources: [windows-app, sekai-browser]
+    blocking: []
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, browser]
+      note: >-
+        There's no phone app for Android or ChromeOS, which use the built-in VPN settings, but there are Android TV,
+        Fire TV and Fire tablet apps.
+      sources: [home, android-tv, sekai-browser]
+    open_source:
+      value: none
+      sources: [windows-app, mac-app]
+    telemetry:
+      value: null
+      note: The App Store listing declares no data collected, which doesn't say whether the desktop apps send any.
+      sources: [app-store]
+    fdroid:
+      value: false
+      sources: [android-tv]
+
+  pricing:
+    monthly:
+      value: { amount: 1100, currency: JPY }
+      sources: [price]
+    best:
+      value: { amount: 1100, currency: JPY }
+      note: Monthly billing only. The iOS app's weekly plan is ¥500 with a three-day trial.
+      sources: [price, annual-faq, app-store]
+    best_term:
+      value: 1
+      sources: [annual-faq]
+    renewal_increase:
+      value: 0
+      sources: [price]
+    free_tier:
+      value: false
+      note: New accounts get a free trial to the end of the month after signup, so up to two months.
+      sources: [trial, price]
+    refund_days:
+      value: null
+      note: >-
+        The member terms rule out refunds, but the trial page says card payers who cancel after the trial and say
+        they're unhappy get that month's fee back.
+      sources: [member-terms, trial]
+
+  ethics:
+    misleading_claims:
+      value: false
+      sources: [home, affiliate]
+    affiliates:
+      value: true
+      note: Pays ¥1,100 per signup that stays four months, through A8.net and ValueCommerce.
+      sources: [affiliate]
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://www.interlink.or.jp/service/sekaivpn/
+    title: Sekai VPN service details
+  price:
+    url: https://www.interlink.or.jp/service/sekaivpn/price.html
+    title: Sekai VPN pricing
+  service-terms:
+    url: https://www.interlink.or.jp/service/sekaivpn/rule.html
+    title: Sekai VPN terms of use
+  member-terms:
+    url: https://www.interlink.or.jp/join/rule.html
+    title: Interlink member terms
+  privacy:
+    url: https://www.interlink.or.jp/company/privacy.html
+    title: Interlink personal information protection policy
+  security-policy:
+    url: https://www.interlink.or.jp/company/securitypolicy.html
+    title: Interlink basic information security policy
+  tokusho:
+    url: https://www.interlink.or.jp/company/tokusho.html
+    title: Interlink notice under the Specified Commercial Transactions Act
+  company:
+    url: https://www.interlink.or.jp/company/annai.html
+    title: Interlink company overview and history
+  register:
+    url: https://www.houjin-bangou.nta.go.jp/henkorireki-johoto.html?selHouzinNo=4013301014250
+    title: National Tax Agency corporate number record for Interlink Co., Ltd.
+  news-2014:
+    url: https://www.interlink.or.jp/new/2014.html
+    title: Interlink news 2014, Sekai VPN launch
+  trial:
+    url: https://www.interlink.or.jp/taiken.html
+    title: Interlink free trial
+  payment:
+    url: https://www.interlink.or.jp/service/pay/index.html
+    title: Interlink payment methods
+  flow:
+    url: https://www.interlink.or.jp/service/sekaivpn/flow.html
+    title: Sekai VPN steps to get started
+  signup-form:
+    url: https://web.archive.org/web/20240528094638/https://www.interlink.or.jp/sekaivpn_signup/step3_new
+    title: Sekai VPN online signup, customer details step (Wayback, May 2024)
+  annual-faq:
+    url: https://faq.interlink.or.jp/qa/79
+    title: Do you offer annual billing?
+  compare-faq:
+    url: https://faq.interlink.or.jp/qa/359
+    title: Sekai VPN, My IP and My IP SoftEther comparison
+  sessions:
+    url: https://support.interlink.or.jp/manual/sekaivpn/28.md?view
+    title: Sekai VPN suddenly won't connect or allow three devices
+  censorship:
+    url: https://support.interlink.or.jp/manual/sekaivpn/19.md?view
+    title: Can't connect to Sekai VPN from a country that restricts the internet
+  ios-https:
+    url: https://support.interlink.or.jp/manual/sekaivpn/26.md?view
+    title: Setting up the HTTPS connection on iOS
+  windows-app:
+    url: https://support.interlink.or.jp/manual/sekaivpn/36.md?view
+    title: Using the Sekai VPN Windows app
+  mac-app:
+    url: https://support.interlink.or.jp/manual/sekaivpn/16.md?view
+    title: Installing and using the Sekai VPN macOS app
+  ios-app:
+    url: https://support.interlink.or.jp/manual/sekaivpn/38.md?view
+    title: Using the Sekai VPN app (iOS)
+  android-tv:
+    url: https://support.interlink.or.jp/manual/sekaivpn/15.md?view
+    title: Installing and using the Sekai VPN Android TV app
+  dns-mac:
+    url: https://support.interlink.or.jp/manual/sekaivpn/37.md?view
+    title: Changing DNS settings on macOS (Sekai VPN)
+  app-store:
+    url: https://apps.apple.com/jp/app/id1301726885
+    title: Sekai VPN app on the App Store
+  sekai-browser:
+    url: https://www.interlink.or.jp/service/sekaivpn/sekai_browser.html
+    title: Sekai Browser
+  affiliate:
+    url: https://www.interlink.or.jp/aff/
+    title: Interlink affiliate partner programme
