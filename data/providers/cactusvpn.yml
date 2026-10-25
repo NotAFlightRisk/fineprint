@@ -1,0 +1,257 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: CactusVPN
+icon: cactusvpn.png
+checked: 2026-10-25
+
+criteria:
+  identity:
+    website:
+      value: https://www.cactusvpn.com
+      sources: [about]
+    legal_entity:
+      value: CactusVPN, LLC
+      note: The terms don't name a company. CactusVPN, LLC is a Utah company formed in March 2023 (entity 13326810-0160), and publishes the Android and iOS apps.
+      sources: [utah-register, play, app-store]
+    owner:
+      value: null
+      note: Sergiu Candja is named as founder and CEO, but no shareholders are published.
+      sources: [about]
+    founded:
+      value: 2011
+      sources: [about]
+    team:
+      value: public
+      note: Six staff are named with their roles, including the CEO and CTO.
+      sources: [about]
+    sister_brands:
+      value: []
+      note: CactusVPN Professional, also sold as Client Data Safeguards, is a plan for licensed professionals on the same service.
+      sources: [professional]
+    acquisitions:
+      value: []
+      note: The founders say they've turned down offers to buy all or part of it.
+      sources: [about]
+
+  jurisdiction:
+    hq:
+      value: US
+      note: It started in Moldova and the team is still described as Moldovan, but the company selling the service is in Salt Lake City, Utah.
+      sources: [utah-register, play, professional, about]
+    entities:
+      value: [US]
+      sources: [utah-register]
+
+  logging:
+    traffic:
+      value: none
+      evidence: verified
+      sources: [terms, audit-securitum-2026]
+    dns:
+      value: none
+      evidence: verified
+      note: The servers' DNS resolver keeps a cache of records in memory with no user identifiers, which the 2026 audit didn't count as logging.
+      sources: [terms, audit-securitum-2026]
+    timestamps:
+      value: none
+      evidence: verified
+      sources: [terms, audit-securitum-2026]
+    bandwidth:
+      value: none
+      evidence: claimed
+      sources: [faq-general]
+    source_ip:
+      value: none
+      evidence: verified
+      note: The last IP used to log in to the website is kept for fraud prevention, separate from VPN use.
+      sources: [terms, audit-securitum-2026]
+    proven:
+      value: [audit]
+      evidence: verified
+      note: Securitum inspected four of the 39 servers in 2026 and found nothing contradicting the no-logs policy.
+      sources: [audit-securitum-2026, server-locations]
+    policy:
+      value: https://www.cactusvpn.com/terms-conditions/
+      note: The privacy and no-logs policy sit inside the terms of service.
+
+  transparency:
+    audits:
+      value:
+        - date: 2026-05-07
+          auditor: Securitum
+          scope: no_logs
+          source: audit-securitum-2026
+      evidence: verified
+      sources: [pricing]
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents:
+      value:
+        - date: 2018-02-21
+          summary: VerSprite reported a second root privilege escalation in the macOS app's privileged helper tool. CactusVPN shipped a fix on 5 March 2018 (CVE-2018-7493).
+          handled: well
+          source: versprite-2018-007
+        - date: 2018-02-16
+          summary: VerSprite reported a root privilege escalation through a setuid binary in the macOS app. CactusVPN replied the same day and sent a fix within four days (CVE-2018-7281).
+          handled: well
+          source: versprite-2018-003
+
+  account:
+    email:
+      value: required
+      sources: [terms]
+    personal_data:
+      value: []
+      note: A name or company is optional.
+      sources: [terms]
+    payment:
+      value: [card, paypal, bank, bitcoin, other_crypto]
+      note: Crypto payments aren't refundable.
+      sources: [faq-general, pricing]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn, ikev2, other]
+      note: Also SSTP, SoftEther, L2TP/IPsec and PPTP.
+      sources: [features]
+    post_quantum: none
+    kill_switch:
+      value: app
+      note: The apps can block all traffic, or close chosen apps, when the VPN drops.
+      sources: [apps, features]
+    dns:
+      value: first_party
+      sources: [audit-securitum-2026, features]
+
+  infra:
+    ram_only: null
+    hosting: null
+    virtual_locations: null
+    servers:
+      value: 39
+      sources: [server-locations]
+    countries:
+      value: 25
+      sources: [server-locations]
+
+  features:
+    connections:
+      value: unlimited
+      note: Limited to one household. WireGuard, IKEv2, L2TP and PPTP allow only one connection per server at a time.
+      sources: [terms, features]
+    multihop: false
+    obfuscation:
+      value: [obfs4]
+      note: Obfsproxy over OpenVPN. SoftEther's VPN over ICMP and DNS is also offered.
+      sources: [obfsproxy, features]
+    port_forwarding:
+      value: false
+      sources: [faq-vpn]
+    split_tunnel:
+      value: true
+      sources: [apps, features]
+    blocking: []
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android, browser]
+      note: Android covers Android TV and Fire TV. Linux and routers are manual setup only.
+      sources: [downloads, apps]
+    open_source: none
+    telemetry:
+      value: null
+      note: Both app stores list no data collected, but the terms say usage trends and platform diagnostics may be shared with Google Analytics.
+      sources: [play, app-store, terms]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 15, currency: USD }
+      sources: [pricing]
+    best:
+      value: { amount: 3.96, currency: USD }
+      note: $95 for two years.
+      sources: [pricing]
+    best_term:
+      value: 24
+      sources: [pricing]
+    renewal_increase:
+      value: 0
+      note: Plans renew at the price you signed up at.
+      sources: [pricing]
+    free_tier:
+      value: false
+      note: The pricing page says there's no free trial, but the Play listing still offers three days.
+      sources: [pricing, play]
+    refund_days:
+      value: 30
+      note: Only if the service doesn't work as advertised, and not for speed issues, unsupported devices or crypto payments.
+      sources: [pricing, faq-general]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: Promises "military-grade encryption" and to "stop ISP & government surveillance for good".
+      sources: [features]
+    affiliates:
+      value: true
+      note: Affiliates get 25% of every payment for as long as the customer stays.
+      sources: [affiliates]
+    review_sites: false
+    activism: false
+
+refs:
+  about:
+    url: https://www.cactusvpn.com/about-us/
+    title: About CactusVPN
+  terms:
+    url: https://www.cactusvpn.com/terms-conditions/
+    title: Terms of Service
+  pricing:
+    url: https://www.cactusvpn.com/pricing/
+    title: Plans and pricing
+  features:
+    url: https://www.cactusvpn.com/features/
+    title: Features
+  apps:
+    url: https://www.cactusvpn.com/vpn-software/
+    title: CactusVPN apps
+  downloads:
+    url: https://www.cactusvpn.com/downloads/
+    title: Download CactusVPN apps
+  server-locations:
+    url: https://www.cactusvpn.com/vpn-server-locations/
+    title: VPN server locations
+  faq-general:
+    url: https://www.cactusvpn.com/support/faq-general/
+    title: General FAQ
+  faq-vpn:
+    url: https://www.cactusvpn.com/support/faq-vpn/
+    title: VPN FAQ
+  obfsproxy:
+    url: https://www.cactusvpn.com/tutorials/how-to-set-up-obfsproxy-on-windows/
+    title: How to set up Obfsproxy on Windows
+  affiliates:
+    url: https://www.cactusvpn.com/affiliates/
+    title: Affiliate program
+  professional:
+    url: https://www.cactusvpn.com/professional/
+    title: CactusVPN Professional
+  audit-securitum-2026:
+    url: https://www.securitum.com/public-reports/Securitum_CactusVPN_No-Log-Policy_Public.pdf
+    title: Securitum, CactusVPN No-Log Policy Audit (May 2026)
+  play:
+    url: https://play.google.com/store/apps/details?id=com.cactusvpn.app
+    title: CactusVPN on Google Play
+  app-store:
+    url: https://apps.apple.com/us/app/cactusvpn-smart-dns/id6743163048
+    title: CactusVPN on the App Store
+  utah-register:
+    url: https://businessregistration.utah.gov/EntitySearch/OnlineEntitySearch
+    title: Utah business entity search, CACTUSVPN, LLC (13326810-0160)
+  versprite-2018-003:
+    url: https://github.com/VerSprite/research/blob/master/advisories/VS-2018-003.md
+    title: VerSprite VS-2018-003, CactusVPN macOS privilege escalation
+  versprite-2018-007:
+    url: https://github.com/VerSprite/research/blob/master/advisories/VS-2018-007.md
+    title: VerSprite VS-2018-007, CactusVPN macOS privileged helper
