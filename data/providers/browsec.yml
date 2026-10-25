@@ -1,0 +1,220 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Browsec
+icon: browsec.svg
+checked: 2026-10-25
+
+criteria:
+  identity:
+    website: https://browsec.com
+    legal_entity:
+      value: Browsec Inc
+      note: Browsec says it's a Delaware company. Its Google Play and App Store listings name Browsec Inc, at an Alexandria, Virginia address.
+      sources: [terms, policy, about, play, app-store]
+    owner:
+      value: null
+      note: Who owns Browsec Inc isn't public.
+      sources: [about]
+    founded:
+      value: 2012
+      sources: [about]
+    team:
+      value: anonymous
+      sources: [about]
+    sister_brands: null
+    acquisitions: []
+
+  jurisdiction:
+    hq:
+      value: US
+      sources: [about, play]
+    entities:
+      value: [US]
+      note: The terms say Browsec Inc itself takes payment for orders from Russia, where Paddle doesn't sell.
+      sources: [terms]
+
+  logging:
+    traffic:
+      value: null
+      note: The policy makes no promise about browsing data. It only says it records operational data it calls non-identifying while the service is on.
+      sources: [policy]
+    dns:
+      value: null
+      sources: [policy]
+    timestamps:
+      value: null
+      note: The policy keeps device activity records, without saying what's in them or for how long, even after an account is deleted.
+      sources: [policy]
+    bandwidth:
+      value: null
+      sources: [policy]
+    source_ip:
+      value: null
+      sources: [policy]
+    proven: []
+    policy: https://browsec.com/en/privacypolicy
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: required
+      note: Free use needs no account. Premium needs an account with a confirmed email address.
+      sources: [faq, create-account]
+    personal_data: []
+    payment:
+      value: [card, paypal, app_store]
+      note: Paddle sells it outside Russia. The FAQ also mentions unnamed local payment methods in some regions.
+      sources: [payment-methods, faq, terms]
+
+  security:
+    protocols:
+      value: [ikev2, other]
+      note: >-
+        The mobile apps use IKEv2/IPsec and Xray, and the desktop apps bundle Xray and sing-box. The
+        browser extensions are an HTTPS proxy, so they only cover that browser.
+      sources: [faq, desktop-release]
+    post_quantum: none
+    kill_switch:
+      value: app
+      evidence: claimed
+      note: >-
+        The extension blocks the browser's traffic if the proxy drops. On Android it points you to the
+        system's Always-on VPN setting, which is off until you turn it on.
+      sources: [kill-switch-extension, kill-switch-android]
+    dns: null
+
+  infra:
+    ram_only: null
+    hosting: null
+    virtual_locations: null
+    servers: null
+    countries:
+      value: 45
+      note: 46 locations including two in the US. The locations page also lists New Zealand, which the plans page doesn't.
+      sources: [plans, windows, locations]
+
+  features:
+    connections:
+      value: 5
+      note: Each browser profile counts as a device, and you can only swap a device once a day.
+      sources: [devices, faq]
+    multihop: false
+    obfuscation:
+      value: [v2ray]
+      note: V2Ray here is Xray with VLESS, in the mobile and desktop apps.
+      sources: [faq, desktop-release]
+    port_forwarding: false
+    split_tunnel:
+      value: true
+      note: Per app on Android and desktop. The extension's Smart Settings pick per site, with one rule on the free plan.
+      sources: [split-tunnel, windows, smart-settings]
+    blocking: []
+
+  clients:
+    platforms:
+      value: [windows, macos, linux_gui, ios, android, browser]
+      note: >-
+        The extensions for Chrome, Firefox, Edge and Opera are a proxy for that browser alone. The desktop
+        apps cover the whole machine but need Premium, and the Linux one is a .deb for Ubuntu and Debian only.
+      sources: [about, faq, linux]
+    open_source:
+      value: none
+      sources: [desktop-release]
+    telemetry:
+      value: forced
+      evidence: claimed
+      note: The policy says the software has to record operational data automatically while the service is on.
+      sources: [policy]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 6.99, currency: USD }
+      sources: [plans]
+    best:
+      value: { amount: 2.99, currency: USD }
+      sources: [plans]
+    best_term:
+      value: 24
+      sources: [plans]
+    renewal_increase:
+      value: null
+      note: The plans page shows discounted prices without saying what they renew at.
+      sources: [plans]
+    free_tier:
+      value: true
+      note: Free use gets a handful of locations, which vary by platform, at much lower speeds.
+      sources: [plans, faq]
+    refund_days:
+      value: 7
+      sources: [terms, faq]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: It sells "military-grade encryption" and anonymity, and says it never tracks your activity, while its policy records activity data.
+      sources: [about, policy]
+    affiliates: null
+    review_sites: false
+    activism: false
+
+refs:
+  policy:
+    url: https://browsec.com/en/privacypolicy
+    title: Browsec Privacy Policy (December 5, 2023)
+  terms:
+    url: https://browsec.com/en/terms_of_service
+    title: Browsec software licence and terms of services
+  about:
+    url: https://browsec.com/en/about_us
+    title: About Browsec
+  faq:
+    url: https://browsec.com/en/faq
+    title: Browsec VPN FAQ
+  plans:
+    url: https://browsec.com/en/plans
+    title: Browsec Premium plans and pricing
+  locations:
+    url: https://browsec.com/en/locations/all
+    title: Browsec VPN server locations
+  windows:
+    url: https://browsec.com/en/windows-vpn
+    title: VPN for Windows 10 and 11
+  linux:
+    url: https://browsec.com/en/linux-vpn
+    title: VPN for Linux (Ubuntu, Debian)
+  play:
+    url: https://play.google.com/store/apps/details?id=com.browsec.vpn&hl=en
+    title: Browsec VPN on Google Play
+  app-store:
+    url: https://apps.apple.com/us/app/browsec-vpn-fast-ads-free/id978583103
+    title: Browsec VPN on the App Store
+  desktop-release:
+    url: https://github.com/brwinfo/desktop-release/releases
+    title: Browsec desktop app releases
+  create-account:
+    url: https://browsec.zendesk.com/hc/en-us/articles/4417363660050-Creating-a-Browsec-account
+    title: Creating a Browsec account
+  payment-methods:
+    url: https://browsec.zendesk.com/hc/en-us/articles/4406229443218-Available-Payment-Methods
+    title: Available payment methods
+  devices:
+    url: https://browsec.zendesk.com/hc/en-us/articles/360021375679-How-many-devices-does-Browsec-Premium-cover
+    title: How many devices does Browsec Premium cover?
+  kill-switch-extension:
+    url: https://browsec.zendesk.com/hc/en-us/articles/4402996713874-Kill-Switch
+    title: Kill Switch (browser extension)
+  kill-switch-android:
+    url: https://browsec.zendesk.com/hc/en-us/articles/4402996987794-Kill-Switch
+    title: Kill Switch (Android)
+  split-tunnel:
+    url: https://browsec.zendesk.com/hc/en-us/articles/4402779505938-Selecting-the-apps-to-protect
+    title: Selecting the apps to protect (Android)
+  smart-settings:
+    url: https://browsec.zendesk.com/hc/en-us/articles/4402682062482-Smart-Settings
+    title: Smart Settings (browser extension)
