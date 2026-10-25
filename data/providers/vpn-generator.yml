@@ -1,0 +1,239 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: VPN Generator
+icon: vpn-generator.png
+checked: 2026-10-25
+
+criteria:
+  identity:
+    website:
+      value: https://vpngen.org
+      sources: [home]
+    legal_entity:
+      value: IEDN Privatinstitut zur Förderung und Entwicklung öffentlicher digitaler Netze gGmbH
+      note: A Berlin non-profit research institute. The service is free and asks for donations.
+      sources: [policy, imprint, register, home]
+    owner:
+      value: null
+      sources: [register]
+    founded:
+      value: 2022
+      note: The institute was registered in November 2021 and VPN Generator launched in 2022.
+      sources: [home, register]
+    team:
+      value: partial
+      note: Mikhail Klimarev is the managing director and Mikhail Yakushev holds power of attorney.
+      sources: [imprint, register]
+    sister_brands: []
+    acquisitions:
+      value: []
+      sources: [register]
+
+  jurisdiction:
+    hq:
+      value: DE
+      sources: [policy, imprint]
+    entities:
+      value: [DE]
+      sources: [register]
+
+  logging:
+    traffic:
+      value: null
+      note: >-
+        The privacy policy says it collects or may collect destination IP addresses, kept as long as
+        the service needs them, but the 2023 audit found no user traffic logged.
+      sources: [policy, audit-2023]
+    dns:
+      value: null
+      note: It runs its own resolver, and neither the policy nor the 2023 audit says whether lookups are logged.
+      sources: [policy, audit-2023]
+    timestamps:
+      value: null
+      sources: [policy]
+    bandwidth:
+      value: aggregate
+      evidence: verified
+      note: Daily, weekly, monthly and yearly byte totals per user were stored for each brigade.
+      sources: [audit-2023]
+    source_ip:
+      value: null
+      note: >-
+        The privacy policy says it collects or may collect your IP address, kept as long as the service
+        needs it, but the 2023 audit didn't find real IP addresses logged anywhere.
+      sources: [policy, audit-2023]
+    proven:
+      value: [audit]
+      note: The 2023 audit reviewed the server code and a staging setup, not the live servers.
+      sources: [audit-2023]
+    policy: https://vpngen.org/IEDN_Privacy_Policy.pdf
+
+  transparency:
+    audits:
+      value:
+        - date: 2023-07-28
+          auditor: Include Security
+          scope: infra
+          source: audit-2023
+      evidence: verified
+      note: >-
+        Commissioned through the Open Technology Fund's Security Lab. It found four low-risk issues,
+        including storing Telegram chat IDs. A retest closed three and the fourth was accepted as a risk.
+      sources: [otf-audit, audit-2023-retest]
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: none
+      note: Signing up goes through a Telegram bot, so it needs a Telegram account, which needs a phone number.
+      sources: [bot, bot-texts]
+    personal_data:
+      value: []
+      note: The bot asks for any picture to prove you're a person, and a team member approves it.
+      sources: [bot-texts, audit-2023]
+    payment:
+      value: []
+      note: It's free.
+      sources: [iedn-project]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn, other]
+      note: OpenVPN only runs over Cloak. Other covers AmneziaWG, Outline's Shadowsocks, VLESS Reality and IPsec/L2TP.
+      sources: [profile, protocols-code]
+    post_quantum: none
+    kill_switch:
+      value: null
+      note: It has no apps of its own, so this is down to the client you use.
+      sources: [bot-texts]
+    dns:
+      value: first_party
+      sources: [bot-texts]
+
+  infra:
+    ram_only: null
+    hosting: null
+    virtual_locations: null
+    servers:
+      value: null
+      note: Each brigadier gets their own server, and no total is published.
+      sources: [profile]
+    countries: null
+
+  features:
+    connections:
+      value: 250
+      note: A brigadier can hand out configs to up to 250 friends and family, one each.
+      sources: [profile, user-limits]
+    multihop: false
+    obfuscation:
+      value: [amneziawg, shadowsocks, v2ray]
+      note: V2Ray here is VLESS with Reality. OpenVPN can also be wrapped in Cloak.
+      sources: [protocols-code, bot-texts]
+    port_forwarding: null
+    split_tunnel:
+      value: null
+      note: It has no apps of its own, so this is down to the client you use.
+      sources: [bot-texts]
+    blocking: null
+
+  clients:
+    platforms:
+      value: []
+      note: >-
+        Configs come from a Telegram bot and go into WireGuard, Outline, AmneziaVPN or a Reality client.
+        Brigadiers manage users through a web page reached over the VPN.
+      sources: [bot-texts]
+    open_source:
+      value: null
+      note: It has no apps of its own. Its server and bot code is published under MPL-2.0.
+      sources: [github]
+    telemetry:
+      value: null
+      note: It has no apps of its own, though the privacy policy lists app usage metrics and Google Analytics.
+      sources: [policy]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 0, currency: EUR }
+      note: Free, with no paid plan.
+      sources: [iedn-project]
+    best:
+      value: { amount: 0, currency: EUR }
+      sources: [iedn-project]
+    best_term: null
+    renewal_increase:
+      value: 0
+      note: Nothing renews.
+      sources: [iedn-project]
+    free_tier:
+      value: true
+      sources: [iedn-project, bot-texts]
+    refund_days: null
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        The institute's site says the service keeps no logs and stores zero, while the 2023 audit found
+        per-user data totals stored and the privacy policy says it may collect IP addresses.
+      sources: [iedn-project, iedn-home, audit-2023, policy]
+    affiliates: false
+    review_sites: false
+    activism:
+      value: true
+      note: It's a non-profit anti-censorship project aimed at people in Russia and other censored countries.
+      sources: [home, profile, iedn-institute]
+
+refs:
+  home:
+    url: https://vpngen.org/
+    title: VPN Generator
+  policy:
+    url: https://vpngen.org/IEDN_Privacy_Policy.pdf
+    title: IEDN privacy policy (PDF)
+  imprint:
+    url: https://iedn.net/en/imprint
+    title: IEDN imprint
+  register:
+    url: https://www.northdata.de/IEDN+Privatinstitut+zur+F%C3%B6rderung+und+Entwicklung+%C3%B6ffentlicher+digitaler+Netze+gGmbH,+Berlin/Amtsgericht+Charlottenburg+(Berlin)+HRB+236015+B
+    title: North Data, IEDN gGmbH (HRB 236015 B, Berlin)
+  iedn-home:
+    url: https://iedn.net/en
+    title: IEDN, Institute for the Development of Public Digital Networks
+  iedn-project:
+    url: https://iedn.net/en/projects/vpn-generator
+    title: IEDN, VPN Generator project
+  iedn-institute:
+    url: https://iedn.net/en/institute
+    title: IEDN, About the institute
+  github:
+    url: https://github.com/vpngen
+    title: vpngen on GitHub
+  profile:
+    url: https://github.com/vpngen/.github/blob/main/profile/README.md
+    title: What is VPN Generator (GitHub profile)
+  bot:
+    url: https://t.me/vpngeneratorbot
+    title: VPN Generator Telegram bot
+  bot-texts:
+    url: https://github.com/vpngen/embassy-tgbot/blob/main/res.go
+    title: VPN Generator bot messages (Russian)
+  protocols-code:
+    url: https://github.com/vpngen/keydesk/tree/main/internal/vpn
+    title: Keydesk VPN protocol modules
+  user-limits:
+    url: https://github.com/vpngen/keydesk/blob/main/keydesk/user.go
+    title: Keydesk user limits
+  otf-audit:
+    url: https://www.opentech.fund/security-safety-audits/vpn-generator-security-audit/
+    title: Open Technology Fund, VPN Generator security audit
+  audit-2023:
+    url: https://www.opentech.fund/wp-content/uploads/2024/05/OTF-2023-Q3-VPN-Generator-FINAL-1.pdf
+    title: Include Security, VPN Generator application and cryptography architecture review (2023)
+  audit-2023-retest:
+    url: https://www.opentech.fund/wp-content/uploads/2024/05/OTF-2023-Q3-VPN-Generator-REMEDIATION-1.pdf
+    title: Include Security, VPN Generator remediation report (2023)
