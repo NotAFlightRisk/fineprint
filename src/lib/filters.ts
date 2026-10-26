@@ -3,10 +3,13 @@ import type { Summary } from '#lib/summary.ts';
 export const sorts = { flags: 'Fewest red flags', price: 'Cheapest', name: 'A to Z' };
 export type Sort = keyof typeof sorts;
 
+export const minComplete = 75;
+
 export interface Filters {
   q: string;
   must: string[];
   sort: Sort;
+  incomplete: boolean;
 }
 
 export const sortBy: Record<Sort, (a: Summary, b: Summary) => number> = {
@@ -18,9 +21,14 @@ export const sortBy: Record<Sort, (a: Summary, b: Summary) => number> = {
 export const passes = (summary: Summary, must: string[]) =>
   must.every((id) => summary.checks.some((check) => check.id === id && check.grade === 'good'));
 
-export function applyFilters(summaries: Summary[], { q, must, sort }: Filters) {
+export function applyFilters(summaries: Summary[], { q, must, sort, incomplete }: Filters) {
   const words = q.trim().toLowerCase();
   return summaries
-    .filter((summary) => summary.name.toLowerCase().includes(words) && passes(summary, must))
+    .filter(
+      (summary) =>
+        summary.name.toLowerCase().includes(words) &&
+        passes(summary, must) &&
+        (incomplete || words !== '' || summary.complete >= minComplete)
+    )
     .toSorted((a, b) => sortBy[sort](a, b) || sortBy.name(a, b));
 }
