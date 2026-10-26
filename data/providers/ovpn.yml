@@ -31,9 +31,9 @@ criteria:
         names its own executives.
       sources: [next-chapter, point-wild-team]
     sister_brands:
-      value: [Hotspot Shield, Betternet, Touch VPN, UltraVPN, VPN 360, TotalAV VPN]
+      value: [Hotspot Shield, Betternet, Touch VPN, UltraVPN, VPN 360, TotalAV VPN, VPN in Touch]
       note: All owned by Point Wild, through Pango or Total Security.
-      sources: [aura-split-2024, hss-privacy-vpn, point-wild-merger, totalav-vpn]
+      sources: [aura-split-2024, hss-privacy-vpn, point-wild-merger, totalav-vpn, vpn-in-touch]
     acquisitions:
       value:
         - date: 2024-12-12
@@ -459,3 +459,6 @@ refs:
   comparitech-disclosure:
     url: https://www.comparitech.com/disclosure/
     title: Comparitech disclosure
+  vpn-in-touch:
+    url: https://apps.apple.com/us/app/vpn-in-touch/id464241430
+    title: VPN in Touch on the App Store, sold by Betternet LLC
