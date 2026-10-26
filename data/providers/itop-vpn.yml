@@ -1,0 +1,292 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: iTop VPN
+icon: itop-vpn.svg
+checked: 2026-10-26
+
+criteria:
+  identity:
+    website:
+      value: https://www.itopvpn.com
+      sources: [home]
+    legal_entity:
+      value: Orange View Limited
+      note: >-
+        A Hong Kong company (no. 2770852) that the EULA says trades as iTop, and the seller of its App Store
+        apps and Chrome extensions. The terms and privacy policy just say iTop Inc.
+      sources: [terms, eula, app-store, chrome-publisher, register]
+    owner:
+      value: null
+      note: >-
+        The EULA mentions a parent company without naming it. The same 2022 updater flaw was found in
+        IObit's apps and iTop's, and NVD files iTop VPN under IObit, but no ownership link is on record.
+      sources: [eula, cve-2022-24140, cve-2024-1195]
+    founded:
+      value: 2020
+      note: iTop says the company dates from 2016. Its VPN site and iOS app date from late 2020.
+      sources: [about, wayback-2020, app-store]
+    team:
+      value: anonymous
+      note: Nobody running it is named on its site.
+      sources: [about]
+    sister_brands:
+      value: null
+      note: >-
+        Its Android download link goes to iFlip VPN, listed on Google Play under "iTop Tech" by a personal
+        developer in Sichuan, China, and it isn't clear whether that's an iTop brand.
+      sources: [android, play-iflip]
+    acquisitions: []
+
+  jurisdiction:
+    hq:
+      value: HK
+      note: The terms are governed by Hong Kong law, and its business address is in Kowloon.
+      sources: [terms, about]
+    entities:
+      value: [HK]
+      sources: [register, app-store]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [privacy]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [privacy]
+    timestamps:
+      value: null
+      note: The policy lists IP addresses, browsing, DNS and data transferred as not logged, but says nothing of connection times.
+      sources: [privacy]
+    bandwidth:
+      value: null
+      note: The policy says transferred data isn't logged, but the free Windows and Mac apps get 300 MB a day, which needs a running count.
+      sources: [privacy, purchase]
+    source_ip:
+      value: none
+      evidence: claimed
+      sources: [privacy]
+    proven: []
+    policy: https://www.itopvpn.com/privacy
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents:
+      value:
+        - date: 2024-02-02
+          summary: >-
+            A flaw in the Windows app's ITopVpnCallbackProcess.sys driver (CVE-2024-1195) let a local user
+            crash the system, up to version 4.0.0.1. The disclosure says iTop was contacted early and didn't
+            respond.
+          handled: poorly
+          source: cve-2024-1195
+      note: >-
+        Researchers also published a named pipe token theft bug and an updater flaw in 2022, and a DLL
+        hijacking bug in version 16.0 in 2025, with no response from iTop on record.
+      sources: [cve-2022-24141, cve-2022-24140, cve-2024-53588]
+
+  account:
+    email:
+      value: required
+      note: The free apps work without an account. Accounts sign in with an email address, or Google or Microsoft.
+      sources: [free-vpn, login]
+    personal_data:
+      value: null
+      note: The policy says registering takes a username or email and a phone number, but sign-in only offers email, Google or Microsoft.
+      sources: [privacy, login]
+    payment:
+      value: [card, app_store]
+      note: Web orders go through a third-party reseller, and the site doesn't list which other methods it takes.
+      sources: [privacy, refund]
+
+  security:
+    protocols:
+      value: [other]
+      note: >-
+        It offers TCP, UDP and HTTPS modes without naming the protocol underneath. Its pages variously
+        give the encryption as AES-256 or Salsa20/ChaCha20.
+      sources: [windows, mac, about]
+    post_quantum: none
+    kill_switch:
+      value: app
+      note: The Windows page mentions a built-in kill switch without saying how it works.
+      sources: [windows]
+    dns:
+      value: null
+      note: It advertises DNS leak protection without saying whose DNS servers it uses.
+      sources: [windows, servers]
+
+  infra:
+    ram_only:
+      value: all
+      evidence: claimed
+      note: Only the Windows page says so.
+      sources: [windows]
+    hosting: null
+    virtual_locations:
+      value: null
+      note: It claims 100+ locations, but its full server list names 59 countries, and it doesn't say whether any are virtual.
+      sources: [servers]
+    servers:
+      value: 3200
+      note: Given as 3200+.
+      sources: [servers]
+    countries:
+      value: 59
+      note: Countries on its full server list. Its pages say 100+ locations.
+      sources: [servers]
+
+  features:
+    connections:
+      value: 8
+      note: The iOS App Store listing says 5 devices.
+      sources: [purchase, ios, store, app-store]
+    multihop:
+      value: true
+      note: Called Double VPN.
+      sources: [windows, servers]
+    obfuscation: []
+    port_forwarding: false
+    split_tunnel:
+      value: true
+      sources: [ios, purchase]
+    blocking:
+      value: [ads, trackers, malware]
+      sources: [purchase, windows]
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android]
+      note: >-
+        Its Android link now goes to iFlip VPN on Google Play, from a different developer. iTop Private
+        Browser is a separate Windows browser with a VPN built in.
+      sources: [windows, mac, ios, android, play-iflip, browser]
+    open_source: none
+    telemetry:
+      value: null
+      note: >-
+        The policy says the Windows app uses Microsoft App Center for crash reports and user metrics, and
+        the iOS app Firebase Analytics and Crashlytics, without saying whether you can turn them off.
+      sources: [privacy]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 11.99, currency: USD }
+      sources: [store]
+    best:
+      value: { amount: 1.67, currency: USD }
+      note: $59.99 for two years plus a free third year. A year is $47.99.
+      sources: [purchase, store]
+    best_term:
+      value: 36
+      sources: [purchase]
+    renewal_increase:
+      value: null
+      note: Plans renew automatically, but no renewal price is given. The crossed-out list price is $11.99 a month.
+      sources: [store, purchase]
+    free_tier:
+      value: true
+      note: 300 MB a day on Windows and Mac without the VIP servers, and unlimited on Android and iOS.
+      sources: [purchase, free-vpn]
+    refund_days:
+      value: 30
+      note: 60 days for one-off purchases. App Store purchases are refunded through Apple.
+      sources: [refund]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        It promises browsing that's "100% private and safe" and a free plan with "no data collection, no
+        bundle-ware", while its policy names analytics tools and its affiliate scheme pays app makers to bundle it.
+      sources: [mac, free-vpn, privacy, affiliates]
+    affiliates:
+      value: true
+      note: Commission of up to 100% of sales.
+      sources: [affiliates]
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://www.itopvpn.com/
+    title: iTop VPN homepage
+  privacy:
+    url: https://www.itopvpn.com/privacy
+    title: iTop Privacy Policy (June 14, 2022)
+  terms:
+    url: https://www.itopvpn.com/terms
+    title: iTop Terms of Service
+  eula:
+    url: https://www.itopvpn.com/eula
+    title: iTop VPN End User License Agreement
+  about:
+    url: https://www.itopvpn.com/about
+    title: About iTop
+  login:
+    url: https://www.itopvpn.com/login
+    title: iTop account log in
+  app-store:
+    url: https://apps.apple.com/us/app/itop-vpn-vpn-fast-secure/id1538546081
+    title: 'iTop VPN: VPN Fast & Secure on the App Store (US), sold by Orange View Limited'
+  chrome-publisher:
+    url: https://chromewebstore.google.com/publisher/orange-view-limited/uecd79b3dfb2eec4874781ee61305e6b6
+    title: Orange View Limited on the Chrome Web Store
+  register:
+    url: https://opencorporates.com/companies/hk/2770852
+    title: ORANGE VIEW LIMITED (2770852), Hong Kong, on OpenCorporates
+  wayback-2020:
+    url: https://web.archive.org/web/20201028103824/https://www.itopvpn.com/
+    title: itopvpn.com (archived October 2020)
+  android:
+    url: https://www.itopvpn.com/vpn-android
+    title: Download iTop VPN for Android
+  play-iflip:
+    url: https://play.google.com/store/apps/details?id=com.connectip.safe.iflipvpn
+    title: iFlip VPN-Private & Secure VPN by iTop Tech on Google Play
+  windows:
+    url: https://www.itopvpn.com/vpn-windows
+    title: iTop VPN for Windows
+  mac:
+    url: https://www.itopvpn.com/vpn-mac
+    title: iTop VPN for Mac
+  ios:
+    url: https://www.itopvpn.com/vpn-ios
+    title: iTop VPN for iOS
+  browser:
+    url: https://www.itopvpn.com/vpn-browser
+    title: iTop Private Browser
+  servers:
+    url: https://www.itopvpn.com/vpn-servers
+    title: iTop VPN server list
+  free-vpn:
+    url: https://www.itopvpn.com/free-vpn
+    title: iTop VPN Free Download
+  store:
+    url: https://www.itopvpn.com/store
+    title: iTop Store
+  purchase:
+    url: https://www.itopvpn.com/purchase
+    title: iTop VPN Premium plans
+  refund:
+    url: https://www.itopvpn.com/refundpolicy
+    title: iTop Refund Policy (February 22, 2022)
+  affiliates:
+    url: https://www.itopvpn.com/affiliate-solutions
+    title: iTop Affiliate Program
+  cve-2024-1195:
+    url: https://nvd.nist.gov/vuln/detail/CVE-2024-1195
+    title: NVD, CVE-2024-1195
+  cve-2022-24141:
+    url: https://nvd.nist.gov/vuln/detail/CVE-2022-24141
+    title: NVD, CVE-2022-24141
+  cve-2022-24140:
+    url: https://nvd.nist.gov/vuln/detail/CVE-2022-24140
+    title: NVD, CVE-2022-24140
+  cve-2024-53588:
+    url: https://github.com/JonathanLauener/iTop-privesc
+    title: Jonathan Lauener, iTop VPN privilege escalation (CVE-2024-53588)
