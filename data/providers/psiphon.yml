@@ -1,0 +1,456 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Psiphon
+icon: psiphon.png
+checked: 2026-10-26
+
+criteria:
+  identity:
+    website:
+      value: https://psiphon.ca
+      sources: [home]
+    legal_entity:
+      value: Psiphon Inc.
+      note: An Ontario corporation, incorporated on 26 February 2007.
+      sources: [terms, policy, register]
+    owner:
+      value: null
+      note: >-
+        Psiphon Inc. doesn't publish who holds its shares. The US-government-funded Open Technology Fund
+        has granted it $31.3 million since 2024 to carry users who can't pay.
+      sources: [register, otf]
+    founded:
+      value: 2010
+      note: >-
+        Psiphon 3, the tunnel network that runs today, launched on Windows in December 2010. The Citizen
+        Lab released the original Psiphon proxy software in 2006.
+      sources: [about]
+    team:
+      value: public
+      sources: [about]
+    sister_brands: []
+    acquisitions:
+      value: []
+      sources: [register, about]
+
+  jurisdiction:
+    hq:
+      value: CA
+      note: In October 2026 it said it's drawing up plans to leave Canada if the Bill C-22 lawful access law passes unchanged.
+      sources: [policy, trust-center, c22]
+    entities:
+      value: [CA]
+      sources: [register]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      note: >-
+        Until September 2026 it recorded data volumes to a few popular domains and to known malware
+        servers. The open-source server code still logs connections that hit its malware blocklist.
+      sources: [policy, bulletin, tunnel-server]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [dns-handling]
+    timestamps:
+      value: 'yes'
+      evidence: claimed
+      note: >-
+        Each connection's start time and length is kept with your city and ISP for 90 days, or longer
+        during big censorship events. There's no account or IP address to tie it to you.
+      sources: [what-we-collect, retention, tunnel-server]
+    bandwidth:
+      value: 'yes'
+      evidence: claimed
+      note: Data used on each connection is kept with your city and ISP for 90 days.
+      sources: [what-we-collect, retention]
+    source_ip:
+      value: temporary
+      evidence: claimed
+      note: Used in memory to look up your region and limit abuse, then dropped.
+      sources: [policy, ip-address]
+    proven:
+      value: []
+      note: >-
+        It says it has never had the identifying data that legal requests asked for, but there's no
+        public case to check. No audit has tested the no-logs claim.
+      sources: [trust-center]
+    policy: https://psiphon.ca/en/privacy.html
+
+  transparency:
+    audits:
+      value:
+        - date: 2024-05-24
+          auditor: Cure53
+          scope: apps
+          source: audit-2024-core
+        - date: 2024-05-10
+          auditor: Cure53
+          scope: apps
+          source: audit-2024-conduit
+        - date: 2023-06-16
+          auditor: Cure53
+          scope: apps
+          source: audit-2023
+        - date: 2021-10-08
+          auditor: Cure53
+          scope: apps
+          source: audit-gatekeeper
+        - date: 2021-04-01
+          auditor: 7ASecurity
+          scope: apps
+          source: audit-2021
+        - date: 2020-07-10
+          auditor: Cure53
+          scope: apps
+          source: audit-psipy
+        - date: 2019-10-31
+          auditor: Cure53
+          scope: apps
+          source: audit-2019
+        - date: 2017-07-01
+          auditor: Cure53
+          scope: apps
+          source: audit-2017
+        - date: 2014-08-22
+          auditor: iSEC Partners
+          scope: full
+          source: audit-2014
+      evidence: verified
+      note: >-
+        Dates are the end of the last week of testing, or the 1st where only the month is known. The
+        2017 and 2024 code audits included the server software, and iSEC's 2014 one the server setup.
+        2019 pentests of its servers and websites by Digital Boundary Group, MDSec and PacketLabs are
+        only available on request, so they're left out.
+      sources: [trust-center]
+    report:
+      value: none
+      note: It says it gets about 20 requests for user data a year and has complied with none, but publishes no figures beyond that.
+      sources: [legal-requests]
+    canary: none
+    bug_bounty:
+      value: false
+      note: There's no formal bounty, though significant reports are considered for a reward.
+      sources: [security-txt]
+    incidents:
+      value:
+        - date: 2023-05-08
+          summary: >-
+            A refactor around October 2022 dropped authentication from its Conjure registrar, so anyone
+            who knew could list the IP addresses of Android and Windows users on that protocol, which was
+            only on in some countries. Psiphon found it in late April 2023, restored authentication, saw
+            no suspicious access in its logs and published the details.
+          handled: well
+          source: bulletin
+        - date: 2021-01-26
+          summary: >-
+            A change in Psiphon for Windows v160 let some logs be treated as crash logs and sent with
+            opt-in feedback. It found one report holding a file path, redacted such logs on arrival and
+            fixed the app.
+          handled: well
+          source: bulletin
+        - date: 2020-11-27
+          summary: >-
+            Ad SDKs in the Google Play Android apps may have used the coarse location permission for
+            location-targeted ads. Version 314 removed the permission.
+          handled: well
+          source: bulletin
+        - date: 2020-11-09
+          summary: >-
+            Upstream proxy passwords leaked into diagnostics and connection metrics sent to Psiphon. It
+            redacted them on arrival, deleted the stored copies and fixed the apps.
+          handled: well
+          source: bulletin
+        - date: 2020-11-09
+          summary: >-
+            Psiphon iOS VPN 1.0.43 to 1.0.45 logged the destination of the first request after a reboot
+            or crash, which could reach Psiphon in feedback. It fixed the app and deleted the fewer than
+            10 stored logs a day after finding it in July 2020, and disclosed it in November.
+          handled: well
+          source: bulletin
+        - date: 2020-06-19
+          summary: >-
+            Access logging had been on since June 2015 for many of the S3 buckets serving its websites,
+            apps and server lists, recording visitors' IP addresses against its own policy. It turned the
+            logging off, deleted the logs and disclosed it.
+          handled: well
+          source: bulletin
+      sources: [bulletin]
+
+  account:
+    email:
+      value: none
+      sources: [why]
+    personal_data:
+      value: []
+      sources: [why]
+    payment:
+      value: [app_store]
+      note: Psiphon Plus is only sold through Google Play and the App Store.
+      sources: [subscriptions]
+
+  security:
+    protocols:
+      value: [proprietary, other]
+      note: >-
+        Every connection is an SSH tunnel inside its own obfuscation layer, carried over whichever
+        transport gets through. Windows (Legacy) also has an L2TP/IPsec mode.
+      sources: [protocol, windows-protocol]
+    post_quantum:
+      value: null
+      note: >-
+        Its SSH layer can negotiate ML-KEM hybrid key exchange, but the key exchange is picked at random
+        per connection and Psiphon makes no post-quantum claim.
+      sources: [ssh-kex, ssh-handshake, encryption]
+    kill_switch:
+      value: none
+      note: >-
+        It has no kill switch of its own and points you to Android's block connections without VPN and
+        iOS Connect On Demand. Traffic pauses while it reconnects.
+      sources: [connection-security]
+    dns:
+      value: third_party
+      note: Lookups go through the tunnel to unnamed third-party resolvers.
+      sources: [dns-handling]
+
+  infra:
+    ram_only:
+      value: null
+      sources: [policy]
+    hosting:
+      value: rented
+      note: Cloud servers at DigitalOcean, Linode, Hetzner, Vultr and others, plus volunteers' Conduit stations.
+      sources: [automation, home]
+    virtual_locations: null
+    servers:
+      value: 50000
+      note: Given as over 50,000, not counting Conduit stations.
+      sources: [home]
+    countries:
+      value: 33
+      sources: [home]
+
+  features:
+    connections:
+      value: null
+      note: There's no account, so the free app has no device limit. How many devices a store subscription covers isn't stated.
+      sources: [why]
+    multihop: false
+    obfuscation:
+      value: [shadowsocks, quic, proprietary]
+      note: >-
+        Chosen automatically per network, from obfuscated SSH on its own or inside TLS, QUIC and
+        Shadowsocks, domain-fronted meek, Conjure, and volunteer Conduit proxies.
+      sources: [protocol, protocols-code]
+    port_forwarding:
+      value: false
+      note: Outbound connections are limited to a handful of ports, such as 53, 80 and 443.
+      sources: [port-restrictions]
+    split_tunnel:
+      value: true
+      note: Android and Windows (Legacy) only.
+      sources: [why]
+    blocking:
+      value: [malware]
+      note: Servers block connections to known malware IP addresses and domains and alert you.
+      sources: [malware]
+
+  clients:
+    platforms:
+      value: [windows, ios, android]
+      note: The Windows app is the legacy client. A macOS app is in development.
+      sources: [download]
+    open_source:
+      value: some
+      note: >-
+        The tunnel core and the Windows and Android apps are GPL-3.0, but the public iOS repository
+        stops at version 1.1.43 from June 2026, before the redesigned 2.5 app.
+      sources: [source-code, ios-repo, about]
+    telemetry:
+      value: forced
+      evidence: claimed
+      note: >-
+        Every connection sends the app version, platform, how you got the app and connection failure
+        stats. There's no crash reporter, and diagnostic feedback is opt-in.
+      sources: [what-we-collect, diagnostic-feedback, server-api]
+    fdroid:
+      value: false
+      sources: [fdroid]
+
+  pricing:
+    monthly:
+      value: { amount: 4.99, currency: USD }
+      note: Psiphon Plus is only sold in the app stores, so this is the US App Store price.
+      sources: [app-store]
+    best:
+      value: { amount: 2.92, currency: USD }
+      note: $34.99 a year. The home page says Plus starts at $2.88 a month.
+      sources: [app-store, home]
+    best_term:
+      value: 12
+      sources: [app-store]
+    renewal_increase:
+      value: 0
+      note: Store subscriptions renew at the listed price.
+      sources: [app-store]
+    free_tier:
+      value: true
+      note: >-
+        Psiphon Basic is ad-supported with fewer features and regions. Running a Conduit station on
+        Android gets you full access for free.
+      sources: [home, why]
+    refund_days:
+      value: null
+      note: >-
+        Google Play refunds within 48 hours, and after that you can ask Psiphon by email, with no stated
+        window. App Store refunds go through Apple.
+      sources: [refunds]
+
+  ethics:
+    misleading_claims: false
+    affiliates: false
+    review_sites: false
+    activism:
+      value: true
+      note: >-
+        It exists to get people past censorship, keeps a free tier for them, and has said it'll leave
+        Canada rather than build in the access Bill C-22 could require.
+      sources: [about, home, c22]
+
+refs:
+  home:
+    url: https://psiphon.ca/en/index.html
+    title: Psiphon home page
+  about:
+    url: https://psiphon.ca/en/about.html
+    title: About Psiphon
+  why:
+    url: https://psiphon.ca/en/why-psiphon.html
+    title: Why Psiphon
+  download:
+    url: https://psiphon.ca/en/download.html
+    title: Download Psiphon
+  policy:
+    url: https://psiphon.ca/en/privacy.html
+    title: Privacy Policy (updated 28 September 2026)
+  bulletin:
+    url: https://psiphon.ca/en/privacy-bulletin.html
+    title: Privacy Bulletins
+  terms:
+    url: https://psiphon.ca/en/terms.html
+    title: Terms of Service
+  trust-center:
+    url: https://psiphon.ca/en/trust-center.html
+    title: Trust Center
+  what-we-collect:
+    url: https://psiphon.ca/en/faq.html#what-we-collect
+    title: Policies & Data Handling, What we collect, and why
+  ip-address:
+    url: https://psiphon.ca/en/faq.html#your-ip-address
+    title: Policies & Data Handling, Your IP address
+  dns-handling:
+    url: https://psiphon.ca/en/faq.html#dns-handling
+    title: Policies & Data Handling, DNS handling
+  diagnostic-feedback:
+    url: https://psiphon.ca/en/faq.html#diagnostic-feedback
+    title: Policies & Data Handling, Diagnostic and feedback data
+  retention:
+    url: https://psiphon.ca/en/faq.html#data-retention
+    title: Policies & Data Handling, Data retention and deletion
+  encryption:
+    url: https://psiphon.ca/en/faq.html#encryption-and-security
+    title: Policies & Data Handling, Encryption and security
+  connection-security:
+    url: https://psiphon.ca/en/faq.html#connection-security
+    title: 'Policies & Data Handling, Connection security: kill switch, leaks, and dropped connections'
+  subscriptions:
+    url: https://psiphon.ca/en/faq.html#subscriptions-and-ads
+    title: Policies & Data Handling, Subscriptions and ads
+  legal-requests:
+    url: https://psiphon.ca/en/faq.html#jurisdiction-legal-requests
+    title: Policies & Data Handling, Jurisdiction, legal requests, and transparency
+  protocol:
+    url: https://psiphon.ca/en/faq.html#what-protocol-does-psiphon-use
+    title: What protocol does Psiphon use?
+  windows-protocol:
+    url: https://psiphon.ca/en/faq.html#windows-vpn-protocol
+    title: What VPN protocol is used by Psiphon for Windows (Legacy)?
+  port-restrictions:
+    url: https://psiphon.ca/en/faq.html#port-restrictions
+    title: Some apps and email will not work
+  malware:
+    url: https://psiphon.ca/en/faq.html#malware-detection
+    title: I received a Malware Detection Alert
+  refunds:
+    url: https://psiphon.ca/en/faq.html#refunds
+    title: How do I get a refund for a subscription purchase?
+  security-txt:
+    url: https://psiphon.ca/.well-known/security.txt
+    title: Psiphon security.txt
+  register:
+    url: https://ised-isde.canada.ca/cbr/srch/api/v1/search?fq=keyword:%7Bpsiphon%7D&lang=en&queryaction=fieldquery&sortfield=score&sortorder=desc
+    title: Canada's Business Registries, PSIPHON INC. (Ontario corporation 1727343)
+  otf:
+    url: https://www.opentech.fund/projects-we-support/supported-projects/psiphon/
+    title: Open Technology Fund, Psiphon
+  c22:
+    url: https://gizmodo.com/this-toronto-privacy-tool-has-20-million-users-bill-c-22-could-push-it-out-of-canada-2000822189
+    title: 'Gizmodo, This Toronto Privacy Tool Has 20 Million Users: Bill C-22 Could Push It Out of Canada (2026)'
+  audit-2024-core:
+    url: https://cure53.de/pentest-report_psiphon_4.pdf
+    title: Cure53, Pentest-Report Psiphon Tunnel Core Codebase (2024)
+  audit-2024-conduit:
+    url: https://cure53.de/pentest-report_psiphon-conduit-library_2.pdf
+    title: Cure53, Pentest-Report Psiphon Conduit Integration Codebase (2024)
+  audit-2023:
+    url: https://cure53.de/pentest-report_psiphon-conduit-library.pdf
+    title: Cure53, Pentest-Report Psiphon Conduit Library (2023)
+  audit-2021:
+    url: https://7asecurity.com/reports/pentest-report_psiphon-e.pdf
+    title: 7ASecurity, Psiphon Enhancements Pentest Report (2021)
+  audit-gatekeeper:
+    url: https://cure53.de/pentest-report_psiphon_3.pdf
+    title: Cure53, Pentest-Report Psiphon api-gatekeeper (2021)
+  audit-psipy:
+    url: https://cure53.de/pentest-report_psipy.pdf
+    title: Cure53, Review-Report Psiphon psipy Library (2020)
+  audit-2019:
+    url: https://cure53.de/pentest-report_psiphon_2.pdf
+    title: Cure53, Pentest-Report Psiphon Apps & Server (2019)
+  audit-2017:
+    url: https://cure53.de/pentest-report_psiphon.pdf
+    title: Cure53, Pentest-Report Psiphon (2017)
+  audit-2014:
+    url: https://psiphon3.com/assets/Psiphon-3-iSEC-Partners-v1.1-08-2014.pdf
+    title: iSEC Partners, Psiphon 3 Security Assessment (2014)
+  source-code:
+    url: https://github.com/Psiphon-Inc
+    title: Psiphon Inc. on GitHub
+  ios-repo:
+    url: https://github.com/Psiphon-Inc/psiphon-ios-vpn
+    title: Psiphon-Inc/psiphon-ios-vpn on GitHub
+  tunnel-server:
+    url: https://github.com/Psiphon-Labs/psiphon-tunnel-core/blob/master/psiphon/server/tunnelServer.go
+    title: psiphon-tunnel-core, server/tunnelServer.go
+  server-api:
+    url: https://github.com/Psiphon-Labs/psiphon-tunnel-core/blob/master/psiphon/serverApi.go
+    title: psiphon-tunnel-core, serverApi.go
+  protocols-code:
+    url: https://github.com/Psiphon-Labs/psiphon-tunnel-core/blob/master/psiphon/common/protocol/protocol.go
+    title: psiphon-tunnel-core, common/protocol/protocol.go
+  ssh-kex:
+    url: https://github.com/Psiphon-Labs/psiphon-tunnel-core/blob/master/psiphon/common/crypto/ssh/common.go
+    title: psiphon-tunnel-core, crypto/ssh/common.go
+  ssh-handshake:
+    url: https://github.com/Psiphon-Labs/psiphon-tunnel-core/blob/master/psiphon/common/crypto/ssh/handshake.go
+    title: psiphon-tunnel-core, crypto/ssh/handshake.go
+  automation:
+    url: https://github.com/Psiphon-Inc/psiphon-automation/tree/master/Automation
+    title: Psiphon-Inc/psiphon-automation, Automation
+  app-store:
+    url: https://apps.apple.com/us/app/psiphon-vpn-secure-access/id1276263909
+    title: 'Psiphon VPN: Secure Access on the US App Store'
+  fdroid:
+    url: https://search.f-droid.org/?q=psiphon&lang=en
+    title: F-Droid search for psiphon
