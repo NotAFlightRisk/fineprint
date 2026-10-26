@@ -1,0 +1,265 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Ultrasurf
+icon: ultrasurf.png
+checked: 2026-10-26
+
+criteria:
+  identity:
+    website:
+      value: https://ultrasurf.us
+      sources: [home]
+    legal_entity:
+      value: UltraReach Internet Corporation
+      sources: [policy, terms]
+    owner:
+      value: null
+      note: >-
+        UltraReach names no parent company. Adherents of Falun Gong built Ultrasurf, which has had development
+        money from the State Department and USAGM, which awarded it $1.8 million in 2020 but paid out $249,000.
+      sources: [npr, axios]
+    founded:
+      value: 2002
+      note: UltraReach was founded in 2001 and launched Ultrasurf the year after.
+      sources: [about]
+    team:
+      value: anonymous
+      note: The site only describes its founders as a small group of Silicon Valley engineers.
+      sources: [about]
+    sister_brands:
+      value: []
+      note: The same developer publishes Fair VPN, a client for other providers' servers rather than a VPN service.
+      sources: [app-policy]
+    acquisitions:
+      value: []
+      sources: [about]
+
+  jurisdiction:
+    hq:
+      value: US
+      sources: [home]
+    entities:
+      value: [US]
+      sources: [home]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [policy, security, app-policy]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [app-policy]
+    timestamps:
+      value: null
+      note: >-
+        UltraReach doesn't say. In 2012 it said it kept some logs for a month to check how well its system
+        worked.
+      sources: [response-2012]
+    bandwidth:
+      value: null
+      note: UltraReach doesn't say.
+    source_ip:
+      value: none
+      evidence: claimed
+      sources: [policy]
+    proven: []
+    policy: https://ultrasurf.us/privacy/
+
+  transparency:
+    audits:
+      value:
+        - date: 2022-03-14
+          auditor: NowSecure
+          scope: apps
+          source: ada-2022
+      evidence: verified
+      note: >-
+        Jacob Appelbaum's 2012 analysis of the Windows client found no forward secrecy, extensive logging
+        and servers on years-old software, and UltraReach said it had fixed most of that. A 2020 audit for
+        the State Department found it would be trivial to block, but was never published.
+      sources: [ada-2022, appelbaum-2012, tor-blog, response-2012, npr]
+    report: none
+    canary: none
+    bug_bounty:
+      value: false
+      note: It takes reports by email under a disclosure policy, with no reward.
+      sources: [vdp]
+    incidents: []
+
+  account:
+    email:
+      value: none
+      sources: [play]
+    personal_data:
+      value: []
+      sources: [policy]
+    payment:
+      value: [app_store]
+      note: The subscriptions are sold in the iOS and Android apps.
+      sources: [app-store]
+
+  security:
+    protocols:
+      value: [proprietary]
+      note: Its own encrypted tunnel built on TLS 1.3.
+      sources: [play]
+    post_quantum:
+      value: null
+      note: UltraReach doesn't say.
+    kill_switch:
+      value: app
+      note: The Android app claims an always-on kill switch. The Windows client is a browser proxy without one.
+      sources: [play, download]
+    dns:
+      value: null
+      note: The Android app claims no DNS leaks, but not whose servers answer.
+      sources: [play]
+
+  infra:
+    ram_only:
+      value: null
+      note: UltraReach doesn't say how its servers are run.
+      sources: [security]
+    hosting:
+      value: null
+      note: UltraReach doesn't say whether it owns or rents its servers.
+      sources: [security]
+    virtual_locations:
+      value: null
+      note: UltraReach doesn't say whether any locations are virtual.
+    servers:
+      value: null
+      note: Only a number of countries is given.
+    countries:
+      value: 60
+      note: For subscribers.
+      sources: [app-store]
+
+  features:
+    connections:
+      value: null
+      note: The free service has no accounts, so no device limit. How many devices a subscription covers isn't stated.
+      sources: [play]
+    multihop: false
+    obfuscation:
+      value: [proprietary]
+      note: The tunnel is made to look like ordinary HTTPS traffic.
+      sources: [app-store]
+    port_forwarding: false
+    split_tunnel:
+      value: true
+      note: The Android app has an app filter.
+      sources: [play]
+    blocking:
+      value: []
+      note: The Chrome extension has an opt-in Safe Browsing check that sends page URLs to UltraReach.
+      sources: [policy]
+
+  clients:
+    platforms:
+      value: [windows, ios, android, browser]
+      note: The Windows client is a proxy for its own browser window, and the browser extension is for Chrome.
+      sources: [download]
+    open_source:
+      value: none
+      note: The terms forbid decompiling or reverse engineering it.
+      sources: [terms, npr]
+    telemetry:
+      value: null
+      note: UltraReach doesn't say. Both app stores' privacy labels say no data is collected.
+      sources: [play, app-store]
+    fdroid:
+      value: false
+      sources: [fdroid]
+
+  pricing:
+    monthly:
+      value: { amount: 6.99, currency: USD }
+      note: In the iOS app. Google Play lists in-app purchases from $4.99 to $49.99.
+      sources: [app-store, play]
+    best:
+      value: { amount: 4.17, currency: USD }
+      note: $49.99 a year, in the iOS app.
+      sources: [app-store]
+    best_term:
+      value: 12
+      sources: [app-store]
+    renewal_increase:
+      value: 0
+      sources: [app-store]
+    free_tier:
+      value: true
+      note: The Windows client, Chrome extension and apps are free. Subscribing adds a choice of locations and faster servers.
+      sources: [download, app-store]
+    refund_days:
+      value: null
+      note: Subscriptions are bought through Apple and Google, so refunds follow their rules.
+      sources: [app-store]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        The apps promise your activity is "truly invisible" and nobody will know you're using a VPN, while a
+        2020 State Department audit found it would be trivial to block nationwide.
+      sources: [play, npr]
+    affiliates: false
+    review_sites: false
+    activism:
+      value: true
+      note: A free circumvention tool, first built for people in mainland China.
+      sources: [about]
+
+refs:
+  home:
+    url: https://ultrasurf.us/
+    title: Ultrasurf home page
+  about:
+    url: https://ultrasurf.us/about/
+    title: About Ultrasurf and Ultrareach
+  download:
+    url: https://ultrasurf.us/download/
+    title: Download Ultrasurf
+  security:
+    url: https://ultrasurf.us/security/
+    title: Ultrasurf, Your Security
+  policy:
+    url: https://ultrasurf.us/privacy/
+    title: UltraReach Internet Corporation Privacy Statement
+  terms:
+    url: https://ultrasurf.us/terms/
+    title: Ultrasurf Terms of Use Agreement
+  vdp:
+    url: https://ultrasurf.us/vdp/
+    title: Ultrasurf Vulnerability Disclosure Policy
+  app-policy:
+    url: https://www.fqcdn.xyz/privacy.html
+    title: Privacy Policy for the Ultrasurf VPN and Fair VPN apps
+  play:
+    url: https://play.google.com/store/apps/details?id=us.ultrasurf.mobile.ultrasurf&hl=en_US&gl=US
+    title: Ultrasurf VPN on Google Play
+  app-store:
+    url: https://apps.apple.com/us/app/ultrasurf-vpn/id1563051300
+    title: Ultrasurf VPN on the App Store
+  fdroid:
+    url: https://search.f-droid.org/?q=ultrasurf&lang=en
+    title: F-Droid search for ultrasurf
+  appelbaum-2012:
+    url: https://media.torproject.org/misc/2012-04-16-ultrasurf-analysis.pdf
+    title: Jacob Appelbaum, Technical analysis of the Ultrasurf proxying software (2012)
+  tor-blog:
+    url: https://blog.torproject.org/ultrasurf-definitive-review/
+    title: 'Tor Project, Ultrasurf: the definitive review (2012)'
+  response-2012:
+    url: https://web.archive.org/web/20120511114926/http://ultrasurf.us/Ultrasurf-response-to-Tor-definitive-review.pdf
+    title: "Tor's critique of Ultrasurf: A reply from the Ultrasurf developers (2012, Wayback Machine)"
+  npr:
+    url: https://www.npr.org/2021/04/14/986982387/falun-gong-steve-bannon-and-the-trump-era-battle-over-internet-freedom
+    title: NPR, Falun Gong, Steve Bannon And The Trump-Era Battle Over Internet Freedom (2021)
+  axios:
+    url: https://www.axios.com/2020/06/23/falun-gong-us-agency-global-media
+    title: Axios, In media agency shakeup, conservative groups push for Falun Gong-backed internet tools (2020)
+  ada-2022:
+    url: https://web.archive.org/web/20260103091953/https://ultrasurf.us/download/audit_report.pdf
+    title: NowSecure, App Defense Alliance assessment of Ultrasurf for Android 2.3.0 (2022, Wayback Machine)
