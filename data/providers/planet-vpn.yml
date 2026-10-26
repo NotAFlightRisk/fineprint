@@ -1,0 +1,258 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Planet VPN
+icon: planet-vpn.svg
+checked: 2026-10-26
+
+criteria:
+  identity:
+    website: https://freevpnplanet.com
+    legal_entity:
+      value: FREE VPN PLANET S.R.L.
+      note: The privacy policy's opening line calls it FREE PLANET VPN S.R.L., but its own footer, the terms, the register and both app stores say FREE VPN PLANET S.R.L.
+      sources: [terms, policy, register, play, app-store]
+    owner:
+      value: null
+      note: The company has two shareholders and one administrator, none of them named publicly.
+      sources: [register]
+    founded:
+      value: 2017
+      sources: [about, app-store]
+    team:
+      value: anonymous
+      sources: [about, register]
+    sister_brands:
+      value: []
+      note: RusVPN, sold by Iron Media Group Ltd of Dominica in 2021, has redirected to Planet VPN since at least 2023, and Planet VPN's homepage shows RusVPN's reviews as its own.
+      sources: [rusvpn-2021, rusvpn-2023, home]
+    acquisitions:
+      value: null
+      note: FREE VPN PLANET S.R.L. was only registered in 2021, four years after launch, and who ran Planet VPN before that isn't public.
+      sources: [register, about]
+
+  jurisdiction:
+    hq:
+      value: RO
+      sources: [terms, register]
+    entities:
+      value: [RO]
+      sources: [terms, register]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [policy, terms]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [policy, terms]
+    timestamps:
+      value: null
+      note: The no-logs page says it never collects timestamps, but the terms log connection attempts for security and troubleshooting without saying what's kept or for how long.
+      sources: [no-logs, terms]
+    bandwidth:
+      value: null
+      note: The main policy doesn't say. The separate policy for its country-specific Turbo Proxy apps records how much bandwidth you use and when and for how long.
+      sources: [policy, lite-policy]
+    source_ip:
+      value: none
+      evidence: claimed
+      note: The policy does keep your city-level location and ISP, which it says are anonymised straight away.
+      sources: [policy, no-logs]
+    proven: []
+    policy: https://freevpnplanet.com/policy/
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: required
+      note: Free use needs no account. Buying Premium on the website needs an email address.
+      sources: [policy, order]
+    personal_data: []
+    payment:
+      value: [card, app_store, bitcoin, other_crypto]
+      note: It also takes Telegram Stars. The checkout offers more than 16 cryptocurrencies but doesn't list them up front.
+      sources: [order, refund, telegram-stars]
+
+  security:
+    protocols:
+      value: [openvpn, wireguard, ikev2, proprietary, other]
+      note: StarGuard and PlanetX are its own protocols. Only the iOS page mentions WireGuard. Manual setups also offer L2TP/IPsec and PPTP.
+      sources: [protocols, router, ios, servers]
+    post_quantum: none
+    kill_switch:
+      value: app
+      evidence: claimed
+      sources: [android, windows, ios]
+    dns:
+      value: first_party
+      evidence: claimed
+      sources: [servers]
+
+  infra:
+    ram_only:
+      value: all
+      evidence: claimed
+      sources: [no-logs]
+    hosting: null
+    virtual_locations: null
+    servers:
+      value: 1260
+      sources: [servers]
+    countries:
+      value: 63
+      note: It advertises 100+ locations, but its server list names 63 countries.
+      sources: [servers]
+
+  features:
+    connections:
+      value: 10
+      sources: [plans]
+    multihop:
+      value: true
+      note: Double VPN and Onion over VPN are Premium only.
+      sources: [plans, ios]
+    obfuscation: []
+    port_forwarding: false
+    split_tunnel:
+      value: true
+      note: Premium only.
+      sources: [android]
+    blocking:
+      value: [ads, trackers, malware]
+      note: Smart Filters are a Premium feature, and the plans page says they work in the browser.
+      sources: [download, plans]
+
+  clients:
+    platforms:
+      value: [windows, macos, linux_gui, ios, android, browser]
+      note: The Linux app is Premium only, and routers are a manual OpenVPN or L2TP setup. The Chrome, Firefox, Edge and Opera extensions only cover the browser.
+      sources: [download, linux, router]
+    open_source: none
+    telemetry:
+      value: null
+      note: The policy says the apps send connection status, rough location, device details and crash reports to Firebase, Adjust and GrowthBook, without saying whether you can turn it off.
+      sources: [policy]
+    trackers:
+      value: 30
+      note: Version 8.2.6, from January 2026.
+      sources: [exodus]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 9.99, currency: USD }
+      sources: [plans]
+    best:
+      value: { amount: 1.99, currency: USD }
+      note: $95.52 billed every four years.
+      sources: [plans]
+    best_term:
+      value: 48
+      sources: [plans]
+    renewal_increase:
+      value: null
+      note: The plans page shows discounted prices without saying what they renew at.
+      sources: [plans, terms]
+    free_tier:
+      value: true
+      note: Six locations in five countries, with ads in the mobile app.
+      sources: [servers, play]
+    refund_days:
+      value: 14
+      note: You have to give a reason, and renewals and Telegram Stars purchases aren't refundable.
+      sources: [refund]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: It says every session guarantees anonymity, and that you can confirm its no-logs policy through an independent audit, though none has been published.
+      sources: [no-logs]
+    affiliates:
+      value: true
+      sources: [affiliate]
+    review_sites: false
+    activism: false
+
+refs:
+  terms:
+    url: https://freevpnplanet.com/terms/
+    title: Planet VPN Terms of Use
+  policy:
+    url: https://freevpnplanet.com/policy/
+    title: Planet VPN Privacy Policy
+  no-logs:
+    url: https://freevpnplanet.com/no-logs-vpn-policy/
+    title: Planet VPN no-logs policy
+  lite-policy:
+    url: https://freevpnplanet.com/lite-vpn-policy/
+    title: Privacy Policy for Planet VPN's country-specific apps (June 2, 2024)
+  about:
+    url: https://freevpnplanet.com/about-us/
+    title: About Planet VPN
+  home:
+    url: https://freevpnplanet.com/
+    title: Planet VPN homepage
+  plans:
+    url: https://freevpnplanet.com/plans/
+    title: Planet VPN plans and pricing
+  refund:
+    url: https://freevpnplanet.com/refund/
+    title: Planet VPN refund policy (March 13, 2026)
+  order:
+    url: https://account.freevpnplanet.com/order/
+    title: Buy Planet VPN Premium
+  telegram-stars:
+    url: https://freevpnplanet.com/blog/buy-planet-vpn-with-telegram-stars-with-an-exclusive-new-option/
+    title: Buy Planet VPN with Telegram Stars
+  servers:
+    url: https://freevpnplanet.com/servers/
+    title: Planet VPN server locations
+  protocols:
+    url: https://freevpnplanet.com/vpn-protocols/
+    title: 'VPN Protocols: Everything You Need To Know'
+  router:
+    url: https://freevpnplanet.com/router/
+    title: Planet VPN for routers
+  ios:
+    url: https://freevpnplanet.com/ios/
+    title: Planet VPN for iOS
+  android:
+    url: https://freevpnplanet.com/android/
+    title: Planet VPN for Android
+  windows:
+    url: https://freevpnplanet.com/windows/
+    title: Planet VPN for Windows
+  linux:
+    url: https://freevpnplanet.com/linux/
+    title: Planet VPN for Linux
+  download:
+    url: https://freevpnplanet.com/download/
+    title: Download Planet VPN for all your devices
+  affiliate:
+    url: https://freevpnplanet.com/affiliate-program/
+    title: Planet VPN affiliate program
+  play:
+    url: https://play.google.com/store/apps/details?id=com.freevpnplanet&hl=en
+    title: Planet Free VPN on Google Play
+  app-store:
+    url: https://apps.apple.com/us/app/planet-free-vpn-super-proxy/id1410235921
+    title: Planet Free VPN Super Proxy on the App Store
+  register:
+    url: https://termene.ro/firma/44667783-FREE-VPN-PLANET-SRL
+    title: FREE VPN PLANET S.R.L. (CUI 44667783, J2022008122407) company record
+  exodus:
+    url: https://web.archive.org/web/20260211135841/https://reports.exodus-privacy.eu.org/en/reports/com.freevpnplanet/latest/
+    title: Exodus Privacy report for com.freevpnplanet 8.2.6 (Wayback copy)
+  rusvpn-2021:
+    url: https://web.archive.org/web/20210225021955/https://rusvpn.com/en/
+    title: RusVPN homepage, February 2021 (Wayback copy)
+  rusvpn-2023:
+    url: https://web.archive.org/web/20230202083823/https://rusvpn.com/
+    title: rusvpn.com redirecting to freevpnplanet.com, February 2023 (Wayback copy)
