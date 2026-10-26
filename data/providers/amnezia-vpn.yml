@@ -195,6 +195,7 @@ criteria:
   pricing:
     monthly:
       value: null
+      grade: na
       note: The website only sells 6, 12 and 24 month plans.
       sources: [pay]
     best:

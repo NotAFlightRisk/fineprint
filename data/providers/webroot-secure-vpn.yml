@@ -204,6 +204,7 @@ criteria:
   pricing:
     monthly:
       value: null
+      grade: na
       note: The US page only sells yearly plans.
       sources: [product]
     best:

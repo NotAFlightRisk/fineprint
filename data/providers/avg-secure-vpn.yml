@@ -183,6 +183,7 @@ criteria:
   pricing:
     monthly:
       value: null
+      grade: na
       note: No monthly plan, only 1, 2 and 3 years.
       sources: [store]
     best:

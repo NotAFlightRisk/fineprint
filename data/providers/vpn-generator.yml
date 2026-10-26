@@ -106,6 +106,7 @@ criteria:
     post_quantum: none
     kill_switch:
       value: null
+      grade: na
       note: It has no apps of its own, so this is down to the client you use.
       sources: [bot-texts]
     dns:
@@ -135,6 +136,7 @@ criteria:
     port_forwarding: null
     split_tunnel:
       value: null
+      grade: na
       note: It has no apps of its own, so this is down to the client you use.
       sources: [bot-texts]
     blocking: null
@@ -148,6 +150,7 @@ criteria:
       sources: [bot-texts]
     open_source:
       value: null
+      grade: na
       note: It has no apps of its own. Its server and bot code is published under MPL-2.0.
       sources: [github]
     telemetry:
@@ -164,7 +167,11 @@ criteria:
     best:
       value: { amount: 0, currency: EUR }
       sources: [iedn-project]
-    best_term: null
+    best_term:
+      value: null
+      grade: na
+      note: It's free.
+      sources: [iedn-project]
     renewal_increase:
       value: 0
       note: Nothing renews.
@@ -172,7 +179,11 @@ criteria:
     free_tier:
       value: true
       sources: [iedn-project, bot-texts]
-    refund_days: null
+    refund_days:
+      value: null
+      grade: na
+      note: It's free.
+      sources: [iedn-project]
 
   ethics:
     misleading_claims:

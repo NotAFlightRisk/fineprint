@@ -197,6 +197,7 @@ criteria:
   pricing:
     monthly:
       value: null
+      grade: na
       note: Only one and two year plans are sold.
       sources: [product-de]
     best:
