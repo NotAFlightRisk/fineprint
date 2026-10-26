@@ -1,13 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="none" height="24" viewBox="0 0 24 24" width="24">
-  <filter id="a" color-interpolation-filters="sRGB" height="18.1562" width="17.1562" x="3.42053" y="3.37436">
-    <feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood>
-    <feColorMatrix in="SourceAlpha" result="hardAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"></feColorMatrix>
-    <feOffset dy="1"></feOffset>
-    <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0"></feColorMatrix>
-    <feBlend in2="BackgroundImageFix" mode="normal" result="effect1_dropShadow_113_33500"></feBlend>
-    <feBlend in="SourceGraphic" in2="effect1_dropShadow_113_33500" mode="normal" result="shape"></feBlend>
-  </filter>
   <linearGradient id="b" gradientUnits="userSpaceOnUse" x1="3.74184" x2="23.3757" y1="18.484" y2="20.2821">
     <stop offset="0" stop-color="#dfdbec"></stop>
     <stop offset=".49729" stop-color="#fff"></stop>
@@ -24,7 +16,7 @@
     <stop offset="1" stop-color="#fff"></stop>
   </linearGradient>
   <rect fill="#4527a0" height="24" rx="12" width="24"></rect>
-  <g filter="url(#a)">
+  <g>
     <path clip-rule="evenodd" d="m20.5768 11.9627c-.0057 4.7376-3.8508 8.5736-8.5884 8.5679-4.73753-.0056-8.57351-3.8508-8.56785-8.5883.00565-4.73761 3.85079-8.57358 8.58835-8.56792 4.7376.00565 8.5735 3.85079 8.5679 8.58832zm-3.4219-.0041c-.0034 2.8478-2.3147 5.1535-5.1624 5.1501s-5.15348-2.3146-5.15008-5.1624c.0034-2.84768 2.31469-5.15345 5.16238-5.15005 2.8477.0034 5.1535 2.31468 5.1501 5.16235z" fill="#e9e7f0" fill-rule="evenodd"></path>
   </g>
   <g clip-rule="evenodd" fill-rule="evenodd">
