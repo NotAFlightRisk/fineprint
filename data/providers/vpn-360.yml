@@ -29,9 +29,9 @@ criteria:
       note: There's no VPN 360 leadership page, but Pango's site names its president and other executives.
       sources: [pango-team]
     sister_brands:
-      value: [Hotspot Shield, Betternet, Touch VPN, UltraVPN, TotalAV VPN, OVPN]
+      value: [Hotspot Shield, Betternet, Touch VPN, UltraVPN, TotalAV VPN, OVPN, VPN in Touch]
       note: TotalAV's VPN joined the family when Pango Group merged with TotalAV's maker, Total Security.
-      sources: [aura-split-2024, privacy-vpn, point-wild-merger, totalav-vpn, ovpn-next-chapter]
+      sources: [aura-split-2024, privacy-vpn, point-wild-merger, totalav-vpn, ovpn-next-chapter, vpn-in-touch]
     acquisitions:
       value:
         - date: 2024-12-12
@@ -352,3 +352,6 @@ refs:
   masa-2023:
     url: https://appdefensealliance.dev/reports/co.infinitysoft.vpn360_1706657294416000.pdf
     title: NowSecure, MASA assessment of VPN 360 for Android 5.13.0 (2023)
+  vpn-in-touch:
+    url: https://apps.apple.com/us/app/vpn-in-touch/id464241430
+    title: VPN in Touch on the App Store, sold by Betternet LLC
