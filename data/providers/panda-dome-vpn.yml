@@ -197,6 +197,7 @@ criteria:
   pricing:
     monthly:
       value: null
+      grade: na
       note: The VPN page only sells 1, 2 and 3-year plans.
       sources: [vpn]
     best:

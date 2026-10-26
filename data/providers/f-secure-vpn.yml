@@ -14,6 +14,7 @@ criteria:
       sources: [privacy, store]
     owner:
       value: null
+      grade: na
       note: >-
         F-Secure Corporation has no parent company and is listed on Nasdaq Helsinki. Its largest
         shareholder is co-founder Risto Siilasmaa, with 34.36% on 30 September 2026.
@@ -208,6 +209,7 @@ criteria:
   pricing:
     monthly:
       value: null
+      grade: na
       note: Only one and two year plans are sold.
       sources: [home]
     best:

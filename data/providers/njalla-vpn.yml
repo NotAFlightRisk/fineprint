@@ -164,6 +164,7 @@ criteria:
       sources: [pricing, thinkpenguin]
     open_source:
       value: null
+      grade: na
       note: There are no Njalla apps to publish. The WireGuard and OpenVPN clients it relies on are open source.
       sources: [thinkpenguin]
     telemetry:

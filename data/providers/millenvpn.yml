@@ -182,6 +182,7 @@ criteria:
   pricing:
     monthly:
       value: null
+      grade: na
       note: There's no rolling monthly plan. A one-off 30-day pass costs ¥1,738 including tax.
       sources: [pricing]
     best:

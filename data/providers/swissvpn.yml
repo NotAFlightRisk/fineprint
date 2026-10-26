@@ -157,6 +157,7 @@ criteria:
       sources: [instructions, openvpn]
     open_source:
       value: null
+      grade: na
       note: There are no SwissVPN apps to publish.
       sources: [instructions]
     telemetry:

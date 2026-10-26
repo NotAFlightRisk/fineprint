@@ -14,6 +14,7 @@ criteria:
       sources: [terms, sec]
     owner:
       value: null
+      grade: na
       note: Cloudflare, Inc. is a public company listed in the US, with no parent above it.
       sources: [sec]
     founded:

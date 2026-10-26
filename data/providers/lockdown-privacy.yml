@@ -244,6 +244,7 @@ criteria:
       sources: [app-store, privacy]
     trackers:
       value: null
+      grade: na
       note: There's no Android app.
       sources: [home]
     fdroid: false

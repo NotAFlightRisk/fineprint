@@ -192,6 +192,7 @@ criteria:
       sources: [privacy-policy]
     trackers:
       value: null
+      grade: na
       note: There's no Android app.
       sources: [one-vs-pp]
     fdroid: false
@@ -199,6 +200,7 @@ criteria:
   pricing:
     monthly:
       value: null
+      grade: na
       note: Only 1 and 2-year plans are sold.
       sources: [pricing, plans]
     best:

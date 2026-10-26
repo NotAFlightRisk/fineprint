@@ -180,6 +180,7 @@ criteria:
   pricing:
     monthly:
       value: null
+      grade: na
       note: The pricing page has no monthly plan, only 1, 2 and 3 years.
       sources: [home]
     best:
