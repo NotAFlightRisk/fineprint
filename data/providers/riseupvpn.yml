@@ -1,0 +1,310 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: RiseupVPN
+icon: riseupvpn.svg
+checked: 2026-10-26
+
+criteria:
+  identity:
+    website:
+      value: https://riseup.net/en/vpn
+      sources: [vpn]
+    legal_entity:
+      value: Riseup Networks
+      note: A 501(c)(4) nonprofit in Washington State. The terms only name riseup.net.
+      sources: [donate, irs]
+    owner:
+      value: null
+      grade: na
+      note: An independent nonprofit run by the Riseup collective, with no parent. Riseup Labs is a separate sister charity.
+      sources: [donate, irs]
+    founded:
+      value: null
+      note: Riseup ran an OpenVPN and PPTP service by April 2012, but no launch year is published. The account-free RiseupVPN app came later.
+      sources: [vpn-2012]
+    team:
+      value: partial
+      note: Collective members go by bird names, but the nonprofit's tax filings name its three officers.
+      sources: [about, irs]
+    sister_brands:
+      value: []
+      note: CalyxVPN runs on the same LEAP software but belongs to the Calyx Institute.
+      sources: [otf-audit]
+    acquisitions: []
+
+  jurisdiction:
+    hq:
+      value: US
+      sources: [tos, irs]
+    entities:
+      value: [US]
+      sources: [irs, donate]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      note: A blanket claim of no logs and no tracking, with no detail on what the VPN gateways record.
+      sources: [fdroid, vpn]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [fdroid]
+    timestamps:
+      value: none
+      evidence: claimed
+      sources: [fdroid, policy]
+    bandwidth:
+      value: none
+      evidence: claimed
+      sources: [fdroid]
+    source_ip:
+      value: none
+      evidence: claimed
+      note: The policy says no IP address of any user is kept for any service.
+      sources: [policy, vpn]
+    proven:
+      value: []
+      note: The FBI warrants Riseup complied with in 2016 were for two email accounts, not the VPN.
+      sources: [press-2017]
+    policy: https://riseup.net/en/privacy-policy
+
+  transparency:
+    audits:
+      value:
+        - date: 2025-03-28
+          auditor: Security Research Labs
+          scope: apps
+          source: audit-srl-2025
+      evidence: verified
+      note: >-
+        Covered LEAP's desktop and Android clients and Menshen, its gateway and bridge registry, on test
+        infrastructure rather than Riseup's servers. LEAP's site says Cure53 audited its code, with no date
+        or report.
+      sources: [otf-audit, leap]
+    report:
+      value: none
+      note: Riseup has put out a statement about specific warrants, but no regular figures.
+      sources: [press-2017]
+    canary:
+      value: maintained
+      note: >-
+        Re-signed every quarter. Since 2017 it only covers compromise, breaches and forced key disclosure or
+        access, not gag orders or national security letters.
+      sources: [canary, press-2017]
+    bug_bounty: false
+    incidents:
+      value:
+        - date: 2021-10-18
+          summary: >-
+            Tenable found the Windows installer let a local user swap the VPN executable and gain admin
+            rights (CVE-2021-44466). LEAP fixed it in version 0.21.11 two months later.
+          handled: well
+          source: tenable-2021
+        - date: 2017-02-16
+          summary: >-
+            Riseup disclosed that it had complied with two sealed FBI warrants for email accounts tied to a
+            DDoS extortion ring and ransomware. A gag order had stopped it renewing its canary, and it then
+            moved new accounts to personally encrypted storage.
+          handled: well
+          source: press-2017
+      sources: [tenable-2021, press-2017]
+
+  account:
+    email:
+      value: none
+      note: There are no accounts.
+      sources: [fdroid]
+    personal_data:
+      value: []
+      sources: [fdroid]
+    payment:
+      value: []
+      note: >-
+        It's free. Riseup asks VPN users to donate about $60 a year, by card or bank debit through Liberapay,
+        PayPal or Bitcoin.
+      sources: [vpn]
+
+  security:
+    protocols:
+      value: [openvpn]
+      sources: [gateways, vpn-windows]
+    post_quantum:
+      value: none
+      sources: [gateways]
+    kill_switch:
+      value: app
+      note: >-
+        The Linux and macOS apps block traffic through the firewall if the tunnel drops. Windows has no kill
+        switch, and Android relies on the system's block connections without VPN setting.
+      sources: [vpn-windows, audit-srl-2025]
+    dns:
+      value: null
+      note: Riseup doesn't say which resolver the tunnel uses.
+      sources: [gateways]
+
+  infra:
+    ram_only:
+      value: null
+      note: Riseup doesn't say.
+      sources: [policy]
+    hosting:
+      value: null
+      note: >-
+        Gateways sit on several networks, including Scaleway in Paris and Amsterdam. Riseup doesn't say whether
+        it owns any of the hardware.
+      sources: [gateways, ripe-scaleway]
+    virtual_locations:
+      value: none
+      sources: [gateways]
+    servers:
+      value: 21
+      sources: [gateways]
+    countries:
+      value: 4
+      note: The US, Canada, France and the Netherlands.
+      sources: [gateways]
+
+  features:
+    connections:
+      value: unlimited
+      note: There are no accounts, so nothing limits devices.
+      sources: [vpn]
+    multihop: false
+    obfuscation:
+      value: [obfs4]
+      note: Every gateway also takes obfs4 on port 443, and the app can fetch its setup over Snowflake where Riseup is blocked.
+      sources: [gateways, leap, audit-srl-2025]
+    port_forwarding:
+      value: null
+      note: Riseup doesn't document it.
+      sources: [vpn-linux, vpn-android]
+    split_tunnel:
+      value: null
+      note: Riseup doesn't document it.
+      sources: [vpn-linux, vpn-android]
+    blocking: []
+
+  clients:
+    platforms:
+      value: [windows, macos, linux_gui, android]
+      note: There's no iOS app.
+      sources: [vpn-windows, vpn-macos, vpn-linux, vpn-android]
+    open_source:
+      value: all
+      note: All the apps are builds of LEAP's open source Bitmask code.
+      sources: [vpn-android, vpn-linux]
+    telemetry:
+      value: none
+      evidence: claimed
+      sources: [fdroid, exodus]
+    trackers:
+      value: 0
+      sources: [exodus]
+    fdroid:
+      value: true
+      sources: [fdroid]
+
+  pricing:
+    monthly:
+      value: { amount: 0, currency: USD }
+      note: Free, funded by donations.
+      sources: [vpn]
+    best:
+      value: { amount: 0, currency: USD }
+      sources: [donate]
+    best_term:
+      value: null
+      grade: na
+      note: It's free.
+      sources: [donate]
+    renewal_increase:
+      value: 0
+      note: Nothing renews.
+      sources: [donate]
+    free_tier:
+      value: true
+      sources: [vpn]
+    refund_days:
+      value: null
+      grade: na
+      note: It's free.
+      sources: [donate]
+
+  ethics:
+    misleading_claims:
+      value: false
+      sources: [vpn, limitations]
+    affiliates: false
+    review_sites: false
+    activism:
+      value: true
+      note: A collective that exists to give activists and social movements communication tools outside corporate control.
+      sources: [about]
+
+refs:
+  vpn:
+    url: https://riseup.net/en/vpn
+    title: RiseupVPN
+  vpn-windows:
+    url: https://riseup.net/en/vpn/windows
+    title: RiseupVPN for Windows
+  vpn-macos:
+    url: https://riseup.net/en/vpn/macos
+    title: RiseupVPN for macOS
+  vpn-linux:
+    url: https://riseup.net/en/vpn/linux
+    title: RiseupVPN for Linux
+  vpn-android:
+    url: https://riseup.net/en/vpn/android
+    title: RiseupVPN for Android
+  limitations:
+    url: https://riseup.net/en/vpn/limitations
+    title: VPN Limitations
+  vpn-2012:
+    url: https://web.archive.org/web/20120415140329/https://help.riseup.net/en/vpn
+    title: RiseupVPN help page, April 2012 (Wayback Machine)
+  policy:
+    url: https://riseup.net/en/privacy-policy
+    title: Riseup Privacy Policy
+  tos:
+    url: https://riseup.net/en/tos
+    title: Riseup Terms of Service
+  about:
+    url: https://riseup.net/en/about-us
+    title: About Us
+  donate:
+    url: https://riseup.net/en/donate
+    title: Donate to Riseup
+  irs:
+    url: https://projects.propublica.org/nonprofits/organizations/200394008
+    title: Riseup Networks, ProPublica Nonprofit Explorer (IRS filings)
+  canary:
+    url: https://riseup.net/en/canary
+    title: Riseup Canary Statement
+  press-2017:
+    url: https://riseup.net/en/about-us/press/canary-statement
+    title: Riseup moves to encrypted email in response to legal requests (February 2017)
+  gateways:
+    url: https://api.black.riseup.net/3/config/eip-service.json
+    title: RiseupVPN gateway list (eip-service.json)
+  ripe-scaleway:
+    url: https://rdap.db.ripe.net/ip/51.159.197.108
+    title: RIPE record for a Paris gateway's IP address (Scaleway)
+  otf-audit:
+    url: https://www.opentech.fund/security-safety-audits/leap-applications-security-audit/
+    title: OTF, LEAP Applications security audit
+  audit-srl-2025:
+    url: https://www.opentech.fund/wp-content/uploads/2026/02/SRL-OTF_LEAP_Pentest_Report.v1.1.pdf
+    title: Security Research Labs, LEAP Security Assessment penetration test v1.1 (2025)
+  leap:
+    url: https://leap.se/
+    title: LEAP Encryption Access Project
+  tenable-2021:
+    url: https://www.tenable.com/security/research/tra-2021-58
+    title: 'Tenable TRA-2021-58: Riseup local privilege escalation (CVE-2021-44466)'
+  fdroid:
+    url: https://f-droid.org/en/packages/se.leap.riseupvpn/
+    title: RiseupVPN on F-Droid
+  exodus:
+    url: https://web.archive.org/web/20260523042227/https://reports.exodus-privacy.eu.org/en/reports/se.leap.riseupvpn/latest/
+    title: Exodus Privacy report for se.leap.riseupvpn 1.5.3 (Wayback Machine)
