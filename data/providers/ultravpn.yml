@@ -1,0 +1,354 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: UltraVPN
+icon: ultravpn.svg
+checked: 2026-10-26
+
+criteria:
+  identity:
+    website: https://ultravpn.com
+    legal_entity:
+      value: Fast VPN Pro, S. de R.L.
+      note: Its 2023 privacy policy called it a Pango Group company.
+      sources: [tos, privacy-policy, policy-2023]
+    owner:
+      value: Point Wild
+      note: >-
+        Network Protect Limited, a Protected.net Group company, ran UltraVPN until Aura's Intersections took
+        it over in 2020. It sat under Aura's Pango Group, which Aura spun off in 2024, and Pango Group then
+        merged with Total Security to form Point Wild.
+      sources: [network-protect-ch, terms-2020-08, terms-2020-09, policy-2023, aura-split-2024, point-wild-merger, comparitech-disclosure]
+    founded:
+      value: null
+      note: >-
+        UltraVPN doesn't say when it launched. Its site was selling the VPN by May 2019, run by Network
+        Protect Limited, which was set up in June 2018.
+      sources: [home-2019, network-protect-ch]
+    team:
+      value: partial
+      note: There's no UltraVPN leadership page, but Pango's site names its president and other executives.
+      sources: [pango-team]
+    sister_brands:
+      value: [Hotspot Shield, Betternet, Touch VPN, VPN 360, TotalAV VPN, OVPN]
+      note: TotalAV's VPN joined the family when Pango Group merged with TotalAV's maker, Total Security.
+      sources: [aura-split-2024, pango-vpn-notice, point-wild-merger, totalav-vpn, ovpn-next-chapter]
+    acquisitions:
+      value:
+        - date: 2024-12-12
+          acquirer: Point Wild
+          source: point-wild-merger
+        - date: 2024-09-03
+          acquirer: Pango Group, spun off from Aura
+          source: aura-split-2024
+        - date: 2020-08-01
+          acquirer: Aura
+          source: terms-2020-09
+      note: >-
+        Only the month of Aura's takeover is known: the terms named Network Protect Limited on 6 August 2020
+        and Aura's Intersections Inc by 1 September. Point Wild was formed when Pango Group merged with Total
+        Security in December 2024.
+      sources: [terms-2020-08, terms-2020-09, aura-split-2024, point-wild-merger]
+
+  jurisdiction:
+    hq:
+      value: PA
+      sources: [tos]
+    entities:
+      value: [PA, US]
+      note: Fast VPN Pro, S. de R.L. is in Panama City. The Android app's developer details name CF Newco, Inc. in Boston.
+      sources: [tos, play]
+
+  logging:
+    traffic:
+      value: aggregate
+      evidence: verified
+      note: >-
+        It doesn't inspect what you send, but it logs the domains people visit, without full URLs or
+        anything that identifies them, and Pango's notice says it aggregates them about monthly.
+      sources: [privacy-vpn, pango-vpn-notice, audit-aon-2023]
+    dns:
+      value: aggregate
+      evidence: verified
+      note: Domains visited are logged without a user or device attached and aggregated about monthly.
+      sources: [privacy-vpn, pango-vpn-notice, audit-aon-2023]
+    timestamps:
+      value: 'yes'
+      evidence: claimed
+      note: >-
+        UltraVPN's own notice leaves this out, but Pango's notice for its VPNs, which names UltraVPN, says it
+        logs how long each session lasts. Usage data is tied to a hash of your device, with no stated limit.
+      sources: [pango-vpn-notice, privacy-vpn, privacy-policy]
+    bandwidth:
+      value: 'yes'
+      evidence: claimed
+      note: It logs the data each session uses and measures it against a device hash, without saying how long it keeps it.
+      sources: [pango-vpn-notice, privacy-vpn, privacy-policy]
+    source_ip:
+      value: temporary
+      evidence: verified
+      note: >-
+        Kept encrypted until the session ends. It also uses your IP to work out your rough location and
+        ISP, and to attribute ads.
+      sources: [privacy-vpn, audit-aon-2023]
+    proven:
+      value: [audit]
+      evidence: verified
+      note: >-
+        Aon's 2023 review checked that browsing activity isn't logged with your IP or another identifier, but
+        left UltraVPN's own log data out of scope because Pango said it keeps none.
+      sources: [audit-aon-2023]
+    policy: https://ultravpn.com/privacy-notice/
+
+  transparency:
+    audits:
+      value:
+        - date: 2023-08-25
+          auditor: Aon
+          scope: no_logs
+          source: audit-aon-2023
+      evidence: verified
+      note: Only a four-page summary of Aon's review is published, dated by the report.
+      sources: [point-wild-reports, audit-aon-2023]
+    report:
+      value: irregular
+      note: The newest is Pango's group-wide report for 2023, published by Point Wild, which doesn't break out UltraVPN.
+      sources: [pango-transparency-2023, point-wild-reports]
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: required
+      sources: [pricing]
+    personal_data:
+      value: []
+      sources: [pricing]
+    payment:
+      value: [card, paypal, app_store]
+      sources: [features, ios-app, cancel-google-play]
+
+  security:
+    protocols:
+      value: [proprietary, wireguard, ikev2]
+      note: >-
+        Hydra, Pango's own protocol, is the default, and IKEv2 isn't offered on Android. Its features page
+        and Aon's 2023 review also mention OpenVPN, but the apps' settings don't list it.
+      sources: [settings-features, features, audit-aon-2023]
+    post_quantum:
+      value: none
+      sources: [settings-features]
+    kill_switch:
+      value: app
+      note: A setting in the Windows, iOS and Android apps that cuts the internet if the VPN drops.
+      sources: [settings-features, android-settings]
+    dns:
+      value: null
+      note: It claims DNS leak protection, but not whose servers answer DNS requests.
+      sources: [features]
+
+  infra:
+    ram_only:
+      value: null
+      note: UltraVPN doesn't say its servers run from RAM.
+      sources: [locations]
+    hosting:
+      value: rented
+      note: It calls them bare-metal servers, hosted with infrastructure providers.
+      sources: [privacy-vpn, locations]
+    virtual_locations:
+      value: disclosed
+      note: >-
+        The locations list shows India as served via Singapore. Its site calls every location virtual
+        without saying which others sit elsewhere.
+      sources: [locations, home]
+    servers:
+      value: null
+      note: Its own pages variously claim 800, 1,300 and 1,800+ servers.
+      sources: [locations, home]
+    countries:
+      value: 80
+      note: Its App Store listing says 80+ countries, across 125+ locations.
+      sources: [ios-app]
+
+  features:
+    connections:
+      value: 10
+      sources: [features]
+    multihop:
+      value: true
+      note: Android only.
+      sources: [multihop]
+    obfuscation:
+      value: []
+      sources: [settings-features]
+    port_forwarding:
+      value: false
+      sources: [settings-features]
+    split_tunnel:
+      value: true
+      note: On iOS it only works for websites, not apps, and on iOS and macOS only with Hydra.
+      sources: [settings-features]
+    blocking:
+      value: [malware]
+      note: >-
+        It blocks sites known for malware or phishing. Its features page also promises to block ads and
+        trackers, which no app setting offers.
+      sources: [features, privacy-vpn, settings-features]
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android]
+      note: The help centre says Linux, routers and TVs aren't supported.
+      sources: [platforms, compatible-platforms]
+    open_source:
+      value: none
+      sources: [tos]
+    telemetry:
+      value: null
+      note: >-
+        The policy says it collects which app features you use and when, tied to a hash of your device, but
+        doesn't mention a way to turn this off.
+      sources: [privacy-policy, privacy-vpn]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 7.99, currency: USD }
+      note: Only in the iOS app. The website sells yearly plans only.
+      sources: [ios-app, pricing]
+    best:
+      value: { amount: 2.99, currency: USD }
+      note: Billed as $35.88 for the first year.
+      sources: [home, pricing]
+    best_term:
+      value: 12
+      sources: [pricing]
+    renewal_increase:
+      value: null
+      note: In 2024 the same $35.88 first year renewed at $99.99 a year, a 179% rise.
+      sources: [plans-2024]
+    free_tier:
+      value: false
+      note: The apps offer a free trial, but the service needs a subscription.
+      sources: [tos, ios-app]
+    refund_days:
+      value: 30
+      note: App Store purchases go through Apple's own refund process.
+      sources: [home, apple-refund]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        It promises "military-grade encryption", "complete anonymity" and a "strict no-logs policy", while
+        Pango's notice for its VPNs lists session lengths, bandwidth and domains.
+      sources: [features, ios-app, pango-vpn-notice]
+    affiliates:
+      value: true
+      sources: [affiliates]
+    review_sites:
+      value: true
+      note: Point Wild also owns Comparitech, a VPN review site, which discloses it.
+      sources: [comparitech-disclosure]
+    activism: false
+
+refs:
+  home:
+    url: https://ultravpn.com/
+    title: UltraVPN
+  features:
+    url: https://ultravpn.com/features/
+    title: UltraVPN features
+  locations:
+    url: https://ultravpn.com/locations/
+    title: UltraVPN server locations
+  pricing:
+    url: https://get.ultravpn.com/order-v5
+    title: UltraVPN plans and pricing
+  affiliates:
+    url: https://ultravpn.com/affiliates/
+    title: UltraVPN affiliate program
+  tos:
+    url: https://legal.ultravpn.com/documents/terms_of_service
+    title: UltraVPN terms of service
+  privacy-policy:
+    url: https://legal.ultravpn.com/documents/privacy_policy
+    title: UltraVPN privacy policy
+  privacy-vpn:
+    url: https://ultravpn.com/privacy-notice/
+    title: UltraVPN VPN services privacy notice
+  pango-vpn-notice:
+    url: https://www.pango.co/legal/vpn-products-privacy-notice
+    title: Pango VPN products privacy notice (Hotspot Shield, Betternet, VPN360, Ultra VPN)
+  audit-aon-2023:
+    url: https://www.pointwild.com/wp-content/uploads/2026/01/UltraVPN-VPN-Privacy-Policy-Review-Summary-Report.pdf
+    title: Aon, technical security review of Ultra VPN's privacy policy, summary (2023)
+  point-wild-reports:
+    url: https://www.pointwild.com/press/resources/security-reviews-and-reports/
+    title: Point Wild, security reviews and reports
+  pango-transparency-2023:
+    url: https://www.pointwild.com/wp-content/uploads/2026/01/pango_transparency_report_2023.pdf
+    title: Pango transparency report 2023
+  play:
+    url: https://play.google.com/store/apps/details?id=tech.hexa
+    title: Ultra VPN on Google Play
+  ios-app:
+    url: https://apps.apple.com/us/app/vpn-secure-proxy-ultravpn/id1053874290
+    title: 'VPN Secure Proxy: UltraVPN on the App Store'
+  settings-features:
+    url: https://support.ultravpn.com/en/general/general-information/ultravpn-settings-and-features
+    title: UltraVPN settings and features
+  android-settings:
+    url: https://support.ultravpn.com/en/android/general-information/what-do-all-these-settings-mean-on-android
+    title: What do all these settings mean on Android?
+  multihop:
+    url: https://support.ultravpn.com/en/android/general-information/what-is-multi-hop-on-android
+    title: What is Multi-hop on Android?
+  platforms:
+    url: https://support.ultravpn.com/en/general/general-information/what-are-ultravpn-s-supported-platforms
+    title: What are UltraVPN's supported platforms?
+  compatible-platforms:
+    url: https://support.ultravpn.com/en/general/general-information/what-are-ultravpn-s-compatible-platforms
+    title: What are UltraVPN's compatible platforms?
+  cancel-google-play:
+    url: https://support.ultravpn.com/en/general/general-information/how-do-i-cancel-my-subscription-on-google-play
+    title: How do I cancel my subscription on Google Play?
+  apple-refund:
+    url: https://support.ultravpn.com/en/ios/account-devices/how-do-i-request-a-refund-through-apple
+    title: How do I request a refund through Apple?
+  plans-2024:
+    url: https://web.archive.org/web/20240703082831/https://app.ultravpn.com/vendorPlan/list?vendorPlanGroupId=aa2077bb-8f8a-44f7-ab0e-694c7ba46a03&country=US
+    title: UltraVPN pricing page plan data, July 2024 (archived)
+  home-2019:
+    url: https://web.archive.org/web/20190527010642/https://ultravpn.com/
+    title: UltraVPN homepage, May 2019 (archived)
+  terms-2020-08:
+    url: https://web.archive.org/web/20200806131906/https://www.ultravpn.com/terms
+    title: UltraVPN terms naming Network Protect Limited, August 2020 (archived)
+  terms-2020-09:
+    url: https://web.archive.org/web/20200901005122/https://www.ultravpn.com/terms
+    title: UltraVPN terms naming Intersections Inc (Aura), September 2020 (archived)
+  policy-2023:
+    url: https://web.archive.org/web/20240811175457/https://ultravpn.com/privacy/
+    title: UltraVPN privacy policy calling Fast VPN Pro a Pango Group company, 2023 (archived)
+  network-protect-ch:
+    url: https://find-and-update.company-information.service.gov.uk/company/11436112/persons-with-significant-control
+    title: Network Protect Limited, persons with significant control (Companies House)
+  pango-team:
+    url: https://www.pango.co/team
+    title: Pango, our team
+  totalav-vpn:
+    url: https://www.totalav.com/security/vpn
+    title: TotalAV VPN
+  aura-split-2024:
+    url: https://www.aura.com/press/release/aura-splits-into-two-world-class-online-safety-companies
+    title: Aura splits into two world-class online safety companies (2024)
+  ovpn-next-chapter:
+    url: https://www.ovpn.com/en/blog/next-chapter-for-ovpn
+    title: Next chapter for OVPN (2023-05-08)
+  point-wild-merger:
+    url: https://www.paulweiss.com/insights/client-news/pango-group-merges-with-total-security
+    title: Pango Group merges with Total Security (Paul, Weiss)
+  comparitech-disclosure:
+    url: https://www.comparitech.com/disclosure/
+    title: Comparitech disclosure
