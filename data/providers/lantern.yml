@@ -1,0 +1,325 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Lantern
+icon: lantern.svg
+checked: 2026-10-26
+
+criteria:
+  identity:
+    website:
+      value: https://lantern.io
+      sources: [mission]
+    legal_entity:
+      value: Brave New Software Project, Inc.
+      note: >-
+        A US 501(c)(3) nonprofit, tax exempt since 2014. Until early 2025 the terms named Innovate Labs,
+        LLC of Los Angeles as the company selling the service.
+      sources: [terms, propublica, terms-2025]
+    owner:
+      value: null
+      grade: na
+      note: >-
+        A nonprofit with no parent company. The Open Technology Fund, which the US government funds, has
+        given it about $14.2 million in grants.
+      sources: [propublica, otf]
+    founded:
+      value: 2010
+      note: It took off in China in late 2013.
+      sources: [vice, cdt-2013]
+    team:
+      value: partial
+      note: Founder Adam Fisk is named in press and audit reports. The site names nobody.
+      sources: [builtin-la, audit-2016]
+    sister_brands:
+      value: []
+      sources: [bns]
+    acquisitions:
+      value: null
+      note: >-
+        VICE called Innovate Labs Lantern's parent company in 2022. How the service moved from it to the
+        nonprofit in 2025 isn't documented.
+      sources: [vice, terms-2025]
+
+  jurisdiction:
+    hq:
+      value: US
+      sources: [terms]
+    entities:
+      value: [US]
+      sources: [propublica, terms-2025]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [policy, transparency]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [policy, transparency]
+    timestamps:
+      value: none
+      evidence: claimed
+      sources: [policy, transparency]
+    bandwidth:
+      value: aggregate
+      evidence: claimed
+      note: The free plan's daily data cap is counted against a random device ID, and usage statistics are kept in aggregate.
+      sources: [policy, faq]
+    source_ip:
+      value: none
+      evidence: claimed
+      note: The terms allow limited technical data to be kept briefly for stability and fraud prevention before it's discarded or anonymised.
+      sources: [policy, terms]
+    proven:
+      value: []
+      note: Its audits covered the apps, not the servers or the no-logs claim.
+      sources: [audit-2020, audit-2016]
+    policy: https://lantern.io/privacy
+
+  transparency:
+    audits:
+      value:
+        - date: 2020-10-23
+          auditor: NCC Group
+          scope: apps
+          source: audit-2020
+        - date: 2016-07-29
+          auditor: NCC Group
+          scope: apps
+          source: audit-2016
+      evidence: verified
+      note: >-
+        NCC Group retested the 2020 findings in 2022. Both left the servers out of scope. A Subgraph
+        audit started in 2025 hasn't been published.
+      sources: [audits]
+    report:
+      value: regular
+      sources: [transparency]
+    canary:
+      value: maintained
+      note: Renewed every six months, most recently as of 30 June 2026.
+      sources: [transparency]
+    bug_bounty: false
+    incidents:
+      value: []
+      sources: [transparency]
+
+  account:
+    email:
+      value: optional
+      note: >-
+        The free version needs no account. Pro bought on desktop or the sideloaded Android app needs an
+        email, while through Apple or Google it's optional.
+      sources: [faq, play]
+    personal_data:
+      value: []
+      sources: [policy]
+    payment:
+      value: [card, app_store]
+      note: Stripe also takes UnionPay and some regional methods, and Pro can be activated with a licence code.
+      sources: [faq]
+
+  security:
+    protocols:
+      value: [wireguard, proprietary, other]
+      note: >-
+        The app picks automatically from a long list including WireGuard, its own Samizdat, Shadowsocks,
+        VLESS, Trojan and Hysteria 2. There's no OpenVPN.
+      sources: [circumvention]
+    post_quantum:
+      value: null
+      note: Lantern doesn't say whether any of its protocols use post-quantum key exchange.
+      sources: [circumvention]
+    kill_switch:
+      value: none
+      sources: [features]
+    dns:
+      value: null
+      note: Who answers DNS inside the tunnel isn't stated.
+      sources: [circumvention]
+
+  infra:
+    ram_only:
+      value: null
+      note: Lantern doesn't say how its servers are run.
+      sources: [features]
+    hosting:
+      value: null
+      note: Lantern doesn't say whether it owns or rents its servers.
+      sources: [features]
+    virtual_locations:
+      value: null
+      note: Lantern doesn't say whether any locations are virtual.
+      sources: [features]
+    servers:
+      value: null
+      note: It only gives a number of countries.
+      sources: [features]
+    countries:
+      value: null
+      note: Only "20+ countries" is given.
+      sources: [features]
+
+  features:
+    connections:
+      value: 5
+      note: The Pro checkout page says 3 devices.
+      sources: [terms, pro]
+    multihop: false
+    obfuscation:
+      value: [shadowsocks, quic, obfs4, v2ray, amneziawg, proprietary]
+      note: >-
+        QUIC here is Hysteria and TUIC, V2Ray is VLESS and VMess, and its own methods include Samizdat and
+        domain fronting.
+      sources: [circumvention]
+    port_forwarding: false
+    split_tunnel:
+      value: true
+      note: >-
+        By app or site. The default Smart Routing mode only tunnels sites that are blocked or unencrypted
+        in your region, and Full Tunnel sends everything.
+      sources: [smart-routing]
+    blocking:
+      value: [ads, trackers]
+      note: Pro only.
+      sources: [features]
+
+  clients:
+    platforms:
+      value: [windows, macos, linux_gui, ios, android]
+      note: The Action Mode browser extension shares your connection with others rather than tunnelling yours.
+      sources: [download]
+    open_source:
+      value: all
+      note: GPL-3.0.
+      sources: [source-code]
+    telemetry:
+      value: opt_in
+      evidence: claimed
+      note: Covers crash reports and usage data. The apps always send a random device ID.
+      sources: [faq, policy]
+    fdroid:
+      value: false
+      sources: [fdroid]
+
+  pricing:
+    monthly:
+      value: null
+      note: >-
+        The website only sells 12 and 24 month plans. The US App Store lists monthly plans at $12.99 and
+        $12.00.
+      sources: [pro, app-store]
+    best:
+      value: { amount: 3.63, currency: USD }
+      note: $87 for two years.
+      sources: [pro]
+    best_term:
+      value: 24
+      sources: [pro]
+    renewal_increase:
+      value: 0
+      sources: [pro]
+    free_tier:
+      value: true
+      note: With a daily data cap, raised or lifted in heavily censored countries.
+      sources: [faq]
+    refund_days:
+      value: 30
+      note: A prorated refund in the first 30 days, for Stripe and Google Play purchases, and none on renewals. App Store refunds go through Apple.
+      sources: [terms]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: The home page says it doesn't collect any personal data, ever, while the policy keeps your email address for Pro.
+      sources: [home, policy]
+    affiliates:
+      value: true
+      sources: [affiliates]
+    review_sites: false
+    activism:
+      value: true
+      note: >-
+        Keeps free access going in censored countries, and runs Action Mode for people elsewhere to share
+        their connection with them.
+      sources: [mission, features]
+
+refs:
+  home:
+    url: https://lantern.io/
+    title: Lantern home page
+  mission:
+    url: https://lantern.io/mission
+    title: Lantern's mission
+  terms:
+    url: https://lantern.io/terms
+    title: Lantern Terms of Service
+  terms-2025:
+    url: https://web.archive.org/web/20250315191311/https://lantern.io/terms
+    title: Lantern Terms of Service, March 2025 (Wayback Machine)
+  policy:
+    url: https://lantern.io/privacy
+    title: Lantern VPN Privacy Policy
+  faq:
+    url: https://lantern.io/faq
+    title: Lantern FAQ
+  features:
+    url: https://lantern.io/features
+    title: Lantern VPN features
+  circumvention:
+    url: https://lantern.io/circumvention
+    title: Advanced censorship circumvention
+  smart-routing:
+    url: https://lantern.io/smart-routing
+    title: Smart Routing
+  download:
+    url: https://lantern.io/download
+    title: Download Lantern
+  pro:
+    url: https://lantern.io/pro
+    title: Get Lantern Pro
+  transparency:
+    url: https://lantern.io/transparency
+    title: Lantern Transparency Report
+  audits:
+    url: https://lantern.io/security-audits
+    title: Lantern security audits
+  audit-2020:
+    url: https://www.nccgroup.com/media/iy3f4g2k/_ncc_group_innovatelabsllc_lant001_report_2022-05-05_v11-final.pdf
+    title: NCC Group, Lantern and Replica Security Assessment (2020, retested 2022)
+  audit-2016:
+    url: https://public.opentech.fund/documents/Lantern_Security_Audit_NCC.pdf
+    title: NCC Group, Lantern Client Application Security Assessment (2016)
+  affiliates:
+    url: https://lantern.firstpromoter.com/
+    title: Lantern Affiliate Program
+  source-code:
+    url: https://github.com/getlantern/lantern
+    title: getlantern/lantern on GitHub
+  fdroid:
+    url: https://search.f-droid.org/?q=lantern&lang=en
+    title: F-Droid search for lantern
+  play:
+    url: https://play.google.com/store/apps/details?id=org.getlantern.lantern
+    title: Lantern on Google Play
+  app-store:
+    url: https://apps.apple.com/us/app/lantern-vpn/id1457872372
+    title: Lantern VPN on the App Store
+  propublica:
+    url: https://projects.propublica.org/nonprofits/organizations/273272909
+    title: Brave New Software Project Inc, ProPublica Nonprofit Explorer
+  otf:
+    url: https://www.opentech.fund/projects-we-support/supported-projects/lantern/
+    title: Open Technology Fund, Lantern
+  bns:
+    url: https://www.bravenewsoftware.org/
+    title: Brave New Software
+  vice:
+    url: https://www.vice.com/en/article/russian-internet-lantern/
+    title: VICE, Meet the Secretive US Company Building an 'Unbreakable' Internet Inside Russia (2022)
+  cdt-2013:
+    url: https://chinadigitaltimes.net/2013/12/lantern-program-allows-chinese-dodge-firewall/
+    title: China Digital Times, Lantern Program Allows Chinese to Dodge Firewall (2013)
+  builtin-la:
+    url: https://www.builtinla.com/articles/how-la-coder-making-internet-free-bahrain-china
+    title: Built In LA, How an LA coder is making the Internet free from Bahrain to China (2015)
