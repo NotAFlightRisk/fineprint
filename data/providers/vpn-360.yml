@@ -1,0 +1,354 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: VPN 360
+icon: vpn-360.svg
+checked: 2026-10-26
+
+criteria:
+  identity:
+    website: https://www.vpn360.com
+    legal_entity:
+      value: Anchorfree LLC
+      note: >-
+        The terms also name Pango GmbH in Switzerland, which the App Store lists as the seller. Google
+        Play's developer details give Pango, LLC at the same Boston address.
+      sources: [tos, privacy-policy, ios-app, play]
+    owner:
+      value: Point Wild
+      note: >-
+        TouchVPN Inc., the maker of its sister Touch VPN, took over VPN 360 from its Hong Kong developer in
+        December 2018, and Touch VPN was AnchorFree's by 2019. Aura bought AnchorFree, by then called
+        Pango, in 2020 and spun Pango off in 2024, and Pango Group then merged with Total Security to form
+        Point Wild.
+      sources: [ios-2018, ios-2018-touchvpn, touch-policy-2019, aura-pango-2020, aura-split-2024, point-wild-merger, comparitech-disclosure]
+    founded:
+      value: 2017
+      note: The iPhone app came out in January 2017, from Infinity Software Co., Limited in Hong Kong.
+      sources: [app-lookup, policy-2017, ios-2018]
+    team:
+      value: partial
+      note: There's no VPN 360 leadership page, but Pango's site names its president and other executives.
+      sources: [pango-team]
+    sister_brands:
+      value: [Hotspot Shield, Betternet, Touch VPN, UltraVPN, TotalAV VPN, OVPN]
+      note: TotalAV's VPN joined the family when Pango Group merged with TotalAV's maker, Total Security.
+      sources: [aura-split-2024, privacy-vpn, point-wild-merger, totalav-vpn, ovpn-next-chapter]
+    acquisitions:
+      value:
+        - date: 2024-12-12
+          acquirer: Point Wild
+          source: point-wild-merger
+        - date: 2024-09-03
+          acquirer: Pango Group, spun off from Aura
+          source: aura-split-2024
+        - date: 2020-07-07
+          acquirer: Aura
+          source: aura-pango-2020
+        - date: 2018-12-01
+          acquirer: TouchVPN Inc., Touch VPN's maker, now part of Pango
+          source: ios-2018-touchvpn
+      note: >-
+        The App Store seller changed from Infinity Software Co., Limited to TouchVPN Inc. in mid-December
+        2018, and Google Play listed TouchVPN Inc. by April 2019. Point Wild was formed when Pango Group
+        merged with Total Security in December 2024.
+      sources: [ios-2018, ios-2018-touchvpn, play-2019, aura-pango-2020, aura-split-2024, point-wild-merger]
+
+  jurisdiction:
+    hq:
+      value: US
+      sources: [tos]
+    entities:
+      value: [US, CH]
+      note: Anchorfree LLC is in Boston and Pango GmbH in Stans, Switzerland.
+      sources: [tos, privacy-policy]
+
+  logging:
+    traffic:
+      value: aggregate
+      evidence: verified
+      note: >-
+        It doesn't inspect what you send, but it logs the domains people visit, without full URLs or
+        anything that identifies them, and aggregates them about monthly.
+      sources: [privacy-notice, audit-aon-2023]
+    dns:
+      value: aggregate
+      evidence: verified
+      note: Domains visited are logged without a user or device attached and aggregated about monthly.
+      sources: [privacy-notice, audit-aon-2023]
+    timestamps:
+      value: 'yes'
+      evidence: claimed
+      note: >-
+        It logs how long each VPN session lasts and ties usage data to a hash of your device, without
+        saying how long it keeps it.
+      sources: [privacy-notice, privacy-policy]
+    bandwidth:
+      value: 'yes'
+      evidence: claimed
+      note: >-
+        It logs the data each session uses and measures it against a device hash, partly to enforce the
+        free app's limits, without saying how long it keeps it.
+      sources: [privacy-notice]
+    source_ip:
+      value: temporary
+      evidence: verified
+      note: >-
+        Kept encrypted until the session ends. It also uses your IP to work out your rough location and
+        ISP, and to attribute ads.
+      sources: [privacy-notice, audit-aon-2023]
+    proven:
+      value: [audit]
+      evidence: verified
+      note: Aon's 2023 review checked that browsing activity isn't logged with your IP or another identifier.
+      sources: [audit-aon-2023]
+    policy: https://www.vpn360.com/privacy-notice/
+
+  transparency:
+    audits:
+      value:
+        - date: 2023-08-25
+          auditor: Aon
+          scope: no_logs
+          source: audit-aon-2023
+        - date: 2023-01-30
+          auditor: NowSecure
+          scope: apps
+          source: masa-2023
+      evidence: verified
+      note: Only a four-page summary of Aon's review is published, dated by the report. NowSecure's is a MASA check of Android version 5.13.0.
+      sources: [point-wild-reports, audit-aon-2023]
+    report:
+      value: irregular
+      note: The newest is Pango's group-wide report for 2023, published by Point Wild.
+      sources: [pango-transparency-2023, point-wild-reports]
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: required
+      note: The free app works without an account.
+      sources: [tos, play]
+    personal_data:
+      value: null
+      note: The privacy policy says creating an account may collect your name as well as your email, without saying which you have to give.
+      sources: [privacy-policy]
+    payment:
+      value: [card, paypal, app_store]
+      sources: [cancel-renewal, purchase]
+
+  security:
+    protocols:
+      value: [proprietary, openvpn, other]
+      note: >-
+        Aon found Hydra, Pango's own protocol, plus OpenVPN and IPSec in 2023. VPN 360 now just says it
+        has multiple protocols.
+      sources: [audit-aon-2023, pricing]
+    post_quantum: none
+    kill_switch:
+      value: app
+      note: A setting in the Windows app that stops traffic if the VPN drops. It isn't documented for the phone apps.
+      sources: [windows-settings]
+    dns:
+      value: null
+      note: It claims DNS leak protection, but not whose servers answer DNS requests.
+      sources: [pricing]
+
+  infra:
+    ram_only:
+      value: null
+      note: VPN 360 doesn't say its servers run from RAM.
+    hosting:
+      value: rented
+      sources: [privacy-notice]
+    virtual_locations:
+      value: disclosed
+      note: >-
+        The homepage map shows India as served via Singapore. It doesn't say whether any of its other
+        locations are virtual.
+      sources: [home]
+    servers:
+      value: null
+      note: Its pricing page says 800+ servers, while its App Store and Google Play listings say 1,800+.
+      sources: [pricing, ios-app, play]
+    countries:
+      value: 85
+      sources: [home]
+
+  features:
+    connections:
+      value: 5
+      note: For Premium. Its App Store and Google Play listings say 10, as did the pricing page until mid-2026.
+      sources: [pricing, ios-app, play, pricing-2026]
+    multihop:
+      value: null
+      note: It offers Tor over VPN, but doesn't mention routing through two of its own servers.
+      sources: [pricing]
+    obfuscation:
+      value: [proprietary]
+      note: It lists "traffic obfuscations" without naming a method.
+      sources: [pricing]
+    port_forwarding: false
+    split_tunnel:
+      value: null
+      note: VPN 360 doesn't say whether it offers split tunnelling.
+    blocking:
+      value: [malware]
+      note: It blocks sites known for malware or phishing. It doesn't say what its DNS filtering covers.
+      sources: [pricing, play]
+
+  clients:
+    platforms:
+      value: [windows, ios, android]
+      note: The iPad app also runs on Macs with Apple silicon. There's no Linux, router or browser app.
+      sources: [platforms, ios-app]
+    open_source: none
+    telemetry:
+      value: null
+      note: >-
+        The policy says it ties how you use the app to a hash of your device for analytics and marketing,
+        but doesn't mention a way to turn this off.
+      sources: [privacy-notice, privacy-policy]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 11.99, currency: USD }
+      note: Premium.
+      sources: [pricing, ios-app]
+    best:
+      value: { amount: 3.00, currency: USD }
+      note: >-
+        $35.99 a year, which the homepage says it renews at too. The pricing page now shows $1.99 a month
+        without a plan length.
+      sources: [ios-app, home, pricing]
+    best_term:
+      value: 12
+      sources: [ios-app, pricing-2026]
+    renewal_increase:
+      value: 0
+      note: The App Store prices are what each plan renews at.
+      sources: [ios-app]
+    free_tier:
+      value: true
+      note: Basic is ad-supported and only connects to US servers.
+      sources: [pricing, why-vpn360, tos]
+    refund_days:
+      value: 0
+      note: The terms say direct purchases aren't refundable unless the law requires it.
+      sources: [tos]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        Its App Store listing promises "complete privacy with no saved logs", while its privacy notice
+        lists session lengths, bandwidth and domains.
+      sources: [ios-app, play, privacy-notice]
+    affiliates:
+      value: null
+      note: VPN 360 doesn't publish an affiliate scheme of its own, though its sister Hotspot Shield runs one.
+      sources: [hss-affiliates]
+    review_sites:
+      value: true
+      note: Point Wild also owns Comparitech, a VPN review site, which discloses it.
+      sources: [comparitech-disclosure]
+    activism: false
+
+refs:
+  home:
+    url: https://www.vpn360.com/
+    title: VPN360
+  pricing:
+    url: https://www.vpn360.com/pricing/
+    title: VPN360 pricing
+  pricing-2026:
+    url: https://web.archive.org/web/20260614154712/https://www.vpn360.com/pricing/
+    title: VPN360 pricing, June 2026 (archived)
+  tos:
+    url: https://legal.vpn360.com/documents/terms_of_service
+    title: VPN 360 terms of service
+  privacy-policy:
+    url: https://legal.vpn360.com/documents/privacy_policy
+    title: VPN360 privacy policy
+  privacy-notice:
+    url: https://www.vpn360.com/privacy-notice/
+    title: VPN360 VPN products privacy notice
+  privacy-vpn:
+    url: https://www.pango.co/legal/vpn-products-privacy-notice
+    title: Pango VPN products privacy notice (Hotspot Shield, Betternet, VPN360, Ultra VPN)
+  audit-aon-2023:
+    url: https://www.pointwild.com/wp-content/uploads/2026/01/VPN360-VPN-Privacy-Policy-Review-Summary-Report.pdf
+    title: Aon, technical security review of VPN 360's VPN privacy policy, summary (2023)
+  point-wild-reports:
+    url: https://www.pointwild.com/press/resources/security-reviews-and-reports/
+    title: Point Wild, security reviews and reports
+  pango-transparency-2023:
+    url: https://www.pointwild.com/wp-content/uploads/2026/01/pango_transparency_report_2023.pdf
+    title: Pango transparency report 2023
+  play:
+    url: https://play.google.com/store/apps/details?id=co.infinitysoft.vpn360
+    title: VPN 360 on Google Play
+  ios-app:
+    url: https://apps.apple.com/us/app/id1193154948
+    title: VPN 360 on the App Store (US)
+  app-lookup:
+    url: https://itunes.apple.com/lookup?id=1193154948&country=us
+    title: App Store lookup record for VPN 360, with its January 2017 release date
+  policy-2017:
+    url: https://web.archive.org/web/20180131223701/https://vpn360.wordpress.com/2017/01/17/privacy-policy/
+    title: VPN 360 privacy policy, posted January 2017 (archived)
+  ios-2018:
+    url: https://web.archive.org/web/20181213130836/https://itunes.apple.com/us/app/vpn-360-unlimited-vpn-proxy/id1193154948?mt=8
+    title: VPN 360 on the App Store, sold by Infinity Software Co., Limited, 13 December 2018 (archived)
+  ios-2018-touchvpn:
+    url: https://web.archive.org/web/20181220134138/https://itunes.apple.com/us/app/vpn-360-unlimited-vpn-proxy/id1193154948?mt=8
+    title: VPN 360 on the App Store, sold by TouchVPN Inc., 20 December 2018 (archived)
+  play-2019:
+    url: https://web.archive.org/web/20190403111356/https://play.google.com/store/apps/details?id=co.infinitysoft.vpn360
+    title: VPN 360 on Google Play, offered by TouchVPN Inc., April 2019 (archived)
+  touch-policy-2019:
+    url: https://web.archive.org/web/20190413071416/https://touchvpn.net/privacy.html
+    title: Touch VPN privacy policy naming AnchorFree, April 2019 (archived)
+  platforms:
+    url: https://support.vpn360.com/hc/en-us/articles/8478315280020-What-platforms-does-VPN360-support
+    title: What platforms does VPN360 support?
+  windows-settings:
+    url: https://support.vpn360.com/hc/en-us/articles/13100547808020-What-do-these-settings-mean-on-my-VPN360-Windows-application
+    title: What do these settings mean on my VPN360 Windows application?
+  cancel-renewal:
+    url: https://support.vpn360.com/hc/en-us/articles/9657713905300-How-do-I-cancel-auto-renewal-of-my-premium-subscription
+    title: How do I cancel auto-renewal of my premium subscription?
+  purchase:
+    url: https://support.vpn360.com/hc/en-us/articles/8528343976340-How-do-I-purchase-a-VPN360-subscription
+    title: How do I purchase a VPN360 subscription?
+  why-vpn360:
+    url: https://support.vpn360.com/hc/en-us/articles/8527002470292-What-is-VPN360-and-why-should-I-choose-you
+    title: What is VPN360 and why should I choose you?
+  hss-affiliates:
+    url: https://www.hotspotshield.com/affiliates/
+    title: Hotspot Shield VPN affiliate program
+  pango-team:
+    url: https://www.pango.co/team
+    title: Pango, our team
+  totalav-vpn:
+    url: https://www.totalav.com/security/vpn
+    title: TotalAV VPN
+  aura-pango-2020:
+    url: https://www.aura.com/press/release/aura-acquires-digital-privacy-and-security-company-pango
+    title: Aura acquires digital privacy and security company Pango (2020)
+  aura-split-2024:
+    url: https://www.aura.com/press/release/aura-splits-into-two-world-class-online-safety-companies
+    title: Aura splits into two world-class online safety companies (2024)
+  ovpn-next-chapter:
+    url: https://www.ovpn.com/en/blog/next-chapter-for-ovpn
+    title: Next chapter for OVPN (2023-05-08)
+  point-wild-merger:
+    url: https://www.paulweiss.com/insights/client-news/pango-group-merges-with-total-security
+    title: Pango Group merges with Total Security (Paul, Weiss)
+  comparitech-disclosure:
+    url: https://www.comparitech.com/disclosure/
+    title: Comparitech disclosure
+  masa-2023:
+    url: https://appdefensealliance.dev/reports/co.infinitysoft.vpn360_1706657294416000.pdf
+    title: NowSecure, MASA assessment of VPN 360 for Android 5.13.0 (2023)
