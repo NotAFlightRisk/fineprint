@@ -1,0 +1,332 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: VPN Proxy Master
+icon: vpn-proxy-master.png
+checked: 2026-10-26
+
+criteria:
+  identity:
+    website:
+      value: https://vpnproxymaster.com
+      sources: [home]
+    legal_entity:
+      value: Secureguard Group Pte. Ltd.
+      note: >-
+        It replaced Lemon Clove Pte. Limited as the Google Play developer in mid-2025. The iOS app is still sold
+        by ALL Connected Co., Ltd under its own copy of the terms, and the Mac app by Lemon Clove.
+      sources: [terms, privacy, register, play, play-2025, ios-terms, app-store-ios, app-store-mac]
+    owner:
+      value: null
+      note: >-
+        Secureguard's owners aren't public. Qihoo 360 bought Lemon Clove in 2019 and reported selling it to
+        unnamed parties in 2020, but TTP found Lemon Clove's March 2025 filings still list one director whose name
+        matches a former Qihoo 360 manager.
+      sources: [ttp-2025, ttp-spot-check-2025]
+    founded:
+      value: 2018
+      note: The Android app was on Google Play by December 2018, published then by Innovative Connecting.
+      sources: [about, press, play-2018]
+    team:
+      value: partial
+      note: The privacy policy names a data protection officer, and TTP named a director of Lemon Clove from its 2025 filings. Nobody else is named.
+      sources: [privacy, ttp-2025]
+    sister_brands:
+      value: [Turbo VPN, VPN Monster, Snap VPN, Robot VPN, SuperNet VPN]
+      note: >-
+        2025 research found the Android app shares code and VPN servers with these apps from sister companies
+        Innovative Connecting and Autumn Breeze. TTP also ties Thunder VPN and Signal Secure VPN to the group.
+      sources: [hidden-links-2025, ttp-2025, ttp-spot-check-2025]
+    acquisitions:
+      value:
+        - date: 2020-09-01
+          acquirer: Undisclosed buyers
+          source: ttp-2025
+        - date: 2019-12-01
+          acquirer: Qihoo 360
+          source: ttp-2025
+      note: >-
+        Qihoo 360 bought Lemon Clove, then its developer, in December 2019. The 2020 sale is TTP's reading of
+        an unnamed "Project L" in Qihoo's annual report. It isn't known whether the 2025 move to Secureguard
+        Group was a sale.
+      sources: [ttp-2025, play-2025, play]
+
+  jurisdiction:
+    hq:
+      value: SG
+      sources: [register, play]
+    entities:
+      value: [SG]
+      note: Secureguard Group and Lemon Clove are both Singapore companies. ALL Connected Co., Ltd, the iOS seller, doesn't say where it's registered.
+      sources: [register, register-lemon-clove, ios-terms]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [privacy, help-logs]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [privacy, help-logs]
+    timestamps:
+      value: null
+      note: Its help centre says connection times aren't stored, but the terms log "access attempts" for security and diagnostics without saying what that covers or for how long.
+      sources: [help-logs, terms]
+    bandwidth:
+      value: null
+      note: It doesn't say whether it records how much data you use.
+      sources: [privacy]
+    source_ip:
+      value: null
+      note: >-
+        Its help centre says your IP address isn't logged, and the policy collects your country, which it
+        says is anonymised. 2025 research saw the Android app send the postcode of your IP address to Firebase.
+      sources: [help-logs, privacy, hidden-links-2025]
+    proven: []
+    policy: https://vpnproxymaster.com/privacy-policy
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents:
+      value: []
+      grade: ok
+      note: >-
+        In 2025 researchers decrypted its traffic using a Shadowsocks password hard-coded into the Android app,
+        and found the app sent location data its policy says it doesn't collect. No response or fix from the
+        company is on record, so it's graded ok rather than good.
+      sources: [hidden-links-2025]
+
+  account:
+    email:
+      value: optional
+      note: The free version and app store subscriptions work without an account. Buying on the website needs an email address.
+      sources: [privacy, help-account]
+    personal_data: []
+    payment:
+      value: [card, paypal, app_store, bitcoin, other_crypto, gift_card]
+      note: Also local e-wallets such as WebMoney, DANA and GCash through third-party processors.
+      sources: [help-payments]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn, ikev2, proprietary, other]
+      note: Other is ShadowsocksR, and its own protocol is the iOS app's Vortex. WireGuard is only listed for iOS, as "Wireguard Enhanced".
+      sources: [app-store-ios, play, servers, help-protocols]
+    post_quantum:
+      value: none
+      note: Nothing is published about its key exchange.
+      sources: [features, help-protocols]
+    kill_switch:
+      value: app
+      evidence: claimed
+      sources: [features, help-kill-switch]
+    dns:
+      value: null
+      note: It advertises DNS leak protection without saying whose DNS servers the apps use.
+      sources: [help-leaks, press]
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say how its servers are run.
+    hosting:
+      value: null
+      note: It doesn't say whether it owns or rents its servers. 2025 research found it shares VPN servers with its sister brands.
+      sources: [hidden-links-2025]
+    virtual_locations:
+      value: null
+      note: It doesn't say whether any locations are virtual. Its help centre puts location mismatches down to geolocation databases.
+      sources: [servers, help-geolocation]
+    servers:
+      value: 20000
+      note: Its app store listings say 6,700.
+      sources: [servers, play, app-store-ios]
+    countries:
+      value: 52
+      note: Counting Hong Kong and Taiwan. It advertises over 100 locations.
+      sources: [servers]
+
+  features:
+    connections:
+      value: 15
+      note: The pricing page also sells a 50-device tier, and older help articles give 5 to 35. The free version doesn't allow multiple devices.
+      sources: [pricing, features, help-devices, help-sharing, help-free-trial]
+    multihop:
+      value: true
+      note: Only the iOS app lists multi-hop servers.
+      sources: [app-store-ios]
+    obfuscation:
+      value: [shadowsocks, v2ray]
+      note: Its ShadowsocksR mode was found to use the deprecated rc4-md5 cipher, with a password hard-coded into the Android app.
+      sources: [servers, play, hidden-links-2025]
+    port_forwarding: false
+    split_tunnel:
+      value: true
+      note: Android only.
+      sources: [help-features, help-subscription]
+    blocking: []
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android, browser]
+      note: The browser extension is for Chrome. There are also apps for Fire TV, Apple TV and some smart TVs, and a separate Lite app for Android.
+      sources: [download, features, play-lite]
+    open_source:
+      value: none
+      note: The terms forbid reverse engineering the apps.
+      sources: [terms]
+    telemetry:
+      value: null
+      note: >-
+        The policy says the apps send anonymised diagnostics and crash reports through Firebase, without
+        mentioning a way to turn them off. 2025 research saw the Android app upload location data to Firebase.
+      sources: [privacy, play-data-safety, hidden-links-2025]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 12.99, currency: USD }
+      sources: [pricing]
+    best:
+      value: { amount: 3.70, currency: USD }
+      note: $99.99 for two years plus three free months.
+      sources: [pricing]
+    best_term:
+      value: 27
+      sources: [pricing]
+    renewal_increase:
+      value: null
+      note: The pricing page bills $99.99 every 27 months, but the terms say introductory prices only cover the first term.
+      sources: [terms, pricing]
+    free_tier:
+      value: true
+      note: Ad-supported, with fewer locations and lower speeds.
+      sources: [help-free-trial, play]
+    refund_days:
+      value: 30
+      note: Website purchases only, and first-time buyers only. App store purchases follow the store's own refund rules.
+      sources: [terms, help-refund]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: Its plans are sold as "100% Anonymous and Untraceble", and it promises "military-grade" encryption.
+      sources: [features, play]
+    affiliates:
+      value: true
+      note: Up to 47% commission, run through Commission Factory.
+      sources: [affiliate]
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://vpnproxymaster.com/
+    title: VPN Proxy Master homepage
+  terms:
+    url: https://vpnproxymaster.com/terms-of-service
+    title: Terms of Service (effective 30 April 2025)
+  privacy:
+    url: https://vpnproxymaster.com/privacy-policy
+    title: Privacy Policy (effective 30 April 2025)
+  ios-terms:
+    url: https://vpnproxymaster.com/ios/terms_of_use.html
+    title: Terms of Service for the iOS app (effective 30 April 2025)
+  about:
+    url: https://vpnproxymaster.com/aboutus
+    title: About VPN Proxy Master
+  press:
+    url: https://vpnproxymaster.com/press-room
+    title: VPN Proxy Master press area
+  features:
+    url: https://vpnproxymaster.com/features
+    title: 'Features: Easy to Use & Anonymous'
+  servers:
+    url: https://vpnproxymaster.com/vpn-server
+    title: VPN Proxy Master's server locations
+  download:
+    url: https://vpnproxymaster.com/download
+    title: Download VPN for all Devices
+  pricing:
+    url: https://vpnproxymaster.com/pricing
+    title: VPN Proxy Master plans and pricing
+  affiliate:
+    url: https://vpnproxymaster.com/affiliate
+    title: Join VPN Proxy Master Affiliate Program
+  help-logs:
+    url: https://support.vpnproxymaster.com/hc/en-us/articles/900001917146--Does-VPN-Proxy-Master-Log-My-Data
+    title: Does VPN Proxy Master Log My Data?
+  help-leaks:
+    url: https://support.vpnproxymaster.com/hc/en-us/articles/48350457171481--Will-VPN-Proxy-Master-Leak-My-Data
+    title: Will VPN Proxy Master Leak My Data?
+  help-kill-switch:
+    url: https://support.vpnproxymaster.com/hc/en-us/articles/48349213440281--Kill-Switch-in-VPN-Proxy-Master-What-It-Is-How-It-Works
+    title: 'Kill Switch in VPN Proxy Master: What It Is & How It Works'
+  help-features:
+    url: https://support.vpnproxymaster.com/hc/en-us/articles/48347898435865--VPN-Proxy-Master-Features-Secure-Fast-Unlimited-VPN
+    title: 'VPN Proxy Master Features: Secure, Fast & Unlimited VPN'
+  help-free-trial:
+    url: https://support.vpnproxymaster.com/hc/en-us/articles/48346609542297-Does-VPN-Proxy-Master-Offer-a-Free-Trial
+    title: Does VPN Proxy Master Offer a Free Trial?
+  help-account:
+    url: https://support.vpnproxymaster.com/hc/en-us/articles/48312809474713-How-to-Create-a-VPN-Proxy-Master-Account
+    title: How to Create a VPN Proxy Master Account?
+  help-sharing:
+    url: https://support.vpnproxymaster.com/hc/en-us/articles/48311180031641-How-to-Share-Your-VPN-Proxy-Master-Subscription-Across-Multiple-Devices
+    title: How to Share Your VPN Proxy Master Subscription Across Multiple Devices
+  help-subscription:
+    url: https://support.vpnproxymaster.com/hc/en-us/articles/48310538368153-What-Do-You-Get-After-Subscribing-to-VPN-Proxy-Master
+    title: What Do You Get After Subscribing to VPN Proxy Master?
+  help-devices:
+    url: https://support.vpnproxymaster.com/hc/en-us/articles/900005340583-How-do-I-Manage-my-VPN-Proxy-Master-Devices
+    title: How do I Manage my VPN Proxy Master Devices?
+  help-geolocation:
+    url: https://support.vpnproxymaster.com/hc/en-us/articles/48188850096537-Google-location-is-different-from-the-one-I-am-connected-to-on-VPN-Proxy-Master
+    title: Google location is different from the one I am connected to on VPN Proxy Master
+  help-protocols:
+    url: https://support.vpnproxymaster.com/hc/en-us/articles/900001917143-How-to-change-connection-mode-or-protocols
+    title: How to change connection mode or protocols?
+  help-payments:
+    url: https://support.vpnproxymaster.com/hc/en-us/articles/900004367966--What-Payment-Methods-Does-VPN-Proxy-Master-Accept
+    title: What Payment Methods Does VPN Proxy Master Accept?
+  help-refund:
+    url: https://support.vpnproxymaster.com/hc/en-us/articles/900006175546-VPN-Proxy-Master-30-day-Money-Back-Guarantee
+    title: VPN Proxy Master 30-day Money-Back Guarantee
+  register:
+    url: https://data.gov.sg/api/action/datastore_search?resource_id=d_3f960c10fed6145404ca7b821f263b87&q=202439206Z
+    title: Secureguard Group Pte. Ltd. (UEN 202439206Z), ACRA corporate entities dataset
+  register-lemon-clove:
+    url: https://data.gov.sg/api/action/datastore_search?resource_id=d_3f960c10fed6145404ca7b821f263b87&q=201813499K
+    title: Lemon Clove Pte. Limited (UEN 201813499K), ACRA corporate entities dataset
+  play:
+    url: https://play.google.com/store/apps/details?id=free.vpn.unblock.proxy.vpn.master.pro
+    title: VPN Proxy Master - Safer Vpn on Google Play
+  play-data-safety:
+    url: https://play.google.com/store/apps/datasafety?id=free.vpn.unblock.proxy.vpn.master.pro
+    title: VPN Proxy Master data safety on Google Play
+  play-lite:
+    url: https://play.google.com/store/apps/details?id=free.vpn.unblock.fast.proxy.vpn.master.pro.lite
+    title: Secure VPN Proxy Master Lite on Google Play
+  play-2025:
+    url: https://web.archive.org/web/20250603063616/https://play.google.com/store/apps/details?id=free.vpn.unblock.proxy.vpn.master.pro
+    title: VPN Proxy Master on Google Play, listed by Lemon Clove (archived June 2025)
+  play-2018:
+    url: https://web.archive.org/web/20181223104535/https://play.google.com/store/apps/details?id=free.vpn.unblock.proxy.vpn.master.pro
+    title: VPN Proxy Master on Google Play (archived December 2018)
+  app-store-ios:
+    url: https://apps.apple.com/us/app/vpn-proxy-master-super-vpn/id1025707485
+    title: VPN Proxy Master - Super VPN on the App Store (US)
+  app-store-mac:
+    url: https://apps.apple.com/us/app/vpn-proxy-maste-unlimited-vpn/id1475620342?mt=12
+    title: VPN Proxy Master Unlimited VPN on the Mac App Store (US)
+  ttp-2025:
+    url: https://www.techtransparencyproject.org/articles/apple-offers-apps-with-ties-to-chinese-military
+    title: Tech Transparency Project, Apple Offers Apps With Ties to Chinese Military (1 April 2025)
+  ttp-spot-check-2025:
+    url: https://www.techtransparencyproject.org/articles/spot-check-apple-and-google-still-have-a-chinese-vpn-problem
+    title: 'Tech Transparency Project, Spot Check: Apple and Google Still Have a Chinese VPN Problem (12 June 2025)'
+  hidden-links-2025:
+    url: https://www.petsymposium.org/foci/2025/foci-2025-0008.php
+    title: 'Mixon-Baca, Knockel and Crandall, Hidden Links: Analyzing Secret Families of VPN Apps (FOCI 2025)'
