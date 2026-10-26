@@ -22,11 +22,18 @@
   let view = $state<'cards' | 'table'>('cards');
   let table = $state<ReturnType<typeof loadTable>>();
 
-  let filters = $state<Filters>({ q: '', must: [], sort: 'flags' });
+  const defaults = (): Filters => ({ q: '', must: [], sort: 'flags', incomplete: false });
+  let filters = $state(defaults());
   let open = $state(false);
+  const listed = $derived(applyFilters(summaries, defaults()));
   const shown = $derived(applyFilters(summaries, filters));
-  const active = $derived(filters.must.length + Number(Boolean(filters.q.trim())));
-  const clear = () => ((filters.q = ''), (filters.must = []));
+  const hiding = $derived(
+    applyFilters(summaries, { ...filters, incomplete: true }).length - shown.length
+  );
+  const active = $derived(
+    filters.must.length + Number(Boolean(filters.q.trim())) + Number(filters.incomplete)
+  );
+  const clear = () => ((filters.q = ''), (filters.must = []), (filters.incomplete = false));
 
   export const snapshot: Snapshot<{ filters: Filters; open: boolean }> = {
     capture: () => ({ filters: $state.snapshot(filters), open }),
@@ -67,8 +74,8 @@
     {
       '@type': 'ItemList',
       name: 'VPN providers compared',
-      numberOfItems: summaries.length,
-      itemListElement: summaries.map(({ id, name }, index) => ({
+      numberOfItems: listed.length,
+      itemListElement: listed.map(({ id, name }, index) => ({
         '@type': 'ListItem',
         position: index + 1,
         name,
@@ -159,6 +166,10 @@
     </label>
     <MustHave bind:selected={filters.must} />
     <SortBy bind:value={filters.sort} options={sorts} />
+    <label class="patchy">
+      <input type="checkbox" bind:checked={filters.incomplete} />
+      Include providers with patchy data
+    </label>
   </div>
 </div>
 
@@ -191,6 +202,13 @@
       >
     </p>
   {/await}
+{/if}
+
+{#if hiding}
+  <p class="status">
+    Hiding {hiding} provider{hiding === 1 ? '' : 's'} we don't know enough about yet.
+    <button type="button" class="link" onclick={() => (filters.incomplete = true)}>Show all</button>
+  </p>
 {/if}
 
 <style>
@@ -348,6 +366,13 @@
       border-radius: 0;
       background: var(--surface);
     }
+  }
+
+  .patchy {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding-left: calc(var(--label-width) + var(--space-2));
   }
 
   .key {

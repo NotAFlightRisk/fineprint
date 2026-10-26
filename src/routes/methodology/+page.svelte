@@ -1,6 +1,7 @@
 <script lang="ts">
   import GradeMark from '#lib/components/GradeMark.svelte';
   import Seo from '#lib/components/Seo.svelte';
+  import { minComplete } from '#lib/filters.ts';
   import { gradeNames } from '#lib/marks.ts';
   import { site } from '#lib/site.ts';
   import { describeRule } from '#lib/summary.ts';
@@ -49,6 +50,11 @@
       Every provider is measured on the same {criteria} criteria. Each value comes with a source, and
       the grade comes from the rules below, not from anyone's opinion of the brand. Where a rule would
       mislead for one provider, the grade can be overridden, but only with a note saying why.
+    </p>
+    <p>
+      Fewer red flags can just mean fewer facts, so the homepage hides providers until at least
+      {minComplete}% of their criteria are known. They're one filter away, and still in search and
+      on their own pages.
     </p>
     <p>
       Nobody pays to be listed, there are no affiliate links, and the data lives in

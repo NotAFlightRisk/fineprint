@@ -2,7 +2,8 @@ import { describe, expect, it } from 'vitest';
 import { unify } from '#lib/data/build.ts';
 import { loadCriteria, readProvider } from '#lib/data/load.ts';
 import { absolute, ogPage } from '#lib/site.ts';
-import { byId, checks, redFlags, summarise, verdict } from '#lib/summary.ts';
+import type { Entry, Grade, Value } from '#lib/data/types.ts';
+import { byId, checks, completeness, redFlags, summarise, verdict } from '#lib/summary.ts';
 
 const categories = loadCriteria();
 const criteria = byId(categories);
@@ -46,6 +47,21 @@ describe('provider summary', () => {
   it('counts the serious red flags', () => {
     const flagged = { ...provider, flags: ['jurisdiction.eyes', 'account.email'] };
     expect(summarise(flagged, criteria).serious).toBe(1);
+  });
+});
+
+describe('completeness', () => {
+  const asked = [...criteria.values()].filter((criterion) => !criterion.derived);
+  const known = (entries: Record<string, Entry>) =>
+    completeness({ ...provider, criteria: entries }, criteria);
+  const every = (value: Value, grade: Grade) =>
+    Object.fromEntries(asked.map(({ id }) => [id, { value, grade, sources: [] }]));
+
+  it("counts Doesn't apply as known, but not Unknown or Not checked", () => {
+    expect(known(every(true, 'good'))).toBe(100);
+    expect(known(every(null, 'na'))).toBe(100);
+    expect(known(every(null, null))).toBe(0);
+    expect(known({})).toBe(0);
   });
 });
 

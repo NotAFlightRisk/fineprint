@@ -8,10 +8,12 @@ const categories = loadCriteria();
 const criteria = byId(categories);
 const { raw } = readProvider('tests/fixtures/good.yml');
 const provider = unify(categories, 'good', raw as never, new Date('2026-10-18'));
-const summary = (name: string, flags: string[] = []) =>
-  summarise({ ...provider, id: name, name, flags }, criteria);
+const summary = (name: string, flags: string[] = [], complete = 100) => ({
+  ...summarise({ ...provider, id: name, name, flags }, criteria),
+  complete
+});
 
-const none: Filters = { q: '', must: [], sort: 'flags' };
+const none: Filters = { q: '', must: [], sort: 'flags', incomplete: false };
 const names = (list: ReturnType<typeof summary>[], filters: Partial<Filters> = {}) =>
   applyFilters(list, { ...none, ...filters }).map(({ name }) => name);
 
@@ -39,5 +41,12 @@ describe('homepage filters', () => {
     const failed = list[0].checks.find((check) => check.grade !== 'good')!.id;
     expect(names(list, { must: [passed] })).toEqual(['Alpha VPN', 'Beta VPN']);
     expect(names(list, { must: [passed, failed] })).toEqual([]);
+  });
+
+  it('hides patchy providers unless asked for or searched by name', () => {
+    const list = [summary('Known VPN', [], 75), summary('Patchy VPN', [], 74)];
+    expect(names(list)).toEqual(['Known VPN']);
+    expect(names(list, { incomplete: true })).toEqual(['Known VPN', 'Patchy VPN']);
+    expect(names(list, { q: 'patchy' })).toEqual(['Patchy VPN']);
   });
 });

@@ -91,6 +91,16 @@ export const located = (provider: Provider, criteria: Map<string, Criterion>) =>
 
 export const redFlags = (count: number) => `${count || 'No'} red flag${count === 1 ? '' : 's'}`;
 
+// how much of the hand-filled stuff isn't Unknown or Not checked, in whole percent
+export function completeness(provider: Provider, criteria: Map<string, Criterion>) {
+  const asked = [...criteria.values()].filter((criterion) => !criterion.derived);
+  const known = asked.filter(({ id }) => {
+    const entry = provider.criteria[id];
+    return entry && (entry.value !== null || entry.grade === 'na');
+  });
+  return Math.floor((known.length / asked.length) * 100);
+}
+
 // The gist of a provider: what its card, social image and llms.txt entry show
 export function summarise(provider: Provider, criteria: Map<string, Criterion>) {
   const best = provider.criteria['pricing.best']?.value;
@@ -104,6 +114,7 @@ export function summarise(provider: Provider, criteria: Map<string, Criterion>) 
     checks: checklist(provider, criteria),
     flags: flagged(provider, criteria),
     serious: seriousFlags(provider, criteria),
+    complete: completeness(provider, criteria),
     price: best ? formatValue(criteria.get('pricing.best')!, best) : undefined,
     usd: best ? inUsd(best as Price) : undefined
   };
