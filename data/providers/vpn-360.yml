@@ -1,6 +1,6 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: VPN 360
-icon: vpn-360.svg
+icon: vpn-360.png
 checked: 2026-10-26
 
 criteria:
