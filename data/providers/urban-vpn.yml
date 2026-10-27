@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: Urban VPN
 icon: urban-vpn.svg
-checked: 2026-10-25
+checked: 2026-10-27
 
 criteria:
   identity:
@@ -12,8 +12,8 @@ criteria:
       sources: [policy, terms, play, play-premium, app-store]
     owner:
       value: BIScience
-      note: Urban's privacy policy says its parent company is a data broker, without naming it. Koi Security quoted an earlier version that named BIScience as the affiliate it shares browsing data with.
-      sources: [play, policy, koi-2025]
+      note: Urban's privacy policy says its parent company is a data broker without naming it, but sends GDPR requests to B.I Science (2009) Ltd's privacy portal. Koi Security quoted an earlier version that named BIScience.
+      sources: [play, policy, prighter, koi-2025]
     founded:
       value: 2018
       sources: [about]
@@ -21,9 +21,11 @@ criteria:
       value: anonymous
       sources: [about]
     sister_brands:
-      value: null
-      note: Koi Security found 1ClickVPN Proxy running the same collection code, but it's sold by a different company (Sugar - Smart Shopping Inc.) and nothing on either side names a shared owner.
-      sources: [koi-2025, oneclick-policy, oneclick-play]
+      value: [1ClickVPN Proxy]
+      note: >-
+        Sold by Sugar - Smart Shopping Inc. at 1clickvpn.com, not the 1ClickVPN listed here. Its policy shares
+        whole paragraphs with Urban's, sends GDPR requests to the same BIScience portal, and Koi found the same collection code in it.
+      sources: [oneclick-policy, prighter, koi-2025, oneclick-play]
     acquisitions: []
 
   jurisdiction:
@@ -54,7 +56,10 @@ criteria:
       evidence: claimed
       note: Usage logs record "time of access and duration of use", kept for performance and security with no stated limit.
       sources: [policy]
-    bandwidth: null
+    bandwidth:
+      value: null
+      note: The policy doesn't mention data use, though free Android use is capped at 100MB a day, so it's counted per user.
+      sources: [policy, why-free]
     source_ip:
       value: temporary
       evidence: claimed
@@ -160,11 +165,12 @@ criteria:
       sources: [faq, why-free, premium, app-store, amo]
     open_source: none
     telemetry:
-      value: null
+      value: forced
+      evidence: claimed
       note: >-
-        The policy collects usage, crash and analytics data under "legitimate interest". Koi found no
-        way to stop the extension's collection, while 2026 research found its opt-out switch wired backwards.
-      sources: [policy, koi-2025, pwned-2026]
+        The policy collects usage, crash and analytics data under "legitimate interest". The Chrome extension sends
+        usage events to Urban and Google Analytics, tagged with your panelist ID, and crash reports to Bugsnag, with no setting to stop them.
+      sources: [policy, chrome-extension, koi-2025]
     fdroid: false
 
   pricing:
@@ -255,6 +261,12 @@ refs:
   urban-response:
     url: https://www.urban-vpn.com/blog/setting-the-record-straight-how-urban-vpns-ai-protection-feature-actually-works/
     title: "Setting the record straight: how Urban VPN's AI protection feature actually works (December 18, 2025)"
+  prighter:
+    url: https://prighter.com/q/13252349120
+    title: B.I Science (2009) Ltd. Trust Center (Prighter)
+  chrome-extension:
+    url: https://clients2.google.com/service/update2/crx?response=redirect&prodversion=140.0&acceptformat=crx2,crx3&x=id%3Deppiocemhmnlbhjplcgkofciiegomcon%26uc
+    title: Urban VPN Proxy Chrome extension 5.14.4 (CRX package)
   pwned-2026:
     url: https://amibeingpwned.com/blog/urban-vpn-postmessage-command-injection
     title: Am I Being Pwned, Urban VPN postMessage command injection (May 27, 2026)
