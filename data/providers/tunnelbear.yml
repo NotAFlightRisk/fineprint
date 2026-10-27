@@ -292,6 +292,7 @@ criteria:
       value: true
       note: Run through Impact, paying commission on each sale.
       sources: [affiliate]
+    review_sites: false
     activism:
       value: true
       note: >-

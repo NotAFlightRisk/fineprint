@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: McAfee VPN
 icon: mcafee-vpn.png
-checked: 2026-10-21
+checked: 2026-10-27
 
 criteria:
   identity:
@@ -152,8 +152,10 @@ criteria:
       sources: [vpn-faq]
     hosting:
       value: null
-      note: McAfee doesn't say who owns or runs its VPN servers.
-      sources: [locations]
+      note: >-
+        It runs on TunnelBear's VPN technology, which McAfee bought in 2018 to build into its own products.
+        Neither says whether the servers are owned or rented.
+      sources: [mcafee-10k-2020, locations]
     virtual_locations:
       value: null
       note: Its help calls every location a virtual location, without saying where the servers physically sit.
@@ -210,12 +212,6 @@ criteria:
         The privacy notice says the VPN may collect certain telemetry, and doesn't say whether you can turn
         it off.
       sources: [privacy-notice]
-    trackers:
-      value: 5
-      note: >-
-        In McAfee Security 7.6.2.15, the newest version in an archived Exodus list from November 2023. The
-        Android VPN lives in that app.
-      sources: [exodus]
     fdroid: false
 
   pricing:
@@ -254,6 +250,7 @@ criteria:
     affiliates:
       value: null
       note: McAfee's own site doesn't describe an affiliate scheme.
+    review_sites: false
     activism: false
 
 refs:
@@ -299,9 +296,6 @@ refs:
   play:
     url: https://play.google.com/store/apps/details?id=com.wsandroid.suite
     title: 'McAfee: Stay Secure & Private on Google Play'
-  exodus:
-    url: https://web.archive.org/web/20231129160710/https://reports.exodus-privacy.eu.org/en/reports/search/com.wsandroid.suite/
-    title: Exodus Privacy reports for com.wsandroid.suite (archived November 2023)
   github:
     url: https://github.com/mcafee
     title: McAfee on GitHub
