@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: Browsec
 icon: browsec.svg
-checked: 2026-10-25
+checked: 2026-10-27
 
 criteria:
   identity:
@@ -20,7 +20,9 @@ criteria:
     team:
       value: anonymous
       sources: [about]
-    sister_brands: null
+    sister_brands:
+      value: []
+      sources: [play-dev, app-store-dev]
     acquisitions: []
 
   jurisdiction:
@@ -35,8 +37,8 @@ criteria:
   logging:
     traffic:
       value: null
-      note: The policy makes no promise about browsing data. It only says it records operational data it calls non-identifying while the service is on.
-      sources: [policy]
+      note: Its site and help pages say it never tracks or accesses the sites you visit, but the privacy policy makes no such promise.
+      sources: [about, help-android, policy]
     dns:
       value: null
       sources: [policy]
@@ -86,17 +88,32 @@ criteria:
         The extension blocks the browser's traffic if the proxy drops. On Android it points you to the
         system's Always-on VPN setting, which is off until you turn it on.
       sources: [kill-switch-extension, kill-switch-android]
-    dns: null
+    dns:
+      value: third_party
+      note: The desktop app sends lookups through the tunnel to Cloudflare's 1.1.1.1, with Google's resolvers as a fallback.
+      sources: [desktop-1-4-2]
 
   infra:
-    ram_only: null
-    hosting: null
-    virtual_locations: null
-    servers: null
+    ram_only:
+      value: null
+      note: It doesn't say whether its servers run from RAM.
+      sources: [locations]
+    hosting:
+      value: null
+      note: It doesn't say whether it owns or rents its servers.
+      sources: [locations]
+    virtual_locations:
+      value: null
+      note: It calls its locations virtual locations, without saying where the servers physically sit.
+      sources: [locations, dns-leak]
+    servers:
+      value: 1374
+      note: Elsewhere it says 1,000+ servers.
+      sources: [home, dns-leak]
     countries:
       value: 45
-      note: 46 locations including two in the US. The locations page also lists New Zealand, which the plans page doesn't.
-      sources: [plans, windows, locations]
+      note: 46 locations including two in the US. The plans page leaves out New Zealand.
+      sources: [order, locations, plans]
 
   features:
     connections:
@@ -128,8 +145,10 @@ criteria:
     telemetry:
       value: forced
       evidence: claimed
-      note: The policy says the software has to record operational data automatically while the service is on.
-      sources: [policy]
+      note: >-
+        The policy says the software has to record operational data while the service is on. The Chrome
+        extension sends usage events to Google Analytics and Jitsu, and only the Firefox add-on has a switch to stop it.
+      sources: [policy, chrome-extension]
     fdroid: false
 
   pricing:
@@ -143,9 +162,9 @@ criteria:
       value: 24
       sources: [plans]
     renewal_increase:
-      value: null
-      note: The plans page shows discounted prices without saying what they renew at.
-      sources: [plans]
+      value: 0
+      note: Plans renew at the price they start at, $71.99 every two years or $39.99 a year, though a first 2-year purchase currently adds two free months.
+      sources: [order, monthly-to-yearly]
     free_tier:
       value: true
       note: Free use gets a handful of locations, which vary by platform, at much lower speeds.
@@ -159,7 +178,10 @@ criteria:
       value: true
       note: It sells "military-grade encryption" and anonymity, and says it never tracks your activity, while its policy records activity data.
       sources: [about, policy]
-    affiliates: null
+    affiliates:
+      value: null
+      note: It doesn't say whether it pays affiliates.
+      sources: [terms]
     review_sites: false
     activism: false
 
@@ -218,3 +240,30 @@ refs:
   smart-settings:
     url: https://browsec.zendesk.com/hc/en-us/articles/4402682062482-Smart-Settings
     title: Smart Settings (browser extension)
+  home:
+    url: https://browsec.com/en/
+    title: Browsec VPN home page (server locations)
+  dns-leak:
+    url: https://browsec.com/en/features/dns-leak
+    title: DNS Leak Test with Browsec VPN
+  order:
+    url: https://browsec.com/en/orders/new?plan_id=biennial
+    title: Get Browsec Premium (order page)
+  monthly-to-yearly:
+    url: https://browsec.zendesk.com/hc/en-us/articles/4403038589714-Premium-Monthly-to-Yearly
+    title: Premium Monthly to Yearly
+  help-android:
+    url: https://browsec.zendesk.com/hc/en-us/articles/360021931639-Android
+    title: Getting started with Browsec on Android
+  play-dev:
+    url: https://play.google.com/store/apps/dev?id=7167020701801681035&hl=en
+    title: Browsec Inc developer page on Google Play
+  app-store-dev:
+    url: https://apps.apple.com/us/developer/browsec-inc/id1632498322
+    title: Browsec Inc developer page on the App Store
+  desktop-1-4-2:
+    url: https://github.com/brwinfo/desktop-release/releases/tag/v1.4.2
+    title: Browsec desktop app 1.4.2
+  chrome-extension:
+    url: https://clients2.google.com/service/update2/crx?response=redirect&prodversion=140.0&acceptformat=crx2,crx3&x=id%3Domghfjlpggmjjaagoclmmobgdodcjboh%26uc
+    title: Browsec Chrome extension 4.1.0 (CRX package)
