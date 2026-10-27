@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: Hola VPN
 icon: hola-vpn.png
-checked: 2026-10-25
+checked: 2026-10-27
 
 criteria:
   identity:
@@ -93,6 +93,14 @@ criteria:
             of users were affected, and rebuilt its distribution pipeline with code-signing checks.
           handled: well
           source: bleeping-2026
+        - date: 2024-07-23
+          summary: >-
+            An Israeli class action claimed Hola kept information on how people used it and passed it to
+            third parties without consent, while selling itself as peer-to-peer. Hola denied it, but
+            registered its database as Israeli law requires, tightened its terms and privacy policy, and
+            agreed a settlement giving users free time or a $3 credit.
+          handled: well
+          source: class-action-notice
         - date: 2018-07-09
           summary: >-
             An attacker got into Hola's Chrome Web Store account and pushed a malicious extension that
@@ -115,7 +123,7 @@ criteria:
           handled: poorly
           source: securityweek-2015
       note: After the May 2015 pair, Hola promised a security chief, an outside audit and a bug bounty.
-      sources: [threatpost-2015, securityweek-2015, bleeping-2018, bleeping-2026]
+      sources: [threatpost-2015, securityweek-2015, bleeping-2018, bleeping-2026, class-action-notice]
 
   account:
     email:
@@ -150,9 +158,9 @@ criteria:
       value: 700
       sources: [locations]
     countries:
-      value: null
-      note: Hola advertises 190+ countries, counting other users' devices as exits, and doesn't say how many countries its own servers are in.
-      sources: [locations, faq]
+      value: 47
+      note: Hola advertises 190+ countries, but its own servers are only in 47 of them and the rest go through other users' devices.
+      sources: [locations]
 
   features:
     connections:
@@ -178,8 +186,8 @@ criteria:
     open_source: none
     telemetry:
       value: null
-      note: The policy's log data covers your IP, operating system and access times, but it doesn't say what usage or crash data the apps send.
-      sources: [policy]
+      note: The Android app collects crash logs and app interactions for analytics and shares device IDs, and Hola doesn't say whether you can turn this off.
+      sources: [play-data-safety]
     fdroid: false
 
   pricing:
@@ -220,7 +228,8 @@ criteria:
       sources: [faq, policy]
     affiliates:
       value: null
-      note: Hola has run affiliate schemes through ad networks, but no longer has a public affiliate page.
+      note: Hola has paid affiliates through ad networks, but its own affiliate page is gone and at least one network lists the campaign as paused.
+      sources: [cuelinks]
     review_sites: false
     activism: false
   other:
@@ -263,6 +272,12 @@ refs:
   desktop:
     url: https://hola.org/products/desktop
     title: Hola desktop app for Windows and macOS
+  play-data-safety:
+    url: https://play.google.com/store/apps/datasafety?id=org.hola.play&hl=en
+    title: Hola VPN data safety (Google Play)
+  cuelinks:
+    url: https://www.cuelinks.com/campaigns/hola-vpn-affiliate-program
+    title: Hola VPN (CPS) affiliate programme (Cuelinks)
   kill-switch:
     url: https://support.hola.org/en/articles/9636412-what-is-the-kill-switch-feature
     title: What is the kill switch feature? (Hola Help Center)
@@ -299,3 +314,6 @@ refs:
   securityweek-2015:
     url: https://www.securityweek.com/hola-vpn-vulnerabilities-still-unfixed-researchers/
     title: "Hola VPN vulnerabilities still unfixed: researchers (SecurityWeek, June 1, 2015)"
+  class-action-notice:
+    url: https://yitzugit.co.il/custom-newspaper/%D7%94%D7%A1%D7%9B%D7%9D-%D7%A4%D7%A9%D7%A8%D7%94-62567-02-22-%D7%99%D7%A2%D7%A7%D7%91-%D7%A1%D7%95%D7%98%D7%95-%D7%95-jean-michel-salamon-%D7%A0-%D7%94%D7%95%D7%9C%D7%94-%D7%95%D7%99-%D7%A4/
+    title: Notice of the settlement in Soto and Salamon v. Hola VPN and Bright Data, Tel Aviv District Court 62567-02-22 (in Hebrew)
