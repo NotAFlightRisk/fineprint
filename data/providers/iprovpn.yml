@@ -1,0 +1,316 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: iProVPN
+icon: iprovpn.png
+checked: 2026-10-27
+
+criteria:
+  identity:
+    website:
+      value: https://iprovpn.com
+      sources: [home]
+    legal_entity:
+      value: The Inner Technology LLC
+      note: >-
+        The terms and privacy policy name no company. The App Store seller is Reckonmedia LLC, and Reckon
+        Media announced iProVPN's launch in 2021.
+      sources: [play, app-store, launch]
+    owner:
+      value: null
+      note: Nothing published says who owns The Inner Technology LLC or Reckonmedia LLC.
+      sources: [play, app-store]
+    founded:
+      value: 2021
+      note: Its first App Store release is from November 2020, and the service launched in January 2021.
+      sources: [launch, app-store]
+    team:
+      value: anonymous
+      note: Its site names nobody, and its 2021 launch announcement only quoted a marketing head.
+      sources: [about, launch]
+    sister_brands:
+      value: [FastestVPN]
+      note: >-
+        Its Android app calls FastestVPN's API, its servers share small address blocks with FastestVPN's,
+        and the two sites run the same pricing page code. Neither names an owner.
+      sources: [apk, support-servers, fastestvpn-servers, dns-ipro-bel, dns-fastest-bel, dns-ipro-dk, dns-fastest-dk, home, fastestvpn-pricing]
+    acquisitions:
+      value: null
+      note: Its ownership isn't published, so there's no way to tell whether it has changed hands.
+
+  jurisdiction:
+    hq:
+      value: US
+      note: >-
+        Its privacy policy, last updated in 2020, puts it under British Virgin Islands law, but its About
+        page now says Houston, Texas, and its Google Play developer is a Dallas company.
+      sources: [about, play, privacy]
+    entities:
+      value: [US]
+      note: >-
+        The App Store credits iProVPN Limited and its launch announcement gave a British Virgin Islands
+        address, but no company there is named.
+      sources: [play, app-store, launch]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [privacy, faq]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [privacy]
+    timestamps:
+      value: none
+      evidence: claimed
+      sources: [privacy]
+    bandwidth:
+      value: null
+      note: The privacy policy doesn't say whether data use is recorded.
+      sources: [privacy]
+    source_ip:
+      value: none
+      evidence: claimed
+      sources: [privacy]
+    proven: []
+    policy: https://iprovpn.com/privacy-policy
+
+  transparency:
+    audits:
+      value: []
+      sources: [home]
+    report:
+      value: none
+      sources: [support]
+    canary:
+      value: none
+      sources: [support]
+    bug_bounty:
+      value: false
+      sources: [support]
+    incidents:
+      value: []
+
+  account:
+    email:
+      value: required
+      sources: [privacy]
+    personal_data:
+      value: []
+      sources: [pricing]
+    payment:
+      value: [card, paypal, app_store]
+      sources: [pricing, faq, app-store, play]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn, ikev2, other]
+      note: Other is PPTP, L2TP/IPsec and IPsec, for manual setup.
+      sources: [play, tutorials, pptp-guide, l2tp-guide]
+    post_quantum:
+      value: none
+      sources: [features]
+    kill_switch:
+      value: app
+      sources: [features, android]
+    dns:
+      value: null
+      note: It doesn't say whose DNS servers the VPN uses.
+      sources: [support-servers]
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say whether its servers run from RAM.
+      sources: [servers]
+    hosting:
+      value: rented
+      note: Its server addresses belong to M247, in the same small blocks as FastestVPN's servers.
+      sources: [support-servers, fastestvpn-servers, dns-ipro-bel, dns-fastest-bel, ip-bel]
+    virtual_locations:
+      value: null
+      note: It doesn't say whether any of its locations are virtual.
+      sources: [servers]
+    servers:
+      value: 250
+      sources: [servers]
+    countries:
+      value: 34
+      note: It advertises 36+ countries, and its Google Play listing says 47.
+      sources: [servers, play]
+
+  features:
+    connections:
+      value: 10
+      note: Extra devices cost $4 each, or $10 for unlimited.
+      sources: [home, faq]
+    multihop:
+      value: true
+      evidence: claimed
+      note: It lists Double VPN among its features but doesn't explain how it works.
+      sources: [pricing]
+    obfuscation:
+      value: []
+      sources: [features]
+    port_forwarding:
+      value: null
+      note: It doesn't say whether port forwarding is offered.
+      sources: [features]
+    split_tunnel:
+      value: true
+      sources: [features, android]
+    blocking:
+      value: [ads, malware]
+      sources: [features]
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android, browser]
+      note: Also Fire TV. Linux and routers are manual setup only.
+      sources: [download, windows-app, mac-app, app-store, play, chrome, linux, routers]
+    open_source:
+      value: none
+      sources: [download]
+    telemetry:
+      value: null
+      note: >-
+        The privacy policy says the apps send anonymised crash and connection-error reports, and the Android
+        app bundles Firebase Crashlytics, but nothing says whether you can turn it off.
+      sources: [privacy, apk]
+    fdroid:
+      value: false
+      sources: [android]
+
+  pricing:
+    monthly:
+      value: { amount: 6, currency: USD }
+      sources: [pricing]
+    best:
+      value: { amount: 0.66, currency: USD }
+      note: $39.60 for five years, sold as four years plus one free.
+      sources: [pricing]
+    best_term:
+      value: 60
+      sources: [pricing]
+    renewal_increase:
+      value: null
+      note: Renewal prices aren't published.
+      sources: [pricing, terms]
+    free_tier:
+      value: false
+      sources: [pricing]
+    refund_days:
+      value: 30
+      note: Purchases made through third parties don't qualify for a full refund.
+      sources: [terms, faq]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: It advertises "military-grade encryption" and calls itself "the top choice for millions of internet users".
+      sources: [android, features]
+    affiliates:
+      value: true
+      note: Affiliates get 100% of a new monthly subscription and 40% of renewals.
+      sources: [affiliates]
+    review_sites:
+      value: null
+      note: No sign it owns any, but who owns it isn't published.
+    activism: false
+
+refs:
+  home:
+    url: https://iprovpn.com/
+    title: iProVPN homepage
+  about:
+    url: https://iprovpn.com/about
+    title: About iProVPN
+  terms:
+    url: https://iprovpn.com/terms-of-service
+    title: General Terms of Service
+  privacy:
+    url: https://iprovpn.com/privacy-policy
+    title: Privacy Policy
+  faq:
+    url: https://iprovpn.com/faq
+    title: Frequently Asked Questions
+  features:
+    url: https://iprovpn.com/features
+    title: Features
+  pricing:
+    url: https://iprovpn.com/buy-vpn
+    title: Buy VPN (pricing)
+  servers:
+    url: https://iprovpn.com/servers
+    title: VPN servers
+  download:
+    url: https://iprovpn.com/download
+    title: Download iProVPN apps
+  windows-app:
+    url: https://iprovpn.com/download/windows-vpn
+    title: iProVPN for Windows
+  android:
+    url: https://iprovpn.com/download/android-vpn
+    title: iProVPN for Android
+  linux:
+    url: https://iprovpn.com/download/linux-vpn
+    title: iProVPN for Linux
+  affiliates:
+    url: https://iprovpn.com/affiliate-program
+    title: Affiliate Program
+  support:
+    url: https://support.iprovpn.com/
+    title: iProVPN Customer Support Center
+  tutorials:
+    url: https://support.iprovpn.com/tutorials/
+    title: VPN setup tutorials
+  pptp-guide:
+    url: https://support.iprovpn.com/tutorials/windows/pptp/
+    title: Setup with PPTP on Windows
+  l2tp-guide:
+    url: https://support.iprovpn.com/tutorials/windows/l2tp/
+    title: Setup with L2TP on Windows
+  routers:
+    url: https://support.iprovpn.com/tutorials/routers/
+    title: Router setup tutorials
+  support-servers:
+    url: https://support.iprovpn.com/vpn-servers/
+    title: iProVPN server/host name list
+  play:
+    url: https://play.google.com/store/apps/details?id=com.vpn.iprovpn&hl=en&gl=US
+    title: iProVPN on Google Play
+  app-store:
+    url: https://apps.apple.com/us/app/iprovpn-fast-secure-vpn/id1541172950
+    title: iProVPN on the App Store
+  mac-app:
+    url: https://apps.apple.com/us/app/iprovpn/id1541190853?mt=12
+    title: iProVPN on the Mac App Store
+  chrome:
+    url: https://chromewebstore.google.com/detail/iprovpn-proxy-for-chrome/mndmccpbnldnfafofmabbbcfbcffheld
+    title: iProVPN Proxy for Chrome on the Chrome Web Store
+  apk:
+    url: https://iprovpn.s3.amazonaws.com/downloads/iprovpn.apk
+    title: iProVPN Android app (direct download APK)
+  launch:
+    url: https://www.newswire.com/news/iprovpn-promises-to-protect-digital-privacy-21300023
+    title: iProVPN Promises to Protect Digital Privacy (Newswire, 2021)
+  fastestvpn-pricing:
+    url: https://fastestvpn.com/buy-vpn
+    title: FastestVPN pricing
+  fastestvpn-servers:
+    url: https://support.fastestvpn.com/vpn-servers/
+    title: FastestVPN server list
+  dns-ipro-bel:
+    url: https://dns.google/resolve?name=bel1.connectipro.com&type=A
+    title: bel1.connectipro.com (iProVPN Brussels) resolves to 193.9.114.212 (Google Public DNS)
+  dns-fastest-bel:
+    url: https://dns.google/resolve?name=bel-01.jumptoserver.com&type=A
+    title: bel-01.jumptoserver.com (FastestVPN Brussels) resolves to 193.9.114.210 (Google Public DNS)
+  dns-ipro-dk:
+    url: https://dns.google/resolve?name=denmark.connectipro.com&type=A
+    title: denmark.connectipro.com (iProVPN Denmark) resolves to 146.70.92.86 (Google Public DNS)
+  dns-fastest-dk:
+    url: https://dns.google/resolve?name=dk-01.jumptoserver.com&type=A
+    title: dk-01.jumptoserver.com (FastestVPN Denmark) resolves to 146.70.92.82 (Google Public DNS)
+  ip-bel:
+    url: https://bgp.he.net/ip/193.9.114.212
+    title: 193.9.114.212 on M247's network (Hurricane Electric BGP Toolkit)
