@@ -1,0 +1,254 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Seed4.Me
+icon: seed4-me.png
+checked: 2026-10-27
+
+criteria:
+  identity:
+    website:
+      value: https://seed4.me
+      sources: [home]
+    legal_entity:
+      value: S4M Tech, Inc.
+      note: >-
+        The terms only say Seed4.Me and fall under Delaware law. The company gives an address in Dover,
+        Delaware, and a hidden block in the site's code names Global Bridge LLC of Bishkek, Kyrgyzstan.
+      sources: [home, play, app-store, terms, invitations]
+    owner:
+      value: null
+      note: Who owns S4M Tech, Inc. isn't published.
+      sources: [about, play]
+    founded:
+      value: 2013
+      note: It opened as an invite-only VPN club in January 2013 and became an open service in December 2017.
+      sources: [about]
+    team:
+      value: anonymous
+      note: Nobody running the company is named. Blog posts carry first names only.
+      sources: [about, split-tunnel]
+    sister_brands:
+      value: []
+      sources: [play-developer]
+    acquisitions:
+      value: []
+      sources: [about]
+
+  jurisdiction:
+    hq:
+      value: US
+      sources: [play, terms]
+    entities:
+      value: [US]
+      sources: [play]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [privacy, faq]
+    dns:
+      value: null
+      note: The policy says VPN nodes keep no logs and the FAQ says browsing isn't logged, but neither mentions DNS lookups.
+      sources: [privacy, faq]
+    timestamps:
+      value: null
+      note: The policy keeps general connection logs for seven days, without saying what's in them. The FAQ says it keeps no connection logs.
+      sources: [privacy, faq]
+    bandwidth:
+      value: null
+      note: The FAQ says it collects minimal usage information to fix technical issues, without saying whether that includes data use.
+      sources: [faq]
+    source_ip:
+      value: null
+      note: The policy doesn't say whether its seven-day connection logs include your IP address.
+      sources: [privacy]
+    proven: []
+    policy: https://seed4.me/pages/privacy-policy
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: null
+      note: The website checkout and the policy require an email, but the app store listings say no registration is required.
+      sources: [pricing, privacy, play, app-store]
+    personal_data:
+      value: []
+      note: Card payments ask for a name and postcode for billing.
+      sources: [pricing]
+    payment:
+      value: [card, paypal, bitcoin, other_crypto, gift_card, app_store]
+      note: Bitcoin and Ether go through support for a payment link. The FAQ also lists WebMoney, Perfect Money, Yandex Money, QIWI and WeChat, which the checkout doesn't offer.
+      sources: [pricing, app-store, faq]
+
+  security:
+    protocols:
+      value: [openvpn]
+      note: Its own build of OpenVPN with an added obfuscation layer. It doesn't say what the mobile apps use.
+      sources: [windows-app, mac-app]
+    post_quantum:
+      value: none
+      sources: [windows-app]
+    kill_switch:
+      value: app
+      evidence: claimed
+      note: Its blog says the VPN client has a kill switch you can turn on, without saying which apps.
+      sources: [kill-switch-blog]
+    dns:
+      value: null
+      sources: [privacy]
+
+  infra:
+    ram_only:
+      value: null
+      sources: [locations]
+    hosting:
+      value: null
+      sources: [locations, about]
+    virtual_locations:
+      value: null
+      note: It lists a China optimised cluster as a location without saying where it sits.
+      sources: [locations]
+    servers:
+      value: null
+      note: It said it had more than 200 servers in March 2022, and gives no current count.
+      sources: [about]
+    countries:
+      value: 45
+      note: Plus a cluster optimised for China.
+      sources: [locations]
+
+  features:
+    connections:
+      value: unlimited
+      sources: [home, app-store]
+    multihop:
+      value: false
+      sources: [home]
+    obfuscation:
+      value: [proprietary]
+      evidence: claimed
+      note: An obfuscation layer on top of OpenVPN in the desktop apps, not described further.
+      sources: [windows-app, mac-app]
+    port_forwarding: null
+    split_tunnel:
+      value: true
+      note: iPhone only so far, and you pick a country whose local services skip the VPN rather than choosing apps.
+      sources: [split-tunnel]
+    blocking:
+      value: []
+      sources: [home]
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android]
+      note: Also Android TV and Amazon Fire TV.
+      sources: [download, play, app-store]
+    open_source:
+      value: none
+      sources: [download]
+    telemetry:
+      value: null
+      note: Its App Store label declares usage data collected for analytics, without saying whether you can turn it off.
+      sources: [app-store]
+    fdroid:
+      value: false
+      sources: [download]
+
+  pricing:
+    monthly:
+      value: { amount: 5, currency: USD }
+      sources: [pricing]
+    best:
+      value: { amount: 2.99, currency: USD }
+      note: $107.55 for three years.
+      sources: [pricing]
+    best_term:
+      value: 36
+      sources: [pricing]
+    renewal_increase:
+      value: 0
+      sources: [pricing]
+    free_tier:
+      value: false
+      note: There's a seven-day free trial in the apps.
+      sources: [faq]
+    refund_days:
+      value: null
+      note: It promises a 100% money-back guarantee with no time limit stated. The terms only refund credit you haven't yet used to extend your access.
+      sources: [pricing, faq, terms]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: It promises to "hide IP so no one can trace you", "Surf easy and 100% anonymously online" and "absolute privacy".
+      sources: [app-store, faq]
+    affiliates:
+      value: true
+      sources: [affiliate, privacy]
+    review_sites: false
+    activism:
+      value: false
+      note: It offers free VPN to bloggers, politicians and journalists who ask.
+      sources: [press]
+
+refs:
+  home:
+    url: https://seed4.me/
+    title: Seed4.Me homepage
+  about:
+    url: https://seed4.me/pages/about
+    title: About Seed4.Me VPN
+  terms:
+    url: https://seed4.me/pages/terms
+    title: Terms of Service
+  privacy:
+    url: https://seed4.me/pages/privacy-policy
+    title: Privacy Policy
+  pricing:
+    url: https://seed4.me/pages/pricing
+    title: Pricing
+  faq:
+    url: https://seed4.me/pages/faq
+    title: Frequently asked questions
+  locations:
+    url: https://seed4.me/pages/locations
+    title: Seed4.Me VPN locations
+  download:
+    url: https://seed4.me/pages/download
+    title: Download Seed4.Me VPN
+  press:
+    url: https://seed4.me/pages/press
+    title: Press area
+  affiliate:
+    url: https://affiliate.seed4.me/
+    title: Seed4.Me affiliate programme
+  split-tunnel:
+    url: https://seed4.me/blog/seed4-me-vpn-split-tunneling/
+    title: Split Tunneling Now Available in Seed4.Me VPN
+  windows-app:
+    url: https://seed4.me/blog/seed4-me-vpn-for-windows/
+    title: Seed4.Me VPN & Proxy now available on Windows
+  mac-app:
+    url: https://seed4.me/blog/seed4-me-vpn-macos/
+    title: Seed4.Me VPN & Proxy now on macOS
+  play:
+    url: https://play.google.com/store/apps/details?id=me.seed4.app.android
+    title: Seed4.Me VPN Proxy on Google Play
+  play-developer:
+    url: https://play.google.com/store/apps/developer?id=S4M+Tech,+Inc.
+    title: S4M Tech, Inc. apps on Google Play
+  app-store:
+    url: https://apps.apple.com/us/app/vpn-proxy-by-seed4-me-vpn/id860180339
+    title: VPN Proxy by Seed4.Me on the App Store
+  invitations:
+    url: https://seed4.me/invitations
+    title: Seed4.Me invitations page (Global Bridge LLC in its footer code)
+  kill-switch-blog:
+    url: https://seed4.me/blog/google-wrong-location-vpn/
+    title: Why Google shows a different location when connecting to VPN?
