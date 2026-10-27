@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: Trend Micro VPN
 icon: trend-micro-vpn.svg
-checked: 2026-10-21
+checked: 2026-10-27
 
 criteria:
   identity:
@@ -13,13 +13,17 @@ criteria:
         such as Trend Micro (Ireland) Limited in the UK and Europe.
       sources: [consumer-terms, play]
     owner:
-      value: null
-      note: Trend Micro Incorporated in Japan is listed on the Tokyo Stock Exchange (4704).
-      sources: [ir]
+      value: Trend Micro Incorporated (Japan)
+      note: >-
+        The Tokyo-listed parent (4704) owns all of the US company. Its shares are widely held, with no
+        parent company above it.
+      sources: [annual-report, ir]
     founded:
-      value: null
-      note: Trend Micro doesn't say when it launched. It was sold as VPN Proxy One Pro and WiFi Protection before the rename.
-      sources: [rename]
+      value: 2017
+      note: >-
+        It went on sale in Japan in March 2017 as Free Wi-Fi Protection, and was later sold as WiFi
+        Protection and VPN Proxy One Pro before the rename.
+      sources: [jp-launch-2017, jp-product, rename]
     team:
       value: partial
       note: Trend Micro's executives are named, but no one running the VPN is.
@@ -88,7 +92,7 @@ criteria:
       sources: [gov-policy]
     bug_bounty:
       value: true
-      note: Through the Zero Day Initiative, Trend's own programme that pays researchers, which reported all three VPN flaws below.
+      note: Through the Zero Day Initiative, Trend's own programme that pays researchers, which reported all four VPN flaws below.
       sources: [zdi, bulletin-2024-07]
     incidents:
       value:
@@ -116,7 +120,7 @@ criteria:
             (CVE-2022-33158). Fixed in 5.3.1056, with a security bulletin.
           handled: well
           source: bulletin-2022
-      sources: [bulletin-2024-07, bulletin-2024-05, bulletin-2022]
+      sources: [bulletin-2026-07, bulletin-2024-07, bulletin-2024-05, bulletin-2022]
 
   account:
     email:
@@ -204,15 +208,16 @@ criteria:
       evidence: claimed
       note: >-
         Usage data goes to Trend Micro and to AppsFlyer, Firebase, Google Analytics and App Center, and can't
-        be turned off. Only tying it to your device ID is optional.
-      sources: [notice]
+        be turned off. Only tying it to your device ID is optional. Its App Store label says diagnostics
+        may be used to track you.
+      sources: [notice, app-store]
     fdroid: false
 
   pricing:
     monthly:
-      value: null
-      note: The US page only sells a yearly plan. The apps also sell a monthly one in-app.
-      sources: [product, purchase]
+      value: { amount: 4.99, currency: USD }
+      note: Only sold in the apps. The US App Store price for one device; the website only sells yearly plans.
+      sources: [app-store, purchase]
     best:
       value: { amount: 2.5, currency: USD }
       note: USD from the US site. $29.95 a year for one device.
@@ -240,8 +245,22 @@ criteria:
       value: true
       note: The product page links to an affiliate signup through CJ.
       sources: [product]
+    review_sites: false
+    activism: false
 
 refs:
+  annual-report:
+    url: https://disclosure2dl.edinet-fsa.go.jp/searchdocument/pdf/S100XUHN.pdf
+    title: Trend Micro annual securities report for 2025 (March 2026, in Japanese)
+  jp-launch-2017:
+    url: https://www.trendmicro.com/ja_jp/about/press-release/2017/pr-20170306-01.html
+    title: Trend Micro launches Free Wi-Fi Protection (March 2017, in Japanese)
+  jp-product:
+    url: https://www.trendmicro.com/ja_jp/forHome/products/fwp.html
+    title: Trend Micro VPN, formerly Free Wi-Fi Protection (Japan, in Japanese)
+  app-store:
+    url: https://apps.apple.com/us/app/trend-micro-vpn-secure-proxy/id1311355327
+    title: Trend Micro VPN - Secure Proxy on the US App Store
   bulletin-2026-07:
     url: https://helpcenter.trendlife.com/en-us/article/TMKA-13331/
     title: "Security bulletin: Trend Micro VPN OpenSSL configuration local privilege escalation (CVE-2026-67212)"
