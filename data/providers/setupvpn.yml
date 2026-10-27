@@ -1,0 +1,252 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: SetupVPN
+icon: setupvpn.png
+checked: 2026-10-27
+
+criteria:
+  identity:
+    website: https://setupvpn.com
+    legal_entity:
+      value: SetupVPN Inc
+      note: The terms name SetupVPN Inc in Coral Gables, Florida, though they say the site's content is copyrighted under Bulgarian law.
+      sources: [terms, play, chrome, app-store]
+    owner:
+      value: null
+      note: Who owns SetupVPN Inc isn't public.
+      sources: [play]
+    founded:
+      value: 2015
+      note: The site says it has served clients since 2015. Its Firefox add-on was first listed in April 2016.
+      sources: [home, amo]
+    team:
+      value: partial
+      note: The Chrome Web Store's trader details name one person for SetupVPN Inc. Its own site names nobody.
+      sources: [chrome, home]
+    sister_brands:
+      value: [Hoxx VPN]
+      note: >-
+        SetupVPN Inc and Hoxx Inc give the same suite at 815 Ponce de Leon Blvd, share the baseserver.io
+        download service, and run near-identical FAQs.
+      sources: [chrome, hoxx-chrome, download, hoxx-download, faq-abuse, hoxx-faq]
+    acquisitions: []
+
+  jurisdiction:
+    hq:
+      value: US
+      sources: [terms, play]
+    entities:
+      value: [US]
+      sources: [chrome]
+
+  logging:
+    traffic:
+      value: 'yes'
+      evidence: claimed
+      note: >-
+        The FAQ says it keeps proxy logs, including the websites you visit, for an unstated time, and
+        works with the authorities when they ask for them.
+      sources: [faq-abuse, faq-account]
+    dns:
+      value: null
+      sources: [policy]
+    timestamps:
+      value: null
+      note: The FAQ asks for the date and time of anything it's asked to look up, but doesn't say what its logs hold.
+      sources: [faq-abuse]
+    bandwidth:
+      value: aggregate
+      evidence: claimed
+      note: Free accounts have a daily data quota, so usage is counted per account.
+      sources: [faq-general]
+    source_ip:
+      value: 'yes'
+      evidence: claimed
+      note: Its EULA says it collects and tracks your IP address, device details and usage statistics.
+      sources: [eula]
+    proven: []
+    policy: https://setupvpn.com/privacy-policy/
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: optional
+      evidence: claimed
+      note: The site says you can register anonymously with a few clicks, while the FAQ talks about verifying your email address.
+      sources: [how-it-works, faq-account]
+    personal_data:
+      value: null
+      note: The privacy policy says it may ask for your name, home address and phone number, without saying when.
+      sources: [policy]
+    payment:
+      value: [card, paypal, bitcoin]
+      note: Premium is bought inside the apps. The FAQ also lists Alipay, and Stripe and Paymentwall as processors.
+      sources: [faq-premium]
+
+  security:
+    protocols:
+      value: null
+      note: The browser extensions are a proxy for that browser alone, and the apps' protocols aren't stated.
+      sources: [chrome, amo]
+    post_quantum: none
+    kill_switch: null
+    dns: null
+
+  infra:
+    ram_only: null
+    hosting: null
+    virtual_locations: null
+    servers:
+      value: null
+      note: The store listings say over 100 servers.
+      sources: [chrome, play]
+    countries:
+      value: null
+      note: The site says over 100 locations, without saying how many countries.
+      sources: [home]
+
+  features:
+    connections:
+      value: null
+      note: The FAQ says you can use several browsers and computers at once, without giving a limit.
+      sources: [faq-general]
+    multihop: false
+    obfuscation:
+      value: null
+      note: It says it gets around government filtering, without saying how.
+      sources: [home]
+    port_forwarding: false
+    split_tunnel: null
+    blocking:
+      value: [malware]
+      evidence: claimed
+      note: The FAQ also claims it stops ad networks tracking you, without saying how.
+      sources: [faq-general]
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android, browser]
+      note: >-
+        The Chrome, Firefox and Edge extensions are a proxy for that browser alone. Firefox's was last
+        updated in June 2024, Chrome's and Edge's and the Windows app in January 2025, and the Android,
+        iPhone and Mac apps in 2026.
+      sources: [download, chrome, amo, edge, windows, play, app-store, mac-app-store]
+    open_source:
+      value: null
+      note: >-
+        The Firefox add-on is listed under the GPL 3.0, but the FAQ says you may read the code and not
+        modify or reuse it, and the EULA bans reverse engineering.
+      sources: [amo, faq-general, eula]
+    telemetry:
+      value: null
+      note: >-
+        The EULA says it tracks usage statistics, and the iOS app's privacy label lists crash,
+        performance and usage data linked to you. Nothing says whether you can turn it off.
+      sources: [eula, app-store]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: null
+      note: Premium is only sold inside the apps, with no published prices.
+      sources: [faq-premium]
+    best:
+      value: null
+      note: Premium is only sold inside the apps, with no published prices.
+      sources: [faq-premium]
+    best_term: null
+    renewal_increase:
+      value: null
+      grade: na
+      note: Premium isn't a subscription, so it drops back to the free plan instead of renewing.
+      sources: [faq-premium]
+    free_tier:
+      value: true
+      note: >-
+        Free accounts get a daily data quota, though the store listings say unlimited bandwidth. Free
+        accounts unused for 180 days may be closed.
+      sources: [faq-general, faq-account, chrome]
+    refund_days:
+      value: null
+      note: No refund window is given, and the FAQ says slow speeds don't get a refund.
+      sources: [terms, eula, faq-premium]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        It promises 4096-bit military grade encryption, end-to-end encryption and unlimited bandwidth,
+        while free accounts have a daily quota and it keeps logs of the sites you visit for the authorities.
+      sources: [chrome, play, faq-general, faq-abuse]
+    affiliates:
+      value: false
+      sources: [faq-general]
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://setupvpn.com/
+    title: SetupVPN home page
+  policy:
+    url: https://setupvpn.com/privacy-policy/
+    title: SetupVPN Privacy Policy
+  terms:
+    url: https://setupvpn.com/terms/
+    title: SetupVPN Terms of Service
+  eula:
+    url: https://setupvpn.com/eula/
+    title: SetupVPN End User License Agreement
+  how-it-works:
+    url: https://setupvpn.com/how-it-works/
+    title: SetupVPN, How it works
+  faq-general:
+    url: https://setupvpn.com/faq/#General
+    title: SetupVPN FAQ, General
+  faq-abuse:
+    url: https://setupvpn.com/faq/#Abuse
+    title: SetupVPN FAQ, Abuse
+  faq-account:
+    url: https://setupvpn.com/faq/#Account
+    title: SetupVPN FAQ, Account
+  faq-premium:
+    url: https://setupvpn.com/faq/#Premium-Account
+    title: SetupVPN FAQ, Premium Account
+  download:
+    url: https://setupvpn.com/download/
+    title: Download SetupVPN
+  windows:
+    url: https://baseserver.io/public/s/windows/
+    title: SetupVPN for Windows, client downloads
+  play:
+    url: https://play.google.com/store/apps/details?id=com.setupvpn.main&hl=en
+    title: SetupVPN on Google Play
+  app-store:
+    url: https://apps.apple.com/us/app/setupvpn-easy-fast-vpn/id6474674779
+    title: SetupVPN - Easy & Fast VPN on the App Store (iPhone and iPad)
+  mac-app-store:
+    url: https://apps.apple.com/us/app/setupvpn-easy-fast-vpn/id6474868868
+    title: 'SetupVPN: Easy & Fast VPN on the Mac App Store'
+  chrome:
+    url: https://chromewebstore.google.com/detail/setupvpn-lifetime-free-vp/oofgbpoabipfcfjapgnbbjjaenockbdp
+    title: SetupVPN - Lifetime Free VPN on the Chrome Web Store
+  amo:
+    url: https://addons.mozilla.org/en-US/firefox/addon/setupvpn/
+    title: SetupVPN Lifetime Free VPN on Firefox Add-ons
+  edge:
+    url: https://microsoftedge.microsoft.com/addons/detail/okhjkpgblgdjappgfgakbcecdblgffcl
+    title: SetupVPN - Lifetime Free VPN on Edge Add-ons
+  hoxx-chrome:
+    url: https://chromewebstore.google.com/detail/hoxx-vpn-proxy/nbcojefnccbanplpoffopkoepjmhgdgh
+    title: Hoxx VPN Proxy on the Chrome Web Store
+  hoxx-download:
+    url: https://hoxx.com/download/
+    title: Download Hoxx VPN
+  hoxx-faq:
+    url: https://hoxx.com/support/#Abuse
+    title: Hoxx FAQ, Abuse
