@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: Sekai VPN
 icon: sekai-vpn.png
-checked: 2026-10-25
+checked: 2026-10-27
 
 criteria:
   identity:
@@ -49,18 +49,19 @@ criteria:
       value: null
       sources: [privacy, service-terms]
     timestamps:
-      value: null
+      value: 'yes'
+      evidence: claimed
       note: >-
-        Interlink's security policy lists authentication logs among the customer data it holds, without saying
-        what's in them or how long they're kept. The service terms also have it contact the user behind a complaint.
-      sources: [security-policy, service-terms]
+        Interlink keeps connection logs with no stated limit, and answers police inquiry letters naming one of its IP
+        addresses and a time with the account holder's name, address, email and phone number.
+      sources: [police-faq, security-policy]
     bandwidth:
       value: null
       sources: [privacy, service-terms]
     source_ip:
       value: null
-      note: The authentication logs in Interlink's security policy may include it, but the text doesn't say.
-      sources: [security-policy, privacy]
+      note: Its connection and authentication logs may include it, but it doesn't say what's in them.
+      sources: [police-faq, security-policy]
     proven:
       value: []
       sources: [privacy]
@@ -108,9 +109,23 @@ criteria:
 
   infra:
     ram_only: null
-    hosting: null
-    virtual_locations: null
-    servers: null
+    hosting:
+      value: rented
+      note: >-
+        Its servers' addresses belong to hosts such as Sakura Internet, LightNode, Contabo and UK2, and the overseas
+        OpenConnect servers run on Amazon Web Services.
+      sources: [server-list, ip-sakura, ip-lightnode, ip-contabo, ip-uk2, ip-aws]
+    virtual_locations:
+      value: null
+      note: It doesn't say whether any of its locations are virtual.
+      sources: [server-list]
+    servers:
+      value: 72
+      evidence: claimed
+      note: >-
+        28 take most protocols, two per country outside Japan, and share 19 addresses. The other 44, 35 of them in
+        Japan, only take OpenConnect.
+      sources: [server-list, openvpn-list, oc-status]
     countries:
       value: 10
       note: Japan, the US, Germany, Taiwan, South Korea, France, the UK, Thailand, Indonesia and Vietnam.
@@ -149,8 +164,10 @@ criteria:
       sources: [windows-app, mac-app]
     telemetry:
       value: null
-      note: The App Store listing declares no data collected, which doesn't say whether the desktop apps send any.
-      sources: [app-store]
+      note: >-
+        The App Store listing declares no data collected and the Android TV app has no analytics SDK, only a form to
+        email an error report. Nothing says whether the Windows and Mac apps send any.
+      sources: [app-store, tv-apk]
     fdroid:
       value: false
       sources: [android-tv]
@@ -178,7 +195,7 @@ criteria:
       note: >-
         The member terms rule out refunds, but the trial page says card payers who cancel after the trial and say
         they're unhappy get that month's fee back.
-      sources: [member-terms, trial]
+      sources: [member-terms, cancel-faq, trial]
 
   ethics:
     misleading_claims:
@@ -273,3 +290,36 @@ refs:
   affiliate:
     url: https://www.interlink.or.jp/aff/
     title: Interlink affiliate partner programme
+  police-faq:
+    url: https://faq.interlink.or.jp/qa/275
+    title: Inquiries for police investigations
+  cancel-faq:
+    url: https://faq.interlink.or.jp/qa/4
+    title: How do I cancel my membership?
+  server-list:
+    url: https://www.interlink.or.jp/support/vpn/sekaivpn/serverlist.xml
+    title: Sekai VPN app server list
+  openvpn-list:
+    url: https://www.interlink.or.jp/support/vpn/openvpn/serverlist.html
+    title: Sekai VPN OpenVPN server list
+  oc-status:
+    url: https://aaww.jp/oc/
+    title: Interlink OpenConnect server status
+  tv-apk:
+    url: https://www.interlink.or.jp/support/vpn/sekaivpn/apk/sekaivpn-androidtv.apk
+    title: Sekai VPN Android TV app APK
+  ip-sakura:
+    url: https://bgp.he.net/ip/163.43.209.204
+    title: ja.skv.moe (163.43.209.204), announced by Sakura Internet (AS9370)
+  ip-lightnode:
+    url: https://bgp.he.net/ip/38.54.40.105
+    title: ka.skv.moe (38.54.40.105), announced by LightNode (AS154177)
+  ip-contabo:
+    url: https://bgp.he.net/ip/149.102.152.157
+    title: uka.skv.moe (149.102.152.157), announced by Contabo (AS51167)
+  ip-uk2:
+    url: https://bgp.he.net/ip/109.123.80.99
+    title: da.skv.moe (109.123.80.99), announced by THG Hosting, UK2 (AS13213)
+  ip-aws:
+    url: https://bgp.he.net/ip/18.159.95.7
+    title: doc.skv.moe (18.159.95.7), announced by Amazon (AS16509)
