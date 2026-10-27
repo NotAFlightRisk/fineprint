@@ -1,0 +1,246 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: HideIPVPN
+icon: hideipvpn.png
+checked: 2026-10-27
+
+criteria:
+  identity:
+    website:
+      value: https://www.hideipvpn.com
+      sources: [home]
+    legal_entity:
+      value: Server Management LLC
+      note: A Delaware company at a Wilmington address. Terms from 2019 named no company at all.
+      sources: [terms, privacy, play, terms-2019]
+    owner:
+      value: null
+      note: Who owns Server Management LLC isn't published.
+      sources: [privacy]
+    founded:
+      value: 2009
+      sources: [about]
+    team:
+      value: public
+      note: Its site names the CEO, Adrian Crismaru, and six other staff.
+      sources: [about]
+    sister_brands:
+      value: []
+      sources: [app-store-developer]
+    acquisitions:
+      value: []
+      sources: [about]
+
+  jurisdiction:
+    hq:
+      value: US
+      sources: [terms, play]
+    entities:
+      value: [US]
+      sources: [play]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [terms, features]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [terms]
+    timestamps:
+      value: null
+      note: The terms say activity while connected isn't stored, without mentioning connection times. The policy says any data it keeps is deleted after three months.
+      sources: [terms, privacy]
+    bandwidth:
+      value: null
+      note: The terms say activity while connected isn't stored, without mentioning data use.
+      sources: [terms]
+    source_ip:
+      value: none
+      evidence: claimed
+      sources: [terms, features]
+    proven: []
+    policy: https://www.hideipvpn.com/privacy-policy/
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: required
+      sources: [privacy, support]
+    personal_data:
+      value: []
+      note: It keeps your full name with your billing record, and may ask for ID if an order looks suspicious or comes from a high-risk country.
+      sources: [privacy]
+    payment:
+      value: [card, paypal, bitcoin, app_store]
+      sources: [pricing, app-store]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn, ikev2, other]
+      note: Other is SSTP, SoftEther, L2TP/IPsec and PPTP.
+      sources: [pricing, software, tutorials]
+    post_quantum:
+      value: none
+      sources: [software, features]
+    kill_switch:
+      value: app
+      note: The Windows and macOS apps' App Killer closes chosen apps when the VPN drops, rather than blocking all traffic.
+      sources: [windows-app, mac-app]
+    dns:
+      value: null
+      note: It says you get new DNS resolvers when connected, without saying whose.
+      sources: [support]
+
+  infra:
+    ram_only:
+      value: null
+      sources: [locations]
+    hosting:
+      value: null
+      sources: [locations]
+    virtual_locations:
+      value: null
+      sources: [locations]
+    servers:
+      value: 24
+      sources: [locations]
+    countries:
+      value: 12
+      sources: [locations]
+
+  features:
+    connections:
+      value: 5
+      note: Smart DNS, which comes with the VPN plans, works on any number of devices.
+      sources: [pricing]
+    multihop:
+      value: false
+      sources: [features, software]
+    obfuscation:
+      value: []
+      sources: [software, windows-app]
+    port_forwarding: null
+    split_tunnel:
+      value: false
+      sources: [windows-app, android-app]
+    blocking:
+      value: []
+      sources: [software, windows-app]
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android, browser]
+      note: Also Apple TV, Google TV and Fire TV apps. Linux uses manual OpenVPN, WireGuard or PPTP setup.
+      sources: [software, tutorials]
+    open_source:
+      value: none
+      sources: [software]
+    telemetry:
+      value: null
+      note: Both app store listings declare no data collected, but HideIPVPN doesn't say what its apps send.
+      sources: [play, app-store]
+    fdroid:
+      value: false
+      sources: [software]
+
+  pricing:
+    monthly:
+      value: { amount: 6.99, currency: USD }
+      note: For the first month, then $9.99.
+      sources: [pricing]
+    best:
+      value: { amount: 2.99, currency: USD }
+      note: $71.76 for two years.
+      sources: [pricing]
+    best_term:
+      value: 24
+      sources: [pricing]
+    renewal_increase:
+      value: null
+      note: The two-year plan's renewal price isn't stated. The yearly plan renews at $69.99 after $59.88, and the monthly at $9.99 after $6.99.
+      sources: [pricing]
+    free_tier:
+      value: false
+      note: There's a three-day VPN trial with no card needed.
+      sources: [free-vpn]
+    refund_days:
+      value: 30
+      note: First orders only, for Windows, macOS and Linux users who can't connect. Not for speed, unblocking, renewals or app store purchases.
+      sources: [terms]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: It promises "100% online privacy", to "Surf the web anonymously" and the "highest security level".
+      sources: [home, features]
+    affiliates:
+      value: true
+      note: >-
+        Its support page invites would-be affiliates to get in touch, though no terms are published. It also
+        gives free VPN to anyone who posts a review linking back to it.
+      sources: [support, free-vpn]
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://www.hideipvpn.com/
+    title: HideIPVPN homepage
+  about:
+    url: https://www.hideipvpn.com/about-us/
+    title: About us
+  terms:
+    url: https://www.hideipvpn.com/terms-of-service/
+    title: Terms of Service
+  terms-2019:
+    url: https://web.archive.org/web/2019id_/https://www.hideipvpn.com/terms-of-service/
+    title: Terms of Service (2019 copy, Wayback Machine)
+  privacy:
+    url: https://www.hideipvpn.com/privacy-policy/
+    title: Privacy Policy
+  features:
+    url: https://www.hideipvpn.com/features/
+    title: Features
+  pricing:
+    url: https://www.hideipvpn.com/pricing/
+    title: Pricing
+  free-vpn:
+    url: https://www.hideipvpn.com/free-vpn/
+    title: Free VPN for everyone
+  support:
+    url: https://www.hideipvpn.com/support/
+    title: Support and FAQ
+  software:
+    url: https://www.hideipvpn.com/free-vpn-software/
+    title: Free VPN software
+  tutorials:
+    url: https://www.hideipvpn.com/vpn-tutorials/
+    title: VPN tutorials
+  locations:
+    url: https://www.hideipvpn.com/vpn-servers-location/
+    title: Servers locations
+  windows-app:
+    url: https://www.hideipvpn.com/setup/hideipvpn-windows-vpn-and-smart-dns-software-v5/
+    title: Windows VPN and Smart DNS software v5, setup guide
+  mac-app:
+    url: https://www.hideipvpn.com/setup/hideipvpn-macos-x-vpn-smart-dns-software-v5/
+    title: macOS VPN and Smart DNS software v5, setup guide
+  android-app:
+    url: https://www.hideipvpn.com/setup/setup-hideipvpn-app-android-v2/
+    title: Android app v2, setup guide
+  play:
+    url: https://play.google.com/store/apps/details?id=hideIPVPN.app
+    title: HideIPVPN on Google Play
+  app-store:
+    url: https://apps.apple.com/us/app/hideipvpn-vpn-smart-dns/id964479810
+    title: HideIPVPN on the App Store
+  app-store-developer:
+    url: https://apps.apple.com/us/developer/server-management-llc/id964479809
+    title: Server Management LLC apps on the App Store
