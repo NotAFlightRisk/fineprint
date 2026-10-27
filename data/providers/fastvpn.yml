@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: FastVPN
 icon: fastvpn.svg
-checked: 2026-10-21
+checked: 2026-10-27
 
 criteria:
   identity:
@@ -100,9 +100,11 @@ criteria:
       note: Namecheap's signup asks for a first and last name.
       sources: [signup]
     payment:
-      value: null
-      note: FastVPN's pages don't list payment methods. Namecheap takes cards, PayPal and crypto (through account funds) for its other products.
-      sources: [payment-methods]
+      value: [card, paypal, bitcoin, app_store]
+      note: >-
+        Cards and PayPal through Namecheap's checkout, or in-app purchase on iOS and Android. Crypto has to
+        go into Namecheap account funds first.
+      sources: [home, payment-methods, app-store, play]
 
   security:
     protocols:
@@ -129,21 +131,23 @@ criteria:
     hosting:
       value: null
       note: >-
-        Its policy says an unnamed upstream provider runs the network. Server hostnames in its help
-        centre are on wlvpn.com, the IPVanish-powered white-label VPN service owned by Ziff Davis.
-      sources: [tos, china, wlvpn]
+        Its policy says an unnamed upstream provider runs the network. Every server in its OpenVPN
+        configs is on wlvpn.com, the IPVanish-powered white-label VPN service owned by Ziff Davis.
+      sources: [tos, ovpn-configs, wlvpn]
     virtual_locations:
-      value: null
-      note: It doesn't say whether any of its locations are virtual.
-      sources: [fastvpn-site, fastvpn-help]
+      value: disclosed
+      note: >-
+        57 of its 151 locations are marked virtual, which leaves 55 of its 112 countries with no
+        physical server.
+      sources: [ovpn-configs]
     servers:
       value: 2700
       note: Listed as "over 2,700".
       sources: [fastvpn-site]
     countries:
-      value: null
-      note: Namecheap says "100+ locations" rather than countries. Spaceship's FastVPN page says "100+ countries".
-      sources: [home, spaceship]
+      value: 112
+      note: Includes territories like Jersey and Puerto Rico, and 55 countries reached only through virtual locations.
+      sources: [country-list, ovpn-configs]
 
   features:
     connections:
@@ -151,17 +155,17 @@ criteria:
       note: Only on what it calls privacy servers.
       sources: [compare]
     multihop:
-      value: null
-      note: A November 2024 post promised multi-hop for 2025, but no current FastVPN page mentions it.
-      sources: [blog-2024, compare]
+      value: false
+      note: A November 2024 post promised it for 2025, but no app release since has added it.
+      sources: [blog-2024, app-store]
     obfuscation:
       value: [proprietary]
       note: Scramble, an OpenVPN obfuscation option in the Windows app.
       sources: [protocols-windows, china]
     port_forwarding:
-      value: null
-      note: No FastVPN page or help article mentions port forwarding.
-      sources: [fastvpn-help]
+      value: false
+      note: IPVanish, which runs on the same network, doesn't support it either.
+      sources: [fastvpn-help, ipvanish-port-forwarding]
     split_tunnel:
       value: true
       note: Windows, Android and iOS.
@@ -313,6 +317,18 @@ refs:
   linux:
     url: https://www.namecheap.com/vpn/vpn-for-linux/
     title: FastVPN for Linux
+  app-store:
+    url: https://apps.apple.com/us/app/fastvpn-secure-private/id1381516895
+    title: 'FastVPN: Secure & Private on the App Store'
+  country-list:
+    url: https://vpn.ncapi.io/countryList.json
+    title: FastVPN server country list
+  ovpn-configs:
+    url: https://vpn.ncapi.io/groupedServerList.zip
+    title: FastVPN OpenVPN config files
+  ipvanish-port-forwarding:
+    url: https://support.ipvanish.com/hc/en-us/articles/115002080173-Port-Forwarding
+    title: IPVanish help, Port Forwarding
   play:
     url: https://play.google.com/store/apps/details?id=com.namecheap.vpn
     title: 'FastVPN: Secure & Private on Google Play'
