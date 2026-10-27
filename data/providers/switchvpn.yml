@@ -1,0 +1,315 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: SwitchVPN
+icon: switchvpn.png
+checked: 2026-10-27
+
+criteria:
+  identity:
+    website:
+      value: https://switchvpn.net
+      sources: [home]
+    legal_entity:
+      value: CS Systems, Inc.
+      note: The current terms name only "SwitchVPN". The 2016 terms and both app store listings name CS Systems, Inc., at an address in Newark, Delaware.
+      sources: [terms, terms-2016, play, app-store]
+    owner:
+      value: null
+      note: Who owns CS Systems, Inc. isn't published.
+      sources: [terms-2016, play]
+    founded:
+      value: 2010
+      evidence: claimed
+      sources: [windows, trial]
+    team:
+      value: anonymous
+      note: Its site and terms name nobody who runs it.
+      sources: [home, terms]
+    sister_brands:
+      value: []
+      sources: [app-store-developer]
+    acquisitions:
+      value: null
+      note: CS Systems, Inc. has been named in its terms since 2016, but whether the service has ever changed hands isn't published.
+      sources: [terms-2016]
+
+  jurisdiction:
+    hq:
+      value: US
+      sources: [play, app-store]
+    entities:
+      value: [US]
+      sources: [play, terms-2016]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [policy, logs-faq]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [policy, logs-faq]
+    timestamps:
+      value: none
+      evidence: claimed
+      sources: [trial, policy]
+    bandwidth:
+      value: none
+      evidence: claimed
+      sources: [policy, logs-faq]
+    source_ip:
+      value: none
+      evidence: claimed
+      sources: [gdpr, trial]
+    proven: []
+    policy: https://switchvpn.net/privacy-policy
+
+  transparency:
+    audits: []
+    report: none
+    canary:
+      value: none
+      sources: [terms]
+    bug_bounty:
+      value: false
+      sources: [cve-2018-18860]
+    incidents:
+      value:
+        - date: 2018-11-12
+          summary: >-
+            A flaw in the macOS app (CVE-2018-18860) let any local user run programs as root. The researcher's
+            disclosure lists six weeks of contact attempts with no reply, and no fix when it was published.
+          handled: poorly
+          source: cve-2018-18860
+      sources: [cve-2018-18860]
+
+  account:
+    email:
+      value: required
+      sources: [policy, checkout]
+    personal_data:
+      value: [name]
+      note: The order form asks for your first and last name and country whichever way you pay.
+      sources: [checkout]
+    payment:
+      value: [card, paypal, bitcoin]
+      note: Its terms also list Alipay, and the checkout's cryptocurrency option goes through Plisio without saying which coins.
+      sources: [terms, payment-help, checkout]
+
+  security:
+    protocols:
+      value: [openvpn, ikev2, other]
+      note: Other is PPTP, L2TP and SSTP.
+      sources: [features, ovpn-configs, ikev2-list]
+    post_quantum:
+      value: none
+      sources: [windows]
+    kill_switch:
+      value: app
+      sources: [windows, mac, bittorrent]
+    dns:
+      value: first_party
+      evidence: claimed
+      note: Its router guides set Google's public DNS instead.
+      sources: [windows, android, dd-wrt]
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say whether its servers run from RAM.
+      sources: [servers]
+    hosting:
+      value: rented
+      note: Its OpenVPN servers sit on addresses belonging to Amazon Web Services, Linode, Vultr and other hosts, though its site calls them proprietary.
+      sources: [ovpn-configs, rdap-aws, rdap-linode, rdap-vultr, features]
+    virtual_locations:
+      value: null
+      note: It doesn't say whether any locations are virtual.
+      sources: [servers]
+    servers:
+      value: null
+      note: It claims more than 250 servers, but its current OpenVPN setup files list 24.
+      sources: [servers, ovpn-configs]
+    countries:
+      value: null
+      note: It advertises 43 countries and lists 33, but its current OpenVPN and IKEv2 setup files only cover 13.
+      sources: [order, servers, ovpn-configs, ikev2-list]
+
+  features:
+    connections:
+      value: 3
+      note: Six on the Families plan.
+      sources: [order]
+    multihop:
+      value: false
+      sources: [features]
+    obfuscation:
+      value: []
+      note: It markets China-optimised servers but names no obfuscation method, and its China help suggests switching to L2TP.
+      sources: [features, windows, china-help]
+    port_forwarding:
+      value: true
+      note: In the Windows and Mac apps, on servers in a handful of countries.
+      sources: [port-forwarding, windows]
+    split_tunnel:
+      value: true
+      note: Only claimed for the Android app.
+      sources: [android]
+    blocking:
+      value: []
+      sources: [features]
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android]
+      note: >-
+        The iOS app was last updated in 2018 and the Android app in January 2021. The Mac app is offered for macOS
+        10.15 and older, with newer Macs pointed to Tunnelblick, and Linux and routers need manual setup.
+      sources: [windows, mac-old, mac-tunnelblick, app-store, play, asus-router]
+    open_source:
+      value: none
+      sources: [windows, android]
+    telemetry:
+      value: null
+      note: The Play listing declares no data collected, but SwitchVPN doesn't say what its apps send.
+      sources: [play, policy]
+    fdroid:
+      value: false
+      sources: [android]
+
+  pricing:
+    monthly:
+      value: { amount: 6.99, currency: USD }
+      sources: [order]
+    best:
+      value: { amount: 4.99, currency: USD }
+      note: $59.88 a year.
+      sources: [order]
+    best_term:
+      value: 12
+      sources: [order]
+    renewal_increase:
+      value: 0
+      sources: [order, checkout]
+    free_tier:
+      value: false
+      note: There's a three-day trial for $1.
+      sources: [trial]
+    refund_days:
+      value: 30
+      sources: [terms, refund]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: It sells "Truly Anonymous Services", says your privacy "will never be compromised" and calls its encryption "bank-level, 2048-bit AES-256".
+      sources: [order, home, trial]
+    affiliates:
+      value: true
+      note: Affiliates get from 30% of each sale, renewals included.
+      sources: [affiliates]
+    review_sites:
+      value: false
+      sources: [home]
+    activism: false
+
+refs:
+  home:
+    url: https://switchvpn.net/
+    title: "SwitchVPN: Online Freedom Made Easy"
+  order:
+    url: https://switchvpn.net/order
+    title: Buy VPN with Credit card, Paypal, Bitcoin and more
+  features:
+    url: https://switchvpn.net/features
+    title: "SwitchVPN: All VPN benefits in one powerful app"
+  servers:
+    url: https://switchvpn.net/servers
+    title: SwitchVPN Servers
+  policy:
+    url: https://switchvpn.net/privacy-policy
+    title: Privacy Policy
+  terms:
+    url: https://switchvpn.net/terms-of-service
+    title: Terms of Service
+  terms-2016:
+    url: https://web.archive.org/web/20161221034405/https://switchvpn.net/terms-of-service
+    title: Terms of Service (December 2016 copy, Wayback Machine)
+  trial:
+    url: https://switchvpn.net/vpn-free-trial
+    title: Get A Risk-Free VPN Trial from SwitchVPN For 3 Days
+  affiliates:
+    url: https://switchvpn.net/affiliates
+    title: VPN Affiliate Program
+  windows:
+    url: https://switchvpn.net/vpn-for-windows
+    title: Download a VPN for Windows
+  mac:
+    url: https://switchvpn.net/vpn-for-mac
+    title: Download a VPN for Mac
+  android:
+    url: https://switchvpn.net/switchvpn-for-android
+    title: Download a VPN for Android
+  checkout:
+    url: https://secure.switchkonnect.com/cart.php?a=add&pid=94&billingcycle=monthly&skipconfig=1
+    title: Shopping Cart - SwitchVPN (Premium, monthly)
+  logs-faq:
+    url: https://help.switchvpn.net/en/articles/380047-does-switchvpn-store-logs-of-my-vpn-usage
+    title: Does SwitchVPN store logs of my VPN usage?
+  gdpr:
+    url: https://help.switchvpn.net/en/articles/1943852-how-will-gdpr-general-data-protection-regulation-affect-switchvpn
+    title: How will GDPR (General Data Protection Regulation) affect SwitchVPN?
+  payment-help:
+    url: https://help.switchvpn.net/en/articles/380056-what-payment-options-are-available-for-switchvpn-subscription
+    title: What payment options are available for SwitchVPN subscription?
+  refund:
+    url: https://help.switchvpn.net/en/articles/3126088-how-can-i-get-a-refund
+    title: How can I get a refund?
+  port-forwarding:
+    url: https://help.switchvpn.net/en/articles/2083151-how-do-i-enable-vpn-port-forwarding
+    title: How do I enable VPN port forwarding?
+  bittorrent:
+    url: https://help.switchvpn.net/en/articles/1620294-how-to-set-up-vpn-on-bittorrent-with-port-forwarding
+    title: How to set up VPN on BitTorrent with port forwarding
+  china-help:
+    url: https://help.switchvpn.net/en/articles/392818-help-i-am-unable-to-connect-to-vpn-from-china
+    title: Help! I am unable to connect to VPN from China
+  ikev2-list:
+    url: https://help.switchvpn.net/en/articles/975871-ikev2-server-address-list
+    title: IKEv2 server address list
+  ovpn-configs:
+    url: https://secure.switchkonnect.com/dl.php?type=d&id=43
+    title: SwitchOVPN.zip, OpenVPN configuration files
+  mac-old:
+    url: https://help.switchvpn.net/en/articles/107416-switchvpn-for-mac-for-older-macos-versions-10-15-below
+    title: SwitchVPN for Mac for older macOS versions (10.15 and below)
+  mac-tunnelblick:
+    url: https://help.switchvpn.net/en/articles/11761735-switchvpn-for-mac-tunnelblick-setup-for-newer-macos-versions
+    title: SwitchVPN for Mac, Tunnelblick setup for newer macOS versions
+  dd-wrt:
+    url: https://help.switchvpn.net/en/articles/107522-dd-wrt-router-pptp-vpn-setup
+    title: DD-WRT router PPTP VPN setup
+  asus-router:
+    url: https://help.switchvpn.net/en/articles/2015623-asus-router-vpn-setup
+    title: Asus router VPN setup
+  play:
+    url: https://play.google.com/store/apps/details?id=com.switchvpn.ovpn&hl=en&gl=US
+    title: SwitchVPN - Premium VPN on Google Play
+  app-store:
+    url: https://apps.apple.com/us/app/switchvpn-fast-and-powerful-vpn/id1156053301
+    title: SwitchVPN on the App Store
+  app-store-developer:
+    url: https://apps.apple.com/us/developer/cs-systems-inc/id1156053300
+    title: CS Systems, Inc. apps on the App Store
+  rdap-aws:
+    url: https://rdap.arin.net/registry/ip/3.148.210.239
+    title: ARIN RDAP record for 3.148.210.239 (Amazon)
+  rdap-linode:
+    url: https://rdap.arin.net/registry/ip/45.33.123.122
+    title: ARIN RDAP record for 45.33.123.122 (Linode)
+  rdap-vultr:
+    url: https://rdap.arin.net/registry/ip/66.42.67.0
+    title: ARIN RDAP record for 66.42.67.0 (Vultr)
+  cve-2018-18860:
+    url: https://seclists.org/fulldisclosure/2018/Nov/38
+    title: SwitchVPN MacOS Privilege Escalation Vulnerability (Full Disclosure)
