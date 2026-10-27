@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: TotalAV VPN
 icon: totalav-vpn.png
-checked: 2026-10-22
+checked: 2026-10-27
 
 criteria:
   identity:
@@ -33,8 +33,16 @@ criteria:
         - date: 2024-12-12
           acquirer: Point Wild
           source: point-wild-merger
-      note: Point Wild was formed when Total Security merged with Pango Group in December 2024.
-      sources: [point-wild-merger, comparitech-disclosure]
+        - date: 2023-11-30
+          acquirer: Avance Investment Management and Just Develop It
+          source: system1-sale-2023
+        - date: 2022-01-28
+          acquirer: System1
+          source: system1-buy-2022
+      note: >-
+        System1 bought Protected.net Group, now Total Security Limited, in 2022 and sold it in 2023. Point
+        Wild was formed when Total Security merged with Pango Group in December 2024.
+      sources: [system1-buy-2022, system1-sale-2023, point-wild-merger]
 
   jurisdiction:
     hq:
@@ -47,8 +55,7 @@ criteria:
 
   logging:
     traffic:
-      value: none
-      evidence: claimed
+      value: null
       note: >-
         Only a help article says it doesn't track, log or store browsing history. The shared Total
         Security privacy policy has no VPN section, and its US part lists browsing history among the
@@ -83,7 +90,16 @@ criteria:
       sources: [point-wild-reports]
     canary: none
     bug_bounty: false
-    incidents: []
+    incidents:
+      value:
+        - date: 2023-10-20
+          summary: >-
+            A California class action alleged that Total Security, Protected.net and System1 signed people
+            up to auto-renewing subscriptions, Total VPN among them, without setting out the renewal terms
+            clearly. They denied it and agreed to pay $2.5 million to settle, promising only a good faith
+            effort to follow California's auto-renewal law.
+          handled: poorly
+          source: renewal-settlement
 
   account:
     email:
@@ -122,28 +138,32 @@ criteria:
       sources: [vpn-page]
     hosting:
       value: null
-      note: Neither the VPN page nor the privacy policy says who runs the servers.
-      sources: [privacy-policy]
+      note: >-
+        Its processor list names NortonLifeLock for the VPN and IPVanish for Total VPN, but the current
+        Total VPN Android app is built on the SDK and Hydra protocol of Pango, Hotspot Shield's maker.
+      sources: [third-party, android-apk, help-connection]
     virtual_locations:
       value: null
       note: TotalAV doesn't say whether any of its locations are virtual.
       sources: [vpn-page]
     servers:
       value: null
-      note: The VPN page says 50 servers in over 30 countries, but the help centre offers over 90 countries.
-      sources: [vpn-page, help-settings]
+      note: The TotalAV VPN page says 50 servers, while Total VPN's own site and Play listing say thousands.
+      sources: [vpn-page, totalvpn-home, play-listing]
     countries:
       value: null
       note: >-
-        The VPN page lists 36 countries and territories and says over 35, but the help centre's settings
-        guide says over 90.
-      sources: [vpn-page, help-settings]
+        Its pages variously say over 30, over 35, 50+ and over 90 countries. The VPN page lists 36 and
+        Total VPN's homepage lists 49.
+      sources: [vpn-page, totalvpn-home, totalvpn-pricing, help-settings]
 
   features:
     connections:
-      value: null
-      note: Internet Security covers 6 devices, but TotalAV doesn't say how many of them can use the VPN.
-      sources: [renewal-usd]
+      value: 1
+      note: >-
+        Total VPN on its own is licensed for one device. Internet Security covers 6, without saying how
+        many of them can use the VPN.
+      sources: [totalvpn-matrix, renewal-usd]
     multihop: false
     obfuscation: []
     port_forwarding: false
@@ -172,9 +192,9 @@ criteria:
 
   pricing:
     monthly:
-      value: { amount: 11.99, currency: USD }
-      note: Internet Security, the cheapest TotalAV plan that includes the VPN, at its regular monthly rate.
-      sources: [renewal-usd, pricing]
+      value: { amount: 9.99, currency: USD }
+      note: Total VPN on its own, for one device. Internet Security, which bundles it with the antivirus, is $11.99.
+      sources: [totalvpn-matrix, renewal-usd]
     best:
       value: { amount: 3.25, currency: USD }
       note: >-
@@ -271,6 +291,33 @@ refs:
   comparitech-disclosure:
     url: https://www.comparitech.com/disclosure/
     title: Comparitech disclosure
+  totalvpn-home:
+    url: https://www.totalvpn.com/
+    title: Total VPN homepage, with its server countries
+  totalvpn-pricing:
+    url: https://www.totalvpn.com/pricing
+    title: Total VPN pricing
+  totalvpn-matrix:
+    url: https://www.totalvpn.com/subscription-pricing-matrix/active/usd
+    title: Total VPN prices and device licences, USD tab of the pricing matrix
+  play-listing:
+    url: https://play.google.com/store/apps/details?id=com.totalvpn.android
+    title: Total VPN on Google Play, by Total Security Limited
+  android-apk:
+    url: https://apkpure.com/total-vpn/com.totalvpn.android
+    title: Total VPN for Android 1.0.3, whose APK bundles Pango's unified VPN SDK
+  system1-buy-2022:
+    url: https://www.sec.gov/Archives/edgar/data/1805833/000119312522025942/d222372dex991.htm
+    title: System1 completes its combination with Protected.net Group on 28 January 2022 (SEC filing)
+  system1-sale-2023:
+    url: https://www.sec.gov/Archives/edgar/data/1805833/000180583323000179/sst-20231130.htm
+    title: System1 sells Total Security Limited, 30 November 2023 (SEC Form 8-K)
+  renewal-settlement:
+    url: https://www.classaction.org/media/nelson-et-al-v-system1-inc-et-al-settlement-agreement.pdf
+    title: Nelson v. System1, Total Security and Protected.net, settlement agreement (San Diego Superior Court)
   vpn-in-touch:
     url: https://apps.apple.com/us/app/vpn-in-touch/id464241430
     title: VPN in Touch on the App Store, sold by Betternet LLC
+  third-party:
+    url: https://legal.totalav.com/third-party
+    title: Total Security third-party processors
