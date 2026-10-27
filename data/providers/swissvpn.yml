@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: SwissVPN
 icon: swissvpn.png
-checked: 2026-10-25
+checked: 2026-10-27
 
 criteria:
   identity:
@@ -14,8 +14,8 @@ criteria:
       sources: [terms, privacy-policy, imprint, register]
     owner:
       value: null
-      note: Monzoon doesn't publish its shareholders.
-      sources: [imprint, management]
+      note: Monzoon Networks AG's shareholders aren't on the Swiss register, and Monzoon doesn't name them.
+      sources: [imprint, register, moneyhouse]
     founded:
       value: 2007
       note: Monzoon itself was founded in 2000.
@@ -102,7 +102,8 @@ criteria:
       sources: [help, instructions]
     dns:
       value: null
-      sources: [ovpn-config]
+      note: The configs use whatever DNS server SwissVPN hands out, and it doesn't say whose that is.
+      sources: [ovpn-config, viscosity-config]
 
   infra:
     ram_only:
@@ -131,8 +132,10 @@ criteria:
     multihop: false
     obfuscation:
       value: []
-      note: SSTP and OpenVPN run over TCP port 443, which gets through most firewalls, but neither hides that it's a VPN.
-      sources: [help, sstp]
+      note: >-
+        SSTP runs over TCP port 443, which gets through most firewalls, but doesn't hide that it's a VPN.
+        The OpenVPN page says 443 too, though its config files connect on TCP port 1194.
+      sources: [help, sstp, openvpn, ovpn-config, openvpn-ios]
     port_forwarding:
       value: true
       note: >-
@@ -164,6 +167,11 @@ criteria:
       value: none
       note: There are no SwissVPN apps.
       sources: [instructions]
+    trackers:
+      value: null
+      grade: na
+      note: There's no Android app, only guides for Android's built-in VPN client and OpenVPN for Android.
+      sources: [instructions, openvpn-android]
     fdroid:
       value: false
       sources: [fdroid-search]
@@ -189,7 +197,8 @@ criteria:
       sources: [help]
     refund_days:
       value: null
-      sources: [terms, buy]
+      note: The terms have no refund clause, only a right to withdraw over a serious defect that a repair doesn't fix.
+      sources: [terms]
 
   ethics:
     misleading_claims:
@@ -269,6 +278,18 @@ refs:
   management:
     url: https://www.moneyhouse.ch/en/company/monzoon-networks-ag-2589316761/management
     title: Monzoon Networks AG management (Moneyhouse)
+  moneyhouse:
+    url: https://www.moneyhouse.ch/en/company/monzoon-networks-ag-2589316761
+    title: Monzoon Networks AG ownership structure (Moneyhouse)
+  viscosity-config:
+    url: https://www.swissvpn.net/downloads/swissvpn.visz
+    title: SwissVPN Viscosity configuration
+  openvpn-ios:
+    url: https://www.swissvpn.net/support/OPENVPN/openvpn-iphone-en.html
+    title: OpenVPN setup for iPhone
+  openvpn-android:
+    url: https://www.swissvpn.net/support/OPENVPN/openvpn-htc-en.html
+    title: OpenVPN setup for Android
   ripe:
     url: https://stat.ripe.net/data/whois/data.json?resource=80.254.79.100
     title: RIPE whois for connect.swissvpn.net (80.254.79.100)
