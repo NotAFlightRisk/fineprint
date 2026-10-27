@@ -1,0 +1,373 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: URnetwork
+icon: urnetwork.png
+checked: 2026-10-27
+
+criteria:
+  identity:
+    website:
+      value: https://ur.io
+      sources: [home]
+    legal_entity:
+      value: BringYour, Inc.
+      sources: [terms, privacy, sec-formd, play]
+    owner:
+      value: null
+      note: No parent company is named. BringYour raised about $1.5 million from investors in 2024.
+      sources: [sec-formd]
+    founded:
+      value: null
+      note: BringYour, Inc. was incorporated in 2023, and the iOS app first came out in February 2025.
+      sources: [sec-formd, appstore]
+    team:
+      value: public
+      note: >-
+        Brien Colwell is BringYour's executive officer and a director, with Daniel Portillo as the other
+        director. The UR protocol site names its core contributors, a few by handle only.
+      sources: [sec-formd, ur-about]
+    sister_brands: []
+    acquisitions:
+      value: []
+      sources: [sec-formd]
+
+  jurisdiction:
+    hq:
+      value: US
+      sources: [terms, sec-formd]
+    entities:
+      value: [US]
+      note: A Delaware corporation, with its terms governed by Texas law.
+      sources: [sec-formd, terms]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      note: >-
+        BringYour says it records no destinations, and the member devices your traffic exits from see the
+        sites you visit but not who you are. With Post Quantum Encryption off, as it ships, BringYour's relay
+        can read your traffic, and the privacy policy says nothing about logging.
+      sources: [threat-model, overview, privacy]
+    dns:
+      value: none
+      evidence: claimed
+      note: >-
+        Lookups go over DNS over HTTPS through the tunnel to Cloudflare, Google, Quad9 or OpenDNS. The Pro
+        WireGuard profiles use plain DNS, which the exit device can read.
+      sources: [tm-dns, tour-android]
+    timestamps:
+      value: 'yes'
+      evidence: claimed
+      note: >-
+        Transfer contracts, recording when each opened and closed and which member device carried it, are
+        kept for 7 days. Connection records with your approximate city go after 8 hours.
+      sources: [retention, db-schema]
+    bandwidth:
+      value: 'yes'
+      evidence: claimed
+      note: Byte counts per transfer contract are kept for 7 days.
+      sources: [retention, db-schema]
+    source_ip:
+      value: temporary
+      evidence: claimed
+      note: >-
+        Connection records keep a keyed hash of your /29 address block, not the address, for 8 hours.
+        A hash of the block you signed up from stays in audit records for 180 days.
+      sources: [retention]
+    proven:
+      value: []
+      sources: [faq-audited]
+    policy: https://ur.io/privacy
+
+  transparency:
+    audits:
+      value:
+        - date: 2025-05-23
+          auditor: Leviathan Security Group
+          scope: apps
+          source: audit-leviathan-2025
+      evidence: verified
+      note: >-
+        A MASA check of the Android app. BringYour also cites a 2025 pentest of its web app and API by an
+        unnamed firm, unpublished. Nothing independent has covered the protocol or servers.
+      sources: [faq-audited, threat-model]
+    report:
+      value: none
+      sources: [legal]
+    canary:
+      value: none
+      sources: [legal]
+    bug_bounty:
+      value: false
+      note: It has a disclosure policy with safe harbour, but doesn't pay.
+      sources: [vdp]
+    incidents:
+      value: []
+      note: Its outage log covers several long platform outages in October 2026, but no breaches or leaks.
+      sources: [outages]
+
+  account:
+    email:
+      value: optional
+      note: An Instant Account needs no email or phone, just a recovery phrase.
+      sources: [getting-started-android, faq]
+    personal_data:
+      value: []
+      sources: [privacy, getting-started-android]
+    payment:
+      value: [card, app_store, monero, other_crypto]
+      note: Other crypto is USDC on Solana and shielded Zcash. Crypto buys a fixed term and doesn't renew.
+      sources: [terms, faq-pay]
+
+  security:
+    protocols:
+      value: [proprietary, wireguard]
+      note: >-
+        The apps use URnetwork's own protocol over TLS or QUIC. WireGuard is a Pro bridge for stock
+        WireGuard apps, with no end-to-end seal to the exit.
+      sources: [overview, faq-wireguard]
+    post_quantum:
+      value: optional
+      note: The Post Quantum Encryption switch seals traffic end to end to the exit, but ships off. The browser extension and proxies can't use it.
+      sources: [overview, tour-android]
+    kill_switch:
+      value: app
+      note: >-
+        Off by default, and while it's off the apps can fall back to your own connection when no exit is
+        reachable. Android's always-on VPN setting can enforce it at system level.
+      sources: [tour-android, faq-kill-switch]
+    dns:
+      value: third_party
+      note: >-
+        Cloudflare, Google, Quad9 or OpenDNS over DNS over HTTPS, reached through the exit. A brief window
+        at startup also sends lookups over your own connection.
+      sources: [tm-dns, tour-android]
+
+  infra:
+    ram_only:
+      value: null
+      note: Exits are members' own devices, and BringYour doesn't say whether its relay servers run from RAM.
+      sources: [providers-coverage]
+    hosting:
+      value: null
+      note: Exits are members' devices on their own connections. BringYour runs the relay in between and doesn't say whose hardware it's on.
+      sources: [providers-coverage]
+    virtual_locations:
+      value: none
+      note: Locations come from the address BringYour sees, so a member can't claim a city it isn't in.
+      sources: [faq-location]
+    servers:
+      value: 92202
+      note: Member devices providing on 2026-10-27, not servers BringYour runs.
+      sources: [stats-api]
+    countries:
+      value: 100
+      note: Countries with a providing device on 2026-10-27.
+      sources: [stats-api]
+
+  features:
+    connections:
+      value: 1000
+      note: Two on the free plan.
+      sources: [products]
+    multihop:
+      value: true
+      note: >-
+        Traffic always passes BringYour's relay before a member's device, but the relay only stops seeing
+        your destinations once Post Quantum Encryption is on.
+      sources: [overview]
+    obfuscation:
+      value: [proprietary]
+      note: Volunteer-run extenders pose as ordinary TLS services on common ports, with a DNS-shaped fallback.
+      sources: [getting-through]
+    port_forwarding:
+      value: false
+      sources: [products]
+    split_tunnel:
+      value: true
+      note: By app on Android and Windows, and by domain or IP on Android, Apple, Windows and Linux.
+      sources: [faq-split]
+    blocking:
+      value: [ads, trackers, malware]
+      note: Malware and botnet blocking is always on. The ad and tracker blocker ships off.
+      sources: [products, tour-android]
+
+  clients:
+    platforms:
+      value: [windows, macos, linux_gui, ios, android, browser]
+      note: Browser extensions for Chrome, Edge and Firefox.
+      sources: [install]
+    open_source:
+      value: all
+      note: MPL-2.0 for the Android, Apple and extension apps and the core. The Windows and Linux app repos carry no licence.
+      sources: [source-code, android-licence, windows-repo]
+    telemetry:
+      value: null
+      note: The Android app has no third-party analytics or crash SDK, and the privacy policy doesn't say whether the apps send usage data.
+      sources: [privacy, android-build]
+    fdroid:
+      value: true
+      sources: [fdroid]
+
+  pricing:
+    monthly:
+      value: { amount: 5, currency: USD }
+      sources: [products]
+    best:
+      value: { amount: 3.33, currency: USD }
+      note: $40 billed yearly.
+      sources: [products]
+    best_term:
+      value: 12
+      sources: [products]
+    renewal_increase:
+      value: 0
+      sources: [products, terms]
+    free_tier:
+      value: true
+      note: >-
+        30 GiB a day on two devices. Sharing your own connection is optional; until July 2026 the Android
+        app shared it publicly by default while you were connected, and new installs now default to never.
+      sources: [products, faq-sharing, provide-default]
+    refund_days:
+      value: null
+      note: The terms set no refund window. Crypto is refunded only where the law requires, and app store purchases follow the store's rules.
+      sources: [terms]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        The homepage says no single node sees the full path, "privacy by architecture, not promise". Its own
+        docs say that as it ships, BringYour's relay can read your traffic and only discipline keeps
+        destinations out of its records.
+      sources: [home, overview]
+    affiliates: false
+    review_sites: false
+    activism: false
+
+  other:
+    concerns:
+      value:
+        - summary: >-
+            With the kill switch off, as it ships, traffic the apps' own filter won't pass to an exit, such as
+            SSH and other unlisted low ports or unrecognised encrypted protocols, goes out over your own
+            connection with your real IP.
+          severity: serious
+          source: ip-security
+
+refs:
+  home:
+    url: https://ur.io/
+    title: URnetwork, The Privacy Network
+  privacy:
+    url: https://ur.io/privacy
+    title: URnetwork privacy policy (October 21, 2026)
+  terms:
+    url: https://ur.io/terms
+    title: URnetwork terms of service
+  overview:
+    url: https://ur.io/docs/overview
+    title: How URnetwork works
+  faq:
+    url: https://ur.io/docs/faq
+    title: URnetwork frequently asked questions
+  threat-model:
+    url: https://ur.io/docs/threat-model
+    title: URnetwork threat model
+  retention:
+    url: https://ur.io/docs/threat-model#51-how-long-any-of-it-is-kept-and-where-it-goes
+    title: URnetwork threat model, how long any of it is kept
+  tm-dns:
+    url: https://ur.io/docs/threat-model#32-dns
+    title: URnetwork threat model, DNS
+  legal:
+    url: https://ur.io/docs/threat-model#10-legal-demands
+    title: URnetwork threat model, legal demands
+  ip-security:
+    url: https://ur.io/docs/overview#safe-to-share-the-ipsecurity-layer
+    title: 'How URnetwork works: the ip_security layer'
+  getting-through:
+    url: https://ur.io/docs/overview#getting-through-blocks
+    title: 'How URnetwork works: getting through blocks'
+  providers-coverage:
+    url: https://ur.io/docs/overview#providers-and-coverage
+    title: 'How URnetwork works: providers and coverage'
+  faq-audited:
+    url: https://ur.io/docs/faq#has-urnetwork-been-audited
+    title: Has URnetwork been audited? (FAQ)
+  faq-sharing:
+    url: https://ur.io/docs/faq#do-i-have-to-share-my-internet-to-use-it
+    title: Do I have to share my internet to use it? (FAQ)
+  faq-pay:
+    url: https://ur.io/docs/faq#how-do-i-pay
+    title: How do I pay? (FAQ)
+  faq-kill-switch:
+    url: https://ur.io/docs/faq#is-there-a-kill-switch
+    title: Is there a kill switch? (FAQ)
+  faq-split:
+    url: https://ur.io/docs/faq#can-i-keep-one-app-like-my-banking-app-off-the-tunnel
+    title: Can I keep one app off the tunnel? (FAQ)
+  faq-location:
+    url: https://ur.io/docs/faq#can-a-provider-fake-its-location
+    title: Can a provider fake its location? (FAQ)
+  faq-wireguard:
+    url: https://ur.io/docs/faq#what-are-the-httpssocks5wireguard-endpoints
+    title: What are the HTTPS/SOCKS5/WireGuard endpoints? (FAQ)
+  tour-android:
+    url: https://ur.io/docs/tour-android
+    title: The Android app, in depth
+  getting-started-android:
+    url: https://ur.io/docs/getting-started-android
+    title: Getting started on Android
+  products:
+    url: https://ur.io/products
+    title: URnetwork products and pricing
+  install:
+    url: https://ur.io/install
+    title: Install URnetwork
+  outages:
+    url: https://ur.io/outages
+    title: URnetwork outages
+  vdp:
+    url: https://ur.io/vdp
+    title: URnetwork vulnerability disclosure policy
+  stats-api:
+    url: https://api.bringyour.com/stats/last-90
+    title: URnetwork network stats, last 90 days (API)
+  sec-formd:
+    url: https://www.sec.gov/Archives/edgar/data/1979559/000197955924000001/xslFormDX01/primary_doc.xml
+    title: BringYour, Inc., Form D notice of exempt offering (SEC, July 2024)
+  ur-about:
+    url: https://ur.xyz/about
+    title: About UR, the people building the privacy network
+  play:
+    url: https://play.google.com/store/apps/details?id=com.bringyour.network
+    title: URnetwork on Google Play
+  appstore:
+    url: https://apps.apple.com/us/app/urnetwork/id6741000606
+    title: URnetwork on the App Store
+  fdroid:
+    url: https://f-droid.org/en/packages/com.bringyour.network/
+    title: URnetwork on F-Droid
+  audit-leviathan-2025:
+    url: https://appdefensealliance.dev/reports/com.bringyour.network_1747958400000000.pdf
+    title: Leviathan Security Group, MASA report for the Android app (2025)
+  source-code:
+    url: https://github.com/urnetwork
+    title: URnetwork on GitHub
+  android-licence:
+    url: https://github.com/urnetwork/android/blob/main/LICENSE
+    title: urnetwork/android licence (MPL-2.0)
+  windows-repo:
+    url: https://github.com/urnetwork/windows
+    title: urnetwork/windows on GitHub
+  android-build:
+    url: https://github.com/urnetwork/android/blob/main/app/app/build.gradle
+    title: URnetwork Android app build file
+  db-schema:
+    url: https://github.com/urnetwork/server/blob/main/db_migrations.go
+    title: URnetwork server database schema
+  provide-default:
+    url: https://github.com/urnetwork/android/commit/d27fe4feb6b3f2314942455da498af1dae7cf0be
+    title: urnetwork/android commit d27fe4f, providing defaults to never (July 11, 2026)
