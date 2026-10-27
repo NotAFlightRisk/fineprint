@@ -23,7 +23,12 @@ criteria:
     team:
       value: anonymous
       sources: [play, chrome]
-    sister_brands: null
+    sister_brands:
+      value: [SetupVPN]
+      note: >-
+        Hoxx Inc and SetupVPN Inc give the same suite at 815 Ponce de Leon Blvd, share the baseserver.io
+        download service, and run near-identical FAQs.
+      sources: [chrome, setupvpn-chrome, download, setupvpn-download, faq-abuse, setupvpn-faq]
     acquisitions: []
 
   jurisdiction:
@@ -234,3 +239,12 @@ refs:
   edge:
     url: https://microsoftedge.microsoft.com/addons/detail/mmkgibaofkehmmnbcfleonelhenlgcbc
     title: Hoxx VPN Proxy on Edge Add-ons
+  setupvpn-chrome:
+    url: https://chromewebstore.google.com/detail/setupvpn-lifetime-free-vp/oofgbpoabipfcfjapgnbbjjaenockbdp
+    title: SetupVPN - Lifetime Free VPN on the Chrome Web Store
+  setupvpn-download:
+    url: https://setupvpn.com/download/
+    title: Download SetupVPN
+  setupvpn-faq:
+    url: https://setupvpn.com/faq/#Abuse
+    title: SetupVPN FAQ, Abuse
