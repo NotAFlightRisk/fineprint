@@ -1,0 +1,207 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: QuickQ
+icon: quickq.png
+checked: 2026-10-27
+
+criteria:
+  identity:
+    website:
+      value: https://quickq.io
+      sources: [home]
+    legal_entity:
+      value: HongKong IRAY Technology Company Limited
+      note: >-
+        The terms and privacy policy name 艾瑞科技有限公司 (Airui Technology), the Chinese name of this Hong Kong
+        company, registered in 2014. It also sells the iOS app.
+      sources: [terms, privacy, cr-hk, app-store]
+    owner:
+      value: null
+      note: Nothing public names who owns IRAY or Airui Technology.
+      sources: [app-store]
+    founded:
+      value: 2015
+      note: Its site claims to have run since 2015, and its iOS app first came out in August 2019.
+      sources: [home, app-store]
+    team:
+      value: partial
+      note: Its Google Play developer account is in one person's name, at a Hong Kong address. Its site names nobody.
+      sources: [play, terms]
+    sister_brands: []
+    acquisitions:
+      value: null
+      note: No sale is on record, but nothing public says who has owned it since 2015.
+      sources: [app-store]
+
+  jurisdiction:
+    hq:
+      value: HK
+      note: The terms give no country and choose no governing law.
+      sources: [cr-hk, app-store, play, terms]
+    entities:
+      value: [HK]
+      sources: [cr-hk]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [privacy, terms]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [privacy, terms]
+    timestamps:
+      value: aggregate
+      evidence: claimed
+      note: The policy keeps the date you connect, but not the time. The terms also log "access attempts" to its servers, without saying what that covers.
+      sources: [privacy, terms]
+    bandwidth:
+      value: null
+      note: The policy keeps "your data condition" and the data package you bought, without saying whether that's a running usage total.
+      sources: [privacy]
+    source_ip:
+      value: null
+      note: The policy doesn't mention it, and the terms log "access attempts" to its servers for security and troubleshooting.
+      sources: [privacy, terms]
+    proven: []
+    policy: https://quickq.io/privacy
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: null
+      note: The App Store privacy label lists only a user ID and device ID, and it doesn't say whether signing up needs an email.
+      sources: [app-store]
+    personal_data: []
+    payment:
+      value: [card, paypal, app_store]
+      note: Also UnionPay.
+      sources: [home, app-store]
+
+  security:
+    protocols:
+      value: null
+      note: It promises "multi-protocol support" picked automatically, without naming any protocol.
+      sources: [app-store]
+    post_quantum:
+      value: none
+      note: Nothing is published about how its connections are encrypted.
+    kill_switch:
+      value: null
+      note: It doesn't say whether the apps have one.
+    dns:
+      value: null
+      note: It doesn't say whose DNS servers the apps use.
+      sources: [privacy]
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say how its servers are run.
+    hosting:
+      value: null
+      note: It doesn't say whether it owns or rents its servers.
+    virtual_locations:
+      value: null
+      note: It publishes no server list, so there's no way to tell whether any locations are virtual.
+      sources: [home]
+    servers:
+      value: 10000
+      note: It claims over 10,000 nodes but publishes no list.
+      sources: [home]
+    countries:
+      value: 184
+      note: Countries and regions, as claimed with no list to back it.
+      sources: [home]
+
+  features:
+    connections:
+      value: 3
+      note: The terms say premium plans can be used on unlimited devices, but the site and App Store listing both say 3 at once.
+      sources: [home, app-store, terms]
+    multihop: false
+    obfuscation:
+      value: null
+      note: It's sold for use inside restricted networks, but nothing says how it disguises its traffic.
+      sources: [home]
+    port_forwarding: false
+    split_tunnel:
+      value: null
+      note: It doesn't say whether you can choose which apps use the VPN.
+    blocking: []
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android]
+      note: There's also a Linux build, but it doesn't say whether that's a desktop app or a command line tool. The iOS app runs on Apple TV too.
+      sources: [home, app-store, play]
+    open_source:
+      value: none
+      sources: [terms]
+    telemetry:
+      value: null
+      note: The App Store label lists usage and crash data, used for analytics. Nothing says whether you can turn it off.
+      sources: [app-store]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 24.99, currency: USD }
+      note: The App Store price. Its site advertises 50% off under a two-hour countdown.
+      sources: [app-store, home]
+    best:
+      value: { amount: 21.67, currency: USD }
+      note: $259.99 a year on the App Store.
+      sources: [app-store]
+    best_term:
+      value: 12
+      sources: [app-store]
+    renewal_increase:
+      value: 0
+      note: The App Store plans are flat-priced by the month, quarter or year, with no intro deal.
+      sources: [app-store]
+    free_tier:
+      value: null
+      note: The app is free to download and the terms allow ads for non-paying users, but nothing says whether there's a lasting free plan.
+      sources: [terms, app-store]
+    refund_days:
+      value: 0
+      note: The terms say it doesn't offer refunds. App Store purchases follow Apple's rules.
+      sources: [terms]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: It calls itself "an anonymous and privacy service" with a "zero logs policy", while its policy keeps the date you connect, your data use and connection errors.
+      sources: [terms, home, privacy]
+    affiliates:
+      value: false
+      sources: [home]
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://quickq.io/
+    title: QuickQ VPN homepage
+  privacy:
+    url: https://quickq.io/privacy
+    title: Privacy Policy
+  terms:
+    url: https://quickq.io/terms
+    title: Terms of Service
+  app-store:
+    url: https://apps.apple.com/us/app/id1461691334
+    title: QuickQ VPN on the App Store (US)
+  play:
+    url: https://play.google.com/store/apps/details?id=io.quickq.app.android&hl=en&gl=US
+    title: QuickQ VPN on Google Play
+  cr-hk:
+    url: https://www.cr.gov.hk/docs/wrpt/RNC063_2014.03.10-2014.03.16.pdf
+    title: Hong Kong Companies Registry, new companies 10-16 March 2014 (HongKong IRAY Technology, 2050875)
