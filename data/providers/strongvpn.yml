@@ -1,0 +1,326 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: StrongVPN
+icon: strongvpn.png
+checked: 2026-10-27
+
+criteria:
+  identity:
+    website: https://strongvpn.com
+    legal_entity:
+      value: Strong Technology, LLC
+      sources: [tos, privacy-policy, zd-subsidiaries]
+    owner:
+      value: Ziff Davis
+      note: A US listed company, called J2 Global until October 2021.
+      sources: [zd-10k-2025, zd-subsidiaries]
+    founded:
+      value: 2005
+      sources: [aboutus]
+    team:
+      value: partial
+      note: >-
+        Its site names no one who runs StrongVPN, but its owner Ziff Davis is a listed company with
+        named executives.
+      sources: [aboutus, zd-10k-2025]
+    sister_brands:
+      value: [IPVanish]
+      note: >-
+        Encrypt.me, another Ziff Davis VPN, is being folded into StrongVPN and sends new customers
+        there. ibVPN's site now redirects to a StrongVPN page that moves its users over.
+      sources: [zd-10k-2025, encrypt-me, welcome-ibvpn]
+    acquisitions:
+      value:
+        - date: 2019-01-01
+          acquirer: J2 Global
+          source: zd-subsidiaries-2019
+      note: >-
+        Only the year is known. Strong Technology, LLC joined J2 Global's subsidiaries during 2019,
+        and J2 renamed itself Ziff Davis in 2021.
+      sources: [zd-subsidiaries-2019, zd-10k-2025]
+
+  jurisdiction:
+    hq:
+      value: US
+      sources: [subpoenas, tos]
+    entities:
+      value: [US]
+      note: Strong Technology, LLC is registered in Florida. Its EU representative is J2 Global Ireland, a sister company.
+      sources: [zd-subsidiaries, privacy-policy]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [privacy-policy, logs-faq]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [privacy-policy]
+    timestamps:
+      value: none
+      evidence: claimed
+      sources: [logs-faq]
+    bandwidth:
+      value: none
+      evidence: claimed
+      sources: [logs-faq, privacy-policy]
+    source_ip:
+      value: none
+      evidence: claimed
+      sources: [logs-faq]
+    proven: []
+    policy: https://strongvpn.com/privacy-policy/
+
+  transparency:
+    audits: []
+    report:
+      value: none
+      sources: [subpoenas]
+    canary:
+      value: none
+      sources: [subpoenas]
+    bug_bounty:
+      value: false
+      note: Reports go through Ziff Davis's disclosure programme on Bugcrowd, which pays no rewards.
+      sources: [vdp, bugcrowd]
+    incidents: []
+
+  account:
+    email:
+      value: required
+      sources: [privacy-policy]
+    personal_data:
+      value: []
+      note: Signup asks for an email. Card payments also take the cardholder's name and billing address.
+      sources: [privacy-policy]
+    payment:
+      value: [card, paypal, app_store]
+      note: Also Alipay. There's no crypto or cash option.
+      sources: [payment-methods]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn, ikev2, other]
+      note: Other is the older Cisco-style IPSec, kept for legacy devices.
+      sources: [protocols]
+    post_quantum:
+      value: none
+      sources: [protocols]
+    kill_switch:
+      value: app
+      note: >-
+        A setting in the Windows and macOS apps, and on macOS only with OpenVPN or L2TP. The mobile
+        apps don't have one.
+      sources: [kill-switch]
+    dns:
+      value: first_party
+      sources: [dns-leaks]
+
+  infra:
+    ram_only:
+      value: null
+      note: StrongVPN doesn't say whether its servers run from RAM.
+      sources: [zero-logging]
+    hosting:
+      value: owned
+      evidence: claimed
+      note: It also counts Highwinds and StackPath addresses, IPVanish's former owners, as part of its network.
+      sources: [zero-logging, why, dns-leaks]
+    virtual_locations:
+      value: disclosed
+      note: Its server list labels the India location as virtual.
+      sources: [locations, geolocation]
+    servers:
+      value: 950
+      note: It says 950+, without a count per location.
+      sources: [plans]
+    countries:
+      value: 30
+      note: Its own server list, which still includes legacy PPTP servers, names 41 countries.
+      sources: [plans, locations]
+
+  features:
+    connections:
+      value: 12
+      sources: [tos, devices]
+    multihop:
+      value: false
+      sources: [home]
+    obfuscation:
+      value: [proprietary]
+      note: Scramble, a patch that disguises OpenVPN traffic, in every app but iOS.
+      sources: [protocols, best-protocol]
+    port_forwarding:
+      value: false
+      sources: [port-forwarding]
+    split_tunnel:
+      value: true
+      note: In the Android and Fire TV apps.
+      sources: [split-tunnel, android-features]
+    blocking:
+      value: []
+      sources: [home]
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android, linux_cli]
+      note: >-
+        Also Fire TV. Linux gets a WireGuard script with an optional basic GUI, and
+        routers are set up with installer scripts or by hand.
+      sources: [plans, linux, routers]
+    open_source:
+      value: none
+      sources: [tos]
+    telemetry:
+      value: null
+      note: >-
+        The policy names Sentry for Windows app diagnostics and Firebase for the Android, Fire TV and
+        Apple apps, without saying whether you can turn them off.
+      sources: [privacy-policy, play]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 11.99, currency: USD }
+      sources: [plans]
+    best:
+      value: { amount: 3.97, currency: USD }
+      note: The annual plan's $47.69 covers the first year only.
+      sources: [plans]
+    best_term:
+      value: 12
+      sources: [min-term]
+    renewal_increase:
+      value: null
+      note: The annual plan's $47.69 is a first-year price, and the renewal price isn't published.
+      sources: [plans, tos]
+    free_tier:
+      value: false
+      sources: [plans]
+    refund_days:
+      value: 30
+      note: On annual plans only.
+      sources: [guarantee, tos]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        It promises to keep your activity anonymous and calls itself one of the few VPNs that can
+        promise zero logging.
+      sources: [zero-logging]
+    affiliates:
+      value: true
+      note: It offers affiliates up to 200% commission.
+      sources: [press]
+    review_sites:
+      value: true
+      note: >-
+        Ziff Davis also owns tech review sites including PCMag, CNET, Mashable and ZDNET. PCMag's
+        StrongVPN review discloses the link.
+      sources: [zd-10k-2025, pcmag-review]
+    activism: false
+
+refs:
+  home:
+    url: https://strongvpn.com/
+    title: StrongVPN homepage
+  privacy-policy:
+    url: https://strongvpn.com/privacy-policy/
+    title: StrongVPN privacy policy
+  tos:
+    url: https://strongvpn.com/tos/
+    title: StrongVPN terms of service
+  subpoenas:
+    url: https://strongvpn.com/subpoenas/
+    title: StrongVPN, service of subpoenas and other legal process
+  plans:
+    url: https://strongvpn.com/plans/
+    title: StrongVPN plans
+  guarantee:
+    url: https://strongvpn.com/guarantee/
+    title: StrongVPN 30-day money-back guarantee
+  aboutus:
+    url: https://strongvpn.com/aboutus/
+    title: About StrongVPN
+  press:
+    url: https://strongvpn.com/press/
+    title: StrongVPN press page
+  protocols:
+    url: https://strongvpn.com/vpn-protocols/
+    title: StrongVPN protocols
+  locations:
+    url: https://strongvpn.com/locations/
+    title: StrongVPN VPN servers
+  zero-logging:
+    url: https://strongvpn.com/what-is-vpn/zero-logging/
+    title: StrongVPN, pay for a VPN you can trust (zero logging)
+  vdp:
+    url: https://strongvpn.com/vulnerability-disclosure-program/
+    title: Ziff Davis vulnerability disclosure program (StrongVPN)
+  welcome-ibvpn:
+    url: https://strongvpn.com/welcome-ibvpn/
+    title: StrongVPN welcomes ibVPN
+  bugcrowd:
+    url: https://bugcrowd.com/engagements/ziffdavis-vdp-pro
+    title: Ziff Davis vulnerability disclosure program (Bugcrowd)
+  logs-faq:
+    url: https://support.strongvpn.com/hc/en-us/articles/115003036534-Do-You-Keep-Logs
+    title: StrongVPN help, do you keep logs?
+  payment-methods:
+    url: https://support.strongvpn.com/hc/en-us/articles/115003039274-Payment-methods
+    title: StrongVPN help, payment methods
+  kill-switch:
+    url: https://support.strongvpn.com/hc/en-us/articles/360059298373-Kill-Switch
+    title: StrongVPN help, Kill Switch
+  dns-leaks:
+    url: https://support.strongvpn.com/hc/en-us/articles/360026720233-DNS-Leaks
+    title: StrongVPN help, DNS leaks
+  geolocation:
+    url: https://support.strongvpn.com/hc/en-us/articles/360044351914-Geolocation-Errors-When-Connected-to-StrongVPN-Servers
+    title: StrongVPN help, geolocation errors when connected to StrongVPN servers
+  why:
+    url: https://support.strongvpn.com/hc/en-us/articles/115003237034-Why-StrongVPN
+    title: StrongVPN help, why StrongVPN?
+  port-forwarding:
+    url: https://support.strongvpn.com/hc/en-us/articles/360045757953-Does-Port-Forwarding-Work-with-StrongVPN
+    title: StrongVPN help, does port forwarding work with StrongVPN?
+  split-tunnel:
+    url: https://support.strongvpn.com/hc/en-us/articles/360038764874-Split-Tunneling-Feature-in-StrongVPN-for-Android
+    title: StrongVPN help, split tunnelling in StrongVPN for Android
+  android-features:
+    url: https://support.strongvpn.com/hc/en-us/articles/360043261254--StrongVPN-Android-App-Feature-Map-Description
+    title: StrongVPN help, Android app feature map
+  best-protocol:
+    url: https://support.strongvpn.com/hc/en-us/articles/360049145674-Selecting-the-Best-VPN-Protocol-Location
+    title: StrongVPN help, selecting the best VPN protocol and location
+  devices:
+    url: https://support.strongvpn.com/hc/en-us/articles/115003193133-How-Many-Devices-Can-I-Connect-with-StrongVPN
+    title: StrongVPN help, how many devices can I connect?
+  min-term:
+    url: https://support.strongvpn.com/hc/en-us/articles/360047462553-What-is-the-Minimum-Subscription-Term
+    title: StrongVPN help, what is the minimum subscription term?
+  linux:
+    url: https://support.strongvpn.com/hc/en-us/articles/360039443013-WireGuard-Linux-CLI-Script-GUI
+    title: StrongVPN help, WireGuard Linux CLI script and GUI
+  routers:
+    url: https://support.strongvpn.com/hc/en-us/articles/115003511934-Supported-Routers
+    title: StrongVPN help, supported routers
+  play:
+    url: https://play.google.com/store/apps/details?id=com.strongvpn
+    title: StrongVPN on Google Play
+  encrypt-me:
+    url: https://encrypt.me/
+    title: Encrypt.me is becoming StrongVPN
+  zd-subsidiaries-2019:
+    url: https://www.sec.gov/Archives/edgar/data/1084048/000108404820000012/jcom20191231ex-211.htm
+    title: J2 Global, list of subsidiaries (exhibit 21.1, 2019 10-K)
+  zd-10k-2025:
+    url: https://www.sec.gov/Archives/edgar/data/1084048/000108404826000005/zd-20251231.htm
+    title: Ziff Davis, annual report on Form 10-K for 2025
+  zd-subsidiaries:
+    url: https://www.sec.gov/Archives/edgar/data/1084048/000108404826000005/zd20251231ex-211.htm
+    title: Ziff Davis, list of subsidiaries (exhibit 21.1, 2025 10-K)
+  pcmag-review:
+    url: https://www.pcmag.com/reviews/strongvpn
+    title: StrongVPN review (PCMag)
