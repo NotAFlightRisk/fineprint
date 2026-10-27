@@ -1,0 +1,323 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Anonine
+icon: anonine.png
+checked: 2026-10-27
+
+criteria:
+  identity:
+    website:
+      value: https://anonine.com
+      sources: [home]
+    legal_entity:
+      value: Edelino Commerce Inc.
+      note: >-
+        The terms and privacy policy only say Anonine.com. The company is named in the site footer and as the
+        App Store seller, and its 2019 website called it Edelino Commerce Ltd, at a Victoria, Seychelles address.
+      sources: [home, app-store, edelino-2019]
+    owner:
+      value: null
+      note: Nothing published says who owns Edelino Commerce.
+      sources: [edelino-2019]
+    founded:
+      value: 2009
+      note: Its site carried a © 2009 line by early 2010, and the About page says it started in Sweden.
+      sources: [wayback-2010, about]
+    team:
+      value: anonymous
+      note: No one is named on its site, in its terms or on its App Store listing.
+      sources: [about, terms, app-store]
+    sister_brands:
+      value: [BoxPN, Easy Hide IP, FrootVPN, VPNTunnel]
+      note: >-
+        BoxPN, Easy Hide IP and FrootVPN name Edelino Commerce Inc. on their sites. It also sells the BoxPN and
+        VPNTunnel iOS apps from the same developer account as Anonine's, though VPNTunnel's own site names
+        Digital Sales Solutions LLC.
+      sources: [boxpn, easy-hide-ip, frootvpn, developer, boxpn-app, vpntunnel-app, vpntunnel]
+    acquisitions:
+      value: null
+      note: >-
+        In 2015 the site named Breus Electronic Solutions Ltd, a UK company dissolved in 2018, and from 2016
+        Edelino Commerce Inc. The About page calls it a move offshore, and whether it was also a sale isn't
+        published.
+      sources: [wayback-2015, breus-register, wayback-2016, about]
+
+  jurisdiction:
+    hq:
+      value: SC
+      evidence: claimed
+      note: The service page still calls it Swedish-based.
+      sources: [about, app-terms, service]
+    entities:
+      value: [SC]
+      sources: [edelino-2019, app-terms]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [privacy-policy]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [privacy-policy]
+    timestamps:
+      value: none
+      evidence: claimed
+      note: Your number of active connections is held only while they're open, to enforce the device limit.
+      sources: [privacy-policy]
+    bandwidth:
+      value: aggregate
+      evidence: claimed
+      note: The data each account uses is kept for two months, for server planning and the free plan's limits.
+      sources: [privacy-policy]
+    source_ip:
+      value: none
+      evidence: claimed
+      sources: [privacy-policy]
+    proven: []
+    policy: https://anonine.com/privacy-policy/
+
+  transparency:
+    audits: []
+    report: none
+    canary:
+      value: maintained
+      grade: ok
+      note: >-
+        The "as of" date comes from the reader's own device clock, so it shows today's date whether or not
+        anyone has renewed it. It isn't signed either.
+      sources: [about]
+    bug_bounty:
+      value: false
+      sources: [help]
+    incidents: []
+
+  account:
+    email:
+      value: required
+      sources: [purchase]
+    personal_data:
+      value: []
+      sources: [purchase]
+    payment:
+      value: [paypal, app_store]
+      note: >-
+        Cards go through PayPal. It also takes Perfect Money, and Cellsynt phone billing for Swedish customers.
+        The order page's description mentions Bitcoin, but no crypto option is offered.
+      sources: [purchase, app-store]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn, ikev2, other]
+      note: Other is L2TP/IPsec and PPTP. WireGuard isn't among the protocols listed for its apps.
+      sources: [home, wireguard, app-windows, protocols-help]
+    post_quantum:
+      value: none
+      sources: [service, wireguard]
+    kill_switch:
+      value: app
+      note: Listed for the Windows and macOS apps.
+      sources: [app-windows, app-macos]
+    dns:
+      value: first_party
+      evidence: claimed
+      sources: [app-windows]
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say whether its servers run from RAM.
+    hosting:
+      value: mixed
+      evidence: claimed
+      note: Its app terms say most of its servers are its own.
+      sources: [app-terms]
+    virtual_locations:
+      value: null
+      note: It doesn't say whether any of its locations are virtual.
+      sources: [network]
+    servers:
+      value: 150
+      note: It says "more than 150 servers", and the About page over 100.
+      sources: [home, about]
+    countries:
+      value: 34
+      note: Other pages say 32 countries, and the About page 56 locations.
+      sources: [home, network, applications, about]
+
+  features:
+    connections:
+      value: 5
+      sources: [purchase]
+    multihop: false
+    obfuscation:
+      value: [stunnel]
+      note: OpenVPN over Stunnel.
+      sources: [home, service]
+    port_forwarding:
+      value: true
+      note: Swedish servers also offer a public IP address at no extra cost.
+      sources: [service]
+    split_tunnel:
+      value: false
+      sources: [app-windows]
+    blocking: []
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android]
+      note: >-
+        Linux and routers are set up by hand. The Android app is an APK download from its site, and the iOS
+        app was last updated in April 2019.
+      sources: [applications, app-android, app-linux, app-store]
+    open_source:
+      value: none
+      note: Its terms forbid reverse engineering the apps, and no source is published.
+      sources: [terms]
+    telemetry:
+      value: null
+      note: >-
+        The policy lists Google Analytics, Hotjar and Amplitude for tracking how users move, without saying
+        whether the apps send anything.
+      sources: [privacy-policy]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 25.49, currency: USD }
+      note: The home page briefly shows an older $6.99 before the current prices load.
+      sources: [purchase, plans-api]
+    best:
+      value: { amount: 7.86, currency: USD }
+      note: $94.32 for 12 months, sold as a limited-time deal against a struck-through $305.88.
+      sources: [purchase, plans-api]
+    best_term:
+      value: 12
+      sources: [purchase, plans-api]
+    renewal_increase:
+      value: null
+      note: Plans renew automatically, but no renewal price is published.
+      sources: [purchase, app-terms]
+    free_tier:
+      value: true
+      evidence: claimed
+      note: Only in the Android and iOS apps, which advertise free servers. The policy says free accounts get limited bandwidth.
+      sources: [app-android, app-ios, privacy-policy]
+    refund_days:
+      value: 7
+      note: A full refund if you ask within 7 days of ordering. After that it's at its discretion.
+      sources: [app-terms, applications]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        It promises "100% anonymous" browsing, "unbreakable" encryption and that it's "government safe", and
+        still calls itself Swedish-based.
+      sources: [service, about]
+    affiliates:
+      value: true
+      note: Through VPN Partner, a multi-site VPN affiliate programme.
+      sources: [affiliate, home]
+    review_sites:
+      value: null
+      note: No sign it owns any, but who owns Edelino Commerce isn't published.
+    activism: false
+
+refs:
+  home:
+    url: https://anonine.com/
+    title: Anonine home page
+  about:
+    url: https://anonine.com/about/
+    title: About us (and warrant canary)
+  service:
+    url: https://anonine.com/service/
+    title: Service
+  network:
+    url: https://anonine.com/network/
+    title: Our server network locations
+  terms:
+    url: https://anonine.com/terms-of-service/
+    title: Terms of Service (last updated 3 April 2018)
+  privacy-policy:
+    url: https://anonine.com/privacy-policy/
+    title: Privacy Policy (last updated 3 April 2018)
+  app-terms:
+    url: https://app.anonine.com/tos
+    title: Terms of use, linked from the iOS app
+  purchase:
+    url: https://anonine.com/en/order/purchase
+    title: Order page
+  plans-api:
+    url: https://anonine.com/www/plans
+    title: Anonine plans (the data behind the pricing table)
+  applications:
+    url: https://anonine.com/applications/
+    title: All platforms
+  app-windows:
+    url: https://anonine.com/applications/windows/
+    title: Anonine VPN for Windows
+  app-macos:
+    url: https://anonine.com/applications/macos/
+    title: Anonine VPN on macOS
+  app-linux:
+    url: https://anonine.com/applications/linux/
+    title: Anonine VPN for Linux
+  app-android:
+    url: https://anonine.com/applications/android/
+    title: Anonine VPN for Android
+  app-ios:
+    url: https://anonine.com/applications/ios/
+    title: Anonine VPN for iPhone and iPad
+  wireguard:
+    url: https://anonine.com/wireguard/
+    title: WireGuard
+  protocols-help:
+    url: https://help.anonine.com/support/solutions/articles/5000595237-which-protocols-are-supported-
+    title: Which protocols are supported?
+  help:
+    url: https://help.anonine.com/support/solutions
+    title: Anonine knowledge base
+  app-store:
+    url: https://apps.apple.com/us/app/anonine-best-vpn-service/id969103391
+    title: Anonine - Best VPN Service on the App Store
+  developer:
+    url: https://apps.apple.com/us/developer/digit-capital/id957308225
+    title: Digit Capital on the App Store
+  boxpn-app:
+    url: https://apps.apple.com/us/app/boxpn-fast-vpn-proxy/id969103277
+    title: BoxPN - Fast VPN Proxy on the App Store
+  vpntunnel-app:
+    url: https://apps.apple.com/us/app/vpntunnel-private-vpn-spot/id969091963
+    title: VPNTunnel - Private VPN Spot on the App Store
+  boxpn:
+    url: https://boxpn.com/
+    title: BoxPN
+  easy-hide-ip:
+    url: https://easy-hide-ip.com/
+    title: Easy Hide IP
+  frootvpn:
+    url: https://frootvpn.com/
+    title: FrootVPN
+  vpntunnel:
+    url: https://vpntunnel.com/
+    title: VPNTunnel
+  edelino-2019:
+    url: https://web.archive.org/web/20190905203648/http://edelinocommerce.com/
+    title: Edelino Commerce, archived September 2019
+  wayback-2010:
+    url: https://web.archive.org/web/20100208035723/https://www.anonine.com/
+    title: anonine.com, archived February 2010
+  wayback-2015:
+    url: https://web.archive.org/web/20150504011056/https://anonine.com/en/
+    title: anonine.com, archived May 2015
+  wayback-2016:
+    url: https://web.archive.org/web/20160704223520/https://anonine.com/en/
+    title: anonine.com, archived July 2016
+  breus-register:
+    url: https://find-and-update.company-information.service.gov.uk/company/08335529
+    title: Breus Electronic Solutions Ltd at Companies House
+  affiliate:
+    url: https://vpnpartner.com/
+    title: VPN Partner, multi-site VPN affiliate program
