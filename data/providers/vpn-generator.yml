@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: VPN Generator
 icon: vpn-generator.png
-checked: 2026-10-25
+checked: 2026-10-27
 
 criteria:
   identity:
@@ -14,7 +14,8 @@ criteria:
       sources: [policy, imprint, register, home]
     owner:
       value: null
-      sources: [register]
+      note: The institute says a group of internet experts set it up in 2021, and names no parent company.
+      sources: [register, iedn-institute]
     founded:
       value: 2022
       note: The institute was registered in November 2021 and VPN Generator launched in 2022.
@@ -38,33 +39,44 @@ criteria:
 
   logging:
     traffic:
-      value: null
+      value: 'yes'
+      evidence: claimed
       note: >-
-        The privacy policy says it collects or may collect destination IP addresses, kept as long as
-        the service needs them, but the 2023 audit found no user traffic logged.
-      sources: [policy, audit-2023]
+        Its published server setup logs the destination address and port of each connection, with the time,
+        and ships it to log storage encrypted so at least two key holders are needed to read it. The policy lists
+        destination IPs and sets no deletion date.
+      sources: [policy, wg-template, ep-syslog, encrypted-logger, lea-commit]
     dns:
       value: null
-      note: It runs its own resolver, and neither the policy nor the 2023 audit says whether lookups are logged.
-      sources: [policy, audit-2023]
+      note: >-
+        Each server's dnsmasq cache forwards lookups to Cloudflare, with no query logging switched on,
+        but the policy doesn't rule it out.
+      sources: [dnsmasq, policy]
     timestamps:
-      value: null
-      sources: [policy]
+      value: 'yes'
+      evidence: claimed
+      note: >-
+        The connection log is timestamped, a cron job logs users' real IPs every minute, and the
+        brigadier's dashboard shows each user's last visit to the hour.
+      sources: [wg-lea-rev, ep-syslog, last-visit]
     bandwidth:
       value: aggregate
       evidence: verified
       note: Daily, weekly, monthly and yearly byte totals per user were stored for each brigade.
       sources: [audit-2023]
     source_ip:
-      value: null
+      value: 'yes'
+      evidence: claimed
       note: >-
-        The privacy policy says it collects or may collect your IP address, kept as long as the service
-        needs it, but the 2023 audit didn't find real IP addresses logged anywhere.
-      sources: [policy, audit-2023]
+        Every minute each server logs every connected user's real IP address against their tunnel address,
+        into the same encrypted log. The user stats also keep your /24 network for 12 hours.
+      sources: [policy, wg-lea-rev, encrypted-logger, endpoint-prefix, stats-ttl]
     proven:
       value: [audit]
-      note: The 2023 audit reviewed the server code and a staging setup, not the live servers.
-      sources: [audit-2023]
+      note: >-
+        The 2023 audit reviewed the server code and a staging setup, and found no traffic or real IPs logged,
+        though that code already logged destinations.
+      sources: [audit-2023, lea-commit]
     policy: https://vpngen.org/IEDN_Privacy_Policy.pdf
 
   transparency:
@@ -101,8 +113,8 @@ criteria:
   security:
     protocols:
       value: [wireguard, openvpn, other]
-      note: OpenVPN only runs over Cloak. Other covers AmneziaWG, Outline's Shadowsocks, VLESS Reality and IPsec/L2TP.
-      sources: [profile, protocols-code]
+      note: OpenVPN only runs over Cloak. Other covers AmneziaWG, Outline's Shadowsocks and VLESS Reality, as IPsec/L2TP was switched off in 2024.
+      sources: [profile, protocols-code, ipsec-off]
     post_quantum: none
     kill_switch:
       value: null
@@ -110,18 +122,35 @@ criteria:
       note: It has no apps of its own, so this is down to the client you use.
       sources: [bot-texts]
     dns:
-      value: first_party
-      sources: [bot-texts]
+      value: third_party
+      note: Each server runs a dnsmasq cache that forwards lookups to Cloudflare's 1.1.1.1.
+      sources: [dnsmasq, wg-template]
 
   infra:
-    ram_only: null
-    hosting: null
-    virtual_locations: null
+    ram_only:
+      value: none
+      evidence: claimed
+      note: Servers are ordinary disk-based virtual machines, and each brigade's database is a file on its control server.
+      sources: [stats-doc, disk-fix]
+    hosting:
+      value: null
+      note: >-
+        It runs the servers itself as virtual machines, and its deployment scripts target Wolkee's VMware
+        cloud, but it doesn't say where the live ones run.
+      sources: [audit-2023, deploy-providers]
+    virtual_locations:
+      value: null
+      grade: na
+      note: You can't pick a location and it doesn't claim any, so there's nothing to fake.
+      sources: [profile, audit-2023]
     servers:
       value: null
-      note: Each brigadier gets their own server, and no total is published.
+      note: Brigades share pairs of virtual servers in its data centres, and no total is published.
+      sources: [audit-2023, profile]
+    countries:
+      value: null
+      note: It doesn't say which countries its servers are in.
       sources: [profile]
-    countries: null
 
   features:
     connections:
@@ -133,13 +162,18 @@ criteria:
       value: [amneziawg, shadowsocks, v2ray]
       note: V2Ray here is VLESS with Reality. OpenVPN can also be wrapped in Cloak.
       sources: [protocols-code, bot-texts]
-    port_forwarding: null
+    port_forwarding:
+      value: false
+      note: Not offered, and BitTorrent traffic is blocked.
+      sources: [wg-template]
     split_tunnel:
       value: null
       grade: na
       note: It has no apps of its own, so this is down to the client you use.
       sources: [bot-texts]
-    blocking: null
+    blocking:
+      value: []
+      sources: [dnsmasq, wg-mng]
 
   clients:
     platforms:
@@ -155,8 +189,14 @@ criteria:
       sources: [github]
     telemetry:
       value: null
+      grade: na
       note: It has no apps of its own, though the privacy policy lists app usage metrics and Google Analytics.
       sources: [policy]
+    trackers:
+      value: null
+      grade: na
+      note: It has no Android app of its own.
+      sources: [profile]
     fdroid: false
 
   pricing:
@@ -189,9 +229,9 @@ criteria:
     misleading_claims:
       value: true
       note: >-
-        The institute's site says the service keeps no logs and stores zero, while the 2023 audit found
-        per-user data totals stored and the privacy policy says it may collect IP addresses.
-      sources: [iedn-project, iedn-home, audit-2023, policy]
+        The institute's site says no logging and that it stores zero, while its own server code logs
+        destinations and real IP addresses, and the privacy policy lists both.
+      sources: [iedn-project, iedn-home, wg-template, wg-lea-rev, policy]
     affiliates: false
     review_sites: false
     activism:
@@ -256,6 +296,48 @@ refs:
   audit-2023:
     url: https://www.opentech.fund/wp-content/uploads/2024/05/OTF-2023-Q3-VPN-Generator-FINAL-1.pdf
     title: Include Security, VPN Generator application and cryptography architecture review (2023)
+  wg-template:
+    url: https://github.com/vpngen/endpoint-setup-files/blob/main/etc/wireguard/wg.conf.tpl
+    title: VPN Generator WireGuard server template (connection logging and torrent blocking)
+  lea-commit:
+    url: https://github.com/vpngen/endpoint-setup-files/commit/d6999f765f800945c3c67ba6aaf57447edde0e9f
+    title: Enable connection establishment logging (January 2023 commit)
+  wg-lea-rev:
+    url: https://github.com/vpngen/endpoint-setup-files/blob/main/wg-lea-rev.sh
+    title: VPN Generator per-minute user IP logger
+  ep-syslog:
+    url: https://github.com/vpngen/control-endpoint-vms-deploy/blob/main/script-ep.sh.init
+    title: VPN Generator endpoint setup script (remote log forwarding)
+  encrypted-logger:
+    url: https://github.com/vpngen/encrypted-logger/blob/main/encrypted-logger.service
+    title: VPN Generator encrypted logger service
+  endpoint-prefix:
+    url: https://github.com/vpngen/endpoint-vpn-usage-stats/blob/main/util.go
+    title: VPN Generator usage stats, client IP cut to a subnet
+  stats-ttl:
+    url: https://github.com/vpngen/keydesk/blob/main/keydesk/const.go
+    title: Keydesk constants (12 hour endpoint TTL)
+  last-visit:
+    url: https://github.com/vpngen/keydesk/blob/main/keydesk/user.go
+    title: Keydesk user list with last visit hour
+  dnsmasq:
+    url: https://github.com/vpngen/endpoint-setup-files/blob/main/etc/systemd/system/dnsmasq-ns@.service
+    title: VPN Generator per-brigade dnsmasq service
+  wg-mng:
+    url: https://github.com/vpngen/endpoint-setup-files/blob/main/wg-mng.sh
+    title: VPN Generator endpoint manager (dnsmasq hosts file)
+  ipsec-off:
+    url: https://github.com/vpngen/endpoint-setup-files/commit/83b98cba
+    title: Disable ipsec and accel-pppd (July 2024 commit)
+  stats-doc:
+    url: https://github.com/vpngen/keydesk/blob/main/STATISTICS.md
+    title: Keydesk statistics service
+  disk-fix:
+    url: https://github.com/vpngen/endpoint-setup-files/commit/968e37c3
+    title: Fix endpoint disk space exhaustion by nginx logs (2024 commit)
+  deploy-providers:
+    url: https://github.com/vpngen/control-endpoint-vms-deploy/blob/main/providers.tf
+    title: VPN Generator VM deployment, VMware Cloud Director provider
   audit-2023-retest:
     url: https://www.opentech.fund/wp-content/uploads/2024/05/OTF-2023-Q3-VPN-Generator-REMEDIATION-1.pdf
     title: Include Security, VPN Generator remediation report (2023)
