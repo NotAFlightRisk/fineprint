@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: Avira Phantom VPN
 icon: avira-phantom-vpn.png
-checked: 2026-10-21
+checked: 2026-10-27
 
 criteria:
   identity:
@@ -16,9 +16,9 @@ criteria:
       value: Gen Digital
       sources: [lsa, nll-avira-closed]
     founded:
-      value: null
-      note: Avira itself dates from 1986, but none of its pages say when Phantom VPN launched.
-      sources: [investcorp-2020]
+      value: 2016
+      note: Launched for Windows and Android on 30 March 2016. Avira itself dates from 1986.
+      sources: [launch-2016]
     team:
       value: partial
       note: Gen's executives are named, but no one running the VPN is.
@@ -146,8 +146,8 @@ criteria:
       sources: [vpn-pro]
     countries:
       value: 36
-      note: The Pro page lists 36 countries, the help article 35 (no Isle of Man), and the Android listing says 38 locations.
-      sources: [vpn-pro, locations, play-store]
+      note: The Pro page lists 36 countries, the platform pages say 37, the help article 35 (no Isle of Man), and the Android listing says 38 locations.
+      sources: [vpn-pro, windows, locations, play-store]
 
   features:
     connections:
@@ -218,7 +218,11 @@ criteria:
       value: true
       note: Pays affiliates 25% of each qualifying purchase.
       sources: [affiliates]
-    activism: null
+    review_sites: false
+    activism:
+      value: true
+      note: A founding member of the Coalition Against Stalkerware in 2019.
+      sources: [stalkerware]
 
 refs:
   home:
@@ -290,6 +294,12 @@ refs:
   nll-avira-closed:
     url: https://www.sec.gov/Archives/edgar/data/849399/000084939921000010/R12.htm
     title: NortonLifeLock annual report for fiscal 2021, acquisitions note (SEC filing)
+  launch-2016:
+    url: https://web.archive.org/web/20161129072826/http://www.avira.com/en/press-details/nid/1066/news/avira-launches-phantom-vpn-for-secure-and-anonymous-internet-access
+    title: Avira launches Phantom VPN for secure and anonymous internet access, anywhere (March 2016)
+  stalkerware:
+    url: https://stopstalkerware.org/about/
+    title: Coalition Against Stalkerware, about
   investcorp-2020:
     url: https://www.investcorp.com/investcorp-acquires-germanys-leading-cybersecurity-company-avira/
     title: Investcorp acquires Germany's leading cybersecurity company, Avira (April 2020)
