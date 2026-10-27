@@ -11,6 +11,7 @@
 #
 # serious: true   a bad grade here is a serious red flag, which turns the count red.
 #                 Without it, a bad grade is a minor flag, shown in orange.
+# default: x      what leaving it out means, instead of Not checked.
 
 categories:
   - id: identity
@@ -562,3 +563,26 @@ categories:
         rules:
           good: { is: [true] }
           ok: {}
+
+  - id: other
+    label: Other red flags
+    description: Problems the rest of the list doesn't cover.
+    criteria:
+      - key: concerns
+        label: Other red flags
+        type: records
+        default: []
+        description: >-
+          Anything else that puts you at risk, one line each with a source. Each one is its own red
+          flag, serious or minor.
+        fields:
+          summary: { type: text }
+          severity:
+            type: enum
+            options:
+              serious: Serious
+              minor: Minor
+          source: { type: text }
+        rules:
+          good: { max: 0 }
+          bad: {}

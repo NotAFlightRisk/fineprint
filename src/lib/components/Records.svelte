@@ -1,6 +1,6 @@
 <script lang="ts">
   import GradeMark from '#lib/components/GradeMark.svelte';
-  import type { Criterion, Item, Ref } from '#lib/data/types.ts';
+  import type { Criterion, Grade, Item, Ref } from '#lib/data/types.ts';
   import { formatDate, newestFirst, optionLabel } from '#lib/format.ts';
 
   let {
@@ -16,21 +16,22 @@
   } = $props();
 
   const fields = $derived(
-    Object.entries(criterion.fields ?? {}).filter(([name]) => name !== 'date')
+    Object.entries(criterion.fields ?? {}).filter(([name]) => name !== 'date' && name !== 'source')
   );
   const show = (name: string, value: string) =>
     optionLabel({ options: criterion.fields?.[name].options }, value);
+  const marks: Record<string, Grade> = { well: 'good', poorly: 'bad', serious: 'bad', minor: 'ok' };
 </script>
 
-<ol class="timeline">
+<ol class="timeline" class:undated={!criterion.fields?.date}>
   {#each newestFirst(items) as item, index (index)}
     <li>
-      <time datetime={item.date}>{formatDate(item.date, true)}</time>
+      {#if item.date}<time datetime={item.date}>{formatDate(item.date, true)}</time>{/if}
       <p>
         {#each fields as [name, field] (name)}
-          {#if name === 'handled'}
-            <span class="handled">
-              <GradeMark grade={item[name] === 'well' ? 'good' : 'bad'} label="" />
+          {#if name === 'handled' || name === 'severity'}
+            <span class="marked">
+              <GradeMark grade={marks[item[name]]} label="" />
               {show(name, item[name])}
             </span>
           {:else}
@@ -63,6 +64,10 @@
       padding: var(--space-1) 0 var(--space-1) var(--space-3);
     }
 
+    &.undated li {
+      grid-template-columns: 1fr;
+    }
+
     & time {
       font-weight: 600;
       font-size: var(--text-sm);
@@ -81,7 +86,7 @@
     color: var(--text-muted);
   }
 
-  .handled {
+  .marked {
     display: inline-flex;
     align-items: baseline;
     gap: var(--space-1);

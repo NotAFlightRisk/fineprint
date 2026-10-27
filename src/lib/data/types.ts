@@ -57,6 +57,7 @@ export interface Criterion {
   required?: boolean;
   derived?: boolean;
   serious?: boolean;
+  default?: Value;
 }
 
 export interface Category {

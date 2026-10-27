@@ -29,6 +29,10 @@ criteria:
         scope: no_logs
   pricing:
     monthly: { amount: 4.999, currency: EURO }
+  other:
+    concerns:
+      - summary: Sells your IP to the neighbours.
+        severity: serious
   vibes:
     cool: true
 refs:

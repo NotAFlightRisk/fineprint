@@ -198,6 +198,14 @@ criteria:
       value: true
       note: It's a non-profit anti-censorship project aimed at people in Russia and other censored countries.
       sources: [home, profile, iedn-institute]
+  other:
+    concerns:
+      value:
+        - summary: >-
+            Signup is through a Telegram bot, so the VPN is tied to your Telegram account, and Telegram can
+            see that you use it. Friends you invite only get a config file.
+          severity: minor
+          source: bot-welcome
 
 refs:
   home:
@@ -233,6 +241,9 @@ refs:
   bot-texts:
     url: https://github.com/vpngen/embassy-tgbot/blob/main/res.go
     title: VPN Generator bot messages (Russian)
+  bot-welcome:
+    url: https://github.com/vpngen/embassy-tgbot/blob/main/res.go#L86
+    title: VPN Generator bot's welcome message (Russian)
   protocols-code:
     url: https://github.com/vpngen/keydesk/tree/main/internal/vpn
     title: Keydesk VPN protocol modules

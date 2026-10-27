@@ -226,6 +226,14 @@ criteria:
       value: true
       note: It exists to get people past government censorship, and published its methods for beating China's firewall.
       sources: [overview, nsdi]
+  other:
+    concerns:
+      value:
+        - summary: >-
+            Anyone can turn their own computer into a relay, so your traffic runs through a stranger's
+            machine, and they can see whatever isn't encrypted.
+          severity: serious
+          source: warning
 
 refs:
   home:

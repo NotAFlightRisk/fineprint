@@ -223,6 +223,14 @@ criteria:
       note: Hola has run affiliate schemes through ad networks, but no longer has a public affiliate page.
     review_sites: false
     activism: false
+  other:
+    concerns:
+      value:
+        - summary: >-
+            On the free Windows app, and Android builds from outside Google Play, your device becomes an exit
+            node for Bright Data's proxy customers, so other people's traffic leaves through your IP address.
+          severity: serious
+          source: free-version
 
 refs:
   policy:
@@ -237,6 +245,9 @@ refs:
   faq:
     url: https://hola.org/faq
     title: Hola FAQ
+  free-version:
+    url: https://hola.org/faq#intro-lum-cost
+    title: How come Hola has a free version? (Hola FAQ)
   billing-faq:
     url: https://hola.org/faq_billing
     title: Hola billing FAQ

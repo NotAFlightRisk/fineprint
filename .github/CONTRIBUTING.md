@@ -65,6 +65,23 @@ Grades come from the rules in `criteria.yml`, so the same value always gets the 
 
 ---
 
+### Other red flags
+
+Now and then a provider has a problem none of the criteria cover. That goes in `other.concerns`, one line each, and each one counts as its own red flag:
+
+```yaml
+other:
+  concerns:
+    value:
+      - summary: Signup is through a Telegram bot, which ties the VPN to your Telegram account.
+        severity: minor # or serious
+        source: bot
+```
+
+Go easy on it. It's only for when no criterion fits - once the same thing turns up for three providers, it wants a criterion of its own. It's for how the service works now, and things that happened go in `incidents`. `serious` is only for something that directly exposes your identity, traffic or device, and every line needs a source you can check. Leave the key out when there's nothing, rather than writing `concerns: []`.
+
+---
+
 ### Sources
 
 - Prefer the provider's own current pages, then auditors' reports, court records, Exodus Privacy and decent press. Review sites are out, most of them are paid per signup.
