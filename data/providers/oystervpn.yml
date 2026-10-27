@@ -1,0 +1,348 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: OysterVPN
+icon: oystervpn.svg
+checked: 2026-10-27
+
+criteria:
+  identity:
+    website:
+      value: https://oystervpn.com
+      sources: [home]
+    legal_entity:
+      value: Oyster Digital Solutions Limited
+      note: An Irish company registered in Dublin in April 2022.
+      sources: [terms, privacy, cro, play]
+    owner:
+      value: null
+      note: Who owns Oyster Digital Solutions Limited isn't published.
+      sources: [cro, play]
+    founded:
+      value: 2022
+      note: Its company was registered in April 2022 and the Android app came out that July.
+      sources: [cro, play]
+    team:
+      value: partial
+      note: Its AppSumo listing names its founder, Jason Gray. Its own site and policies name nobody.
+      sources: [appsumo, home, privacy]
+    sister_brands:
+      value: []
+      note: Its Google Play and App Store developer accounts list only OysterVPN and a live chat app, Voo.Chat.
+      sources: [play-dev, app-store-dev]
+    acquisitions:
+      value: []
+      sources: [cro]
+
+  jurisdiction:
+    hq:
+      value: IE
+      sources: [cro, location-faq]
+    entities:
+      value: [IE]
+      sources: [cro, play]
+
+  logging:
+    traffic:
+      value: null
+      note: >-
+        The privacy policy lists "DNS queries and traffic destinations" among the data it must collect, but also
+        says it doesn't store the sites you visit. Until July 2025 the same list sat under what it doesn't collect.
+      sources: [privacy, privacy-2024, no-logs-faq]
+    dns:
+      value: null
+      note: >-
+        The privacy policy lists "DNS queries and traffic destinations" among the data it must collect, but also
+        says it doesn't store the sites you visit. Until July 2025 the same list sat under what it doesn't collect.
+      sources: [privacy, privacy-2024, no-logs-faq]
+    timestamps:
+      value: 'yes'
+      evidence: claimed
+      note: >-
+        The privacy policy lists when you connect to a VPN server among the data it must collect, kept for your
+        subscription plus 30 days. Until July 2025 the same list sat under what it doesn't collect.
+      sources: [privacy, privacy-2024]
+    bandwidth:
+      value: null
+      note: >-
+        Its help centre says it keeps no data on bandwidth use, but lifetime plans sold since June 2024 have a
+        monthly fair-use data limit.
+      sources: [no-logs-faq, terms]
+    source_ip:
+      value: null
+      note: >-
+        The privacy policy says it collects which VPN servers and IP addresses you used, without saying whether
+        that includes your own. Its help centre says it keeps no IP address data.
+      sources: [privacy, no-logs-faq]
+    proven: []
+    policy: https://oystervpn.com/privacy-policy/
+
+  transparency:
+    audits:
+      value: []
+      note: The privacy policy says it carries out security audits, but none has been published.
+      sources: [privacy]
+    report:
+      value: none
+      sources: [home]
+    canary:
+      value: none
+      sources: [home]
+    bug_bounty:
+      value: false
+      sources: [home]
+    incidents:
+      value: []
+
+  account:
+    email:
+      value: required
+      sources: [checkout]
+    personal_data:
+      value: []
+      sources: [checkout]
+    payment:
+      value: [card, paypal, app_store]
+      note: Its pricing page title mentions Bitcoin, but checkout offers only cards and PayPal.
+      sources: [checkout, payment-faq, pricing, play]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn, ikev2, proprietary, other]
+      note: Its own protocol is Lightshell. Other is L2TP/IPsec and PPTP.
+      sources: [faqs, protocols-faq, secure-protocols, wireguard-pr]
+    post_quantum:
+      value: none
+      sources: [secure-protocols, wireguard-pr]
+    kill_switch:
+      value: null
+      note: It says the kill switch blocks traffic when the VPN drops, but not whether it works at system level.
+      sources: [kill-switch]
+    dns:
+      value: first_party
+      evidence: claimed
+      sources: [dns-faq]
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say whether its servers run from RAM.
+      sources: [servers]
+    hosting:
+      value: null
+      note: It doesn't say whether it owns or rents its servers.
+      sources: [servers]
+    virtual_locations:
+      value: null
+      note: Its help centre explains virtual servers without saying whether any of its own locations are virtual.
+      sources: [virtual-servers, servers]
+    servers:
+      value: null
+      note: Its plans list 413+ servers, while its server page counts 39.
+      sources: [pricing, servers]
+    countries:
+      value: 32
+      note: Its server page lists 39 countries but shows no servers in seven of them. Its plans say 40+.
+      sources: [servers, pricing]
+
+  features:
+    connections:
+      value: 5
+      note: More are available as a paid add-on through support.
+      sources: [pricing, devices-faq]
+    multihop:
+      value: false
+      sources: [features]
+    obfuscation:
+      value: null
+      note: Its no-logs page mentions an obfuscation or Camouflage mode without saying how it works or which apps have it.
+      sources: [log-less, features]
+    port_forwarding:
+      value: false
+      sources: [features]
+    split_tunnel:
+      value: true
+      note: On Android and Windows only.
+      sources: [split]
+    blocking:
+      value: [ads, malware]
+      sources: [ad-blocker, anti-malware]
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android, browser]
+      note: >-
+        Also Apple TV, Fire TV and Android TV apps. The browser extensions are proxies. Linux and routers use
+        manual setup. The Android app was updated in September 2026.
+      sources: [download, windows-app, mac-app, app-store, play, chrome-ext, linux, routers]
+    open_source:
+      value: none
+      sources: [download, windows-app]
+    telemetry:
+      value: null
+      note: >-
+        App diagnostic reports are optional, but the privacy policy also uses Google Analytics in the apps
+        without saying whether that can be turned off.
+      sources: [privacy]
+    fdroid:
+      value: false
+      sources: [download]
+
+  pricing:
+    monthly:
+      value: { amount: 5.99, currency: USD }
+      note: Its current offer makes the first $5.99 payment cover three months.
+      sources: [pricing]
+    best:
+      value: { amount: 2.00, currency: USD }
+      note: >-
+        The monthly plan's first payment of $5.99 covers three months, which OysterVPN rounds to $1.99 a month.
+        There's also a lifetime plan at $59.99.
+      sources: [pricing]
+    best_term:
+      value: 3
+      sources: [pricing]
+    renewal_increase:
+      value: 200
+      note: After three months it's $5.99 a month. The yearly plan is $39.99 and renews at the same price.
+      sources: [pricing]
+    free_tier:
+      value: false
+      note: There's no free trial either.
+      sources: [free-trial-faq]
+    refund_days:
+      value: 30
+      note: Not for purchases through app stores, or for renewals.
+      sources: [refund, terms, faqs]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        Its terms say you "become anonymous" by masking your IP address, and it promises "military-grade
+        encryption" and to "Browse the web anonymously".
+      sources: [terms, play, log-less]
+    affiliates:
+      value: true
+      note: Its affiliate programme pays 40% of new sales and 35% of renewals, and invites tech reviewers to join.
+      sources: [affiliates]
+    review_sites:
+      value: false
+      sources: [home]
+    activism:
+      value: false
+      sources: [home]
+
+refs:
+  home:
+    url: https://oystervpn.com/
+    title: OysterVPN homepage
+  terms:
+    url: https://oystervpn.com/terms-of-services/
+    title: Terms of Services
+  privacy:
+    url: https://oystervpn.com/privacy-policy/
+    title: Privacy Policy
+  privacy-2024:
+    url: https://web.archive.org/web/20240415192707/https://oystervpn.com/privacy-policy/
+    title: Privacy Policy (April 2024 copy, Wayback Machine)
+  cro:
+    url: https://opendata.cro.ie/api/3/action/datastore_search?resource_id=3fef41bc-b8f4-4b10-8434-ce51c29b1bba&q=717331
+    title: Companies Registration Office open data, Oyster Digital Solutions Limited (717331)
+  play:
+    url: https://play.google.com/store/apps/details?id=com.oystervpn.app&hl=en&gl=US
+    title: 'OysterVPN: Secure and Fast VPN on Google Play'
+  play-dev:
+    url: https://play.google.com/store/apps/developer?id=Oyster+Digital+Solutions
+    title: Oyster Digital Solutions apps on Google Play
+  app-store:
+    url: https://apps.apple.com/us/app/oystervpn-secure-and-fast-vpn/id1639558080
+    title: 'OysterVPN: Secure and Fast VPN on the App Store'
+  mac-app:
+    url: https://apps.apple.com/us/app/oystervpn/id1661305782
+    title: OysterVPN for Mac on the App Store
+  app-store-dev:
+    url: https://apps.apple.com/us/developer/oyster-digital-solution/id1639558082
+    title: Oyster Digital Solution apps on the App Store
+  windows-app:
+    url: https://github.com/oysterdigitalsolutions/winapp-setup/releases
+    title: OysterVPN Windows installer releases
+  chrome-ext:
+    url: https://chromewebstore.google.com/detail/oystervpn-browser-extensi/libhaggbamofjneipmnbhhfhkcdaanmh
+    title: OysterVPN browser extension on the Chrome Web Store
+  download:
+    url: https://oystervpn.com/download/
+    title: Download OysterVPN
+  linux:
+    url: https://oystervpn.com/support/applications/set-up-oystervpn-vpn-on-linux/
+    title: How to set up OysterVPN on Linux
+  routers:
+    url: https://oystervpn.com/support/routers/
+    title: Router tutorials
+  pricing:
+    url: https://oystervpn.com/buy-vpn/
+    title: Buy VPN
+  checkout:
+    url: https://checkout.oystervpn.com/?price_id=16
+    title: OysterVPN checkout
+  payment-faq:
+    url: https://oystervpn.com/support/billing/what-payment-options-do-you-offer/
+    title: What payment options do you offer?
+  free-trial-faq:
+    url: https://oystervpn.com/support/billing/do-you-offer-a-free-trial/
+    title: Do you offer a free trial?
+  refund:
+    url: https://oystervpn.com/refund-policy/
+    title: Refund Policy
+  no-logs-faq:
+    url: https://oystervpn.com/support/accounts/do-you-keep-any-logs-of-my-internet-activities/
+    title: Do you keep any logs of my internet activities?
+  location-faq:
+    url: https://oystervpn.com/support/other-guides/where-are-you-located/
+    title: Where are you located?
+  devices-faq:
+    url: https://oystervpn.com/support/accounts/how-many-devices-can-i-use-with-oystervpn-simultaneously/
+    title: How many devices can I use simultaneously with OysterVPN?
+  protocols-faq:
+    url: https://oystervpn.com/support/other-guides/what-protocols-can-i-use-with-oystervpn/
+    title: What protocols can I use with OysterVPN?
+  secure-protocols:
+    url: https://oystervpn.com/features/secure-protocols/
+    title: Secure protocols
+  wireguard-pr:
+    url: https://www.accessnewswire.com/newsroom/en/computers-technology-and-internet/oystervpn-introduces-wireguard-for-enhanced-speed-and-security-in-b2c-cybersecurity-965548
+    title: OysterVPN introduces WireGuard (ACCESS Newswire, January 2025)
+  dns-faq:
+    url: https://oystervpn.com/support/other-guides/what-dns-addresses-do-you-get-after-connecting-to-oystervpn/
+    title: What DNS addresses do you get after connecting to OysterVPN?
+  virtual-servers:
+    url: https://oystervpn.com/support/other-guides/what-are-virtual-servers/
+    title: What are virtual servers?
+  servers:
+    url: https://oystervpn.com/servers/
+    title: OysterVPN server locations
+  features:
+    url: https://oystervpn.com/features/
+    title: OysterVPN features
+  kill-switch:
+    url: https://oystervpn.com/features/kill-switch/
+    title: Internet kill switch
+  split:
+    url: https://oystervpn.com/features/split-tunneling/
+    title: Split tunnelling
+  log-less:
+    url: https://oystervpn.com/features/log-less-policy/
+    title: Zero-logs policy
+  ad-blocker:
+    url: https://oystervpn.com/features/ad-blocker/
+    title: Ad blocker
+  anti-malware:
+    url: https://oystervpn.com/features/anti-malware/
+    title: Anti-malware protection
+  faqs:
+    url: https://oystervpn.com/support/faqs/
+    title: OysterVPN FAQs
+  appsumo:
+    url: https://appsumo.com/products/oystervpn/
+    title: OysterVPN on AppSumo
+  affiliates:
+    url: https://oystervpn.com/affiliates/
+    title: OysterVPN affiliate programme
