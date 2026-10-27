@@ -100,7 +100,7 @@ criteria:
       value: []
       sources: [purchase]
     payment:
-      value: [paypal, app_store]
+      value: [card, paypal, app_store]
       note: >-
         Cards go through PayPal. It also takes Perfect Money, and Cellsynt phone billing for Swedish customers.
         The order page's description mentions Bitcoin, but no crypto option is offered.
