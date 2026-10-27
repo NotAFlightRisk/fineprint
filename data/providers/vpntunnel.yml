@@ -1,0 +1,310 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: VPNTunnel
+icon: vpntunnel.png
+checked: 2026-10-27
+
+criteria:
+  identity:
+    website:
+      value: https://vpntunnel.com
+      sources: [home]
+    legal_entity:
+      value: Digital Sales Solutions LLC
+      note: >-
+        The terms and privacy policy only say VPNTunnel.com. The site footer names Digital Sales Solutions LLC
+        at a Las Vegas address, while the iOS app is sold by Edelino Commerce Inc.
+      sources: [home, order, terms, app-store]
+    owner:
+      value: null
+      note: Nothing published says who owns Edelino Commerce or Digital Sales Solutions.
+      sources: [edelino-2019]
+    founded:
+      value: 2009
+      note: It launched in Sweden as vpntunnel.se, which announced the service in April 2009 and was selling accounts by December.
+      sources: [wayback-2009-04, wayback-2009-12]
+    team:
+      value: anonymous
+      note: The canary is signed by a CTO called Michael Bass, and no one else is named.
+      sources: [canary, terms]
+    sister_brands:
+      value: [Anonine, BoxPN, Easy Hide IP, FrootVPN]
+      note: >-
+        Its iOS app is sold by Edelino Commerce Inc., which also sells Anonine and BoxPN and runs FrootVPN. Its
+        canary was signed on the same day as FrootVPN's, and both use the same order system.
+      sources: [app-store, developer, anonine, boxpn, easy-hide-ip, frootvpn, canary, frootvpn-canary]
+    acquisitions:
+      value: null
+      note: >-
+        It started as a Swedish service and now runs under Seychelles law, with a Nevada company in the footer.
+        Whether it was ever sold isn't published.
+      sources: [wayback-2009-12, terms, home]
+
+  jurisdiction:
+    hq:
+      value: SC
+      evidence: claimed
+      note: >-
+        Its terms and privacy policy are governed by Seychelles law, but the company its site names is in Nevada and
+        the canary is signed from Amsterdam.
+      sources: [terms, privacy-policy, home, canary]
+    entities:
+      value: [SC, US]
+      note: Edelino Commerce in the Seychelles and Digital Sales Solutions LLC in Nevada.
+      sources: [edelino-2019, app-store, home]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      note: >-
+        Its older FAQ says the no-logs promise always holds for its Swedish servers, and that in countries where logs
+        have to be kept it only hands data over when legally required.
+      sources: [privacy-policy, logs-help, faqs]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [privacy-policy, service-help]
+    timestamps:
+      value: none
+      evidence: claimed
+      sources: [logs-help, privacy-policy]
+    bandwidth:
+      value: null
+      note: It doesn't say, though the iOS app's free allowance means usage is counted per account there.
+      sources: [privacy-policy, app-store]
+    source_ip:
+      value: none
+      evidence: claimed
+      sources: [logs-help, privacy-policy]
+    proven:
+      value: []
+      sources: [canary]
+    policy: https://vpntunnel.com/privacy-policy/
+
+  transparency:
+    audits:
+      value: []
+      sources: [help]
+    report:
+      value: none
+      sources: [canary, help]
+    canary:
+      value: maintained
+      note: PGP-signed, most recently on 13 August 2026.
+      sources: [canary]
+    bug_bounty:
+      value: false
+      sources: [help]
+    incidents: []
+
+  account:
+    email:
+      value: required
+      sources: [order, privacy-policy]
+    personal_data:
+      value: []
+      sources: [order, privacy-policy]
+    payment:
+      value: [card, paypal, app_store]
+      note: Cards are taken through PayPal. The only other option is Perfect Money, an online payment service.
+      sources: [order, app-store]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn, ikev2, other]
+      note: Other is L2TP/IPsec and PPTP. WireGuard is manual setup only, and IKEv2 is only in the iOS app.
+      sources: [protocols-help, wireguard-help, windows-client, app-store]
+    post_quantum:
+      value: none
+      sources: [protocols-help]
+    kill_switch:
+      value: null
+      note: It doesn't say whether its Windows client or iOS app has one.
+      sources: [windows-client]
+    dns:
+      value: first_party
+      evidence: claimed
+      sources: [dns-help]
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say whether its servers run from RAM.
+    hosting:
+      value: mixed
+      evidence: claimed
+      note: Its terms say most of its servers are its own.
+      sources: [terms]
+    virtual_locations:
+      value: null
+      note: It doesn't say whether any locations are virtual.
+      sources: [network]
+    servers:
+      value: 150
+      sources: [home, order]
+    countries:
+      value: 32
+      note: It says "over 32 countries".
+      sources: [home, order]
+
+  features:
+    connections:
+      value: 5
+      note: Its FAQ still says one device at a time.
+      sources: [order, faqs]
+    multihop:
+      value: false
+      sources: [services]
+    obfuscation:
+      value: [stunnel]
+      note: Stunnel wrapped around OpenVPN, by manual setup.
+      sources: [stunnel-help]
+    port_forwarding:
+      value: null
+      note: It doesn't say.
+    split_tunnel:
+      value: null
+      note: Only an old iOS release note mentions choosing which apps use the VPN.
+      sources: [app-store]
+    blocking:
+      value: []
+      sources: [services]
+
+  clients:
+    platforms:
+      value: [windows, ios]
+      note: >-
+        The iOS app was last updated in February 2019, and the Android app its site links to is no longer on Google
+        Play. Everything else is set up by hand.
+      sources: [windows-client, app-store, home, help]
+    open_source:
+      value: none
+      note: Its terms forbid reverse engineering the apps, and no source is published.
+      sources: [terms]
+    telemetry:
+      value: null
+      note: It doesn't say whether the apps send usage or crash data.
+      sources: [privacy-policy]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 29.98, currency: USD }
+      sources: [order]
+    best:
+      value: { amount: 2.50, currency: USD }
+      note: $59.99 for 24 months after a one-day trial, PayPal only, from the home page's free trial button. The yearly plan is $76.32.
+      sources: [trial-order, order]
+    best_term:
+      value: 24
+      sources: [trial-order]
+    renewal_increase:
+      value: null
+      note: Plans can renew automatically, but no renewal price is published.
+      sources: [order, terms]
+    free_tier:
+      value: null
+      note: >-
+        The iOS app advertises free data every month, but the site sells no free plan, only a one-day trial.
+      sources: [app-store, trial-order]
+    refund_days:
+      value: 7
+      note: A full refund if you ask within 7 days of ordering. After that it's at its discretion.
+      sources: [terms, home]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        It calls itself "government safe", sells "military grade encryption" and says you'll be "100% anonymous".
+      sources: [faqs, order, app-store]
+    affiliates:
+      value: null
+      note: It doesn't say whether it pays affiliates.
+    review_sites:
+      value: null
+      note: No sign it owns any, but who owns Edelino Commerce isn't published.
+    activism: false
+
+refs:
+  home:
+    url: https://vpntunnel.com/
+    title: VPNTunnel home page
+  order:
+    url: https://vpntunnel.com/en/order/purchase
+    title: Order page
+  trial-order:
+    url: https://vpntunnel.com/en/order/purchase/plan?plan=m24d_trial
+    title: Free trial order page
+  terms:
+    url: https://vpntunnel.com/terms-of-use/
+    title: Terms of Use
+  privacy-policy:
+    url: https://vpntunnel.com/privacy-policy/
+    title: Privacy policy
+  services:
+    url: https://vpntunnel.com/services/
+    title: Our VPN services
+  network:
+    url: https://vpntunnel.com/network/
+    title: Server network locations
+  faqs:
+    url: https://vpntunnel.com/faqs/
+    title: FAQs
+  canary:
+    url: https://vpntunnel.com/canary.txt
+    title: Warrant canary (signed 13 August 2026)
+  frootvpn-canary:
+    url: https://frootvpn.com/canary.txt
+    title: FrootVPN warrant canary (signed 13 August 2026)
+  wireguard-help:
+    url: https://help.vpntunnel.com/support/solutions/articles/5000857921-vpntunnel-wireguard-manual-configuration
+    title: 'VPNTunnel: WireGuard manual configuration'
+  stunnel-help:
+    url: https://help.vpntunnel.com/support/solutions/articles/5000753548-vpntunnel-stunnel-openvpn-installation-guide-for-windows-10-video
+    title: 'VPNTunnel: Stunnel + OpenVPN installation guide for Windows 10'
+  help:
+    url: https://help.vpntunnel.com/support/solutions
+    title: VPNTunnel knowledge base
+  logs-help:
+    url: https://help.vpntunnel.com/support/solutions/articles/5000611843-does-vpntunnel-log-user-data-
+    title: Does VPNTunnel log user data?
+  service-help:
+    url: https://help.vpntunnel.com/support/solutions/articles/5000595232-how-does-our-service-work-
+    title: How does our service work?
+  protocols-help:
+    url: https://help.vpntunnel.com/support/solutions/articles/5000595237-which-protocols-are-supported-
+    title: Which protocols are supported?
+  dns-help:
+    url: https://help.vpntunnel.com/support/solutions/articles/5000665110-vpntunnel-windows-dns-settings
+    title: 'VPNTunnel: Windows DNS settings'
+  windows-client:
+    url: https://help.vpntunnel.com/support/solutions/articles/5000706675-vpntunnel-for-windows-installation-instructions
+    title: VPNTunnel for Windows, installation instructions
+  app-store:
+    url: https://apps.apple.com/us/app/vpntunnel-private-vpn-spot/id969091963
+    title: VPNTunnel - Private VPN Spot on the App Store
+  developer:
+    url: https://apps.apple.com/us/developer/digit-capital/id957308225
+    title: Digit Capital on the App Store
+  anonine:
+    url: https://anonine.com/
+    title: Anonine
+  boxpn:
+    url: https://boxpn.com/
+    title: BoxPN
+  easy-hide-ip:
+    url: https://easy-hide-ip.com/
+    title: Easy Hide IP
+  frootvpn:
+    url: https://frootvpn.com/
+    title: FrootVPN
+  edelino-2019:
+    url: https://web.archive.org/web/20190905203648/http://edelinocommerce.com/
+    title: Edelino Commerce, archived September 2019
+  wayback-2009-04:
+    url: https://web.archive.org/web/20090424044352/http://www.vpntunnel.se/
+    title: vpntunnel.se, archived April 2009
+  wayback-2009-12:
+    url: https://web.archive.org/web/20091209055450/http://www.vpntunnel.se/
+    title: vpntunnel.se, archived December 2009
