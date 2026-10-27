@@ -7,7 +7,7 @@
   import type { Item } from '#lib/data/types.ts';
   import { formatDate, formatValue, showEntry } from '#lib/format.ts';
   import { absolute, editUrl, historyUrl, site } from '#lib/site.ts';
-  import { byId, redFlags, summarise, verdict } from '#lib/summary.ts';
+  import { byId, redFlags, redFlagsOf, summarise, verdict } from '#lib/summary.ts';
   import { tip } from '#lib/tip.ts';
 
   let { data } = $props();
@@ -15,6 +15,7 @@
 
   const criteria = $derived(byId(categories));
   const summary = $derived(summarise(provider, criteria));
+  const flags = $derived(redFlagsOf(provider, criteria));
   const { website, hq, where, checks } = $derived(summary);
 
   const cited = $derived.by(() => {
@@ -99,21 +100,17 @@
     <div class="facts">
       <Checklist {checks} />
       <div class="flags">
-        <h3 class:none={!provider.flags.length} data-grade={summary.serious ? 'bad' : 'ok'}>
-          {redFlags(provider.flags.length)}
+        <h3 class:none={!flags.length} data-grade={summary.serious ? 'bad' : 'ok'}>
+          {redFlags(flags.length)}
         </h3>
-        {#if provider.flags.length}
+        {#if flags.length}
           <ul>
-            {#each provider.flags as id (id)}
-              {@const criterion = criteria.get(id)!}
+            {#each flags as flag, index (index)}
               <li>
                 <GradeMark grade="bad" />
                 <span
-                  ><a href="#{id}">{criterion.label}</a>: {formatValue(
-                    criterion,
-                    provider.criteria[id].value
-                  )}
-                  {#if criterion.serious}<span class="tag serious">Serious</span>{/if}</span
+                  ><a href="#{flag.id}">{flag.label}</a>: {flag.value}
+                  {#if flag.serious}<span class="tag serious">Serious</span>{/if}</span
                 >
               </li>
             {/each}

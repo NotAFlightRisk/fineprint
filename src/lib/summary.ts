@@ -1,4 +1,4 @@
-import type { Category, Criterion, Grade, Match, Price, Provider } from '#lib/data/types.ts';
+import type { Category, Criterion, Grade, Item, Match, Price, Provider } from '#lib/data/types.ts';
 import { formatValue, inUsd, optionLabel, showEntry } from '#lib/format.ts';
 
 export interface Check {
@@ -78,11 +78,29 @@ export function describeRule(criterion: Criterion, match: Match): string {
 const describeEntry = (provider: Provider, criterion: Criterion) =>
   `${criterion.label}: ${showEntry(criterion, provider.criteria[criterion.id])}`;
 
-export const flagged = (provider: Provider, criteria: Map<string, Criterion>) =>
-  provider.flags.map((id) => describeEntry(provider, criteria.get(id)!));
+export interface RedFlag {
+  id: string;
+  label: string;
+  value: string;
+  serious: boolean;
+}
 
-export const seriousFlags = (provider: Provider, criteria: Map<string, Criterion>) =>
-  provider.flags.filter((id) => criteria.get(id)!.serious).length;
+// one per bad criterion, or per item when the items say how serious they are, serious first
+export const redFlagsOf = (provider: Provider, criteria: Map<string, Criterion>): RedFlag[] =>
+  provider.flags
+    .flatMap((id) => {
+      const criterion = criteria.get(id)!;
+      const entry = provider.criteria[id];
+      const flag = { id, label: criterion.label };
+      if (!criterion.fields?.severity)
+        return [{ ...flag, value: showEntry(criterion, entry), serious: !!criterion.serious }];
+      return (entry.value as Item[]).map((item) => ({
+        ...flag,
+        value: item.summary,
+        serious: item.severity === 'serious'
+      }));
+    })
+    .toSorted((a, b) => Number(b.serious) - Number(a.serious));
 
 export const located = (provider: Provider, criteria: Map<string, Criterion>) =>
   ['jurisdiction.hq', 'jurisdiction.eyes']
@@ -93,7 +111,9 @@ export const redFlags = (count: number) => `${count || 'No'} red flag${count ===
 
 // how much of the hand-filled stuff isn't Unknown or Not checked, in whole percent
 export function completeness(provider: Provider, criteria: Map<string, Criterion>) {
-  const asked = [...criteria.values()].filter((criterion) => !criterion.derived);
+  const asked = [...criteria.values()].filter(
+    (criterion) => !criterion.derived && criterion.default === undefined
+  );
   const known = asked.filter(({ id }) => {
     const entry = provider.criteria[id];
     return entry && (entry.value !== null || entry.grade === 'na');
@@ -104,6 +124,7 @@ export function completeness(provider: Provider, criteria: Map<string, Criterion
 // The gist of a provider: what its card, social image and llms.txt entry show
 export function summarise(provider: Provider, criteria: Map<string, Criterion>) {
   const best = provider.criteria['pricing.best']?.value;
+  const flags = redFlagsOf(provider, criteria);
   return {
     id: provider.id,
     name: provider.name,
@@ -112,8 +133,8 @@ export function summarise(provider: Provider, criteria: Map<string, Criterion>) 
     hq: provider.criteria['jurisdiction.hq'].value as string,
     where: located(provider, criteria),
     checks: checklist(provider, criteria),
-    flags: flagged(provider, criteria),
-    serious: seriousFlags(provider, criteria),
+    flags: flags.map(({ label, value }) => `${label}: ${value}`),
+    serious: flags.filter((flag) => flag.serious).length,
     complete: completeness(provider, criteria),
     price: best ? formatValue(criteria.get('pricing.best')!, best) : undefined,
     usd: best ? inUsd(best as Price) : undefined

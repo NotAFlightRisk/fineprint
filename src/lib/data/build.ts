@@ -40,7 +40,7 @@ export function unify(categories: Category[], id: string, raw: Raw, today: Date)
     const entry: Partial<Entry> | undefined = criterion.derived
       ? derive(criteria, criterion)
       : given === undefined
-        ? undefined
+        ? { value: criterion.default }
         : entryOf(given);
     if (entry?.value === undefined) continue;
     const value = entry.value;

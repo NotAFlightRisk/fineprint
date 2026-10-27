@@ -50,6 +50,10 @@ describe('validator', () => {
     expect(said('transparency.audits[1].date')[0].message).toMatch(/in the future/);
   });
 
+  it('wants a source on every other red flag', () => {
+    expect(said('other.concerns[0]')[0].message).toBe('is missing "source"');
+  });
+
   it('flags missing required criteria', () => {
     expect(said('logging')[0].message).toMatch(/needs policy/);
   });

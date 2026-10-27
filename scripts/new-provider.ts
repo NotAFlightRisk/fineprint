@@ -30,7 +30,7 @@ const examples: Record<string, string> = {
 
 const hint = ({ type, options, fields }: Criterion) =>
   type === 'records'
-    ? `[{ ${Object.keys(fields ?? {}).join(', ')}, source }]`
+    ? `[{ ${[...new Set([...Object.keys(fields ?? {}), 'source'])].join(', ')} }]`
     : options
       ? `${type === 'set' ? 'any of ' : ''}${Object.keys(options).join(' | ')}`
       : examples[type];

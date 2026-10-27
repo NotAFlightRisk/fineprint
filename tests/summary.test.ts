@@ -48,6 +48,36 @@ describe('provider summary', () => {
     const flagged = { ...provider, flags: ['jurisdiction.eyes', 'account.email'] };
     expect(summarise(flagged, criteria).serious).toBe(1);
   });
+
+  it('counts each other red flag on its own, at its own severity', () => {
+    const value = [
+      { summary: 'Sells your IP', severity: 'minor', source: 'policy' },
+      { summary: 'Reads your mail', severity: 'serious', source: 'policy' }
+    ];
+    const summary = summarise(
+      {
+        ...provider,
+        flags: ['account.email', 'other.concerns'],
+        criteria: { ...provider.criteria, 'other.concerns': { value, grade: 'bad', sources: [] } }
+      },
+      criteria
+    );
+    expect(summary.flags).toEqual([
+      'Other red flags: Reads your mail',
+      'Email: Not checked',
+      'Other red flags: Sells your IP'
+    ]);
+    expect(summary.serious).toBe(1);
+  });
+
+  it('reads no other red flags as none, without counting it as research done', () => {
+    expect(provider.criteria['other.concerns']).toMatchObject({ value: [], grade: 'good' });
+    expect(provider.flags).toEqual([]);
+    const { 'other.concerns': _, ...rest } = provider.criteria;
+    expect(completeness({ ...provider, criteria: rest }, criteria)).toBe(
+      completeness(provider, criteria)
+    );
+  });
 });
 
 describe('completeness', () => {
