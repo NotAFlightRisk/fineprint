@@ -1,0 +1,306 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Orchid
+icon: orchid.svg
+checked: 2026-10-27
+
+criteria:
+  identity:
+    website:
+      value: https://www.orchid.com
+      sources: [about]
+    legal_entity:
+      value: Orchid Labs Inc.
+      note: A Delaware corporation based in San Francisco. Google Play lists the Android app under Orchid Technologies LLC, at the same San Francisco address.
+      sources: [sec-form-d, app-store, about, play]
+    owner:
+      value: Orchid Global, Inc.
+      note: Orchid Labs' Delaware parent, privately held. Its backers include Sequoia Capital, Andreessen Horowitz and Threshold (formerly DFJ).
+      sources: [court-2026, launch]
+    founded:
+      value: 2019
+      note: Orchid Labs was formed in 2017. The network and the first Android and Linux apps went live in December 2019.
+      sources: [launch]
+    team:
+      value: partial
+      note: Its website names nobody. Its blog names CEO Steven Waterhouse and CTO Jay Freeman, who are both on its 2018 SEC filing.
+      sources: [ceo-cto, sec-form-d, about]
+    sister_brands:
+      value: []
+      sources: [about]
+    acquisitions:
+      value: []
+      sources: [sec-form-d, about]
+
+  jurisdiction:
+    hq:
+      value: US
+      sources: [about, sec-form-d]
+    entities:
+      value: [US]
+      sources: [sec-form-d, play]
+
+  logging:
+    traffic:
+      value: null
+      note: >-
+        Orchid runs no VPN servers. Independent providers carry your traffic, its FAQ says they can monitor
+        it, and Orchid makes no logging promise for them.
+      sources: [vpn-page, faq, mobile-policy]
+    dns:
+      value: null
+      note: The app sends lookups to Cloudflare over DNS-over-HTTPS, so Cloudflare's resolver policy applies rather than Orchid's.
+      sources: [capture-code]
+    timestamps:
+      value: null
+      note: Each provider sees when you connect and your account's payment address. Orchid's policy only covers what the app keeps on your device.
+      sources: [faq, mobile-policy]
+    bandwidth:
+      value: null
+      note: Providers are paid per byte, so each one counts what you use. Whether they keep it is up to them.
+      sources: [vpn-page, avalanche, faq]
+    source_ip:
+      value: null
+      note: The first provider in your circuit sees your real IP, and Orchid's FAQ says one that keeps logs could be made to hand them over.
+      sources: [faq]
+    proven:
+      value: []
+      sources: [faq]
+    policy: https://www.orchid.com/mobile-privacy-policy/
+
+  transparency:
+    audits:
+      value: []
+      note: >-
+        Consensys Diligence audited the Ethereum payment, directory and curation contracts in 2019, which
+        isn't an audit of the VPN. The store listing also names Certora for the contracts.
+      sources: [audit-consensys-2019, play]
+    report: none
+    canary: none
+    bug_bounty:
+      value: false
+      note: Its disclosure policy promises credit and no legal action, but no payment.
+      sources: [security-policy]
+    incidents: []
+
+  account:
+    email:
+      value: none
+      note: The app creates an Orchid identity key on your device.
+      sources: [identity]
+    personal_data:
+      value: []
+      sources: [mobile-policy, identity]
+    payment:
+      value: [app_store, other_crypto]
+      note: >-
+        In-app credit from $1 through Apple or Google, which Orchid holds for you as xDAI. A self-funded
+        account takes any of nine tokens, OXT, xDAI and AVAX among them, through its dapp.
+      sources: [in-app, how, avalanche]
+
+  security:
+    protocols:
+      value: [proprietary]
+      note: >-
+        Orchid's providers only speak its own protocol, which runs over WebRTC. The app can also connect to
+        WireGuard and OpenVPN servers from other VPNs you pay for separately.
+      sources: [how, circuit-builder]
+    post_quantum: none
+    kill_switch:
+      value: system
+      evidence: claimed
+      note: Built in and always on, cutting all traffic until the tunnel is up.
+      sources: [kill-switch]
+    dns:
+      value: third_party
+      note: Cloudflare's 1.0.0.1, over DNS-over-HTTPS.
+      sources: [capture-code]
+
+  infra:
+    ram_only:
+      value: null
+      note: The servers belong to independent providers, and Orchid doesn't say how they're set up.
+      sources: [vpn-page]
+    hosting:
+      value: null
+      note: Orchid runs no servers. Independent providers host them, and the app picks from a curated list of partners by default.
+      sources: [vpn-page, default-curator, partners]
+    virtual_locations:
+      value: null
+      note: Each Orchid hop goes to a random provider, with no locations listed or offered.
+      sources: [orchid-hop]
+    servers:
+      value: null
+      note: No server list is published. Eleven providers had OXT staked in its directory on 2026-10-27, and five of them held nearly all of it.
+      sources: [directory]
+    countries: null
+
+  features:
+    connections:
+      value: unlimited
+      note: An account can be shared with any number of devices, all paying from one balance.
+      sources: [accounts-docs]
+    multihop:
+      value: true
+      note: Each hop is paid for separately, and Orchid calls multi-hop an advanced, use-at-your-own-risk feature.
+      sources: [circuit-builder, faq]
+    obfuscation:
+      value: [proprietary]
+      note: Its own protocol runs over WebRTC, which Orchid says disguises the traffic to get past firewalls.
+      sources: [how, app-store]
+    port_forwarding: false
+    split_tunnel: false
+    blocking: []
+
+  clients:
+    platforms:
+      value: [ios, macos, android, linux_cli]
+      note: >-
+        Windows only gets a command-line beta. The iOS and Mac app was last updated in May 2023, the Android
+        one in December 2024.
+      sources: [app-store, play, releases, windows-beta]
+    open_source:
+      value: all
+      note: AGPL-3.0, covering the apps, the provider software and the smart contracts.
+      sources: [source-code, vpn-page]
+    telemetry:
+      value: none
+      evidence: claimed
+      note: Both app stores' privacy labels say nothing is collected, and the app has no analytics or crash reporting libraries.
+      sources: [app-store, play, pubspec]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: null
+      grade: na
+      note: There are no plans. You pay per GB as you go, topping up from $1 in the app.
+      sources: [in-app]
+    best:
+      value: null
+      grade: na
+      note: Each provider sets its own price per GB.
+      sources: [in-app]
+    best_term:
+      value: null
+      grade: na
+      note: There are no plans to compare.
+      sources: [in-app]
+    renewal_increase:
+      value: null
+      grade: na
+      note: Credit is prepaid, so nothing renews.
+      sources: [in-app]
+    free_tier: false
+    refund_days:
+      value: null
+      note: Orchid publishes no refund policy. In-app credit can't be withdrawn, while a self-funded account's balance can.
+      sources: [in-app, accounts-docs]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        Its VPN page promises "no trust required" and a 2025 post says you pick from thousands of independent
+        operators, while its FAQ says providers can monitor your traffic and eleven had stake in its directory.
+      sources: [vpn-page, substack-how, faq, directory]
+    affiliates: false
+    review_sites: false
+    activism: false
+
+  other:
+    concerns:
+      value:
+        - summary: >-
+            Payments from a self-funded account now and then settle on a public blockchain, recording your
+            wallet address, the provider's payment address and the time for anyone to see.
+          severity: minor
+          source: faq
+
+refs:
+  about:
+    url: https://www.orchid.com/about/
+    title: About Orchid
+  vpn-page:
+    url: https://www.orchid.com/vpn/
+    title: The Orchid VPN
+  how:
+    url: https://www.orchid.com/how/
+    title: How Orchid works
+  partners:
+    url: https://www.orchid.com/partners/
+    title: Orchid partners
+  mobile-policy:
+    url: https://www.orchid.com/mobile-privacy-policy/
+    title: Privacy policy (app)
+  faq:
+    url: https://docs.orchid.com/en/latest/faq/
+    title: Orchid FAQ
+  identity:
+    url: https://docs.orchid.com/en/latest/using-orchid/#orchid-identity
+    title: The Orchid client, Orchid identity
+  in-app:
+    url: https://docs.orchid.com/en/latest/using-orchid/#add-funds-with-an-in-app-purchase
+    title: The Orchid client, adding funds with an in-app purchase
+  circuit-builder:
+    url: https://docs.orchid.com/en/latest/using-orchid/#circuit-builder
+    title: The Orchid client, circuit builder
+  orchid-hop:
+    url: https://docs.orchid.com/en/latest/using-orchid/#orchid-hop
+    title: The Orchid client, Orchid hops
+  default-curator:
+    url: https://docs.orchid.com/en/latest/using-orchid/#default-curator
+    title: The Orchid client, default curator
+  windows-beta:
+    url: https://docs.orchid.com/en/latest/using-orchid/#windows-beta
+    title: The Orchid client, Windows beta
+  kill-switch:
+    url: https://docs.orchid.com/en/latest/using-orchid/#help-my-internet-connection-shut-off-after-i-turned-orchid-on
+    title: The Orchid client, kill switch FAQ
+  accounts-docs:
+    url: https://docs.orchid.com/en/latest/accounts/
+    title: Orchid accounts
+  court-2026:
+    url: https://courts.ca.gov/opinion/published/2026-07-31/a173959
+    title: Salamon v. Orchid Global, Inc., California Court of Appeal (July 2026)
+  sec-form-d:
+    url: https://www.sec.gov/Archives/edgar/data/1721086/000172108618000001/xslFormDX01/primary_doc.xml
+    title: Orchid Labs Inc. Form D filing with the SEC (2018)
+  app-store:
+    url: https://apps.apple.com/us/app/orchid-secure-networking/id1474884867
+    title: 'Orchid: Secure Networking on the App Store'
+  play:
+    url: https://play.google.com/store/apps/details?id=net.orchid.Orchid
+    title: 'Orchid: VPN, Secure Networking on Google Play'
+  ceo-cto:
+    url: https://blog.orchid.com/orchids-dr-steven-waterhouse-and-jay-freeman-on-orchids-mission/
+    title: Orchid's Dr. Steven Waterhouse and Jay Freeman on Orchid's mission and more
+  launch:
+    url: https://blog.orchid.com/a-billion-orchids-have-bloomed/
+    title: A billion Orchids have bloomed (December 2019)
+  avalanche:
+    url: https://blog.orchid.com/orchid-probabilistic-rollups-are-on-avalanche/
+    title: Orchid's probabilistic rollups are on Avalanche
+  substack-how:
+    url: https://orchidlabs.substack.com/p/how-orchid-creates-a-vpn
+    title: How Orchid creates a VPN (October 2025)
+  source-code:
+    url: https://github.com/OrchidTechnologies/orchid
+    title: OrchidTechnologies/orchid on GitHub
+  releases:
+    url: https://github.com/OrchidTechnologies/orchid/releases
+    title: Orchid releases on GitHub
+  capture-code:
+    url: https://github.com/OrchidTechnologies/orchid/blob/master/vpn-shared/source/capture.cpp
+    title: Orchid client DNS handling (capture.cpp)
+  pubspec:
+    url: https://github.com/OrchidTechnologies/orchid/blob/master/gui-orchid/pubspec.yaml
+    title: Orchid app dependencies (pubspec.yaml)
+  security-policy:
+    url: https://github.com/OrchidTechnologies/orchid/blob/master/SECURITY.md
+    title: Orchid security policy
+  directory:
+    url: https://eth.blockscout.com/address/0x918101FB64f467414e9a785aF9566ae69C3e22C5?tab=logs
+    title: Orchid's stake directory contract on Ethereum (Blockscout)
+  audit-consensys-2019:
+    url: https://diligence.security/audits/2019/11/orchid-network-protocol/orchid-audit-2019-10.pdf
+    title: Consensys Diligence, Orchid network protocol smart contract audit (2019)
