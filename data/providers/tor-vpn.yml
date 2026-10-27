@@ -1,0 +1,341 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Tor VPN
+icon: tor-vpn.svg
+checked: 2026-10-27
+
+criteria:
+  identity:
+    website:
+      value: https://download.torproject.org/tor-vpn-for-android/
+      sources: [download]
+    legal_entity:
+      value: The Tor Project, Inc.
+      note: A US 501(c)(3) nonprofit.
+      sources: [policy, propublica, play]
+    owner:
+      value: null
+      grade: na
+      note: A nonprofit with no parent company. It's funded by US federal agencies, private foundations and individual donors.
+      sources: [propublica, who-funds]
+    founded:
+      value: 2025
+      note: A limited beta release in autumn 2025. The Tor Project itself was founded in 2006.
+      sources: [blog-beta, history]
+    team:
+      value: public
+      sources: [people]
+    sister_brands:
+      value: []
+      sources: [download]
+    acquisitions: []
+
+  jurisdiction:
+    hq:
+      value: US
+      sources: [propublica, play]
+    entities:
+      value: [US]
+      sources: [propublica]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      note: >-
+        The Tor Project runs none of the relays. Volunteer operators are asked not to look at or record
+        traffic, and the exit relay that carries it doesn't know who you are.
+      sources: [policy, relay-expectations, about]
+    dns:
+      value: none
+      evidence: claimed
+      note: Lookups are made by the volunteer exit relay, which can't see your IP address.
+      sources: [troubleshooting, relay-expectations]
+    timestamps:
+      value: none
+      evidence: claimed
+      note: Relay operators are asked not to reveal the timing or volume of anyone's connections.
+      sources: [policy, relay-expectations]
+    bandwidth:
+      value: none
+      evidence: claimed
+      note: Session stats stay on your phone and are dropped when the session ends.
+      sources: [policy]
+    source_ip:
+      value: none
+      evidence: claimed
+      note: Only the first relay sees your IP address, and it can't see where your traffic goes.
+      sources: [about, no-logs, relay-expectations]
+    proven:
+      value: []
+      note: Its audit covered the app, not the relays.
+      sources: [audit-2025]
+    policy: https://www.torproject.org/about/privacy_policy/
+
+  transparency:
+    audits:
+      value:
+        - date: 2025-06-27
+          auditor: Cure53
+          scope: apps
+          source: audit-2025
+      evidence: verified
+      note: Covered the Android app and its onionmasq tunnel library over two weeks in June 2025, not the Tor network.
+      sources: [audit-blog]
+    report: none
+    canary: none
+    bug_bounty:
+      value: true
+      note: The Tor Project's HackerOne bounty pays for bugs in Tor and Arti, which the app runs on. The app itself isn't listed in scope.
+      sources: [hackerone]
+    incidents:
+      value:
+        - date: 2026-10-05
+          summary: >-
+            Attackers hacked some volunteers' relay servers and turned them into exits that intercepted SSH
+            connections. The Tor Project flagged them and had them rejected from the network.
+          handled: well
+          source: relay-incident-2026
+      sources: [relay-incident-2026]
+
+  account:
+    email:
+      value: none
+      note: There are no accounts.
+      sources: [policy]
+    personal_data:
+      value: []
+      sources: [policy]
+    payment:
+      value: []
+      note: It's free. The Tor Project takes donations.
+      sources: [download]
+
+  security:
+    protocols:
+      value: [other]
+      note: Traffic goes over the Tor network through Arti, Tor's Rust client, rather than a VPN protocol.
+      sources: [about, fdroid]
+    post_quantum:
+      value: none
+      note: Post-quantum circuit handshakes are still a design proposal for Tor.
+      sources: [pq-proposal]
+    kill_switch:
+      value: none
+      note: >-
+        It has no kill switch of its own. Its Kill switch screen sends you to Android's Always-on VPN and
+        Block connections without VPN settings, which are off by default.
+      sources: [kill-switch, threat-model]
+    dns:
+      value: third_party
+      note: Lookups are answered by whichever resolver the volunteer exit relay uses.
+      sources: [troubleshooting]
+
+  infra:
+    ram_only:
+      value: null
+      note: Relays are volunteers' own machines, and Tor doesn't ask them to run from RAM.
+      sources: [relay-expectations]
+    hosting:
+      value: null
+      note: The Tor Project runs none of the relays. Thousands of volunteers host them on hardware they choose.
+      sources: [download, relay-expectations]
+    virtual_locations:
+      value: none
+      note: A relay's country comes from a GeoIP lookup of its address, not from what its operator says.
+      sources: [onionoo-docs, exit-location]
+    servers:
+      value: 9183
+      note: Running relays on 2026-10-26, 2,744 of them exits.
+      sources: [onionoo]
+    countries:
+      value: 78
+      note: Countries with a running relay on 2026-10-26. Exits were in 54 of them.
+      sources: [onionoo]
+
+  features:
+    connections:
+      value: unlimited
+      note: There are no accounts, so nothing limits devices.
+      sources: [policy]
+    multihop:
+      value: true
+      note: Every connection goes through three relays, and each app gets its own circuit.
+      sources: [about, fdroid]
+    obfuscation:
+      value: [obfs4, proprietary]
+      note: >-
+        Its own methods are Tor's Snowflake and WebTunnel bridges. The beta doesn't have all of Tor's
+        anti-censorship features yet.
+      sources: [bridges, fdroid, changelog]
+    port_forwarding:
+      value: null
+      note: Tor VPN doesn't document it.
+      sources: [about]
+    split_tunnel:
+      value: true
+      note: By app. Tor Browser and Orbot are left out by default.
+      sources: [config-apps]
+    blocking: []
+
+  clients:
+    platforms:
+      value: [android]
+      note: Android 7 or newer. Tablets and Chromebooks aren't supported.
+      sources: [install]
+    open_source:
+      value: all
+      note: BSD-3-Clause, with reproducible builds.
+      sources: [source-code, fdroid, changelog]
+    telemetry:
+      value: none
+      evidence: claimed
+      sources: [policy, fdroid]
+    fdroid:
+      value: true
+      sources: [fdroid]
+
+  pricing:
+    monthly:
+      value: { amount: 0, currency: USD }
+      note: Free, and the Tor Project says it always will be.
+      sources: [download]
+    best:
+      value: { amount: 0, currency: USD }
+      sources: [install]
+    best_term:
+      value: null
+      grade: na
+      note: It's free.
+      sources: [install]
+    renewal_increase:
+      value: 0
+      note: Nothing renews.
+      sources: [install]
+    free_tier:
+      value: true
+      sources: [download, install]
+    refund_days:
+      value: null
+      grade: na
+      note: It's free.
+      sources: [install]
+
+  ethics:
+    misleading_claims:
+      value: false
+      note: >-
+        The Play listing says it hides your IP address from your apps, while its threat model says apps
+        can read it on mobile data. The listing does warn that Android data can still identify you.
+      sources: [play, threat-model]
+    affiliates: false
+    review_sites: false
+    activism:
+      value: true
+      note: A nonprofit that builds free tools against surveillance and censorship.
+      sources: [history]
+
+  other:
+    concerns:
+      value:
+        - summary: >-
+            The Tor Project calls it beta software that may leak information, and says not to rely on it
+            for anything sensitive.
+          severity: minor
+          source: support
+        - summary: >-
+            Exit relays are run by volunteers, and a bad one can read anything you send unencrypted, though
+            it can't tell who sent it.
+          severity: serious
+          source: tor-vs-proxies
+
+refs:
+  download:
+    url: https://download.torproject.org/tor-vpn-for-android/
+    title: Tor VPN Beta for Android
+  support:
+    url: https://support.torproject.org/tor-vpn/
+    title: Tor VPN Beta support
+  about:
+    url: https://support.torproject.org/tor-vpn/getting-started/about-tor-vpn/
+    title: About Tor VPN
+  install:
+    url: https://support.torproject.org/tor-vpn/getting-started/download-and-install/
+    title: Downloading and installing Tor VPN
+  config-apps:
+    url: https://support.torproject.org/tor-vpn/features/config-apps/
+    title: Configuring apps to use Tor VPN
+  exit-location:
+    url: https://support.torproject.org/tor-vpn/features/exit-location/
+    title: Exit location of the Tor connections
+  kill-switch:
+    url: https://support.torproject.org/tor-vpn/features/kill-switch/
+    title: Tor VPN Kill Switch
+  bridges:
+    url: https://support.torproject.org/tor-vpn/circumvention/using-bridges/
+    title: Configure Tor VPN to use bridges
+  troubleshooting:
+    url: https://support.torproject.org/tor-vpn/encountering-issues/troubleshooting/
+    title: Tor VPN troubleshooting
+  threat-model:
+    url: https://support.torproject.org/tor-vpn/security/threat-model/
+    title: Tor VPN Threat Model (Mike Perry, August 2025)
+  policy:
+    url: https://www.torproject.org/about/privacy_policy/
+    title: Privacy Policy for Tor Browser for Desktop, Tor Browser for Android, and Tor VPN
+  no-logs:
+    url: https://support.torproject.org/about-tor/using-and-sharing/no-logs/
+    title: Does the Tor Project keep logs of its users?
+  relay-expectations:
+    url: https://community.torproject.org/policies/relays/expectations-for-relay-operators/
+    title: Expectations for relay operators
+  tor-vs-proxies:
+    url: https://support.torproject.org/about-tor/introduction/tor-vs-other-proxies/
+    title: How is Tor different from other proxies?
+  relay-incident-2026:
+    url: https://forum.torproject.org/t/tor-relays-security-incident-affecting-some-relay-operators/22231
+    title: Security incident affecting some relay operators (Tor forum, October 2026)
+  blog-beta:
+    url: https://blog.torproject.org/tor-vpn-beta/
+    title: "Tor VPN Beta: What we've learned building our own VPN for Android from scratch (September 2026)"
+  audit-blog:
+    url: https://blog.torproject.org/code-audit-tor-vpn/
+    title: Code audit of Tor VPN (April 2026)
+  audit-2025:
+    url: https://blog.torproject.org/code-audit-tor-vpn/torvpn_cure53_audit.pdf
+    title: Cure53, Pentest-Report Tor Android VPN & Arti Interface (June 2025)
+  hackerone:
+    url: https://hackerone.com/torproject
+    title: Tor on HackerOne
+  pq-proposal:
+    url: https://spec.torproject.org/proposals/355-revisiting-pq.html
+    title: 'Tor proposal 355: Options for postquantum circuit extension handshakes'
+  onionoo:
+    url: https://onionoo.torproject.org/details?running=true&type=relay&fields=country,flags
+    title: Onionoo, running Tor relays with country and flags
+  onionoo-docs:
+    url: https://metrics.torproject.org/onionoo.html
+    title: Onionoo protocol documentation, Tor Metrics
+  source-code:
+    url: https://gitlab.torproject.org/tpo/applications/vpn
+    title: tpo/applications/vpn on the Tor Project's GitLab
+  changelog:
+    url: https://gitlab.torproject.org/tpo/applications/vpn/-/blob/main/CHANGELOG.md
+    title: Tor VPN changelog
+  fdroid:
+    url: https://f-droid.org/en/packages/org.torproject.vpn/
+    title: Tor VPN Beta on F-Droid
+  play:
+    url: https://play.google.com/store/apps/details?id=org.torproject.vpn&hl=en_US
+    title: Tor VPN Beta on Google Play
+  propublica:
+    url: https://projects.propublica.org/nonprofits/organizations/208096820
+    title: Tor Project Inc, ProPublica Nonprofit Explorer (IRS filings)
+  who-funds:
+    url: https://support.torproject.org/about-tor/introduction/who-funds-tor/
+    title: Who funds the Tor Project?
+  history:
+    url: https://www.torproject.org/about/history/
+    title: Tor Project history
+  people:
+    url: https://www.torproject.org/about/people/
+    title: Tor Project people
