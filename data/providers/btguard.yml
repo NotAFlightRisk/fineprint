@@ -1,0 +1,266 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: BTGuard
+icon: btguard.png
+checked: 2026-10-27
+
+criteria:
+  identity:
+    website:
+      value: https://btguard.com
+      sources: [home]
+    legal_entity:
+      value: Netcrawled LLC
+      sources: [tos, play, appstore]
+    owner:
+      value: null
+      note: No parent company is named above Netcrawled LLC.
+      sources: [tos, play]
+    founded:
+      value: 2008
+      evidence: claimed
+      sources: [home, network]
+    team:
+      value: anonymous
+      note: Its site and terms name a company but nobody who runs it.
+      sources: [home, tos]
+    sister_brands:
+      value: []
+      note: Netcrawled LLC also sells VPS and dedicated server hosting, but no other VPN brand.
+      sources: [netcrawled]
+    acquisitions:
+      value: null
+      note: Netcrawled LLC has been named in its terms since 2011, but whether it has ever changed hands isn't published.
+      sources: [tos]
+
+  jurisdiction:
+    hq:
+      value: US
+      note: Its Google Play developer listing gives an address in Coolidge, Arizona.
+      sources: [play]
+    entities:
+      value: [US]
+      sources: [play]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [policy]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [policy]
+    timestamps:
+      value: none
+      evidence: claimed
+      note: The privacy policy doesn't cover connection times, but the network page claims no connection logs.
+      sources: [network, policy]
+    bandwidth:
+      value: null
+      note: The privacy policy doesn't say whether data use per account is recorded.
+      sources: [policy]
+    source_ip:
+      value: null
+      note: The privacy policy doesn't say whether the IP you connect from is recorded.
+      sources: [policy]
+    proven:
+      value: []
+      sources: [policy]
+    policy: https://btguard.com/privacy
+
+  transparency:
+    audits:
+      value: []
+      sources: [home, policy]
+    report:
+      value: none
+      sources: [home]
+    canary:
+      value: none
+      sources: [support]
+    bug_bounty:
+      value: false
+      sources: [support]
+    incidents:
+      value: []
+
+  account:
+    email:
+      value: required
+      sources: [join]
+    personal_data:
+      value: []
+      sources: [join, policy]
+    payment:
+      value: [card, paypal, bitcoin, other_crypto]
+      note: Visa, Google Pay, PayPal, Bitcoin, Ether and USDT are listed; the checkout itself only shows once an account exists.
+      sources: [home, network]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn, ikev2, other]
+      note: Other is PPTP, kept for old devices, plus REALITY and Hysteria2.
+      sources: [included]
+    post_quantum:
+      value: none
+      sources: [included]
+    kill_switch:
+      value: app
+      sources: [android-app, windows-app]
+    dns:
+      value: null
+      note: It doesn't say whose DNS servers the VPN uses.
+      sources: [policy, included]
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say whether its servers run from RAM.
+      sources: [network]
+    hosting:
+      value: null
+      note: Netcrawled LLC is itself a hosting company, but which servers it owns isn't stated.
+      sources: [network, netcrawled]
+    virtual_locations:
+      value: null
+      note: It doesn't say whether any locations are virtual.
+      sources: [network]
+    servers:
+      value: null
+      note: It lists 33 locations but no server count.
+      sources: [network]
+    countries:
+      value: 27
+      sources: [network]
+
+  features:
+    connections:
+      value: 20
+      sources: [included]
+    multihop:
+      value: false
+      sources: [included]
+    obfuscation:
+      value: [v2ray, quic]
+      note: Its stealth mode offers REALITY (from the Xray and V2Ray family) and Hysteria2, which runs over QUIC.
+      sources: [included, network]
+    port_forwarding:
+      value: true
+      sources: [included, android-app]
+    split_tunnel:
+      value: true
+      sources: [included, android-app]
+    blocking:
+      value: []
+      sources: [included]
+
+  clients:
+    platforms:
+      value: [windows, macos, linux_gui, ios, android, browser]
+      note: The Android app was updated on Google Play in October 2026.
+      sources: [windows-app, macos-app, linux-app, ios-app, appstore, play, install-browser]
+    open_source:
+      value: none
+      sources: [install-vpn]
+    telemetry:
+      value: null
+      note: The policy rules out third-party analytics in its apps but doesn't say whether they send anything of their own.
+      sources: [policy]
+    fdroid:
+      value: false
+      sources: [android-app]
+
+  pricing:
+    monthly:
+      value: null
+      note: Only a starting price is public; the plan lengths and monthly price show after you create an account.
+      sources: [home]
+    best:
+      value: { amount: 5.83, currency: USD }
+      note: The lowest per-month price it advertises, on a plan length it doesn't state.
+      sources: [home]
+    best_term:
+      value: null
+      note: The plan length behind the starting price isn't published.
+      sources: [home]
+    renewal_increase:
+      value: null
+      note: The renewal terms aren't published before signup.
+      sources: [home]
+    free_tier:
+      value: false
+      sources: [included]
+    refund_days:
+      value: 30
+      sources: [home, network]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: It calls its no-logs policy "proven over 18 years" with no audit or court case behind it.
+      sources: [network]
+    affiliates:
+      value: true
+      sources: [affiliates]
+    review_sites:
+      value: false
+      sources: [home]
+    activism:
+      value: false
+      sources: [support]
+
+refs:
+  home:
+    url: https://btguard.com/
+    title: BTGuard - Anonymous VPN and BitTorrent Proxy Since 2008
+  tos:
+    url: https://btguard.com/tos
+    title: Terms of Service
+  policy:
+    url: https://btguard.com/privacy
+    title: Privacy Policy
+  play:
+    url: https://play.google.com/store/apps/details?id=com.btguard.vpn.app&hl=en&gl=US
+    title: BTGuard VPN on Google Play
+  netcrawled:
+    url: https://www.netcrawled.com/
+    title: Netcrawled LLC
+  network:
+    url: https://btguard.com/network
+    title: VPN Server Locations
+  included:
+    url: https://btguard.com/whats-included
+    title: "What's Included: VPN, Torrent Proxy, Extension and Email"
+  join:
+    url: https://btguard.com/join?service=vpn
+    title: VPN Signup
+  install-vpn:
+    url: https://btguard.com/install/vpn/
+    title: VPN install guides
+  install-browser:
+    url: https://btguard.com/install/browser/
+    title: Browser extension install guides
+  android-app:
+    url: https://btguard.com/install/view/btguardvpn-android/
+    title: BTGuard VPN for Android
+  windows-app:
+    url: https://btguard.com/install/view/btguardvpn-windows/
+    title: BTGuard VPN for Windows
+  linux-app:
+    url: https://btguard.com/install/view/btguardvpn-linux/
+    title: BTGuard VPN for Linux
+  macos-app:
+    url: https://btguard.com/install/view/btguardvpn-macos/
+    title: BTGuard VPN for MacOS
+  ios-app:
+    url: https://btguard.com/install/view/btguardvpn-ios/
+    title: BTGuard VPN for iOS
+  appstore:
+    url: https://apps.apple.com/us/app/btguard-vpn/id6768444213
+    title: BTGuard VPN on the App Store
+  support:
+    url: https://btguard.com/support/
+    title: Support - Help Center and Contact
+  affiliates:
+    url: https://btguard.com/affiliate/
+    title: BTGuard affiliate programme
