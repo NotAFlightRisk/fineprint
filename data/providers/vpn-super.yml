@@ -1,0 +1,278 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: VPN Super
+icon: vpn-super.png
+checked: 2026-10-27
+
+criteria:
+  identity:
+    website:
+      value: https://vpnsuper.com
+      sources: [home]
+    legal_entity:
+      value: VPN Super Inc.
+      note: >-
+        The terms name VPN Super Inc. and Mobile Jump Pte. Ltd. for the app. Google Play lists VPN Super
+        Inc., the App Store seller is Mobile Jump Pte Ltd, and the privacy notice's contact is Super
+        Unlimited Inc. at the same Redwood City address.
+      sources: [terms, privacy, play, app-store]
+    owner:
+      value: Super Unlimited Inc.
+      note: >-
+        It signs VPN Super's privacy notice and presents the app as its own. Who owns it isn't public, and
+        VPN Super isn't among the apps the Tech Transparency Project tied to Chinese owners in 2025.
+      sources: [privacy, super-unlimited, ttp-2025, ttp-spot-check-2025]
+    founded:
+      value: 2018
+      note: The app came out in May 2018, when VPN Super says it started using the name.
+      sources: [court-2026, app-store]
+    team:
+      value: partial
+      note: VPN Super names nobody, but its parent Super Unlimited names its CEO and board.
+      sources: [terms, super-unlimited]
+    sister_brands:
+      value: null
+      note: The terms also cover an app called VPN by Free VPN Pte Ltd, from a related Singapore company.
+      sources: [terms]
+    acquisitions:
+      value: null
+      note: No sale is on record, but the companies' owners aren't public.
+
+  jurisdiction:
+    hq:
+      value: US
+      note: Notices go to Redwood City, California, and the terms fall under California law.
+      sources: [terms, play]
+    entities:
+      value: [US, SG]
+      note: Free VPN Pte. Ltd. is registered in Singapore. Mobile Jump Pte Ltd gives a Singapore address on the App Store.
+      sources: [terms, register-free-vpn, app-store]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [privacy]
+    dns:
+      value: none
+      evidence: claimed
+      note: The policy says it stores nothing that identifies what you browse over the VPN.
+      sources: [privacy]
+    timestamps:
+      value: none
+      evidence: claimed
+      note: Its download page says connection times aren't tracked. The policy collects connection success and usage data it calls anonymised.
+      sources: [download, privacy]
+    bandwidth:
+      value: null
+      note: The policy doesn't say whether data use is recorded.
+    source_ip:
+      value: temporary
+      evidence: claimed
+      note: Your IP address is used for the length of a VPN session and to work out a rough location, then discarded.
+      sources: [privacy]
+    proven: []
+    policy: https://vpnsuper.com/privacy-notice
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: optional
+      note: The apps work without an account.
+      sources: [privacy, play]
+    personal_data: []
+    payment:
+      value: [card, paypal, app_store]
+      note: The website takes cards, Apple Pay, Google Pay and PayPal, charged in USD whatever currency it shows.
+      sources: [payment-methods, pricing, app-store]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn, ikev2, other]
+      note: Other is V2Ray.
+      sources: [features, protocols]
+    post_quantum:
+      value: null
+      note: It says nothing about its key exchange.
+      sources: [protocols]
+    kill_switch:
+      value: app
+      evidence: claimed
+      note: In the iOS, Android and Windows apps, off until you turn it on.
+      sources: [kill-switch, app-features]
+    dns:
+      value: null
+      note: It doesn't say whose DNS servers the apps use.
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say how its servers are run.
+    hosting:
+      value: null
+      note: It doesn't say whether it owns or rents its servers.
+    virtual_locations:
+      value: null
+      note: Its server list has a column for virtual servers, but doesn't make clear which locations use them.
+      sources: [servers]
+    servers:
+      value: 4160
+      note: Its server list adds up to 4,160 servers, several of them only on iOS or only for Premium.
+      sources: [servers]
+    countries:
+      value: 52
+      note: Its pages also claim 90+ countries and 100+ locations.
+      sources: [servers, features]
+
+  features:
+    connections:
+      value: 10
+      note: The website's plans say up to 10 devices, while its features page says "every device".
+      sources: [pricing, features]
+    multihop:
+      value: null
+      note: It doesn't mention multi-hop.
+    obfuscation:
+      value: [v2ray]
+      sources: [features]
+    port_forwarding:
+      value: null
+      note: It doesn't mention port forwarding.
+    split_tunnel:
+      value: true
+      note: By app, on Android only.
+      sources: [app-features]
+    blocking:
+      value: null
+      note: It doesn't mention any blocklists.
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android]
+      note: Apple TV and Android TV are covered by the iOS and Android apps. The Mac app needs Apple silicon.
+      sources: [download, app-store]
+    open_source: none
+    telemetry:
+      value: null
+      note: >-
+        The policy says the apps send usage data, error reports and interface clicks, and that free
+        versions carry ad SDKs that collect device details. It doesn't mention a way to turn this off.
+      sources: [privacy, play-data-safety]
+    trackers:
+      value: 28
+      note: Version 2.26.0, mostly advertising SDKs that pay for the free version.
+      sources: [exodus]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 10.99, currency: USD }
+      note: The website's US price. In-app it's $12.99 on the US App Store.
+      sources: [pricing-guide, app-store]
+    best:
+      value: { amount: 4.99, currency: USD }
+      note: $59.88 a year on the website. Its pricing page sometimes offers two years for less.
+      sources: [pricing-guide, pricing]
+    best_term:
+      value: 12
+      sources: [pricing-guide]
+    renewal_increase:
+      value: null
+      note: Plans renew automatically, and no renewal price is stated.
+      sources: [pricing-guide]
+    free_tier:
+      value: true
+      note: Ad-supported, with fewer locations.
+      sources: [free-vpn, play, servers]
+    refund_days:
+      value: 30
+      note: Website purchases only, and only the first payment. App store purchases aren't refunded by VPN Super.
+      sources: [terms]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: Its features page says hiding your IP lets you "stay anonymous", and Play promises "enterprise-grade encryption".
+      sources: [features, play]
+    affiliates:
+      value: true
+      note: Run through Impact.com, paying up to 100% of a new monthly sign-up.
+      sources: [affiliate]
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://vpnsuper.com/
+    title: VPN Super homepage
+  privacy:
+    url: https://vpnsuper.com/privacy-notice
+    title: Privacy Notice (last updated 24 July 2024)
+  terms:
+    url: https://vpnsuper.com/terms-of-service
+    title: Terms of Service (last updated 21 July 2026)
+  features:
+    url: https://vpnsuper.com/vpn-features
+    title: VPN - Super Unlimited Proxy features
+  protocols:
+    url: https://vpnsuper.com/vpn-protocol
+    title: 'VPN Protocols: how to choose the right one'
+  kill-switch:
+    url: https://vpnsuper.com/features/kill-switch
+    title: VPN kill switch for greater protection
+  servers:
+    url: https://vpnsuper.com/vpn-server
+    title: Fast VPN servers in 100+ locations worldwide
+  download:
+    url: https://vpnsuper.com/download-vpn
+    title: Download VPN Super on all your devices
+  free-vpn:
+    url: https://vpnsuper.com/free-vpn
+    title: Download the fastest free VPN app
+  affiliate:
+    url: https://vpnsuper.com/affiliate
+    title: VPN Super affiliate programme
+  play:
+    url: https://play.google.com/store/apps/details?id=com.free.vpn.super.hotspot.open&hl=en
+    title: VPN - Super Unlimited Proxy on Google Play
+  play-data-safety:
+    url: https://play.google.com/store/apps/datasafety?id=com.free.vpn.super.hotspot.open&hl=en
+    title: VPN - Super Unlimited Proxy data safety on Google Play
+  app-store:
+    url: https://apps.apple.com/us/app/vpn-super-unlimited-proxy/id1370293473
+    title: VPN - Super Unlimited Proxy on the App Store (US)
+  register-free-vpn:
+    url: https://data.gov.sg/api/action/datastore_search?resource_id=d_3f960c10fed6145404ca7b821f263b87&q=201929358N
+    title: Free VPN Pte. Ltd. (UEN 201929358N), ACRA corporate entities dataset
+  exodus:
+    url: https://web.archive.org/web/20260521050644/https://reports.exodus-privacy.eu.org/en/reports/com.free.vpn.super.hotspot.open/latest/
+    title: Exodus Privacy report for VPN Super 2.26.0 (May 2026, archived)
+  ttp-2025:
+    url: https://www.techtransparencyproject.org/articles/apple-offers-apps-with-ties-to-chinese-military
+    title: Tech Transparency Project, Apple Offers Apps With Ties to Chinese Military (1 April 2025)
+  ttp-spot-check-2025:
+    url: https://www.techtransparencyproject.org/articles/spot-check-apple-and-google-still-have-a-chinese-vpn-problem
+    title: 'Tech Transparency Project, Spot Check: Apple and Google Still Have a Chinese VPN Problem (12 June 2025)'
+  pricing:
+    url: https://account.vpnsuper.com/en/pricing
+    title: VPN Super plans and pricing
+  pricing-guide:
+    url: https://vpnsuper.com/support-articles/how-much-does-vpn-super-unlimited-proxy-cost
+    title: How much does VPN Super cost?
+  payment-methods:
+    url: https://vpnsuper.com/support-articles/accepted-payment-methods
+    title: Accepted payment methods
+  app-features:
+    url: https://vpnsuper.com/support-articles/app-features
+    title: VPN Super app features
+  super-unlimited:
+    url: https://superunlimited.com/
+    title: Super Unlimited
+  court-2026:
+    url: https://www.govinfo.gov/content/pkg/USCOURTS-cand-5_26-cv-00615/pdf/USCOURTS-cand-5_26-cv-00615-0.pdf
+    title: VPN Super Inc. v. TopApps Tech Pte Ltd, order (N.D. Cal., 2026)
