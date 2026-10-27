@@ -1,0 +1,255 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: SkyVPN
+icon: skyvpn.png
+checked: 2026-10-27
+
+criteria:
+  identity:
+    website:
+      value: https://www.skyvpn.net
+      sources: [home]
+    legal_entity:
+      value: SkyVPN, Inc.
+      note: >-
+        Signs the terms and privacy policy from Hong Kong. Dingtone Communications Limited is the Google Play
+        developer, and Telos Protocol Limited the App Store seller.
+      sources: [terms, privacy, play, app-store]
+    owner:
+      value: null
+      note: >-
+        Who owns the three companies isn't public. The Play developer shares its name with the Dingtone calling
+        app, which in 2016 came from Hangzhou Tengzhan Technology, a company listed in China.
+      sources: [play, baijing-2016]
+    founded:
+      value: 2017
+      note: Announced in April 2017. Its terms date from October 2016.
+      sources: [launch-2017, terms]
+    team:
+      value: anonymous
+      note: Its press releases quote an unnamed founder, and nobody running it is named.
+      sources: [press, pr-2020]
+    sister_brands: []
+    acquisitions:
+      value: []
+      note: The App Store seller changed from Dingtone Communications Limited to Telos Protocol Limited between 2020 and 2023, with nothing published about why.
+      sources: [app-store-2020, app-store]
+
+  jurisdiction:
+    hq:
+      value: HK
+      sources: [terms, play]
+    entities:
+      value: [HK]
+      note: Where SkyVPN, Inc. and Telos Protocol Limited are registered isn't public.
+      sources: [play]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      note: The policy allows real-time analysis of traffic, including the sites you visit and your IP address, for traffic management, without saying any of it is kept.
+      sources: [privacy, no-logs]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [privacy, no-logs]
+    timestamps:
+      value: null
+      note: >-
+        Its FAQ says it keeps no logs of any kind, but the policy keeps temporary usage data for debugging and
+        collects statistics on user behaviour without saying what they cover.
+      sources: [no-logs, privacy]
+    bandwidth:
+      value: aggregate
+      evidence: claimed
+      note: The policy keeps aggregate bandwidth use, and free accounts are metered by the data they use.
+      sources: [privacy, free-data]
+    source_ip:
+      value: null
+      note: The policy collects your device's IP address, MAC address and location when you install the app, without saying how long it's kept.
+      sources: [privacy]
+    proven: []
+    policy: https://www.skyvpn.net/privacy-policy
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: null
+      note: >-
+        Its FAQ says the free plan needs an account, by email or a Facebook login on Android, while the iOS
+        listing says the basic service works without registering.
+      sources: [register, app-store]
+    personal_data: []
+    payment:
+      value: [card, app_store]
+      note: The website checkout only offers cards, although its page title still promises PayPal and Bitcoin.
+      sources: [pricing, app-store]
+
+  security:
+    protocols:
+      value: null
+      note: It doesn't name the protocols its apps use.
+      sources: [windows, download]
+    post_quantum:
+      value: none
+      note: Nothing is published about its key exchange.
+      sources: [windows]
+    kill_switch:
+      value: app
+      evidence: claimed
+      note: Windows app only, where it's on by default.
+      sources: [kill-switch]
+    dns:
+      value: null
+      note: It doesn't say whose DNS servers the apps use.
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say how its servers are run.
+    hosting:
+      value: null
+      note: It doesn't say whether it owns or rents its servers.
+    virtual_locations:
+      value: null
+      note: It doesn't say whether any locations are virtual.
+    servers:
+      value: 3000
+      note: Advertised as "3000+ VPN server locations", with no server list.
+      sources: [windows]
+    countries:
+      value: null
+      note: It doesn't publish how many countries it covers.
+
+  features:
+    connections:
+      value: 5
+      sources: [download, play]
+    multihop: false
+    obfuscation: []
+    port_forwarding: false
+    split_tunnel:
+      value: true
+      evidence: claimed
+      note: It doesn't say which apps have it.
+      sources: [split-tunnel, download]
+    blocking: []
+
+  clients:
+    platforms:
+      value: [windows, ios, android]
+      note: >-
+        The iOS app hasn't been updated since November 2021, and the site's macOS download goes to a Mac App
+        Store listing that no longer exists.
+      sources: [download, app-store, play]
+    open_source:
+      value: none
+      note: The terms forbid reverse engineering the apps.
+      sources: [terms]
+    telemetry:
+      value: null
+      note: >-
+        The policy says the apps may use in-app analytics such as Google Analytics, and may collect a list of the
+        apps installed on your device, without mentioning a way to turn either off.
+      sources: [privacy, play]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 10.99, currency: USD }
+      sources: [pricing]
+    best:
+      value: { amount: 1.99, currency: USD }
+      note: $71.64 for 36 months on the website. The app stores sell other plans, such as $35.99 a year.
+      sources: [pricing, app-store]
+    best_term:
+      value: 36
+      sources: [pricing]
+    renewal_increase:
+      value: null
+      note: It doesn't say what the website plans renew at.
+      sources: [pricing]
+    free_tier:
+      value: true
+      note: Ad-supported, with one server and limited data, topped up by watching ads and other in-app tasks.
+      sources: [free-data]
+    refund_days:
+      value: 30
+      note: First purchases only. Payments made through third parties, like the app stores, aren't refunded.
+      sources: [terms]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: The Play listing says you're "entirely anonymous", and its download page promises "military grade encryption".
+      sources: [play, download]
+    affiliates:
+      value: true
+      sources: [affiliate]
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://www.skyvpn.net/
+    title: SkyVPN homepage
+  terms:
+    url: https://www.skyvpn.net/terms
+    title: Terms of Service (in effect from 9 October 2016)
+  privacy:
+    url: https://www.skyvpn.net/privacy-policy
+    title: Privacy Policy (last modified February 2019)
+  no-logs:
+    url: https://www.skyvpn.net/blog/skyvpn-keeps-no-log/
+    title: '[FAQ] Does SkyVPN Keep Logs?'
+  free-data:
+    url: https://www.skyvpn.net/blog/how-much-data-available/
+    title: '[FAQ] How Much Data is Available for Me?'
+  register:
+    url: https://www.skyvpn.net/blog/how-to-free-use-skyvpn-premium/
+    title: '[FAQ] How to Register on SkyVPN for Free Application?'
+  kill-switch:
+    url: https://www.skyvpn.net/blog/whats-vpn-kill-switch-how-it-helps/
+    title: 'VPN Kill Switch: What Is It and Why You Need It'
+  split-tunnel:
+    url: https://www.skyvpn.net/blog/whats-split-tunneling-vpn-how-it-helps-you/
+    title: What Is Split Tunneling VPN and How Can It Help You
+  download:
+    url: https://www.skyvpn.net/vpn-download
+    title: Download Free VPN App for Windows, Mac, iOS & Android
+  windows:
+    url: https://www.skyvpn.net/vpn-for-windows
+    title: SkyVPN for Windows
+  pricing:
+    url: https://www.skyvpn.net/vpn-purchase
+    title: Buy VPN (SkyVPN pricing)
+  affiliate:
+    url: https://www.skyvpn.net/vpn-affiliate
+    title: SkyVPN Affiliate Program
+  press:
+    url: https://www.skyvpn.net/press
+    title: SkyVPN press room
+  pr-2020:
+    url: https://www.pr.com/press-release/819598
+    title: Bans on WeChat and TikTok Lead to SkyVPN's Rapid Traffic Growth (PR.com, August 2020)
+  play:
+    url: https://play.google.com/store/apps/details?id=me.skyvpn.app
+    title: SkyVPN - Fast Secure VPN on Google Play
+  app-store:
+    url: https://apps.apple.com/us/app/skyvpn-unlimited-vpn-proxy/id1225558991
+    title: SkyVPN - Unlimited VPN Proxy on the App Store (US)
+  app-store-2020:
+    url: https://web.archive.org/web/20201206020328/https://apps.apple.com/us/app/skyvpn-best-vpn-proxy-shield/id1225558991
+    title: SkyVPN on the App Store (archived December 2020)
+  baijing-2016:
+    url: https://www.baijing.cn/article/7912
+    title: Baijing, Dingtone developer Tengzhan Technology lists on the NEEQ (7 September 2016, in Chinese)
+  launch-2017:
+    url: https://www.prweb.com/releases/skyvpn_offers_zero_cost_premium_vpn_service_with_no_usage_log_policy/prweb14279771.htm
+    title: SkyVPN Offers Zero-Cost Premium VPN Service with No Usage Log Policy (PRWeb, April 2017)
