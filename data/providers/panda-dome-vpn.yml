@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: Panda Dome VPN
 icon: panda-dome-vpn.svg
-checked: 2026-10-21
+checked: 2026-10-27
 
 criteria:
   identity:
@@ -11,11 +11,12 @@ criteria:
       sources: [legal-notice]
     owner:
       value: Vector Capital
-      note: Panda has been a wholly owned subsidiary of WatchGuard Technologies since 2020, and WatchGuard is owned by Vector Capital.
-      sources: [watchguard-closes, vector-watchguard, watchguard-about]
+      note: Panda has been a wholly owned subsidiary of WatchGuard Technologies since 2020, and Vector Capital is WatchGuard's majority owner.
+      sources: [watchguard-closes, vector-majority, watchguard-about]
     founded:
-      value: null
-      note: Panda doesn't say when its VPN launched.
+      value: 2018
+      note: Panda announced Panda VPN in December 2017 and it was out for Windows by March 2018.
+      sources: [forum-2018]
     team:
       value: partial
       note: WatchGuard names its executives, but no one running Panda's consumer products or the VPN is named.
@@ -43,28 +44,31 @@ criteria:
     traffic:
       value: null
       note: >-
-        The VPN pages say no browsing information is stored, but Panda's privacy policy doesn't single out
-        the VPN and lists the URLs or domain names of sites you visit and traffic data among what its
-        products collect.
-      sources: [vpn, privacy-policy]
+        Panda says it keeps no activity logs and stores none of your browsing, but its privacy policy
+        doesn't single out the VPN and lists the sites you visit and traffic data among what its products collect.
+      sources: [vpn, faq-logs, privacy-policy]
     dns:
       value: null
       note: >-
-        The VPN pages say no browsing information is stored, but Panda's privacy policy lists the URLs or
-        domain names of sites you visit among what its products collect.
-      sources: [vpn, privacy-policy]
+        Panda says it keeps no activity logs, but its privacy policy lists the URLs or domain names of sites
+        you visit among what its products collect, without excluding the VPN.
+      sources: [faq-logs, android-vpn, privacy-policy]
     timestamps:
       value: null
-      note: The privacy policy lists session data and the date and time of visits, without saying whether that covers the VPN.
-      sources: [privacy-policy]
+      note: >-
+        Panda says it keeps no activity logs, but its privacy policy lists session data and authentication
+        logs without saying whether that covers the VPN.
+      sources: [faq-logs, privacy-policy]
     bandwidth:
       value: null
       note: The free plan's 150 MB daily cap needs a running count, but Panda doesn't say what it keeps or for how long.
       sources: [features-vpn]
     source_ip:
       value: null
-      note: The privacy policy lists IP addresses among what its products collect, without saying whether the VPN keeps yours.
-      sources: [privacy-policy]
+      note: >-
+        Its VPN FAQ used to say it kept no IP addresses, but the privacy policy lists them among what its
+        products collect, without excluding the VPN.
+      sources: [faq-logs, privacy-policy]
     proven: []
     policy: https://www.pandasecurity.com/en/homeusers/media/legal-notice/
 
@@ -103,6 +107,10 @@ criteria:
       value: required
       note: Paid plans are managed through a Panda account, which signs in with your email address.
       sources: [account]
+    personal_data:
+      value: []
+      note: A Panda account asks for an email address, a password and your country.
+      sources: [register]
     payment:
       value: [card, paypal, bank, app_store]
       note: The site lists Visa, Mastercard, Maestro, PayPal, Apple Pay, bank transfer, iDEAL and Klarna, and the Android app sells plans in-app.
@@ -111,7 +119,7 @@ criteria:
   security:
     protocols:
       value: [wireguard, openvpn, other]
-      note: Other is Catapult Hydra on every platform, plus IPsec on Apple devices.
+      note: Other is Catapult Hydra, Pango's protocol, on every platform, plus IPsec on Apple devices.
       sources: [protocols-help]
     post_quantum:
       value: none
@@ -134,8 +142,10 @@ criteria:
       sources: [android-vpn]
     hosting:
       value: null
-      note: Panda doesn't say who runs its VPN servers, and its privacy policy names no VPN partner.
-      sources: [privacy-policy]
+      note: >-
+        The apps are built on the VPN SDK and Hydra protocol of Pango, Hotspot Shield's maker, and Panda
+        doesn't say who runs the servers.
+      sources: [protocols-help, zdi-24-1015, privacy-policy]
     virtual_locations:
       value: null
       note: Panda calls every location a virtual location, without saying where the servers physically sit.
@@ -145,9 +155,9 @@ criteria:
       note: The VPN page claims "thousands of servers" without a count.
       sources: [vpn]
     countries:
-      value: null
-      note: Panda says "more than 60" virtual locations without listing them.
-      sources: [android-vpn]
+      value: 60
+      note: Panda says it has servers in over 60 countries, and elsewhere more than 60 virtual locations, without listing them.
+      sources: [features-vpn, android-vpn]
 
   features:
     connections:
@@ -186,12 +196,6 @@ criteria:
         The privacy policy says the apps upload how you use them and error data, with no opt-out stated. The free version
         also runs Google's ads SDK.
       sources: [privacy-policy, play]
-    trackers:
-      value: null
-      note: >-
-        Exodus wouldn't load from here, and its only archived report is from 2020, finding 10 trackers in version 3.5.24.
-        The Play listing says the app contains ads.
-      sources: [exodus-2020, play]
     fdroid: false
 
   pricing:
@@ -233,6 +237,10 @@ criteria:
       value: true
       note: Its affiliate programme pays commission on every sale.
       sources: [partners]
+    review_sites:
+      value: false
+      note: Panda's own blog publishes VPN rankings that put Panda Dome VPN first, but it owns no separate review site.
+      sources: [blog-gaming]
     activism: false
 
 refs:
@@ -269,6 +277,9 @@ refs:
   watchguard-closes:
     url: https://www.pandasecurity.com/en/mediacenter/watchguard_panda/
     title: WatchGuard completes acquisition of Panda Security (June 2020)
+  vector-majority:
+    url: https://www.watchguard.com/wgrd-news/press-releases/vector-capital-acquires-majority-ownership-watchguard-technologies-0
+    title: Vector Capital acquires majority ownership of WatchGuard Technologies
   vector-watchguard:
     url: https://www.vectorcapital.com/investments/case-study/watchguard
     title: Vector Capital, WatchGuard case study
@@ -284,9 +295,15 @@ refs:
   app-store:
     url: https://apps.apple.com/us/app/pandadome/id1459095718
     title: PandaDome on the App Store
-  exodus-2020:
-    url: https://web.archive.org/web/20201125202832/https://reports.exodus-privacy.eu.org/en/reports/search/com.pandasecurity.pandaav/
-    title: Exodus Privacy reports for com.pandasecurity.pandaav (archived November 2020)
+  faq-logs:
+    url: https://web.archive.org/web/20240913012211/https://www.pandasecurity.com/en/support/card?id=84017
+    title: Panda support, does Panda VPN keep logs? (archived September 2024)
+  forum-2018:
+    url: https://support.pandasecurity.com/forum/viewtopic.php?p=28483
+    title: Panda support forum, public Wi-Fi security and privacy (2017 to 2018)
+  register:
+    url: https://accounts.pandasecurity.com/Web/Account/Register?wa=wregister1.0&wtrealm=https%3a%2f%2fmy.pandasecurity.com%2f
+    title: Panda account registration form
   psirt:
     url: https://psirt.watchguard.com/
     title: WatchGuard PSIRT security advisories
