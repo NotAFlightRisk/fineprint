@@ -1,0 +1,221 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Secure VPN
+icon: secure-vpn.png
+checked: 2026-10-27
+
+criteria:
+  identity:
+    website:
+      value: https://securevpn.com
+      sources: [home]
+    legal_entity:
+      value: Webzilla Apps Inc
+      note: >-
+        The terms only name SecureVPN.com. Webzilla Apps Inc is the Google Play developer and the company
+        named on the website, while the iOS app is sold by SecureVPN.com Inc.
+      sources: [terms, home, press, play, app-store]
+    owner:
+      value: null
+      note: Its 2015 launch release says it was set up by XBT Holding, a hosting group. Who owns it now isn't published.
+      sources: [launch, press]
+    founded:
+      value: 2015
+      sources: [launch]
+    team:
+      value: anonymous
+      sources: [press, privacy, terms]
+    sister_brands:
+      value: [Fastzilla VPN]
+      note: >-
+        Fastzilla VPN shares its Google Play developer and App Store seller. It isn't the Secure VPN from
+        Secure Signal Inc in 2025 research, or the Signal Secure VPN that TTP tied to Qihoo 360.
+      sources: [play-dev, app-store, hidden-links-2025, ttp-spot-check-2025]
+    acquisitions: []
+
+  jurisdiction:
+    hq:
+      value: US
+      note: Webzilla Apps Inc gives an address in West Palm Beach, Florida, and the website says Lake Worth, Florida.
+      sources: [play, press]
+    entities:
+      value: [US]
+      sources: [play]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [privacy]
+    dns:
+      value: null
+      note: The policy only says it doesn't log VPN traffic.
+      sources: [privacy]
+    timestamps:
+      value: null
+      note: It doesn't say whether it records when you connect.
+      sources: [privacy]
+    bandwidth:
+      value: null
+      note: It doesn't say, though the free iOS version caps how much data you can use.
+      sources: [privacy, app-store]
+    source_ip:
+      value: null
+      note: It doesn't say whether it logs your IP address. The policy collects "technical identifiers" without saying what they are.
+      sources: [privacy]
+    proven: []
+    policy: https://securevpn.com/?page=privacy_policy
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: optional
+      note: The free apps need no registration. Buying on the website needs an email address.
+      sources: [play, pricing, privacy]
+    personal_data: []
+    payment:
+      value: [card, paypal, app_store]
+      sources: [pricing, app-store]
+
+  security:
+    protocols:
+      value: [openvpn, other]
+      note: Other is IPsec. Both are for setting up routers and other devices by hand, and it doesn't say what the apps use.
+      sources: [faq]
+    post_quantum:
+      value: none
+      note: Nothing is published about its key exchange.
+      sources: [faq, home]
+    kill_switch:
+      value: null
+      note: It doesn't say whether the apps have one.
+    dns:
+      value: null
+      note: It doesn't say whose DNS servers the apps use.
+      sources: [faq]
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say how its servers are run.
+    hosting:
+      value: null
+      note: It doesn't say whether it owns or rents its servers.
+    virtual_locations:
+      value: null
+      note: It doesn't say where its servers are or whether any locations are virtual.
+    servers:
+      value: null
+      note: It doesn't publish a server count.
+    countries:
+      value: null
+      note: It doesn't publish a list of locations.
+
+  features:
+    connections:
+      value: 5
+      sources: [pricing, terms]
+    multihop: false
+    obfuscation: []
+    port_forwarding: false
+    split_tunnel: false
+    blocking: []
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android]
+      note: >-
+        The apps look unmaintained: the iOS app was last updated in July 2021, the Windows and Mac downloads
+        date from March 2021, and the Android app was last updated in June 2024.
+      sources: [faq, app-store, play]
+    open_source:
+      value: none
+      note: The terms forbid reverse engineering the apps.
+      sources: [terms]
+    telemetry:
+      value: null
+      note: >-
+        The store listings say the apps share device IDs, approximate location, usage, crash and diagnostic
+        data, some of it for advertising. The privacy policy only mentions account and technical identifiers, and
+        neither says whether you can opt out.
+      sources: [play-data-safety, app-store, privacy]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 9.99, currency: USD }
+      sources: [pricing]
+    best:
+      value: { amount: 3.75, currency: USD }
+      note: $45 billed yearly.
+      sources: [pricing]
+    best_term:
+      value: 12
+      sources: [pricing]
+    renewal_increase:
+      value: null
+      note: Plans are sold at a permanent "up to 62% off", and it doesn't say what they renew at.
+      sources: [pricing, terms]
+    free_tier:
+      value: true
+      note: Ad-supported. The iOS listing caps free use at 1,000 MB of data.
+      sources: [play, app-store]
+    refund_days:
+      value: 7
+      note: Website purchases.
+      sources: [pricing]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: It says the service keeps your online activity "100% private", lets you "surf the web anonymously" and uses "military grade" encryption.
+      sources: [home, play]
+    affiliates: false
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://securevpn.com
+    title: Secure VPN - Fast & Private VPN for iOS, Android, PC and Mac
+  privacy:
+    url: https://securevpn.com/?page=privacy_policy
+    title: SecureVPN Privacy Policy
+  terms:
+    url: https://securevpn.com/?page=terms_of_service
+    title: SecureVPN Terms of Service (last revised 25 February 2018)
+  faq:
+    url: https://securevpn.com/?page=faq
+    title: SecureVPN FAQ
+  press:
+    url: https://securevpn.com/?page=press_kit
+    title: SecureVPN Press Kit
+  pricing:
+    url: https://securevpn.com/special-offers/
+    title: Premium VPN Service. Special Offer - up to 62% OFF
+  launch:
+    url: https://sg.finance.yahoo.com/news/xbt-holding-launches-securevpn-050000030.html
+    title: XBT Holding Launches SecureVPN (Marketwired, 1 June 2015)
+  play:
+    url: https://play.google.com/store/apps/details?id=com.securevpn.securevpn
+    title: Secure VPN - Super Fast Proxy on Google Play
+  play-data-safety:
+    url: https://play.google.com/store/apps/datasafety?id=com.securevpn.securevpn
+    title: Secure VPN - Super Fast Proxy data safety on Google Play
+  play-dev:
+    url: https://play.google.com/store/apps/dev?id=5439910015174089906
+    title: Webzilla Apps Inc apps on Google Play
+  app-store:
+    url: https://apps.apple.com/us/app/securevpn-wifi-vpn-proxy/id986008447
+    title: SecureVPN - WiFi VPN Proxy on the App Store (US)
+  hidden-links-2025:
+    url: https://www.petsymposium.org/foci/2025/foci-2025-0008.php
+    title: 'Mixon-Baca, Knockel and Crandall, Hidden Links: Analyzing Secret Families of VPN Apps (FOCI 2025)'
+  ttp-spot-check-2025:
+    url: https://www.techtransparencyproject.org/articles/spot-check-apple-and-google-still-have-a-chinese-vpn-problem
+    title: 'Tech Transparency Project, Spot Check: Apple and Google Still Have a Chinese VPN Problem (12 June 2025)'
