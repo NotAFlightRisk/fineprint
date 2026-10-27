@@ -1,0 +1,356 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: ExtremeVPN
+icon: extremevpn.png
+checked: 2026-10-27
+
+criteria:
+  identity:
+    website:
+      value: https://extremevpn.com
+      sources: [home]
+    legal_entity:
+      value: Extreme VPN Limited
+      note: >-
+        Registered in England and Wales in May 2023. The terms add a British Virgin Islands company,
+        ExtremeVPN Ltd, for its technical infrastructure.
+      sources: [tos, register, play]
+    owner:
+      value: David Nathaniel Merry
+      note: Its sole director, who holds over 75% of the UK company. Who owns the BVI company isn't published.
+      sources: [register-officers, register-psc]
+    founded:
+      value: 2023
+      note: Its About page dates its inception to 2022, but the company and its first apps date from 2023.
+      sources: [about, register, app-store]
+    team:
+      value: partial
+      note: Its site names no one who runs it, but Companies House names the director and owner.
+      sources: [about, register-officers, register-psc]
+    sister_brands:
+      value: []
+      note: >-
+        It's built on PureWL, PureVPN's white-label service, but the UK register shows a different owner
+        from PureVPN's.
+      sources: [register-psc, purewl-about]
+    acquisitions:
+      value: []
+      sources: [register-psc]
+
+  jurisdiction:
+    hq:
+      value: GB
+      note: >-
+        Its About and Trust Center pages say it's based in the British Virgin Islands, but the terms
+        name the London company as the one that owns and runs the service.
+      sources: [tos, about, trust-center]
+    entities:
+      value: [GB, VG]
+      sources: [tos, about]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [privacy, tos]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [privacy]
+    timestamps:
+      value: null
+      note: >-
+        The terms keep your username and session times until 15 minutes after you disconnect, to enforce
+        the device limit. Its logging explainer says it keeps the dates you connect, while the privacy
+        policy says it keeps neither.
+      sources: [tos, logs, privacy]
+    bandwidth:
+      value: aggregate
+      evidence: claimed
+      note: It monitors each user's total data use, and its logging explainer mentions a daily total.
+      sources: [privacy, logs]
+    source_ip:
+      value: none
+      evidence: claimed
+      sources: [privacy, logs]
+    proven:
+      value: []
+      sources: [trust-center]
+    policy: https://extremevpn.com/privacy-policy/
+
+  transparency:
+    audits:
+      value: []
+      note: >-
+        It says big four firms and PricewaterhouseCoopers audit its no-logs policy, but no report has
+        been published.
+      sources: [trust-center, review]
+    report:
+      value: irregular
+      note: >-
+        An undated table on its About page, which it calls annual, lists three court orders, a warrant
+        and a subpoena, with no logs handed over.
+      sources: [about]
+    canary:
+      value: stale
+      note: >-
+        The Trust Center statement, dated 22 January 2026, says it has had no court orders or subpoenas,
+        but its About page lists three court orders and a subpoena.
+      sources: [trust-center, about]
+    bug_bounty:
+      value: null
+      note: >-
+        Its About page mentions a reward programme for security researchers, but there's no page saying
+        how to report a flaw or what it pays.
+      sources: [about]
+    incidents:
+      value: []
+
+  account:
+    email:
+      value: required
+      sources: [pricing]
+    personal_data:
+      value: []
+      sources: [privacy]
+    payment:
+      value: [card, paypal, bitcoin, app_store]
+      note: Crypto goes through CoinGate.
+      sources: [pricing, tos, app-store, play]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn, ikev2]
+      sources: [protocols, windows-protocols]
+    post_quantum:
+      value: null
+      note: It mentions quantum-resistant servers without saying where they are or how they work.
+      sources: [multi-devices]
+    kill_switch:
+      value: app
+      note: A setting in the Windows app. On Android it points you to the system's Always-on VPN setting.
+      sources: [kill-switch, windows-settings, android-settings]
+    dns:
+      value: null
+      note: >-
+        It says it runs its own encrypted DNS on every server, on a page that also claims ExpressVPN's
+        TrustedServer technology as its own.
+      sources: [logs, dns-leak]
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say whether its servers run from RAM.
+      sources: [servers, trust-center]
+    hosting:
+      value: null
+      note: >-
+        Its checkout runs on PureWL's plugin and its Linux app installed to a pure-linux-cli folder.
+        PureWL, PureVPN's white-label service, sells VPNs on PureVPN's network.
+      sources: [pricing, linux-cli, purewl, purewl-about]
+    virtual_locations:
+      value: null
+      note: Its servers page offers "virtual servers" without saying which locations, if any, are virtual.
+      sources: [servers]
+    servers:
+      value: 6500
+      note: Listed as 6,500+.
+      sources: [servers]
+    countries:
+      value: 78
+      note: Listed as 78+, though the table on the same page names 68 countries.
+      sources: [servers]
+
+  features:
+    connections:
+      value: 10
+      sources: [play, multi-devices]
+    multihop:
+      value: false
+      sources: [review, resilience]
+    obfuscation:
+      value: [proprietary]
+      note: Obfuscated servers, domain fronting and automatic port switching, without naming the method.
+      sources: [resilience]
+    port_forwarding:
+      value: true
+      note: A paid add-on.
+      sources: [port-forwarding]
+    split_tunnel:
+      value: true
+      note: On Windows and Android.
+      sources: [windows-split, android-split]
+    blocking:
+      value: null
+      note: It claims to block trackers, malware and ads, but doesn't describe any blocker in its apps.
+      sources: [review, windows-settings]
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android, browser]
+      note: >-
+        The Chrome extension is a proxy for the browser alone. Linux is listed as coming soon, and routers
+        use manual setup. The Android app was last updated in September 2026.
+      sources: [download, chrome-store, router, play]
+    open_source:
+      value: none
+      sources: [tos]
+    telemetry:
+      value: null
+      note: >-
+        The policy lists Google Analytics, Firebase, Sentry, New Relic and Mixpanel among the tools for app
+        analytics and crash reports, without saying whether you can turn them off. Its App Store listing
+        declares no data collected.
+      sources: [privacy, app-store]
+    fdroid:
+      value: false
+      sources: [download]
+
+  pricing:
+    monthly:
+      value: { amount: 10.59, currency: USD }
+      sources: [pricing]
+    best:
+      value: { amount: 3.29, currency: USD }
+      note: $39.48 a year.
+      sources: [pricing]
+    best_term:
+      value: 12
+      sources: [pricing]
+    renewal_increase:
+      value: 0
+      sources: [pricing]
+    free_tier:
+      value: false
+      note: The Android app advertises a seven-day free trial.
+      sources: [pricing-faq, play]
+    refund_days:
+      value: 30
+      note: Not for App Store purchases, gift or prepaid cards, or plans bought through resellers.
+      sources: [tos, pricing-faq]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        It claims no-logs audits by PricewaterhouseCoopers and big four firms that it hasn't published,
+        and VPN Trust Initiative membership the initiative doesn't list. Its logging page claims
+        ExpressVPN's TrustedServer technology, and its policy calls its payment options "100% anonymous".
+      sources: [review, trust-center, vti-members, logs, privacy]
+    affiliates:
+      value: true
+      note: Up to 100% of the first payment, then 35% recurring.
+      sources: [affiliates]
+    review_sites: false
+    activism:
+      value: null
+      note: >-
+        It says it funds privacy groups, but its About and Press pages give two different lists and no
+        details.
+      sources: [about, press]
+
+refs:
+  home:
+    url: https://extremevpn.com/
+    title: ExtremeVPN homepage
+  tos:
+    url: https://extremevpn.com/tos/
+    title: Terms of Service
+  privacy:
+    url: https://extremevpn.com/privacy-policy/
+    title: Privacy Policy
+  logs:
+    url: https://extremevpn.com/what-is-vpn/policy-towards-logs/
+    title: ExtremeVPN's policy towards logs
+  about:
+    url: https://extremevpn.com/about-us/
+    title: About Us
+  trust-center:
+    url: https://extremevpn.com/trust-center/
+    title: ExtremeVPN Trust Center
+  review:
+    url: https://extremevpn.com/review/
+    title: Why should you get ExtremeVPN?
+  press:
+    url: https://extremevpn.com/press-area/
+    title: Press Area
+  pricing:
+    url: https://extremevpn.com/pricing/
+    title: Buy VPN with PayPal, Bitcoin, Credit Card
+  pricing-faq:
+    url: https://extremevpn.com/support/faqs/pricing-plans-money-back-guarantee/
+    title: Pricing, plans and money back guarantee
+  servers:
+    url: https://extremevpn.com/servers/
+    title: Vast network of 6,500+ fastest VPN servers
+  resilience:
+    url: https://extremevpn.com/features/resilience/
+    title: Online resilience with ExtremeVPN
+  dns-leak:
+    url: https://extremevpn.com/features/dns-leak-protection/
+    title: DNS leak protection
+  multi-devices:
+    url: https://extremevpn.com/features/vpn-for-multiple-devices/
+    title: VPN for multiple devices
+  kill-switch:
+    url: https://extremevpn.com/features/kill-switch/
+    title: Internet Kill Switch
+  protocols:
+    url: https://extremevpn.com/what-is-vpn/protocols/
+    title: VPN protocols
+  windows-protocols:
+    url: https://extremevpn.com/support/setup-guides/windows/how-to-switch-protocol/
+    title: How to switch protocol on Windows
+  windows-settings:
+    url: https://extremevpn.com/support/setup-guides/windows/windows-app-general-settings/
+    title: Windows app general settings
+  android-settings:
+    url: https://extremevpn.com/support/setup-guides/android/android-app-general-settings/
+    title: Android app general settings
+  windows-split:
+    url: https://extremevpn.com/support/setup-guides/windows/activate-split-tunneling/
+    title: Activate split tunneling on the Windows app
+  android-split:
+    url: https://extremevpn.com/support/setup-guides/android/activate-split-tunneling/
+    title: Activate split tunneling on Android
+  port-forwarding:
+    url: https://extremevpn.com/support/setup-guides/how-to-configure-a-port-forwarding/how-to-activate-port-forwarding-nat-firewall-on-extremevpn/
+    title: How to use ExtremeVPN's Port Forwarding/NAT Firewall
+  linux-cli:
+    url: https://extremevpn.com/support/setup-guides/linux/set-up-extremevpn-command-line-app-on-linux/
+    title: Set up the ExtremeVPN command line app on Linux
+  router:
+    url: https://extremevpn.com/support/setup-guides/router/
+    title: Router setup guides
+  download:
+    url: https://extremevpn.com/download/
+    title: Download ExtremeVPN
+  affiliates:
+    url: https://extremevpn.com/affiliates/
+    title: ExtremeVPN affiliate program
+  play:
+    url: https://play.google.com/store/apps/details?id=com.extremevpn.vpnclient.android&hl=en&gl=US
+    title: ExtremeVPN on Google Play
+  app-store:
+    url: https://apps.apple.com/us/app/extremevpn-fast-secure-vpn/id6449742374
+    title: ExtremeVPN on the App Store
+  chrome-store:
+    url: https://chromewebstore.google.com/detail/extremevpn-vpn-proxy-for/jpfkcjhdlchnpgcnlfmamgfejnfgmjkg
+    title: ExtremeVPN on the Chrome Web Store
+  register:
+    url: https://find-and-update.company-information.service.gov.uk/company/14904059
+    title: EXTREME VPN LIMITED (14904059), Companies House
+  register-officers:
+    url: https://find-and-update.company-information.service.gov.uk/company/14904059/officers
+    title: EXTREME VPN LIMITED officers, Companies House
+  register-psc:
+    url: https://find-and-update.company-information.service.gov.uk/company/14904059/persons-with-significant-control
+    title: EXTREME VPN LIMITED persons with significant control, Companies House
+  purewl:
+    url: https://www.purewl.com/white-label-vpn/
+    title: PureWL white-label VPN solution
+  purewl-about:
+    url: https://www.purewl.com/about/
+    title: About PureWL
+  vti-members:
+    url: https://vpntrust.net/vti-members/
+    title: VPN Trust Initiative members
