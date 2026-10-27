@@ -31,9 +31,11 @@ criteria:
       note: Its site, terms and privacy policy name nobody behind the company.
       sources: [about, contact]
     sister_brands:
-      value: []
-      note: Its App Store developer account lists only FastestVPN and its FastestPass password manager.
-      sources: [app-store-dev]
+      value: [iProVPN]
+      note: >-
+        iProVPN's Android app calls FastestVPN's API, its servers share small address blocks with
+        FastestVPN's, and the two sites run the same pricing page code. Neither names an owner.
+      sources: [iprovpn-apk, iprovpn-servers, fastestvpn-servers, iprovpn-pricing]
     acquisitions:
       value: null
       note: Its ownership isn't published, so there's no way to tell whether it has changed hands.
@@ -305,9 +307,6 @@ refs:
   app-store:
     url: https://apps.apple.com/us/app/fastestvpn-security-for-wifi/id1332852583
     title: FastestVPN on the App Store
-  app-store-dev:
-    url: https://apps.apple.com/us/developer/fastest-technology-pty-ltd/id1628534686
-    title: Fastest Technology Pty Ltd on the App Store
   google-play:
     url: https://play.google.com/store/apps/details?id=com.vpn.fastestvpnservice
     title: FastestVPN on Google Play
@@ -332,3 +331,15 @@ refs:
   abn:
     url: https://abr.business.gov.au/AbnHistory/View?id=61658034336
     title: FASTEST TECHNOLOGY PTY LTD in the Australian Business Register
+  iprovpn-apk:
+    url: https://iprovpn.s3.amazonaws.com/downloads/iprovpn.apk
+    title: iProVPN Android app (direct download APK)
+  iprovpn-servers:
+    url: https://support.iprovpn.com/vpn-servers/
+    title: iProVPN server/host name list
+  iprovpn-pricing:
+    url: https://iprovpn.com/buy-vpn
+    title: iProVPN pricing
+  fastestvpn-servers:
+    url: https://support.fastestvpn.com/vpn-servers/
+    title: FastestVPN server list
