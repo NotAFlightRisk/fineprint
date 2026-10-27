@@ -1,0 +1,272 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: SlickVPN
+icon: slickvpn.png
+checked: 2026-10-27
+
+criteria:
+  identity:
+    website:
+      value: https://www.slickvpn.com
+      sources: [about]
+    legal_entity:
+      value: Slick Networks, Inc.
+      note: Named as data controller in the privacy policy, at a mailbox address in Weston, Florida.
+      sources: [privacy, terms]
+    owner:
+      value: null
+      note: >-
+        Who owns Slick Networks, Inc. isn't published. Its OpenVPN configs are served from the
+        members' site of NewsDemon, a Usenet provider run by K&L Technologies, Inc. of South Carolina.
+      sources: [locations, newsdemon-terms]
+    founded:
+      value: null
+      note: It doesn't say when it launched. Its oldest blog posts are from 2015.
+      sources: [blog]
+    team:
+      value: anonymous
+      note: Nobody who runs it is named on its site.
+      sources: [about]
+    sister_brands:
+      value: []
+    acquisitions:
+      value: null
+      note: Who has owned it over the years isn't published.
+
+  jurisdiction:
+    hq:
+      value: US
+      note: The terms are governed by US law.
+      sources: [terms]
+    entities:
+      value: [US]
+      note: Its 2016 canary also names a Slick Network, LTD., without saying where it's registered.
+      sources: [privacy, canary]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [privacy]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [privacy]
+    timestamps:
+      value: none
+      evidence: claimed
+      note: The policy says it doesn't record connection times "tied to your identity".
+      sources: [privacy]
+    bandwidth:
+      value: null
+      note: It doesn't say whether it logs data use.
+      sources: [privacy]
+    source_ip:
+      value: none
+      evidence: claimed
+      sources: [privacy]
+    proven:
+      value: []
+    policy: https://www.slickvpn.com/privacy-policy/
+
+  transparency:
+    audits:
+      value: []
+    report:
+      value: none
+    canary:
+      value: stale
+      note: It promises a signed statement every two weeks, but the one on the page is dated 6 May 2016.
+      sources: [canary]
+    bug_bounty:
+      value: false
+    incidents:
+      value: []
+
+  account:
+    email:
+      value: required
+      sources: [checkout]
+    personal_data:
+      value: []
+      sources: [checkout]
+    payment:
+      value: [card, paypal, bitcoin]
+      note: Bitcoin goes through BitPay. Its FAQ still offers cash, cheque or money order by invoice, but checkout doesn't.
+      sources: [checkout, faq]
+
+  security:
+    protocols:
+      value: [openvpn, other]
+      note: Other is IPsec for Apple devices. PPTP has been dropped.
+      sources: [protocols, mac-ipsec]
+    post_quantum:
+      value: none
+      sources: [protocols]
+    kill_switch:
+      value: null
+      note: It doesn't say whether its client has a kill switch.
+      sources: [win-client]
+    dns:
+      value: null
+      note: It doesn't say whose DNS servers the tunnel uses.
+      sources: [dns-guide]
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say how its servers are run.
+    hosting:
+      value: null
+      note: It doesn't say whether it owns or rents its servers.
+    virtual_locations:
+      value: null
+      note: It doesn't say whether any of its locations are virtual.
+      sources: [locations]
+    servers:
+      value: 11
+      note: Listed as 11 active gateways, though its About page still claims servers in over 45 countries.
+      sources: [locations, about]
+    countries:
+      value: 4
+      note: The US, UK, Netherlands and Singapore.
+      sources: [locations]
+
+  features:
+    connections:
+      value: 5
+      note: Five at once, from no more than two IP addresses. The FAQ still describes older PRO and CORE plans.
+      sources: [faq]
+    multihop:
+      value: true
+      note: Called HYDRA, from specific gateways.
+      sources: [hydra]
+    obfuscation:
+      value: []
+      sources: [protocols]
+    port_forwarding:
+      value: null
+    split_tunnel:
+      value: null
+    blocking:
+      value: []
+
+  clients:
+    platforms:
+      value: [windows, macos]
+      note: Linux, iOS, Android and routers are set up by hand with OpenVPN or IPsec.
+      sources: [help, win-client, mac-install]
+    open_source:
+      value: none
+    telemetry:
+      value: null
+      note: The privacy policy says nothing about app usage or crash data.
+      sources: [privacy]
+    fdroid:
+      value: false
+      note: There's no Android app.
+      sources: [help]
+
+  pricing:
+    monthly:
+      value: { amount: 10, currency: USD }
+      sources: [pricing]
+    best:
+      value: { amount: 4, currency: USD }
+      note: The yearly plan at $48.
+      sources: [pricing]
+    best_term:
+      value: 12
+      sources: [pricing]
+    renewal_increase:
+      value: 0
+      note: Billed $48 every year. The $120 "regular price" it's shown against isn't what it renews at.
+      sources: [pricing]
+    free_tier:
+      value: false
+      sources: [pricing]
+    refund_days:
+      value: 30
+      sources: [refund]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        It calls HYDRA "The Most Secure VPN In The World" and says it makes tracking you "impossible". Its
+        About page claims servers in over 45 countries, while its locations page lists 4.
+      sources: [hydra, about, locations]
+    affiliates:
+      value: null
+    review_sites:
+      value: null
+    activism:
+      value: true
+      evidence: claimed
+      note: Its FAQ says it's a sustaining donor to the EFF.
+      sources: [faq]
+
+  other:
+    concerns:
+      value:
+        - summary: Its Ubuntu 22.04 guide has you set OpenSSL's security level to 0 to connect, which lets the tunnel use weak, outdated TLS settings.
+          severity: minor
+          source: linux-2204
+
+refs:
+  about:
+    url: https://www.slickvpn.com/about-slickvpn/
+    title: About Us
+  privacy:
+    url: https://www.slickvpn.com/privacy-policy/
+    title: Privacy Policy (9 July 2026)
+  terms:
+    url: https://www.slickvpn.com/terms-and-conditions/
+    title: Terms and Conditions
+  refund:
+    url: https://www.slickvpn.com/refund-policy/
+    title: Refund Policy
+  canary:
+    url: https://www.slickvpn.com/warrant-canary/
+    title: Warrant Canary
+  pricing:
+    url: https://www.slickvpn.com/pricing/
+    title: Pricing
+  checkout:
+    url: https://www.slickvpn.com/l52/checkout/order/
+    title: Checkout
+  faq:
+    url: https://www.slickvpn.com/faqs/
+    title: Frequently Asked Questions
+  locations:
+    url: https://www.slickvpn.com/locations/
+    title: Server Locations
+  protocols:
+    url: https://www.slickvpn.com/protocols/
+    title: Protocols
+  hydra:
+    url: https://www.slickvpn.com/hydra/
+    title: HYDRA multi-hop
+  help:
+    url: https://www.slickvpn.com/help-support/
+    title: Help & Support
+  win-client:
+    url: https://www.slickvpn.com/guides/win-client/
+    title: SlickVPN Client User Guide (Windows)
+  mac-install:
+    url: https://www.slickvpn.com/guides/mac-install/
+    title: OS X install guide
+  mac-ipsec:
+    url: https://www.slickvpn.com/guides/mac-ipsec/
+    title: OS X IPSec setup
+  dns-guide:
+    url: https://www.slickvpn.com/guides/issue-dns/
+    title: DNS Leak Warning
+  linux-2204:
+    url: https://www.slickvpn.com/guides/linux-2204/
+    title: Ubuntu 22.04 can't connect fix
+  blog:
+    url: https://www.slickvpn.com/blog/
+    title: The SlickVPN Blog
+  newsdemon-terms:
+    url: https://web.archive.org/web/20260515200842/https://www.newsdemon.com/terms-of-service/
+    title: NewsDemon Terms of Service, K&L Technologies, Inc. (archived May 2026)
