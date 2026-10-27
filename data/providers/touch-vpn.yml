@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: Touch VPN
 icon: touch-vpn.png
-checked: 2026-10-26
+checked: 2026-10-27
 
 criteria:
   identity:
@@ -22,7 +22,9 @@ criteria:
       sources: [policy-2018, policy-2019, aura-pango-2020, aura-split-2024, point-wild-merger, comparitech-disclosure]
     founded:
       value: null
-      note: Touch VPN doesn't say when it launched. Its Android app, then listed under Northghost, was last updated in January 2015.
+      note: >-
+        Touch VPN doesn't say when it launched. Its Android app, then listed under Northghost, already had over
+        100,000 installs by March 2015.
       sources: [play-2015]
     team:
       value: partial
@@ -153,19 +155,19 @@ criteria:
       value: rented
       sources: [privacy-notice]
     virtual_locations:
-      value: null
+      value: disclosed
       note: >-
-        It calls every location "virtual", and one help article offers India via Singapore, but its
-        location lists just say India.
-      sources: [android-locations, speed-test]
+        A help article offers India via Singapore, though its location lists just say India. It calls every
+        location virtual without saying which others sit elsewhere.
+      sources: [speed-test, android-locations]
     servers:
       value: 5900
       note: The homepage says over 5,900, in the same breath as both 80+ and 90+ countries.
       sources: [home]
     countries:
-      value: null
-      note: The homepage says both 80+ and 90+ countries, while the help centre's location list has 56.
-      sources: [home, android-locations]
+      value: 56
+      note: Its Android and iOS location lists name 56 countries, while the homepage says both 80+ and 90+.
+      sources: [android-locations, home]
 
   features:
     connections:
@@ -179,9 +181,9 @@ criteria:
       sources: [android-settings, hss-protocols]
     port_forwarding: false
     split_tunnel:
-      value: null
-      note: Help articles for iOS and Mac claim it, but the Android settings don't include it.
-      sources: [ios-settings, mac-advanced, android-settings]
+      value: true
+      note: For chosen apps or websites. On iOS it's a Premium feature.
+      sources: [ios-settings, mac-advanced]
     blocking:
       value: [malware]
       note: It may block sites known to be malicious.
@@ -194,11 +196,12 @@ criteria:
       sources: [devices, chrome, firefox]
     open_source: none
     telemetry:
-      value: null
+      value: forced
+      evidence: claimed
       note: >-
-        The policy says it ties how you use the app to a hash of your device for analytics and marketing,
-        but doesn't mention a way to turn this off.
-      sources: [privacy-notice, privacy-policy]
+        The policy says it records which app features you use and can tie that to a random device ID. The
+        Chrome extension sends usage events to Google Analytics, and only the Firefox add-on asks first.
+      sources: [privacy-policy, chrome-crx]
     fdroid: false
 
   pricing:
@@ -283,6 +286,9 @@ refs:
   chrome:
     url: https://chromewebstore.google.com/detail/bihmplhobchoageeokmgbdihknkjbknd
     title: Touch VPN on the Chrome Web Store
+  chrome-crx:
+    url: https://clients2.google.com/service/update2/crx?response=redirect&prodversion=140.0&acceptformat=crx2,crx3&x=id%3Dbihmplhobchoageeokmgbdihknkjbknd%26uc
+    title: Touch VPN Chrome extension 5.0.23 (CRX package)
   firefox:
     url: https://addons.mozilla.org/firefox/addon/touch-vpn/
     title: Touch VPN on Firefox Add-ons
