@@ -1,0 +1,287 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Hide My IP
+icon: hide-my-ip.png
+checked: 2026-10-27
+
+criteria:
+  identity:
+    website:
+      value: https://www.hidemyip.com
+      sources: [home]
+    legal_entity:
+      value: My Privacy Tools, Inc.
+      sources: [terms, play, privacy]
+    owner:
+      value: null
+      note: No parent company is named above My Privacy Tools, Inc.
+      sources: [terms]
+    founded:
+      value: null
+      note: My Privacy Tools has sold Hide My IP since 2006, first as proxy software, but when the VPN launched isn't stated.
+      sources: [home-2007, app-store]
+    team:
+      value: partial
+      note: A 2015 court order names its vice president, who called it his company. Its site names nobody.
+      sources: [wilens-order, terms]
+    sister_brands:
+      value: []
+      sources: [app-store-developer]
+    acquisitions:
+      value: null
+      note: My Privacy Tools, Inc. has been named on the site since 2006, but whether it has ever changed hands isn't published.
+      sources: [home-2007]
+
+  jurisdiction:
+    hq:
+      value: US
+      note: Its privacy policy and Google Play listing give an address in San Diego, California.
+      sources: [privacy]
+    entities:
+      value: [US]
+      sources: [play]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [terms, privacy]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [privacy]
+    timestamps:
+      value: null
+      note: The terms rule out activity and usage logs, but the policy says it collects information when you use its network without saying what.
+      sources: [terms, privacy]
+    bandwidth:
+      value: null
+      note: The terms rule out usage logs, but the policy doesn't say whether data use per account is recorded.
+      sources: [terms, privacy]
+    source_ip:
+      value: null
+      note: The policy doesn't say whether the IP you connect from is recorded.
+      sources: [privacy, kb-logs]
+    proven:
+      value: [court]
+      evidence: verified
+      note: >-
+        Subpoenaed in a 2014 lawsuit for whoever used its IP addresses at given times, it said it kept no
+        record of which customer had them, beyond perhaps a short time.
+      sources: [wilens-order]
+    policy: https://www.hidemyip.com/privacy-policy
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty:
+      value: false
+      sources: [contact]
+    incidents: []
+
+  account:
+    email:
+      value: required
+      note: The license key is sent to it.
+      sources: [checkout]
+    personal_data:
+      value: []
+      sources: [checkout]
+    payment:
+      value: [card, paypal, bitcoin, other_crypto, app_store]
+      note: Litecoin is the other coin it names, and it also lists AliPay.
+      sources: [checkout, kb-payment, kb-google-play]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn]
+      note: OpenVPN is for manual setup. Its Android app is built on WireGuard, which the site doesn't mention.
+      sources: [web-app, kb-linux, kb-tcp-udp, apk]
+    post_quantum: none
+    kill_switch:
+      value: app
+      note: The Android and iOS apps have one; the desktop apps aren't said to.
+      sources: [play, app-store]
+    dns:
+      value: null
+      note: It doesn't say whose DNS servers the VPN uses.
+      sources: [privacy]
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say whether its servers run from RAM.
+      sources: [locations]
+    hosting:
+      value: null
+      note: It doesn't say whether it owns or rents its servers.
+      sources: [locations]
+    virtual_locations:
+      value: none
+      evidence: claimed
+      sources: [locations, kb-geo]
+    servers:
+      value: null
+      note: It lists 133 locations, though its homepage says 140, and gives no server count.
+      sources: [locations]
+    countries:
+      value: 80
+      sources: [locations]
+
+  features:
+    connections:
+      value: 7
+      note: Its Google Play listing says 10.
+      sources: [devices-faq, kb-devices, play]
+    multihop:
+      value: false
+      sources: [play]
+    obfuscation:
+      value: null
+      note: Its Android app bundles Xray and wstunnel, but it doesn't say whether or when they're used.
+      sources: [apk]
+    port_forwarding: null
+    split_tunnel:
+      value: null
+      note: It doesn't say whether you can choose which apps use the VPN.
+      sources: [app-store]
+    blocking:
+      value: null
+      note: Its App Store listing says it blocks tracking, without saying how.
+      sources: [app-store]
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android, browser]
+      note: Linux uses manual OpenVPN setup and routers get Smart DNS only. The iOS app was updated in October 2026.
+      sources: [downloads, kb-linux, dns-proxy, play, app-store, chrome]
+    open_source:
+      value: none
+      sources: [downloads]
+    telemetry:
+      value: null
+      note: The App Store listing declares no data collected and Google Play declares some personal info, but neither says what the apps send.
+      sources: [app-store, play]
+    fdroid:
+      value: false
+      sources: [downloads]
+
+  pricing:
+    monthly:
+      value: { amount: 4.95, currency: USD }
+      sources: [home, checkout]
+    best:
+      value: { amount: 2.91, currency: USD }
+      note: $34.95 for a year.
+      sources: [home, checkout]
+    best_term:
+      value: 12
+      sources: [home, checkout]
+    renewal_increase:
+      value: 0
+      note: The plans aren't sold as intro deals and renew automatically at checkout.
+      sources: [checkout]
+    free_tier:
+      value: true
+      note: The apps have a few free locations, with the rest for paying users.
+      sources: [app-store, try]
+    refund_days:
+      value: 30
+      sources: [refund]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: It promises "online anonymity", "Military-grade encryption" and that you'll "Stay Anonymous".
+      sources: [home, play]
+    affiliates:
+      value: true
+      sources: [affiliates, kb-affiliate]
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://www.hidemyip.com/
+    title: Hide My IP - Hide Your IP, Surf Anonymously, and Access Blocked Websites
+  downloads:
+    url: https://www.hidemyip.com/#downloads
+    title: Download Hide My IP
+  devices-faq:
+    url: https://www.hidemyip.com/#faq
+    title: Frequently asked questions
+  try:
+    url: https://www.hidemyip.com/#pricing
+    title: Affordable VPN Plans for Every Budget
+  kb-google-play:
+    url: https://support.hidemyip.com/#purchasing-hide-my-ip-on-google-play-1712035174
+    title: Purchasing Hide My IP on Google Play
+  home-2007:
+    url: https://web.archive.org/web/20070103161545/http://www.hide-my-ip.com/
+    title: Hide My IP homepage (2007 copy, Wayback Machine)
+  terms:
+    url: https://www.hidemyip.com/terms
+    title: Terms of Service
+  privacy:
+    url: https://www.hidemyip.com/privacy-policy
+    title: Privacy Policy
+  refund:
+    url: https://www.hidemyip.com/refund-policy
+    title: Refund Policy
+  contact:
+    url: https://www.hidemyip.com/contact-us
+    title: Contact Us
+  locations:
+    url: https://www.hidemyip.com/server-ip-locations
+    title: VPN Server IP Locations
+  web-app:
+    url: https://www.hidemyip.com/web-app
+    title: Hide My IP Web App (OpenVPN config files)
+  dns-proxy:
+    url: https://www.hidemyip.com/dns-proxy
+    title: Smart DNS Proxy
+  checkout:
+    url: https://my.hidemyip.com/cart?pid=2&billingcycle=monthly
+    title: "Checkout: Hide My IP Premium Service"
+  affiliates:
+    url: https://affiliate.hidemyip.com/
+    title: Hide My IP Affiliate Program
+  kb-logs:
+    url: https://support.hidemyip.com/#do-you-keep-logs-1712034502
+    title: Do you keep logs?
+  kb-payment:
+    url: https://support.hidemyip.com/#what-payment-methods-do-you-accept-1712033920
+    title: What Payment Methods Do You Accept?
+  kb-devices:
+    url: https://support.hidemyip.com/#how-many-devices-can-i-use-hide-my-ip-on-1712034758
+    title: How Many Devices Can I use Hide My IP On?
+  kb-linux:
+    url: https://support.hidemyip.com/#hide-my-ip-for-linux-1712035531
+    title: Hide My IP for Linux
+  kb-tcp-udp:
+    url: https://support.hidemyip.com/#solving-connection-issues-with-the-tcpudp-setting-1712220154
+    title: Solving Connection Issues With the TCP/UDP Setting
+  kb-geo:
+    url: https://support.hidemyip.com/#hide-my-ip-geo-location-is-wrong-1712034439
+    title: Hide My IP Geo Location Is Wrong?
+  kb-affiliate:
+    url: https://support.hidemyip.com/#how-can-i-refer-customer-to-hide-my-ip-and-receive-a-commission-1712035906
+    title: How Can I Refer Customer to Hide My IP and Receive a Commission?
+  apk:
+    url: https://www.hidemyip.com/hidemyip-vpn-android-apk
+    title: Hide My IP Android app (direct download APK)
+  wilens-order:
+    url: https://storage.courtlistener.com/recap/gov.uscourts.cand.277727/gov.uscourts.cand.277727.53.0.pdf
+    title: Wilens v. Automattic, order granting service by email (N.D. Cal., 5 February 2015)
+  play:
+    url: https://play.google.com/store/apps/details?id=com.hidemyip.hideme&hl=en&gl=US
+    title: Hide My IP - Fast, Secure VPN on Google Play
+  app-store:
+    url: https://apps.apple.com/us/app/hide-my-ip-vpn/id1364900416
+    title: Hide My IP VPN on the App Store
+  app-store-developer:
+    url: https://apps.apple.com/us/developer/my-privacy-tools-inc/id975588160
+    title: My Privacy Tools Inc apps on the App Store
+  chrome:
+    url: https://chromewebstore.google.com/detail/hide-my-ip/pekcnopmdcbjdgmpnpkndppflpldnkkp
+    title: Hide My IP on the Chrome Web Store
