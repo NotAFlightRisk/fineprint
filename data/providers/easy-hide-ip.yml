@@ -1,0 +1,371 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Easy Hide IP
+icon: easy-hide-ip.png
+checked: 2026-10-27
+
+criteria:
+  identity:
+    website:
+      value: https://easy-hide-ip.com
+      sources: [home]
+    legal_entity:
+      value: Edelino Commerce Inc.
+      note: >-
+        The terms and privacy policy only say Easy-Hide-IP.com. The site footer names Edelino Commerce Inc., and
+        its 2019 website called it Edelino Commerce Ltd, at a Victoria, Seychelles address.
+      sources: [home, terms, edelino-2019]
+    owner:
+      value: null
+      note: Nothing published says who owns Edelino Commerce.
+      sources: [edelino-2019]
+    founded:
+      value: null
+      note: >-
+        Easy Hide IP started in 2007 as IP-hiding proxy software, and its site had added a VPN page by January
+        2014. When the VPN itself launched isn't published.
+      sources: [wayback-2007, wayback-2014]
+    team:
+      value: anonymous
+      note: The canary is signed by a "Wolf Blitzer", CTO of Easy-Hide-IP Group, and no one else is named.
+      sources: [canary, terms]
+    sister_brands:
+      value: [Anonine, BoxPN, FrootVPN, VPNTunnel]
+      note: >-
+        Anonine, BoxPN and FrootVPN name Edelino Commerce Inc. on their sites, and it sells VPNTunnel's iOS app.
+        Its canary was signed on the same day as FrootVPN's and VPNTunnel's.
+      sources: [anonine, boxpn, frootvpn, vpntunnel, vpntunnel-app, canary, frootvpn-canary]
+    acquisitions:
+      value: null
+      note: >-
+        In 2014 and 2015 the site said it was owned and operated by Websecure Ltd of London, and by January 2020
+        it named Edelino Commerce Inc. Whether that was a sale isn't published.
+      sources: [wayback-2015, wayback-2020]
+
+  jurisdiction:
+    hq:
+      value: SC
+      evidence: claimed
+      note: The canary is signed from Toronto.
+      sources: [terms, privacy-policy, canary]
+    entities:
+      value: [SC]
+      sources: [edelino-2019]
+
+  logging:
+    traffic:
+      value: null
+      note: >-
+        The privacy policy rules out activity logs, but its FAQ says it keeps logs for diagnostics and to meet
+        the laws where its servers are, without saying what's in them.
+      sources: [privacy-policy, faq]
+    dns:
+      value: null
+      note: >-
+        The privacy policy rules out activity logs, but its FAQ says it keeps logs for diagnostics and to meet
+        the laws where its servers are, without saying what's in them.
+      sources: [privacy-policy, faq]
+    timestamps:
+      value: null
+      note: >-
+        The policy rules out activity logs, but the FAQ says it keeps unspecified logs and cuts off a key used
+        from too many places within 24 hours.
+      sources: [privacy-policy, faq]
+    bandwidth:
+      value: null
+      note: It doesn't say whether data use is counted per account.
+    source_ip:
+      value: null
+      note: >-
+        The policy rules out activity logs, but the FAQ says it keeps unspecified logs and cuts off a key used
+        from too many places within 24 hours.
+      sources: [privacy-policy, faq]
+    proven: []
+    policy: https://easy-hide-ip.com/privacy_policy
+
+  transparency:
+    audits: []
+    report:
+      value: none
+      sources: [canary, help]
+    canary:
+      value: maintained
+      note: PGP-signed, most recently on 13 August 2026.
+      sources: [canary]
+    bug_bounty:
+      value: false
+      sources: [help]
+    incidents:
+      value:
+        - date: 2015-02-20
+          summary: >-
+            Easy Hide IP Classic shipped Komodia's HTTPS interception component, the flaw behind Superfish. Its
+            operator replied to CERT within days with an update that dropped it.
+          handled: well
+          source: cert-komodia
+      sources: [cert-komodia]
+
+  account:
+    email:
+      value: required
+      sources: [order, privacy-policy]
+    personal_data:
+      value: []
+      sources: [order]
+    payment:
+      value: [card, paypal]
+      note: >-
+        Cards are taken through PayPal. The only other option is Perfect Money, an online payment service. Its
+        help centre still says it takes Bitcoin, which the order page doesn't offer.
+      sources: [order, payment-help, bitcoin-help]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn, ikev2, other]
+      note: >-
+        WireGuard is manual setup only. Other is L2TP/IPsec, IPsec IKEv1, PPTP and Classic, a Windows-only mode
+        that redirects connections through a system-wide interceptor.
+      sources: [protocols-help, wireguard-android, ikev2-win10, l2tp-win10, classic-help]
+    post_quantum:
+      value: none
+      sources: [protocols-help]
+    kill_switch:
+      value: null
+      note: It doesn't say whether the Windows client has one.
+      sources: [windows-vpn, windows-client]
+    dns:
+      value: null
+      note: It doesn't say which DNS servers answer inside the tunnel.
+      sources: [help]
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say whether its servers run from RAM.
+    hosting:
+      value: mixed
+      evidence: claimed
+      note: Its terms say most of its servers are its own.
+      sources: [terms]
+    virtual_locations:
+      value: null
+      note: It doesn't say whether any locations are virtual.
+      sources: [network]
+    servers:
+      value: 150
+      note: It says "more than 150 VPN servers". Its server status page listed none on 2026-10-27.
+      sources: [home, server-status]
+    countries:
+      value: 26
+      note: It says "more than 26 countries". The order page says over 32, and the Windows page lists 24.
+      sources: [home, order, windows-vpn]
+
+  features:
+    connections:
+      value: 5
+      note: Its FAQ still calls it a single-machine licence for one computer, one laptop or tablet and one phone.
+      sources: [order, faq]
+    multihop:
+      value: false
+      sources: [home]
+    obfuscation:
+      value: [stunnel]
+      note: OpenVPN wrapped in Stunnel, set up by hand.
+      sources: [stunnel-win10, stunnel-android]
+    port_forwarding:
+      value: null
+      note: It doesn't say.
+    split_tunnel:
+      value: null
+      note: It doesn't say whether the Windows client can leave some apps outside the VPN.
+      sources: [windows-vpn]
+    blocking:
+      value: []
+      sources: [home]
+
+  clients:
+    platforms:
+      value: [windows]
+      note: >-
+        The Windows client, version 4.17, dates from December 2020. Everything else, routers included, uses
+        manual OpenVPN, IKEv2, L2TP or PPTP setups.
+      sources: [windows-vpn, windows-download, mac-help, help]
+    open_source:
+      value: none
+      note: Its terms forbid reverse engineering the software, and no source is published.
+      sources: [terms]
+    telemetry:
+      value: null
+      note: It doesn't say whether the Windows client sends usage or crash data.
+      sources: [privacy-policy]
+    trackers:
+      value: null
+      grade: na
+      note: There's no Android app. Android uses manual OpenVPN, IPsec, L2TP or PPTP setups.
+      sources: [android-openvpn, mac-help]
+    fdroid:
+      value: false
+      sources: [help]
+
+  pricing:
+    monthly:
+      value: { amount: 32.93, currency: USD }
+      sources: [order]
+    best:
+      value: { amount: 7.8, currency: USD }
+      note: $93.60 for 12 months, shown against a struck-through $395.16. Six months cost $63.
+      sources: [order]
+    best_term:
+      value: 12
+      sources: [order]
+    renewal_increase:
+      value: null
+      note: Plans can renew automatically, but no renewal price is published.
+      sources: [order, terms]
+    free_tier:
+      value: false
+      sources: [order]
+    refund_days:
+      value: 7
+      note: The terms only promise a refund if the service didn't meet "reasonable expectations".
+      sources: [terms]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        It says your online activity is "100% private", that you can use the internet "completely anonymously",
+        and sells "military grade encryption".
+      sources: [isp-help, terms, order]
+    affiliates:
+      value: true
+      note: A 30% commission on referred sales.
+      sources: [affiliates]
+    review_sites:
+      value: null
+      note: No sign it owns any, but who owns Edelino Commerce isn't published.
+    activism: false
+
+  other:
+    concerns:
+      value:
+        - summary: >-
+            The Windows client's Classic mode installs a system-wide interceptor for every connection, which has
+            to keep running even when Easy Hide IP isn't.
+          severity: minor
+          source: redirector-help
+
+refs:
+  home:
+    url: https://easy-hide-ip.com/
+    title: Easy Hide IP home page
+  terms:
+    url: https://easy-hide-ip.com/terms_of_use
+    title: Terms of Use
+  privacy-policy:
+    url: https://easy-hide-ip.com/privacy_policy
+    title: Privacy Policy
+  order:
+    url: https://easy-hide-ip.com/en/order/purchase
+    title: Order page
+  network:
+    url: https://easy-hide-ip.com/en/network
+    title: Server network locations
+  server-status:
+    url: https://easy-hide-ip.com/ajax/server-status
+    title: Easy Hide IP server list (the data behind the network page)
+  windows-vpn:
+    url: https://easy-hide-ip.com/windows-vpn
+    title: Easy-Hide-IP VPN for Windows
+  windows-download:
+    url: https://easy-hide-ip.com/en/download-client?platform=win
+    title: Windows client download (easy-hide-ip-vpn-4.17.exe)
+  affiliates:
+    url: https://easy-hide-ip.com/affiliates
+    title: Affiliate program
+  canary:
+    url: https://easy-hide-ip.com/canary.txt
+    title: Warrant canary (signed 13 August 2026)
+  frootvpn-canary:
+    url: https://frootvpn.com/canary.txt
+    title: FrootVPN warrant canary (signed 13 August 2026)
+  faq:
+    url: https://easy-hide-ip.com/faqs
+    title: FAQs
+  cert-komodia:
+    url: https://www.kb.cert.org/vuls/id/529496
+    title: CERT VU#529496, Komodia Redirector with SSL Digestor (Websecure Ltd statement, February 2015)
+  wireguard-android:
+    url: https://help.easy-hide-ip.com/support/solutions/articles/5000857015-easy-hide-ip-wireguard-installation-guide-for-android
+    title: WireGuard installation guide for Android
+  help:
+    url: https://help.easy-hide-ip.com/support/solutions
+    title: Easy Hide IP knowledge base
+  protocols-help:
+    url: https://help.easy-hide-ip.com/support/solutions/articles/5000701497-which-protocol-should-i-use-and-what-s-the-difference-
+    title: Which protocol should I use and what's the difference?
+  classic-help:
+    url: https://help.easy-hide-ip.com/support/solutions/articles/5000700670-cannot-connect-using-vpn-try-the-classic-protocol
+    title: Cannot connect using VPN? Try the Classic protocol
+  redirector-help:
+    url: https://help.easy-hide-ip.com/support/solutions/articles/5000700657-what-is-easyredirector-
+    title: What is EasyRedirector?
+  ikev2-win10:
+    url: https://help.easy-hide-ip.com/support/solutions/articles/5000761301-easy-hide-ip-ipsec-ikev2-installation-guide-for-windows-10
+    title: IPsec IKEv2 installation guide for Windows 10
+  l2tp-win10:
+    url: https://help.easy-hide-ip.com/support/solutions/articles/5000756868-easy-hide-ip-l2tp-installation-guide-for-windows-10
+    title: L2TP installation guide for Windows 10
+  stunnel-win10:
+    url: https://help.easy-hide-ip.com/support/solutions/articles/5000753545-easy-hide-ip-windows-10-stunnel-openvpn-manual-setup-instructions
+    title: Windows 10, Stunnel + OpenVPN manual setup instructions
+  stunnel-android:
+    url: https://help.easy-hide-ip.com/support/solutions/articles/5000756162-easy-hide-ip-stunnel-openvpn-android-manual-configurations-
+    title: Stunnel + OpenVPN, Android manual configuration
+  android-openvpn:
+    url: https://help.easy-hide-ip.com/support/solutions/articles/5000745432-easy-hide-ip-android-openvpn-connect-manual-configuration-instructions
+    title: Android, OpenVPN Connect manual configuration instructions
+  windows-client:
+    url: https://help.easy-hide-ip.com/support/solutions/articles/5000707067-easy-hide-ip-windows-client-installation-instructions
+    title: Easy-Hide-IP Windows client, installation instructions
+  mac-help:
+    url: https://help.easy-hide-ip.com/support/solutions/articles/5000701507-is-there-a-apple-mac-version-of-easy-hide-ip-
+    title: Is there an Apple Mac version of Easy-Hide-IP?
+  payment-help:
+    url: https://help.easy-hide-ip.com/support/solutions/articles/5000701530-what-are-my-payment-options-
+    title: What are my payment options?
+  bitcoin-help:
+    url: https://help.easy-hide-ip.com/support/solutions/articles/5000701533-can-i-pay-via-bitcoin-
+    title: Can I pay via Bitcoin?
+  isp-help:
+    url: https://help.easy-hide-ip.com/support/solutions/articles/5000701510-what-will-my-isp-see-if-i-use-your-service-
+    title: What will my ISP see if I use your service?
+  anonine:
+    url: https://anonine.com/
+    title: Anonine
+  boxpn:
+    url: https://boxpn.com/
+    title: BoxPN
+  frootvpn:
+    url: https://frootvpn.com/
+    title: FrootVPN
+  vpntunnel:
+    url: https://vpntunnel.com/
+    title: VPNTunnel
+  vpntunnel-app:
+    url: https://apps.apple.com/us/app/vpntunnel-private-vpn-spot/id969091963
+    title: VPNTunnel - Private VPN Spot on the App Store
+  edelino-2019:
+    url: https://web.archive.org/web/20190905203648/http://edelinocommerce.com/
+    title: Edelino Commerce, archived September 2019
+  wayback-2007:
+    url: https://web.archive.org/web/20070626114612/http://www.easy-hide-ip.com/
+    title: easy-hide-ip.com, archived June 2007
+  wayback-2014:
+    url: https://web.archive.org/web/20140104194130/http://www.easy-hide-ip.com/
+    title: easy-hide-ip.com, archived January 2014
+  wayback-2015:
+    url: https://web.archive.org/web/20150104225607/https://easy-hide-ip.com/
+    title: easy-hide-ip.com, archived January 2015
+  wayback-2020:
+    url: https://web.archive.org/web/20200115170555/https://easy-hide-ip.com/
+    title: easy-hide-ip.com, archived January 2020
