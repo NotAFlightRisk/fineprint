@@ -1,0 +1,245 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: 1ClickVPN
+icon: 1clickvpn.png
+checked: 2026-10-27
+
+criteria:
+  identity:
+    website: https://1clickvpn.net
+    legal_entity:
+      value: Kodice LLC
+      note: >-
+        Kodice LLC's own site gives a business centre address in Sharjah, UAE, and sells online ad traffic. The
+        Chrome listing names no company.
+      sources: [terms, kodice, cws]
+    owner:
+      value: null
+      note: Who owns Kodice LLC isn't public.
+      sources: [terms]
+    founded:
+      value: null
+      note: No launch date is given. Its domain dates from September 2019, and the Chrome extension had over 700,000 users by August 2020.
+      sources: [rdap, cws-2020]
+    team:
+      value: anonymous
+      sources: [about, cws]
+    sister_brands:
+      value: null
+      note: >-
+        1ClickVPN Proxy at 1clickvpn.com, which Koi Security caught collecting AI chats, is a different
+        product sold by Sugar - Smart Shopping Inc.
+      sources: [com-play, koi-2025]
+    acquisitions: []
+
+  jurisdiction:
+    hq:
+      value: AE
+      evidence: claimed
+      note: The terms are governed by UAE law, with disputes going to a UAE arbitration centre.
+      sources: [kodice, terms]
+    entities:
+      value: [AE]
+      sources: [kodice]
+
+  logging:
+    traffic:
+      value: 'yes'
+      evidence: claimed
+      note: >-
+        The privacy policy collects the URLs you visit with their times, a pseudonymous ID and your IP
+        address, and passes an anonymised version to analytics partners. The 2021 terms promise no traffic logs.
+      sources: [policy, cws, terms]
+    dns:
+      value: null
+      note: The policy doesn't mention DNS, but it collects the URLs you visit.
+      sources: [policy]
+    timestamps:
+      value: 'yes'
+      evidence: claimed
+      note: >-
+        The policy collects session timestamps and connection duration, kept as long as "necessary". The
+        terms say only the last session status is kept, for 15 minutes after you disconnect.
+      sources: [policy, terms]
+    bandwidth:
+      value: none
+      evidence: claimed
+      sources: [terms]
+    source_ip:
+      value: 'yes'
+      evidence: claimed
+      note: The policy collects your IP address for service delivery and security, while the terms say IP addresses aren't stored.
+      sources: [policy, terms]
+    proven: []
+    policy: https://1clickvpn.net/privacy
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: required
+      note: The free extension needs no account. Premium needs one with an email address.
+      sources: [cws, terms, faq]
+    personal_data:
+      value: null
+      note: The policy lists your name among what it collects when you register or subscribe, without saying it's required.
+      sources: [policy]
+    payment:
+      value: [card, paypal]
+      note: Also Google Pay, Apple Pay, Telegram Stars and crypto, without saying which coins.
+      sources: [payment, terms]
+
+  security:
+    protocols:
+      value: null
+      note: The extensions are a proxy for that browser alone, which the Chrome listing says uses SSL (TLS) encryption.
+      sources: [cws, faq]
+    post_quantum: none
+    kill_switch: null
+    dns: null
+
+  infra:
+    ram_only: null
+    hosting: null
+    virtual_locations: null
+    servers:
+      value: 500
+      evidence: claimed
+      sources: [faq, cws]
+    countries:
+      value: 10
+      evidence: claimed
+      note: Premium gets 10 countries and the free plan 3.
+      sources: [pricing, faq]
+
+  features:
+    connections:
+      value: 5
+      note: Premium covers 5 devices and the free plan 3.
+      sources: [pricing]
+    multihop: false
+    obfuscation:
+      value: null
+      note: The Chrome listing says it bypasses censorship, without saying how.
+      sources: [cws]
+    port_forwarding: false
+    split_tunnel:
+      value: null
+      note: The Chrome extension can switch on protection for chosen websites. Nothing is said about choosing apps.
+      sources: [cws]
+    blocking:
+      value: [ads, trackers, malware]
+      evidence: claimed
+      note: The extension's built-in ad blocker, with no detail on how it works.
+      sources: [cws, pricing]
+
+  clients:
+    platforms:
+      value: [browser]
+      note: >-
+        A proxy for the browser alone. The Chrome extension was updated in October 2026, the Edge one last
+        in January 2022, and the Firefox one is no longer listed. The site has Android and iOS download pages,
+        but they don't link to any app.
+      sources: [cws, edge, amo-2025, android, ios, terms]
+    open_source:
+      value: none
+      sources: [terms]
+    telemetry:
+      value: null
+      note: The policy collects crash logs, diagnostics and feature interaction data, without saying whether you can turn it off.
+      sources: [policy]
+    trackers:
+      value: null
+      grade: na
+      note: There's no Android app.
+      sources: [android]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 3.99, currency: USD }
+      sources: [pricing]
+    best:
+      value: { amount: 1.99, currency: USD }
+      note: Billed yearly.
+      sources: [pricing]
+    best_term:
+      value: 12
+      sources: [pricing]
+    renewal_increase:
+      value: 0
+      note: The yearly plan's 50% off is against the monthly price, and nothing says it renews higher.
+      sources: [pricing, terms]
+    free_tier:
+      value: true
+      note: The free plan gets 3 countries and 3 devices.
+      sources: [pricing]
+    refund_days:
+      value: 2
+      note: Refunds are only within 48 hours of the first purchase.
+      sources: [terms]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        It says its SSL encryption makes you "fully anonymous" and that your browsing is never stored, while
+        its privacy policy collects the URLs you visit.
+      sources: [about, cws, policy]
+    affiliates: null
+    review_sites: false
+    activism: false
+
+refs:
+  policy:
+    url: https://1clickvpn.net/privacy
+    title: 1clickVPN Privacy Policy
+  terms:
+    url: https://1clickvpn.net/terms-of-service
+    title: 1clickVPN Terms and Conditions of Service (October 28, 2021)
+  kodice:
+    url: https://kodice.net/
+    title: Kodice LLC
+  payment:
+    url: https://1clickvpn.net/payment?plan=month
+    title: 1clickVPN checkout
+  about:
+    url: https://1clickvpn.net/about
+    title: About 1clickVPN
+  faq:
+    url: https://1clickvpn.net/faq
+    title: 1clickVPN FAQ
+  pricing:
+    url: https://1clickvpn.net/pricing
+    title: 1clickVPN pricing
+  android:
+    url: https://1clickvpn.net/download-1clickvpn-android-application
+    title: 1ClickVPN for Android
+  ios:
+    url: https://1clickvpn.net/download-1clickvpn-ios-application
+    title: 1ClickVPN for iOS
+  cws:
+    url: https://chromewebstore.google.com/detail/free-vpn-for-chrome-vpn-p/fcfhplploccackoneaefokcmbjfbkenj
+    title: Free VPN for Chrome - VPN Proxy 1clickVPN on the Chrome Web Store
+  cws-2020:
+    url: https://web.archive.org/web/20200803131101/https://chrome.google.com/webstore/detail/1clickvpn-free-vpn-for-ch/fcfhplploccackoneaefokcmbjfbkenj
+    title: 1clickVPN on the Chrome Web Store (archived August 2020)
+  edge:
+    url: https://microsoftedge.microsoft.com/addons/detail/pmogomcckhjhjndmcgjchnfoalglganm
+    title: 1clickVPN - Fast and Secure VPN on Edge Add-ons
+  amo-2025:
+    url: https://web.archive.org/web/20251220034401/https://addons.mozilla.org/en-US/firefox/addon/1clickvpn-secure-and-free-vpn/
+    title: 1clickVPN - Secure and Free VPN on Firefox Add-ons (archived December 2025)
+  rdap:
+    url: https://rdap.verisign.com/net/v1/domain/1clickvpn.net
+    title: Verisign RDAP record for 1clickvpn.net
+  com-play:
+    url: https://play.google.com/store/apps/details?id=com.oneclickvpn.android&hl=en
+    title: 1ClickVPN (1clickvpn.com) on Google Play
+  koi-2025:
+    url: https://web.archive.org/web/20251230235210/https://www.koi.ai/blog/urban-vpn-browser-extension-ai-conversations-data-collection
+    title: Koi Security, 8 million users' AI conversations sold for profit by "privacy" extensions (December 15, 2025)
