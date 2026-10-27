@@ -1,0 +1,345 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Mysterium VPN
+icon: mysterium-vpn.svg
+checked: 2026-10-27
+
+criteria:
+  identity:
+    website:
+      value: https://www.mysteriumvpn.com
+      sources: [terms]
+    legal_entity:
+      value: UAB MN Intelligence
+      note: A Lithuanian company set up in December 2024. The terms named UAB MN Technologijos until early 2025.
+      sources: [terms, register, terms-2024]
+    owner:
+      value: null
+      note: >-
+        The register lists one corporate shareholder without naming it. The Mysterium Network itself is
+        developed by BlockDev AG of Zug, Switzerland.
+      sources: [register, mn-team]
+    founded:
+      value: 2019
+      note: Its first decentralised VPN came out in 2019. The current subscription app came later and runs alongside it.
+      sources: [about, dark-app]
+    team:
+      value: partial
+      note: The Mysterium Network names its founder and a director. The VPN's own site names nobody.
+      sources: [mn-team, about]
+    sister_brands:
+      value: [Mysterium Dark]
+      note: Its older pay-as-you-go app, paid in MYST tokens, on the same node network.
+      sources: [dark-app, fdroid-dark]
+    acquisitions:
+      value: []
+      note: The service moved from UAB MN Technologijos to UAB MN Intelligence in 2025. Who owns either isn't public.
+      sources: [terms-2024, terms, register]
+
+  jurisdiction:
+    hq:
+      value: LT
+      note: The terms are governed by the law of Panama, with disputes going to Panama's courts.
+      sources: [terms, register]
+    entities:
+      value: [LT]
+      sources: [register, terms]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      note: >-
+        Residential exits are run by independent node operators. The policy covers Mysterium's own side and
+        doesn't say what operators may log.
+      sources: [policy, nologs, about]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [nologs]
+    timestamps:
+      value: temporary
+      evidence: claimed
+      note: >-
+        The policy says session timestamps go within minutes of a session ending. In 2024, under an older
+        policy, Mysterium gave German police the times of connections to some of its nodes.
+      sources: [policy, nologs, policy-2024, reddit-2024]
+    bandwidth:
+      value: temporary
+      evidence: claimed
+      note: Bandwidth volumes are processed to run the service. Mysterium says they aren't stored, and basic connection data goes within minutes.
+      sources: [policy, nologs]
+    source_ip:
+      value: none
+      evidence: claimed
+      note: Traffic passes through a second node before the residential exit, so the exit's operator never sees your IP, Mysterium says.
+      sources: [policy, double-vpn, original-ip]
+    proven:
+      value: []
+      sources: [nologs]
+    policy: https://www.mysteriumvpn.com/privacy-policy-vpn
+
+  transparency:
+    audits:
+      value: []
+      note: Mysterium says its public code and decentralised design stand in for a no-logs audit.
+      sources: [nologs]
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents:
+      value:
+        - date: 2024-09-23
+          summary: >-
+            A business client used the network for child abuse material between April and August 2024, and
+            German police went after the home node operators it exited through. Mysterium gave police
+            connection times to clear them and limited what business clients can reach.
+          handled: well
+          source: reddit-2024
+      sources: [reddit-2024]
+
+  account:
+    email:
+      value: required
+      note: Login is passwordless, by a magic link sent to your email or by Google or Apple sign-in.
+      sources: [purchase, login]
+    personal_data:
+      value: []
+      sources: [purchase]
+    payment:
+      value: [card, paypal, app_store, bitcoin, other_crypto]
+      note: Crypto goes through CoinGate, which takes Ethereum and others besides Bitcoin. Apple Pay and Google Pay too.
+      sources: [payment-methods]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn]
+      note: OpenVPN isn't on Android.
+      sources: [protocols]
+    post_quantum:
+      value: none
+      sources: [features, protocols]
+    kill_switch:
+      value: system
+      note: Always on and can't be turned off on Windows, macOS, Android and iOS.
+      sources: [kill-switch]
+    dns:
+      value: third_party
+      note: Cloudflare's 1.1.1.1 by default, swapped for filtering resolvers when a blocker is on.
+      sources: [dns-code, blocker]
+
+  infra:
+    ram_only:
+      value: null
+      note: Residential exits are home connections run by independent operators. Mysterium doesn't say how its data-centre servers are set up.
+      sources: [about, nologs]
+    hosting:
+      value: null
+      note: >-
+        Residential IPs belong to independent node operators who earn MYST tokens for sharing their
+        connection. Who hosts the data-centre "High-Speed" servers isn't stated.
+      sources: [about, new-servers]
+    virtual_locations:
+      value: null
+      note: Residential exits sit wherever their operators live. Mysterium doesn't say whether any data-centre locations are virtual.
+      sources: [locations]
+    servers:
+      value: 11000
+      note: 11,000+ IPs, 7,500+ of them residential. The Basic plan only gets 3,800+ data-centre servers.
+      sources: [pricing, about]
+    countries:
+      value: 108
+      note: On the Plus and Pro plans. Basic covers 57 countries.
+      sources: [pricing]
+
+  features:
+    connections:
+      value: 10
+      note: 6 on Basic, 10 on Plus (the cheapest plan) and 15 on Pro. The terms still cap use at six connections.
+      sources: [devices, terms]
+    multihop:
+      value: true
+      note: Every connection goes through two nodes.
+      sources: [double-vpn]
+    obfuscation:
+      value: []
+      note: Residential IPs are sold as harder for sites to block, but there's no traffic obfuscation.
+      sources: [features, protocols]
+    port_forwarding:
+      value: false
+      sources: [features]
+    split_tunnel:
+      value: false
+      note: Mysterium says it's coming. The browser extensions only tunnel the browser.
+      sources: [split-tunnel]
+    blocking:
+      value: [malware]
+      note: A malware and phishing DNS blocker, plus an adult content filter, on the Pro plan only.
+      sources: [blocker]
+
+  clients:
+    platforms:
+      value: [windows, macos, linux_cli, ios, android, router, browser]
+      note: Extensions for Chrome, Brave, Opera and Opera GX. Routers get a WireGuard config.
+      sources: [downloads, linux-cli, router]
+    open_source:
+      value: some
+      note: The Android, iOS, macOS and Windows app and the Linux CLI are GPL-2.0. There's no public source for the browser extensions.
+      sources: [source-code, cli-source, about]
+    telemetry:
+      value: forced
+      evidence: claimed
+      note: >-
+        The apps send Firebase Analytics, Crashlytics and Sentry reports with no setting to turn them off.
+        The policy says diagnostics carry no unique identifiers, but the app sets a Firebase user ID.
+      sources: [policy, analytics-code]
+    fdroid:
+      value: false
+      note: Only the older Mysterium Dark app is on F-Droid.
+      sources: [fdroid-dark]
+
+  pricing:
+    monthly:
+      value: { amount: 12.99, currency: USD }
+      note: Basic. Plus is $14.99 and Pro $19.99 a month.
+      sources: [pricing]
+    best:
+      value: { amount: 2.29, currency: USD }
+      note: Plus at $54.94 for the first two years.
+      sources: [pricing]
+    best_term:
+      value: 24
+      sources: [pricing]
+    renewal_increase:
+      value: null
+      note: Plans renew for the same term, but the renewal price isn't given. The 2-year Plus plan is shown as 85% off $359.76.
+      sources: [terms, pricing]
+    free_tier:
+      value: false
+      sources: [pricing]
+    refund_days:
+      value: 7
+      note: >-
+        The terms and the monthly and 1-year plans give 7 days, 2-year plans 30. Refunds only apply under
+        10 GB of use.
+      sources: [terms, refund, pricing]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        It promises "genuine anonymity online", "military-grade encryption" and that you'll "never get
+        identified or caught", and says there's no central server to seize while selling data-centre servers.
+      sources: [locations, residential-servers, nologs]
+    affiliates:
+      value: true
+      note: Runs through Impact and CJ, and directly.
+      sources: [affiliates]
+    review_sites: false
+    activism: false
+
+refs:
+  terms:
+    url: https://www.mysteriumvpn.com/terms-conditions-vpn
+    title: Mysterium VPN terms and conditions
+  terms-2024:
+    url: https://web.archive.org/web/20241213160439/https://www.mysteriumvpn.com/terms-conditions-vpn
+    title: Mysterium VPN terms and conditions (December 2024, Wayback Machine)
+  policy-2024:
+    url: https://web.archive.org/web/20240918171344/https://www.mysteriumvpn.com/privacy-policy-vpn
+    title: Mysterium VPN privacy policy (September 2024, Wayback Machine)
+  reddit-2024:
+    url: https://web.archive.org/web/20250109144400/https://www.reddit.com/r/MysteriumNetwork/comments/1fnf8l6/what_happened_what_was_done_and_what_will_be_done/
+    title: What Happened, What Was Done, and What Will Be Done (Mysterium team on r/MysteriumNetwork, September 2024)
+  register:
+    url: https://rekvizitai.vz.lt/en/company/mn_intelligence/
+    title: MN Intelligence, UAB (code 307039286) on Rekvizitai
+  policy:
+    url: https://www.mysteriumvpn.com/privacy-policy-vpn
+    title: Mysterium VPN privacy policy
+  nologs:
+    url: https://www.mysteriumvpn.com/features/no-logs-vpn
+    title: No-Logs VPN
+  about:
+    url: https://www.mysteriumvpn.com/about-us
+    title: About Mysterium VPN
+  mn-team:
+    url: https://www.mysterium.network/team
+    title: Team, Mysterium Network
+  features:
+    url: https://www.mysteriumvpn.com/features
+    title: Mysterium VPN features
+  locations:
+    url: https://www.mysteriumvpn.com/locations
+    title: Mysterium VPN locations
+  pricing:
+    url: https://www.mysteriumvpn.com/vpn-pricing
+    title: Mysterium VPN plans and pricing
+  affiliates:
+    url: https://www.mysteriumvpn.com/affiliates
+    title: Mysterium VPN affiliate program
+  downloads:
+    url: https://www.mysteriumvpn.com/downloads
+    title: Download Mysterium VPN
+  refund:
+    url: https://help.mysteriumvpn.com/en/articles/11088944-what-is-mysteriumvpn-s-refund-policy
+    title: What is MysteriumVPN's refund policy?
+  kill-switch:
+    url: https://help.mysteriumvpn.com/en/articles/11864509-does-mysteriumvpn-offer-killswitch-feature
+    title: Does MysteriumVPN offer KillSwitch feature?
+  split-tunnel:
+    url: https://help.mysteriumvpn.com/en/articles/11864554-does-mysteriumvpn-offer-split-tunneling-feature
+    title: Does MysteriumVPN offer Split Tunneling feature?
+  double-vpn:
+    url: https://help.mysteriumvpn.com/en/articles/14533053-what-is-double-vpn-standard-on-mysteriumvpn
+    title: What is Double VPN Standard on MysteriumVPN?
+  original-ip:
+    url: https://help.mysteriumvpn.com/en/articles/14532459-if-i-am-connected-will-someone-be-able-to-use-or-view-my-original-ip
+    title: If I am connected, will someone be able to use or view my original IP?
+  protocols:
+    url: https://help.mysteriumvpn.com/en/articles/8954864-what-vpn-protocols-does-the-app-support
+    title: What VPN protocols does the app support?
+  payment-methods:
+    url: https://help.mysteriumvpn.com/en/articles/8954751-what-payment-methods-does-mysterium-vpn-accept
+    title: What payment methods does Mysterium VPN accept?
+  devices:
+    url: https://help.mysteriumvpn.com/en/articles/8954849-can-i-use-the-vpn-on-multiple-devices
+    title: Can I use the VPN on multiple devices?
+  dark-app:
+    url: https://help.mysteriumvpn.com/en/articles/8072972-mysterium-vpn-apps-key-differences-and-cross-platform-compatibility-explained
+    title: 'Mysterium VPN apps: key differences and cross-platform compatibility explained'
+  purchase:
+    url: https://help.mysteriumvpn.com/en/articles/8954727-how-to-purchase-a-mysterium-vpn-subscription
+    title: How to purchase a Mysterium VPN subscription?
+  login:
+    url: https://help.mysteriumvpn.com/en/articles/12647414-how-to-log-in-to-mysteriumvpn
+    title: How to log in to MysteriumVPN?
+  blocker:
+    url: https://help.mysteriumvpn.com/en/articles/12701363-how-to-toggle-malware-and-nsfw-blocker-available-in-pro-plans-only
+    title: How to toggle Malware and NSFW Blocker (available in Pro plans only)?
+  router:
+    url: https://help.mysteriumvpn.com/en/articles/16010679-how-to-generate-wireguard-configuration-file
+    title: How to generate WireGuard configuration file?
+  linux-cli:
+    url: https://help.mysteriumvpn.com/en/articles/17578060-mysterium-vpn-guide-for-linux-ubuntu-and-debian
+    title: Mysterium VPN guide for Linux (Ubuntu and Debian)
+  new-servers:
+    url: https://help.mysteriumvpn.com/en/articles/8954878-how-frequently-are-new-servers-added
+    title: How frequently are new servers added?
+  residential-servers:
+    url: https://help.mysteriumvpn.com/en/articles/8954867-does-the-vpn-offer-residential-servers
+    title: Does the VPN offer residential servers?
+  source-code:
+    url: https://github.com/mysteriumnetwork/mysterium-vpn
+    title: mysteriumnetwork/mysterium-vpn on GitHub
+  cli-source:
+    url: https://github.com/mysteriumnetwork/mysteriumvpncli
+    title: mysteriumnetwork/mysteriumvpncli on GitHub
+  analytics-code:
+    url: https://github.com/mysteriumnetwork/mysterium-vpn/blob/master/lib/stores/analytics/analytics_store_firebase.dart
+    title: Mysterium VPN app, Firebase analytics store (source)
+  dns-code:
+    url: https://github.com/mysteriumnetwork/mysterium-vpn/blob/master/lib/stores/dns_store.dart
+    title: Mysterium VPN app, DNS store (source)
+  fdroid-dark:
+    url: https://f-droid.org/en/packages/network.mysterium.vpn/
+    title: Mysterium Dark on F-Droid
