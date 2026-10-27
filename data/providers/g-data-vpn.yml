@@ -240,8 +240,9 @@ criteria:
       value: false
       sources: [who-we-are]
     activism:
-      value: false
-      sources: [who-we-are]
+      value: true
+      note: A founding member of the Coalition Against Stalkerware in 2019.
+      sources: [stalkerware]
 
 refs:
   product:
@@ -298,3 +299,6 @@ refs:
   affiliates:
     url: https://www.gdata-software.com/become-an-advertising-partner
     title: G DATA affiliate partner program
+  stalkerware:
+    url: https://stopstalkerware.org/about/
+    title: Coalition Against Stalkerware, about
