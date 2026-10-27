@@ -1,0 +1,344 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: FrootVPN
+icon: frootvpn.svg
+checked: 2026-10-27
+
+criteria:
+  identity:
+    website:
+      value: https://frootvpn.com
+      sources: [home]
+    legal_entity:
+      value: Edelino Commerce Inc.
+      note: >-
+        The terms and privacy policy only say Frootvpn.com. The legal statement names Edelino Commerce Inc. of
+        the Seychelles, and its own 2019 website called it Edelino Commerce Ltd, at a Victoria address.
+      sources: [legal, edelino-2019]
+    owner:
+      value: null
+      note: Nothing published says who owns Edelino Commerce.
+      sources: [edelino-2019]
+    founded:
+      value: 2014
+      note: The earliest archived copy of the live service is from October 2014.
+      sources: [wayback-2014]
+    team:
+      value: anonymous
+      note: No one is named. The canary is signed only as the CTO of Edelino Commerce.
+      sources: [about, canary]
+    sister_brands:
+      value: [Anonine, BoxPN, Easy Hide IP, VPNTunnel]
+      note: >-
+        Anonine, BoxPN and Easy Hide IP name Edelino Commerce Inc. on their sites, and it sells the Anonine,
+        BoxPN and VPNTunnel iOS apps, though VPNTunnel's own site names Digital Sales Solutions LLC.
+      sources: [anonine, boxpn, easy-hide-ip, vpntunnel-app, vpntunnel]
+    acquisitions:
+      value: null
+      note: >-
+        In 2017 the site named Frootynet AB of Stockholm, and from 2019 Edelino Commerce Inc. in the Seychelles.
+        Whether that was a sale isn't published.
+      sources: [legal-2017, legal-2019]
+
+  jurisdiction:
+    hq:
+      value: SC
+      evidence: claimed
+      note: The terms' refund clause still cites Swedish consumer law.
+      sources: [legal, terms]
+    entities:
+      value: [SC]
+      sources: [legal, edelino-2019]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [privacy-policy]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [legal]
+    timestamps:
+      value: none
+      evidence: claimed
+      sources: [privacy-policy]
+    bandwidth:
+      value: aggregate
+      evidence: claimed
+      note: It keeps how much traffic each account has used, and how many connections it has open.
+      sources: [legal]
+    source_ip:
+      value: none
+      evidence: claimed
+      sources: [privacy-policy]
+    proven:
+      value: []
+      sources: [canary]
+    policy: https://frootvpn.com/privacy-policy
+
+  transparency:
+    audits:
+      value: []
+      sources: [about]
+    report:
+      value: none
+      sources: [about, canary]
+    canary:
+      value: maintained
+      note: >-
+        PGP-signed and re-signed about once a year, most recently on 13 August 2026. The July 2021 statement was
+        still up in June 2023.
+      sources: [canary, canary-2023, canary-2024]
+    bug_bounty:
+      value: false
+      sources: [help-centre]
+    incidents: []
+
+  account:
+    email:
+      value: required
+      sources: [order, privacy-policy]
+    personal_data:
+      value: []
+      sources: [order, privacy-policy]
+    payment:
+      value: [card, paypal]
+      note: Cards are taken through PayPal. The only other option is Perfect Money, an online payment service.
+      sources: [order]
+
+  security:
+    protocols:
+      value: [openvpn, ikev2, other]
+      note: Other is L2TP/IPsec, IPsec IKEv1, SSTP and PPTP. Everything but the Windows client is set up by hand.
+      sources: [protocols, help-centre, ikev2-ios, free-trial]
+    post_quantum:
+      value: none
+      sources: [protocols, help-centre]
+    kill_switch:
+      value: app
+      note: Only in the Windows client.
+      sources: [kill-switch]
+    dns:
+      value: null
+      note: It doesn't say which DNS servers answer inside the tunnel.
+      sources: [help-centre]
+
+  infra:
+    ram_only:
+      value: null
+      note: It says its servers keep no access logs, but not whether they run from RAM.
+      sources: [legal]
+    hosting:
+      value: null
+      note: >-
+        It doesn't say. Its network is shared with sister brand Easy Hide IP: 714 of the 732 server IPs it listed
+        in December 2020 were on Easy Hide IP's list a month later.
+      sources: [servers-2020, ehip-servers-2021]
+    virtual_locations:
+      value: null
+      note: It doesn't say whether any locations are virtual.
+      sources: [servers]
+    servers:
+      value: 150
+      note: It says "150+ VPN servers". Its server status page listed none on 2026-10-27.
+      sources: [order, servers]
+    countries:
+      value: 32
+      note: It says "over 32 countries".
+      sources: [order]
+
+  features:
+    connections:
+      value: 5
+      sources: [home]
+    multihop:
+      value: false
+      sources: [features]
+    obfuscation:
+      value: [stunnel]
+      note: OpenVPN wrapped in Stunnel, set up by hand.
+      sources: [stunnel-mac, stunnel-android]
+    port_forwarding:
+      value: false
+      note: Incoming connections to users are never allowed.
+      sources: [port-fail]
+    split_tunnel:
+      value: false
+      sources: [features]
+    blocking:
+      value: []
+      sources: [features]
+
+  clients:
+    platforms:
+      value: [windows]
+      note: >-
+        The Windows client downloads from the account area. Everything else, routers included, uses manual
+        OpenVPN, IKEv2, L2TP or PPTP setups.
+      sources: [windows-client, kill-switch, help-centre]
+    open_source:
+      value: none
+      sources: [windows-client]
+    telemetry:
+      value: null
+      note: It doesn't say whether the Windows client sends usage or crash data.
+      sources: [windows-client, privacy-policy]
+    trackers:
+      value: null
+      grade: na
+      note: There's no Android app. Android uses manual OpenVPN, IPsec, L2TP or PPTP setups.
+      sources: [android-openvpn, help-centre]
+    fdroid:
+      value: false
+      sources: [help-centre]
+
+  pricing:
+    monthly:
+      value: { amount: 29.98, currency: USD }
+      sources: [home]
+    best:
+      value: { amount: 6.36, currency: USD }
+      note: 76.32 USD a year. A quarter costs 40.45 USD.
+      sources: [home]
+    best_term:
+      value: 12
+      sources: [home]
+    renewal_increase:
+      value: 0
+      note: Each plan is billed at the same price every term, and automatic renewal is optional at checkout.
+      sources: [home, order]
+    free_tier:
+      value: false
+      sources: [order]
+    refund_days:
+      value: 30
+      note: The terms only promise a refund if the service didn't meet "reasonable expectations".
+      sources: [terms, home]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        It says no one can trace you, "not even the best hackers and spying agencies, or even your government",
+        and sells "military grade encryption".
+      sources: [home, order]
+    affiliates:
+      value: true
+      note: Up to 50% commission.
+      sources: [affiliate]
+    review_sites:
+      value: null
+      note: No sign it owns any, but who owns Edelino Commerce isn't published.
+    activism:
+      value: false
+      sources: [about]
+
+  other:
+    concerns:
+      value:
+        - summary: >-
+            Visitors who arrive through an affiliate link have their IP address logged and stored indefinitely,
+            so a later order can be credited to the affiliate.
+          severity: minor
+          source: affiliate
+
+refs:
+  home:
+    url: https://frootvpn.com/
+    title: FrootVPN home page
+  about:
+    url: https://frootvpn.com/about
+    title: About FrootVPN
+  legal:
+    url: https://frootvpn.com/legal
+    title: Legal statement
+  terms:
+    url: https://frootvpn.com/terms-of-service
+    title: Terms and conditions
+  privacy-policy:
+    url: https://frootvpn.com/privacy-policy
+    title: Privacy policy
+  canary:
+    url: https://frootvpn.com/canary.txt
+    title: Warrant canary (signed 13 August 2026)
+  canary-2023:
+    url: https://web.archive.org/web/20230601173620/https://frootvpn.com/canary.txt
+    title: Warrant canary, archived June 2023
+  canary-2024:
+    url: https://web.archive.org/web/20240612100834/https://frootvpn.com/canary.txt
+    title: Warrant canary, archived June 2024
+  order:
+    url: https://frootvpn.com/en/order/purchase
+    title: Order page
+  features:
+    url: https://frootvpn.com/features
+    title: FrootVPN features
+  protocols:
+    url: https://frootvpn.com/features/openvpn-pptp-l2tp
+    title: OpenVPN, PPTP and L2TP
+  kill-switch:
+    url: https://frootvpn.com/features/kill-switch
+    title: Kill switch
+  servers:
+    url: https://frootvpn.com/servers
+    title: Server locations
+  affiliate:
+    url: https://frootvpn.com/affiliate
+    title: Affiliate program
+  help-centre:
+    url: https://help.frootvpn.com/support/solutions
+    title: FrootVPN knowledge base
+  windows-client:
+    url: https://help.frootvpn.com/support/solutions/articles/5000732960-frootvpn-for-windows-installation-instructions
+    title: FrootVPN for Windows, installation instructions
+  ikev2-ios:
+    url: https://help.frootvpn.com/support/solutions/articles/5000761460-frootvpn-ipsec-ikev2-installation-guide-for-ios
+    title: IPsec IKEv2 installation guide for iOS
+  stunnel-mac:
+    url: https://help.frootvpn.com/support/solutions/articles/5000756218-frootvpn-stunnel-openvpn-installation-guide-for-mac
+    title: Stunnel + OpenVPN installation guide for Mac
+  stunnel-android:
+    url: https://help.frootvpn.com/support/solutions/articles/5000756167-frootvpn-stunnel-openvpn-android-manual-configurations-
+    title: Stunnel + OpenVPN, Android manual configuration
+  android-openvpn:
+    url: https://help.frootvpn.com/support/solutions/articles/5000727602-frootvpn-openvpn-installation-guide-for-android
+    title: OpenVPN installation guide for Android
+  port-fail:
+    url: https://help.frootvpn.com/support/solutions/articles/5000728198-is-frootvpn-affected-by-the-port-fail-security-vulnerability-
+    title: Is FrootVPN affected by the Port Fail security vulnerability?
+  legal-2017:
+    url: https://web.archive.org/web/20171005085046/https://frootvpn.com/legal
+    title: Legal statement, archived October 2017
+  legal-2019:
+    url: https://web.archive.org/web/20190420020938/https://frootvpn.com/legal
+    title: Legal statement, archived April 2019
+  wayback-2014:
+    url: https://web.archive.org/web/20141023204807/https://www.frootvpn.com/
+    title: frootvpn.com, archived October 2014
+  edelino-2019:
+    url: https://web.archive.org/web/20190905203648/http://edelinocommerce.com/
+    title: Edelino Commerce, archived September 2019
+  servers-2020:
+    url: https://web.archive.org/web/20201221003655/https://frootvpn.com/ajax/server-status
+    title: FrootVPN server list, archived December 2020
+  ehip-servers-2021:
+    url: https://web.archive.org/web/20210110233518/https://easy-hide-ip.com/ajax/server-status
+    title: Easy Hide IP server list, archived January 2021
+  anonine:
+    url: https://anonine.com/
+    title: Anonine
+  boxpn:
+    url: https://boxpn.com/
+    title: BoxPN
+  easy-hide-ip:
+    url: https://easy-hide-ip.com/
+    title: Easy Hide IP
+  vpntunnel:
+    url: https://vpntunnel.com/
+    title: VPNTunnel
+  vpntunnel-app:
+    url: https://apps.apple.com/us/app/vpntunnel-private-vpn-spot/id969091963
+    title: VPNTunnel - Private VPN Spot on the App Store
+  free-trial:
+    url: https://frootvpn.com/win-free-trial/
+    title: FrootVPN free trial
