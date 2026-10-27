@@ -1,0 +1,270 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Celo VPN
+icon: celo-vpn.png
+checked: 2026-10-27
+
+criteria:
+  identity:
+    website:
+      value: https://celo.net
+      sources: [home]
+    legal_entity:
+      value: Celo Net Pty Ltd
+      sources: [terms, register, play]
+    owner:
+      value: null
+      note: Australia's free company records don't show who holds its shares.
+      sources: [register]
+    founded:
+      value: 2015
+      note: The site was selling the VPN by August 2015, and the company's ABN dates from September 2015.
+      sources: [home-2015, register]
+    team:
+      value: anonymous
+      note: Its site and app listings give an address and phone number in Sydney, but name nobody.
+      sources: [about, play]
+    sister_brands: []
+    acquisitions:
+      value: []
+      sources: [register]
+
+  jurisdiction:
+    hq:
+      value: AU
+      sources: [terms, register, play]
+    entities:
+      value: [AU]
+      sources: [register]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [terms, privacy]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [terms]
+    timestamps:
+      value: none
+      evidence: claimed
+      note: It does keep the times you log in to the website's client area.
+      sources: [terms, faq]
+    bandwidth:
+      value: none
+      evidence: claimed
+      sources: [terms]
+    source_ip:
+      value: none
+      evidence: claimed
+      note: The policy says your IP address isn't stored after you disconnect.
+      sources: [terms, privacy]
+    proven: []
+    policy: https://celo.net/privacy-policy/
+
+  transparency:
+    audits:
+      value: []
+      sources: [privacy]
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents:
+      value: []
+
+  account:
+    email:
+      value: required
+      sources: [faq, privacy]
+    personal_data:
+      value: []
+      note: Your name is optional. A postal address is needed only to pay by card.
+      sources: [faq, privacy]
+    payment:
+      value: [card, app_store]
+      note: The homepage says it takes cryptocurrency, without saying which coins. The iOS app sells in-app subscriptions.
+      sources: [faq, home, app-store]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn, ikev2]
+      note: WireGuard configs are set up by hand through a support ticket.
+      sources: [features, server-details, wireguard-windows]
+    post_quantum:
+      value: none
+      sources: [features]
+    kill_switch:
+      value: null
+      note: Older guides build one from the Windows firewall or a setting in the old macOS client. The 2026 apps don't mention one.
+      sources: [kill-switch-windows, kill-switch-macos]
+    dns:
+      value: first_party
+      sources: [dns-leaks]
+
+  infra:
+    ram_only:
+      value: null
+      sources: [features]
+    hosting:
+      value: null
+      note: It says it runs dedicated servers on dedicated uplinks, without saying whether it owns them.
+      sources: [home]
+    virtual_locations:
+      value: none
+      evidence: claimed
+      sources: [home, locations]
+    servers:
+      value: 26
+      note: One per city on its list, with two in Amsterdam. The homepage says over 20.
+      sources: [locations, home]
+    countries:
+      value: 17
+      sources: [locations]
+
+  features:
+    connections:
+      value: 8
+      sources: [pricing, features]
+    multihop:
+      value: false
+      sources: [features]
+    obfuscation:
+      value: [v2ray]
+      note: V2Ray/VMess logins are handed out through a support ticket.
+      sources: [features, proxy-details]
+    port_forwarding:
+      value: true
+      note: Up to two ports on up to two OpenVPN servers, set up through a support ticket.
+      sources: [port-forwarding]
+    split_tunnel:
+      value: false
+      note: Only by adding routes to an OpenVPN config by hand, which leaves out IP addresses rather than apps.
+      sources: [split-tunnel]
+    blocking:
+      value: [ads, trackers, malware]
+      note: Runs on its servers and is always on.
+      sources: [home, features]
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android]
+      note: Linux, routers and NAS boxes use config files or OpenVPN guides.
+      sources: [ms-store, app-store, play, knowledge-base]
+    open_source:
+      value: none
+      sources: [downloads]
+    telemetry:
+      value: null
+      note: The policy says the mobile app may collect usage statistics and crash reports, without saying whether you can turn that off.
+      sources: [privacy]
+    fdroid:
+      value: false
+      sources: [play]
+
+  pricing:
+    monthly:
+      value: { amount: 6, currency: USD }
+      sources: [pricing]
+    best:
+      value: { amount: 4.83, currency: USD }
+      note: $58 a year.
+      sources: [pricing]
+    best_term:
+      value: 12
+      sources: [pricing]
+    renewal_increase:
+      value: 0
+      sources: [pricing]
+    free_tier:
+      value: false
+      sources: [pricing]
+    refund_days:
+      value: 10
+      note: Crypto refunds are paid at the USD rate on the day, and some payment methods get service credit instead.
+      sources: [terms]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: It promises "100% Anonymous" and "military grade encryption", while its own app listings say a VPN doesn't make you anonymous.
+      sources: [home, app-store]
+    affiliates:
+      value: null
+      note: Its client area has an affiliates section, but the terms are behind a login.
+      sources: [affiliates]
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://celo.net/
+    title: Celo VPN homepage
+  home-2015:
+    url: https://web.archive.org/web/20150801022940/http://celo.net/
+    title: Celo VPN homepage, August 2015 (Wayback Machine)
+  about:
+    url: https://celo.net/about-us/
+    title: About Celo
+  terms:
+    url: https://celo.net/terms-and-conditions/
+    title: Terms and conditions
+  privacy:
+    url: https://celo.net/privacy-policy/
+    title: Privacy policy
+  faq:
+    url: https://celo.net/faq/
+    title: Frequently asked questions
+  pricing:
+    url: https://celo.net/vpn-pricing/
+    title: VPN pricing
+  features:
+    url: https://celo.net/vpn-features/
+    title: VPN features
+  locations:
+    url: https://celo.net/celo-vpn-server-location/
+    title: VPN server locations
+  register:
+    url: https://abr.business.gov.au/ABN/View?abn=86606279109
+    title: ABN Lookup, Celo Net Pty Ltd
+  play:
+    url: https://play.google.com/store/apps/details?id=com.celovpn
+    title: Celo VPN on Google Play
+  app-store:
+    url: https://apps.apple.com/us/app/celo-vpn/id6761050732
+    title: Celo VPN on the App Store
+  ms-store:
+    url: https://apps.microsoft.com/detail/9NMD2K87GHVG
+    title: Celo VPN on the Microsoft Store
+  server-details:
+    url: https://support.celo.net/kb/vpn-server-details/
+    title: VPN server details
+  proxy-details:
+    url: https://support.celo.net/kb/socks5-v2ray-vmess-server-details/
+    title: SOCKS5 and V2Ray/VMess server details
+  wireguard-windows:
+    url: https://support.celo.net/kb/wireguard-windows/
+    title: WireGuard on Windows
+  kill-switch-windows:
+    url: https://support.celo.net/kb/windows-firewall-kill-switch/
+    title: Windows firewall kill switch
+  kill-switch-macos:
+    url: https://support.celo.net/kb/setup-vpn-kill-switch-on-macos/
+    title: Set up a VPN kill switch on macOS
+  dns-leaks:
+    url: https://support.celo.net/kb/windows-fix-dns-leaks/
+    title: Fix DNS leaks on Windows
+  port-forwarding:
+    url: https://support.celo.net/kb/port-forwarding/
+    title: Port forwarding
+  split-tunnel:
+    url: https://support.celo.net/kb/how-to-setup-openvpn-split-tunneling-on-windows/
+    title: OpenVPN split tunnelling on Windows
+  knowledge-base:
+    url: https://support.celo.net/article/celo-vpn-guides-for-routers-torrent-clients-socks5-and-more/
+    title: Guides for routers, torrent clients, SOCKS5 and more
+  downloads:
+    url: https://support.celo.net/article/downloads/
+    title: Downloads
+  affiliates:
+    url: https://web.archive.org/web/20200922040547/https://celo.net/members/affiliates.php
+    title: Celo VPN client area, affiliates (Wayback Machine)
