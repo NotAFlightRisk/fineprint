@@ -1,0 +1,236 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Hoxx VPN
+icon: hoxx-vpn.png
+checked: 2026-10-27
+
+criteria:
+  identity:
+    website: https://hoxx.com
+    legal_entity:
+      value: Hoxx Inc
+      note: >-
+        The terms and EULA call the company Hoxx VPN Services, at the same Coral Gables, Florida
+        address that the app store listings give for Hoxx Inc.
+      sources: [eula, terms, play, chrome, app-store]
+    owner:
+      value: null
+      note: Who owns Hoxx Inc isn't public.
+      sources: [play]
+    founded:
+      value: 2016
+      note: Its Firefox add-on was first listed in January 2016, and the terms date from March 2016.
+      sources: [amo, terms]
+    team:
+      value: anonymous
+      sources: [play, chrome]
+    sister_brands: null
+    acquisitions: []
+
+  jurisdiction:
+    hq:
+      value: US
+      sources: [eula, play]
+    entities:
+      value: [US]
+      sources: [play, chrome]
+
+  logging:
+    traffic:
+      value: 'yes'
+      evidence: claimed
+      note: >-
+        Its EULA says it keeps logs of the websites you visit for an unlimited time, deleting them only at its
+        discretion, and helps the authorities with them.
+      sources: [eula, faq-abuse]
+    dns:
+      value: null
+      sources: [policy]
+    timestamps:
+      value: null
+      note: The FAQ asks for the date and time of anything it's asked to look up, but doesn't say what its logs hold.
+      sources: [faq-abuse]
+    bandwidth:
+      value: aggregate
+      evidence: claimed
+      note: Free accounts have a daily data quota, so usage is counted per account.
+      sources: [faq-general]
+    source_ip:
+      value: 'yes'
+      evidence: claimed
+      note: Its EULA says it keeps your IP address alongside the logs of the sites you visit.
+      sources: [eula]
+    proven: []
+    policy: https://hoxx.com/privacy-policy/
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: required
+      note: The free plan needs an account too.
+      sources: [register, faq-account]
+    personal_data:
+      value: null
+      note: The privacy policy says registering takes your name and contact number, while the register page only asks for an email address.
+      sources: [policy, register]
+    payment:
+      value: [card, paypal, bitcoin, other_crypto]
+      note: Premium is bought inside the apps. The site also lists Alipay, and Stripe and Paymentwall as processors.
+      sources: [pricing, faq-premium]
+
+  security:
+    protocols:
+      value: null
+      note: >-
+        The EULA calls the service a VPN or HTTP/HTTPS proxy. The browser extensions are a proxy for
+        that browser alone, and the apps' protocols aren't stated.
+      sources: [eula, amo]
+    post_quantum: none
+    kill_switch: null
+    dns: null
+
+  infra:
+    ram_only: null
+    hosting: null
+    virtual_locations: null
+    servers:
+      value: null
+      note: The store listings say over 100 servers.
+      sources: [play, app-store]
+    countries:
+      value: null
+      note: The pricing page says 50+ locations on the free plan and more on Premium.
+      sources: [pricing]
+
+  features:
+    connections:
+      value: null
+      note: The FAQ says you can use several browsers and computers at once, without giving a limit.
+      sources: [faq-general]
+    multihop: false
+    obfuscation:
+      value: null
+      note: It says it gets around government filtering, without saying how.
+      sources: [pricing]
+    port_forwarding: false
+    split_tunnel:
+      value: null
+      note: Premium can skip the proxy for certain IPs with a PAC file. Nothing is said about choosing apps.
+      sources: [pricing]
+    blocking:
+      value: [malware]
+      evidence: claimed
+      note: Premium also claims to stop ad networks tracking you, without saying how.
+      sources: [pricing, faq-general]
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android, browser]
+      note: >-
+        The Chrome, Firefox and Edge extensions are a proxy for that browser alone, and were last
+        updated in early 2025. The Android, iPhone and Mac apps were updated in September 2026.
+      sources: [download, chrome, amo, edge, play, app-store, mac-app-store]
+    open_source:
+      value: null
+      note: The Firefox add-on is listed under the MPL 2.0, but the FAQ says you may read the code and not modify or reuse it.
+      sources: [amo, faq-general]
+    telemetry:
+      value: null
+      note: >-
+        The add-on sends error messages, and the iOS app's privacy label lists crash, performance and
+        usage data linked to you. Nothing says whether you can turn it off.
+      sources: [faq-general, app-store]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: null
+      note: Premium is sold inside the apps, and the site only gives a starting price.
+      sources: [pricing]
+    best:
+      value: { amount: 1.99, currency: USD }
+      note: The site's "from" price, with no plan length given.
+      sources: [pricing]
+    best_term: null
+    renewal_increase:
+      value: null
+      grade: na
+      note: Premium isn't a subscription, so it drops back to the free plan instead of renewing.
+      sources: [faq-premium]
+    free_tier:
+      value: true
+      note: >-
+        Free accounts get a daily data quota, though the pricing page says no bandwidth restrictions.
+        Free accounts unused for 180 days may be closed.
+      sources: [pricing, faq-general, faq-account]
+    refund_days:
+      value: 7
+      sources: [eula]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        It promises end-to-end encryption from your browser to the site and says nobody can know what
+        you're doing, while it keeps logs of the sites you visit for the authorities.
+      sources: [faq-general, faq-abuse, play]
+    affiliates:
+      value: false
+      sources: [faq-general]
+    review_sites: false
+    activism: false
+
+refs:
+  policy:
+    url: https://hoxx.com/privacy-policy/
+    title: Hoxx Privacy Policy
+  terms:
+    url: https://hoxx.com/terms/
+    title: Hoxx Terms of Service (March 16, 2016)
+  eula:
+    url: https://hoxx.com/eula/
+    title: Hoxx End User License Agreement
+  faq-general:
+    url: https://hoxx.com/support/#General
+    title: Hoxx FAQ, General
+  faq-abuse:
+    url: https://hoxx.com/support/#Abuse
+    title: Hoxx FAQ, Abuse
+  faq-account:
+    url: https://hoxx.com/support/#Account
+    title: Hoxx FAQ, Account
+  faq-premium:
+    url: https://hoxx.com/support/#Premium-Account
+    title: Hoxx FAQ, Premium Account
+  pricing:
+    url: https://hoxx.com/pricing/
+    title: Hoxx pricing
+  register:
+    url: https://hoxx.com/register/
+    title: Register for Hoxx
+  download:
+    url: https://hoxx.com/download/
+    title: Download Hoxx VPN
+  play:
+    url: https://play.google.com/store/apps/details?id=com.hoxxvpn.main&hl=en
+    title: Hoxx VPN on Google Play
+  app-store:
+    url: https://apps.apple.com/us/app/hoxx-vpn/id1411383968
+    title: Hoxx VPN on the App Store (iPhone and iPad)
+  mac-app-store:
+    url: https://apps.apple.com/us/app/hoxx-vpn-proxy/id6474968383
+    title: Hoxx VPN Proxy on the Mac App Store
+  chrome:
+    url: https://chromewebstore.google.com/detail/hoxx-vpn-proxy/nbcojefnccbanplpoffopkoepjmhgdgh
+    title: Hoxx VPN Proxy on the Chrome Web Store
+  amo:
+    url: https://addons.mozilla.org/en-US/firefox/addon/hoxx-vpn-proxy/
+    title: Hoxx VPN Proxy on Firefox Add-ons
+  edge:
+    url: https://microsoftedge.microsoft.com/addons/detail/mmkgibaofkehmmnbcfleonelhenlgcbc
+    title: Hoxx VPN Proxy on Edge Add-ons
