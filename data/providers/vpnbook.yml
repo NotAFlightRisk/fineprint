@@ -1,0 +1,274 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: VPNBook
+icon: vpnbook.svg
+checked: 2026-10-27
+
+criteria:
+  identity:
+    website:
+      value: https://www.vpnbook.com
+      sources: [home]
+    legal_entity:
+      value: null
+      note: Its site and privacy policy name no company, only a location in Zurich.
+      sources: [contact, home]
+    owner:
+      value: null
+      note: Nobody behind it is named.
+      sources: [home]
+    founded:
+      value: 2012
+      sources: [rdap, site-2012]
+    team:
+      value: anonymous
+      note: Its site names nobody who runs it.
+      sources: [home]
+    sister_brands:
+      value: null
+      note: Its owners aren't published, so there's no way to tell what else they run.
+    acquisitions:
+      value: null
+      note: Its ownership isn't published, so there's no way to tell whether it has changed hands.
+
+  jurisdiction:
+    hq:
+      value: CH
+      evidence: claimed
+      note: It says it's based in Zurich, but names no company there or anywhere else.
+      sources: [contact, home]
+    entities:
+      value: null
+      note: It names no company in any country.
+      sources: [home]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [contact, features]
+    dns:
+      value: none
+      evidence: claimed
+      note: The policy says your IP address and connection time are the only things it logs.
+      sources: [contact]
+    timestamps:
+      value: 'yes'
+      evidence: claimed
+      note: Kept with your IP address to fight abuse and deleted weekly. The features page says daily.
+      sources: [contact, features]
+    bandwidth:
+      value: none
+      evidence: claimed
+      sources: [contact]
+    source_ip:
+      value: 'yes'
+      evidence: claimed
+      note: Logged with every connection and deleted weekly. The features page says daily.
+      sources: [contact, features]
+    proven: []
+    policy: https://www.vpnbook.com/contact
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents:
+      value: []
+      note: >-
+        Anonymous claimed in January 2013 that VPNBook logs had turned up in court papers against its members,
+        which has never been confirmed. Its policy said in June 2013 that it logged no user activity, and by
+        February 2014 that it keeps your IP address and connection times.
+      sources: [anon-2013, policy-2013, policy-2014]
+
+  account:
+    email:
+      value: none
+      note: >-
+        There are no accounts. OpenVPN and PPTP share one published username and password, and WireGuard
+        configs are generated on the site.
+      sources: [freevpn, wireguard]
+    personal_data: []
+    payment:
+      value: []
+      note: It's free. Donations are taken in Bitcoin, Ethereum, Litecoin and Dogecoin.
+      sources: [freevpn]
+
+  security:
+    protocols:
+      value: [openvpn, wireguard, other]
+      note: >-
+        Other is PPTP, whose security VPNBook calls basic, and Outline's Shadowsocks. The OpenVPN configs
+        skip the server certificate check OpenVPN calls an important precaution.
+      sources: [freevpn, pptp, outline, ovpn-config, openvpn-tls]
+    post_quantum: none
+    kill_switch:
+      value: null
+      grade: na
+      note: There are no VPNBook apps, so it's down to the client you use.
+      sources: [howto]
+    dns: null
+
+  infra:
+    ram_only: null
+    hosting:
+      value: rented
+      note: Every server is on OVH's network.
+      sources: [he-us16, he-uk205]
+    virtual_locations: null
+    servers:
+      value: 13
+      note: Ten take OpenVPN and WireGuard, three take PPTP and Outline. The features page says 15+.
+      sources: [freevpn, features]
+    countries:
+      value: 6
+      sources: [freevpn, features]
+
+  features:
+    connections:
+      value: unlimited
+      note: There are no accounts. Each WireGuard config works on one device, but you can make one per device.
+      sources: [freevpn, wireguard]
+    multihop: false
+    obfuscation:
+      value: [shadowsocks]
+      note: Outline, on two servers in Poland and one in Canada.
+      sources: [outline]
+    port_forwarding: null
+    split_tunnel:
+      value: null
+      grade: na
+      note: There are no VPNBook apps, so it's down to the client you use.
+      sources: [howto]
+    blocking: []
+
+  clients:
+    platforms:
+      value: []
+      note: >-
+        There are no apps. It gives out logins, keys and config files for the official OpenVPN, WireGuard
+        and Outline apps, and for built-in PPTP clients.
+      sources: [howto, freevpn]
+    open_source:
+      value: null
+      grade: na
+      note: There are no VPNBook apps to publish.
+      sources: [howto]
+    telemetry:
+      value: none
+      note: There are no VPNBook apps.
+      sources: [howto]
+    trackers:
+      value: null
+      grade: na
+      note: There's no Android app.
+      sources: [howto]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 0, currency: USD }
+      note: Free, with no paid plan. The $7.95 a month dedicated VPN it sold until at least 2021 has gone.
+      sources: [freevpn, dedicated-2021, site-2022]
+    best:
+      value: { amount: 0, currency: USD }
+      sources: [home]
+    best_term:
+      value: null
+      grade: na
+      note: It's free.
+    renewal_increase:
+      value: 0
+      note: Nothing renews.
+    free_tier:
+      value: true
+      sources: [home]
+    refund_days:
+      value: null
+      grade: na
+      note: It's free.
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: Its features page promises 100% anonymity, while its policy keeps your IP address and connection times for a week.
+      sources: [features, contact]
+    affiliates: false
+    review_sites:
+      value: true
+      note: >-
+        Its own reviews section rates NordVPN, ExpressVPN, Surfshark and others, through affiliate links
+        that pay VPNBook a commission.
+      sources: [reviews]
+    activism: false
+
+  other:
+    concerns:
+      value:
+        - summary: >-
+            Every OpenVPN config carries the same published client key and doesn't check it's talking to a
+            real VPNBook server, so anyone who can intercept your connection can pose as one and see your traffic.
+          severity: serious
+          source: ovpn-config
+
+refs:
+  home:
+    url: https://www.vpnbook.com/
+    title: VPNBook homepage
+  contact:
+    url: https://www.vpnbook.com/contact
+    title: VPNBook privacy policy, FAQ and contact page
+  features:
+    url: https://www.vpnbook.com/features
+    title: Why Choose VPNBook?
+  freevpn:
+    url: https://www.vpnbook.com/freevpn
+    title: VPNBook free VPN servers, login and donations
+  wireguard:
+    url: https://www.vpnbook.com/freevpn/wireguard-vpn
+    title: VPNBook free WireGuard VPN
+  outline:
+    url: https://www.vpnbook.com/freevpn/outline-vpn
+    title: VPNBook free Outline VPN
+  pptp:
+    url: https://www.vpnbook.com/freevpn/pptp-vpn
+    title: VPNBook free PPTP VPN
+  howto:
+    url: https://www.vpnbook.com/howto
+    title: VPNBook setup guides
+  reviews:
+    url: https://www.vpnbook.com/reviews
+    title: VPNBook VPN reviews
+  ovpn-config:
+    url: https://www.vpnbook.com/api/openvpn?hostname=us16.vpnbook.com&protocol=tcp443
+    title: VPNBook OpenVPN config for us16.vpnbook.com, TCP 443
+  openvpn-tls:
+    url: https://github.com/OpenVPN/openvpn/blob/master/doc/man-sections/tls-options.rst
+    title: OpenVPN manual, TLS options (--remote-cert-tls)
+  he-us16:
+    url: https://bgp.he.net/ip/147.135.15.16
+    title: us16.vpnbook.com (147.135.15.16), announced by OVH (AS16276)
+  he-uk205:
+    url: https://bgp.he.net/ip/145.239.252.205
+    title: uk205.vpnbook.com (145.239.252.205), announced by OVH (AS16276)
+  rdap:
+    url: https://rdap.verisign.com/com/v1/domain/vpnbook.com
+    title: vpnbook.com domain registration record (registered 9 August 2012)
+  site-2012:
+    url: https://web.archive.org/web/20120913003611/http://www.vpnbook.com/
+    title: VPNBook homepage, September 2012 (Wayback copy)
+  dedicated-2021:
+    url: https://web.archive.org/web/20210602110419/https://www.vpnbook.com/
+    title: VPNBook homepage with the dedicated VPN plan, June 2021 (Wayback copy)
+  site-2022:
+    url: https://web.archive.org/web/20220531035647/https://www.vpnbook.com/
+    title: VPNBook homepage without the dedicated VPN plan, May 2022 (Wayback copy)
+  policy-2013:
+    url: https://web.archive.org/web/20130607074049/http://www.vpnbook.com/contact
+    title: VPNBook privacy policy, June 2013 (Wayback copy)
+  policy-2014:
+    url: https://web.archive.org/web/20140217213614/http://www.vpnbook.com/contact
+    title: VPNBook privacy policy, February 2014 (Wayback copy)
+  anon-2013:
+    url: https://www.pclosmag.com/html/Issues/201309/page10.html
+    title: 'PCLinuxOS Magazine, OpenVPN: Other VPN Services (September 2013)'
