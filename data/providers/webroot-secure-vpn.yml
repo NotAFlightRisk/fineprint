@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: Webroot Secure VPN
 icon: webroot-secure-vpn.png
-checked: 2026-10-22
+checked: 2026-10-27
 
 criteria:
   identity:
@@ -71,19 +71,22 @@ criteria:
       note: >-
         Webroot advertises a "no-log policy" but doesn't publish one, and the OpenText privacy policy its apps
         link to has no VPN section. The network is PureVPN's white-label one, whose partners can opt into a
-        track with logging.
-      sources: [product, privacy-policy, purevpn-privacy]
+        track with logging. Its predecessor, WiFi Security, logged when each session began and ended.
+      sources: [product, privacy-policy, purevpn-privacy, wifi-security-data]
     bandwidth:
       value: null
-      note: Data is unlimited, and Webroot doesn't say whether your use is recorded.
-      sources: [kb-overview, privacy-policy]
+      note: >-
+        Data is unlimited, and Webroot doesn't say whether your use is recorded. Its predecessor, WiFi
+        Security, logged how much data each session used.
+      sources: [kb-overview, privacy-policy, wifi-security-data]
     source_ip:
       value: null
       evidence: claimed
       note: >-
         Webroot says it hides your IP address but publishes nothing on whether it's kept. Its consumer terms
-        say its services may collect your device's IP address and approximate location.
-      sources: [product, consumer-terms, privacy-policy]
+        say its services may collect your device's IP address and approximate location. Its predecessor,
+        WiFi Security, kept only the country you connected from.
+      sources: [product, consumer-terms, privacy-policy, wifi-security-data]
     proven:
       value: []
       note: No audit of the VPN has been published.
@@ -129,7 +132,7 @@ criteria:
     post_quantum:
       value: none
       note: Nothing on its VPN page or help articles mentions post-quantum key exchange.
-      sources: [kb-protocols, kb-overview]
+      sources: [kb-protocols, kb-faq]
     kill_switch:
       value: app
       note: Sold as "always-on" protection that blocks any connection when the VPN isn't active.
@@ -147,13 +150,15 @@ criteria:
     hosting:
       value: null
       note: >-
-        Webroot doesn't say who runs its servers. Its Android app is built on PureVPN's white-label SDK
-        and ships a server list on PureVPN's pointtoserver.com domain.
-      sources: [play, purevpn-manual, purevpn-privacy]
+        It runs on PureVPN's white-label network, and neither says whether the servers are owned or rented.
+        The data centres in its Android app's server list include M247, DataPacket, Vultr and DigitalOcean.
+      sources: [apk, purevpn-manual, purevpn-privacy]
     virtual_locations:
-      value: null
-      note: Webroot doesn't say whether any of its locations are virtual.
-      sources: [kb-locations]
+      value: undisclosed
+      note: >-
+        The server list in its Android app flags 26 of its 40 countries as virtual, matching PureVPN's own
+        list, including Sweden, Ireland, India and Turkey. Neither the app nor Webroot's pages say so.
+      sources: [apk, purevpn-virtual, kb-locations]
     servers:
       value: 6000
       note: Listed as 6,000+. Its help article still says 6,500+ in 70+ countries.
@@ -194,11 +199,11 @@ criteria:
       value: none
       sources: [kb-install]
     telemetry:
-      value: null
+      value: forced
       note: >-
-        Webroot doesn't say. Its consumer terms allow collecting the features you use and session length,
-        while its app store labels declare no usage data.
-      sources: [consumer-terms, play-data, app-store]
+        The Android app sends screen views and connection events to Firebase Analytics, Crashlytics and
+        Mixpanel, with no setting to turn them off. Its app store labels declare no usage or crash data.
+      sources: [apk, kb-settings, consumer-terms, play-data, app-store]
     fdroid: false
 
   pricing:
@@ -311,6 +316,15 @@ refs:
   purevpn-privacy:
     url: https://www.purevpn.com/privacy-policy.php
     title: PureVPN privacy policy, including its white-label partner terms
+  purevpn-virtual:
+    url: https://purevpn2.helpjuice.com/en_US/general-articles/important-announcement-we-are-removing-virtual-locations-from-the-purevpn-service
+    title: PureVPN, removing virtual locations from the PureVPN service (February 2026)
+  apk:
+    url: https://apkpure.com/securevpn-by-webroot/com.webroot.android.vpn
+    title: SecureVPN by Webroot for Android 1.3.0, whose APK bundles PureVPN's Atom SDK and its server list
+  wifi-security-data:
+    url: https://web.archive.org/web/20260612145911/https://community.opentextcybersecurity.com/learn-more-about-wifi-security-93/data-stored-by-webroot-wifi-security-330189
+    title: Data stored by Webroot WiFi Security (2018, archived)
   purevpn-manual:
     url: https://purevpn2.helpjuice.com/en_US/windows-manual-articles/how-to-setup-purevpn-manually-on-windows-11
     title: How to set up PureVPN manually on Windows 11 (pointtoserver.com server addresses)
