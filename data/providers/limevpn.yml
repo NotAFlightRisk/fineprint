@@ -1,0 +1,292 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: LimeVPN
+icon: limevpn.svg
+checked: 2026-10-27
+
+criteria:
+  identity:
+    website:
+      value: https://www.limevpn.com
+      sources: [home]
+    legal_entity:
+      value: null
+      note: The terms say LimeVPN is incorporated in Singapore but don't name the company.
+      sources: [terms]
+    owner:
+      value: null
+      note: No company or parent is named behind it.
+      sources: [terms]
+    founded:
+      value: 2013
+      note: Its site was selling the service by mid-2013; the launch year isn't stated.
+      sources: [about-2013]
+    team:
+      value: anonymous
+      note: Its site names nobody who runs it.
+      sources: [about]
+    sister_brands:
+      value: []
+      sources: [compare]
+    acquisitions:
+      value: null
+      note: It relaunched in 2026 with new plans and a new account portal, without saying whether it changed hands.
+      sources: [about, terms-2024]
+
+  jurisdiction:
+    hq:
+      value: SG
+      sources: [terms]
+    entities:
+      value: [SG]
+      sources: [terms]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [privacy]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [privacy, no-logs]
+    timestamps:
+      value: temporary
+      evidence: claimed
+      note: The privacy policy says connection times aren't collected, but the no-logs policy keeps session data for up to 24 hours after you disconnect.
+      sources: [privacy, no-logs]
+    bandwidth:
+      value: null
+      note: Both policies say data use isn't tracked per account, yet refunds are refused once an account has used more than 10 GB.
+      sources: [privacy, no-logs, refund]
+    source_ip:
+      value: null
+      note: The privacy policy says your IP isn't collected, but the no-logs policy keeps unnamed abuse-prevention data for up to 24 hours.
+      sources: [privacy, no-logs]
+    proven:
+      value: []
+      sources: [no-logs]
+    policy: https://www.limevpn.com/privacy-policy
+
+  transparency:
+    audits:
+      value: []
+      note: Its no-logs policy says no independent audit has been done yet.
+      sources: [no-logs]
+    report:
+      value: none
+      note: It says it publishes quarterly transparency reports, but none is published.
+      sources: [about, security]
+    canary:
+      value: none
+      sources: [no-logs]
+    bug_bounty:
+      value: false
+      sources: [security]
+    incidents:
+      value:
+        - date: 2020-10-08
+          summary: >-
+            A breach of its billing backup server exposed about 23,000 customers' emails, IP and home addresses,
+            names, phone numbers and hashed passwords. Its 2026 write-up dates it to 2021 and only mentions email
+            addresses and payment details.
+          handled: poorly
+          source: hibp
+      sources: [hibp, breach-post]
+
+  account:
+    email:
+      value: required
+      note: Signup also issues a 16-digit account number, but an email address is still required.
+      sources: [terms, signup]
+    personal_data:
+      value: []
+      sources: [checkout, signup]
+    payment:
+      value: [card, paypal]
+      note: Paddle takes cards, PayPal, Apple Pay and Google Pay. The pricing page also lists Bitcoin and Ethereum, which the checkout doesn't offer.
+      sources: [checkout, faq, pricing]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn, ikev2]
+      note: The account portal hands out WireGuard configs; the pricing table lists only WireGuard and OpenVPN.
+      sources: [terms, about, pricing, download]
+    post_quantum:
+      value: none
+      sources: [security, download]
+    kill_switch:
+      value: null
+      note: It claims a kill switch in every app, but apart from a beta Windows app it relies on the official WireGuard apps.
+      sources: [faq, download, download-android]
+    dns:
+      value: first_party
+      evidence: claimed
+      sources: [no-logs]
+
+  infra:
+    ram_only:
+      value: all
+      evidence: claimed
+      sources: [breach-post]
+    hosting:
+      value: null
+      note: It says it runs bare-metal dedicated servers at data centre providers, without saying whether it owns them.
+      sources: [about, privacy]
+    virtual_locations:
+      value: null
+      sources: [locations]
+    servers:
+      value: null
+      note: It lists 23 cities but no server count.
+      sources: [locations]
+    countries:
+      value: 13
+      note: Its other pages claim 30+ countries.
+      sources: [locations, faq]
+
+  features:
+    connections:
+      value: 6
+      sources: [pricing]
+    multihop:
+      value: false
+      sources: [security]
+    obfuscation:
+      value: []
+      sources: [security, download]
+    port_forwarding:
+      value: null
+      sources: [faq]
+    split_tunnel:
+      value: true
+      evidence: claimed
+      note: On Android this is the WireGuard app's own per-app setting.
+      sources: [faq, download-android]
+    blocking:
+      value: []
+      sources: [security]
+
+  clients:
+    platforms:
+      value: [windows]
+      note: The Windows app is a 2026 beta. Every other platform uses the official WireGuard app with a config from its portal, though its homepage claims native apps for all of them.
+      sources: [download, download-windows, home]
+    open_source:
+      value: none
+      sources: [download]
+    telemetry:
+      value: null
+      note: It doesn't say what its Windows app sends.
+      sources: [privacy]
+    trackers:
+      value: null
+      grade: na
+      note: It has no Android app of its own.
+      sources: [download-android]
+    fdroid:
+      value: false
+      sources: [download-android]
+
+  pricing:
+    monthly:
+      value: { amount: 5.99, currency: USD }
+      sources: [pricing]
+    best:
+      value: { amount: 4.08, currency: USD }
+      note: $49 a year for Core.
+      sources: [pricing]
+    best_term:
+      value: 12
+      sources: [pricing]
+    renewal_increase:
+      value: 0
+      note: Plans renew at the then-current price.
+      sources: [terms]
+    free_tier:
+      value: false
+      note: The pricing and signup pages offer a free trial, which the refund policy and FAQ say doesn't exist.
+      sources: [pricing, signup, refund, faq]
+    refund_days:
+      value: 7
+      note: Core only, and only under 10 GB used; Plus isn't refundable. The no-logs page advertises a 30-day guarantee.
+      sources: [refund, terms, no-logs]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        It calls its encryption "military-grade" and "uncrackable", says shared IPs make activity "impossible to
+        trace", and says auditors have verified its no-logs policy, which its own no-logs page says hasn't happened.
+      sources: [about, security, breach-post, no-logs]
+    affiliates:
+      value: null
+      note: It doesn't say whether it pays affiliates.
+      sources: [compare]
+    review_sites:
+      value: false
+      sources: [compare]
+    activism:
+      value: false
+      sources: [about]
+
+refs:
+  home:
+    url: https://www.limevpn.com/
+    title: LimeVPN homepage
+  about:
+    url: https://www.limevpn.com/about
+    title: About LimeVPN
+  about-2013:
+    url: https://web.archive.org/web/20130708220422/http://limevpn.com/about-us
+    title: About us (2013 copy, Wayback Machine)
+  terms:
+    url: https://www.limevpn.com/terms-of-service
+    title: Terms of Service
+  terms-2024:
+    url: https://web.archive.org/web/20240302011835/https://limevpn.com/terms-of-use/
+    title: Terms of use (2024 copy, Wayback Machine)
+  privacy:
+    url: https://www.limevpn.com/privacy-policy
+    title: Privacy Policy
+  no-logs:
+    url: https://www.limevpn.com/no-logs-policy
+    title: No-Logs Policy
+  refund:
+    url: https://www.limevpn.com/refund-policy
+    title: Refund Policy
+  hibp:
+    url: https://haveibeenpwned.com/Breach/LimeVPN
+    title: LimeVPN breach (Have I Been Pwned)
+  breach-post:
+    url: https://www.limevpn.com/blog/security/2021-data-breach-what-we-learned/
+    title: 'The 2021 Data Breach: What Happened, What We Learned (LimeVPN blog, March 2026)'
+  pricing:
+    url: https://www.limevpn.com/pricing
+    title: Pricing
+  checkout:
+    url: https://www.limevpn.com/checkout?plan=core&billing=monthly
+    title: Checkout
+  signup:
+    url: https://portal.limevpn.com/signup
+    title: LimeVPN Portal signup
+  faq:
+    url: https://www.limevpn.com/faq
+    title: FAQ
+  security:
+    url: https://www.limevpn.com/security
+    title: VPN security
+  compare:
+    url: https://www.limevpn.com/compare
+    title: VPN comparisons
+  locations:
+    url: https://www.limevpn.com/locations
+    title: Server locations
+  download:
+    url: https://www.limevpn.com/download
+    title: Download
+  download-windows:
+    url: https://www.limevpn.com/download/windows/
+    title: LimeVPN for Windows
+  download-android:
+    url: https://www.limevpn.com/download/android/
+    title: LimeVPN for Android
