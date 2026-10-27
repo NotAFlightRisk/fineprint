@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: LetsVPN
 icon: letsvpn.png
-checked: 2026-10-25
+checked: 2026-10-27
 
 criteria:
   identity:
@@ -160,8 +160,8 @@ criteria:
       sources: [user-terms]
     telemetry:
       value: null
-      note: The privacy policy says crash and interaction data only leave the device if you upload them, but its signup terms say the apps use the Fabric diagnostics service.
-      sources: [privacy, user-terms, play-data-safety]
+      note: The privacy policy says crash and interaction data only leave the device if you upload them, but both app stores list analytics and diagnostics collection, and its 2024 Android app shipped Firebase Analytics, Crashlytics, Umeng and AppsFlyer. Nothing says whether you can turn it off.
+      sources: [privacy, user-terms, play-data-safety, app-store, apk-2024]
     fdroid: false
 
   pricing:
@@ -191,8 +191,8 @@ criteria:
   ethics:
     misleading_claims:
       value: true
-      note: The homepage sells it as "the VPN that always connects", which "erases any trace" and gives your privacy "absolute protection", and presents a Play Store app check as proof of "absolute security".
-      sources: [home, audit-page, exit-notice]
+      note: The homepage sells it as "the VPN that always connects", which "erases any trace" and gives your privacy "absolute protection", and presents a Play Store app check as proof of "absolute security". Its CEO promised in May 2026 to drop the "always connects" slogan, but the homepage and Play listing still use it.
+      sources: [home, audit-page, exit-notice, ceo-apology, play]
     affiliates:
       value: true
       note: Promoters get up to 5 yuan per install, paid out to Alipay or a bank account.
@@ -231,6 +231,9 @@ refs:
   play:
     url: https://play.google.com/store/apps/details?id=world.letsgo.booster.android.pro
     title: LetsVPN on Google Play
+  apk-2024:
+    url: https://web.archive.org/web/20240926112616id_/https://www.adwtrue.xyz/android/letsvpn-latest.apk
+    title: LetsVPN Android app, direct download (archived September 2024)
   play-data-safety:
     url: https://play.google.com/store/apps/datasafety?id=world.letsgo.booster.android.pro
     title: LetsVPN data safety on Google Play
