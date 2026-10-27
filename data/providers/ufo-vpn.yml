@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: UFO VPN
 icon: ufo-vpn.png
-checked: 2026-10-25
+checked: 2026-10-27
 
 criteria:
   identity:
@@ -115,8 +115,8 @@ criteria:
       value: [openvpn, ikev2, proprietary, other]
       note: >-
         Its App Store listing names OpenVPN, IKEv2, V2Ray and its own "Super" protocol. The website
-        only lists unnamed Protocols A to D.
-      sources: [app-store, protocols]
+        only lists unnamed Protocols A to D, and the Android app is built on Xray with no OpenVPN library.
+      sources: [app-store, protocols, apk]
     post_quantum:
       value: none
       note: Nothing is published about its protocols' key exchange.
@@ -126,13 +126,18 @@ criteria:
       sources: [kill-switch]
     dns:
       value: null
-      note: It says it prevents DNS leaks without saying whose DNS servers the apps use.
-      sources: [servers]
+      note: >-
+        It says it prevents DNS leaks, and the Android app picks a DNS server automatically unless you
+        set your own, without saying whose servers it picks.
+      sources: [servers, apk]
 
   infra:
     ram_only:
       value: null
-      note: It doesn't say how its servers are run.
+      note: >-
+        Only its Japan and South Korea pages claim RAM-only servers, in copy that also calls its
+        no-logs policy verified, and no policy or other page says so.
+      sources: [server-japan, server-south-korea, no-log]
     hosting:
       value: null
       note: It doesn't say whether it owns or rents its servers.
@@ -175,9 +180,10 @@ criteria:
     telemetry:
       value: null
       note: >-
-        It says diagnostics can be turned off in the apps, without saying the default. Its App
-        Store labels say device identifiers are used to track you for ads.
-      sources: [no-log, app-store, play-data-safety]
+        It says diagnostics can be turned off in the apps, without saying the default. The Android
+        app carries Firebase Analytics, Crashlytics, AppsFlyer and Facebook's SDK alongside a dozen ad
+        networks, and its App Store labels say device identifiers are used to track you for ads.
+      sources: [no-log, apk, app-store, play-data-safety]
     fdroid: false
 
   pricing:
@@ -210,9 +216,10 @@ criteria:
     misleading_claims:
       value: true
       note: >-
-        It sells "military-grade encryption", calls its encryption "audited" with no audit
-        published, and calls itself zero-logs under the same policy its 2020 log exposure contradicted.
-      sources: [home, uk-server, privacy, register-2020]
+        It sells "military-grade encryption", calls its encryption "audited" and its no-logs policy
+        "verified" with nothing published to back either, and calls itself zero-logs under the same
+        policy its 2020 log exposure contradicted.
+      sources: [home, uk-server, server-japan, privacy, register-2020]
     affiliates:
       value: null
       note: It paid affiliates 65 to 80% of a first purchase as recently as June 2025, but that programme's page is gone.
@@ -266,6 +273,15 @@ refs:
   uk-server:
     url: https://ufovpn.io/server/united_kingdom
     title: Free UK VPN
+  server-japan:
+    url: https://ufovpn.io/server/japan
+    title: UFO VPN Japan servers
+  server-south-korea:
+    url: https://ufovpn.io/server/south_korea
+    title: UFO VPN South Korea servers
+  apk:
+    url: https://download.ufovpn.io/UFO/UFOVPN.apk
+    title: UFO VPN Android app 2.6.26 (APK from ufovpn.io)
   register-dreamfii:
     url: https://data.cr.gov.hk/cr/api/api/v1/api_builder/json/local/search?query%5B0%5D%5Bkey1%5D=Comp_name&query%5B0%5D%5Bkey2%5D=begins_with&query%5B0%5D%5Bkey3%5D=DREAMFII
     title: Dreamfii HK Limited, Hong Kong Companies Registry (BRN 66078972)
