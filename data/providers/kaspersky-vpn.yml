@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: Kaspersky VPN
 icon: kaspersky-vpn.svg
-checked: 2026-10-21
+checked: 2026-10-27
 
 criteria:
   identity:
@@ -31,8 +31,8 @@ criteria:
     sister_brands:
       value: []
       note: >-
-        Kaspersky sells no other VPN brand, though the service itself mostly runs on PureVPN's network.
-      sources: [product, vpn-statement-android]
+        Kaspersky sells no other VPN brand, though the service partly runs on PureVPN's network.
+      sources: [product, vpn-statement-android, fastest-server]
     acquisitions:
       value: []
       sources: [about]
@@ -53,41 +53,41 @@ criteria:
       value: null
       evidence: claimed
       note: >-
-        Kaspersky says it has a "strict no-logging policy", but the service usually runs on PureVPN's
-        white-label network, whose partners can opt into a track with logging. Kaspersky doesn't say
-        which one it uses.
-      sources: [vpn-statement-windows, vpn-statement-android, purevpn-privacy, android-page]
+        Kaspersky claims a "strict no-logging policy". Connections run on its own servers or on PureVPN's
+        white-label network, whose partners can opt into a track with logging, and Kaspersky doesn't say
+        which track it uses.
+      sources: [vpn-statement-windows, vpn-statement-android, fastest-server, purevpn-privacy, android-page]
     dns:
       value: null
       evidence: claimed
       note: >-
-        Kaspersky says it has a "strict no-logging policy", but the service usually runs on PureVPN's
-        white-label network, whose partners can opt into a track with logging. Kaspersky doesn't say
-        which one it uses.
-      sources: [vpn-statement-windows, vpn-statement-android, purevpn-privacy, android-page]
+        Kaspersky claims a "strict no-logging policy". Connections run on its own servers or on PureVPN's
+        white-label network, whose partners can opt into a track with logging, and Kaspersky doesn't say
+        which track it uses.
+      sources: [vpn-statement-windows, vpn-statement-android, fastest-server, purevpn-privacy, android-page]
     timestamps:
       value: null
       evidence: claimed
       note: >-
-        Kaspersky says it has a "strict no-logging policy", but the service usually runs on PureVPN's
-        white-label network, whose partners can opt into a track with logging. Kaspersky doesn't say
-        which one it uses.
-      sources: [vpn-statement-windows, vpn-statement-android, purevpn-privacy, android-page]
+        Kaspersky claims a "strict no-logging policy". Connections run on its own servers or on PureVPN's
+        white-label network, whose partners can opt into a track with logging, and Kaspersky doesn't say
+        which track it uses. The Android app also sends Kaspersky how long each session lasted.
+      sources: [vpn-statement-windows, vpn-statement-android, fastest-server, purevpn-privacy, android-data]
     bandwidth:
       value: null
       evidence: claimed
       note: >-
-        Kaspersky's VPN statements list account and session set-up data, not data use or how long
-        anything is kept. Its Android data list includes a "Traffic limit".
+        The Android app sends Kaspersky each VPN session's incoming and outgoing traffic, without saying
+        whether that's tied to your account or how long it's kept.
       sources: [vpn-statement-windows, android-data]
     source_ip:
       value: null
       evidence: claimed
       note: >-
-        Kaspersky says it has a "strict no-logging policy", but the service usually runs on PureVPN's
-        white-label network, whose partners can opt into a track with logging. Kaspersky doesn't say
-        which one it uses.
-      sources: [vpn-statement-windows, vpn-statement-android, purevpn-privacy, android-page]
+        Kaspersky claims a "strict no-logging policy". Connections run on its own servers or on PureVPN's
+        white-label network, whose partners can opt into a track with logging, and Kaspersky doesn't say
+        which track it uses.
+      sources: [vpn-statement-windows, vpn-statement-android, fastest-server, purevpn-privacy, android-page]
     proven:
       value: []
       note: Kaspersky's own audits cover its antivirus and threat data systems, not the VPN.
@@ -146,7 +146,14 @@ criteria:
             4.0 (2020) patch E and credited the researcher.
           handled: well
           source: advisories
-      sources: [advisories, bis-2024, bleepingcomputer-2024]
+        - date: 2019-07-01
+          summary: >-
+            Roskomnadzor confirmed Kaspersky had connected Secure Connection to Russia's register of banned
+            sites, so the VPN blocked them for users in Russia. It was the only one of ten VPNs told to
+            that complied, and Kaspersky declined to comment.
+          handled: poorly
+          source: interfax-2019
+      sources: [advisories, bis-2024, bleepingcomputer-2024, interfax-2019]
 
   account:
     email:
@@ -192,14 +199,16 @@ criteria:
       sources: [locations, android-terms]
     hosting:
       value: null
-      note: Kaspersky says it isn't a VPN provider itself, and its VPN statements say the service is provided by PureVPN.
-      sources: [android-terms, vpn-statement-windows]
+      note: >-
+        Connections run on Kaspersky's own servers or on PureVPN's network, and neither says whether
+        the servers are owned or rented.
+      sources: [fastest-server, vpn-statement-windows, android-terms]
     virtual_locations:
       value: null
       note: >-
-        It lists places like Kabul, Thimphu and Caracas without saying whether any are virtual. Its help
-        calls every server a "virtual server".
-      sources: [locations, virtual-server]
+        It lists places like Kabul, Algiers and Hamilton without marking any as virtual, though PureVPN
+        says its own servers for those countries are virtual. Its help calls every server a "virtual server".
+      sources: [locations, virtual-server, purevpn-virtual]
     servers:
       value: 6000
       note: Kaspersky says 6,000+.
@@ -298,8 +307,8 @@ criteria:
       value: false
       note: Nothing found linking Kaspersky to a VPN review site.
     activism:
-      value: null
-      note: Kaspersky co-founded the Coalition Against Stalkerware, but that isn't about online privacy.
+      value: true
+      note: A founding member of the Coalition Against Stalkerware in 2019.
       sources: [stalkerware]
 
 refs:
@@ -378,6 +387,12 @@ refs:
   locations:
     url: https://support.kaspersky.com/ksec/common/214424
     title: Kaspersky VPN locations
+  fastest-server:
+    url: https://support.kaspersky.com/ksec/common/332864
+    title: Kaspersky VPN, connecting via the fastest server
+  purevpn-virtual:
+    url: https://purevpn2.helpjuice.com/en_US/general-articles/important-announcement-we-are-removing-virtual-locations-from-the-purevpn-service
+    title: PureVPN, removing virtual locations from the PureVPN service
   virtual-server:
     url: https://support.kaspersky.com/ksec-for-windows/5.27/127067
     title: Kaspersky VPN for Windows, about the virtual server
@@ -420,3 +435,6 @@ refs:
   stalkerware:
     url: https://stopstalkerware.org/about/
     title: Coalition Against Stalkerware, about
+  interfax-2019:
+    url: https://www.interfax.ru/russia/667389
+    title: Interfax, Kaspersky's VPN will block sites banned in Russia (2019, in Russian)
