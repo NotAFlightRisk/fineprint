@@ -1,0 +1,301 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Ghost Path
+icon: ghostpath.png
+checked: 2026-10-27
+
+criteria:
+  identity:
+    website:
+      value: https://ghostpath.com
+      sources: [home]
+    legal_entity:
+      value: Ghost Path, Inc.
+      note: A Georgia corporation, according to its terms.
+      sources: [terms, checkout-monthly]
+    owner:
+      value: null
+      note: Who owns Ghost Path, Inc. isn't published.
+      sources: [terms]
+    founded:
+      value: 2012
+      sources: [home, rdap]
+    team:
+      value: partial
+      note: Its founder, Jim Lastinger, signs its blog posts and help articles. Nobody else is named.
+      sources: [blog-net-neutrality, blog-energy]
+    sister_brands: []
+    acquisitions:
+      value: null
+      note: Whether Ghost Path, Inc. has ever changed hands isn't published.
+      sources: [terms]
+
+  jurisdiction:
+    hq:
+      value: US
+      sources: [terms]
+    entities:
+      value: [US]
+      sources: [terms]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [policy, faq]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [policy, faq]
+    timestamps:
+      value: none
+      evidence: claimed
+      sources: [policy]
+    bandwidth:
+      value: none
+      evidence: claimed
+      sources: [policy]
+    source_ip:
+      value: none
+      evidence: claimed
+      sources: [policy]
+    proven:
+      value: []
+      sources: [policy]
+    policy: https://ghostpath.com/privacy
+
+  transparency:
+    audits:
+      value: []
+      sources: [home]
+    report:
+      value: none
+      sources: [home]
+    canary:
+      value: none
+      sources: [home]
+    bug_bounty:
+      value: false
+      sources: [contact]
+    incidents: []
+
+  account:
+    email:
+      value: required
+      sources: [checkout-monthly, getting-started]
+    personal_data:
+      value: []
+      note: It keeps your name with your billing details.
+      sources: [policy, checkout-monthly]
+    payment:
+      value: [card]
+      note: Its FAQ also lists PayPal, Bitcoin, and cash or money orders by post, but the plans on its pricing page check out by card only.
+      sources: [pricing, checkout-monthly, faq]
+
+  security:
+    protocols:
+      value: [openvpn, other]
+      note: Other is Cisco IPsec, which is off until you turn it on.
+      sources: [servers, protocols, ipsec]
+    post_quantum:
+      value: none
+      sources: [protocols, servers]
+    kill_switch:
+      value: app
+      note: On by default in the Windows and Mac client, as IP and DNS leak protection.
+      sources: [kill-switch]
+    dns:
+      value: null
+      note: It doesn't say whose DNS servers the VPN uses, and its DNS article recommends Google's or OpenDNS.
+      sources: [dns-servers]
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say whether its servers run from RAM.
+      sources: [servers]
+    hosting:
+      value: rented
+      note: It says its addresses change as hosting partners change, and its servers sit on hosting companies' networks such as HostPapa and Akamai Connected Cloud.
+      sources: [static-ips, ip-lax1, ip-fra1]
+    virtual_locations:
+      value: null
+      note: It doesn't say whether any locations are virtual.
+      sources: [servers]
+    servers:
+      value: 129
+      note: Its list has 129 server addresses, though the same page claims "hundreds of VPN servers".
+      sources: [servers]
+    countries:
+      value: 42
+      note: The same page's headline claims 52 countries.
+      sources: [servers]
+
+  features:
+    connections:
+      value: 5
+      sources: [pricing, faq]
+    multihop:
+      value: true
+      evidence: claimed
+      sources: [home]
+    obfuscation:
+      value: []
+      sources: [servers, protocols]
+    port_forwarding:
+      value: true
+      sources: [pricing, port-forwarding]
+    split_tunnel:
+      value: null
+      note: It doesn't say whether its client can leave some apps outside the VPN.
+      sources: [getting-started]
+    blocking:
+      value: []
+      sources: [home]
+
+  clients:
+    platforms:
+      value: [windows, macos]
+      note: Its own client is for Windows and Mac only. iOS, Android, Linux and routers use manual OpenVPN or IPsec setups.
+      sources: [getting-started, recommended-clients, android-openvpn, ubuntu, dd-wrt]
+    open_source:
+      value: none
+      sources: [getting-started]
+    telemetry:
+      value: null
+      note: It doesn't say what its Windows and Mac client sends.
+      sources: [policy]
+    trackers:
+      value: null
+      grade: na
+      note: There's no Android app. Android uses manual OpenVPN or IPsec setups.
+      sources: [faq, android-openvpn]
+    fdroid:
+      value: false
+      sources: [faq]
+
+  pricing:
+    monthly:
+      value: { amount: 6.95, currency: USD }
+      sources: [pricing, checkout-monthly]
+    best:
+      value: { amount: 1.67, currency: USD }
+      note: $20 a year, labelled a holiday special but on sale since at least December 2024.
+      sources: [pricing, checkout-yearly, pricing-2024]
+    best_term:
+      value: 12
+      sources: [pricing]
+    renewal_increase:
+      value: 0
+      sources: [checkout-yearly, checkout-monthly]
+    free_tier:
+      value: false
+      sources: [pricing]
+    refund_days:
+      value: 30
+      note: For your first payment only, and once per customer.
+      sources: [terms, pricing]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: It promises "the strongest protection possible" and "an anonymous IP address", and says a VPN makes it "impossible for third-parties to see what you are doing online".
+      sources: [home, faq]
+    affiliates:
+      value: null
+      note: The affiliate programme it ran until at least 2022 is no longer linked, but it still invites resellers and partners without saying what they're paid.
+      sources: [pricing-2022, resellers]
+    review_sites: false
+    activism: false
+
+  other:
+    concerns:
+      value:
+        - summary: Every IPsec user gets the same shared secret, printed in its setup guide, so anyone on the same network can pose as its servers.
+          severity: minor
+          source: ipsec
+
+refs:
+  home:
+    url: https://ghostpath.com/
+    title: Ghost Path VPN homepage
+  terms:
+    url: https://ghostpath.com/terms
+    title: Terms of Service
+  policy:
+    url: https://ghostpath.com/privacy
+    title: Privacy Policy
+  faq:
+    url: https://ghostpath.com/faq
+    title: Frequently Asked Questions
+  pricing:
+    url: https://ghostpath.com/pricing
+    title: Pricing
+  pricing-2024:
+    url: https://web.archive.org/web/20241219165734/https://ghostpath.com/pricing
+    title: Pricing (December 2024 copy, Wayback Machine)
+  pricing-2022:
+    url: https://web.archive.org/web/20221202011910/https://ghostpath.com/pricing
+    title: Pricing (December 2022 copy, Wayback Machine)
+  checkout-monthly:
+    url: https://buy.stripe.com/eVa9BfdrCdX704U003
+    title: Subscribe to Ghost Path VPN, monthly (Stripe checkout)
+  checkout-yearly:
+    url: https://buy.stripe.com/dR68xb3R21al04U288
+    title: Subscribe to Ghost Path VPN, yearly (Stripe checkout)
+  servers:
+    url: https://ghostpath.com/servers
+    title: VPN Servers
+  contact:
+    url: https://ghostpath.com/contact
+    title: Contact Us
+  resellers:
+    url: https://ghostpath.com/resellers
+    title: VPN Reseller Program
+  blog-net-neutrality:
+    url: https://ghostpath.com/blog/5-reasons-100-net-neutrality/
+    title: 5 Reasons We're 100% for Net Neutrality
+  blog-energy:
+    url: https://ghostpath.com/blog/our-commitment-to-renewable-energy/
+    title: Our Commitment to Renewable Energy
+  rdap:
+    url: https://rdap.verisign.com/com/v1/domain/ghostpath.com
+    title: ghostpath.com domain registration record (registered 13 January 2012)
+  getting-started:
+    url: https://intercom.help/ghostpath/en/articles/4832449-getting-started-with-vpn
+    title: Getting Started With VPN
+  recommended-clients:
+    url: https://intercom.help/ghostpath/en/articles/1448711-recommended-vpn-clients
+    title: Recommended VPN Clients
+  protocols:
+    url: https://intercom.help/ghostpath/en/articles/1408816-explaining-the-vpn-protocols
+    title: Explaining the VPN Protocols
+  ipsec:
+    url: https://intercom.help/ghostpath/en/articles/5541411-configuring-ipsec
+    title: Configuring IPSEC
+  kill-switch:
+    url: https://intercom.help/ghostpath/en/articles/4404105-enabling-kill-switch
+    title: Enabling Kill Switch
+  dns-servers:
+    url: https://intercom.help/ghostpath/en/articles/1449634-dns-servers
+    title: DNS Servers
+  port-forwarding:
+    url: https://intercom.help/ghostpath/en/articles/1448677-setting-up-port-forwarding
+    title: Setting Up Port Forwarding
+  static-ips:
+    url: https://intercom.help/ghostpath/en/articles/1420768-are-ghost-path-vpn-ip-addresses-static
+    title: Are Ghost Path VPN IP Addresses Static?
+  android-openvpn:
+    url: https://intercom.help/ghostpath/en/articles/1448709-setting-up-ghostpath-vpn-on-android-using-openvpn
+    title: Setting Up GhostPath VPN on Android Using OpenVPN
+  ubuntu:
+    url: https://intercom.help/ghostpath/en/articles/1552156-setting-up-open-vpn-on-ubuntu
+    title: Setting Up OpenVPN on Ubuntu
+  dd-wrt:
+    url: https://intercom.help/ghostpath/en/articles/1552068-setting-up-ghost-path-vpn-with-dd-wrt
+    title: Setting Up Ghost Path VPN With DD-WRT
+  ip-lax1:
+    url: https://bgp.he.net/ip/172.245.220.35
+    title: lax1.gpvpn.com (172.245.220.35), announced by HostPapa (Hurricane Electric BGP Toolkit)
+  ip-fra1:
+    url: https://bgp.he.net/ip/139.162.159.184
+    title: fra1.gpvpn.com (139.162.159.184), announced by Akamai Connected Cloud (Hurricane Electric BGP Toolkit)
