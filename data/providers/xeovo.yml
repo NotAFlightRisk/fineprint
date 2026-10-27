@@ -1,0 +1,336 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Xeovo
+icon: xeovo.png
+checked: 2026-10-27
+
+criteria:
+  identity:
+    website:
+      value: https://xeovo.com
+      sources: [home]
+    legal_entity:
+      value: Xeovo Oy
+      note: Registered in Helsinki in September 2021, five years after the VPN launched. Xeovo doesn't say who ran it before then.
+      sources: [tos, privacy-controller, register]
+    owner:
+      value: null
+      note: Xeovo says it's bootstrapped with no outside shareholders, but doesn't say who owns Xeovo Oy.
+      sources: [about, register]
+    founded:
+      value: 2016
+      sources: [about]
+    team:
+      value: partial
+      note: Its site names nobody and staff post as "Team", but Finland's trade register names its managing director.
+      sources: [about, helsinki, trade-register]
+    sister_brands:
+      value: []
+      sources: [about]
+    acquisitions:
+      value: []
+      sources: [about]
+
+  jurisdiction:
+    hq:
+      value: FI
+      sources: [tos, register]
+    entities:
+      value: [FI]
+      sources: [privacy-controller, register]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [privacy-logs, tos]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [privacy-logs]
+    timestamps:
+      value: none
+      evidence: claimed
+      sources: [privacy-logs]
+    bandwidth:
+      value: none
+      evidence: claimed
+      sources: [privacy-logs]
+    source_ip:
+      value: none
+      evidence: claimed
+      sources: [privacy-logs]
+    proven:
+      value: []
+      sources: [transparency-2025]
+    policy:
+      value: https://xeovo.com/privacy/
+      sources: [privacy]
+
+  transparency:
+    audits:
+      value: []
+    report:
+      value: regular
+      note: >-
+        A yearly report since 2019. The first police request came in 2024 and got no data, and 2025 had
+        none.
+      sources: [transparency-2025, transparency-2024]
+    canary:
+      value: none
+    bug_bounty:
+      value: true
+      note: Pays up to 4,000 EUR in Monero for bugs in its website, account system and VPN gateways.
+      sources: [bug-bounty]
+    incidents:
+      value: []
+      sources: [updates]
+
+  account:
+    email:
+      value: optional
+      note: Signup takes a username and password, and can generate a random username.
+      sources: [signup, privacy-data, xeovo-2]
+    personal_data:
+      value: []
+      sources: [privacy-data, signup]
+    payment:
+      value: [card, paypal, bitcoin, monero, other_crypto, cash]
+      note: >-
+        Other crypto is Litecoin. Apple Pay, Google Pay and MobilePay are offered too. Cash is listed, but
+        Xeovo doesn't say how to send it.
+      sources: [pricing, faq]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn]
+      sources: [features, faq]
+    post_quantum:
+      value: none
+      sources: [features]
+    kill_switch:
+      value: null
+      grade: na
+      note: There are no Xeovo apps, so it's down to the client you use. Xeovo points to WireGuard's own blocking of traffic outside the tunnel.
+      sources: [faq, guides]
+    dns:
+      value: first_party
+      evidence: claimed
+      note: Configs use a resolver inside the tunnel by default. You can pick an ad-blocking one or set your own.
+      sources: [xeovo-2, adblock-dns, stealth-dns]
+
+  infra:
+    ram_only:
+      value: null
+      note: Xeovo doesn't say.
+    hosting:
+      value: rented
+      evidence: claimed
+      note: Staff say servers come from hosting suppliers, and that some hosts are no use as they're widely blocked.
+      sources: [helsinki, qa-2022]
+    virtual_locations:
+      value: null
+      note: Xeovo doesn't say whether every location is physically where it's listed.
+      sources: [status]
+    servers:
+      value: 28
+      note: VPN servers on 2026-10-27, across 26 cities. The stealth proxies run on their own servers.
+      sources: [status]
+    countries:
+      value: 23
+      note: For the VPN. The stealth proxies add Bulgaria, Lithuania and South Korea.
+      sources: [status]
+
+  features:
+    connections:
+      value: 5
+      sources: [pricing, features]
+    multihop:
+      value: false
+      note: Staff said in July 2026 that it's planned, with no date.
+      sources: [multihop]
+    obfuscation:
+      value: [shadowsocks, v2ray, amneziawg, quic]
+      note: >-
+        Shadowsocks, VLESS, VMess, Trojan and QUIC-based Hysteria 2 are stealth proxies that come with every
+        account and are used instead of the VPN. AmneziaWG disguises WireGuard itself.
+      sources: [features, pricing, faq, hysteria]
+    port_forwarding:
+      value: false
+      sources: [faq]
+    split_tunnel:
+      value: null
+      grade: na
+      note: There are no Xeovo apps, so it's down to the client you use.
+      sources: [faq]
+    blocking:
+      value: [ads, trackers]
+      note: Off by default. You pick it when generating WireGuard, AmneziaWG or OpenVPN configs.
+      sources: [xeovo-2]
+
+  clients:
+    platforms:
+      value: []
+      note: >-
+        There are no apps. You generate configs for the standard WireGuard, OpenVPN or AmneziaWG apps, or
+        subscriptions for third-party proxy clients, with guides for Windows, macOS, Linux, iOS, Android and routers.
+      sources: [guides, android-guide]
+    open_source:
+      value: null
+      grade: na
+      note: There are no Xeovo apps to publish.
+      sources: [guides]
+    telemetry:
+      value: none
+      note: There are no Xeovo apps.
+      sources: [guides]
+    trackers:
+      value: null
+      grade: na
+      note: There's no Android app.
+      sources: [android-guide]
+    fdroid:
+      value: false
+      sources: [fdroid-search]
+
+  pricing:
+    monthly:
+      value: { amount: 4.99, currency: EUR }
+      sources: [pricing]
+    best:
+      value: { amount: 2.99, currency: EUR }
+      note: 35.88 EUR a year.
+      sources: [pricing]
+    best_term:
+      value: 12
+      sources: [pricing]
+    renewal_increase:
+      value: 0
+      sources: [pricing]
+    free_tier:
+      value: false
+      note: There's no free trial either.
+      sources: [faq]
+    refund_days:
+      value: 30
+      note: Once per customer, and not on crypto payments.
+      sources: [refund, tos]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        The About page says Xeovo keeps no data that can be taken by court orders, while its privacy policy
+        says it could hand over account details and payment method.
+      sources: [about, privacy-court]
+    affiliates:
+      value: false
+      note: It has a referral scheme that gives both sides a free month instead.
+      sources: [about, referrals]
+    review_sites:
+      value: false
+      sources: [about]
+    activism:
+      value: true
+      note: Gave 10,000 USD to the Tor x Funding the Commons pool in 2026 and campaigns against the EU's Chat Control law.
+      sources: [tor-donation, chat-control]
+
+refs:
+  home:
+    url: https://xeovo.com/
+    title: Xeovo VPN
+  tos:
+    url: https://xeovo.com/tos/
+    title: Terms of Service (updated 2025-04-07)
+  privacy:
+    url: https://xeovo.com/privacy/
+    title: Privacy Policy (updated 2025-04-07)
+  privacy-logs:
+    url: https://xeovo.com/privacy/#logs
+    title: Privacy Policy - Logs
+  privacy-court:
+    url: https://xeovo.com/privacy/#court-orders
+    title: Privacy Policy - Court orders
+  privacy-data:
+    url: https://xeovo.com/privacy/#user-info
+    title: Privacy Policy - User information
+  privacy-controller:
+    url: https://xeovo.com/privacy/#contact-info
+    title: Privacy Policy - Data controller contact information
+  register:
+    url: https://avoindata.prh.fi/opendata-ytj-api/v3/companies?businessId=3233901-7
+    title: Finnish Patent and Registration Office open data, Xeovo Oy (3233901-7)
+  about:
+    url: https://xeovo.com/about/
+    title: About Us
+  pricing:
+    url: https://xeovo.com/pricing/
+    title: Pricing
+  faq:
+    url: https://xeovo.com/faq/
+    title: FAQ
+  features:
+    url: https://xeovo.com/features/
+    title: Features
+  refund:
+    url: https://xeovo.com/refund/
+    title: Refund Policy
+  signup:
+    url: https://xeovo.com/signup/
+    title: Sign Up
+  bug-bounty:
+    url: https://xeovo.com/bug-bounty/
+    title: Bug Bounty
+  referrals:
+    url: https://xeovo.com/referrals/
+    title: Referrals
+  guides:
+    url: https://xeovo.com/guides/
+    title: Guides
+  status:
+    url: https://status.xeovo.com/
+    title: Xeovo Status
+  transparency-2025:
+    url: https://hub.xeovo.com/posts/131-transparency-report-for-2025
+    title: Transparency report for 2025
+  updates:
+    url: https://hub.xeovo.com/channels/updates
+    title: Xeovo Hub, updates
+  xeovo-2:
+    url: https://hub.xeovo.com/posts/80-xeovo-20-is-here-new-design-features-and-locations
+    title: Xeovo 2.0 is here. New design, features and locations
+  adblock-dns:
+    url: https://hub.xeovo.com/posts/81-ad-blocking-dns-and-location-inconsistencies
+    title: Ad blocking DNS and location inconsistencies (Xeovo Hub thread)
+  stealth-dns:
+    url: https://hub.xeovo.com/posts/216-xeovo-dns-for-stealth-proxy
+    title: Xeovo DNS for stealth proxy (Xeovo Hub thread)
+  helsinki:
+    url: https://hub.xeovo.com/posts/224-add-vpn-server-in-helsinki
+    title: Add VPN Server in Helsinki? (Xeovo Hub thread)
+  qa-2022:
+    url: https://hub.xeovo.com/posts/21-qa-with-xeovo-team
+    title: Q&A with Xeovo team (2022)
+  multihop:
+    url: https://hub.xeovo.com/posts/206-multihop
+    title: Multihop (Xeovo Hub thread)
+  hysteria:
+    url: https://hub.xeovo.com/posts/115-hysteria-20-launch-new-way-to-bypass-censorship
+    title: Hysteria 2.0 launch. New way to bypass censorship.
+  android-guide:
+    url: https://hub.xeovo.com/posts/39-how-to-install-wireguard-on-android
+    title: How to install WireGuard on Android
+  tor-donation:
+    url: https://hub.xeovo.com/posts/198-xeovo-donates-to-tor-x-funding-the-commons
+    title: Xeovo donates to Tor x Funding The Commons
+  chat-control:
+    url: https://hub.xeovo.com/posts/204-chat-control-comes-back-tomorrow-unless-you-act-today
+    title: Chat Control comes back tomorrow. Unless you act today.
+  fdroid-search:
+    url: https://search.f-droid.org/?q=xeovo&lang=en
+    title: F-Droid search for xeovo
+  trade-register:
+    url: https://www.kauppalehti.fi/yritykset/yritys/32339017
+    title: Xeovo Oy on Kauppalehti (Finnish trade register data)
+  transparency-2024:
+    url: https://hub.xeovo.com/posts/66-transparency-report-for-2024
+    title: Transparency report for 2024
