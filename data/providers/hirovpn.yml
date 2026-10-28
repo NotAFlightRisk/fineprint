@@ -1,0 +1,212 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Hiro VPN
+icon: hirovpn.png
+checked: 2026-10-28
+
+criteria:
+  identity:
+    website:
+      value: https://hirovpn.com
+      sources: [home]
+    legal_entity:
+      value: Wolle Development Limited
+      note: The privacy policy, Google Play and the App Store name Wolle Development Limited, while the terms and site footer say Wolle Limited, both with Hong Kong registration number 3342674.
+      sources: [policy, play, app-store, terms]
+    owner:
+      value: null
+      note: Nobody is named. The Play listing's contact address is at stakewolle.com, a crypto staking provider.
+      sources: [play]
+    founded:
+      value: null
+      note: Its current terms and privacy policy both date from February 2025.
+      sources: [terms, policy]
+    team:
+      value: anonymous
+      sources: [home, terms]
+    sister_brands:
+      value: []
+      note: The same Play account also publishes ProxyHop, a Telegram proxy finder, plus the WolleBuy and Hodler apps.
+      sources: [play-developer]
+    acquisitions: null
+
+  jurisdiction:
+    hq:
+      value: HK
+      note: The terms are under Hong Kong law, but the Russian-language public offer for site purchases falls back on Russian law.
+      sources: [terms, offer]
+    entities:
+      value: [HK]
+      sources: [terms, policy]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [policy]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [policy]
+    timestamps:
+      value: none
+      evidence: claimed
+      sources: [policy]
+    bandwidth:
+      value: aggregate
+      evidence: claimed
+      note: The policy lists the total amount of data transferred.
+      sources: [policy]
+    source_ip:
+      value: none
+      evidence: claimed
+      note: It keeps "aggregated" connection data with your country and ISP.
+      sources: [policy]
+    proven: []
+    policy: https://files.downloadhiro.app/public/docs/privacy_policy.pdf
+
+  transparency:
+    audits: []
+    report:
+      value: none
+      sources: [home]
+    canary:
+      value: none
+      sources: [home]
+    bug_bounty:
+      value: false
+      sources: [home]
+
+  account:
+    email:
+      value: optional
+      sources: [policy]
+    personal_data:
+      value: []
+      sources: [policy]
+    payment:
+      value: [card, bank, app_store, other_crypto]
+      note: Bank is Russia's SBP, SberPay and Tinkoff Pay. The site doesn't say which cryptocurrencies.
+      sources: [pricing, terms]
+
+  security:
+    protocols:
+      value: [other]
+      note: VLESS.
+      sources: [home]
+    post_quantum: null
+    kill_switch:
+      value: app
+      sources: [home, pricing]
+    dns: null
+
+  infra:
+    ram_only: null
+    hosting: null
+    virtual_locations: null
+    servers:
+      value: 130
+      evidence: claimed
+      note: 130+ on the top plan, 100+ and 80+ on the cheaper ones.
+      sources: [pricing]
+    countries:
+      value: null
+      note: The homepage says 50+, the pricing page 80+, the affiliate page 100+, and the terms list 44.
+      sources: [home, pricing, partners, terms]
+
+  features:
+    connections:
+      value: 10
+      note: On the top Legend plan. Base allows 3 and Premium 5.
+      sources: [pricing, faq]
+    multihop: null
+    obfuscation:
+      value: [v2ray]
+      note: VLESS.
+      sources: [home]
+    port_forwarding: null
+    split_tunnel:
+      value: true
+      note: Per site and per app.
+      sources: [faq]
+    blocking:
+      value: [ads]
+      sources: [home, pricing]
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android]
+      note: Also Android TV and Apple TV. The site lists Linux without saying what kind of client.
+      sources: [home, faq]
+    open_source: none
+    telemetry:
+      value: null
+      note: The policy says the app collects anonymous crash reports and diagnostics, without saying whether you can turn them off.
+      sources: [policy]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 299, currency: RUB }
+      note: The Base plan, for 3 devices.
+      sources: [pricing]
+    best:
+      value: { amount: 159, currency: RUB }
+      note: 1,908 roubles a year on Base, though the comparison table on the same page says 124 a month.
+      sources: [pricing]
+    best_term:
+      value: 12
+      sources: [pricing]
+    renewal_increase:
+      value: 0
+      note: Discounts on a first purchase don't carry over to renewals, but none are applied on the pricing page.
+      sources: [pricing, faq]
+    free_tier:
+      value: true
+      note: 3 GB a month after a 7-day unlimited trial.
+      sources: [play, faq]
+    refund_days:
+      value: 30
+      note: First purchases only, not crypto or gift card payments, and app store purchases go through the store.
+      sources: [terms]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: The homepage says your data is "never collected or stored", while the policy keeps your email, ISP, country and data totals. Its country count runs from 44 to 100+ depending on the page.
+      sources: [home, policy, terms, partners]
+    affiliates:
+      value: true
+      note: Up to 50% of new sales and 30% of renewals.
+      sources: [partners]
+
+refs:
+  home:
+    url: https://hirovpn.com/en
+    title: Hiro VPN
+  terms:
+    url: https://hirovpn.com/docs/terms_of_service.pdf
+    title: Terms of Service
+  offer:
+    url: https://hirovpn.com/docs/offer.pdf
+    title: Public offer (Russian)
+  policy:
+    url: https://files.downloadhiro.app/public/docs/privacy_policy.pdf
+    title: Privacy Policy
+  faq:
+    url: https://hirovpn.com/en/faq
+    title: FAQ
+  pricing:
+    url: https://hirovpn.com/en/purchase
+    title: Plans
+  partners:
+    url: https://hirovpn.com/en/partners
+    title: Affiliate program
+  play:
+    url: https://play.google.com/store/apps/details?id=com.hiro.vpn
+    title: HiroVPN on Google Play
+  play-developer:
+    url: https://play.google.com/store/apps/developer?id=Wolle+Apps
+    title: Wolle Apps on Google Play
+  app-store:
+    url: https://apps.apple.com/us/app/id6746091465
+    title: HiroVPN on the App Store
