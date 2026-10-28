@@ -1,0 +1,224 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Hello VPN
+icon: hello-vpn.png
+checked: 2026-10-28
+
+criteria:
+  identity:
+    website:
+      value: https://hellovpn.app
+      sources: [home]
+    legal_entity:
+      value: Appwise OÜ
+      note: Registered in Tallinn in August 2017, registry code 14315500.
+      sources: [terms, register, app-store]
+    owner:
+      value: null
+      grade: na
+      note: No parent company. Estonia's register lists Muhammet Furkan Taşel and Ilker Çam as its two board members, each owning half.
+      sources: [register]
+    founded:
+      value: 2018
+      note: The iOS app was first released in January 2018.
+      sources: [itunes-lookup]
+    team:
+      value: partial
+      note: Its site names nobody, but Estonia's register names its board members and owners.
+      sources: [home, register]
+    sister_brands:
+      value: [VPN Hero]
+      note: Appwise OÜ publishes VPN Hero on both app stores too.
+      sources: [app-store, play-dev]
+    acquisitions:
+      value: []
+      sources: [register]
+
+  jurisdiction:
+    hq:
+      value: EE
+      sources: [terms, register]
+    entities:
+      value: [EE]
+      sources: [register]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [privacy]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [privacy]
+    timestamps:
+      value: 'yes'
+      evidence: claimed
+      note: >-
+        Data use is recorded every 5 minutes with timestamps, against your user ID and session ID, with no
+        stated limit on how long it's kept. The policy's own summary says it only knows the day you connected.
+      sources: [privacy]
+    bandwidth:
+      value: 'yes'
+      evidence: claimed
+      note: Recorded per session in 5-minute intervals, alongside the server you used and why the connection ended.
+      sources: [privacy]
+    source_ip:
+      value: none
+      evidence: claimed
+      sources: [privacy]
+    proven: []
+    policy: https://hellovpn.app/en/privacy/
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: none
+      note: The app makes an anonymous user ID. The terms still say an email may be collected at registration.
+      sources: [privacy, terms]
+    personal_data: []
+    payment:
+      value: [app_store]
+      sources: [home, terms]
+
+  security:
+    protocols:
+      value: [openvpn, ikev2]
+      note: The Play listing also names OpenConnect, but the Android app only bundles OpenVPN and strongSwan for IKEv2.
+      sources: [play, apk]
+    post_quantum: none
+    kill_switch:
+      value: app
+      note: A setting in the Android app.
+      sources: [apk]
+    dns:
+      value: null
+      note: It doesn't say whose DNS servers the apps use.
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say how its servers are run.
+    hosting:
+      value: rented
+      note: Server names in the Android app's built-in list point to DigitalOcean, OVH, AWS, Gcore and other hosts.
+      sources: [apk]
+    virtual_locations:
+      value: null
+      note: >-
+        Its site says it never uses fake locations, but the Android app's built-in server list points some
+        streaming and gaming servers labelled Toronto, Seoul, Sydney and Moscow at Arizona or Frankfurt. The app
+        can fetch a newer list, so it's unclear what it uses today.
+      sources: [apk, home]
+    servers:
+      value: null
+      note: Its site says over 20 servers, and the Play listing claims 50+ locations.
+      sources: [home, play]
+    countries:
+      value: null
+      note: It doesn't publish a list. The Android app's built-in one covers 13 countries.
+      sources: [apk, play]
+
+  features:
+    connections:
+      value: 3
+      sources: [terms]
+    multihop: false
+    obfuscation: []
+    port_forwarding: false
+    split_tunnel:
+      value: false
+      sources: [play]
+    blocking: []
+
+  clients:
+    platforms:
+      value: [ios, macos, android]
+      note: The Mac app comes from the App Store.
+      sources: [home, app-store, play]
+    open_source:
+      value: none
+      note: The terms forbid reverse engineering the apps.
+      sources: [terms]
+    telemetry:
+      value: null
+      note: >-
+        The policy collects in-app analytics with no opt-out mentioned, and calls crash and diagnostic reports
+        opt-in while saying iOS shares them by default. The Android app bundles Amplitude, AppsFlyer, Firebase,
+        Sentry, Facebook and AdMob, and its Play form says location, installed apps and device IDs go to third
+        parties, without encryption in transit.
+      sources: [privacy, apk, play-data-safety, app-store]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 10.49, currency: USD }
+      note: The cheaper of two monthly plans on the US App Store. The other is $11.99. Weekly plans cost $6.99 to $10.49.
+      sources: [app-store]
+    best:
+      value: { amount: 2.92, currency: USD }
+      note: $34.99 a year on the US App Store, which also lists a $49.99 yearly plan.
+      sources: [app-store]
+    best_term:
+      value: 12
+      sources: [app-store]
+    renewal_increase:
+      value: null
+      note: It doesn't say what plans renew at, and the terms say price changes take effect on renewal.
+      sources: [terms]
+    free_tier:
+      value: true
+      note: Ad-supported, with a slow free server. Ads show before you connect and after you disconnect.
+      sources: [itunes-lookup, play, apk]
+    refund_days:
+      value: null
+      note: Refunds are left to the App Store and Google Play.
+      sources: [terms]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        Its App Store listing says it "never ever keeps user logs" while the policy keeps timestamped usage per
+        session, and the app advertises "Military Grade Security".
+      sources: [itunes-lookup, privacy, apk]
+    affiliates: false
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://hellovpn.app/
+    title: Hello VPN - Fast VPN Proxy
+  privacy:
+    url: https://hellovpn.app/en/privacy/
+    title: Hello VPN Privacy Policy
+  terms:
+    url: https://hellovpn.app/en/terms-of-use/
+    title: Hello VPN Terms of Service
+  register:
+    url: https://ariregister.rik.ee/eng/company/14315500/Appwise-O%C3%9C
+    title: Appwise OÜ in the Estonian e-Business Register
+  app-store:
+    url: https://apps.apple.com/us/app/id1304487566
+    title: 'HelloVPN: VPN Proxy on the App Store (US)'
+  itunes-lookup:
+    url: https://itunes.apple.com/lookup?id=1304487566&country=us
+    title: 'HelloVPN: VPN Proxy, App Store lookup data (release date and description)'
+  play:
+    url: https://play.google.com/store/apps/details?id=com.selam.vpn&hl=en
+    title: 'HelloVPN: Unlimited VPN Proxy on Google Play'
+  play-data-safety:
+    url: https://play.google.com/store/apps/datasafety?id=com.selam.vpn&hl=en
+    title: 'HelloVPN: Unlimited VPN Proxy data safety on Google Play'
+  play-dev:
+    url: https://play.google.com/store/apps/developer?id=Appwise+O%C3%9C
+    title: Appwise OÜ apps on Google Play
+  apk:
+    url: https://apkpure.com/hellovpn-unlimited-vpn-proxy/com.selam.vpn
+    title: 'HelloVPN: Unlimited VPN Proxy for Android 3.7 (APK)'
