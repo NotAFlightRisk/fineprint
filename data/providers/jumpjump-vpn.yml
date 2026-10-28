@@ -1,0 +1,226 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: JumpJump VPN
+icon: jumpjump-vpn.png
+checked: 2026-10-28
+
+criteria:
+  identity:
+    website: https://jumpjump.io
+    legal_entity:
+      value: Soon Bodywerkz Auto Pte. Ltd.
+      note: >-
+        The Google Play developer and App Store seller. Its privacy policy and terms name no company, and
+        the Singapore register lists car repair as its main business, with software as a second.
+      sources: [play, app-store, register, register-activity, privacy, terms]
+    owner:
+      value: null
+      note: >-
+        Who owns the Singapore company isn't public. Its sister apps SpeedTop VPN and ForthVPN credit
+        their websites to Jiachuang Smooth Limited, at a Hong Kong address.
+      sources: [register-activity, speedtop, forthvpn]
+    founded:
+      value: 2023
+      sources: [app-store, play-2023]
+    team:
+      value: anonymous
+      note: Nobody running it is named, and Singapore's open register data only gives a count of officers.
+      sources: [register-activity]
+    sister_brands:
+      value: [SpeedTop VPN, ForthVPN]
+      note: >-
+        Both are published by the same company on Google Play and the App Store, alongside a game booster
+        called FKey. The same developer published biubiuVPN before JumpJump.
+      sources: [play-dev, app-store, apkmirror-2023]
+    acquisitions: []
+
+  jurisdiction:
+    hq:
+      value: SG
+      sources: [register, play]
+    entities:
+      value: [SG]
+      sources: [register]
+
+  logging:
+    traffic:
+      value: null
+      note: The policy says it doesn't log users' traffic or the content of communications, but also lists "traffic data" among what it collects.
+      sources: [privacy]
+    dns:
+      value: null
+      note: The policy doesn't mention DNS requests.
+      sources: [privacy]
+    timestamps:
+      value: null
+      note: The policy lists "usage duration" among what it collects without saying for how long, while also saying it doesn't log VPN session data.
+      sources: [privacy]
+    bandwidth:
+      value: null
+      note: The policy lists "traffic data" among what it collects without saying what that covers or for how long.
+      sources: [privacy]
+    source_ip:
+      value: null
+      note: The policy lists your IP address among what it collects without saying for how long, while also saying it doesn't log VPN session data.
+      sources: [privacy]
+    proven: []
+    policy: https://jumpjump.io/#/privacyterms/index
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: null
+      note: Buying on the website needs an email address, and Google Play's data safety form lists email addresses. It doesn't say whether the free app needs one.
+      sources: [pricing, play-data-safety]
+    personal_data: []
+    payment:
+      value: [app_store]
+      note: Its website checkout also has crypto, US Amazon gift cards and local payments aimed at Iran, India and Myanmar.
+      sources: [app-store, pricing]
+
+  security:
+    protocols:
+      value: null
+      note: It doesn't say which protocols its apps use, only that it has its own "exclusive proprietary technology".
+      sources: [home]
+    post_quantum:
+      value: none
+      note: Nothing is published about its key exchange.
+    kill_switch:
+      value: null
+      note: It doesn't mention one.
+    dns:
+      value: null
+      note: It doesn't say whose DNS servers it uses.
+      sources: [privacy]
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say how its servers are run.
+    hosting:
+      value: null
+      note: It doesn't say whether it owns or rents its servers.
+    virtual_locations:
+      value: null
+      note: It doesn't say whether any locations are virtual.
+    servers:
+      value: null
+      note: It only says it has servers across the Americas, Europe and Asia.
+      sources: [home]
+    countries: null
+
+  features:
+    connections:
+      value: 2
+      note: Its paid plans cover two devices, bar a cheaper one-device monthly plan.
+      sources: [home]
+    multihop: null
+    obfuscation: null
+    port_forwarding: null
+    split_tunnel: null
+    blocking: null
+
+  clients:
+    platforms:
+      value: [ios, android]
+      note: The iPhone app also runs on Macs with Apple silicon. Its homepage also claims a Windows app.
+      sources: [play, app-store, home]
+    open_source: none
+    telemetry:
+      value: null
+      note: >-
+        The Android app carries Firebase Analytics, Crashlytics and AppMetrica, and the App Store label
+        says device IDs are used for third-party advertising and to track you. Neither says whether you
+        can opt out.
+      sources: [exodus, app-store, play-data-safety]
+    trackers:
+      value: 14
+      note: Version 2.3.0, half of them advertising SDKs that pay for the free version. Its Play data safety form says it shares no data with third parties.
+      sources: [exodus, play-data-safety]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 3.99, currency: USD }
+      note: The same month for one device instead of two is $2.99 on its website.
+      sources: [home, app-store]
+    best:
+      value: { amount: 2, currency: USD }
+      note: $23.99 a year.
+      sources: [home]
+    best_term:
+      value: 12
+      sources: [home]
+    renewal_increase:
+      value: 0
+      sources: [app-store, terms]
+    free_tier:
+      value: true
+      note: Ad-supported, on its free servers.
+      sources: [play]
+    refund_days:
+      value: null
+      note: The terms don't mention refunds. App store purchases follow the store's own rules.
+      sources: [terms]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: It promises "military-grade privacy to keep you anonymous".
+      sources: [home]
+    affiliates: false
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://jumpjump.io/
+    title: JumpJump VPN homepage
+  privacy:
+    url: https://jumpjump.io/#/privacyterms/index
+    title: JumpJumpVPN Privacy Terms (last updated 20 December 2023)
+  terms:
+    url: https://jumpjump.io/#/termsofservice/index
+    title: JumpJumpVPN Terms of Service (last updated 20 December 2023)
+  pricing:
+    url: https://jumpjump.io/#/pricing/index
+    title: Choose your JumpJumpVPN Plan
+  play:
+    url: https://play.google.com/store/apps/details?id=app.jumpjumpvpn.jumpjumpvpn
+    title: 'JumpJumpVPN: Fast & Secure on Google Play'
+  play-data-safety:
+    url: https://play.google.com/store/apps/datasafety?id=app.jumpjumpvpn.jumpjumpvpn
+    title: JumpJumpVPN data safety on Google Play
+  play-dev:
+    url: https://play.google.com/store/apps/developer?id=SOON+BODYWERKZ+AUTO+PTE.+LTD.
+    title: SOON BODYWERKZ AUTO PTE. LTD. apps on Google Play
+  play-2023:
+    url: https://web.archive.org/web/20231024150401/https://play.google.com/store/apps/details?id=app.jumpjumpvpn.jumpjumpvpn
+    title: JumpJumpVPN on Google Play (archived October 2023)
+  app-store:
+    url: https://apps.apple.com/us/app/jumpjumpvpn-fast-secure-vpn/id6451097052
+    title: 'JumpJumpVPN: Fast & Secure on the App Store (US)'
+  apkmirror-2023:
+    url: https://web.archive.org/web/20230805105530/https://www.apkmirror.com/apk/soon-bodywerkz/
+    title: SOON BODYWERKZ uploads on APKMirror (archived August 2023)
+  register:
+    url: https://data.gov.sg/api/action/datastore_search?resource_id=d_3f960c10fed6145404ca7b821f263b87&q=201319960G
+    title: Soon Bodywerkz Auto Pte. Ltd. (UEN 201319960G), ACRA corporate entities dataset
+  register-activity:
+    url: https://www.opengovsg.com/corporate/201319960G
+    title: Soon Bodywerkz Auto Pte. Ltd. business activities and officers, from ACRA data
+  speedtop:
+    url: https://speedtop.io/
+    title: SpeedTop VPN homepage
+  forthvpn:
+    url: https://www.forthvpn.com/
+    title: ForthVPN homepage
+  exodus:
+    url: https://web.archive.org/web/20251107000356/https://reports.exodus-privacy.eu.org/en/reports/app.jumpjumpvpn.jumpjumpvpn/latest/
+    title: Exodus Privacy report for JumpJumpVPN 2.3.0 (October 2025, archived)
