@@ -1,0 +1,290 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: vpnify
+icon: vpnify.png
+checked: 2026-10-28
+
+criteria:
+  identity:
+    website:
+      value: https://vpnifyapp.com
+      sources: [home]
+    legal_entity:
+      value: Neonetworks Solution Limited
+      note: >-
+        The name Google Play gives. The privacy policy says Neonetworks Solutions Ltd and the App Store
+        Neonetworks solution ltd, all at the same Hong Kong address. The current company was registered in
+        Hong Kong in September 2024.
+      sources: [privacy, play, app-store, hk-register-2024]
+    owner:
+      value: null
+      note: >-
+        Hong Kong filings from 2024 list a mainland Chinese citizen as its sole shareholder. A Slovenian
+        man later told TTP he founded it and that she's his wife, and that it isn't controlled from mainland China.
+      sources: [ttp-2025, ttp-spot-check-2025, incorporation]
+    founded:
+      value: 2019
+      note: The Android app came out in February 2019. Its About page says the project started in 2015.
+      sources: [play, about]
+    team:
+      value: partial
+      note: vpnify names nobody, but its Hong Kong filings name a sole director and shareholder.
+      sources: [about, ttp-2025, ttp-spot-check-2025]
+    sister_brands:
+      value: null
+      note: >-
+        GOVPN and JustVPN look related: their Google Play developers give the same Hong Kong address,
+        GOVPN's privacy policy names the address vpnify's used in 2020, and vpnify's blog suggests JustVPN
+        as an alternative. They're registered to differently named companies, so a shared owner isn't proven.
+      sources: [play-govpn, play-justvpn, govpn-privacy, privacy-2020, blog-russia]
+    acquisitions:
+      value: null
+      note: No sale is on record, but who's behind the company isn't fully clear.
+      sources: [ttp-spot-check-2025]
+
+  jurisdiction:
+    hq:
+      value: HK
+      sources: [privacy, terms, play]
+    entities:
+      value: [HK]
+      sources: [privacy, ttp-2025]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [privacy]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [privacy]
+    timestamps:
+      value: none
+      evidence: claimed
+      sources: [privacy]
+    bandwidth:
+      value: none
+      evidence: claimed
+      note: The policy says it may count how many people use each server location, without knowing who they are.
+      sources: [privacy]
+    source_ip:
+      value: none
+      evidence: claimed
+      sources: [privacy]
+    proven: []
+    policy: https://vpnifyapp.com/privacy
+
+  transparency:
+    audits:
+      value:
+        - date: 2022-07-20
+          auditor: DEKRA
+          scope: apps
+          source: masa-2022
+      evidence: verified
+      note: A MASA check of Android version 1.9.7.20, against a limited set of mobile security requirements.
+      sources: [masa-2022]
+    report:
+      value: none
+      note: Its canary page says it gets "a lot" of information requests, but it publishes no numbers.
+      sources: [canary]
+    canary:
+      value: maintained
+      grade: ok
+      note: >-
+        It claims daily updates, but the "as of" date is always the day you load the page, archived
+        copies included, and it isn't signed, so it shows as current whether or not anyone has renewed it.
+      sources: [canary, canary-2025]
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: none
+      note: There are no accounts. Premium is bought in the app.
+      sources: [privacy, home]
+    personal_data: []
+    payment:
+      value: [app_store]
+      note: Premium is only sold in-app, through the App Store and Google Play.
+      sources: [app-store, play]
+
+  security:
+    protocols:
+      value: [openvpn, other]
+      note: >-
+        Taken from the Android app, which bundles OpenVPN and a Shadowsocks library. vpnify doesn't say
+        which protocols its apps use.
+      sources: [apk]
+    post_quantum:
+      value: none
+      note: Nothing is published about its key exchange.
+      sources: [home]
+    kill_switch:
+      value: app
+      evidence: claimed
+      note: >-
+        Sold as a Premium feature. On Android the app walks you through turning on the system's Always-on
+        VPN and block settings.
+      sources: [blog-tiktok, apk]
+    dns:
+      value: first_party
+      evidence: claimed
+      note: The Android app also lets you set your own DNS servers.
+      sources: [privacy]
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say how its servers are run.
+    hosting:
+      value: null
+      note: It doesn't say whether it owns or rents its servers.
+    virtual_locations:
+      value: null
+      note: It doesn't say whether any locations are virtual.
+    servers:
+      value: null
+      note: Its About page only says "hundreds of servers".
+      sources: [about]
+    countries:
+      value: 23
+      note: As listed on Google Play. The App Store listing names fewer.
+      sources: [play, app-store]
+
+  features:
+    connections:
+      value: null
+      note: No device limit is stated.
+    multihop: false
+    obfuscation:
+      value: null
+      note: Its About page mentions an "anti-censorship system" and the Android app bundles Shadowsocks, but no obfuscation mode is described.
+      sources: [about, apk]
+    port_forwarding: false
+    split_tunnel:
+      value: true
+      note: By app, in the Android app.
+      sources: [apk]
+    blocking:
+      value: [ads]
+      note: A DNS ad blocker, sold as a Premium feature.
+      sources: [blog-tiktok, apk]
+
+  clients:
+    platforms:
+      value: [macos, ios, android]
+      note: Apple TV and Android TV are covered by the iOS and Android apps. There's no Windows or Linux app.
+      sources: [home, app-store]
+    open_source: none
+    telemetry:
+      value: null
+      note: >-
+        The policy only mentions AdMob ads and anonymised analytics, but the Android app also bundles
+        Firebase, Yandex AppMetrica and ad SDKs from Bigo, Yandex, Vungle, TradPlus, Meta and AppLovin. No way
+        to turn analytics off is mentioned.
+      sources: [privacy, apk, play-data-safety]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 7.99, currency: USD }
+      note: US App Store price.
+      sources: [app-store]
+    best:
+      value: { amount: 2.92, currency: USD }
+      note: $34.99 a year on the US App Store. There's also a $4.99 weekly plan.
+      sources: [app-store]
+    best_term:
+      value: 12
+      sources: [app-store]
+    renewal_increase:
+      value: 0
+      note: In-app subscriptions renew at the listed App Store price.
+      sources: [app-store]
+    free_tier:
+      value: true
+      note: >-
+        Ad-supported. The store listings promise no session limits, but the Android app has messages
+        for a free connection time limit that disconnects you until you reconnect.
+      sources: [home, play, apk]
+    refund_days:
+      value: null
+      note: It's only sold through the App Store and Google Play, so refunds follow their rules.
+      sources: [play]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        It promises "military-grade encryption", says your data is "100% secure" and your activity
+        "100% your own", and its App Store listing name-drops ExpressVPN, Private Internet Access and Hotspot Shield.
+      sources: [play, canary, privacy, app-store]
+    affiliates: false
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://vpnifyapp.com/
+    title: vpnify homepage
+  privacy:
+    url: https://vpnifyapp.com/privacy
+    title: vpnify Privacy Policy
+  privacy-2020:
+    url: https://web.archive.org/web/20200616135933/https://vpnifyapp.com/privacy
+    title: vpnify Privacy Policy (archived June 2020)
+  terms:
+    url: https://vpnifyapp.com/tos
+    title: vpnify Terms of Service
+  about:
+    url: https://vpnifyapp.com/about
+    title: About vpnify
+  canary:
+    url: https://vpnifyapp.com/warrant-canary
+    title: vpnify Warrant Canary
+  canary-2025:
+    url: https://web.archive.org/web/20250701231657/https://vpnifyapp.com/warrant-canary
+    title: vpnify Warrant Canary (archived 1 July 2025, dated that day)
+  blog-tiktok:
+    url: https://vpnifyapp.com/hub/internet-censorship-freedom/how-to-access-tiktok-after-a-potential-ban-in-the-u-s/
+    title: How to access TikTok after a potential ban in the U.S. (vpnify blog)
+  blog-russia:
+    url: https://vpnifyapp.com/hub/internet-censorship-freedom/how-to-use-vpnify-in-russia-in-2025-free-unlimited-vpn-for-ios-google-play/
+    title: How to use VPNIFY in Russia in 2025 (vpnify blog)
+  play:
+    url: https://play.google.com/store/apps/details?id=com.vpn.free.hotspot.secure.vpnify&hl=en
+    title: vpnify - Unlimited VPN Proxy on Google Play
+  play-data-safety:
+    url: https://play.google.com/store/apps/datasafety?id=com.vpn.free.hotspot.secure.vpnify&hl=en
+    title: vpnify - Unlimited VPN Proxy data safety on Google Play
+  app-store:
+    url: https://apps.apple.com/us/app/vpnify-unlimited-vpn/id1503251395
+    title: VPNIFY - Unlimited VPN on the App Store (US)
+  apk:
+    url: https://apkpure.com/vpnify-unlimited-vpn-proxy/com.vpn.free.hotspot.secure.vpnify
+    title: vpnify for Android 2.3.0, whose APK bundles OpenVPN, Shadowsocks, Firebase, AppMetrica and several ad SDKs
+  play-govpn:
+    url: https://play.google.com/store/apps/details?id=com.free.vpn.turbo.fast.secure.govpn&hl=en
+    title: VPN secure fast proxy by GOVPN on Google Play (Nextgen Networks Slt Limited)
+  play-justvpn:
+    url: https://play.google.com/store/apps/details?id=free.vpn.unblock.proxy.unlimited.justvpn&hl=en
+    title: VPN high speed proxy - justvpn on Google Play (Nexa Network Solutions Limited)
+  govpn-privacy:
+    url: https://govpnapp.net/privacy
+    title: GOVPN Privacy Policy
+  ttp-2025:
+    url: https://www.techtransparencyproject.org/articles/apple-offers-apps-with-ties-to-chinese-military
+    title: Tech Transparency Project, Apple Offers Apps With Ties to Chinese Military (1 April 2025)
+  ttp-spot-check-2025:
+    url: https://www.techtransparencyproject.org/articles/spot-check-apple-and-google-still-have-a-chinese-vpn-problem
+    title: 'Tech Transparency Project, Spot Check: Apple and Google Still Have a Chinese VPN Problem (12 June 2025)'
+  incorporation:
+    url: https://web.archive.org/web/20261014112825/https://www.documentcloud.org/documents/25536152-neonetworks-incorp/
+    title: Neonetworks incorporation filing, published by TTP on DocumentCloud (archived)
+  masa-2022:
+    url: https://appdefensealliance.dev/reports/com.vpn.free.hotspot.secure.vpnify_1659866028073144.pdf
+    title: DEKRA, MASA assessment of vpnify for Android 1.9.7.20 (2022)
+  hk-register-2024:
+    url: https://www.cr.gov.hk/docs/wrpt/RNC063_2024.09.02-2024.09.08.pdf
+    title: Hong Kong Companies Registry, new companies 2-8 September 2024 (Neonetworks Solution Limited, 77028489)
