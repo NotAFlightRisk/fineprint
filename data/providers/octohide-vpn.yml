@@ -1,0 +1,303 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Octohide VPN
+icon: octohide-vpn.png
+checked: 2026-10-28
+
+criteria:
+  identity:
+    website: https://octohide.com
+    legal_entity:
+      value: UAB Digiteka
+      note: Registered in Panevėžys, Lithuania, under company code 300661638. Its contacts page gives 300660638, which is a typo.
+      sources: [terms, register, play-listing, app-store]
+    owner:
+      value: null
+      note: Digiteka, a Lithuanian company registered in 2007, doesn't say who holds its shares.
+      sources: [register, contacts]
+    founded:
+      value: 2022
+      note: The Android app was released in September 2022, and the iOS app in February 2023.
+      sources: [play-listing, app-store]
+    team:
+      value: anonymous
+      note: Octohide and Digiteka name nobody who runs them.
+      sources: [why-octohide, contacts]
+    sister_brands: []
+    acquisitions: []
+
+  jurisdiction:
+    hq:
+      value: LT
+      sources: [terms]
+    entities:
+      value: [LT]
+      sources: [privacy-policy, register]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [privacy-policy]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [privacy-policy]
+    timestamps:
+      value: 'yes'
+      evidence: claimed
+      note: >-
+        Session length and connection times are kept for 14 days, and session and device details can be kept
+        longer to keep you logged in.
+      sources: [privacy-policy]
+    bandwidth:
+      value: none
+      evidence: claimed
+      sources: [privacy-policy]
+    source_ip:
+      value: 'yes'
+      evidence: claimed
+      note: The IP address you connect from is kept for 14 days, which the policy says is for bot protection.
+      sources: [privacy-policy]
+    proven:
+      value: []
+      note: Its only audits are checks of the Android app, which don't cover the servers or the no-logs policy.
+      sources: [masa-2025]
+    policy: https://octohide.com/privacy-policy
+
+  transparency:
+    audits:
+      value:
+        - date: 2025-12-10
+          auditor: Leviathan Security Group
+          scope: apps
+          source: masa-2025
+        - date: 2025-02-19
+          auditor: MASA lab, not named
+          scope: apps
+          source: masa-2025-02
+      evidence: verified
+      note: >-
+        Both are App Defense Alliance checks of the Android app against its baseline, and the 2025 report says
+        it isn't a full security review. The earlier one is dated by its announcement, and has no public report.
+        Octohide calls the 2025 check its third year in a row, while the same post says two.
+      sources: [ada-record, masa-third-year]
+    report:
+      value: none
+      sources: [home]
+    canary:
+      value: none
+      sources: [home]
+    bug_bounty:
+      value: null
+      note: It doesn't mention a bug bounty or a way to report security flaws.
+      sources: [contacts]
+    incidents: []
+
+  account:
+    email:
+      value: required
+      note: >-
+        The free plan needs no account. VIP needs an email address, though a help article says an in-app
+        purchase can set up an account automatically.
+      sources: [terms, vip-devices]
+    personal_data:
+      value: []
+      note: The web shop asks for your name and country with every payment method, crypto included.
+      sources: [terms, buy-tokens]
+    payment:
+      value: [card, app_store, other_crypto]
+      note: Also Alipay and WeChat Pay in the web shop, which doesn't say which cryptocurrencies it takes.
+      sources: [shop, buy-tokens]
+
+  security:
+    protocols:
+      value: [wireguard, other]
+      note: The other two are VLESS and what it calls VPN over HTTPS.
+      sources: [play-listing, protocols]
+    post_quantum: none
+    kill_switch:
+      value: none
+      note: >-
+        It doesn't offer one of its own. The Android app's kill switch screen walks you through turning on
+        Android's Always-on VPN and Block connections without VPN.
+      sources: [apk]
+    dns:
+      value: null
+      note: The apps let you pick a DNS server, AdGuard DNS among them, but Octohide doesn't say whose answers by default.
+      sources: [adguard-dns]
+
+  infra:
+    ram_only:
+      value: all
+      evidence: claimed
+      sources: [play-listing]
+    hosting:
+      value: null
+      note: It doesn't say whether it owns or rents its servers.
+      sources: [servers]
+    virtual_locations:
+      value: null
+      note: It doesn't say whether any of its locations are virtual.
+      sources: [servers]
+    servers:
+      value: 4500
+      evidence: claimed
+      sources: [servers]
+    countries:
+      value: 47
+      note: Its marketing says 60+ locations. The server list has 66 cities and regions in 47 countries, one of them labelled a test region.
+      sources: [servers]
+
+  features:
+    connections:
+      value: 4
+      note: On the paid VIP plan.
+      sources: [vip-devices, why-octohide]
+    multihop: false
+    obfuscation:
+      value: [v2ray]
+      note: V2Ray here is VLESS.
+      sources: [why-octohide, protocols]
+    port_forwarding: false
+    split_tunnel:
+      value: true
+      note: Per-app settings, on the VIP plan only.
+      sources: [why-octohide]
+    blocking:
+      value: [ads, trackers]
+      note: By switching the app's DNS to AdGuard DNS.
+      sources: [adguard-dns]
+
+  clients:
+    platforms:
+      value: [ios, android]
+      note: >-
+        Android TV and Huawei's AppGallery too. Windows, macOS and routers use a WireGuard config exported from
+        the phone app.
+      sources: [download, windows]
+    open_source:
+      value: none
+      note: Its terms forbid reverse engineering the apps.
+      sources: [terms]
+    telemetry:
+      value: forced
+      evidence: claimed
+      note: >-
+        The apps always send your IP, device type, network operator, language, install source and session
+        times. Analytics and crash reports are opt-in, and Singular tracks installs and in-app events for
+        ad attribution.
+      sources: [privacy-policy]
+    trackers:
+      value: 34
+      note: In version 2.225 from December 2025. Most are ad networks for the free plan's ads, including Yandex and myTarget.
+      sources: [exodus]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 7.99, currency: EUR }
+      note: In the web shop. The US App Store charges $8.99.
+      sources: [shop, app-store]
+    best:
+      value: { amount: 2.25, currency: EUR }
+      note: €26.99 for a year in the web shop, or $29.99 in the US App Store.
+      sources: [shop, app-store]
+    best_term:
+      value: 12
+      sources: [shop]
+    renewal_increase:
+      value: 0
+      note: Web shop plans are one-off tokens that don't renew, and the in-app subscriptions list no intro prices.
+      sources: [buy-tokens, app-store]
+    free_tier:
+      value: true
+      note: >-
+        Unlimited data, but you watch an ad before connecting, which unlocks 24 hours. Some locations are VIP
+        only unless you watch more ads.
+      sources: [why-octohide, vip-options]
+    refund_days:
+      value: 0
+      note: All sales are final unless the law says otherwise. App store purchases follow the store's own rules.
+      sources: [terms]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        It sells itself as an audited no-logs VPN that saves no connection records, timestamps or IP histories.
+        Its policy keeps your IP and connection times for 14 days, and the only audits are of the Android app.
+      sources: [home, why-octohide, privacy-policy, masa-2025]
+    affiliates: false
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://octohide.com/
+    title: Octohide VPN homepage
+  why-octohide:
+    url: https://octohide.com/why-octohide
+    title: Why Octohide
+  privacy-policy:
+    url: https://octohide.com/privacy-policy
+    title: Octohide VPN privacy policy
+  terms:
+    url: https://octohide.com/user-agreement
+    title: Octohide VPN user agreement
+  contacts:
+    url: https://octohide.com/contacts
+    title: Octohide VPN contacts
+  register:
+    url: https://www.registrucentras.lt/jar/p/dok.php?kod=300661638
+    title: Centre of Registers, UAB "Digiteka" (300661638) filings
+  play-listing:
+    url: https://play.google.com/store/apps/details?id=octohide.vpn&hl=en
+    title: Octohide VPN on Google Play
+  app-store:
+    url: https://apps.apple.com/us/app/octohide-vpn/id6443674175
+    title: Octohide VPN on the App Store
+  masa-2025:
+    url: https://cert.appdefensealliance.org/certifications/10212/report/download
+    title: Leviathan Security Group, ADA mobile application profile assessment of Octohide VPN (December 2025)
+  ada-record:
+    url: https://cert.appdefensealliance.org/certifications/10212
+    title: App Defense Alliance certification record for octohide.vpn
+  masa-2025-02:
+    url: https://octohide.com/support/blog/Octohide-VPN-MASA-certification
+    title: Octohide VPN app earns MASA certification (February 2025)
+  masa-third-year:
+    url: https://octohide.com/support/blog/Octohide-VPN-Passes-Independent-MASA-Mobile-Security-Audit-for-the-Second-Year
+    title: Octohide VPN passes independent MASA mobile security audit for the third year
+  servers:
+    url: https://octohide.com/servers
+    title: Octohide VPN server locations
+  shop:
+    url: https://octohide.com/shop
+    title: Octohide VPN shop
+  buy-tokens:
+    url: https://octohide.com/support/blog/How-to-Buy-VPN-VIP-Tokens-on-Octohide-VPN-Shop
+    title: How to buy VIP access tokens on the Octohide VPN shop
+  vip-options:
+    url: https://octohide.com/support/blog/Explore-Octohide-VPN-s-VIP-Subscription-Options
+    title: Octohide VPN VIP subscription options
+  vip-devices:
+    url: https://octohide.com/support/blog/How-to-Use-Your-Octohide-VPN-VIP-Subscription-on-Multiple-Devices
+    title: How to use your Octohide VPN VIP subscription on multiple devices
+  protocols:
+    url: https://octohide.com/support/blog/What-VPN-Protocol-Should-I-Use-in-2025-WireGuard-VPN-over-HTTPS-or-VLESS
+    title: 'What VPN protocol should I use? WireGuard, VPN-over-HTTPS or VLESS'
+  adguard-dns:
+    url: https://octohide.com/support/blog/How-to-Configure-AdGuard-DNS-in-Octohide-VPN-for-Instant-Ad-Free-Protection
+    title: How to configure AdGuard DNS in Octohide VPN
+  download:
+    url: https://octohide.com/download
+    title: Download Octohide VPN
+  windows:
+    url: https://octohide.com/download/windows
+    title: Use Octohide VPN on Windows
+  apk:
+    url: https://apk-download.octohide.com/octohide-vpn-latest.apk
+    title: Octohide VPN Android APK (latest)
+  exodus:
+    url: https://web.archive.org/web/20260211135007/https://reports.exodus-privacy.eu.org/en/reports/octohide.vpn/latest/
+    title: Exodus Privacy report for octohide.vpn (archived February 2026)
