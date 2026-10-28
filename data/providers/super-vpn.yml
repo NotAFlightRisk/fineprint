@@ -1,0 +1,242 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Super VPN
+icon: super-vpn.png
+checked: 2026-10-28
+
+criteria:
+  identity:
+    website:
+      value: https://www.supershell.me
+      sources: [home]
+    legal_entity:
+      value: TOPAPPS TECH PTE. LTD.
+      note: >-
+        It sells the apps on Google Play and the App Store, signs the privacy policy the apps link to, and is
+        in the website's footer. The website's own policy and terms name Hotspot VPN Pte. Ltd. and Hotspot VPN
+        Ltd instead.
+      sources: [play, app-store, app-privacy, home, privacy, terms, register]
+    owner:
+      value: null
+      note: Who owns TOPAPPS TECH isn't public.
+      sources: [register]
+    founded:
+      value: null
+      note: The app was on Google Play with over a million installs by March 2020.
+      sources: [play-2020]
+    team:
+      value: anonymous
+      sources: [home, register]
+    sister_brands:
+      value: [Free VPN ™, Proxy Master]
+      note: >-
+        Two more Android VPN apps from TOPAPPS TECH, with over 50 million and 10 million installs, linking the
+        same website and privacy policy.
+      sources: [play-free-vpn, play-proxy-master]
+    acquisitions:
+      value: null
+      note: >-
+        No sale is on record. In 2020 its Play developer was Hotspot VPN & Proxy Master, and now it's TOPAPPS TECH,
+        a company set up in 2022.
+      sources: [play-2020, register]
+
+  jurisdiction:
+    hq:
+      value: SG
+      sources: [register]
+    entities:
+      value: [SG]
+      sources: [register]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [privacy]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [privacy]
+    timestamps:
+      value: aggregate
+      evidence: claimed
+      note: Whether you connected on a given day, and to which location, but not the time.
+      sources: [privacy]
+    bandwidth:
+      value: aggregate
+      evidence: claimed
+      note: A running total of the data each user transfers.
+      sources: [privacy]
+    source_ip:
+      value: none
+      evidence: claimed
+      note: It keeps the country and ISP you connect from instead.
+      sources: [privacy]
+    proven: []
+    policy: https://www.supershell.me/about/privacy.html
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: optional
+      note: The apps work without an account, though the Android app has an optional email or Google sign-in.
+      sources: [play, privacy, apk]
+    personal_data: []
+    payment:
+      value: [app_store]
+      sources: [play, app-store]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn, ikev2, other]
+      note: >-
+        Google Play names IKEv2, OpenVPN, VMess and Shadowsocks. The Android app also carries WireGuard,
+        AmneziaWG, sing-box and AdGuard's TrustTunnel.
+      sources: [play, apk]
+    post_quantum:
+      value: null
+      note: It says nothing about its key exchange.
+    kill_switch:
+      value: null
+      note: It doesn't mention one.
+    dns:
+      value: null
+      note: It claims no DNS leaks without saying whose DNS servers the apps use.
+      sources: [play]
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say how its servers are run.
+    hosting:
+      value: null
+      note: The policy says its servers are in data centres, without saying whether it owns or rents them.
+      sources: [privacy]
+    virtual_locations:
+      value: null
+      note: It doesn't say where its servers physically sit.
+    servers:
+      value: 5000
+      note: Claimed as 5000+ on Google Play. Its website says more than 6000.
+      sources: [play, home]
+    countries:
+      value: 20
+      note: Claimed as more than 20 regions on Google Play. Its website says more than 110 countries.
+      sources: [play, home]
+
+  features:
+    connections:
+      value: null
+      note: It doesn't say how many devices a subscription covers.
+    multihop:
+      value: null
+      note: It doesn't mention multi-hop.
+    obfuscation:
+      value: [shadowsocks, v2ray, amneziawg]
+      note: It says it uses "much obfuscation" without naming it, and that it can't be used in China.
+      sources: [play, apk]
+    port_forwarding: null
+    split_tunnel:
+      value: null
+      note: It doesn't mention split tunnelling.
+    blocking:
+      value: null
+      note: Its website says it blocks ads and malicious sites, which the app listings don't mention.
+      sources: [home]
+
+  clients:
+    platforms:
+      value: [ios, android]
+      note: >-
+        On iOS the same company sells it as VPN - Fast & Secure VPN ™, from a twin website at fastv.mobi. Its
+        bundle ID is com.hotspotvpn.super4-ios.
+      sources: [play, app-store]
+    open_source: none
+    telemetry:
+      value: null
+      note: >-
+        The policy collects usage statistics, connection diagnostics and crash reports "with your permission".
+        The Android app carries Firebase Analytics, Yandex AppMetrica and MyTracker alongside a dozen ad networks,
+        and the iOS app's labels say device identifiers are used to track you.
+      sources: [privacy, apk, app-store]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 5.99, currency: USD }
+      note: The iOS app's stated price, though the App Store also lists $10.99. Android's in-app prices run from $1.49 to $39.99.
+      sources: [app-store, play]
+    best:
+      value: { amount: 2.92, currency: USD }
+      note: $69.99 for 24 months on the App Store, which also lists a year at $53.99 or $78.99.
+      sources: [app-store]
+    best_term:
+      value: 24
+      sources: [app-store]
+    renewal_increase:
+      value: null
+      note: Subscriptions renew automatically, and it doesn't say at which of its listed prices.
+      sources: [app-store]
+    free_tier:
+      value: true
+      note: Ad-supported.
+      sources: [privacy]
+    refund_days:
+      value: null
+      note: Subscriptions are bought through Google Play or the App Store, so refunds follow the store's rules.
+      sources: [play, app-store]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        It promises "military-grade encryption", "Anonymous no log" and to be "free forever" with "no payment"
+        while selling subscriptions, and its Play listing says the app collects and shares no data while it
+        carries a dozen ad networks.
+      sources: [home, play, play-data-safety, apk]
+    affiliates: false
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://www.supershell.me/
+    title: VPN Free Super homepage
+  privacy:
+    url: https://www.supershell.me/about/privacy.html
+    title: Privacy Policy (Hotspot VPN Pte. Ltd.)
+  terms:
+    url: https://www.supershell.me/about/tos.html
+    title: Terms of Services (Hotspot VPN Ltd)
+  app-privacy:
+    url: https://www.fastv.mobi/about/privacy.html
+    title: Privacy Policy linked from the apps (TOPAPPS TECH PTE LTD)
+  register:
+    url: https://data.gov.sg/api/action/datastore_search?resource_id=d_3f960c10fed6145404ca7b821f263b87&q=202226773N
+    title: TOPAPPS TECH PTE. LTD. (UEN 202226773N), ACRA corporate entities dataset
+  play:
+    url: https://play.google.com/store/apps/details?id=com.supervpn.vpn.free.proxy&hl=en
+    title: VPN Proxy Speed - Super VPN on Google Play
+  play-data-safety:
+    url: https://play.google.com/store/apps/datasafety?id=com.supervpn.vpn.free.proxy&hl=en
+    title: VPN Proxy Speed - Super VPN data safety on Google Play
+  play-2020:
+    url: https://web.archive.org/web/20200414162428/https://play.google.com/store/apps/details?hl=en&id=com.supervpn.vpn.free.proxy
+    title: Super VPN on Google Play, by Hotspot VPN & Proxy Master (archived April 2020)
+  play-proxy-master:
+    url: https://play.google.com/store/apps/details?id=com.free.vpn.proxy.master.app
+    title: Proxy Master - Fast Secure VPN on Google Play, by TOPAPPS TECH
+  play-free-vpn:
+    url: https://play.google.com/store/apps/details?id=con.hotspot.vpn.free.master&hl=en
+    title: Free VPN ™ - Fast & Secure VPN on Google Play
+  app-store:
+    url: https://apps.apple.com/us/app/vpn-fast-secure-vpn/id1528940523
+    title: VPN - Fast & Secure VPN ™ on the App Store (US)
+  apk:
+    url: https://apkpure.com/vpn-proxy-speed-super-vpn/com.supervpn.vpn.free.proxy
+    title: VPN Proxy Speed - Super VPN for Android 4.9.8
