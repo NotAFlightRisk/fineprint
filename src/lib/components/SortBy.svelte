@@ -1,11 +1,13 @@
 <script lang="ts" generics="T extends string">
+  import { track } from '#lib/plausible.ts';
+
   let { value = $bindable(), options }: { value: T; options: Record<T, string> } = $props();
 </script>
 
 <label>
   <span>Sort</span>
   <span class="select">
-    <select bind:value>
+    <select bind:value onchange={(event) => track('Sort', { by: event.currentTarget.value })}>
       {#each Object.entries<string>(options) as [key, label] (key)}
         <option value={key}>{label}</option>
       {/each}

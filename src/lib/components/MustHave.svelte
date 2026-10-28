@@ -1,10 +1,14 @@
 <script lang="ts">
+  import { track } from '#lib/plausible.ts';
   import { checks } from '#lib/summary.ts';
 
   let { selected = $bindable() }: { selected: string[] } = $props();
 
-  const toggle = (id: string) =>
-    (selected = selected.includes(id) ? selected.filter((one) => one !== id) : [...selected, id]);
+  function toggle(id: string) {
+    const on = !selected.includes(id);
+    selected = on ? [...selected, id] : selected.filter((one) => one !== id);
+    if (on) track('Filter', { feature: id });
+  }
 </script>
 
 <fieldset>

@@ -1,7 +1,5 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
   import { page } from '$app/state';
-  import { loadPlausible } from '#lib/plausible.ts';
   import { site } from '#lib/site.ts';
   import '../app.css';
 
@@ -22,8 +20,6 @@
     SearchDialog ??= (await import('#lib/components/SearchDialog.svelte')).default;
     searching = !searching;
   }
-
-  onMount(() => loadPlausible());
 </script>
 
 <svelte:window onkeydown={shortcut} />
