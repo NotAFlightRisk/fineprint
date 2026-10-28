@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: Hide My IP
 icon: hide-my-ip.png
-checked: 2026-10-27
+checked: 2026-10-28
 
 criteria:
   identity:
@@ -103,9 +103,9 @@ criteria:
       note: The Android and iOS apps have one; the desktop apps aren't said to.
       sources: [play, app-store]
     dns:
-      value: null
-      note: It doesn't say whose DNS servers the VPN uses.
-      sources: [privacy]
+      value: third_party
+      note: Its Android app sends lookups to Cloudflare's 1.1.1.1, and to Google's 8.8.8.8 as well in Xray mode.
+      sources: [apk]
 
   infra:
     ram_only:
@@ -114,8 +114,8 @@ criteria:
       sources: [locations]
     hosting:
       value: null
-      note: It doesn't say whether it owns or rents its servers.
-      sources: [locations]
+      note: A 2015 court order says its IP addresses were then leased from the hosts Nobis Technology Group and Cari.net, and it hasn't said anything since.
+      sources: [wilens-order]
     virtual_locations:
       value: none
       evidence: claimed
@@ -137,14 +137,14 @@ criteria:
       value: false
       sources: [play]
     obfuscation:
-      value: null
-      note: Its Android app bundles Xray and wstunnel, but it doesn't say whether or when they're used.
+      value: [v2ray]
+      note: Its Android app falls back to Xray, a V2Ray fork, when WireGuard won't connect, and can carry WireGuard over WebSocket with wstunnel. The site mentions neither.
       sources: [apk]
     port_forwarding: null
     split_tunnel:
-      value: null
-      note: It doesn't say whether you can choose which apps use the VPN.
-      sources: [app-store]
+      value: true
+      note: The Android app lets you exclude apps from the VPN.
+      sources: [apk]
     blocking:
       value: null
       note: Its App Store listing says it blocks tracking, without saying how.
