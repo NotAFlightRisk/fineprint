@@ -74,9 +74,9 @@ criteria:
 
   account:
     email:
-      value: null
-      note: Buying on the website needs an email address, and Google Play's data safety form lists email addresses. It doesn't say whether the free app needs one.
-      sources: [pricing, play-data-safety]
+      value: optional
+      note: Google Play's data safety form marks the email address as optional, but buying on the website needs one.
+      sources: [play-data-safety, pricing]
     personal_data: []
     payment:
       value: [app_store]
@@ -86,8 +86,8 @@ criteria:
   security:
     protocols:
       value: null
-      note: It doesn't say which protocols its apps use, only that it has its own "exclusive proprietary technology".
-      sources: [home]
+      note: It doesn't name its protocols, calling itself a proxy app that uses "industry-standard encryption protocols" and its own "exclusive proprietary technology".
+      sources: [faq, home]
     post_quantum:
       value: none
       note: Nothing is published about its key exchange.
@@ -96,8 +96,8 @@ criteria:
       note: It doesn't mention one.
     dns:
       value: null
-      note: It doesn't say whose DNS servers it uses.
-      sources: [privacy]
+      note: It says it prevents DNS leaks, but not whose DNS servers it uses.
+      sources: [faq, privacy]
 
   infra:
     ram_only:
@@ -119,7 +119,7 @@ criteria:
     connections:
       value: 2
       note: Its paid plans cover two devices, bar a cheaper one-device monthly plan.
-      sources: [home]
+      sources: [home, faq]
     multihop: null
     obfuscation: null
     port_forwarding: null
@@ -188,6 +188,9 @@ refs:
   terms:
     url: https://jumpjump.io/#/termsofservice/index
     title: JumpJumpVPN Terms of Service (last updated 20 December 2023)
+  faq:
+    url: https://jumpjump.io/#/faq/index
+    title: JumpJumpVPN Knowledge Hub (FAQ)
   pricing:
     url: https://jumpjump.io/#/pricing/index
     title: Choose your JumpJumpVPN Plan
