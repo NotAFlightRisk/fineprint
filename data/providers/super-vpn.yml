@@ -27,11 +27,11 @@ criteria:
       value: anonymous
       sources: [home, register]
     sister_brands:
-      value: [Free VPN ™, Proxy Master]
+      value: [Free VPN ™, VPN - Proxy & Privacy Guard]
       note: >-
         Two more Android VPN apps from TOPAPPS TECH, with over 50 million and 10 million installs, linking the
-        same website and privacy policy.
-      sources: [play-free-vpn, play-proxy-master]
+        same websites.
+      sources: [play-dev, play-free-vpn, play-privacy-guard]
     acquisitions:
       value: null
       note: >-
@@ -88,8 +88,9 @@ criteria:
       sources: [play, privacy, apk]
     personal_data: []
     payment:
-      value: [app_store]
-      sources: [play, app-store]
+      value: [app_store, bank]
+      note: The Android app also sells one-off top-ups paid in a browser, including by Russia's SBP bank transfers.
+      sources: [play, app-store, apk]
 
   security:
     protocols:
@@ -99,11 +100,12 @@ criteria:
         AmneziaWG, sing-box and AdGuard's TrustTunnel.
       sources: [play, apk]
     post_quantum:
-      value: null
-      note: It says nothing about its key exchange.
+      value: none
+      note: Nothing is published about its key exchange.
     kill_switch:
       value: null
-      note: It doesn't mention one.
+      note: The Android app has no kill switch setting, and nothing says the iOS app has one.
+      sources: [apk, app-store]
     dns:
       value: null
       note: It claims no DNS leaks without saying whose DNS servers the apps use.
@@ -134,20 +136,21 @@ criteria:
       value: null
       note: It doesn't say how many devices a subscription covers.
     multihop:
-      value: null
-      note: It doesn't mention multi-hop.
+      value: false
+      sources: [play, apk]
     obfuscation:
       value: [shadowsocks, v2ray, amneziawg]
       note: It says it uses "much obfuscation" without naming it, and that it can't be used in China.
       sources: [play, apk]
     port_forwarding: null
     split_tunnel:
-      value: null
-      note: It doesn't mention split tunnelling.
+      value: true
+      note: On Android, by choosing which apps go through it.
+      sources: [apk]
     blocking:
       value: null
-      note: Its website says it blocks ads and malicious sites, which the app listings don't mention.
-      sources: [home]
+      note: Its websites say it blocks ads and malicious sites, a setting the Android app doesn't have.
+      sources: [home, apk]
 
   clients:
     platforms:
@@ -187,9 +190,9 @@ criteria:
       note: Ad-supported.
       sources: [privacy]
     refund_days:
-      value: null
-      note: Subscriptions are bought through Google Play or the App Store, so refunds follow the store's rules.
-      sources: [play, app-store]
+      value: 30
+      note: For 1 and 2-year plans. Plans of up to 6 months get 7 days, and the 1-day and 1-week plans can't be refunded.
+      sources: [apk]
 
   ethics:
     misleading_claims:
@@ -228,9 +231,12 @@ refs:
   play-2020:
     url: https://web.archive.org/web/20200414162428/https://play.google.com/store/apps/details?hl=en&id=com.supervpn.vpn.free.proxy
     title: Super VPN on Google Play, by Hotspot VPN & Proxy Master (archived April 2020)
-  play-proxy-master:
-    url: https://play.google.com/store/apps/details?id=com.free.vpn.proxy.master.app
-    title: Proxy Master - Fast Secure VPN on Google Play, by TOPAPPS TECH
+  play-dev:
+    url: https://play.google.com/store/apps/dev?id=7738062043687520051
+    title: TOPAPPS TECH PTE. LTD. on Google Play
+  play-privacy-guard:
+    url: https://play.google.com/store/apps/details?id=com.optimizer.booster.fast.speedy.phone.smooth&hl=en
+    title: VPN - Proxy & Privacy Guard on Google Play
   play-free-vpn:
     url: https://play.google.com/store/apps/details?id=con.hotspot.vpn.free.master&hl=en
     title: Free VPN ™ - Fast & Secure VPN on Google Play
