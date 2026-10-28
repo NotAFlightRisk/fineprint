@@ -115,7 +115,8 @@ criteria:
       note: It doesn't say how its servers are run.
     hosting:
       value: null
-      note: It doesn't say whether it owns or rents its servers.
+      note: The policy says its servers sit in other companies' data centres, without saying whether it owns the hardware.
+      sources: [privacy]
     virtual_locations:
       value: null
       note: It doesn't say whether any locations are virtual.
@@ -187,10 +188,10 @@ criteria:
       note: Ad-supported, without the VIP locations.
       sources: [play]
     refund_days:
-      value: null
+      value: 0
       note: >-
-        The terms offer 30 days on website purchases, but it only sells in the apps. Google Play purchases get no
-        money-back guarantee, and App Store ones are up to Apple.
+        The terms' 30-day guarantee only covers website purchases, and it only sells in the apps. Google Play
+        purchases get no guarantee, and App Store ones are up to Apple.
       sources: [terms]
 
   ethics:
