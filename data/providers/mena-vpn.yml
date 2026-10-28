@@ -1,0 +1,258 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: MenaVPN
+icon: mena-vpn.png
+checked: 2026-10-28
+
+criteria:
+  identity:
+    website:
+      value: https://menavpn1.com
+      note: The App Store and Google Play listings link here. Its old menavpn.com address redirects to it.
+      sources: [app-store, play]
+    legal_entity:
+      value: MenaVPN Holding B.V.
+      note: >-
+        Registered in Rotterdam under KvK number 84161167. The privacy policy names no company, and still
+        has a template placeholder where its address should be.
+      sources: [terms, kvk, privacy]
+    owner:
+      value: null
+      note: >-
+        Adfirm B.V., a Rotterdam digital marketing firm, ran it until 2022, and its 2022 policy still shared data
+        within Adfirm's group. Neither company's shareholders are published.
+      sources: [terms-2021, privacy-2022, kvk-adfirm, kvk]
+    founded:
+      value: 2020
+      note: The iOS app came out in July 2020. Its own about text says the company was founded in 2022.
+      sources: [app-store, support]
+    team:
+      value: anonymous
+      note: It names nobody who runs it.
+      sources: [support, kvk]
+    sister_brands: []
+    acquisitions:
+      value: null
+      note: >-
+        The service moved from Adfirm B.V. to MenaVPN Holding B.V. in 2022. Who owns either isn't public, so
+        whether that was a change of hands isn't known.
+      sources: [terms-2021, terms-2022]
+
+  jurisdiction:
+    hq:
+      value: NL
+      sources: [terms, kvk]
+    entities:
+      value: [NL]
+      sources: [kvk]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [privacy]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [privacy]
+    timestamps:
+      value: none
+      evidence: claimed
+      sources: [privacy]
+    bandwidth:
+      value: null
+      note: It only mentions aggregated server load and session counts per server.
+      sources: [privacy]
+    source_ip:
+      value: none
+      evidence: claimed
+      sources: [privacy]
+    proven: []
+    policy: https://menavpn1.com/privacy-policy
+
+  transparency:
+    audits:
+      value: []
+      note: The policy says it may get independent security assessments in the future.
+      sources: [privacy]
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: null
+      note: Buying on the website needs an email address, but it doesn't say whether the apps do.
+      sources: [buy]
+    personal_data: []
+    payment:
+      value: [card, app_store]
+      note: Cards go through Stripe on the website.
+      sources: [terms]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn, other]
+      note: The others are V2Ray, Shadowsocks and one it calls Network+.
+      sources: [support]
+    post_quantum: none
+    kill_switch:
+      value: app
+      sources: [home, play]
+    dns:
+      value: null
+      note: It doesn't say whose DNS servers the apps use.
+      sources: [support]
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say how its servers are run.
+      sources: [servers]
+    hosting:
+      value: null
+      note: It doesn't say whether it owns or rents its servers.
+      sources: [servers]
+    virtual_locations:
+      value: null
+      note: It lists servers in the UAE, Saudi Arabia, Qatar, Oman and Egypt without saying whether any are virtual.
+      sources: [servers]
+    servers:
+      value: 100
+      note: It says "over +100" servers.
+      sources: [servers]
+    countries:
+      value: 19
+      note: The pricing page claims 90+ countries.
+      sources: [servers, buy]
+
+  features:
+    connections:
+      value: 2
+      note: Up to 4 devices, one of each type, with 2 connected at once. Some pages say 5 devices.
+      sources: [home]
+    multihop: false
+    obfuscation:
+      value: [shadowsocks, v2ray]
+      sources: [support]
+    port_forwarding: false
+    split_tunnel:
+      value: null
+      note: It doesn't advertise split tunnelling.
+    blocking: []
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android, browser]
+      note: The Mac app is the iOS one on Apple silicon. The browser extension is for Chrome. Its Linux page offers no download.
+      sources: [support, windows, app-store, play, chrome, linux]
+    open_source:
+      value: none
+      note: Its terms keep all software as its own intellectual property.
+      sources: [terms]
+    telemetry:
+      value: null
+      note: >-
+        The App Store label says the app uses your email address and usage data to track you, and Google Play
+        says it shares your email for analytics. The policy only mentions diagnostic logs you consent to.
+      sources: [app-store, play-data-safety, privacy]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 9.99, currency: USD }
+      sources: [buy]
+    best:
+      value: { amount: 3.33, currency: USD }
+      note: $39.99 billed yearly.
+      sources: [buy]
+    best_term:
+      value: 12
+      sources: [buy]
+    renewal_increase:
+      value: null
+      note: It doesn't say what plans renew at.
+      sources: [buy, terms]
+    free_tier:
+      value: false
+      note: The apps are free to download but need a subscription after a short free trial.
+      sources: [terms, home]
+    refund_days:
+      value: 14
+      note: >-
+        Website purchases only, provided the service "hasn't been extensively used". The pricing page promises a
+        30-day money-back guarantee.
+      sources: [refund, terms, buy]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        It promises "military-grade encryption", 90+ countries against the 19 it lists, and a 30-day money-back
+        guarantee its refund policy doesn't give.
+      sources: [buy, servers, refund]
+    affiliates:
+      value: true
+      note: Through FlexOffers, with a 30-day cookie.
+      sources: [flexoffers]
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://menavpn1.com/
+    title: MenaVPN | #1 VPN in MENA
+  terms:
+    url: https://menavpn1.com/terms
+    title: Terms and Conditions of Mena VPN (updated 9 October 2025)
+  privacy:
+    url: https://menavpn1.com/privacy-policy
+    title: Privacy Policy of MenaVPN (updated 15 October 2025)
+  refund:
+    url: https://menavpn1.com/refund-policy
+    title: MenaVPN refund policy
+  buy:
+    url: https://menavpn1.com/buy
+    title: Buy MenaVPN
+  support:
+    url: https://menavpn1.com/support
+    title: MenaVPN support and company information
+  servers:
+    url: https://menavpn1.com/vpn-servers
+    title: MenaVPN server regions
+  windows:
+    url: https://menavpn1.com/vpn-for-windows
+    title: MenaVPN for Windows
+  chrome:
+    url: https://chromewebstore.google.com/detail/jkhnoejdljommfljaogjkknjdjllpjoj
+    title: MenaVPN on the Chrome Web Store
+  app-store:
+    url: https://apps.apple.com/us/app/mena-vpn-uae-ksa-oman/id1523850662
+    title: 'Mena VPN: UAE, KSA, Oman on the App Store'
+  play:
+    url: https://play.google.com/store/apps/details?id=com.app.vpn.vpninuae&hl=en
+    title: 'Mena VPN: UAE, KSA, Oman on Google Play'
+  play-data-safety:
+    url: https://play.google.com/store/apps/datasafety?id=com.app.vpn.vpninuae&hl=en
+    title: 'Mena VPN: UAE, KSA, Oman data safety on Google Play'
+  kvk:
+    url: https://openkvk.nl/kvk/84161167
+    title: MenaVPN Holding B.V., KvK 84161167 (OpenKvK)
+  kvk-adfirm:
+    url: https://openkvk.nl/company/hoofdvestiging-adfirm-bv-78021642-45677549
+    title: Adfirm B.V., KvK 78021642 (OpenKvK)
+  terms-2021:
+    url: https://web.archive.org/web/20220523041456/https://menavpn.com/terms-and-conditions
+    title: MenaVPN terms and conditions naming Adfirm B.V. (archived May 2022)
+  terms-2022:
+    url: https://web.archive.org/web/20220808131159/https://menavpn.com/terms-and-conditions
+    title: MenaVPN terms and conditions naming MenaVPN Holding B.V. (archived August 2022)
+  privacy-2022:
+    url: https://web.archive.org/web/20221007032436/https://menavpn.com/privacy-policy
+    title: MenaVPN privacy statement (archived October 2022)
+  flexoffers:
+    url: https://www.flexoffers.com/affiliate-programs/menavpn-affiliate-program/
+    title: MenaVpn Affiliate Program (FlexOffers)
+  linux:
+    url: https://menavpn1.com/vpn-for-linux
+    title: MenaVPN for Linux
