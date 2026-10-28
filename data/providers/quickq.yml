@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: QuickQ
 icon: quickq.png
-checked: 2026-10-27
+checked: 2026-10-28
 
 criteria:
   identity:
@@ -75,30 +75,31 @@ criteria:
 
   account:
     email:
-      value: null
-      note: The App Store privacy label lists only a user ID and device ID, and it doesn't say whether signing up needs an email.
-      sources: [app-store]
+      value: optional
+      note: The apps can be used and paid for as a guest, and registering an account takes an email.
+      sources: [apk, app-store]
     personal_data: []
     payment:
-      value: [card, paypal, app_store]
-      note: Also UnionPay.
-      sources: [home, app-store]
+      value: [card, paypal, app_store, other_crypto]
+      note: Also UnionPay. The Android app takes USDT from a linked crypto wallet, at 10% off.
+      sources: [home, app-store, apk]
 
   security:
     protocols:
-      value: null
-      note: It promises "multi-protocol support" picked automatically, without naming any protocol.
-      sources: [app-store]
+      value: [other]
+      note: Trojan and VLESS, run through Xray. It doesn't name them itself, and only promises "multi-protocol support".
+      sources: [apk, app-store]
     post_quantum:
       value: none
       note: Nothing is published about how its connections are encrypted.
     kill_switch:
       value: null
-      note: It doesn't say whether the apps have one.
+      note: It doesn't say whether the apps have one, and the Android app tells you to switch off Android's own Always On VPN setting.
+      sources: [apk]
     dns:
-      value: null
-      note: It doesn't say whose DNS servers the apps use.
-      sources: [privacy]
+      value: third_party
+      note: The Android app sends lookups to Cloudflare and Google, and Chinese domains to a Chinese DNS server.
+      sources: [apk]
 
   infra:
     ram_only:
@@ -127,13 +128,14 @@ criteria:
       sources: [home, app-store, terms]
     multihop: false
     obfuscation:
-      value: null
-      note: It's sold for use inside restricted networks, but nothing says how it disguises its traffic.
-      sources: [home]
+      value: [v2ray]
+      note: V2Ray here is Xray, with Trojan over WebSocket and TLS.
+      sources: [apk, home]
     port_forwarding: false
     split_tunnel:
-      value: null
-      note: It doesn't say whether you can choose which apps use the VPN.
+      value: true
+      note: The Android app can send only the apps you pick through the VPN. It can also leave mainland China addresses out of the tunnel.
+      sources: [apk]
     blocking: []
 
   clients:
@@ -146,8 +148,12 @@ criteria:
       sources: [terms]
     telemetry:
       value: null
-      note: The App Store label lists usage and crash data, used for analytics. Nothing says whether you can turn it off.
-      sources: [app-store]
+      note: The App Store label lists usage and crash data, used for analytics, and the Android app ships Flurry analytics. Nothing says whether you can turn it off.
+      sources: [app-store, exodus]
+    trackers:
+      value: 1
+      note: Flurry, in version 1449.
+      sources: [exodus]
     fdroid: false
 
   pricing:
@@ -181,10 +187,21 @@ criteria:
       note: It calls itself "an anonymous and privacy service" with a "zero logs policy", while its policy keeps the date you connect, your data use and connection errors.
       sources: [terms, home, privacy]
     affiliates:
-      value: false
-      sources: [home]
+      value: true
+      note: Users who link a wallet get 20% of what the friends they invite pay in USDT, paid out in USDT.
+      sources: [apk]
     review_sites: false
     activism: false
+
+  other:
+    concerns:
+      value:
+        - summary: The Android app's Trojan connections don't check the server's TLS certificate, so anyone able to intercept them could pose as its server.
+          severity: serious
+          source: apk
+        - summary: The Android app routes BitTorrent traffic outside the VPN, so torrent peers see your real IP address.
+          severity: serious
+          source: apk
 
 refs:
   home:
@@ -205,3 +222,9 @@ refs:
   cr-hk:
     url: https://www.cr.gov.hk/docs/wrpt/RNC063_2014.03.10-2014.03.16.pdf
     title: Hong Kong Companies Registry, new companies 10-16 March 2014 (HongKong IRAY Technology, 2050875)
+  apk:
+    url: https://d.asdfgh.win/quickq/download/quickq.apk
+    title: QuickQ Android app 6.2.0, official direct download
+  exodus:
+    url: https://web.archive.org/web/20261016005041/https://reports.exodus-privacy.eu.org/en/reports/io.quickq.app.android/latest/
+    title: Exodus Privacy report for QuickQ VPN 1449 (archived October 2026)
