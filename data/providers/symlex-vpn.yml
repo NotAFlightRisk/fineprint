@@ -1,0 +1,298 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Symlex VPN
+icon: symlex-vpn.svg
+checked: 2026-10-28
+
+criteria:
+  identity:
+    website:
+      value: https://symlexvpn.com
+      sources: [home]
+    legal_entity:
+      value: Kolpolok Limited
+      note: A software company in Dhaka. Its terms call Symlex VPN "a brand of Kolpolok Limited", which also sells the iOS and Linux apps.
+      sources: [terms, app-store, snap, kolpolok]
+    owner:
+      value: null
+      note: >-
+        Kolpolok names S M Nazmul Hasan as founder and CEO, but not who owns the company. The Android
+        apps come from a Kolpolok Technologies, and a Symlex Technologies also claims the VPN.
+      sources: [about, play, symlex-technologies]
+    founded:
+      value: 2019
+      sources: [about]
+    team:
+      value: public
+      note: Names its founder and CEO, its CTO and a division head.
+      sources: [about]
+    sister_brands:
+      value: [Noon VPN, Pix VPN, Symlex Layer, LobbyMax]
+      note: >-
+        The first three share its Google Play developer or App Store seller, and Symlex Layer is a business
+        VPN. Its own blog says it runs LobbyMax, a gaming VPN. Kolpolok also sells white-label VPNs, so other
+        brands may run on the same network.
+      sources: [play-dev, app-store-dev, noon-play, lobbymax, white-label]
+    acquisitions: []
+
+  jurisdiction:
+    hq:
+      value: BD
+      sources: [terms, kolpolok]
+    entities:
+      value: [BD]
+      note: >-
+        Google Play gives the Android developer, Kolpolok Technologies, a Port Elizabeth address. A
+        Kolpolok Technologies FZCO in Dubai and a Symlex Technologies in Austin, Texas also claim the
+        group's products.
+      sources: [terms, play, kolpolok-technologies, symlex-technologies]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [privacy-policy]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [privacy-policy]
+    timestamps:
+      value: aggregate
+      evidence: claimed
+      note: Keeps the day each account connected, though not the time.
+      sources: [privacy-policy]
+    bandwidth:
+      value: aggregate
+      evidence: claimed
+      note: Keeps a running total of the data each account uses, and may contact heavy users about it.
+      sources: [privacy-policy]
+    source_ip:
+      value: none
+      evidence: claimed
+      note: It does keep your general location and your country or ISP, by day.
+      sources: [privacy-policy]
+    proven: []
+    policy: https://symlexvpn.com/privacy-policy/
+
+  transparency:
+    audits:
+      value: []
+      note: Kolpolok's own site mentions regular security audits of Symlex VPN, but none is published.
+      sources: [kolpolok]
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: required
+      sources: [download, checkout]
+    personal_data:
+      value: []
+      sources: [checkout]
+    payment:
+      value: [card, paypal, app_store]
+      note: The Android app also takes payment through SSLCommerz, a Bangladeshi gateway.
+      sources: [checkout, terms, apk]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn, other]
+      note: The others are AnyConnect, V2Ray, Shadowsocks and SSH, depending on the server.
+      sources: [play, servers, features]
+    post_quantum:
+      value: none
+      note: Nothing is published about its key exchange.
+      sources: [features]
+    kill_switch:
+      value: app
+      note: Premium only.
+      sources: [faq, pricing]
+    dns:
+      value: null
+      note: >-
+        It says it uses private DNS servers, but the V2Ray setup built into the Android app sends
+        lookups to Google's 8.8.8.8.
+      sources: [features, apk]
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say whether its servers run from RAM.
+    hosting:
+      value: null
+      note: It says its servers sit in partner data centres, without saying whether it owns the hardware.
+      sources: [privacy-policy]
+    virtual_locations:
+      value: null
+      note: It doesn't say whether any locations are virtual.
+      sources: [servers]
+    servers:
+      value: null
+      note: It claims 1,000+ servers, while its server list shows 168.
+      sources: [features, servers]
+    countries:
+      value: 83
+      note: >-
+        It advertises 100+ locations. Its list names 80 countries, filing Toronto, Vancouver and
+        Montreal under the US, Dublin under the UK and Tirana under Spain.
+      sources: [servers]
+
+  features:
+    connections:
+      value: 10
+      sources: [features, checkout]
+    multihop: false
+    obfuscation:
+      value: [shadowsocks, v2ray]
+      sources: [servers, play]
+    port_forwarding: false
+    split_tunnel:
+      value: true
+      note: Premium only.
+      sources: [features, pricing]
+    blocking:
+      value: [ads]
+      note: A DNS-based ad-free mode.
+      sources: [features]
+
+  clients:
+    platforms:
+      value: [windows, macos, linux_gui, ios, android]
+      note: Also Android TV and Fire TV. Routers and browsers get no app.
+      sources: [download, snap]
+    open_source:
+      value: none
+      note: Its terms forbid reverse engineering the apps.
+      sources: [terms]
+    telemetry:
+      value: null
+      note: >-
+        The policy only mentions opt-in crash reports, but the Android app includes AppsFlyer, Facebook,
+        Firebase Analytics and AdMob. Google Play says it collects precise location and device IDs, and
+        the iOS listing says usage data is used to track you.
+      sources: [privacy-policy, apk, play-data-safety, app-store]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 7.99, currency: USD }
+      sources: [pricing]
+    best:
+      value: { amount: 2.22, currency: USD }
+      note: $59.99 for 27 months, a two-year plan with 3 months added. A $499.99 lifetime plan is also sold.
+      sources: [pricing, lifetime]
+    best_term:
+      value: 27
+      sources: [pricing]
+    renewal_increase:
+      value: null
+      note: Plans are sold at up to 72% off, and it doesn't say what they renew at.
+      sources: [pricing, terms]
+    free_tier:
+      value: true
+      note: After a 5-day premium trial, with limited data, a few locations and ads.
+      sources: [pricing, play]
+    refund_days:
+      value: 7
+      note: >-
+        First purchase on its own site, at the regular price. Lifetime and 10-year plans, renewals, and
+        coupon, affiliate or promotional purchases can't be refunded.
+      sources: [refund]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        It promises "no logs" and its policy says it keeps no connection logs, while the same policy
+        records the day you connect, your location and ISP, and the data you use.
+      sources: [worldwide, privacy-policy]
+    affiliates:
+      value: true
+      note: Up to 15% of each sale.
+      sources: [affiliate]
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://symlexvpn.com
+    title: Symlex VPN
+  terms:
+    url: https://symlexvpn.com/terms-and-conditions/
+    title: Symlex VPN terms and conditions (updated 8 September 2026)
+  privacy-policy:
+    url: https://symlexvpn.com/privacy-policy/
+    title: Symlex VPN privacy policy (updated 8 September 2026)
+  about:
+    url: https://symlexvpn.com/about-us/
+    title: About Symlex VPN
+  kolpolok:
+    url: https://kolpolok.com/
+    title: Kolpolok Limited
+  kolpolok-technologies:
+    url: https://kolpoloktechnologies.com/
+    title: Kolpolok Technologies FZCO
+  symlex-technologies:
+    url: https://www.symlextechnologies.com/contact/
+    title: Symlex Technologies, contact
+  play:
+    url: https://play.google.com/store/apps/details?id=app.kismyo.vpn&hl=en
+    title: 'Symlex VPN: Fast & Secure VPN on Google Play'
+  play-data-safety:
+    url: https://play.google.com/store/apps/datasafety?id=app.kismyo.vpn&hl=en
+    title: Symlex VPN data safety on Google Play
+  play-dev:
+    url: https://play.google.com/store/apps/dev?id=5666292402804411661&hl=en
+    title: Kolpolok Technologies apps on Google Play
+  noon-play:
+    url: https://play.google.com/store/apps/details?id=app.noon.vpn&hl=en
+    title: Noon VPN on Google Play
+  app-store:
+    url: https://apps.apple.com/us/app/symlex-vpn-trusted-secured/id1476025535
+    title: 'Symlex VPN: Fast & Secure VPN on the App Store (US)'
+  app-store-dev:
+    url: https://apps.apple.com/us/developer/kolpolok-limited/id1303070471
+    title: Kolpolok Limited apps on the App Store
+  snap:
+    url: https://snapcraft.io/symlex-vpn
+    title: Symlex VPN on the Snap Store
+  apk:
+    url: https://symlexvpn.com/symlexvpn4android_china.apk
+    title: Symlex VPN for Android 6.1.9, direct download
+  pricing:
+    url: https://symlexvpn.com/price/
+    title: Symlex VPN pricing
+  lifetime:
+    url: https://symlexvpn.com/buy-lifetime-vpn/
+    title: Symlex VPN lifetime plan
+  checkout:
+    url: https://pay.symlexvpn.com/checkout/18687
+    title: Symlex VPN checkout, 1 month plan
+  refund:
+    url: https://symlexvpn.com/refund-policy/
+    title: Symlex VPN refund policy
+  features:
+    url: https://symlexvpn.com/features/
+    title: Symlex VPN features
+  faq:
+    url: https://symlexvpn.com/faq/
+    title: Symlex VPN FAQ
+  servers:
+    url: https://symlexvpn.com/country-list/
+    title: Symlex VPN server locations
+  download:
+    url: https://symlexvpn.com/download/
+    title: Download Symlex VPN
+  white-label:
+    url: https://symlexvpn.com/white-label-vpn/
+    title: Symlex white label VPN
+  worldwide:
+    url: https://symlexvpn.com/worldwide-vpn/
+    title: Symlex worldwide VPN
+  affiliate:
+    url: https://symlexvpn.com/affiliate/
+    title: Symlex VPN affiliate programme
+  lobbymax:
+    url: https://symlexvpn.com/how-to-choose-vpn-server-for-warzone/
+    title: Symlex VPN, how to choose a VPN server for Warzone (LobbyMax)
