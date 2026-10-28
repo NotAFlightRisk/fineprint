@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: SlickVPN
 icon: slickvpn.png
-checked: 2026-10-27
+checked: 2026-10-28
 
 criteria:
   identity:
@@ -15,13 +15,14 @@ criteria:
     owner:
       value: null
       note: >-
-        Who owns Slick Networks, Inc. isn't published. Its OpenVPN configs are served from the
-        members' site of NewsDemon, a Usenet provider run by K&L Technologies, Inc. of South Carolina.
-      sources: [locations, newsdemon-terms]
+        Who owns Slick Networks, Inc. isn't published. It gave an address in Anderson, South Carolina
+        until 2014, and its OpenVPN configs are served from the members' site of NewsDemon, a Usenet
+        provider run by K&L Technologies, Inc. of South Carolina.
+      sources: [privacy-2014, locations, newsdemon-terms]
     founded:
-      value: null
-      note: It doesn't say when it launched. Its oldest blog posts are from 2015.
-      sources: [blog]
+      value: 2012
+      note: Its site was selling plans by July 2012, the month its UK company was set up.
+      sources: [site-2012, companies-house]
     team:
       value: anonymous
       note: Nobody who runs it is named on its site.
@@ -39,8 +40,8 @@ criteria:
       sources: [terms]
     entities:
       value: [US]
-      note: Its 2016 canary also names a Slick Network, LTD., without saying where it's registered.
-      sources: [privacy, canary]
+      note: Its 2016 canary also names Slick Networks, LTD, a UK company that had already been struck off in December 2015.
+      sources: [privacy, canary, companies-house]
 
   logging:
     traffic:
@@ -103,12 +104,12 @@ criteria:
       value: none
       sources: [protocols]
     kill_switch:
-      value: null
-      note: It doesn't say whether its client has a kill switch.
-      sources: [win-client]
+      value: app
+      note: The desktop client's leak protection swaps out your default route while connected, so traffic stops if the tunnel drops.
+      sources: [mac-client-pkg]
     dns:
       value: null
-      note: It doesn't say whose DNS servers the tunnel uses.
+      note: It doesn't say whose DNS servers the tunnel uses. Its DNS leak guide has you set Cloudflare's or Google's resolver on your adapter.
       sources: [dns-guide]
 
   infra:
@@ -116,8 +117,9 @@ criteria:
       value: null
       note: It doesn't say how its servers are run.
     hosting:
-      value: null
-      note: It doesn't say whether it owns or rents its servers.
+      value: rented
+      note: Its gateways sit on addresses belonging to hosts such as QuickPacket, ReliableSite, Vital Network Group and Linode.
+      sources: [locations, rdap-quickpacket, rdap-reliablesite, rdap-vng, rdap-linode]
     virtual_locations:
       value: null
       note: It doesn't say whether any of its locations are virtual.
@@ -146,21 +148,30 @@ criteria:
     port_forwarding:
       value: null
     split_tunnel:
-      value: null
+      value: false
+      note: The desktop client has no option for it.
+      sources: [mac-client-pkg, win-client]
     blocking:
       value: []
 
   clients:
     platforms:
       value: [windows, macos]
-      note: Linux, iOS, Android and routers are set up by hand with OpenVPN or IPsec.
-      sources: [help, win-client, mac-install]
+      note: >-
+        Linux, iOS, Android and routers are set up by hand with OpenVPN or IPsec. The current macOS client, built
+        in 2018, still bundles OpenVPN 2.3.9 and OpenSSL 1.0.2e from 2015.
+      sources: [help, win-client, mac-install, mac-client-pkg]
     open_source:
       value: none
     telemetry:
       value: null
-      note: The privacy policy says nothing about app usage or crash data.
-      sources: [privacy]
+      note: The macOS client only calls home for update checks, server lists and account messages, but it doesn't say whether any app sends usage data.
+      sources: [mac-client-pkg]
+    trackers:
+      value: null
+      grade: na
+      note: There's no Android app.
+      sources: [help]
     fdroid:
       value: false
       note: There's no Android app.
@@ -197,6 +208,8 @@ criteria:
       sources: [hydra, about, locations]
     affiliates:
       value: null
+      note: It ran an affiliate scheme, and checkout still loads its tracker, but the affiliate pages have errored since 2021.
+      sources: [affiliates-2020, affiliates-now, checkout]
     review_sites:
       value: null
     activism:
@@ -264,9 +277,36 @@ refs:
   linux-2204:
     url: https://www.slickvpn.com/guides/linux-2204/
     title: Ubuntu 22.04 can't connect fix
-  blog:
-    url: https://www.slickvpn.com/blog/
-    title: The SlickVPN Blog
   newsdemon-terms:
     url: https://web.archive.org/web/20260515200842/https://www.newsdemon.com/terms-of-service/
     title: NewsDemon Terms of Service, K&L Technologies, Inc. (archived May 2026)
+  privacy-2014:
+    url: https://web.archive.org/web/20140213075648/http://www.slickvpn.com/privacy-policy
+    title: Privacy Policy (archived February 2014)
+  site-2012:
+    url: https://web.archive.org/web/20120710160037/http://www.slickvpn.com/
+    title: SlickVPN home page (archived July 2012)
+  companies-house:
+    url: https://find-and-update.company-information.service.gov.uk/company/08150200
+    title: Companies House, SLICK NETWORKS, LTD (08150200)
+  mac-client-pkg:
+    url: https://www.slickvpn.com/vpn-client/SlickVPN_v0.2.61_%28gde9faf8%29.pkg
+    title: SlickVPN macOS client v0.2.61 installer
+  rdap-quickpacket:
+    url: https://rdap.arin.net/registry/ip/104.247.220.10
+    title: ARIN RDAP record for gw1.lax2 (QuickPacket)
+  rdap-reliablesite:
+    url: https://rdap.arin.net/registry/ip/206.221.178.210
+    title: ARIN RDAP record for gw1.lga2 (ReliableSite)
+  rdap-vng:
+    url: https://rdap.arin.net/registry/ip/192.187.101.186
+    title: ARIN RDAP record for gw1.mci2 (Vital Network Group)
+  rdap-linode:
+    url: https://rdap.db.ripe.net/ip/139.162.55.80
+    title: RIPE RDAP record for gw2.sin2 (Linode)
+  affiliates-2020:
+    url: https://web.archive.org/web/20200814023352/https://www.slickvpn.com/p5/pap/affiliates/signup.php
+    title: SlickVPN Affiliate Program signup (archived August 2020)
+  affiliates-now:
+    url: https://www.slickvpn.com/p5/pap/affiliates/signup.php
+    title: SlickVPN Affiliate Program signup (current)
