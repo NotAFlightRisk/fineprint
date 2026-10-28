@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: iTop VPN
 icon: itop-vpn.svg
-checked: 2026-10-26
+checked: 2026-10-28
 
 criteria:
   identity:
@@ -31,9 +31,9 @@ criteria:
     sister_brands:
       value: null
       note: >-
-        Its Android download link goes to iFlip VPN, listed on Google Play under "iTop Tech" by a personal
-        developer in Sichuan, China, and it isn't clear whether that's an iTop brand.
-      sources: [android, play-iflip]
+        Its Android download link goes to iFlip VPN, which gives iTop's support address on Google Play but
+        runs under the terms of WiseAir Limited, and no shared owner is on record.
+      sources: [android, play-iflip, iflip-terms]
     acquisitions: []
 
   jurisdiction:
@@ -94,9 +94,9 @@ criteria:
       note: The free apps work without an account. Accounts sign in with an email address, or Google or Microsoft.
       sources: [free-vpn, login]
     personal_data:
-      value: null
-      note: The policy says registering takes a username or email and a phone number, but sign-in only offers email, Google or Microsoft.
-      sources: [privacy, login]
+      value: []
+      note: The policy says registering takes a phone number too, but the sign-up form and the App Store privacy label only ask for an email.
+      sources: [login, app-store, privacy]
     payment:
       value: [card, app_store]
       note: Web orders go through a third-party reseller, and the site doesn't list which other methods it takes.
@@ -169,8 +169,9 @@ criteria:
       value: null
       note: >-
         The policy says the Windows app uses Microsoft App Center for crash reports and user metrics, and
-        the iOS app Firebase Analytics and Crashlytics, without saying whether you can turn them off.
-      sources: [privacy]
+        the iOS app Firebase Analytics and Crashlytics, without saying whether you can turn them off. The iOS
+        app's privacy label says usage data may be used to track you across other companies' apps and sites.
+      sources: [privacy, app-store]
     fdroid: false
 
   pricing:
@@ -202,14 +203,25 @@ criteria:
       value: true
       note: >-
         It promises browsing that's "100% private and safe" and a free plan with "no data collection, no
-        bundle-ware", while its policy names analytics tools and its affiliate scheme pays app makers to bundle it.
-      sources: [mac, free-vpn, privacy, affiliates]
+        bundle-ware", while its policy names analytics tools, its iOS privacy label admits tracking, and its
+        affiliate scheme pays app makers to bundle it.
+      sources: [mac, free-vpn, privacy, app-store, affiliates]
     affiliates:
       value: true
       note: Commission of up to 100% of sales.
       sources: [affiliates]
     review_sites: false
     activism: false
+
+  other:
+    concerns:
+      value:
+        - summary: >-
+            Its Android download sends you to iFlip VPN, a Google Play app from a personal developer account
+            run under another company's terms and privacy policy, so iTop's own policy doesn't cover it.
+          severity: minor
+          source: iflip-terms
+      sources: [android, play-iflip, iflip-privacy]
 
 refs:
   home:
@@ -248,6 +260,12 @@ refs:
   play-iflip:
     url: https://play.google.com/store/apps/details?id=com.connectip.safe.iflipvpn
     title: iFlip VPN-Private & Secure VPN by iTop Tech on Google Play
+  iflip-terms:
+    url: https://www.iflipvpn.com/terms-of-service/
+    title: iFlip VPN Terms of Service (WiseAir Limited)
+  iflip-privacy:
+    url: https://sites.google.com/view/iflip-privacy-policy/privacy-policy
+    title: iFlip VPN Privacy Policy
   windows:
     url: https://www.itopvpn.com/vpn-windows
     title: iTop VPN for Windows
