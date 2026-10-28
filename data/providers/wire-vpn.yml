@@ -1,0 +1,239 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: WireVPN
+icon: wire-vpn.png
+checked: 2026-10-28
+
+criteria:
+  identity:
+    website:
+      value: https://www.wirevpn.app
+      sources: [home]
+    legal_entity:
+      value: WEILAI NETWORK TECHNOLOGY CO., LIMITED
+      note: >-
+        A UK company that sells both store apps. The privacy policy and user agreement don't name any company,
+        and the Google Play developer account goes by WIRE LTD.
+      sources: [play, app-store, companies-house]
+    owner:
+      value: Zhihua Sheng
+      note: >-
+        WEILAI's sole director and only person with significant control, holding 75% or more. In 2025 the Tech
+        Transparency Project found he lives in China and the company's accounts showed it dormant with £100 in
+        assets.
+      sources: [ttp-2025, companies-house-officers, companies-house-psc]
+    founded:
+      value: 2021
+      note: WEILAI was incorporated in November 2021, and the iOS app came out in March 2022.
+      sources: [companies-house, app-store-lookup]
+    team:
+      value: partial
+      note: Its site names no one who runs it, but Companies House names the director and owner.
+      sources: [home, companies-house-officers]
+    sister_brands:
+      value: []
+      note: >-
+        WEILAI sells no other apps. TTP found a second "Wirevpn" iOS app from freevpn Ltd in Belize with an
+        identical privacy policy; that developer account now sells iSharkVPN.
+      sources: [app-store-developer, play-developer, ttp-2025]
+    acquisitions:
+      value: []
+      sources: [app-store-lookup, companies-house]
+
+  jurisdiction:
+    hq:
+      value: GB
+      evidence: claimed
+      note: >-
+        Its only company is registered in the UK, but the director and controlling shareholder lives in China and
+        the user agreement is governed by the laws of the People's Republic of China.
+      sources: [companies-house, companies-house-officers, user-agreement]
+    entities:
+      value: [GB]
+      note: The registered office has moved several times in 2026, most recently to Bromley.
+      sources: [companies-house, companies-house-filings]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [privacy]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [privacy]
+    timestamps:
+      value: none
+      evidence: claimed
+      sources: [privacy]
+    bandwidth:
+      value: none
+      evidence: claimed
+      sources: [privacy]
+    source_ip:
+      value: none
+      evidence: claimed
+      sources: [privacy]
+    proven: []
+    policy: https://api.wirevpn.app/files/privacy_policy.html
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: optional
+      note: Most features work without an account.
+      sources: [privacy]
+    personal_data: []
+    payment:
+      value: [app_store]
+      sources: [privacy]
+
+  security:
+    protocols:
+      value: null
+      note: It doesn't say which protocols the apps use.
+    post_quantum:
+      value: none
+      note: Nothing is published about its key exchange.
+    kill_switch:
+      value: null
+      note: It doesn't mention a kill switch.
+    dns:
+      value: null
+      note: It doesn't say whose DNS servers the apps use.
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say how its servers are run.
+    hosting:
+      value: null
+      note: It doesn't say whether it owns or rents its servers.
+    virtual_locations:
+      value: null
+      note: It doesn't say whether any locations are virtual.
+    servers:
+      value: 4600
+      evidence: claimed
+      sources: [home]
+    countries:
+      value: 76
+      evidence: claimed
+      sources: [home]
+
+  features:
+    connections:
+      value: unlimited
+      evidence: claimed
+      sources: [home]
+    multihop: false
+    obfuscation:
+      value: null
+      note: It doesn't say whether it disguises VPN traffic.
+    port_forwarding: false
+    split_tunnel:
+      value: null
+      note: It doesn't say.
+    blocking:
+      value: null
+      note: It doesn't mention ad or tracker blocking.
+
+  clients:
+    platforms:
+      value: [ios, android]
+      note: The website lists a Windows app but links to no download.
+      sources: [app-store, play, home]
+    open_source: none
+    telemetry:
+      value: null
+      note: >-
+        The policy says it collects device model, OS, language, region, app version and crash reports, and that
+        all third-party SDKs including Firebase and Google Mobile Ads are gone, while the Play listing still says
+        it contains ads.
+      sources: [privacy, play]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: null
+      note: It doesn't publish prices outside the apps.
+    best:
+      value: null
+      note: It doesn't publish prices outside the apps.
+    best_term:
+      value: null
+    renewal_increase:
+      value: null
+    free_tier:
+      value: true
+      sources: [app-store, play]
+    refund_days:
+      value: 0
+      note: The user agreement says no refund is given once the product is sold. App Store refunds are up to Apple.
+      sources: [user-agreement]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        The Play description promises "a zero advertising application environment" on a listing marked as
+        containing ads, and stuffs in rivals' names as keywords.
+      sources: [play]
+    affiliates: false
+    review_sites: false
+    activism: false
+
+  other:
+    concerns:
+      - summary: >-
+          The user agreement is governed by Chinese law and bans using the app for anything that "endangers national
+          security, national reunification, and social stability", and the account can be closed with records kept
+          for the authorities.
+        severity: minor
+        source: user-agreement
+
+refs:
+  home:
+    url: https://www.wirevpn.app/
+    title: WireVPN homepage
+  privacy:
+    url: https://api.wirevpn.app/files/privacy_policy.html
+    title: Privacy Policy for WireVPN - Fast VPN & Proxy (effective 9 June 2025)
+  user-agreement:
+    url: https://api.wirevpn.app/files/user_agreement.html
+    title: WireVPN User Agreement
+  play:
+    url: https://play.google.com/store/apps/details?id=com.wirevpn.freevpn
+    title: wirevpn - Fast Unlimited Proxy on Google Play
+  app-store:
+    url: https://apps.apple.com/us/app/wirevpn-fast-vpn-proxy/id1615422104
+    title: WireVPN - Fast VPN & Proxy on the App Store (US)
+  app-store-lookup:
+    url: https://itunes.apple.com/lookup?id=1615422104&country=us
+    title: WireVPN - Fast VPN & Proxy, App Store lookup record
+  app-store-developer:
+    url: https://itunes.apple.com/lookup?id=1615422106&entity=software&country=us
+    title: Apps by WEILAI NETWORK TECHNOLOGY CO., LIMITED on the App Store (lookup)
+  companies-house:
+    url: https://find-and-update.company-information.service.gov.uk/company/13720448
+    title: WEILAI NETWORK TECHNOLOGY CO., LIMITED (13720448), Companies House
+  companies-house-officers:
+    url: https://find-and-update.company-information.service.gov.uk/company/13720448/officers
+    title: WEILAI NETWORK TECHNOLOGY CO., LIMITED officers, Companies House
+  companies-house-psc:
+    url: https://find-and-update.company-information.service.gov.uk/company/13720448/persons-with-significant-control
+    title: WEILAI NETWORK TECHNOLOGY CO., LIMITED persons with significant control, Companies House
+  companies-house-filings:
+    url: https://find-and-update.company-information.service.gov.uk/company/13720448/filing-history
+    title: WEILAI NETWORK TECHNOLOGY CO., LIMITED filing history, Companies House
+  play-developer:
+    url: https://play.google.com/store/apps/developer?id=WIRE+LTD.
+    title: Android apps by WIRE LTD. on Google Play
+  ttp-2025:
+    url: https://www.techtransparencyproject.org/articles/apple-offers-apps-with-ties-to-chinese-military
+    title: Tech Transparency Project, Apple Offers Apps With Ties to Chinese Military (1 April 2025)
