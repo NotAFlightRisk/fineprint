@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: SetupVPN
 icon: setupvpn.png
-checked: 2026-10-27
+checked: 2026-10-28
 
 criteria:
   identity:
@@ -47,8 +47,10 @@ criteria:
         works with the authorities when they ask for them.
       sources: [faq-abuse, faq-account]
     dns:
-      value: null
-      sources: [policy]
+      value: 'yes'
+      evidence: claimed
+      note: DNS isn't mentioned as such, but the proxy logs it keeps hold the websites you visit.
+      sources: [faq-abuse]
     timestamps:
       value: null
       note: The FAQ asks for the date and time of anything it's asked to look up, but doesn't say what its logs hold.
@@ -78,11 +80,11 @@ criteria:
       value: optional
       evidence: claimed
       note: The site says you can register anonymously with a few clicks, while the FAQ talks about verifying your email address.
-      sources: [how-it-works, faq-account]
+      sources: [how-it-works, faq-account, chrome-crx]
     personal_data:
-      value: null
-      note: The privacy policy says it may ask for your name, home address and phone number, without saying when.
-      sources: [policy]
+      value: []
+      note: The privacy policy says it may ask for your name, address and phone number, but signing up takes an email address at most.
+      sources: [policy, how-it-works, chrome-crx]
     payment:
       value: [card, paypal, bitcoin]
       note: Premium is bought inside the apps. The FAQ also lists Alipay, and Stripe and Paymentwall as processors.
@@ -90,9 +92,11 @@ criteria:
 
   security:
     protocols:
-      value: null
-      note: The browser extensions are a proxy for that browser alone, and the apps' protocols aren't stated.
-      sources: [chrome, amo]
+      value: [other]
+      note: >-
+        The Android app uses Shadowsocks through Jigsaw's Outline client code, and the browser extensions
+        are an HTTP or HTTPS proxy for that browser alone. The other apps' protocols aren't published.
+      sources: [android-apk, chrome-crx, firefox-xpi]
     post_quantum: none
     kill_switch: null
     dns: null
@@ -107,8 +111,8 @@ criteria:
       sources: [chrome, play]
     countries:
       value: null
-      note: The site says over 100 locations, without saying how many countries.
-      sources: [home]
+      note: The site says over 100 locations, and the Android app only lists the ones users near you have connected to.
+      sources: [home, android-apk]
 
   features:
     connections:
@@ -117,11 +121,14 @@ criteria:
       sources: [faq-general]
     multihop: false
     obfuscation:
-      value: null
-      note: It says it gets around government filtering, without saying how.
-      sources: [home]
+      value: [shadowsocks]
+      note: Shadowsocks is the Android app's protocol, and the site says it gets around government filtering.
+      sources: [android-apk, home]
     port_forwarding: false
-    split_tunnel: null
+    split_tunnel:
+      value: true
+      note: The Android app can leave chosen apps out of the VPN, or send only chosen apps through it.
+      sources: [android-apk]
     blocking:
       value: [malware]
       evidence: claimed
@@ -139,15 +146,17 @@ criteria:
     open_source:
       value: null
       note: >-
-        The Firefox add-on is listed under the GPL 3.0, but the FAQ says you may read the code and not
-        modify or reuse it, and the EULA bans reverse engineering.
-      sources: [amo, faq-general, eula]
+        The Firefox add-on is listed under the GPL 3.0, but it ships minified with no published source,
+        and the FAQ says you may not modify or reuse the code. The Android app builds on the open source
+        Outline client without publishing its own.
+      sources: [amo, firefox-xpi, faq-general, android-apk]
     telemetry:
-      value: null
+      value: forced
       note: >-
-        The EULA says it tracks usage statistics, and the iOS app's privacy label lists crash,
-        performance and usage data linked to you. Nothing says whether you can turn it off.
-      sources: [eula, app-store]
+        The browser extensions report any address that fails a DNS lookup, with the page you were on and
+        your account ID, and the code doesn't wait for the proxy to be on. The Android app sends crash
+        reports and usage events, with no setting to stop either.
+      sources: [chrome-crx, firefox-xpi, android-apk, eula]
     fdroid: false
 
   pricing:
@@ -241,6 +250,15 @@ refs:
   edge:
     url: https://microsoftedge.microsoft.com/addons/detail/okhjkpgblgdjappgfgakbcecdblgffcl
     title: SetupVPN - Lifetime Free VPN on Edge Add-ons
+  chrome-crx:
+    url: https://clients2.google.com/service/update2/crx?response=redirect&prodversion=140.0&acceptformat=crx2,crx3&x=id%3Doofgbpoabipfcfjapgnbbjjaenockbdp%26uc
+    title: SetupVPN Chrome extension 4.0.9 (CRX package)
+  firefox-xpi:
+    url: https://addons.mozilla.org/firefox/downloads/file/4306606/setupvpn-3.12.25.xpi
+    title: SetupVPN Firefox add-on 3.12.25 (XPI package)
+  android-apk:
+    url: https://ourapps2024.s3.amazonaws.com/SetupVPN-android-5.0.39.apk
+    title: SetupVPN Android app 5.0.39 (APK)
   hoxx-chrome:
     url: https://chromewebstore.google.com/detail/hoxx-vpn-proxy/nbcojefnccbanplpoffopkoepjmhgdgh
     title: Hoxx VPN Proxy on the Chrome Web Store
