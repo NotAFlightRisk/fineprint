@@ -1,0 +1,233 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Ninja VPN
+icon: ninja-vpn.png
+checked: 2026-10-28
+
+criteria:
+  identity:
+    website:
+      value: https://ninjavpn.app
+      sources: [home]
+    legal_entity:
+      value: Ninja VPN Ltd.
+      note: Registered in the British Virgin Islands under number 2161939, and also the Google Play developer.
+      sources: [terms, privacy, play]
+    owner:
+      value: null
+      note: Who owns Ninja VPN Ltd. isn't published.
+      sources: [terms, play]
+    founded:
+      value: 2024
+      note: The website was up by November 2024, and the Android app went on Google Play in January 2025.
+      sources: [play, home-2024]
+    team:
+      value: anonymous
+      note: Nobody running it is named.
+      sources: [terms, privacy, play]
+    sister_brands:
+      value: []
+      note: >-
+        Its Google Play developer account has no other apps. It isn't the iOS app called Ninja VPN, which is
+        sold by Bit Security Inc. from ninja-vpn.com.
+      sources: [play-dev, app-store-other]
+    acquisitions: []
+
+  jurisdiction:
+    hq:
+      value: VG
+      sources: [terms, play]
+    entities:
+      value: [VG]
+      sources: [terms]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [privacy]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [privacy]
+    timestamps:
+      value: null
+      note: >-
+        It says it keeps no connection timestamps or session durations, yet keeps how long each session
+        lasted for 7 days, against an ID for your install.
+      sources: [privacy, terms]
+    bandwidth:
+      value: 'yes'
+      evidence: claimed
+      note: Each session's data use is kept for 7 days against an ID for your install, to enforce free-plan limits.
+      sources: [privacy, terms]
+    source_ip:
+      value: none
+      evidence: claimed
+      sources: [privacy]
+    proven: []
+    policy: https://ninjavpn.app/privacy
+
+  transparency:
+    audits:
+      value: []
+      note: The policy says independent audits are planned.
+      sources: [privacy]
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: none
+      note: There are no accounts. The app makes an anonymous one per install, and Premium is checked against your Google Play subscription.
+      sources: [terms]
+    personal_data: []
+    payment:
+      value: [app_store]
+      note: Premium is only sold as a Google Play subscription.
+      sources: [terms, play]
+
+  security:
+    protocols:
+      value: [wireguard, other]
+      note: >-
+        Other is a "Stealth" protocol the app listing offers without saying what it is, though the policy
+        says it runs only on WireGuard. The homepage's OpenVPN, IKEv2 and Shadowsocks aren't in the app.
+      sources: [play, privacy, home]
+    post_quantum:
+      value: none
+      note: Nothing is published about its key exchange.
+      sources: [privacy]
+    kill_switch:
+      value: null
+      note: Only the homepage mentions one, alongside apps and features the terms say don't exist.
+      sources: [home, terms, play]
+    dns:
+      value: null
+      note: The app listing mentions "preconfigured custom DNS servers" without saying whose they are.
+      sources: [play, home]
+
+  infra:
+    ram_only:
+      value: all
+      evidence: claimed
+      sources: [privacy]
+    hosting:
+      value: null
+      note: It doesn't say whether it owns or rents its servers.
+    virtual_locations:
+      value: null
+      note: It doesn't say where its servers are hosted or whether any locations are virtual.
+      sources: [play]
+    servers:
+      value: null
+      note: The homepage claims 500 servers, in 20 countries in one place and 89 locations in another.
+      sources: [home]
+    countries:
+      value: 60
+      note: Premium servers. The free version has over 40, and the homepage lists 20.
+      sources: [play, home]
+
+  features:
+    connections:
+      value: null
+      note: >-
+        The homepage says 10 devices, but the terms say it's an Android app only, with Premium tied to your
+        Google Play subscription.
+      sources: [home, terms]
+    multihop:
+      value: null
+      note: Only the homepage mentions Double VPN.
+      sources: [home, play]
+    obfuscation:
+      value: null
+      note: The app has a "Stealth" protocol, with nothing published on how it works.
+      sources: [play]
+    port_forwarding: false
+    split_tunnel:
+      value: true
+      sources: [play]
+    blocking: []
+
+  clients:
+    platforms:
+      value: [android]
+      note: The terms say other platforms are planned. The homepage's iPhone, Mac and router apps don't exist.
+      sources: [terms, privacy, home]
+    open_source:
+      value: none
+      note: The terms forbid reverse engineering the app.
+      sources: [terms]
+    telemetry:
+      value: forced
+      evidence: claimed
+      note: The policy says you can't opt out of Google Analytics or AdMob, and it also uses Firebase crash reporting.
+      sources: [privacy, play-data-safety]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: null
+      note: Monthly and yearly plans are sold in the app through Google Play, which lists in-app prices of $2.49 to $9.99.
+      sources: [terms, play]
+    best:
+      value: null
+      note: Prices only show in the app.
+      sources: [play]
+    best_term:
+      value: null
+      sources: [terms]
+    renewal_increase:
+      value: null
+      note: Google Play subscriptions renew automatically, and it doesn't publish what they renew at.
+      sources: [terms]
+    free_tier:
+      value: true
+      note: >-
+        Ad-supported, with fewer servers. The terms cap free sessions at 6 hours, though the app listing
+        promises no time limits.
+      sources: [terms, play]
+    refund_days:
+      value: null
+      note: >-
+        The homepage promises a 30-day money-back guarantee, but the terms leave refunds to Google Play's
+        48-hour window and then its own discretion.
+      sources: [home, terms]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        It promises "complete anonymity" and "impenetrable" encryption, and its homepage sells apps, protocols
+        and features the terms say it doesn't have.
+      sources: [privacy, home, terms]
+    affiliates: false
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://ninjavpn.app/
+    title: Ninja VPN - Fast, Secure & Private VPN
+  home-2024:
+    url: https://web.archive.org/web/20241108233706/https://ninjavpn.app/
+    title: Ninja VPN homepage (archived November 2024)
+  privacy:
+    url: https://ninjavpn.app/privacy
+    title: Ninja VPN Privacy Policy (last updated 12 September 2026)
+  terms:
+    url: https://ninjavpn.app/terms
+    title: Ninja VPN Terms of Service (last updated 12 September 2026)
+  play:
+    url: https://play.google.com/store/apps/details?id=app.ninjavpn.android
+    title: Ninja VPN - Fast & Secure VPN on Google Play
+  play-data-safety:
+    url: https://play.google.com/store/apps/datasafety?id=app.ninjavpn.android
+    title: Ninja VPN data safety on Google Play
+  play-dev:
+    url: https://play.google.com/store/apps/dev?id=8399026583206601352
+    title: Ninja VPN Ltd. apps on Google Play
+  app-store-other:
+    url: https://apps.apple.com/us/app/ninja-vpn-ip-proxy-unlimited/id1459067273
+    title: Ninja VPN-IP Proxy Unlimited by Bit Security Inc. on the App Store (US)
