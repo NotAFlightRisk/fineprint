@@ -28,7 +28,12 @@ criteria:
       value: anonymous
       note: Nobody running it is named on its site, and Singapore's open register data only gives a count of officers.
       sources: [about, register]
-    sister_brands: []
+    sister_brands:
+      value: [GhostGuard, PotatoVPN]
+      note: >-
+        2025 research found PotatoVPN's Android app shares X-VPN's proprietary protocol, native library and
+        hard-coded key, and their terms share wording. GhostGuard is sold by PotatoVPN's company.
+      sources: [hidden-links-2025, potatovpn-terms, ghostguard]
     acquisitions:
       value: null
       note: >-
@@ -385,3 +390,13 @@ refs:
   ambassador:
     url: https://xvpn.io/campus-ambassador
     title: X-VPN Campus Ambassador Programme
+
+  hidden-links-2025:
+    url: https://www.petsymposium.org/foci/2025/foci-2025-0008.php
+    title: 'Mixon-Baca, Knockel and Crandall, Hidden Links: Analyzing Secret Families of VPN Apps (FOCI 2025)'
+  potatovpn-terms:
+    url: https://potatovpn.com/terms-of-service
+    title: PotatoVPN terms of service
+  ghostguard:
+    url: https://apps.apple.com/us/app/ghostguard-best-vpn-proxy/id1550242560
+    title: GhostGuard - BEST VPN PROXY on the App Store (US)
