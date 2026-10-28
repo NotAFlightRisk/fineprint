@@ -1,0 +1,240 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: VPN Jantit
+icon: vpn-jantit.png
+checked: 2026-10-28
+
+criteria:
+  identity:
+    website:
+      value: https://www.vpnjantit.com
+      sources: [home]
+    legal_entity:
+      value: null
+      note: Its policy and terms name no company, only VPN Jantit at a postal address in Magelang, Indonesia.
+      sources: [policy]
+    owner:
+      value: null
+      note: Nobody behind it is named.
+      sources: [policy]
+    founded:
+      value: 2016
+      sources: [home, rdap]
+    team:
+      value: anonymous
+      note: Its site names nobody who runs it.
+      sources: [contact]
+    sister_brands:
+      value: null
+      note: Its owners aren't published, so there's no way to tell what else they run.
+    acquisitions:
+      value: null
+      note: Its ownership isn't published, so there's no way to tell whether it has changed hands.
+
+  jurisdiction:
+    hq:
+      value: ID
+      evidence: claimed
+      note: Its policy gives a postal address in Magelang, Central Java, but names no company there or anywhere else.
+      sources: [policy]
+    entities:
+      value: null
+      note: It names no company in any country.
+      sources: [policy]
+
+  logging:
+    traffic:
+      value: null
+      note: >-
+        The terms say it monitors users' VPN connections to catch spam and torrenting, without saying what's
+        kept. The policy says it collects no browsing history.
+      sources: [terms, policy]
+    dns:
+      value: null
+      sources: [policy]
+    timestamps:
+      value: null
+      note: The terms say it monitors users' VPN connections, without saying what's kept or for how long.
+      sources: [terms]
+    bandwidth:
+      value: aggregate
+      evidence: claimed
+      note: It logs how much data each user moves, along with their connection speed and how many devices they use.
+      sources: [premium-vs-free]
+    source_ip:
+      value: null
+      note: >-
+        The policy says it collects IP addresses and keeps them while you have an account, but not whether
+        that covers VPN connections.
+      sources: [policy]
+    proven: []
+    policy: https://www.vpnjantit.com/privacy-policy
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: required
+      note: Free accounts need no sign-up. Premium needs a Jantit account with an email address.
+      sources: [premium-vs-free, sign-up]
+    personal_data:
+      value: []
+      sources: [sign-up]
+    payment:
+      value: [paypal, bank]
+      note: >-
+        Bank is QRIS, Indonesia's QR code payments from bank and e-wallet apps. It also takes cryptocurrency,
+        without saying which coins.
+      sources: [policy, home]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn, ikev2, other]
+      note: Other covers SSH tunnels, PPTP, L2TP/IPsec on SoftEther, and V2Ray and Xray (VMess, VLESS, Trojan, Reality).
+      sources: [home, free-xray]
+    post_quantum: none
+    kill_switch:
+      value: null
+      grade: na
+      note: There are no VPN Jantit apps, so it's down to the client you use.
+      sources: [terms]
+    dns:
+      value: third_party
+      note: The OpenVPN configs set Google's 8.8.8.8.
+      sources: [ovpn-config]
+
+  infra:
+    ram_only: null
+    hosting:
+      value: rented
+      note: Servers run at DigitalOcean, GTHost and ACE, among others.
+      sources: [sg1, usa1, usa9]
+    virtual_locations: null
+    servers:
+      value: 186
+      note: The homepage counter says 185.
+      sources: [premium-status, home]
+    countries:
+      value: 58
+      note: Its pages say up to 62.
+      sources: [premium-status, free-xray]
+
+  features:
+    connections:
+      value: 10
+      note: Two on a free account, and one for WireGuard on either.
+      sources: [premium-vs-free]
+    multihop: false
+    obfuscation:
+      value: [v2ray]
+      note: V2Ray and Xray, including Reality. SSH accounts can also tunnel over WebSocket and DNS (SlowDNS).
+      sources: [free-xray, usa9]
+    port_forwarding: null
+    split_tunnel:
+      value: null
+      grade: na
+      note: There are no VPN Jantit apps, so it's down to the client you use.
+      sources: [terms]
+    blocking: []
+
+  clients:
+    platforms:
+      value: []
+      note: There are no apps. It hands out accounts and config files for third-party apps and built-in VPN clients.
+      sources: [terms, free-xray]
+    open_source:
+      value: null
+      grade: na
+      note: There are no VPN Jantit apps to publish.
+      sources: [terms]
+    telemetry:
+      value: none
+      note: There are no VPN Jantit apps.
+      sources: [free-xray]
+    trackers:
+      value: null
+      grade: na
+      note: There's no Android app.
+      sources: [terms]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 1, currency: USD }
+      note: Premium is paid for in points, and 60 points for $1 buys 30 days.
+      sources: [home, premium-wg]
+    best:
+      value: null
+      note: It doesn't publish prices for bigger point bundles or longer terms, which run up to 360 days.
+      sources: [premium-vs-free]
+    best_term: null
+    renewal_increase:
+      value: 0
+      note: Points are bought up front and nothing renews.
+    free_tier:
+      value: true
+      note: Free accounts last up to seven days, and new ones open up every day.
+      sources: [premium-vs-free]
+    refund_days:
+      value: 0
+      note: Unused time goes back as points, never money.
+      sources: [terms]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        It promises to unblock any content your ISP blocks, and pitches itself for staying anonymous while it
+        logs each user's data use and devices.
+      sources: [home, premium-vs-free]
+    affiliates: false
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://www.vpnjantit.com/
+    title: VPN Jantit homepage
+  contact:
+    url: https://www.vpnjantit.com/contact-us
+    title: VPN Jantit contact page
+  policy:
+    url: https://www.vpnjantit.com/privacy-policy
+    title: VPN Jantit privacy policy (January 2024)
+  terms:
+    url: https://www.vpnjantit.com/terms-and-service
+    title: VPN Jantit terms of service
+  premium-vs-free:
+    url: https://www.vpnjantit.com/premium-vs-free
+    title: VPN Jantit Premium VPN vs Free VPN, with FAQ
+  premium-wg:
+    url: https://www.vpnjantit.com/premium-wireguard-account
+    title: VPN Jantit premium WireGuard servers and price
+  premium-status:
+    url: https://www.vpnjantit.com/premium-server-status
+    title: VPN Jantit premium server status
+  sign-up:
+    url: https://www.vpnjantit.com/account/dashboard/sign-up
+    title: VPN Jantit account sign-up
+  free-xray:
+    url: https://www.vpnjantit.com/free-xray-vless-reality
+    title: VPN Jantit free Xray VLESS Reality
+  ovpn-config:
+    url: https://www.vpnjantit.com/download-openvpn.php?server=sg1
+    title: VPN Jantit OpenVPN configs for Singapore 1 (zip)
+  sg1:
+    url: https://www.vpnjantit.com/create-free-account?server=sg1&type=OpenVPN
+    title: VPN Jantit free OpenVPN, Singapore 1 (provider DigitalOcean)
+  usa1:
+    url: https://www.vpnjantit.com/create-free-account?server=usa1&type=SSH
+    title: VPN Jantit free SSH, USA 1 in Miami (provider GTHost)
+  usa9:
+    url: https://www.vpnjantit.com/create-free-account?server=usa9&type=SSH
+    title: VPN Jantit free SSH, USA 9 in Ashburn (provider ACE)
+  rdap:
+    url: https://rdap.verisign.com/com/v1/domain/vpnjantit.com
+    title: vpnjantit.com domain registration record (registered 3 August 2016)
