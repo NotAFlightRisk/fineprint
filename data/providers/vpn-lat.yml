@@ -1,0 +1,246 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: VPN.lat
+icon: vpn-lat.png
+checked: 2026-10-28
+
+criteria:
+  identity:
+    website:
+      value: https://vpn.lat
+      sources: [home]
+    legal_entity:
+      value: Privacy Apps Latam Ltd.
+      note: The privacy policy only names VPN.lat, and still calls the app VPN Gratis Latinoamerica.
+      sources: [terms, privacy, app-store]
+    owner:
+      value: null
+      note: Privacy Apps Latam Ltd. doesn't name its directors or owners.
+      sources: [terms, company]
+    founded:
+      value: 2019
+      note: The Android app came out in January 2019, billed as "the new Free VPN service for Android in 2019".
+      sources: [play, play-2019]
+    team:
+      value: anonymous
+      sources: [terms, company]
+    sister_brands:
+      value: []
+      sources: [play-dev, app-store-dev]
+    acquisitions:
+      value: null
+      note: >-
+        Until 2023 the apps were published under the name VPN.lat on Google Play and by an individual
+        developer on the App Store. Privacy Apps Latam Ltd. was the Play developer by January 2024 and sells
+        the iOS app now, and whether that was a sale isn't public.
+      sources: [play-2023, app-store-2022, play-2024, app-store]
+
+  jurisdiction:
+    hq:
+      value: SC
+      note: The terms fall under Seychelles law. Google Play gives a Mahé address and a US phone number.
+      sources: [terms, play]
+    entities:
+      value: [SC]
+      sources: [terms, company]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      note: The policy says it doesn't collect the apps, services or sites you use while connected.
+      sources: [privacy]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [privacy]
+    timestamps:
+      value: null
+      note: >-
+        The homepage says it keeps no history of your connections, but the policy doesn't list connection
+        times among what it doesn't collect, and its crash logs include when you used the app.
+      sources: [home, privacy]
+    bandwidth:
+      value: null
+      note: It doesn't say whether data use is recorded.
+      sources: [privacy]
+    source_ip:
+      value: none
+      evidence: claimed
+      note: The policy rules out logging your IP address when you connect. Crash logs sent through third parties can include it.
+      sources: [privacy]
+    proven: []
+    policy: https://vpn.lat/privacy-policy
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: none
+      note: There are no accounts.
+      sources: [home]
+    personal_data: []
+    payment:
+      value: [app_store]
+      note: The only thing for sale is a subscription in the Android app that removes ads.
+      sources: [play, play-2019]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn]
+      note: OpenVPN and WireGuard are both offered on most servers.
+      sources: [play, app-store]
+    post_quantum:
+      value: none
+      note: Nothing is published about its key exchange.
+      sources: [app-store]
+    kill_switch:
+      value: null
+      note: It doesn't mention one.
+    dns:
+      value: null
+      note: It doesn't say whose DNS servers the apps use.
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say how its servers are run.
+    hosting:
+      value: null
+      note: It doesn't say whether it owns or rents its servers.
+    virtual_locations:
+      value: null
+      note: It lists servers in 84 countries, including Laos, Liechtenstein and the Seychelles, and doesn't say whether any are virtual.
+      sources: [servers]
+    servers:
+      value: null
+      note: Its site calls its 84 countries "84 servers" and gives no real count.
+      sources: [servers]
+    countries:
+      value: 84
+      sources: [servers]
+
+  features:
+    connections:
+      value: unlimited
+      note: There are no accounts, so nothing ties it to a number of devices.
+      sources: [home]
+    multihop: false
+    obfuscation: []
+    port_forwarding: false
+    split_tunnel:
+      value: true
+      note: By app, on Android.
+      sources: [play]
+    blocking: []
+
+  clients:
+    platforms:
+      value: [ios, android]
+      note: The iOS app also runs on Apple silicon Macs.
+      sources: [app-store, play-dev]
+    open_source:
+      value: none
+      sources: [terms]
+    telemetry:
+      value: null
+      note: >-
+        The policy names Firebase Analytics, Facebook and OneSignal, and the store listings say the apps
+        share crash logs, diagnostics and device IDs, some of it for advertising. Neither says whether you can opt out.
+      sources: [privacy, play-data-safety, app-store]
+    trackers:
+      value: 6
+      note: Version 3.9.26, mostly advertising SDKs that pay for the free service.
+      sources: [exodus]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 0, currency: USD }
+      note: The VPN is free and ad-supported. An optional monthly subscription in the Android app only removes the ads.
+      sources: [home, play]
+    best:
+      value: { amount: 0, currency: USD }
+      sources: [home]
+    best_term:
+      value: null
+      grade: na
+      note: It's free.
+    renewal_increase:
+      value: null
+      grade: na
+      note: It's free.
+    free_tier:
+      value: true
+      note: Ad-supported, with no data cap or time limit.
+      sources: [home]
+    refund_days:
+      value: null
+      grade: na
+      note: The VPN is free. The ad-removal subscription is bought through Google Play.
+      sources: [play]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        Its store listings promise anonymous browsing, and its guide says third parties
+        "cannot track your online activities", though its homepage says a VPN doesn't make you anonymous.
+      sources: [play, app-store, what-is-a-vpn, home]
+    affiliates: false
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://vpn.lat/
+    title: Free unlimited VPN for Android and iOS - VPN.lat
+  privacy:
+    url: https://vpn.lat/privacy-policy
+    title: VPN.lat Privacy Policy
+  terms:
+    url: https://vpn.lat/terms-of-service
+    title: VPN.lat Terms of service
+  servers:
+    url: https://vpn.lat/servers
+    title: VPN.lat servers
+  what-is-a-vpn:
+    url: https://vpn.lat/what-is-a-vpn
+    title: What is a VPN? (VPN.lat)
+  company:
+    url: https://privacyappslatam.com/
+    title: Privacy Apps Latam Ltd.
+  play:
+    url: https://play.google.com/store/apps/details?id=com.vpn.lat&hl=en
+    title: 'VPN.lat: Unlimited VPN Proxy on Google Play'
+  play-data-safety:
+    url: https://play.google.com/store/apps/datasafety?id=com.vpn.lat&hl=en
+    title: 'VPN.lat: Unlimited VPN Proxy data safety on Google Play'
+  play-dev:
+    url: https://play.google.com/store/apps/developer?id=Privacy+Apps+Latam+Ltd.
+    title: Privacy Apps Latam Ltd. apps on Google Play
+  app-store:
+    url: https://apps.apple.com/us/app/vpn-lat-unlimited-and-secure/id1526622816
+    title: 'VPN.lat: unlimited and secure on the App Store (US)'
+  app-store-dev:
+    url: https://apps.apple.com/us/developer/https-www-vpn-lat/id1771932703
+    title: VPN.lat apps on the App Store (US)
+  play-2019:
+    url: https://web.archive.org/web/20191125194126/https://play.google.com/store/apps/details?id=com.vpn.lat
+    title: VPN.lat on Google Play (archived November 2019)
+  play-2023:
+    url: https://web.archive.org/web/20230405155216/https://play.google.com/store/apps/details?id=com.vpn.lat
+    title: VPN.lat on Google Play (archived April 2023)
+  play-2024:
+    url: https://web.archive.org/web/20240128193939/https://play.google.com/store/apps/details?id=com.vpn.lat
+    title: VPN.lat on Google Play (archived January 2024)
+  app-store-2022:
+    url: https://web.archive.org/web/20221208060617/https://apps.apple.com/app/id1526622816
+    title: VPN.lat on the App Store (archived December 2022)
+  exodus:
+    url: https://web.archive.org/web/20260208142724/https://reports.exodus-privacy.eu.org/en/reports/com.vpn.lat/latest/
+    title: Exodus Privacy report for VPN.lat 3.9.26 (January 2026, archived)
