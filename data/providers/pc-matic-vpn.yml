@@ -1,0 +1,328 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: PC Matic VPN
+icon: pc-matic-vpn.png
+checked: 2026-10-28
+
+criteria:
+  identity:
+    website: https://www.pcmatic.com/vpn/
+    legal_entity:
+      value: PC Matic, Inc.
+      sources: [terms]
+    owner:
+      value: null
+      note: PC Matic names no parent company. Its founder, Rob Cheng, is executive chairman.
+      sources: [leadership]
+    founded:
+      value: 2023
+      note: Its VPN page dates from June 2023 and the iOS app from July 2023. The current two-tier plans launched in July 2026.
+      sources: [vpn-2023, ios-lookup, tiers-2026]
+    team:
+      value: public
+      sources: [leadership]
+    sister_brands:
+      value: []
+      sources: [about]
+    acquisitions:
+      value: []
+      sources: [about, leadership]
+
+  jurisdiction:
+    hq:
+      value: US
+      note: PC Matic is in Sioux City, Iowa.
+      sources: [play, refund]
+    entities:
+      value: [US]
+      sources: [terms]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      note: >-
+        The network is WLVPN's, a white-label service run by Ziff Davis, and PC Matic's policy doesn't say
+        what WLVPN keeps.
+      sources: [privacy, wlvpn]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [privacy]
+    timestamps:
+      value: 'yes'
+      evidence: claimed
+      note: The policy lists connection timestamps among the data the VPN collects, with no retention period for them.
+      sources: [privacy]
+    bandwidth:
+      value: null
+      note: >-
+        The policy lists "VPN server connection metadata" without saying what that covers. Data use is
+        unlimited.
+      sources: [privacy, tiers-2026]
+    source_ip:
+      value: 'yes'
+      evidence: claimed
+      note: >-
+        The policy lists your IP address "for connection establishment" among the data the VPN collects, with
+        no retention period for it.
+      sources: [privacy]
+    proven:
+      value: []
+      note: No audit of PC Matic VPN has been published.
+    policy: https://www.pcmatic.com/privacy/
+
+  transparency:
+    audits:
+      value: []
+      note: No audit of PC Matic VPN has been published. WLVPN's own claims of independent checks don't name PC Matic.
+      sources: [wlvpn-home]
+    report:
+      value: none
+      sources: [privacy]
+    canary: none
+    bug_bounty:
+      value: false
+      note: Security reports go to an email address, with no reward on offer.
+      sources: [privacy]
+    incidents: []
+
+  account:
+    email:
+      value: required
+      note: You sign in to the apps with your PC Matic account.
+      sources: [cart, kb-install]
+    personal_data:
+      value: []
+      sources: [cart]
+    payment:
+      value: [card, paypal]
+      note: Cards go through Stripe. The mobile apps don't sell subscriptions.
+      sources: [cart, app-store, play]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn, ikev2]
+      note: The iOS app also offers IPSec, and macOS only WireGuard and IKEv2.
+      sources: [kb-android, kb-ios, kb-mac, kb-website]
+    post_quantum:
+      value: none
+      sources: [kb-ios, kb-windows]
+    kill_switch:
+      value: app
+      note: >-
+        On Windows, a full-device kill switch you turn on yourself on Standard and that's on by default on
+        Stealth. On Android it points you to the system's Always-on VPN setting.
+      sources: [kb-kill-switch, product, kb-android]
+    dns:
+      value: null
+      note: It promises DNS leak protection but doesn't say whose DNS servers answer inside the tunnel.
+      sources: [product, kb-windows]
+
+  infra:
+    ram_only:
+      value: null
+      note: Neither PC Matic nor WLVPN says whether the servers run from RAM.
+      sources: [wlvpn-home]
+    hosting:
+      value: null
+      note: >-
+        It runs on WLVPN, the IPVanish-powered white-label network owned by Ziff Davis. Its status page reads
+        WLVPN's, and its Android app is built on WLVPN's SDK and talks to api.wlvpn.com.
+      sources: [status, status-js, apk, wlvpn]
+    virtual_locations:
+      value: null
+      note: >-
+        Stealth claims 140+ locations, while WLVPN lists physical servers in 80 cities. PC Matic doesn't say
+        whether any of its locations are virtual.
+      sources: [product, wlvpn-home]
+    servers:
+      value: null
+      note: PC Matic gives no server count. WLVPN, whose network it uses, lists 2,200 servers.
+      sources: [wlvpn-home]
+    countries:
+      value: null
+      note: >-
+        PC Matic counts locations, not countries: 25 on Standard and 140+ on Stealth. WLVPN lists servers in
+        50 countries.
+      sources: [product, wlvpn-home]
+
+  features:
+    connections:
+      value: 5
+      sources: [cart, tiers-2026]
+    multihop:
+      value: true
+      note: >-
+        Only Stealth lets you pick entry and exit servers, and only on Windows. What it calls multi-hop on
+        Standard is an automatic fallback server.
+      sources: [product, tiers-2026]
+    obfuscation:
+      value: []
+      sources: [kb-website, kb-windows]
+    port_forwarding:
+      value: false
+      note: IPVanish, which runs on the same network, doesn't support it either.
+      sources: [kb-website, ipvanish-port-forwarding]
+    split_tunnel:
+      value: true
+      note: On Windows, for apps and websites.
+      sources: [kb-setup, kb-website]
+    blocking:
+      value: null
+      note: The Windows app has a Threat Protection setting, but PC Matic doesn't say what it blocks.
+      sources: [kb-windows, kb-stealth-disconnect]
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android, router]
+      note: >-
+        Routers get a WireGuard or OpenVPN config, and only on Stealth. The iOS app is still version 1.0 from
+        July 2023.
+      sources: [kb-install, kb-router, ios-lookup]
+    open_source:
+      value: none
+      sources: [eula]
+    telemetry:
+      value: null
+      note: >-
+        The VPN sends diagnostic data, and Google Play's label says diagnostics are shared with other
+        companies. Neither says whether you can turn it off.
+      sources: [privacy, play-data]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: null
+      grade: na
+      note: Only yearly plans are sold.
+      sources: [product]
+    best:
+      value: { amount: 2.5, currency: USD }
+      note: Standard, at $30 for the first year. Stealth, with every location, multi-hop and router configs, is $80.
+      sources: [product]
+    best_term: 12
+    renewal_increase:
+      value: 67
+      note: Standard renews at $50 a year, and Stealth at $100.
+      sources: [tiers-2026]
+    free_tier:
+      value: false
+      sources: [tiers-2026]
+    refund_days:
+      value: 30
+      note: First purchases only. Renewals and app store purchases aren't refunded.
+      sources: [refund]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        It promises to make you "anonymous" with "military-grade encryption", and calls itself the fastest
+        VPN in the world off an unnamed third party's test.
+      sources: [product]
+    affiliates:
+      value: true
+      sources: [affiliates]
+    review_sites:
+      value: false
+      note: Nothing ties PC Matic to one. Its network comes from WLVPN, part of Ziff Davis, which owns PCMag.
+      sources: [wlvpn, zd-10k-2025]
+    activism: false
+
+refs:
+  product:
+    url: https://www.pcmatic.com/vpn/
+    title: PC Matic VPN
+  vpn-2023:
+    url: https://web.archive.org/web/20230605130305/https://www.pcmatic.com/vpn/
+    title: PC Matic VPN page (June 2023, archived)
+  tiers-2026:
+    url: https://www.pcmatic.com/blog/introducing-pc-matics-new-tailored-vpn-options/
+    title: Introducing PC Matic's new tailored VPN options (July 2026)
+  privacy:
+    url: https://www.pcmatic.com/privacy/
+    title: PC Matic privacy policy (June 2026)
+  terms:
+    url: https://www.pcmatic.com/company/terms.asp
+    title: PC Matic terms and conditions (May 2025)
+  eula:
+    url: https://www.pcmatic.com/company/eula.asp
+    title: PC Matic end user licence agreement
+  refund:
+    url: https://www.pcmatic.com/company/refund-policy.asp
+    title: PC Matic cancellation and refund policy (May 2025)
+  about:
+    url: https://www.pcmatic.com/company/about.asp
+    title: About PC Matic
+  leadership:
+    url: https://www.pcmatic.com/company/leadership.asp
+    title: PC Matic leadership
+  affiliates:
+    url: https://www.pcmatic.com/company/affiliates.asp
+    title: PC Matic affiliate program
+  cart:
+    url: https://cart.pcmatic.com/?add_products=172
+    title: PC Matic store, Standard VPN checkout
+  status:
+    url: https://www.pcmatic.com/vpn/status.asp
+    title: PC Matic VPN status
+  status-js:
+    url: https://www.pcmatic.com/vpn/vpn-server-status.js
+    title: PC Matic VPN status page script, which reads status.wlvpn.com
+  kb-install:
+    url: https://knowledgebase.pcmatic.com/article/52-how-do-i-install-pc-matic-vpn
+    title: How do I install PC Matic VPN?
+  kb-setup:
+    url: https://knowledgebase.pcmatic.com/article/511-how-to-setup-and-install-pc-matic-vpn
+    title: Install and set up PC Matic VPN
+  kb-windows:
+    url: https://knowledgebase.pcmatic.com/article/53-how-do-i-use-the-pc-matic-vpn-for-windows
+    title: How do I use the PC Matic VPN for Windows?
+  kb-website:
+    url: https://knowledgebase.pcmatic.com/article/473-website-will-not-connect-when-using-vpn
+    title: Website will not connect when using VPN
+  kb-android:
+    url: https://knowledgebase.pcmatic.com/article/56-vpnandroid
+    title: How do I use the PC Matic VPN for Android?
+  kb-ios:
+    url: https://knowledgebase.pcmatic.com/article/55-how-do-i-use-the-pc-matic-vpn-for-ios
+    title: How do I use the PC Matic VPN for iOS?
+  kb-mac:
+    url: https://knowledgebase.pcmatic.com/article/54-install-setup-pc-matic-vpn-mac
+    title: Install and set up PC Matic VPN for Mac
+  kb-kill-switch:
+    url: https://knowledgebase.pcmatic.com/article/523-kill-switch
+    title: PC Matic VPN kill switch
+  kb-router:
+    url: https://knowledgebase.pcmatic.com/article/525-install-vpn-on-router-stealth-only
+    title: Install VPN on router (Stealth only)
+  kb-stealth-disconnect:
+    url: https://knowledgebase.pcmatic.com/article/527-stealth-vpn-disconnect-internet
+    title: Stealth VPN disconnects the internet
+  play:
+    url: https://play.google.com/store/apps/details?id=com.pcmatic.vpn
+    title: PC Matic VPN on Google Play
+  play-data:
+    url: https://play.google.com/store/apps/datasafety?id=com.pcmatic.vpn
+    title: PC Matic VPN, Google Play data safety
+  app-store:
+    url: https://apps.apple.com/us/app/pc-matic-vpn-for-ios/id6450320338
+    title: PC Matic VPN for iOS on the App Store
+  ios-lookup:
+    url: https://itunes.apple.com/lookup?id=6450320338&country=us
+    title: App Store record for PC Matic VPN for iOS (version 1.0, released July 2023)
+  apk:
+    url: https://apkpure.com/pc-matic-vpn/com.pcmatic.vpn
+    title: PC Matic VPN for Android 3.0.0.42, whose APK is built on WLVPN's SDK (com.wlvpn.consumervpn)
+  wlvpn:
+    url: https://wlvpn.com/about-wlvpn/
+    title: About WLVPN
+  wlvpn-home:
+    url: https://web.archive.org/web/20260711113903/https://wlvpn.com/
+    title: WLVPN homepage (July 2026, archived)
+  ipvanish-port-forwarding:
+    url: https://support.ipvanish.com/hc/en-us/articles/115002080173-Port-Forwarding
+    title: IPVanish help, Port Forwarding
+  zd-10k-2025:
+    url: https://www.sec.gov/Archives/edgar/data/1084048/000108404826000005/zd-20251231.htm
+    title: Ziff Davis, annual report on Form 10-K for 2025
