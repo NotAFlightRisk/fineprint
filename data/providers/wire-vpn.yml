@@ -41,11 +41,12 @@ criteria:
 
   jurisdiction:
     hq:
-      value: null
+      value: GB
+      evidence: claimed
       note: >-
-        Registered in the UK, but the director and controlling shareholder lives in China and the user agreement
-        is governed by the laws of the People's Republic of China.
-      sources: [companies-house-officers, user-agreement]
+        Its only company is registered in the UK, but the director and controlling shareholder lives in China and
+        the user agreement is governed by the laws of the People's Republic of China.
+      sources: [companies-house, companies-house-officers, user-agreement]
     entities:
       value: [GB]
       note: The registered office has moved several times in 2026, most recently to Bromley.
