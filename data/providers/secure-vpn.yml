@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: Secure VPN
 icon: secure-vpn.png
-checked: 2026-10-27
+checked: 2026-10-28
 
 criteria:
   identity:
@@ -48,20 +48,24 @@ criteria:
       sources: [privacy]
     dns:
       value: null
-      note: The policy only says it doesn't log VPN traffic.
-      sources: [privacy]
+      note: The policy only says it doesn't log VPN traffic. An older article on its site says it keeps no server logs at all.
+      sources: [privacy, no-logs-article]
     timestamps:
       value: null
-      note: It doesn't say whether it records when you connect.
-      sources: [privacy]
+      note: >-
+        The current policy doesn't say whether it records when you connect, though an older article on its site says
+        it keeps no server logs.
+      sources: [privacy, no-logs-article]
     bandwidth:
       value: null
       note: It doesn't say, though the free iOS version caps how much data you can use.
       sources: [privacy, app-store]
     source_ip:
       value: null
-      note: It doesn't say whether it logs your IP address. The policy collects "technical identifiers" without saying what they are.
-      sources: [privacy]
+      note: >-
+        The policy collects "technical identifiers" without saying what they are. An older article on its site says
+        it keeps no server logs, which the current policy doesn't repeat.
+      sources: [privacy, no-logs-article]
     proven: []
     policy: https://securevpn.com/?page=privacy_policy
 
@@ -85,19 +89,22 @@ criteria:
   security:
     protocols:
       value: [openvpn, other]
-      note: Other is IPsec. Both are for setting up routers and other devices by hand, and it doesn't say what the apps use.
-      sources: [faq]
+      note: Other is IPsec, which the Mac app uses. The Windows app uses OpenVPN, and both are offered for setting up other devices by hand.
+      sources: [faq, mac-app, windows-app]
     post_quantum:
       value: none
       note: Nothing is published about its key exchange.
       sources: [faq, home]
     kill_switch:
       value: null
-      note: It doesn't say whether the apps have one.
+      note: >-
+        An older article on its site says its apps block all traffic outside the tunnel, but neither desktop app has
+        a kill switch setting, and nothing says whether the phone apps have one.
+      sources: [leak-article, windows-app, mac-app]
     dns:
       value: null
-      note: It doesn't say whose DNS servers the apps use.
-      sources: [faq]
+      note: An older article on its site recommends using its DNS servers, but it doesn't say which ones the apps use.
+      sources: [faq, faster-article]
 
   infra:
     ram_only:
@@ -114,7 +121,8 @@ criteria:
       note: It doesn't publish a server count.
     countries:
       value: null
-      note: It doesn't publish a list of locations.
+      note: An article from around 2015 put its servers in six countries, but there's no current list of locations.
+      sources: [censorship-article, home]
 
   features:
     connections:
@@ -131,8 +139,9 @@ criteria:
       value: [windows, macos, ios, android]
       note: >-
         The apps look unmaintained: the iOS app was last updated in July 2021, the Windows and Mac downloads
-        date from March 2021, and the Android app was last updated in June 2024.
-      sources: [faq, app-store, play]
+        date from March 2021, and the Android app was last updated in June 2024. The Windows app still ships
+        OpenVPN 2.3.6 and OpenSSL 1.0.2 from early 2015.
+      sources: [faq, app-store, play, windows-app]
     open_source:
       value: none
       note: The terms forbid reverse engineering the apps.
@@ -159,7 +168,7 @@ criteria:
       sources: [pricing]
     renewal_increase:
       value: null
-      note: Plans are sold at a permanent "up to 62% off", and it doesn't say what they renew at.
+      note: The "up to 62% off" is the saving against the monthly price, and it doesn't say what plans renew at.
       sources: [pricing, terms]
     free_tier:
       value: true
@@ -219,3 +228,21 @@ refs:
   ttp-spot-check-2025:
     url: https://www.techtransparencyproject.org/articles/spot-check-apple-and-google-still-have-a-chinese-vpn-problem
     title: 'Tech Transparency Project, Spot Check: Apple and Google Still Have a Chinese VPN Problem (12 June 2025)'
+  windows-app:
+    url: https://securevpn.com/securevpn.exe
+    title: SecureVPN for Windows installer (March 2021)
+  mac-app:
+    url: https://securevpn.com/SecureVPN.pkg
+    title: SecureVPN for Mac installer, version 1.6 (March 2021)
+  no-logs-article:
+    url: https://securevpn.com/learn_more/Why_It_is_Essential_to_Your_Security_That_Your_VPN_Does_not_Keep_Server_Logs
+    title: Why It is Essential to Your Security That Your VPN Does not Keep Server Logs
+  leak-article:
+    url: https://securevpn.com/learn_more/Despite_VPN_Your_ISP_May_Still_Be_Spying_on_You
+    title: Despite VPN Your ISP May Still Be Spying on You
+  faster-article:
+    url: https://securevpn.com/learn_more/10_Ways_To_Make_Your_VPN_Faster
+    title: 10 Ways To Make Your VPN Faster
+  censorship-article:
+    url: https://securevpn.com/learn_more/Bypass_Internet_Censorship_with_Secure_VPN
+    title: Bypass Internet Censorship with Secure VPN
