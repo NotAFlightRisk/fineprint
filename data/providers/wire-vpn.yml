@@ -32,9 +32,11 @@ criteria:
     sister_brands:
       value: []
       note: >-
-        WEILAI sells no other apps. TTP found a second "Wirevpn" iOS app from freevpn Ltd in Belize with an
-        identical privacy policy; that developer account now sells iSharkVPN.
-      sources: [app-store-developer, play-developer, ttp-2025]
+        WEILAI sells no other apps. The WireVPN site's iOS download link and most of its blog are for iSharkVPN,
+        sold by ROCKET NETWORK TECHNOLOGY CO., LTD, and TTP found a second "Wirevpn" iOS app with an identical
+        privacy policy on a developer account that now sells iSharkVPN, but no register ties iSharkVPN to WEILAI's
+        owner.
+      sources: [app-store-developer, play-developer, ttp-2025, downloads, ishark-lookup]
     acquisitions:
       value: []
       sources: [app-store-lookup, companies-house]
@@ -81,7 +83,16 @@ criteria:
     report: none
     canary: none
     bug_bounty: false
-    incidents: []
+    incidents:
+      value:
+        - date: 2026-07-07
+          summary: >-
+            Infoblox reported that WireVPN's Windows builds, signed with WEILAI's certificate and talking to
+            WireVPN's own domains, behave like residential proxy software, turning PCs into exit nodes for other
+            people's traffic, and tied them to a malware operation running since 2022. WEILAI denied it and said
+            the files Infoblox examined aren't official WireVPN software.
+          handled: poorly
+          source: infoblox
 
   account:
     email:
@@ -90,22 +101,28 @@ criteria:
       sources: [privacy]
     personal_data: []
     payment:
-      value: [app_store]
-      sources: [privacy]
+      value: []
+      note: Neither app sells anything, though the policy says a premium subscription would go through Apple or Google.
+      sources: [app-store, privacy]
 
   security:
     protocols:
-      value: null
-      note: It doesn't say which protocols the apps use.
+      value: [proprietary]
+      note: >-
+        Its own closed relay protocol, AES with an XOR layer behind a tun2socks tunnel on Android and a traffic
+        redirecting driver on Windows. Nothing about it is published.
+      sources: [apk, downloads]
     post_quantum:
       value: none
       note: Nothing is published about its key exchange.
     kill_switch:
-      value: null
-      note: It doesn't mention a kill switch.
+      value: none
+      note: Neither the Android nor the Windows app has one.
+      sources: [apk, downloads]
     dns:
       value: null
-      note: It doesn't say whose DNS servers the apps use.
+      note: The app takes its DNS servers from the VPN server's config, with Google's 8.8.8.8 built in as well.
+      sources: [apk]
 
   infra:
     ram_only:
@@ -120,70 +137,83 @@ criteria:
     servers:
       value: 4600
       evidence: claimed
-      sources: [home]
+      note: Other pages on its site claim more than 3,600, and over 100.
+      sources: [home, android-page, free]
     countries:
       value: 76
       evidence: claimed
-      sources: [home]
+      note: Other pages on its site claim more than 100 countries, and 6.
+      sources: [home, android-page, free]
 
   features:
     connections:
-      value: unlimited
-      evidence: claimed
-      sources: [home]
+      value: null
+      note: The homepage says unlimited devices, but the user agreement says one account can't be used on several computers at once.
+      sources: [home, agreement]
     multihop: false
     obfuscation:
       value: null
-      note: It doesn't say whether it disguises VPN traffic.
+      note: There's no setting for it, and its own relay protocol isn't published, so whether it's built to get past blocks isn't clear.
+      sources: [apk]
     port_forwarding: false
     split_tunnel:
-      value: null
-      note: It doesn't say.
+      value: false
+      note: >-
+        There's no setting for it, though the app takes lists of domains and IPs to route differently from its
+        servers, one of them named china_domain_list.
+      sources: [apk]
     blocking:
-      value: null
-      note: It doesn't mention ad or tracker blocking.
+      value: []
+      sources: [apk]
 
   clients:
     platforms:
-      value: [ios, android]
-      note: The website lists a Windows app but links to no download.
-      sources: [app-store, play, home]
+      value: [windows, ios, android]
+      note: The site's macOS download link is dead, and its iOS link goes to iSharkVPN rather than WireVPN.
+      sources: [app-store, play, windows, downloads]
     open_source: none
     telemetry:
-      value: null
+      value: forced
       note: >-
-        The policy says it collects device model, OS, language, region, app version and crash reports, and that
-        all third-party SDKs including Firebase and Google Mobile Ads are gone, while the Play listing still says
-        it contains ads.
-      sources: [privacy, play]
+        The policy says it collects device model, OS, language, region, app version and crash reports, and Android
+        version 3.6.0 bundles Firebase Crashlytics and AppsFlyer with no setting to turn them off.
+      sources: [privacy, apk]
     fdroid: false
 
   pricing:
     monthly:
-      value: null
-      note: It doesn't publish prices outside the apps.
+      value: { amount: 0, currency: USD }
+      note: Free and paid for by ads, with no in-app purchases in either app.
+      sources: [app-store, play]
     best:
-      value: null
-      note: It doesn't publish prices outside the apps.
+      value: { amount: 0, currency: USD }
+      sources: [app-store]
     best_term:
       value: null
+      grade: na
+      note: It's free.
+      sources: [play]
     renewal_increase:
-      value: null
+      value: 0
+      note: Nothing renews.
     free_tier:
       value: true
       sources: [app-store, play]
     refund_days:
-      value: 0
-      note: The user agreement says no refund is given once the product is sold. App Store refunds are up to Apple.
-      sources: [user-agreement]
+      value: null
+      grade: na
+      note: It's free, though the user agreement says nothing sold is refunded.
+      sources: [play, user-agreement]
 
   ethics:
     misleading_claims:
       value: true
       note: >-
-        The Play description promises "a zero advertising application environment" on a listing marked as
-        containing ads, and stuffs in rivals' names as keywords.
-      sources: [play]
+        The policy says every third-party SDK including Firebase and Google Mobile Ads has been removed and the app
+        collects no data, but Android version 3.6.0 still bundles Google Mobile Ads, Firebase and AppsFlyer. The
+        Play listing promises "a zero advertising application environment" while marked as containing ads, and
+        its site reuses PIA's and iTop VPN's marketing copy.
+      sources: [privacy, apk, play, servers, free]
     affiliates: false
     review_sites: false
     activism: false
@@ -231,9 +261,36 @@ refs:
   companies-house-filings:
     url: https://find-and-update.company-information.service.gov.uk/company/13720448/filing-history
     title: WEILAI NETWORK TECHNOLOGY CO., LIMITED filing history, Companies House
+  apk:
+    url: https://apkpure.net/wirevpn-fast-unlimited-proxy/com.wirevpn.freevpn
+    title: wirevpn - Fast Unlimited Proxy 3.6.0 for Android (APK)
+  downloads:
+    url: https://www.wirevpn.app/web_v1/download
+    title: WireVPN download links (Windows 1.0.1.6, Android, iOS, macOS)
+  windows:
+    url: https://www.wirevpn.app/product/windows
+    title: Get Wire VPN for Windows PC
+  ishark-lookup:
+    url: https://itunes.apple.com/lookup?id=6443781149&country=us
+    title: iSharkVPN - Secure & Fast VPN, App Store lookup record
+  android-page:
+    url: https://www.wirevpn.app/product/android
+    title: Get Wire VPN for Android
+  servers:
+    url: https://www.wirevpn.app/servers
+    title: Wire VPN servers
+  free:
+    url: https://www.wirevpn.app/free
+    title: WIRE VPN free VPN page
   play-developer:
     url: https://play.google.com/store/apps/developer?id=WIRE+LTD.
     title: Android apps by WIRE LTD. on Google Play
   ttp-2025:
     url: https://www.techtransparencyproject.org/articles/apple-offers-apps-with-ties-to-chinese-military
     title: Tech Transparency Project, Apple Offers Apps With Ties to Chinese Military (1 April 2025)
+  infoblox:
+    url: https://www.infoblox.com/blog/threat-intelligence/fake-installers-fake-reviews-fake-services-real-proxies-real-victims/
+    title: Infoblox, Fake installers, fake reviews, fake services, real proxies, real victims (July 2026)
+  agreement:
+    url: https://api.wirevpn.app/files/user_agreement.html
+    title: WireVPN user agreement
