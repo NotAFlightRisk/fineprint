@@ -17,8 +17,9 @@ criteria:
       value: null
       note: >-
         ActMobile Networks says it runs the FreeVPN.org network behind the apps and licenses it to partners, and its
-        Dash Free VPN app carries the same version numbers. Who owns Free VPN LLC isn't published.
-      sources: [actmobile, dash-app-store, app-store]
+        Dash Free VPN app carries the same version numbers. Free VPN LLC gives ActMobile's Carson City head office as its
+        address, but who owns it isn't published.
+      sources: [actmobile, actmobile-about, play, dash-app-store, app-store]
     founded:
       value: 2015
       sources: [about, trust]
@@ -111,9 +112,9 @@ criteria:
       note: A closed-source VPN core written in C, with AES-256-GCM tunnels, shared by the desktop and mobile apps.
       sources: [cli]
     post_quantum:
-      value: null
-      note: It says nothing about its key exchange.
-      sources: [cli-skill]
+      value: none
+      note: The VPN core, which the desktop and mobile apps share, is built on OpenSSL 1.1.1 with no post-quantum algorithms.
+      sources: [cli, cli-deb]
     kill_switch:
       value: app
       evidence: claimed
@@ -137,9 +138,10 @@ criteria:
       note: Google Play advertises "thousands of virtual locations" without saying which ones, or where they really are.
       sources: [play]
     servers:
-      value: null
-      note: Its pages claim anywhere from 800+ to "1000's" of servers.
-      sources: [play, home]
+      value: 1000
+      evidence: claimed
+      note: Claimed as 1,000+ on the CLI page and the iOS listing, and as 800+ on Google Play.
+      sources: [cli, app-store, play]
     countries:
       value: 40
       evidence: claimed
@@ -179,8 +181,9 @@ criteria:
       value: null
       note: >-
         Both store listings say no data is collected, but the policy says the free tier carries AdMob and ironSource ad
-        SDKs that process device and location data. Nothing says you can turn this off.
-      sources: [play, app-store, privacy]
+        SDKs that process device and location data, and the desktop VPN core reports connection successes and failures.
+        Nothing says you can turn either off.
+      sources: [play, app-store, privacy, cli-deb]
     fdroid: false
 
   pricing:
@@ -210,9 +213,9 @@ criteria:
     misleading_claims:
       value: true
       note: >-
-        The iOS listing promises "100% Privacy" and that your IP "stays hidden with zero leaks", and freevpn.org says its
-        tunnel "cannot be hacked" and "triple-encrypts" your data.
-      sources: [app-store, org-home]
+        The iOS listing promises "100% Privacy", that your IP "stays hidden with zero leaks" and "no caps on time", though
+        free users earn time by watching ads. freevpn.org says its tunnel "cannot be hacked" and "triple-encrypts" your data.
+      sources: [app-store, trust, org-home]
     affiliates: false
     review_sites: false
     activism: false
@@ -272,6 +275,12 @@ refs:
   actmobile:
     url: https://actmobile.com/
     title: ActMobile Networks
+  actmobile-about:
+    url: https://actmobile.com/about.html
+    title: ActMobile Networks, About Us (head office address)
+  cli-deb:
+    url: https://freevpnapp.org/downloads/freevpn-0.3.6-linux-amd64.deb
+    title: Free VPN CLI 0.3.6 for Linux, direct download
   databreaches:
     url: https://web.archive.org/web/20230131105735/https://www.databreaches.net/shoot-the-messenger-monday-edition-actmobile-threatens-researcher-whose-only-sin-was-trying-to-let-them-know-they-are-leaking-data/
     title: 'DataBreaches.net, Shoot-the-Messenger, Monday edition: ActMobile threatens researcher (November 2021, archived)'
