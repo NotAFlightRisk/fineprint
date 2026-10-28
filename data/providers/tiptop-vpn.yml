@@ -1,0 +1,241 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: TipTop VPN
+icon: tiptop-vpn.png
+checked: 2026-10-28
+
+criteria:
+  identity:
+    website: https://tiptop-vpn.com
+    legal_entity:
+      value: TipTopNet Limited
+      note: Named as the developer and seller on Google Play and the App Store. The terms only name the brand.
+      sources: [play, app-store, terms]
+    owner:
+      value: null
+      note: Who owns TipTopNet Limited isn't public.
+      sources: [play, app-store]
+    founded:
+      value: 2023
+      note: The site's footer says 2022, but its terms date from June 2023 and the iOS app from September 2023.
+      sources: [terms, home, app-store-lookup]
+    team:
+      value: anonymous
+      sources: [play-dev, app-store]
+    sister_brands:
+      value: []
+      note: Its other apps on the same accounts are a quit-smoking app and a crossword game.
+      sources: [play-dev, app-store-dev]
+    acquisitions:
+      value: []
+      sources: [play-2024]
+
+  jurisdiction:
+    hq:
+      value: HK
+      note: Both app store listings give a Hong Kong address, and the terms are governed by Hong Kong law.
+      sources: [play, app-store, terms]
+    entities:
+      value: [HK]
+      sources: [play, app-store]
+
+  logging:
+    traffic:
+      value: 'yes'
+      evidence: claimed
+      note: >-
+        The privacy policy says it may collect your internet activity for statistics and analytics, and keeps data as
+        long as it needs it. The homepage and FAQ promise a zero-log policy.
+      sources: [policy, home, support]
+    dns:
+      value: null
+      note: The policy doesn't mention DNS, but it may collect your internet activity.
+      sources: [policy]
+    timestamps:
+      value: 'yes'
+      evidence: claimed
+      note: The privacy policy says it may collect connection timestamps for statistics and analytics, with no time limit.
+      sources: [policy]
+    bandwidth:
+      value: 'yes'
+      evidence: claimed
+      note: The privacy policy says it may collect your bandwidth use, with no time limit.
+      sources: [policy]
+    source_ip:
+      value: 'yes'
+      evidence: claimed
+      note: The privacy policy says it may collect your IP address, with no time limit.
+      sources: [policy]
+    proven: []
+    policy: https://tiptop-vpn.com/terms/#privacy-policy
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: optional
+      note: The apps work without an account, and premium can be bought against the app's account ID. Signing in on the site takes an email.
+      sources: [app-store, buy, cabinet]
+    personal_data:
+      value: []
+      note: The privacy policy says it may collect your name when you register, but signing up only asks for an email.
+      sources: [policy, cabinet]
+    payment:
+      value: [card, app_store, other_crypto]
+      note: Crypto includes USDT. Also Google Pay, Apple Pay and e-wallets.
+      sources: [price, support]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn, ikev2, proprietary]
+      evidence: claimed
+      note: The app listings name OpenVPN, IKEv2 and WireGuard, and the locations page lists OpenVPN and its own protocol, which it doesn't describe.
+      sources: [play, app-store, locations]
+    post_quantum: none
+    kill_switch:
+      value: app
+      evidence: claimed
+      note: The site lists a kill switch among the app's settings, without saying how it works.
+      sources: [home]
+    dns:
+      value: null
+      note: The locations page ticks "Private DNS" for every location without saying whose resolvers they are.
+      sources: [locations]
+
+  infra:
+    ram_only: null
+    hosting: null
+    virtual_locations: null
+    servers:
+      value: null
+      note: The locations page says 125 servers, the homepage says 320.
+      sources: [locations, home]
+    countries:
+      value: null
+      note: The locations page says 20 countries but lists 17, including Russia. The homepage says 57.
+      sources: [locations, home]
+
+  features:
+    connections:
+      value: 5
+      sources: [support]
+    multihop: false
+    obfuscation:
+      value: null
+      note: It has its own protocol, but doesn't say whether it disguises VPN traffic.
+      sources: [locations]
+    port_forwarding: false
+    split_tunnel:
+      value: true
+      sources: [play]
+    blocking: []
+
+  clients:
+    platforms:
+      value: [ios, android]
+      note: Windows, macOS, browser and TV apps are listed as "coming soon".
+      sources: [home]
+    open_source: none
+    telemetry:
+      value: null
+      note: >-
+        The Android app carries Firebase Analytics, Crashlytics, Amplitude, AppMetrica and myTracker, and the Play listing
+        declares app interactions shared for analytics. Nothing says whether any of it can be turned off.
+      sources: [exodus, play-data-safety]
+    trackers:
+      value: 24
+      note: Most of them are ad networks.
+      sources: [exodus]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 9.9, currency: USD }
+      sources: [price]
+    best:
+      value: { amount: 2.9, currency: USD }
+      note: $104.40 for three years. In-app prices on iOS differ.
+      sources: [price, app-store]
+    best_term:
+      value: 36
+      sources: [price]
+    renewal_increase:
+      value: null
+      note: Nothing says what the longer plans renew at.
+      sources: [price, account-billing]
+    free_tier:
+      value: true
+      note: Limited speed and a handful of locations, with ads on Android.
+      sources: [home, play]
+    refund_days:
+      value: null
+      note: The terms say fees aren't refundable except under a refund policy, which isn't published. There's a 7-day free trial when paying by card, Google Pay or Apple Pay.
+      sources: [account-billing, price]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        The Play listing promises "no advertising" and a "VPN without limits and ads" for an app Google Play marks as
+        containing ads. The site says "Be completely anonymous" while the policy may collect your IP and activity.
+      sources: [play, exodus, home, policy]
+    affiliates: false
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://tiptop-vpn.com/
+    title: TipTop VPN
+  price:
+    url: https://tiptop-vpn.com/price/
+    title: VPN Cost
+  locations:
+    url: https://tiptop-vpn.com/locations/
+    title: Server Locations
+  support:
+    url: https://tiptop-vpn.com/support/
+    title: Help Center
+  buy:
+    url: https://tiptop-vpn.com/buy/
+    title: Оплата премиума (premium payment)
+  cabinet:
+    url: https://tiptop-vpn.com/cabinet/
+    title: Authorization
+  terms:
+    url: https://tiptop-vpn.com/terms/#terms-conditions
+    title: Условия и положения (terms and conditions, in Russian)
+  policy:
+    url: https://tiptop-vpn.com/terms/#privacy-policy
+    title: Политика конфиденциальности (privacy policy, in Russian)
+  account-billing:
+    url: https://tiptop-vpn.com/terms/#account-billing
+    title: Аккаунт и оплата (account and payment policy, in Russian)
+  play:
+    url: https://play.google.com/store/apps/details?id=com.free.tiptop.vpn.proxy
+    title: VPN proxy - TipTop VPN on Google Play
+  play-data-safety:
+    url: https://play.google.com/store/apps/datasafety?id=com.free.tiptop.vpn.proxy
+    title: VPN proxy - TipTop VPN data safety on Google Play
+  play-dev:
+    url: https://play.google.com/store/apps/dev?id=5475277348715182273
+    title: TipTopNet on Google Play
+  play-2024:
+    url: https://web.archive.org/web/20240225091908/https://play.google.com/store/apps/details?id=com.free.tiptop.vpn.proxy
+    title: VPN proxy - TipTop VPN on Google Play (Wayback, February 2024)
+  app-store:
+    url: https://apps.apple.com/us/app/vpn-proxy-tiptop-vpn/id6454190738
+    title: VPN proxy - TipTop VPN on the App Store
+  app-store-dev:
+    url: https://apps.apple.com/us/developer/free-vpn-network/id1699646653
+    title: Free VPN Network on the App Store
+  app-store-lookup:
+    url: https://itunes.apple.com/lookup?id=6454190738
+    title: App Store lookup for VPN proxy - TipTop VPN
+  exodus:
+    url: https://web.archive.org/web/20260211135436/https://reports.exodus-privacy.eu.org/en/reports/com.free.tiptop.vpn.proxy/latest/
+    title: Exodus Privacy report for TipTop VPN 1.036 (Wayback)
