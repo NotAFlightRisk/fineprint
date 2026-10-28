@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: Easy Hide IP
 icon: easy-hide-ip.png
-checked: 2026-10-27
+checked: 2026-10-28
 
 criteria:
   identity:
@@ -19,11 +19,11 @@ criteria:
       note: Nothing published says who owns Edelino Commerce.
       sources: [edelino-2019]
     founded:
-      value: null
+      value: 2013
       note: >-
-        Easy Hide IP started in 2007 as IP-hiding proxy software, and its site had added a VPN page by January
-        2014. When the VPN itself launched isn't published.
-      sources: [wayback-2007, wayback-2014]
+        Easy Hide IP started in 2007 as IP-hiding proxy software. Its VPN service first appears on its site in
+        February 2013, selling L2TP and PPTP plans.
+      sources: [wayback-2007, home-2013, vpn-2013]
     team:
       value: anonymous
       note: The canary is signed by a "Wolf Blitzer", CTO of Easy-Hide-IP Group, and no one else is named.
@@ -32,8 +32,9 @@ criteria:
       value: [Anonine, BoxPN, FrootVPN, VPNTunnel]
       note: >-
         Anonine, BoxPN and FrootVPN name Edelino Commerce Inc. on their sites, and it sells VPNTunnel's iOS app.
-        Its canary was signed on the same day as FrootVPN's and VPNTunnel's.
-      sources: [anonine, boxpn, frootvpn, vpntunnel, vpntunnel-app, canary, frootvpn-canary]
+        Its canary was signed on the same day as FrootVPN's and VPNTunnel's, and its Windows client carries
+        Anonine, BoxPN and VPNTunnel themes.
+      sources: [anonine, boxpn, frootvpn, vpntunnel, vpntunnel-app, canary, frootvpn-canary, windows-download]
     acquisitions:
       value: null
       note: >-
@@ -129,9 +130,11 @@ criteria:
       value: none
       sources: [protocols-help]
     kill_switch:
-      value: null
-      note: It doesn't say whether the Windows client has one.
-      sources: [windows-vpn, windows-client]
+      value: app
+      note: >-
+        The Windows client can stop all traffic, or just chosen programs, when the VPN drops unexpectedly. Manual
+        setups on other devices have none.
+      sources: [windows-download]
     dns:
       value: null
       note: It doesn't say which DNS servers answer inside the tunnel.
@@ -152,12 +155,14 @@ criteria:
       sources: [network]
     servers:
       value: 150
-      note: It says "more than 150 VPN servers". Its server status page listed none on 2026-10-27.
+      note: It says "more than 150 VPN servers". Its server list shows 45 servers at 35 locations.
       sources: [home, server-status]
     countries:
-      value: 26
-      note: It says "more than 26 countries". The order page says over 32, and the Windows page lists 24.
-      sources: [home, order, windows-vpn]
+      value: 27
+      note: >-
+        Its server list covers 27 countries. The home page says more than 26, the order page over 32, and the
+        Windows page lists 24, some of them missing from the server list.
+      sources: [server-status, home, order, windows-vpn]
 
   features:
     connections:
@@ -175,9 +180,9 @@ criteria:
       value: null
       note: It doesn't say.
     split_tunnel:
-      value: null
-      note: It doesn't say whether the Windows client can leave some apps outside the VPN.
-      sources: [windows-vpn]
+      value: true
+      note: Only in the Windows client's Classic mode, which lets you pick which programs get redirected.
+      sources: [faq, windows-download]
     blocking:
       value: []
       sources: [home]
@@ -324,9 +329,6 @@ refs:
   android-openvpn:
     url: https://help.easy-hide-ip.com/support/solutions/articles/5000745432-easy-hide-ip-android-openvpn-connect-manual-configuration-instructions
     title: Android, OpenVPN Connect manual configuration instructions
-  windows-client:
-    url: https://help.easy-hide-ip.com/support/solutions/articles/5000707067-easy-hide-ip-windows-client-installation-instructions
-    title: Easy-Hide-IP Windows client, installation instructions
   mac-help:
     url: https://help.easy-hide-ip.com/support/solutions/articles/5000701507-is-there-a-apple-mac-version-of-easy-hide-ip-
     title: Is there an Apple Mac version of Easy-Hide-IP?
@@ -360,9 +362,12 @@ refs:
   wayback-2007:
     url: https://web.archive.org/web/20070626114612/http://www.easy-hide-ip.com/
     title: easy-hide-ip.com, archived June 2007
-  wayback-2014:
-    url: https://web.archive.org/web/20140104194130/http://www.easy-hide-ip.com/
-    title: easy-hide-ip.com, archived January 2014
+  home-2013:
+    url: https://web.archive.org/web/20130224001051/http://www.easy-hide-ip.com/
+    title: easy-hide-ip.com, archived February 2013
+  vpn-2013:
+    url: https://web.archive.org/web/20130302132338/http://easy-hide-ip.com/vpn
+    title: Easy Hide IP VPN service page, archived March 2013
   wayback-2015:
     url: https://web.archive.org/web/20150104225607/https://easy-hide-ip.com/
     title: easy-hide-ip.com, archived January 2015
