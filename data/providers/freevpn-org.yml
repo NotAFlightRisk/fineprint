@@ -1,0 +1,280 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Free VPN .org
+icon: freevpn-org.png
+checked: 2026-10-28
+
+criteria:
+  identity:
+    website:
+      value: https://freevpnapp.org
+      note: The apps are sold as Free VPN by Free VPN .org. freevpn.org itself now only pitches the network to partners.
+      sources: [home, org-home]
+    legal_entity:
+      value: Free VPN LLC
+      note: The terms name no company. The privacy policy, Trust Center and both app stores name Free VPN LLC, with a Carson City, Nevada address on Google Play.
+      sources: [privacy, terms, trust, play, app-store]
+    owner:
+      value: null
+      note: >-
+        ActMobile Networks says it runs the FreeVPN.org network behind the apps and licenses it to partners, and its
+        Dash Free VPN app carries the same version numbers. Who owns Free VPN LLC isn't published.
+      sources: [actmobile, dash-app-store, app-store]
+    founded:
+      value: 2015
+      sources: [about, trust]
+    team:
+      value: anonymous
+      sources: [about, trust]
+    sister_brands:
+      value: [VPN Pro, Dash Free VPN]
+      note: >-
+        VPN Pro - for Private Browsing is also sold by Free VPN LLC. Dash Free VPN is ActMobile's own app on the same
+        network, and the two companies' ownership link isn't public.
+      sources: [vpn-pro-app-store, dash-app-store, actmobile]
+    acquisitions:
+      value: null
+      note: No sale is on record, but who owns the company isn't public.
+
+  jurisdiction:
+    hq:
+      value: US
+      note: Google Play gives an address in Carson City, Nevada.
+      sources: [play]
+    entities:
+      value: [US]
+      sources: [play]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [privacy]
+    dns:
+      value: none
+      evidence: claimed
+      note: Stated on the CLI page, which uses the same network as the apps.
+      sources: [cli, privacy]
+    timestamps:
+      value: null
+      note: >-
+        The policy says it never stores connection history or metadata, while the CLI page says it sees a device ID
+        and "standard VPN flow metadata" without saying what that holds.
+      sources: [privacy, cli]
+    bandwidth:
+      value: null
+      note: It doesn't say whether data use is recorded.
+      sources: [privacy]
+    source_ip:
+      value: null
+      note: >-
+        The policy says it keeps no metadata, but a 2021 database a researcher attributed to the network's operator
+        held users' IP addresses while the policy of the day said nothing at all was collected.
+      sources: [privacy, org-privacy, hibp]
+    proven: []
+    policy: https://freevpnapp.org/privacy-policy/
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty:
+      value: false
+      note: Security reports go to the support address, with no reward offered.
+      sources: [trust, security-txt]
+    incidents:
+      value:
+        - date: 2021-10-08
+          summary: >-
+            A researcher found an open database he attributed to ActMobile, which runs the FreeVPN.org network and
+            Dash VPN, holding 1.6 million email addresses, password hashes and IP addresses. ActMobile denied it was
+            theirs and warned him it would act if he wrote about it, and the data was leaked on a hacking forum.
+          handled: poorly
+          source: databreaches
+      sources: [databreaches, hibp]
+
+  account:
+    email:
+      value: optional
+      note: >-
+        The apps need no account. Desktop plans go through Stripe Checkout, and moving one to a new device emails a
+        code to the billing address.
+      sources: [faq, cli-skill]
+    personal_data: []
+    payment:
+      value: [card, app_store]
+      note: Card payments on desktop are handled by Stripe.
+      sources: [cli-skill, app-store]
+
+  security:
+    protocols:
+      value: [proprietary]
+      note: A closed-source VPN core written in C, with AES-256-GCM tunnels, shared by the desktop and mobile apps.
+      sources: [cli]
+    post_quantum:
+      value: null
+      note: It says nothing about its key exchange.
+      sources: [cli-skill]
+    kill_switch:
+      value: app
+      evidence: claimed
+      note: New in the latest Android release, alongside support for Android's always-on VPN. Nothing says the other apps have one.
+      sources: [play]
+    dns:
+      value: third_party
+      note: The CLI and desktop app use Cloudflare's 1.1.1.1 by default. It doesn't say what the mobile apps use.
+      sources: [cli-skill]
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say how its servers are run.
+    hosting:
+      value: null
+      note: The network is run by ActMobile Networks, which doesn't say whether it owns or rents the servers.
+      sources: [actmobile]
+    virtual_locations:
+      value: null
+      note: Google Play advertises "thousands of virtual locations" without saying which ones, or where they really are.
+      sources: [play]
+    servers:
+      value: null
+      note: Its pages claim anywhere from 800+ to "1000's" of servers.
+      sources: [play, home]
+    countries:
+      value: 40
+      evidence: claimed
+      note: Claimed as 40+ on the iOS listing. The apps show regions rather than countries.
+      sources: [app-store]
+
+  features:
+    connections:
+      value: 1
+      note: A paid plan covers the one device it was bought on, and the free apps work on any number.
+      sources: [faq, cli-skill]
+    multihop: false
+    obfuscation:
+      value: null
+      note: It claims to connect through firewalls and blocked networks, without saying how.
+      sources: [org-home]
+    port_forwarding: false
+    split_tunnel:
+      value: true
+      note: Android only, by app.
+      sources: [home, play]
+    blocking:
+      value: [ads, trackers]
+      evidence: claimed
+      note: DNS-based, and a paid feature, though the CLI page says free users get it too.
+      sources: [cli, cli-skill, adblock]
+
+  clients:
+    platforms:
+      value: [windows, macos, linux_gui, linux_cli, ios, android]
+      sources: [downloads, cli-skill]
+    open_source:
+      value: none
+      note: The terms forbid reverse engineering, and the VPN core is closed. It says the CLI wrapper will be opened up later.
+      sources: [terms, cli]
+    telemetry:
+      value: null
+      note: >-
+        Both store listings say no data is collected, but the policy says the free tier carries AdMob and ironSource ad
+        SDKs that process device and location data. Nothing says you can turn this off.
+      sources: [play, app-store, privacy]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 21.99, currency: USD }
+      note: Desktop price. In-app it's $29.89 a month on the US App Store.
+      sources: [cli, app-store]
+    best:
+      value: { amount: 8.25, currency: USD }
+      note: $99 a year on desktop, or $104.89 a year in the iOS app.
+      sources: [cli, app-store]
+    best_term: 12
+    renewal_increase:
+      value: 0
+      note: Plans are sold at a flat price with no intro discount.
+      sources: [cli]
+    free_tier:
+      value: true
+      note: The mobile apps earn VPN time by watching ads. The CLI gives 30-minute sessions with a 3-minute break.
+      sources: [home, trust, cli-skill]
+    refund_days:
+      value: null
+      note: The terms say nothing about refunds.
+      sources: [terms]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        The iOS listing promises "100% Privacy" and that your IP "stays hidden with zero leaks", and freevpn.org says its
+        tunnel "cannot be hacked" and "triple-encrypts" your data.
+      sources: [app-store, org-home]
+    affiliates: false
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://freevpnapp.org/
+    title: Free VPN for iPhone, Android, Windows, Mac & Linux
+  org-home:
+    url: https://www.freevpn.org/
+    title: Free VPN .org Technology
+  about:
+    url: https://freevpnapp.org/about/
+    title: About Free VPN LLC
+  trust:
+    url: https://freevpnapp.org/trust/
+    title: Free VPN Trust Center (last reviewed 15 October 2026)
+  security-txt:
+    url: https://freevpnapp.org/.well-known/security.txt
+    title: Free VPN security.txt
+  privacy:
+    url: https://freevpnapp.org/privacy-policy/
+    title: Free VPN Privacy Policy (last reviewed 21 September 2026)
+  org-privacy:
+    url: https://www.freevpn.org/privacy-policy/
+    title: Free VPN .org Privacy Policy (last updated 9 August 2019)
+  terms:
+    url: https://freevpnapp.org/terms-of-use/
+    title: Free VPN Terms of Use (last updated 30 March 2025)
+  faq:
+    url: https://freevpnapp.org/faq/
+    title: Free VPN FAQ
+  downloads:
+    url: https://freevpnapp.org/downloads/
+    title: Download Free VPN for iPhone, Android, Windows, Mac & Linux
+  adblock:
+    url: https://freevpnapp.org/adblock/
+    title: VPN Ad Block and Tracker Protection
+  cli:
+    url: https://freevpnapp.org/cli/
+    title: Free VPN CLI, with pricing and FAQ
+  cli-skill:
+    url: https://freevpnapp.org/cli/SKILL.md
+    title: Free VPN CLI agent skill reference
+  play:
+    url: https://play.google.com/store/apps/details?id=org.freevpn&hl=en
+    title: Free VPN by Free VPN .org on Google Play
+  app-store:
+    url: https://apps.apple.com/us/app/free-vpn-by-free-vpn-org/id1050171910
+    title: Free VPN by Free VPN .org on the App Store (US)
+  vpn-pro-app-store:
+    url: https://apps.apple.com/us/app/vpn-pro-for-private-browsing/id1120097144
+    title: VPN Pro - for Private Browsing on the App Store (US)
+  dash-app-store:
+    url: https://apps.apple.com/us/app/dash-free-vpn-fast-secure/id570036360
+    title: Dash Free VPN on the App Store (US), sold by ActMobile
+  actmobile:
+    url: https://actmobile.com/
+    title: ActMobile Networks
+  databreaches:
+    url: https://web.archive.org/web/20230131105735/https://www.databreaches.net/shoot-the-messenger-monday-edition-actmobile-threatens-researcher-whose-only-sin-was-trying-to-let-them-know-they-are-leaking-data/
+    title: 'DataBreaches.net, Shoot-the-Messenger, Monday edition: ActMobile threatens researcher (November 2021, archived)'
+  hibp:
+    url: https://haveibeenpwned.com/Breach/ActMobile
+    title: Have I Been Pwned, ActMobile breach (unverified)
