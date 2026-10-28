@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: BTGuard
 icon: btguard.png
-checked: 2026-10-27
+checked: 2026-10-28
 
 criteria:
   identity:
@@ -119,8 +119,8 @@ criteria:
       sources: [network]
     hosting:
       value: null
-      note: Netcrawled LLC is itself a hosting company, but which servers it owns isn't stated.
-      sources: [network, netcrawled]
+      note: Netcrawled LLC is itself a hosting company, but servers such as ca1-1.btguard.com sit on other firms' networks and whether it owns any hardware isn't stated.
+      sources: [network, netcrawled, pf-guide, ipinfo-ca1]
     virtual_locations:
       value: null
       note: It doesn't say whether any locations are virtual.
@@ -146,7 +146,7 @@ criteria:
       sources: [included, network]
     port_forwarding:
       value: true
-      sources: [included, android-app]
+      sources: [included, android-app, pf-guide]
     split_tunnel:
       value: true
       sources: [included, android-app]
@@ -172,9 +172,9 @@ criteria:
 
   pricing:
     monthly:
-      value: null
-      note: Only a starting price is public; the plan lengths and monthly price show after you create an account.
-      sources: [home]
+      value: { amount: 9.99, currency: USD }
+      note: The App Store price; the website shows its plan prices only after you create an account.
+      sources: [appstore]
     best:
       value: { amount: 5.83, currency: USD }
       note: The lowest per-month price it advertises, on a plan length it doesn't state.
@@ -264,3 +264,9 @@ refs:
   affiliates:
     url: https://btguard.com/affiliate/
     title: BTGuard affiliate programme
+  pf-guide:
+    url: https://btguard.com/install/view/wireguard-port-forwarding/
+    title: Port Forwarding - WireGuard Guide
+  ipinfo-ca1:
+    url: https://ipinfo.io/172.86.185.66
+    title: 172.86.185.66 (ca1-1.btguard.com) on IPinfo
