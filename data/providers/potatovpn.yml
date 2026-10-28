@@ -1,0 +1,272 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: PotatoVPN
+icon: potatovpn.png
+checked: 2026-10-28
+
+criteria:
+  identity:
+    website:
+      value: https://potatovpn.com
+      sources: [home]
+    legal_entity:
+      value: Free VPN Potato Pte. Ltd.
+      note: >-
+        The same company is the Google Play developer and the App Store seller. It was called FastPotato Pte. Ltd.
+        until May 2026.
+      sources: [privacy, register, play, app-store, play-2025, hidden-links-2025]
+    owner:
+      value: null
+      note: >-
+        Who owns the Singapore company isn't public. 2025 research groups it with X-VPN, whose Hong Kong
+        company TTP found was "owned by a Chinese tech firm, Chengdu Zhuozhuo Technology Co., Ltd."
+      sources: [register, hidden-links-2025, ttp-2025]
+    founded:
+      value: 2019
+      note: The Singapore company was registered in July 2019, and the site was live by October 2019.
+      sources: [register, site-2019]
+    team:
+      value: anonymous
+      note: Nobody running it is named, and the privacy policy only gives an email address for its data protection officer.
+      sources: [privacy, register]
+    sister_brands:
+      value: [GhostGuard, X-VPN]
+      note: >-
+        GhostGuard is sold by the same company. 2025 research found X-VPN's Android app shares its proprietary
+        protocol, native library and hard-coded key, and their terms and bug bounty share wording.
+      sources: [ghostguard, hidden-links-2025, x-vpn-terms]
+    acquisitions:
+      value: null
+      note: No sale is on record, and who owns it isn't public. The company went from four shareholders to seven in July 2025.
+      sources: [register-history]
+
+  jurisdiction:
+    hq:
+      value: SG
+      sources: [register, play]
+    entities:
+      value: [SG]
+      sources: [register]
+
+  logging:
+    traffic:
+      value: aggregate
+      evidence: claimed
+      note: It says it never collects browsing history, but compiles aggregated statistics such as the most popular sites visited through its servers.
+      sources: [privacy]
+    dns:
+      value: null
+      note: The policy calls your queries confidential, but doesn't say how it works out the most popular sites visited through its servers.
+      sources: [privacy]
+    timestamps:
+      value: 'yes'
+      evidence: claimed
+      note: Connection times are collected with your protocol and network type and kept for up to 48 hours. The policy says they don't identify you.
+      sources: [privacy]
+    bandwidth:
+      value: null
+      note: It doesn't say whether data use is counted. Plans have no data cap.
+      sources: [pricing]
+    source_ip:
+      value: none
+      evidence: claimed
+      note: The apps do collect your city-level location.
+      sources: [privacy, home]
+    proven: []
+    policy: https://potatovpn.com/privacy-policy
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty:
+      value: true
+      note: From $50 to $500 a bug.
+      sources: [bug-bounty]
+    incidents:
+      value: []
+      grade: ok
+      note: >-
+        2025 research found the Android app open to attacks that let someone on the network infer who you're
+        connecting to, the same as X-VPN's. No response from the company is on record, so it's graded ok rather than good.
+      sources: [hidden-links-2025]
+
+  account:
+    email:
+      value: optional
+      note: The free version and app store subscriptions need no account. Buying on the website needs an email address or Sign in with Apple.
+      sources: [play, pricing]
+    personal_data: []
+    payment:
+      value: [card, paypal, app_store]
+      note: Also Apple Pay, Google Pay, and crypto through CoinGate without saying which coins. Crypto can't be refunded.
+      sources: [pricing, terms]
+
+  security:
+    protocols:
+      value: [proprietary]
+      note: The site only says "multi-protocols". Researchers found the Android app uses its own closed tunnelling protocol, shared with X-VPN.
+      sources: [home, hidden-links-2025]
+    post_quantum:
+      value: none
+      note: Nothing is published about its protocol's key exchange.
+      sources: [home]
+    kill_switch:
+      value: null
+      note: It doesn't say whether the apps have one.
+    dns:
+      value: null
+      note: It doesn't say whose DNS servers the apps use.
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say how its servers are run.
+    hosting:
+      value: null
+      note: It doesn't say whether it owns or rents its servers.
+    virtual_locations:
+      value: null
+      note: It publishes no server list, and the homepage talks of "thousands of virtual IP addresses".
+      sources: [home]
+    servers:
+      value: 5000
+      note: Given as over 5,000.
+      sources: [pricing]
+    countries:
+      value: null
+      note: No country list is published beyond the free locations.
+      sources: [cooperation, play]
+
+  features:
+    connections:
+      value: null
+      note: The terms cap an account at three devices on each platform, without giving a total.
+      sources: [terms]
+    multihop: false
+    obfuscation:
+      value: [proprietary]
+      note: Researchers found the apps tunnel over port 53 with traffic disguised so it isn't valid DNS, likely to get past firewalls that allow DNS.
+      sources: [hidden-links-2025]
+    port_forwarding: false
+    split_tunnel:
+      value: null
+      note: It doesn't say whether the apps have it.
+    blocking: []
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android]
+      note: Plus an Amazon Fire TV app. The Mac app is on the App Store.
+      sources: [home, app-store, ms-store]
+    open_source: none
+    telemetry:
+      value: null
+      note: >-
+        The policy lists device information, city-level location and crash reports sent by the apps, with
+        AdMob, Chartboost, Firebase and Google Analytics, without mentioning a way to turn it off. Its Play
+        listing says no data is shared with third parties.
+      sources: [privacy, play-data-safety, app-store]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 11.99, currency: USD }
+      sources: [pricing]
+    best:
+      value: { amount: 6, currency: USD }
+      note: $71.99 a year. App store yearly plans start at $47.99, for mobile only.
+      sources: [pricing, app-store]
+    best_term:
+      value: 12
+      sources: [pricing]
+    renewal_increase:
+      value: 0
+      sources: [pricing, terms]
+    free_tier:
+      value: true
+      note: Ad-supported, with five or six free locations.
+      sources: [cooperation, play]
+    refund_days:
+      value: 30
+      note: First purchases only, and not for crypto payments.
+      sources: [terms]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        Its Play listing says you'll "get completely anonymous and safe", and the homepage promises "bank-grade"
+        encryption and that it doesn't log how you use the VPN, while the policy compiles the most popular sites
+        visited.
+      sources: [play, home, privacy]
+    affiliates:
+      value: true
+      note: The site footer takes affiliate applications by email, with no published terms.
+      sources: [home]
+    review_sites:
+      value: true
+      note: Its own blog runs "best VPN" lists that put PotatoVPN first and X-VPN near the top, without mentioning the link between them.
+      sources: [blog-free-vpn, blog-netflix]
+    activism: false
+
+refs:
+  home:
+    url: https://potatovpn.com/
+    title: PotatoVPN homepage
+  privacy:
+    url: https://potatovpn.com/privacy-policy
+    title: Privacy Policy (last updated 26 October 2026)
+  terms:
+    url: https://potatovpn.com/terms-of-service
+    title: Terms of Service (last updated 26 October 2026)
+  pricing:
+    url: https://potatovpn.com/pricing
+    title: PotatoVPN pricing
+  bug-bounty:
+    url: https://potatovpn.com/bug-bounty-program
+    title: Vulnerability Disclosure Policy - Bug Bounty Program
+  cooperation:
+    url: https://potatovpn.com/cooperation
+    title: Advertisement Cooperation
+  blog-free-vpn:
+    url: https://potatovpn.com/blog/free-vpn
+    title: 18 Free VPN Services for Computers and Smartphones (PotatoVPN blog)
+  blog-netflix:
+    url: https://potatovpn.com/blog/free-vpn-for-netflix
+    title: 'Top 6 Free VPNs for Netflix: 2024 New List (PotatoVPN blog)'
+  site-2019:
+    url: https://web.archive.org/web/20191003213111/http://potatovpn.io/
+    title: PotatoVPN homepage (archived October 2019)
+  register:
+    url: https://data.gov.sg/api/action/datastore_search?resource_id=d_3f960c10fed6145404ca7b821f263b87&q=201921476C
+    title: Free VPN Potato Pte. Ltd. (UEN 201921476C), ACRA corporate entities dataset
+  play:
+    url: https://play.google.com/store/apps/details?id=com.potatovpn.free.proxy.wifi
+    title: VPN PotatoVPN - WiFi Proxy on Google Play
+  play-data-safety:
+    url: https://play.google.com/store/apps/datasafety?id=com.potatovpn.free.proxy.wifi
+    title: PotatoVPN data safety on Google Play
+  play-2025:
+    url: https://web.archive.org/web/20250317224753/https://play.google.com/store/apps/details?id=com.potatovpn.free.proxy.wifi
+    title: PotatoVPN on Google Play, developer FastPotato Pte. Ltd. (archived March 2025)
+  app-store:
+    url: https://apps.apple.com/us/app/id1473774730
+    title: VPN - Free VPN Potato on the App Store (US)
+  ghostguard:
+    url: https://apps.apple.com/us/app/ghostguard-best-vpn-proxy/id1550242560
+    title: GhostGuard - BEST VPN PROXY on the App Store (US)
+  ms-store:
+    url: https://apps.microsoft.com/detail/9NJ4T9QH1VBH
+    title: VPN PotatoVPN on the Microsoft Store
+  x-vpn-terms:
+    url: https://xvpn.io/terms-service
+    title: X-VPN Terms of Service
+  ttp-2025:
+    url: https://www.techtransparencyproject.org/articles/apple-offers-apps-with-ties-to-chinese-military
+    title: Tech Transparency Project, Apple Offers Apps With Ties to Chinese Military (April 2025)
+  hidden-links-2025:
+    url: https://www.petsymposium.org/foci/2025/foci-2025-0008.php
+    title: 'Mixon-Baca, Knockel and Crandall, Hidden Links: Analyzing Secret Families of VPN Apps (FOCI 2025)'
+  register-history:
+    url: https://recordowl.com/company/fastpotato-pte-ltd
+    title: FREE VPN POTATO PTE. LTD. (201921476C) company history, from ACRA data
