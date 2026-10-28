@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: 1ClickVPN
 icon: 1clickvpn.png
-checked: 2026-10-27
+checked: 2026-10-28
 
 criteria:
   identity:
@@ -18,8 +18,10 @@ criteria:
       sources: [terms]
     founded:
       value: null
-      note: No launch date is given. Its domain dates from September 2019, and the Chrome extension had over 700,000 users by August 2020.
-      sources: [rdap, cws-2020]
+      note: >-
+        No launch date is given. Its domain dates from September 2019, the site offered the Chrome extension by
+        February 2020, and it had over 700,000 users by that August.
+      sources: [rdap, home-2020, cws-2020]
     team:
       value: anonymous
       sources: [about, cws]
@@ -27,8 +29,9 @@ criteria:
       value: null
       note: >-
         1ClickVPN Proxy at 1clickvpn.com, which Koi Security caught collecting AI chats, is a different
-        product sold by Sugar - Smart Shopping Inc.
-      sources: [com-play, koi-2025]
+        product sold by Sugar - Smart Shopping Inc. In Russia the extension points you to AltaVPN's Telegram bot
+        instead, without saying who runs it.
+      sources: [com-play, koi-2025, crx]
     acquisitions: []
 
   jurisdiction:
@@ -50,8 +53,9 @@ criteria:
         address, and passes an anonymised version to analytics partners. The 2021 terms promise no traffic logs.
       sources: [policy, cws, terms]
     dns:
-      value: null
-      note: The policy doesn't mention DNS, but it collects the URLs you visit.
+      value: 'yes'
+      evidence: claimed
+      note: The policy collects the URLs you visit, which include each site's domain name.
       sources: [policy]
     timestamps:
       value: 'yes'
@@ -85,9 +89,9 @@ criteria:
       note: The free extension needs no account. Premium needs one with an email address.
       sources: [cws, terms, faq]
     personal_data:
-      value: null
-      note: The policy lists your name among what it collects when you register or subscribe, without saying it's required.
-      sources: [policy]
+      value: []
+      note: Signing up asks only for an email address and password, though the policy lists a name among account details.
+      sources: [signup, policy]
     payment:
       value: [card, paypal]
       note: Also Google Pay, Apple Pay, Telegram Stars and crypto, without saying which coins.
@@ -95,11 +99,14 @@ criteria:
 
   security:
     protocols:
-      value: null
-      note: The extensions are a proxy for that browser alone, which the Chrome listing says uses SSL (TLS) encryption.
-      sources: [cws, faq]
+      value: [other]
+      note: A proxy for that browser alone, set through Chrome's proxy settings, which the Chrome listing says uses SSL (TLS) encryption.
+      sources: [crx, cws]
     post_quantum: none
-    kill_switch: null
+    kill_switch:
+      value: none
+      note: If the proxy fails or the network drops, the extension turns itself off and the browser carries on without it.
+      sources: [crx]
     dns: null
 
   infra:
@@ -124,13 +131,17 @@ criteria:
     multihop: false
     obfuscation:
       value: null
-      note: The Chrome listing says it bypasses censorship, without saying how.
-      sources: [cws]
+      note: >-
+        The Chrome listing says it bypasses censorship, without saying how. In Russia the extension doesn't
+        connect at all, and recommends a different VPN.
+      sources: [cws, crx]
     port_forwarding: false
     split_tunnel:
-      value: null
-      note: The Chrome extension can switch on protection for chosen websites. Nothing is said about choosing apps.
-      sources: [cws]
+      value: false
+      note: >-
+        The extension covers the whole browser. The Chrome listing promises protection for selected websites,
+        but version 2.1.0 has no such setting.
+      sources: [crx, cws]
     blocking:
       value: [ads, trackers, malware]
       evidence: claimed
@@ -149,9 +160,12 @@ criteria:
       value: none
       sources: [terms]
     telemetry:
-      value: null
-      note: The policy collects crash logs, diagnostics and feature interaction data, without saying whether you can turn it off.
-      sources: [policy]
+      value: forced
+      evidence: claimed
+      note: >-
+        The Chrome extension reports every page you open, with the page you came from, the time and an install ID,
+        to its own Sentry server, and has no setting to stop it. The policy also lists crash logs and diagnostics.
+      sources: [crx, policy]
     trackers:
       value: null
       grade: na
@@ -188,11 +202,21 @@ criteria:
       value: true
       note: >-
         It says its SSL encryption makes you "fully anonymous" and that your browsing is never stored, while
-        its privacy policy collects the URLs you visit.
-      sources: [about, cws, policy]
+        its privacy policy collects the URLs you visit. The Chrome listing also promises WebRTC leak protection,
+        which the extension doesn't have the permission to provide.
+      sources: [about, cws, policy, crx]
     affiliates: null
     review_sites: false
     activism: false
+
+  other:
+    concerns:
+      value:
+        - summary: >-
+            The Chrome extension sends the address of every page you open, and the page you came from, to its
+            own server under an install ID, whether or not the VPN is connected.
+          severity: serious
+          source: crx
 
 refs:
   policy:
@@ -234,6 +258,15 @@ refs:
   amo-2025:
     url: https://web.archive.org/web/20251220034401/https://addons.mozilla.org/en-US/firefox/addon/1clickvpn-secure-and-free-vpn/
     title: 1clickVPN - Secure and Free VPN on Firefox Add-ons (archived December 2025)
+  crx:
+    url: https://clients2.google.com/service/update2/crx?response=redirect&prodversion=140.0&acceptformat=crx2,crx3&x=id%3Dfcfhplploccackoneaefokcmbjfbkenj%26uc
+    title: 1clickVPN Chrome extension 2.1.0 (CRX package)
+  signup:
+    url: https://1clickvpn.net/?open=signup
+    title: 1clickVPN sign-up form
+  home-2020:
+    url: https://web.archive.org/web/20200221054042/http://1clickvpn.net/
+    title: 1clickVPN homepage (archived February 2020)
   rdap:
     url: https://rdap.verisign.com/net/v1/domain/1clickvpn.net
     title: Verisign RDAP record for 1clickvpn.net
