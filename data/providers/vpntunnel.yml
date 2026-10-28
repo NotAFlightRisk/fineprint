@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: VPNTunnel
 icon: vpntunnel.png
-checked: 2026-10-27
+checked: 2026-10-28
 
 criteria:
   identity:
@@ -50,7 +50,7 @@ criteria:
     entities:
       value: [SC, US]
       note: Edelino Commerce in the Seychelles and Digital Sales Solutions LLC in Nevada.
-      sources: [edelino-2019, app-store, home]
+      sources: [edelino-2019, home]
 
   logging:
     traffic:
@@ -100,10 +100,10 @@ criteria:
   account:
     email:
       value: required
-      sources: [order, privacy-policy]
+      sources: [order]
     personal_data:
       value: []
-      sources: [order, privacy-policy]
+      sources: [privacy-policy]
     payment:
       value: [card, paypal, app_store]
       note: Cards are taken through PayPal. The only other option is Perfect Money, an online payment service.
@@ -118,9 +118,11 @@ criteria:
       value: none
       sources: [protocols-help]
     kill_switch:
-      value: null
-      note: It doesn't say whether its Windows client or iOS app has one.
-      sources: [windows-client]
+      value: app
+      note: >-
+        The Windows client can stop all traffic, or just chosen programs, when the VPN drops unexpectedly. Whether
+        the iOS app has one isn't stated, and manual setups have none.
+      sources: [windows-download]
     dns:
       value: first_party
       evidence: claimed
@@ -141,11 +143,12 @@ criteria:
       sources: [network]
     servers:
       value: 150
-      sources: [home, order]
+      note: It says "150+ servers". Its server list shows 36 servers at 35 locations.
+      sources: [order, network]
     countries:
-      value: 32
-      note: It says "over 32 countries".
-      sources: [home, order]
+      value: 27
+      note: Its server list covers 27 countries, though the home and order pages say 32.
+      sources: [network, home]
 
   features:
     connections:
@@ -161,11 +164,14 @@ criteria:
       sources: [stunnel-help]
     port_forwarding:
       value: null
-      note: It doesn't say.
+      note: Its FAQ only mentions port forwarding as a general benefit of VPNs, not as something it offers.
+      sources: [faqs]
     split_tunnel:
       value: null
-      note: Only an old iOS release note mentions choosing which apps use the VPN.
-      sources: [app-store]
+      note: >-
+        The Windows client only offers a per-program list in Classic mode, which VPNTunnel doesn't say it offers.
+        An old iOS release note mentions choosing which apps use the VPN.
+      sources: [windows-download, app-store]
     blocking:
       value: []
       sources: [services]
@@ -185,6 +191,11 @@ criteria:
       value: null
       note: It doesn't say whether the apps send usage or crash data.
       sources: [privacy-policy]
+    trackers:
+      value: null
+      grade: na
+      note: Its Android app is no longer on Google Play, and Android now uses manual OpenVPN setups.
+      sources: [android-openvpn]
     fdroid: false
 
   pricing:
@@ -199,13 +210,15 @@ criteria:
       value: 24
       sources: [trial-order]
     renewal_increase:
-      value: null
-      note: Plans can renew automatically, but no renewal price is published.
-      sources: [order, terms]
+      value: 0
+      note: The 24-month plan rebills at the same $59.99 every 24 months. No renewal price is published for the others.
+      sources: [trial-order, terms]
     free_tier:
-      value: null
+      value: true
+      evidence: claimed
       note: >-
-        The iOS app advertises free data every month, but the site sells no free plan, only a one-day trial.
+        Only in the iOS app, which advertises free data every month (500 MB in its description, 3 GB in a release
+        note). That app hasn't been updated since February 2019, and the site has no free plan.
       sources: [app-store, trial-order]
     refund_days:
       value: 7
@@ -219,8 +232,9 @@ criteria:
         It calls itself "government safe", sells "military grade encryption" and says you'll be "100% anonymous".
       sources: [faqs, order, app-store]
     affiliates:
-      value: null
-      note: It doesn't say whether it pays affiliates.
+      value: true
+      note: Through VPN Partner, a multi-site VPN affiliate programme it shares with Anonine, BoxPN and Easy Hide IP.
+      sources: [vpnpartner, vpnpartner-signup]
     review_sites:
       value: null
       note: No sign it owns any, but who owns Edelino Commerce isn't published.
@@ -257,6 +271,18 @@ refs:
   frootvpn-canary:
     url: https://frootvpn.com/canary.txt
     title: FrootVPN warrant canary (signed 13 August 2026)
+  windows-download:
+    url: https://vpntunnel.com/en/download-client?platform=win
+    title: Windows client download (vpntunnel-4.17.exe)
+  vpnpartner:
+    url: https://vpnpartner.com/
+    title: VPN Partner, multi-site VPN affiliate program
+  vpnpartner-signup:
+    url: https://affiliate.vpnpartner.com/signup.php
+    title: VPN Partner affiliate signup and terms
+  android-openvpn:
+    url: https://help.vpntunnel.com/support/solutions/articles/5000810786--vpntunnel-openvpn-for-android-installation-guide
+    title: 'VPNTunnel: OpenVPN for Android installation guide'
   wireguard-help:
     url: https://help.vpntunnel.com/support/solutions/articles/5000857921-vpntunnel-wireguard-manual-configuration
     title: 'VPNTunnel: WireGuard manual configuration'
