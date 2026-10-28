@@ -17,9 +17,9 @@ criteria:
       note: Nobody is named. The Play listing's contact address is at stakewolle.com, a crypto staking provider.
       sources: [play]
     founded:
-      value: null
-      note: Its current terms and privacy policy both date from February 2025.
-      sources: [terms, policy]
+      value: 2025
+      note: Its Android app came out in June 2025.
+      sources: [play]
     team:
       value: anonymous
       sources: [home, terms]
@@ -27,7 +27,7 @@ criteria:
       value: []
       note: The same Play account also publishes ProxyHop, a Telegram proxy finder, plus the WolleBuy and Hodler apps.
       sources: [play-developer]
-    acquisitions: null
+    acquisitions: []
 
   jurisdiction:
     hq:
@@ -75,6 +75,7 @@ criteria:
     bug_bounty:
       value: false
       sources: [home]
+    incidents: []
 
   account:
     email:
@@ -97,11 +98,17 @@ criteria:
     kill_switch:
       value: app
       sources: [home, pricing]
-    dns: null
+    dns:
+      value: null
+      note: The app lets you pick its own DNS server or Google, Cloudflare or Cisco ones, and doesn't say which is the default.
+      sources: [apk]
 
   infra:
     ram_only: null
-    hosting: null
+    hosting:
+      value: null
+      note: It says it buys and installs its own server hardware, but not whether every server is its own or where they're housed.
+      sources: [tg-hardware, tg-new-servers]
     virtual_locations: null
     servers:
       value: 130
@@ -110,7 +117,7 @@ criteria:
       sources: [pricing]
     countries:
       value: null
-      note: The homepage says 50+, the pricing page 80+, the affiliate page 100+, and the terms list 44.
+      note: The homepage says 50+, the pricing page 80+, the affiliate page both 70+ and 100+, and the terms list 44.
       sources: [home, pricing, partners, terms]
 
   features:
@@ -118,7 +125,11 @@ criteria:
       value: 10
       note: On the top Legend plan. Base allows 3 and Premium 5.
       sources: [pricing, faq]
-    multihop: null
+    multihop:
+      value: true
+      evidence: claimed
+      note: Google Play promises multi-hop and Tor support, which its own site doesn't mention.
+      sources: [play]
     obfuscation:
       value: [v2ray]
       note: VLESS.
@@ -140,8 +151,8 @@ criteria:
     open_source: none
     telemetry:
       value: null
-      note: The policy says the app collects anonymous crash reports and diagnostics, without saying whether you can turn them off.
-      sources: [policy]
+      note: The policy says the app collects anonymous crash reports and diagnostics without saying whether you can turn them off, and the Android app carries Firebase Analytics, Crashlytics, Sentry and AppsFlyer.
+      sources: [policy, apk]
     fdroid: false
 
   pricing:
@@ -172,12 +183,17 @@ criteria:
   ethics:
     misleading_claims:
       value: true
-      note: The homepage says your data is "never collected or stored", while the policy keeps your email, ISP, country and data totals. Its country count runs from 44 to 100+ depending on the page.
-      sources: [home, policy, terms, partners]
+      note: The homepage says your data is "never collected or stored" while the policy keeps your email, ISP, country and data totals, and its Play listing says nothing is shared though the app shows Google and Yandex ads. Its country count runs from 44 to 100+ depending on the page.
+      sources: [home, policy, play, play-data-safety, apk, terms, partners]
     affiliates:
       value: true
       note: Up to 50% of new sales and 30% of renewals.
       sources: [partners]
+    review_sites:
+      value: null
+      note: No sign it owns any, but who owns Wolle Development isn't published, and the app gives a free day for a review on Trustpilot or Yandex Maps.
+      sources: [play, apk]
+    activism: false
 
 refs:
   home:
@@ -210,3 +226,15 @@ refs:
   app-store:
     url: https://apps.apple.com/us/app/id6746091465
     title: HiroVPN on the App Store
+  play-data-safety:
+    url: https://play.google.com/store/apps/datasafety?id=com.hiro.vpn&hl=en
+    title: HiroVPN data safety on Google Play
+  apk:
+    url: https://hiro.s3.regru.cloud/HiroApp_latest.apk
+    title: HiroVPN Android app 1.22.0 (APK from hirovpn.com)
+  tg-hardware:
+    url: https://t.me/hirovpnblog/171
+    title: New server hardware for Premium and Legend (Telegram, March 2026)
+  tg-new-servers:
+    url: https://t.me/hirovpnblog/265
+    title: Expanding infrastructure and buying new hardware (Telegram, September 2026)
