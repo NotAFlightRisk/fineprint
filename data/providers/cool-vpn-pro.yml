@@ -1,0 +1,273 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Cool VPN Pro
+icon: cool-vpn-pro.png
+checked: 2026-10-28
+
+criteria:
+  identity:
+    website:
+      value: https://coolvpn.cc
+      sources: [home]
+    legal_entity:
+      value: Hope Deve Pte. Ltd.
+      note: >-
+        Its terms and privacy policy only name a "CoolVPN team" based in Singapore. Hope Deve is the Google Play
+        developer, while the iOS app is sold by a different Singapore company, CTECH Global Pte. Ltd.
+      sources: [terms, privacy, play, register-hope, app-store, register-ctech]
+    owner:
+      value: null
+      note: >-
+        Neither company says who owns it. In 2025 TTP found CTECH Global has two shareholders, one Canadian and one
+        Chinese, the latter described as its founder, and that it had a branch in Guangzhou.
+      sources: [ttp-2025, register-hope, register-ctech]
+    founded:
+      value: 2019
+      note: The iOS app came out in May 2019. Hope Deve was registered in September 2021.
+      sources: [app-store-lookup, register-hope]
+    team:
+      value: partial
+      note: TTP named CTECH Global's Chinese shareholder from its filings. Nobody running the service is named on its own site.
+      sources: [ttp-2025, home]
+    sister_brands:
+      value: [Cool VPN Lite]
+      note: >-
+        Cool VPN Lite comes from the same Google Play developer. CTECH Global also used to sell Now VPN on iOS,
+        which World Creation Technology Limited of Hong Kong took over, and TTP found no link between the two.
+      sources: [play-lite, ttp-2025]
+    acquisitions: []
+
+  jurisdiction:
+    hq:
+      value: SG
+      sources: [register-hope, register-ctech, play]
+    entities:
+      value: [SG]
+      sources: [register-hope, register-ctech]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [privacy, terms]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [terms, help]
+    timestamps:
+      value: null
+      note: >-
+        The policy says it records whether you connected on a given day but not the time, while the terms log
+        "access attempts" to its servers without saying what that covers or for how long.
+      sources: [privacy, terms]
+    bandwidth:
+      value: aggregate
+      evidence: claimed
+      note: The policy keeps a running total of the data each user transfers, while its help page says it keeps no logs at all.
+      sources: [privacy, help]
+    source_ip:
+      value: null
+      note: >-
+        The policy says it doesn't store your IP address, only your country and internet provider, but also that IP
+        addresses are cleared when the session ends, and the terms log access attempts.
+      sources: [privacy, terms]
+    proven: []
+    policy: https://coolvpn.cc/privacy_policy.html
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: optional
+      note: The free app works without an account. Buying on the website means signing in with Google, Facebook, Apple or an email address.
+      sources: [login, pricing]
+    personal_data: []
+    payment:
+      value: [card, app_store, other_crypto]
+      note: Crypto is USDT. The terms also mention paying through third-party platforms such as Codashop.
+      sources: [pricing, terms, play]
+
+  security:
+    protocols:
+      value: [wireguard, other]
+      note: >-
+        Other is Shadowsocks, Trojan, VLESS and TUIC. The Android app's protocol menu also has OpenVPN entries, but
+        its APK carries no OpenVPN code.
+      sources: [apk]
+    post_quantum:
+      value: none
+      note: Nothing is published about its key exchange.
+      sources: [help, features]
+    kill_switch:
+      value: null
+      note: The Android app has a kill switch screen, but nothing published says how it works.
+      sources: [apk]
+    dns:
+      value: null
+      note: It doesn't say whose DNS servers the apps use.
+      sources: [help]
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say how its servers are run.
+    hosting:
+      value: null
+      note: The policy says its servers sit in third-party data centres, without saying whether it owns the hardware.
+      sources: [privacy]
+    virtual_locations:
+      value: null
+      note: It doesn't say whether any locations are virtual.
+      sources: [servers]
+    servers:
+      value: 6000
+      note: Given as 6,000+.
+      sources: [servers, pricing]
+    countries:
+      value: 45
+      note: Given as 45+, with 80+ locations.
+      sources: [servers]
+
+  features:
+    connections:
+      value: 5
+      note: Premium only.
+      sources: [privacy]
+    multihop: false
+    obfuscation:
+      value: [shadowsocks, v2ray]
+      note: Its features page advertises obfuscated servers. The Android app offers Shadowsocks, VLESS and Trojan.
+      sources: [features, apk]
+    port_forwarding: false
+    split_tunnel:
+      value: true
+      sources: [download, play, app-store]
+    blocking:
+      value: null
+      note: Premium is sold as blocking malware and trackers, without saying how.
+      sources: [home, features]
+
+  clients:
+    platforms:
+      value: [ios, android]
+      note: There's also a separate Cool VPN Lite app for Android.
+      sources: [download, play-dev]
+    open_source: none
+    telemetry:
+      value: null
+      note: >-
+        The policy says usage statistics and crash reports are collected "with your permission", without saying
+        how to turn them off. Its App Store listing says identifiers and usage data may be used to track you.
+      sources: [privacy, play-data-safety, app-store]
+    trackers:
+      value: 14
+      note: Version 1.0.406, mostly advertising SDKs that pay for the free version.
+      sources: [exodus]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 7.99, currency: USD }
+      sources: [pricing]
+    best:
+      value: { amount: 2.42, currency: USD }
+      note: $57.99 for two years.
+      sources: [pricing]
+    best_term:
+      value: 24
+      sources: [pricing]
+    renewal_increase:
+      value: null
+      note: The pricing page shows $57.99 struck down from $191.99, and neither it nor the terms say what it renews at.
+      sources: [pricing, terms]
+    free_tier:
+      value: true
+      note: Ad-supported, with limited speed and connection time topped up by watching ads.
+      sources: [play, apk]
+    refund_days:
+      value: 30
+      note: Website purchases only. App store purchases follow the store's own refund rules.
+      sources: [terms, pricing]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        Its store listings promise a "100% Secure free VPN" that leaves you "absolutely anonymous", and its features
+        page advertises Meshnet and threat protection, which the Android app doesn't have.
+      sources: [play, app-store, features, apk]
+    affiliates:
+      value: true
+      note: A reseller programme pays up to 40% commission, aimed at Russia and Iran.
+      sources: [reseller]
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://coolvpn.cc/
+    title: CoolVPN Pro homepage
+  privacy:
+    url: https://coolvpn.cc/privacy_policy.html
+    title: Privacy Policy (last updated 20 January 2022)
+  terms:
+    url: https://coolvpn.cc/terms_of_use.html
+    title: Terms of Service (last updated 17 January 2024)
+  pricing:
+    url: https://coolvpn.cc/pricing.html
+    title: Subscribe CoolVPN Pro Premium
+  features:
+    url: https://coolvpn.cc/features.html
+    title: CoolVPN Pro features
+  servers:
+    url: https://coolvpn.cc/servers.html
+    title: CoolVPN Pro servers
+  help:
+    url: https://coolvpn.cc/help.html
+    title: CoolVPN Pro frequently asked questions
+  download:
+    url: https://coolvpn.cc/downloadvpn.html
+    title: Download CoolVPN Pro
+  login:
+    url: https://coolvpn.cc/login.html
+    title: CoolVPN Pro sign in
+  reseller:
+    url: https://coolvpn.cc/agent.html
+    title: CoolVPN Pro Reseller Program
+  apk:
+    url: https://coolvpn.cc/apk/lastest-release.apk
+    title: Cool VPN Pro Android app 1.0.455 (APK from coolvpn.cc)
+  play:
+    url: https://play.google.com/store/apps/details?id=cc.coolline.client.pro
+    title: 'Cool VPN Pro: Secure VPN Proxy on Google Play'
+  play-data-safety:
+    url: https://play.google.com/store/apps/datasafety?id=cc.coolline.client.pro
+    title: Cool VPN Pro data safety on Google Play
+  play-dev:
+    url: https://play.google.com/store/apps/developer?id=coolvpn+pro
+    title: coolvpn pro apps on Google Play
+  app-store:
+    url: https://apps.apple.com/us/app/cool-vpn-pro-secure-proxy-vpn/id1460130689
+    title: Cool VPN Pro-Secure Proxy VPN on the App Store (US)
+  app-store-lookup:
+    url: https://itunes.apple.com/lookup?id=1460130689&country=us
+    title: App Store lookup data for Cool VPN Pro, with its release date
+  register-hope:
+    url: https://data.gov.sg/api/action/datastore_search?resource_id=d_fa2ed456cf2b8597bb7e064b08fc3c7c&q=202133293M
+    title: Hope Deve Pte. Ltd. (UEN 202133293M), ACRA corporate entities data on data.gov.sg
+  register-ctech:
+    url: https://data.gov.sg/api/action/datastore_search?resource_id=d_c0650f23e94c42e7a20921f4c5b75c24&q=201107245R
+    title: CTECH Global Pte. Ltd. (UEN 201107245R), ACRA corporate entities data on data.gov.sg
+  exodus:
+    url: https://web.archive.org/web/20251125093234/https://reports.exodus-privacy.eu.org/en/reports/cc.coolline.client.pro/latest/
+    title: Exodus Privacy report for CoolVPN Pro 1.0.406 (November 2025, archived)
+  ttp-2025:
+    url: https://www.techtransparencyproject.org/articles/apple-offers-apps-with-ties-to-chinese-military
+    title: Tech Transparency Project, Apple Offers Apps With Ties to Chinese Military (1 April 2025)
+  play-lite:
+    url: https://play.google.com/store/apps/details?id=com.cool.vpn.lite
+    title: Cool VPN Lite on Google Play, by HOPE DEVE PTE. LTD.
