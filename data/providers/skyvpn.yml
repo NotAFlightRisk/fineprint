@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: SkyVPN
 icon: skyvpn.png
-checked: 2026-10-27
+checked: 2026-10-28
 
 criteria:
   identity:
@@ -93,9 +93,12 @@ criteria:
 
   security:
     protocols:
-      value: null
-      note: It doesn't name the protocols its apps use.
-      sources: [windows, download]
+      value: [proprietary]
+      evidence: claimed
+      note: >-
+        It says it doesn't use OpenVPN, and the Windows app runs its own tunnel over a rebranded TAP driver with
+        no standard VPN protocol bundled.
+      sources: [secure-blog, windows-setup]
     post_quantum:
       value: none
       note: Nothing is published about its key exchange.
@@ -156,8 +159,9 @@ criteria:
       value: null
       note: >-
         The policy says the apps may use in-app analytics such as Google Analytics, and may collect a list of the
-        apps installed on your device, without mentioning a way to turn either off.
-      sources: [privacy, play]
+        apps installed on your device, without mentioning a way to turn either off. The Windows app also posts to
+        a log-reporting server.
+      sources: [privacy, play, windows-setup]
     fdroid: false
 
   pricing:
@@ -253,3 +257,9 @@ refs:
   launch-2017:
     url: https://www.prweb.com/releases/skyvpn_offers_zero_cost_premium_vpn_service_with_no_usage_log_policy/prweb14279771.htm
     title: SkyVPN Offers Zero-Cost Premium VPN Service with No Usage Log Policy (PRWeb, April 2017)
+  secure-blog:
+    url: https://www.skyvpn.net/blog/is-skyvpn-secure-to-use/
+    title: Is SkyVPN Secure to Use? (SkyVPN blog, February 2022)
+  windows-setup:
+    url: https://www.skyvpn.net/download/window/SkyVPNSetup.exe
+    title: SkyVPN for Windows installer
