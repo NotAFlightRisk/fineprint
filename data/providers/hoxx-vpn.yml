@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: Hoxx VPN
 icon: hoxx-vpn.png
-checked: 2026-10-27
+checked: 2026-10-28
 
 criteria:
   identity:
@@ -46,13 +46,18 @@ criteria:
       note: >-
         Its EULA says it keeps logs of the websites you visit for an unlimited time, deleting them only at its
         discretion, and helps the authorities with them.
-      sources: [eula, faq-abuse]
+      sources: [eula, faq-abuse, apk]
     dns:
-      value: null
-      sources: [policy]
+      value: 'yes'
+      evidence: claimed
+      note: >-
+        The EULA keeps logs of the websites you visit, and the Android app says it collects the domain or IP
+        of each connection.
+      sources: [eula, apk]
     timestamps:
-      value: null
-      note: The FAQ asks for the date and time of anything it's asked to look up, but doesn't say what its logs hold.
+      value: 'yes'
+      evidence: claimed
+      note: The FAQ matches abuse reports to its logs by date, time and target website.
       sources: [faq-abuse]
     bandwidth:
       value: aggregate
@@ -63,7 +68,7 @@ criteria:
       value: 'yes'
       evidence: claimed
       note: Its EULA says it keeps your IP address alongside the logs of the sites you visit.
-      sources: [eula]
+      sources: [eula, apk]
     proven: []
     policy: https://hoxx.com/privacy-policy/
 
@@ -76,9 +81,11 @@ criteria:
 
   account:
     email:
-      value: required
-      note: The free plan needs an account too.
-      sources: [register, faq-account]
+      value: optional
+      note: >-
+        The website's signup and the EULA need a verified email, but the apps offer a guest login without
+        one in some countries.
+      sources: [register, eula, apk]
     personal_data:
       value: null
       note: The privacy policy says registering takes your name and contact number, while the register page only asks for an email address.
@@ -90,18 +97,21 @@ criteria:
 
   security:
     protocols:
-      value: null
+      value: [other]
       note: >-
-        The EULA calls the service a VPN or HTTP/HTTPS proxy. The browser extensions are a proxy for
-        that browser alone, and the apps' protocols aren't stated.
-      sources: [eula, amo]
+        The Android app is built on Jigsaw's Outline client and tunnels over Shadowsocks. The browser
+        extensions are an HTTPS proxy for that browser alone.
+      sources: [apk, chrome]
     post_quantum: none
     kill_switch: null
     dns: null
 
   infra:
     ram_only: null
-    hosting: null
+    hosting:
+      value: null
+      note: The privacy policy names server providers among the third parties that handle your data, without saying whether it owns any servers.
+      sources: [policy]
     virtual_locations: null
     servers:
       value: null
@@ -119,14 +129,16 @@ criteria:
       sources: [faq-general]
     multihop: false
     obfuscation:
-      value: null
-      note: It says it gets around government filtering, without saying how.
-      sources: [pricing]
+      value: [shadowsocks]
+      note: The Android app tunnels over Shadowsocks, and the extensions are a plain HTTPS proxy.
+      sources: [apk, pricing]
     port_forwarding: false
     split_tunnel:
-      value: null
-      note: Premium can skip the proxy for certain IPs with a PAC file. Nothing is said about choosing apps.
-      sources: [pricing]
+      value: true
+      note: >-
+        The Android app can tunnel only chosen apps or leave chosen apps out. Premium extensions can skip
+        the proxy for certain IPs with a PAC file.
+      sources: [apk, pricing]
     blocking:
       value: [malware]
       evidence: claimed
@@ -145,11 +157,12 @@ criteria:
       note: The Firefox add-on is listed under the MPL 2.0, but the FAQ says you may read the code and not modify or reuse it.
       sources: [amo, faq-general]
     telemetry:
-      value: null
+      value: forced
+      evidence: claimed
       note: >-
-        The add-on sends error messages, and the iOS app's privacy label lists crash, performance and
-        usage data linked to you. Nothing says whether you can turn it off.
-      sources: [faq-general, app-store]
+        The Android app collects crash logs and in-app activity statistics as a condition of use, and the
+        extensions send error messages.
+      sources: [apk, faq-general, app-store]
     fdroid: false
 
   pricing:
@@ -175,7 +188,7 @@ criteria:
       sources: [pricing, faq-general, faq-account]
     refund_days:
       value: 7
-      sources: [eula]
+      sources: [refund]
 
   ethics:
     misleading_claims:
@@ -189,6 +202,18 @@ criteria:
       sources: [faq-general]
     review_sites: false
     activism: false
+
+  other:
+    concerns:
+      value:
+        - summary: The EULA reserves the right to tag your traffic with HTTP headers that identify you.
+          severity: minor
+          source: eula
+        - summary: >-
+            Sites on its blacklist bypass the proxy, so they see your real IP address, and the list can
+            change at any time.
+          severity: serious
+          source: eula
 
 refs:
   policy:
@@ -221,6 +246,12 @@ refs:
   download:
     url: https://hoxx.com/download/
     title: Download Hoxx VPN
+  apk:
+    url: https://ourapps2024.s3.amazonaws.com/Hoxx-android-5.0.39.apk
+    title: Hoxx VPN for Android 5.0.39 (APK, official download mirror)
+  refund:
+    url: https://hoxx.com/eula/#refund
+    title: Hoxx EULA, Refund
   play:
     url: https://play.google.com/store/apps/details?id=com.hoxxvpn.main&hl=en
     title: Hoxx VPN on Google Play
