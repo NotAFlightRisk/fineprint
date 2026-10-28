@@ -1,0 +1,261 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Now VPN
+icon: now-vpn.png
+checked: 2026-10-28
+
+criteria:
+  identity:
+    website:
+      value: https://now-vpn.com
+      sources: [home]
+    legal_entity:
+      value: World Creation Technology Limited
+      note: >-
+        The Hong Kong company behind both app store listings. The terms and privacy policy name Star Core Studio
+        in Singapore, which is the name its Google Play account goes by.
+      sources: [play, app-store, terms, privacy]
+    owner:
+      value: null
+      note: >-
+        In 2025 the Tech Transparency Project found World Creation's sole shareholder and officer is a Chinese
+        citizen, giving the address of the company's registered agent. Until at least 2023 the iOS app was sold by
+        CTECH GLOBAL PTE LTD, a Singapore company TTP couldn't connect to World Creation.
+      sources: [ttp-2025, app-store-2022]
+    founded:
+      value: 2021
+      note: The iOS app was released in September 2021.
+      sources: [app-store-lookup]
+    team:
+      value: anonymous
+      note: Nobody running it is named, and TTP didn't name World Creation's shareholder.
+      sources: [home, ttp-2025]
+    sister_brands:
+      value: [Star VPN, Starlink VPN, ZeroPing VPN]
+      note: All three come from the same Google Play developer account. Starlink and ZeroPing also use Now VPN's terms and privacy policy.
+      sources: [play-developer, play-star, play-starlink, play-zeroping]
+    acquisitions:
+      value: null
+      note: >-
+        No sale is on record. The iOS app moved from CTECH GLOBAL to World Creation between 2023 and 2025, and the
+        Android app from a "Now VPN Team" developer account to World Creation's, without saying whether the owners
+        changed.
+      sources: [app-store-2022, app-store-2025, play-2022, play-2025]
+
+  jurisdiction:
+    hq:
+      value: HK
+      sources: [play, app-store]
+    entities:
+      value: [HK]
+      note: The terms put it under Singapore law and name Star Core Studio there, but it's the Hong Kong company that sells the apps.
+      sources: [play, terms]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [privacy]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [privacy]
+    timestamps:
+      value: aggregate
+      evidence: claimed
+      note: It keeps whether you connected on a given day, the VPN location, and your country and ISP, for 30 days.
+      sources: [privacy]
+    bandwidth:
+      value: aggregate
+      evidence: claimed
+      note: The policy says it doesn't store bandwidth, then that it keeps each user's total data transferred for 30 days.
+      sources: [privacy]
+    source_ip:
+      value: none
+      evidence: claimed
+      note: A device identifier is kept until 15 minutes after each session ends.
+      sources: [privacy]
+    proven: []
+    policy: https://now-vpn.com/privacyPolicy.html
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: optional
+      note: The app works without signing up, and store subscriptions carry over without an account.
+      sources: [play, account-deletion]
+    personal_data: []
+    payment:
+      value: [app_store]
+      note: The terms mention website purchases, crypto and Codashop, but it only sells through Google Play and the App Store.
+      sources: [play, terms]
+
+  security:
+    protocols:
+      value: null
+      note: It doesn't say which protocols the apps use.
+    post_quantum:
+      value: none
+      note: Nothing is published about its key exchange.
+    kill_switch:
+      value: null
+      note: It doesn't mention a kill switch.
+    dns:
+      value: null
+      note: It doesn't say whose DNS servers the apps use.
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say how its servers are run.
+    hosting:
+      value: null
+      note: It doesn't say whether it owns or rents its servers.
+    virtual_locations:
+      value: null
+      note: It doesn't say whether any locations are virtual.
+    servers:
+      value: 200
+      note: The App Store listing says 200+, and the website 100+.
+      sources: [app-store, home]
+    countries:
+      value: 20
+      evidence: claimed
+      note: The App Store listing claims 100+ locations.
+      sources: [home, app-store]
+
+  features:
+    connections:
+      value: null
+      note: It doesn't say how many devices a subscription covers.
+    multihop: false
+    obfuscation:
+      value: null
+      note: It doesn't say whether it disguises VPN traffic.
+    port_forwarding: false
+    split_tunnel:
+      value: null
+      note: It doesn't say.
+    blocking:
+      value: null
+      note: >-
+        The privacy policy describes a Threat Protection feature that blocks ads, trackers and malware, but
+        neither app listing mentions one.
+      sources: [privacy, play]
+
+  clients:
+    platforms:
+      value: [ios, android]
+      note: Google Play also has Starlink VPN and ZeroPing VPN from the same developer.
+      sources: [play, app-store, play-developer]
+    open_source: none
+    telemetry:
+      value: null
+      note: >-
+        The policy says it gathers anonymised diagnostics with your permission. The Android app includes Firebase
+        Analytics, Crashlytics and AppMetrica, while its Play data safety form says it collects nothing but shares
+        approximate location for advertising.
+      sources: [privacy, exodus, play-data-safety]
+    trackers:
+      value: 9
+      sources: [exodus]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 2.99, currency: USD }
+      note: The cheaper of two one-month plans on the US App Store. The other is $7.99.
+      sources: [app-store]
+    best:
+      value: { amount: 1.67, currency: USD }
+      note: $19.99 a year on the US App Store, which also lists a $59.99 yearly plan. Prices show in the app before you buy.
+      sources: [app-store]
+    best_term:
+      value: 12
+      sources: [app-store]
+    renewal_increase:
+      value: null
+      note: It doesn't say what its plans renew at, and the terms let it change prices on renewal.
+      sources: [terms]
+    free_tier:
+      value: true
+      note: Ad-supported, without the VIP locations.
+      sources: [play]
+    refund_days:
+      value: null
+      note: >-
+        The terms offer 30 days on website purchases, but it only sells in the apps. Google Play purchases get no
+        money-back guarantee, and App Store ones are up to Apple.
+      sources: [terms]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        The website promises "Strict ZERO Logs", and the policy says your activity is "untraceable to you", while
+        it keeps daily connection records and data totals for 30 days.
+      sources: [home, privacy]
+    affiliates: false
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://now-vpn.com/
+    title: Now VPN homepage
+  terms:
+    url: https://now-vpn.com/termsofService.html
+    title: Now VPN Terms of Service (last updated 17 June 2025)
+  privacy:
+    url: https://now-vpn.com/privacyPolicy.html
+    title: Now VPN Privacy Policy (last updated 17 June 2025)
+  account-deletion:
+    url: https://now-vpn.com/vpnIntroduce.html
+    title: Now VPN, request account deletion
+  play:
+    url: https://play.google.com/store/apps/details?id=com.now.vpn
+    title: 'Now VPN: Fast VPN Proxy on Google Play'
+  play-data-safety:
+    url: https://play.google.com/store/apps/datasafety?id=com.now.vpn
+    title: Now VPN data safety on Google Play
+  play-developer:
+    url: https://play.google.com/store/apps/dev?id=7354473564010753547
+    title: Android apps by Star Core Studio on Google Play
+  play-starlink:
+    url: https://play.google.com/store/apps/details?id=com.star.link.vpn
+    title: Starlink VPN - Jump Speed on Google Play
+  play-star:
+    url: https://play.google.com/store/apps/details?id=com.nord.star.vpn
+    title: Star VPN on Google Play
+  play-zeroping:
+    url: https://play.google.com/store/apps/details?id=com.zero.ping.vpn
+    title: ZeroPing VPN on Google Play
+  play-2025:
+    url: https://web.archive.org/web/20250417203938/https://play.google.com/store/apps/details?id=com.now.vpn
+    title: Now VPN on Google Play, listed by Star VPN Team (archived April 2025)
+  play-2022:
+    url: https://web.archive.org/web/20220715062004/https://play.google.com/store/apps/details?id=com.now.vpn
+    title: Now VPN on Google Play, listed by Now VPN Team (archived July 2022)
+  app-store:
+    url: https://apps.apple.com/us/app/now-vpn-best-vpn-proxy/id1582922615
+    title: Now VPN - Best VPN Proxy on the App Store (US)
+  app-store-lookup:
+    url: https://itunes.apple.com/lookup?id=1582922615&country=us
+    title: Now VPN - Best VPN Proxy, App Store lookup record
+  app-store-2025:
+    url: https://web.archive.org/web/20250115215727/https://apps.apple.com/us/app/now-vpn-best-vpn-proxy/id1582922615
+    title: Now VPN on the App Store, sold by World Creation Technology Limited (archived January 2025)
+  app-store-2022:
+    url: https://web.archive.org/web/20221109001809/https://apps.apple.com/us/app/now-vpn-best-vpn-proxy/id1582922615
+    title: Now VPN on the App Store, sold by CTECH GLOBAL PTE LTD (archived November 2022)
+  exodus:
+    url: https://web.archive.org/web/20260211135236/https://reports.exodus-privacy.eu.org/en/reports/com.now.vpn/latest/
+    title: Exodus Privacy report for Now VPN 4.2.295 (February 2026, archived)
+  ttp-2025:
+    url: https://www.techtransparencyproject.org/articles/apple-offers-apps-with-ties-to-chinese-military
+    title: Tech Transparency Project, Apple Offers Apps With Ties to Chinese Military (1 April 2025)
