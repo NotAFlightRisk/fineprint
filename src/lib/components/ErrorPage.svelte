@@ -1,9 +1,13 @@
 <script lang="ts">
+  import { afterNavigate } from '$app/navigation';
   import { page } from '$app/state';
+  import { track } from '#lib/plausible.ts';
   import { site } from '#lib/site.ts';
 
   let { status, providers = [] }: { status: number; providers?: { id: string; name: string }[] } =
     $props();
+
+  afterNavigate(() => status === 404 && track('404', { path: location.pathname }));
 
   const bug = $derived(encodeURIComponent(`[Bug]: ${status} on ${page.url.pathname}`));
 

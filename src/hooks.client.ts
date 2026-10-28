@@ -1,4 +1,5 @@
-import type { HandleClientError } from '@sveltejs/kit/hooks';
+import type { ClientInit, HandleClientError } from '@sveltejs/kit/hooks';
+import { loadPlausible } from '#lib/plausible.ts';
 
 const dsn = import.meta.env.PUBLIC_SENTRY_DSN;
 let sentry: Promise<(error: unknown) => void> | undefined;
@@ -18,3 +19,6 @@ if (dsn) {
 export const handleError: HandleClientError = ({ kind, error }) => {
   if (dsn && kind === 'unknown') report(error);
 };
+
+// before any page mounts, so a 404 on arrival still counts
+export const init: ClientInit = () => loadPlausible();
