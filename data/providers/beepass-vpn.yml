@@ -1,0 +1,309 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: BeePass VPN
+icon: beepass-vpn.png
+checked: 2026-10-28
+
+criteria:
+  identity:
+    website:
+      value: https://beepassvpn.com/en/
+      sources: [home]
+    legal_entity:
+      value: ASL19 Inc.
+      note: >-
+        The terms only name "BeePass VPN", located in Canada. ASL19 Inc. publishes the apps and is an
+        Ontario business corporation, incorporated on 12 April 2012.
+      sources: [terms, play, app-store, register]
+    owner:
+      value: null
+      note: >-
+        ASL19 Inc. doesn't publish who holds its shares. It says partnerships, enterprise work and public
+        funding keep BeePass free, without naming the funders.
+      sources: [register, play]
+    founded:
+      value: 2021
+      note: The first beta was on Google Play in January 2021, and version 1.0.0 followed that February.
+      sources: [play-2021, source-tags]
+    team:
+      value: partial
+      note: >-
+        Founder Ali Bangi speaks for ASL19 publicly, but most of its staff work under pseudonyms because of
+        threats from Iran.
+      sources: [betakit, otf-assessment]
+    sister_brands:
+      value: []
+      note: ASL19 also runs Paskoocheh, an app store for circumvention tools, but no other VPN.
+      sources: [asl19-projects]
+    acquisitions:
+      value: []
+      sources: [register, asl19-about]
+
+  jurisdiction:
+    hq:
+      value: CA
+      sources: [terms, register]
+    entities:
+      value: [CA]
+      sources: [register]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      note: The FAQ adds that the team can in theory see what passes through its servers.
+      sources: [policy, faq]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [policy]
+    timestamps:
+      value: 'yes'
+      evidence: claimed
+      note: >-
+        It keeps the bytes each access key transfers every hour, which shows the hours you were online. The
+        bots tie each key to your email or Telegram ID. No retention period is given beyond deleting your
+        details seven days after you unsubscribe.
+      sources: [policy, faq, terms]
+    bandwidth:
+      value: 'yes'
+      evidence: claimed
+      note: Hourly byte counts per access key, tied to your email or Telegram ID.
+      sources: [policy, faq]
+    source_ip:
+      value: null
+      note: >-
+        The policy says it doesn't collect your IP address and keeps the country you connect from, but a 2026
+        report on Iran's June 2025 shutdown charts unique IPs connected to BeePass's servers by ISP.
+      sources: [policy, filterwatch-2026]
+    proven: []
+    policy: https://beepassvpn.com/en/privacy-policy/
+
+  transparency:
+    audits:
+      value:
+        - date: 2024-03-15
+          auditor: Leviathan Security Group
+          scope: apps
+          source: masa-2024
+      evidence: verified
+      note: >-
+        A MASA check of the Android app (version 79). BeePass also points to Cure53's and Radically Open
+        Security's audits of Jigsaw's Outline, which don't cover BeePass's own code or servers.
+      sources: [masa-2024, faq]
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: optional
+      note: >-
+        Server keys come from an email bot or a Telegram bot. The Telegram route keeps your Telegram ID,
+        username and public profile, including your phone number if it's shown.
+      sources: [policy, terms]
+    personal_data:
+      value: []
+      sources: [terms]
+    payment:
+      value: []
+      note: It's free.
+      sources: [home]
+
+  security:
+    protocols:
+      value: [other]
+      note: Shadowsocks, through Jigsaw's Outline client.
+      sources: [asl19-project, about-strings]
+    post_quantum:
+      value: none
+      note: Shadowsocks uses a pre-shared key with no key exchange.
+      sources: [asl19-project]
+    kill_switch:
+      value: null
+      note: BeePass doesn't document one. The app can reconnect by itself when the device restarts.
+      sources: [about-strings]
+    dns:
+      value: third_party
+      note: The Android app picks OpenDNS, Cloudflare or Quad9 at random, as of the last published source.
+      sources: [vpn-tunnel]
+
+  infra:
+    ram_only: null
+    hosting:
+      value: null
+      note: >-
+        The policy says data sits on third-party servers in Australia, Brazil, France, Germany, Korea, the
+        Netherlands, Norway and the US, without saying whether that includes the VPN servers.
+      sources: [policy]
+    virtual_locations: null
+    servers:
+      value: null
+      note: Not published. Each user gets keys for servers the bots hand out.
+      sources: [faq]
+    countries: null
+
+  features:
+    connections:
+      value: null
+      note: An access key can be added on more than one device, and no limit is stated.
+      sources: [faq]
+    multihop: false
+    obfuscation:
+      value: [shadowsocks]
+      note: Servers aren't listed publicly, which makes them harder for censors to find and block.
+      sources: [faq, asl19-project]
+    port_forwarding:
+      value: null
+      note: BeePass doesn't document it.
+    split_tunnel:
+      value: null
+      note: BeePass doesn't document it.
+    blocking: []
+
+  clients:
+    platforms:
+      value: [android, ios]
+      note: The published code also builds for Windows and macOS, but only the phone apps are offered.
+      sources: [home, beepass-ui]
+    open_source:
+      value: some
+      note: >-
+        The Apache-2.0 client source stops at version 1.7.0 from March 2024, behind the current apps
+        (iOS 1.9.0 from May 2025, Android updated in September 2026). Its server code is also published.
+      sources: [source-tags, app-store, play, server-code]
+    telemetry:
+      value: forced
+      evidence: claimed
+      note: >-
+        Crash reports go to Sentry with your country, device and the last 100 in-app events, and the app
+        can't be set up without agreeing to data collection. The policy also lists Firebase.
+      sources: [policy, reporter, onboarding]
+    fdroid:
+      value: false
+      sources: [fdroid]
+
+  pricing:
+    monthly:
+      value: { amount: 0, currency: USD }
+      note: Free.
+      sources: [home]
+    best:
+      value: { amount: 0, currency: USD }
+      sources: [home]
+    best_term:
+      value: null
+      grade: na
+      note: It's free.
+      sources: [home]
+    renewal_increase:
+      value: 0
+      note: Nothing renews.
+      sources: [home]
+    free_tier:
+      value: true
+      note: Instead of ads, each connection opens a landing page from a partner organisation in your browser.
+      sources: [play, landing-page]
+    refund_days:
+      value: null
+      grade: na
+      note: It's free.
+      sources: [home]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        Its Play listing calls it fully open source, while the published client code stops at version 1.7.0
+        from March 2024.
+      sources: [play, source-tags]
+    affiliates: false
+    review_sites: false
+    activism:
+      value: true
+      note: ASL19 was set up in 2012 to get people in Iran past internet censorship, and also runs fact-checking and transparency projects.
+      sources: [asl19-about, asl19-projects]
+
+  other:
+    concerns:
+      value:
+        - summary: >-
+            The app offers a built-in default server whose key everyone shares, so anyone watching your
+            network, your ISP included, can see which sites you visit and read unencrypted traffic. The app
+            warns you before you use it.
+          severity: serious
+          source: about-strings
+
+refs:
+  home:
+    url: https://beepassvpn.com/en/
+    title: BeePass VPN home page
+  faq:
+    url: https://beepassvpn.com/en/#faq
+    title: BeePass VPN FAQs
+  policy:
+    url: https://beepassvpn.com/en/privacy-policy/
+    title: BeePass VPN Privacy Policy (updated 29 June 2023)
+  terms:
+    url: https://beepassvpn.com/en/terms-of-service/
+    title: BeePass VPN Terms of Service (updated 6 January 2021)
+  play:
+    url: https://play.google.com/store/apps/details?id=com.beepassvpn.free.vpn.secure&hl=en&gl=US
+    title: 'BeePass VPN: Easy & Secure on Google Play'
+  play-2021:
+    url: https://web.archive.org/web/20210107141119/https://play.google.com/store/apps/details?id=com.beepassvpn.free.vpn.secure
+    title: BeePass VPN on Google Play, January 2021 (Wayback Machine)
+  app-store:
+    url: https://apps.apple.com/us/app/beepass-vpn/id1556325746
+    title: BeePass VPN on the US App Store
+  register:
+    url: https://ised-isde.canada.ca/cbr/srch/api/v1/search?fq=keyword:%7BASL19%7D&lang=en&queryaction=fieldquery&sortfield=score&sortorder=desc
+    title: Canada's Business Registries, ASL19 INC. (Ontario corporation 2323919)
+  asl19-about:
+    url: https://asl19.org/en/about
+    title: About ASL19
+  asl19-projects:
+    url: https://asl19.org/en/projects
+    title: ASL19 projects
+  asl19-project:
+    url: https://asl19.org/en/projects/beepass-vpn
+    title: ASL19, BeePass VPN
+  betakit:
+    url: https://web.archive.org/web/2026/https://betakit.com/how-toronto-based-asl19-is-using-tech-to-promote-freedom-of-speech/
+    title: BetaKit, How Toronto-based ASL19 is using tech to promote freedom of speech (2016)
+  otf-assessment:
+    url: https://www.opentech.fund/security-safety-audits/asl19/
+    title: Open Technology Fund, ASL19 security assessment by Subgraph
+  source-tags:
+    url: https://github.com/ASL-19/beepassvpn-client/tags
+    title: ASL-19/beepassvpn-client tags on GitHub
+  beepass-ui:
+    url: https://github.com/ASL-19/beepassvpn-client/blob/main/src/beepass-ui/README.markdown
+    title: beepassvpn-client, BeePass UI build docs
+  about-strings:
+    url: https://github.com/ASL-19/beepassvpn-client/blob/main/src/beepass-ui/src/strings/en.json
+    title: beepassvpn-client, English app strings
+  vpn-tunnel:
+    url: https://github.com/ASL-19/beepassvpn-client/blob/main/src/cordova/plugin/android/java/org/outline/vpn/VpnTunnel.java
+    title: beepassvpn-client, Android VpnTunnel.java
+  reporter:
+    url: https://github.com/ASL-19/beepassvpn-client/blob/main/src/beepass-ui/src/utils/reporter.ts
+    title: beepassvpn-client, Sentry reporter
+  onboarding:
+    url: https://github.com/ASL-19/beepassvpn-client/blob/main/src/beepass-ui/src/components/OnboardingPage/OnboardingSlidesStep.tsx
+    title: beepassvpn-client, onboarding data collection dialog
+  landing-page:
+    url: https://github.com/ASL-19/beepassvpn-client/blob/main/src/beepass-ui/src/utils/openLandingPage.ts
+    title: beepassvpn-client, openLandingPage.ts
+  server-code:
+    url: https://github.com/ASL-19/beepass-server
+    title: ASL-19/beepass-server on GitHub
+  fdroid:
+    url: https://search.f-droid.org/?q=beepass&lang=en
+    title: F-Droid search for beepass
+  masa-2024:
+    url: https://appdefensealliance.dev/reports/com.beepassvpn.free.vpn.secure_1710460800000000.pdf
+    title: Leviathan Security Group, MASA assessment of BeePass VPN for Android, version 79 (2024)
+  filterwatch-2026:
+    url: https://filter.watch/wp-content/uploads/sites/2/2026/01/Irans-Stealth-Blackout_-A-Multi-stakeholder-Analysis-of-the-June-2025-Internet-Shutdown.pdf
+    title: "Filterwatch, Iran's Stealth Blackout: the June 2025 internet shutdown (2026), figure 4.9"
