@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: Seed4.Me
 icon: seed4-me.png
-checked: 2026-10-27
+checked: 2026-10-28
 
 criteria:
   identity:
@@ -23,9 +23,11 @@ criteria:
       note: It opened as an invite-only VPN club in January 2013 and became an open service in December 2017.
       sources: [about]
     team:
-      value: anonymous
-      note: Nobody running the company is named. Blog posts carry first names only.
-      sources: [about, split-tunnel]
+      value: partial
+      note: >-
+        Co-founder Dmitry Zelenkovsky lists Seed4.Me and S4M Tech on his CV, and its macOS help names him as the
+        app's login item. The site itself names nobody.
+      sources: [founder-cv, macos-login, about]
     sister_brands:
       value: []
       sources: [play-developer]
@@ -52,16 +54,16 @@ criteria:
       sources: [privacy, faq]
     timestamps:
       value: null
-      note: The policy keeps general connection logs for seven days, without saying what's in them. The FAQ says it keeps no connection logs.
-      sources: [privacy, faq]
+      note: The policy keeps general connection logs for seven days without saying what's in them, and a 2013 post says it keeps login information for seven days. The FAQ says it keeps no connection logs.
+      sources: [privacy, faq, logs-2013]
     bandwidth:
       value: null
       note: The FAQ says it collects minimal usage information to fix technical issues, without saying whether that includes data use.
       sources: [faq]
     source_ip:
       value: null
-      note: The policy doesn't say whether its seven-day connection logs include your IP address.
-      sources: [privacy]
+      note: The policy doesn't say whether its seven-day connection logs, which a 2013 post calls login information, include your IP address.
+      sources: [privacy, logs-2013]
     proven: []
     policy: https://seed4.me/pages/privacy-policy
 
@@ -74,9 +76,9 @@ criteria:
 
   account:
     email:
-      value: null
-      note: The website checkout and the policy require an email, but the app store listings say no registration is required.
-      sources: [pricing, privacy, play, app-store]
+      value: optional
+      note: The apps work without registering and Google Play lists email as optional, but buying on the website needs one and the 2018 policy says it's needed to connect.
+      sources: [play, play-datasafety, app-store, pricing, privacy]
     personal_data:
       value: []
       note: Card payments ask for a name and postcode for billing.
@@ -89,8 +91,8 @@ criteria:
   security:
     protocols:
       value: [openvpn]
-      note: Its own build of OpenVPN with an added obfuscation layer. It doesn't say what the mobile apps use.
-      sources: [windows-app, mac-app]
+      note: Its own build of OpenVPN with an added obfuscation layer on desktop, and OpenVPN in the Android app.
+      sources: [windows-app, mac-app, apk]
     post_quantum:
       value: none
       sources: [windows-app]
@@ -108,8 +110,9 @@ criteria:
       value: null
       sources: [locations]
     hosting:
-      value: null
-      sources: [locations, about]
+      value: rented
+      note: Server addresses built into its Android app belong to hosting firms such as Leaseweb, M247 and Vultr, and in 2016 it said it ran both virtual and physical servers.
+      sources: [apk, ip-leaseweb, ip-m247, ip-vultr, tops-2016]
     virtual_locations:
       value: null
       note: It lists a China optimised cluster as a location without saying where it sits.
@@ -133,8 +136,8 @@ criteria:
     obfuscation:
       value: [proprietary]
       evidence: claimed
-      note: An obfuscation layer on top of OpenVPN in the desktop apps, not described further.
-      sources: [windows-app, mac-app]
+      note: An obfuscation layer on top of OpenVPN in the desktop apps, not described further. The Android app bundles Cloak, an open source transport that dresses traffic up as visits to a website.
+      sources: [windows-app, mac-app, apk]
     port_forwarding: null
     split_tunnel:
       value: true
@@ -154,8 +157,8 @@ criteria:
       sources: [download]
     telemetry:
       value: null
-      note: Its App Store label declares usage data collected for analytics, without saying whether you can turn it off.
-      sources: [app-store]
+      note: The Android app carries Firebase Analytics and the Facebook SDK, and its store labels declare device IDs and usage data for analytics, without saying whether you can turn it off.
+      sources: [apk, play-datasafety, app-store]
     fdroid:
       value: false
       sources: [download]
@@ -166,7 +169,7 @@ criteria:
       sources: [pricing]
     best:
       value: { amount: 2.99, currency: USD }
-      note: $107.55 for three years.
+      note: $107.55 for three years. Paying in crypto doubles the time you get.
       sources: [pricing]
     best_term:
       value: 36
@@ -186,8 +189,8 @@ criteria:
   ethics:
     misleading_claims:
       value: true
-      note: It promises to "hide IP so no one can trace you", "Surf easy and 100% anonymously online" and "absolute privacy".
-      sources: [app-store, faq]
+      note: It promises to "hide IP so no one can trace you", "Surf easy and 100% anonymously online" and "absolute privacy". Its store listings say no log is kept, while the policy keeps connection logs for seven days.
+      sources: [app-store, faq, play, privacy]
     affiliates:
       value: true
       sources: [affiliate, privacy]
@@ -252,3 +255,30 @@ refs:
   kill-switch-blog:
     url: https://seed4.me/blog/google-wrong-location-vpn/
     title: Why Google shows a different location when connecting to VPN?
+  apk:
+    url: https://seed4.me/files/seed4me-vpn-2.2.86.apk
+    title: Seed4.Me VPN for Android 2.2.86 (direct download APK)
+  play-datasafety:
+    url: https://play.google.com/store/apps/datasafety?id=me.seed4.app.android
+    title: Seed4.Me VPN Proxy data safety on Google Play
+  logs-2013:
+    url: https://seed4.me/blog/no-logs-on-vpn-servers/
+    title: Zero logs on VPN servers (2013)
+  tops-2016:
+    url: https://seed4.me/blog/that-one-privacy-site/
+    title: That One Privacy Site, you must see it! Part 1 (2016)
+  ip-leaseweb:
+    url: https://bgp.he.net/ip/185.49.71.92
+    title: 185.49.71.92 on Leaseweb's network (Hurricane Electric BGP Toolkit)
+  ip-m247:
+    url: https://bgp.he.net/ip/176.97.67.244
+    title: 176.97.67.244 on M247's network (Hurricane Electric BGP Toolkit)
+  ip-vultr:
+    url: https://bgp.he.net/ip/139.84.164.12
+    title: 139.84.164.12 on Vultr's network (Hurricane Electric BGP Toolkit)
+  founder-cv:
+    url: https://zelenkovsky.com/assets/files/dmitry-zelenkovsky.pdf
+    title: Dmitry Zelenkovsky, CV
+  macos-login:
+    url: https://seed4.me/blog/fix-preparing-problem-macos/
+    title: Fixing the "Preparing..." problem on macOS
