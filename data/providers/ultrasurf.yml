@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: Ultrasurf
 icon: ultrasurf.png
-checked: 2026-10-26
+checked: 2026-10-28
 
 criteria:
   identity:
@@ -53,9 +53,9 @@ criteria:
     timestamps:
       value: null
       note: >-
-        UltraReach doesn't say. In 2012 it said it kept some logs for a month to check how well its system
-        worked.
-      sources: [response-2012]
+        Its policy doesn't say, though the Play listing promises no access logs. In 2012 UltraReach said it
+        kept some logs for a month to check how well its system worked.
+      sources: [play, response-2012]
     bandwidth:
       value: null
       note: UltraReach doesn't say.
@@ -167,8 +167,10 @@ criteria:
       sources: [terms, npr]
     telemetry:
       value: null
-      note: UltraReach doesn't say. Both app stores' privacy labels say no data is collected.
-      sources: [play, app-store]
+      note: >-
+        UltraReach doesn't say. Both app stores' privacy labels say no data is collected, but the 2023 Android
+        build on its own download mirror bundled Firebase Analytics and Google's AdMob.
+      sources: [play, app-store, apk-2023]
     fdroid:
       value: false
       sources: [fdroid]
@@ -263,3 +265,6 @@ refs:
   ada-2022:
     url: https://web.archive.org/web/20260103091953/https://ultrasurf.us/download/audit_report.pdf
     title: NowSecure, App Defense Alliance assessment of Ultrasurf for Android 2.3.0 (2022, Wayback Machine)
+  apk-2023:
+    url: https://github.com/wujieliulan/download/blob/master/u.apk
+    title: Ultrasurf for Android 3.0.6 (2023) on UltraReach's GitHub download mirror
