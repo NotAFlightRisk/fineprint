@@ -1,0 +1,215 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: VPN Lumos
+icon: vpn-lumos.png
+checked: 2026-10-30
+
+criteria:
+  identity:
+    website:
+      value: https://lumos.mobi
+      sources: [home]
+    legal_entity:
+      value: Lumos LLC
+      note: >-
+        The Minsk company that sells the iOS app and signs its terms. The Android app is published by Midpoint
+        Security FZCO in Dubai, and its privacy policy names both companies.
+      sources: [eula, app-store, play, policy-android]
+    owner:
+      value: null
+      note: Nobody behind Lumos or Midpoint Security is named, and their shared policy calls them affiliates.
+      sources: [policy-android]
+    founded:
+      value: 2018
+      note: The iOS app was released in May 2018, then sold as Secure Net.
+      sources: [app-store-lookup, our-apps]
+    team:
+      value: anonymous
+      note: Neither company's website names anyone running it.
+      sources: [home, midpoint]
+
+  jurisdiction:
+    hq:
+      value: BY
+      sources: [eula, app-store]
+    entities:
+      value: [BY, AE]
+      sources: [eula, play]
+
+  logging:
+    traffic:
+      value: null
+      note: >-
+        Neither policy mentions VPN traffic. The Android app's policy, written for all its apps, lists "URLs you
+        have visited" among what it collects, without excluding the VPN.
+      sources: [policy-ios, policy-android]
+    dns:
+      value: null
+      note: Neither policy mentions DNS requests.
+      sources: [policy-ios, policy-android]
+    timestamps:
+      value: null
+      note: Neither policy mentions connection times.
+      sources: [policy-ios, policy-android]
+    bandwidth:
+      value: null
+      note: Neither policy mentions how much data you use.
+      sources: [policy-ios, policy-android]
+    source_ip:
+      value: null
+      note: Both policies list your IP address among what they collect, without saying for how long or excluding the VPN.
+      sources: [policy-ios, policy-android]
+    proven: []
+    policy: https://lumos.mobi/policy/index.html
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: optional
+      sources: [play-data-safety]
+    personal_data:
+      value: []
+      note: The iOS policy's boilerplate mentions a name and phone number at registration, but the Android data safety form lists only an optional email.
+      sources: [policy-ios, play-data-safety]
+    payment:
+      value: [app_store]
+      sources: [app-store, play]
+
+  security:
+    protocols:
+      value: [openvpn, wireguard, proprietary]
+      evidence: claimed
+      note: Only the iOS listing names them, including its own Thestral protocol.
+      sources: [app-store]
+    post_quantum:
+      value: none
+      note: Nothing is published about its key exchange.
+    kill_switch:
+      value: null
+      note: It doesn't mention a kill switch.
+    dns:
+      value: null
+      note: It doesn't say whose DNS servers the apps use.
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say how its servers are run.
+    hosting:
+      value: null
+      note: It doesn't say whether it owns its servers.
+    virtual_locations:
+      value: null
+      note: It doesn't say whether any locations are virtual.
+    servers:
+      value: 1000
+      evidence: claimed
+      sources: [app-store]
+    countries:
+      value: 45
+      evidence: claimed
+      sources: [app-store]
+
+  features:
+    connections:
+      value: null
+      note: It doesn't say how many devices a subscription covers.
+    multihop: false
+    obfuscation:
+      value: null
+      note: It doesn't say whether it disguises VPN traffic.
+    port_forwarding: false
+    split_tunnel:
+      value: null
+      note: It doesn't say.
+
+  clients:
+    platforms:
+      value: [ios, android]
+      sources: [app-store, play]
+    open_source: none
+    telemetry:
+      value: null
+      note: >-
+        The Android app includes Amplitude, Firebase Analytics and Crashlytics, and its data safety form lists app
+        interactions and crash logs as collected, without saying whether you can turn that off.
+      sources: [exodus, play-data-safety]
+    trackers:
+      value: 5
+      sources: [exodus]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 11.99, currency: USD }
+      note: The plan the US App Store listing advertises, after a 3-day free trial.
+      sources: [app-store]
+    best:
+      value: { amount: 3.83, currency: USD }
+      note: $45.99 a year, among the US App Store's in-app purchases. Android prices only show in the app.
+      sources: [app-store]
+    best_term:
+      value: 12
+      sources: [app-store]
+    renewal_increase:
+      value: null
+      note: It doesn't say what its plans renew at.
+    free_tier:
+      value: false
+      note: Only a free trial.
+      sources: [app-store, play]
+    refund_days:
+      value: 0
+      note: The terms say there are no refunds once a subscription's been charged, so it's down to Apple or Google.
+      sources: [eula]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        Its website says "We do not store user information", while its policies collect your IP address and
+        device identifiers and keep personal data for a year after you leave.
+      sources: [home, policy-ios, policy-android]
+    affiliates: false
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://lumos.mobi/
+    title: Lumos homepage
+  our-apps:
+    url: https://lumos.mobi/our-apps.html
+    title: Lumos, our apps
+  midpoint:
+    url: https://midpoint.software/
+    title: Midpoint Security homepage
+  eula:
+    url: https://lumos.mobi/eula/termsofuse.html
+    title: Lumos LLC End-User License Agreement
+  policy-ios:
+    url: https://lumos.mobi/policy/onionvpn-policy.html
+    title: Lumos LLC privacy policy and data usage (linked from the iOS app)
+  policy-android:
+    url: https://lumos.mobi/policy/index.html
+    title: LLC Lumos and Midpoint Security privacy policy (effective 20 June 2020, linked from the Android app)
+  app-store:
+    url: https://apps.apple.com/us/app/vpn-lumos-open-connect-usa/id1373844471
+    title: 'VPN Lumos: Open & Connect USA on the App Store (US)'
+  app-store-lookup:
+    url: https://itunes.apple.com/lookup?id=1373844471&country=us
+    title: 'VPN Lumos: Open & Connect USA, App Store lookup record'
+  play:
+    url: https://play.google.com/store/apps/details?id=private.internet.access.vpn.lumos
+    title: 'VPN Lumos: Fast VPN on Google Play'
+  play-data-safety:
+    url: https://play.google.com/store/apps/datasafety?id=private.internet.access.vpn.lumos
+    title: VPN Lumos data safety on Google Play
+  exodus:
+    url: https://web.archive.org/web/20251106235755/https://reports.exodus-privacy.eu.org/en/reports/private.internet.access.vpn.lumos/latest/
+    title: Exodus Privacy report for VPN Lumos 1.69.5 (October 2025, archived)
