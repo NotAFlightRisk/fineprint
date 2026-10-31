@@ -32,9 +32,9 @@ criteria:
     hq:
       value: CA
       note: >-
-        Canada's lawful access bill C-22, before the Senate as of September 2026, could force
+        Canada's lawful access bill C-22, in Senate committee as of October 2026, could force
         metadata retention. Windscribe says it's preparing to leave Canada if it has to.
-      sources: [terms, c22-letter, canary]
+      sources: [terms, c22-letter, canary, c22-bill]
     entities:
       value: [CA]
       sources: [terms]
@@ -318,6 +318,9 @@ refs:
   c22-letter:
     url: https://windscribe.com/blog/we-signed-a-letter-against-c22/
     title: We Signed a Letter Agreeing With Nord and ExpressVPN
+  c22-bill:
+    url: https://www.parl.ca/legisinfo/en/bill/45-1/c-22
+    title: LEGISinfo - C-22, Lawful Access Act, 2026
   canary:
     url: https://windscribe.com/canary
     title: Windscribe Warrant Canary
