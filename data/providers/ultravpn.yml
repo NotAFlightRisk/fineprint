@@ -24,8 +24,8 @@ criteria:
         Protect Limited, which was set up in June 2018.
       sources: [home-2019, network-protect-ch]
     team:
-      value: partial
-      note: There's no UltraVPN leadership page, but Pango's site names its president and other executives.
+      value: public
+      note: Pango, which runs it, names its president and other executives.
       sources: [pango-team]
     sister_brands:
       value: [Hotspot Shield, Betternet, Touch VPN, VPN 360, TotalAV VPN, OVPN, VPN in Touch]

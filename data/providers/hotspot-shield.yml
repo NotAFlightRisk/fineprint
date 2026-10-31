@@ -17,8 +17,8 @@ criteria:
         2024. Pango Group then merged with Total Security, TotalAV's maker, to form Point Wild.
       sources: [aura-pango-2020, aura-split-2024, point-wild-merger, comparitech-disclosure]
     team:
-      value: partial
-      note: There's no Hotspot Shield leadership page, but Pango's site names its president and other executives.
+      value: public
+      note: Pango, which runs it, names its president and other executives.
       sources: [pango-team]
     sister_brands:
       value: [Betternet, Touch VPN, UltraVPN, VPN 360, TotalAV VPN, OVPN, VPN in Touch]

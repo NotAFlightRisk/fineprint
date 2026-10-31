@@ -21,8 +21,8 @@ criteria:
       note: Announced in March 2022. The iOS app's first release was on 21 March 2022.
       sources: [launch-2022, app-store]
     team:
-      value: partial
-      note: G DATA's board and supervisory board are named, but no one running the VPN is.
+      value: public
+      note: G DATA, which sells it, names its board and supervisory board.
       sources: [who-we-are, accounts-2024]
     sister_brands:
       value: []

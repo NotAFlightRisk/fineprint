@@ -17,8 +17,8 @@ criteria:
       value: Gen Digital
       sources: [terms-of-sale, lsa]
     team:
-      value: partial
-      note: Gen's executives are named, but no one running the VPN is.
+      value: public
+      note: Gen Digital, which sells it, names its executives.
       sources: [gen-leadership]
     sister_brands:
       value: [HMA VPN, Avast Premium VPN, AVG Secure VPN, Avira Phantom VPN]

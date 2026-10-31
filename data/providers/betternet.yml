@@ -22,8 +22,8 @@ criteria:
       note: Betternet doesn't say when it launched. Its website was already offering the free VPN in March 2015.
       sources: [home-2015]
     team:
-      value: partial
-      note: There's no Betternet leadership page, but Pango's site names its president and other executives.
+      value: public
+      note: Pango, which runs it, names its president and other executives.
       sources: [pango-team]
     sister_brands:
       value: [Hotspot Shield, Touch VPN, UltraVPN, VPN 360, TotalAV VPN, OVPN, VPN in Touch]
