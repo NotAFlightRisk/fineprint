@@ -1,0 +1,269 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: RostamVPN
+icon: rostam-vpn.png
+checked: 2026-10-31
+
+criteria:
+  identity:
+    website:
+      value: https://rostam.app/
+      sources: [home]
+    legal_entity:
+      value: Internet Mastering & Company, Inc.
+      note: >-
+        The policy and App Store name Red Team LTD, which the founder's page says is a trading name of
+        Internet Mastering & Company, Inc., the developer on its Google Play listing.
+      sources: [policy, app-store, red-founder, play-2026]
+    owner:
+      value: null
+      note: Nobody says who holds the shares. Founder Sina Rabbani has sat on Red Team LTD's board since 2012.
+      sources: [red-founder]
+    founded:
+      value: 2019
+      note: The iOS app came out in November 2019. Red Team LTD says it has run tunnels for high-risk users since 2012.
+      sources: [itunes, red-about]
+    team:
+      value: partial
+      note: The founder is named with a full CV, and the other two named staff go by handles.
+      sources: [red-team, red-founder]
+    sister_brands:
+      value: [RedVPN, InternetPro]
+      note: Both run on the same company's network and transport, and InternetPro calls itself RostamVPN's sibling.
+      sources: [red-about, internetpro, build]
+    acquisitions:
+      value: []
+      sources: [red-about]
+
+  jurisdiction:
+    hq:
+      value: US
+      note: Red Team LTD is in Irvine, California, and registers its IP addresses to a Sacramento mailbox.
+      sources: [red-about, arin]
+    entities:
+      value: [US]
+      note: The founder also lists a RedVPN, Inc., founded in 2022, which runs the sister brand.
+      sources: [red-founder, arin]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [policy]
+    dns:
+      value: temporary
+      evidence: claimed
+      note: >-
+        Only with Protect Mode on: each destination goes to its servers with your device ID, and a hashed
+        list of the day's destinations is kept per device until 25 hours after your last check.
+      sources: [policy]
+    timestamps:
+      value: 'yes'
+      evidence: claimed
+      note: The time of each device's last connection, with no retention period given.
+      sources: [policy]
+    bandwidth:
+      value: aggregate
+      evidence: claimed
+      note: A running total of data carried per device.
+      sources: [policy]
+    source_ip:
+      value: 'yes'
+      evidence: claimed
+      note: The IP address you connect from, with its country and network, kept per device to run your plan and stop abuse.
+      sources: [policy]
+    proven: []
+    policy: https://rostam.app/privacy/
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: none
+      note: There's no account. The app makes up a device ID on first run.
+      sources: [policy]
+    personal_data:
+      value: []
+      sources: [policy]
+    payment:
+      value: [app_store]
+      note: >-
+        The policy also mentions buying on its website, and the Android app has card (Stripe) and crypto
+        (NOWPayments) checkouts, but neither is shown publicly.
+      sources: [policy, app-store, apk]
+
+  security:
+    protocols:
+      value: [proprietary]
+      note: >-
+        Its own "redsocket" transport, a Noise handshake inside an HTTP upgrade on port 80. The app also
+        carries a WireGuard-over-TCP transport, switched off in its shipped config.
+      sources: [source-readme, config]
+    post_quantum:
+      value: none
+      note: The handshake is Noise NK over X25519.
+      sources: [source-readme]
+    kill_switch:
+      value: null
+      note: >-
+        It has none of its own. The Android app points you to the system's "Block connections without VPN"
+        setting, and nothing's said for iOS.
+      sources: [apk]
+    dns:
+      value: null
+      note: The Android app hands hostnames to its servers to resolve, without saying whose resolver they use.
+      sources: [apk]
+
+  infra:
+    ram_only: null
+    hosting:
+      value: mixed
+      evidence: claimed
+      note: >-
+        Its own servers in Los Angeles and rented dedicated ones in Falkenstein, behind entry points on cloud
+        addresses. Some addresses are registered to Red Team LTD, others to AWS.
+      sources: [red-network, red-about, config, arin]
+    virtual_locations:
+      value: none
+      evidence: claimed
+      sources: [red-about]
+    servers:
+      value: null
+      note: It deliberately doesn't publish server counts or addresses.
+      sources: [red-about]
+    countries:
+      value: 2
+      note: Exit servers in the US and Germany.
+      sources: [red-about, red-network]
+
+  features:
+    connections:
+      value: null
+      note: A plan is tied to the device ID, and the App Store plans support Family Sharing.
+      sources: [policy, app-store]
+    multihop:
+      value: null
+      note: Traffic passes an entry point and then a back-end server, but nothing says whether the entry point can read it.
+      sources: [red-network]
+    obfuscation:
+      value: [proprietary]
+      note: The transport looks like plain web traffic, with CloudFront and Fastly fronts as fallbacks.
+      sources: [source-readme, config]
+    port_forwarding:
+      value: null
+      note: RostamVPN doesn't document it.
+    split_tunnel:
+      value: true
+      note: A "protected apps" list in the Android app.
+      sources: [settings]
+    blocking:
+      value: [malware]
+      note: Protect Mode, off by default, refuses hosts on a threat list used for malware, phishing and botnet control.
+      sources: [home, policy]
+
+  clients:
+    platforms:
+      value: [android, ios]
+      note: The Android app is no longer on Google Play, and comes as an APK from its own site.
+      sources: [home, apk, play-2026]
+    open_source:
+      value: some
+      note: The Android app's source is on GitHub under Apache-2.0, and the iOS app's isn't.
+      sources: [source]
+    telemetry:
+      value: none
+      evidence: claimed
+      note: >-
+        The policy says there's no analytics code, and the Android source links no ad or analytics SDK for
+        this brand. Its old Google Play listing said "Contains ads".
+      sources: [policy, build, play-2026]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 3.99, currency: USD }
+      sources: [app-store]
+    best:
+      value: { amount: 3.33, currency: USD }
+      note: $39.99 a year.
+      sources: [app-store]
+    best_term: 12
+    renewal_increase:
+      value: 0
+      sources: [app-store]
+    free_tier:
+      value: false
+      note: >-
+        A three-day trial, then it stops. It's free with no limit in Iran, Russia, Cuba and Syria, paid for by
+        donors and subscribers elsewhere.
+      sources: [home]
+    refund_days:
+      value: null
+      note: Not stated. Store purchases follow Apple's and Google's refund rules.
+      sources: [policy]
+
+  ethics:
+    misleading_claims: false
+    affiliates: false
+    review_sites: false
+    activism:
+      value: true
+      note: It's free in Iran, Russia, Cuba and Syria, and the founder co-founded Access Now.
+      sources: [home, red-founder]
+
+refs:
+  home:
+    url: https://rostam.app/
+    title: RostamVPN home page
+  policy:
+    url: https://rostam.app/privacy/
+    title: RostamVPN Privacy (effective 27 October 2026)
+  app-store:
+    url: https://apps.apple.com/us/app/id1487875612
+    title: RostamVPN on the US App Store
+  itunes:
+    url: https://itunes.apple.com/lookup?id=1487875612
+    title: App Store record for RostamVPN (released 21 November 2019)
+  play-2026:
+    url: https://web.archive.org/web/20260818200241/https://play.google.com/store/apps/details?id=com.rostamvpn.android
+    title: RostamVPN on Google Play, August 2026 (Wayback Machine)
+  apk:
+    url: https://rostam.app/download
+    title: RostamVPN Android APK (version 6.7.0)
+  source:
+    url: https://github.com/RostamVPN/rostamvpn-android
+    title: RostamVPN/rostamvpn-android on GitHub
+  source-readme:
+    url: https://github.com/RostamVPN/rostamvpn-android/blob/main/README.md
+    title: rostamvpn-android README, transports and wire protocol
+  config:
+    url: https://github.com/RostamVPN/rostamvpn-android/blob/main/android/gen/android/app/src/main/assets/default-config.json
+    title: rostamvpn-android, bundled default-config.json
+  build:
+    url: https://github.com/RostamVPN/rostamvpn-android/blob/main/android/gen/android/app/build.gradle.kts
+    title: rostamvpn-android, app build flavours
+  settings:
+    url: https://github.com/RostamVPN/rostamvpn-android/blob/main/android/gen/android/app/src/main/java/com/rostamvpn/android/ui/components/SettingsSheet.kt
+    title: rostamvpn-android, settings screen
+  red-about:
+    url: https://vpn.red/about/
+    title: About Red Team LTD
+  red-team:
+    url: https://vpn.red/team/
+    title: Red Team LTD, team
+  red-founder:
+    url: https://vpn.red/founder/
+    title: Red Team LTD, founder Sina Rabbani
+  red-network:
+    url: https://vpn.red/network/
+    title: Red Team LTD, network
+  internetpro:
+    url: https://internetpro.io/
+    title: InternetPro home page
+  arin:
+    url: https://rdap.arin.net/registry/ip/23.128.36.120
+    title: ARIN record for 23.128.36.0/24, registered to Red Team LTD
