@@ -25,8 +25,8 @@ criteria:
       note: The iPhone app came out in January 2017, from Infinity Software Co., Limited in Hong Kong.
       sources: [app-lookup, policy-2017, ios-2018]
     team:
-      value: partial
-      note: There's no VPN 360 leadership page, but Pango's site names its president and other executives.
+      value: public
+      note: Pango, which runs it, names its president and other executives.
       sources: [pango-team]
     sister_brands:
       value: [Hotspot Shield, Betternet, Touch VPN, UltraVPN, TotalAV VPN, OVPN, VPN in Touch]

@@ -25,8 +25,8 @@ criteria:
         Protection and VPN Proxy One Pro before the rename.
       sources: [jp-launch-2017, jp-product, rename]
     team:
-      value: partial
-      note: Trend Micro's executives are named, but no one running the VPN is.
+      value: public
+      note: Trend Micro, which makes and sells it, names its executives.
       sources: [leaders]
     sister_brands:
       value: []
