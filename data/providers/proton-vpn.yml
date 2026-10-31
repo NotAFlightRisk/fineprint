@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: Proton VPN
 icon: proton-vpn.svg
-checked: 2026-10-18
+checked: 2026-10-31
 
 criteria:
   identity:
@@ -202,7 +202,7 @@ criteria:
       note: Proton calls them Smart Routing and lists where each one really is.
       sources: [smart-routing]
     servers:
-      value: 20839
+      value: 21722
       sources: [servers]
     countries:
       value: 149
@@ -373,7 +373,7 @@ refs:
     url: https://proton.me/security/bug-bounty
     title: The Proton bug bounty program
   talos-2018:
-    url: https://talosintelligence.com/reports/TALOS-2018-0679
+    url: https://talosintelligence.com/vulnerability_reports/TALOS-2018-0679
     title: ProtonVPN VPN client privilege escalation (TALOS-2018-0679)
   free-account:
     url: https://protonvpn.com/support/how-to-create-free-vpn-account
