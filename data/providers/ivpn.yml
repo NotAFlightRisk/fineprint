@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: IVPN
 icon: ivpn.png
-checked: 2026-10-18
+checked: 2026-10-31
 
 criteria:
   identity:
@@ -204,8 +204,8 @@ criteria:
       sources: [port-forwarding]
     split_tunnel:
       value: true
-      note: Windows, Linux and Android only.
-      sources: [split-tunnel]
+      note: Windows, macOS, Linux and Android only.
+      sources: [split-tunnel, split-tunnel-macos]
     blocking:
       value: [ads, trackers, malware]
       sources: [windows-app]
@@ -382,14 +382,17 @@ refs:
     url: https://api.ivpn.net/v5/servers/stats
     title: IVPN live server list (JSON)
   v2ray:
-    url: https://www.ivpn.net/blog/v2ray-obfuscation-available-all-ivpn-platforms/
-    title: V2Ray Obfuscation Now Available on All IVPN Platforms
+    url: https://web.archive.org/web/20260913111505/https://www.ivpn.net/blog/v2ray-obfuscation-available-all-ivpn-platforms/
+    title: V2Ray Obfuscation Now Available on All IVPN Platforms (archived copy)
   port-forwarding:
     url: https://www.ivpn.net/blog/gradual-removal-of-port-forwarding/
     title: Gradual removal of port forwarding from the IVPN service
   split-tunnel:
     url: https://www.ivpn.net/knowledgebase/general/split-tunnel-faq/
     title: Split Tunnel FAQ - IVPN Help
+  split-tunnel-macos:
+    url: https://www.ivpn.net/blog/split-tunnel-now-available-ivpn-macos/
+    title: Split Tunnel now available in IVPN for macOS
   github:
     url: https://github.com/ivpn
     title: IVPN on GitHub
