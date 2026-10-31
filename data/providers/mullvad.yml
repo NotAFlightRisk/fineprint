@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: Mullvad VPN
 icon: mullvad.svg
-checked: 2026-10-18
+checked: 2026-10-31
 
 criteria:
   identity:
@@ -205,14 +205,14 @@ criteria:
       sources: [server-list, ram-only]
     hosting:
       value: mixed
-      note: 120 of 553 WireGuard servers were listed as owned on 2026-10-18. The rest are dedicated servers rented from hosts.
+      note: 120 of 553 WireGuard servers were listed as owned on 2026-10-31. The rest are dedicated servers rented from hosts.
       sources: [server-list, relays-api]
     virtual_locations:
       value: none
       sources: [server-list]
     servers:
       value: 553
-      note: WireGuard servers on the list on 2026-10-18, 535 of them online. Leaves out 13 bridge servers.
+      note: WireGuard servers on the list on 2026-10-31, 526 of them online. Leaves out 13 bridge servers.
       sources: [servers, relays-api]
     countries:
       value: 50
