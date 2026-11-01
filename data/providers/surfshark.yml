@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: Surfshark
 icon: surfshark.svg
-checked: 2026-10-20
+checked: 2026-11-01
 
 criteria:
   identity:
@@ -196,7 +196,7 @@ criteria:
     virtual_locations:
       value: disclosed
       note: >-
-        47 of its 142 locations were virtual on 2026-10-20, and the apps label them. Surfshark
+        47 of its 142 locations were virtual on 2026-11-01, and the apps label them. Surfshark
         doesn't say where they really are.
       sources: [virtual, servers-api, virtual-labels]
     servers:
@@ -205,7 +205,7 @@ criteria:
       sources: [servers, server-locations]
     countries:
       value: 100
-      note: In 46 of them, every location was virtual on 2026-10-20, with the servers elsewhere.
+      note: In 46 of them, every location was virtual on 2026-11-01, with the servers elsewhere.
       sources: [servers, servers-api]
 
   features:
