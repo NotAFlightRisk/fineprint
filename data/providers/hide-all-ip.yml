@@ -1,0 +1,276 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Hide ALL IP
+icon: hide-all-ip.png
+checked: 2026-11-01
+
+criteria:
+  identity:
+    website:
+      value: https://www.hideallip.com
+      sources: [home]
+    legal_entity:
+      value: Network & Speed Limited
+      note: The site names no company. This Hong Kong company, 速網科技有限公司 in Chinese, signs its Windows app.
+      sources: [installer, opencorporates]
+    owner:
+      value: null
+      note: No parent company is named above Network & Speed Limited.
+      sources: [opencorporates]
+    founded:
+      value: 2013
+      sources: [home-2013]
+    team:
+      value: anonymous
+      sources: [about, contact]
+    sister_brands:
+      value: null
+      note: Nothing ties it to another VPN, but who owns it isn't known.
+      sources: [opencorporates]
+    acquisitions:
+      value: null
+      note: >-
+        Its Windows app was signed by Zhengzhou longling technology Co., Ltd. of Henan, China until at least
+        October 2016, and by Network & Speed Limited by May 2020. Whether that was a sale isn't published.
+      sources: [installer-2016, installer-2020]
+
+  jurisdiction:
+    hq:
+      value: HK
+      note: A company in Zhengzhou, mainland China, signed its Windows app until at least 2016.
+      sources: [opencorporates, installer, installer-2016]
+    entities:
+      value: [HK]
+      sources: [opencorporates]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      note: This rests on its homepage and a one-line FAQ answer. The privacy policy only covers the website's forms and cookies.
+      sources: [faq, home, privacy]
+    dns:
+      value: none
+      evidence: claimed
+      note: This rests on a one-line FAQ answer. The privacy policy only covers the website's forms and cookies.
+      sources: [faq, privacy]
+    timestamps:
+      value: none
+      evidence: claimed
+      note: This rests on a one-line FAQ answer. The privacy policy only covers the website's forms and cookies.
+      sources: [faq, privacy]
+    bandwidth:
+      value: none
+      evidence: claimed
+      note: This rests on a one-line FAQ answer. The privacy policy only covers the website's forms and cookies.
+      sources: [faq, privacy]
+    source_ip:
+      value: none
+      evidence: claimed
+      note: This rests on a one-line FAQ answer. The privacy policy only covers the website's forms and cookies.
+      sources: [faq, privacy]
+    proven: []
+    policy: https://www.hideallip.com/privacy.html
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty:
+      value: false
+      sources: [contact]
+    incidents: []
+
+  account:
+    email:
+      value: required
+      note: Activating a licence also takes an email address, which is how a lost key is recovered.
+      sources: [checkout, faq-lost-key]
+    personal_data:
+      value: []
+      note: Paying through FastSpring takes your name, address and phone number as billing details.
+      sources: [checkout]
+    payment:
+      value: [card, paypal, bitcoin]
+      note: >-
+        Bitcoin means emailing support for an address. It also takes Perfect Money, and FastSpring offers Amazon
+        Pay and cheques in the US.
+      sources: [order, faq-perfect-money, checkout]
+
+  security:
+    protocols:
+      value: [proprietary]
+      note: Its own TCP or HTTP tunnel, which it says uses RSA 2048 with AES or DES.
+      sources: [home, help]
+    post_quantum:
+      value: none
+      sources: [home]
+    kill_switch:
+      value: none
+      sources: [help]
+    dns:
+      value: null
+      note: Lookups are made at its servers, but it doesn't say whose resolvers answer them.
+      sources: [about, help]
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say whether its servers run from RAM.
+      sources: [order]
+    hosting:
+      value: null
+      note: It doesn't say whether it owns or rents its servers.
+      sources: [order]
+    virtual_locations:
+      value: null
+      note: It doesn't say whether any locations are virtual.
+      sources: [home]
+    servers:
+      value: 150
+      note: Its order page says "150+", some of them only for paying users.
+      sources: [order]
+    countries:
+      value: 38
+      sources: [home]
+
+  features:
+    connections:
+      value: 1
+      note: Each licence covers one computer. Phones and consoles can share a PC's tunnel through its Wi-Fi hotspot.
+      sources: [faq, help]
+    multihop:
+      value: false
+      sources: [about]
+    obfuscation:
+      value: [udp2tcp, proprietary]
+      note: Its own method is an HTTP tunnel that passes everything as ordinary HTTP GET and POST requests, for networks that only allow an HTTP proxy.
+      sources: [help, about]
+    port_forwarding: null
+    split_tunnel:
+      value: true
+      note: >-
+        It only tunnels the programs you pick, or your open browsers and every program started after you switch
+        on its hide-all mode. Anything else uses your real connection.
+      sources: [help, faq]
+    blocking:
+      value: []
+      sources: [home]
+
+  clients:
+    platforms:
+      value: [windows]
+      note: >-
+        The download page lists version 2020.01.13, for Windows XP to 10. Phones and consoles can only share a
+        PC's tunnel over its hotspot.
+      sources: [download, help]
+    open_source:
+      value: none
+      sources: [download]
+    telemetry:
+      value: null
+      note: It doesn't say whether the Windows app sends usage or crash data.
+      sources: [privacy]
+    trackers:
+      value: null
+      grade: na
+      note: There's no Android app.
+      sources: [download]
+    fdroid:
+      value: false
+      sources: [download]
+
+  pricing:
+    monthly:
+      value: null
+      grade: na
+      note: Only a one-year licence is sold.
+      sources: [order]
+    best:
+      value: { amount: 2.42, currency: USD }
+      note: $29 for a year. Buying several licences at once brings each down to as little as $20.
+      sources: [order, checkout]
+    best_term:
+      value: 12
+      sources: [order]
+    renewal_increase:
+      value: 0
+      note: Renewing means buying another $29 licence, which adds a year.
+      sources: [order, faq-renew]
+    free_tier:
+      value: false
+      note: The Windows app has a two-day free trial.
+      sources: [download]
+    refund_days:
+      value: 30
+      sources: [refund]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: It calls itself "100% anonymous" and promises "government level encryption" and "no any DNS leaks".
+      sources: [home, faq]
+    affiliates:
+      value: null
+      note: It doesn't advertise a scheme, but links carrying Avangate (now 2Checkout) affiliate IDs pointed at it in 2021.
+      sources: [affiliate-2021]
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://www.hideallip.com/
+    title: Hide ALL IP Home
+  about:
+    url: https://www.hideallip.com/about.html
+    title: About Hide ALL IP
+  download:
+    url: https://www.hideallip.com/download.html
+    title: Download Hide ALL IP
+  order:
+    url: https://www.hideallip.com/order.html
+    title: Order Hide ALL IP
+  faq:
+    url: https://www.hideallip.com/faq.html
+    title: Hide ALL IP FAQ
+  faq-lost-key:
+    url: https://www.hideallip.com/faq.html#getlostkey
+    title: How do I recover my lost license key?
+  faq-renew:
+    url: https://www.hideallip.com/faq.html#howtorenew
+    title: How long can I use Hide ALL IP with one year license and how to renew?
+  faq-perfect-money:
+    url: https://www.hideallip.com/faq.html#paid_perfect_money
+    title: How to pay with Perfect Money?
+  help:
+    url: https://www.hideallip.com/help.html
+    title: Hide ALL IP online help
+  privacy:
+    url: https://www.hideallip.com/privacy.html
+    title: Privacy Policy
+  refund:
+    url: https://www.hideallip.com/refund.html
+    title: Refund Policy
+  contact:
+    url: https://www.hideallip.com/contact.html
+    title: Contact
+  checkout:
+    url: https://sites.fastspring.com/hideallip/instant/hideallipyearsubscription
+    title: Hide All IP Store (FastSpring checkout)
+  installer:
+    url: https://www.hideallip.com/dwn/hideallipsetup.exe
+    title: Hide ALL IP Windows installer (code-signed by Network & Speed Limited)
+  installer-2020:
+    url: https://web.archive.org/web/20200503183844/http://www.hideallip.com/dwn/hideallipsetup.exe
+    title: Hide ALL IP Windows installer, May 2020 copy (Wayback Machine)
+  installer-2016:
+    url: https://web.archive.org/web/20161018191112/http://www.hideallip.com/dwn/hideallipsetup.exe
+    title: Hide ALL IP Windows installer, October 2016 copy (Wayback Machine)
+  opencorporates:
+    url: https://opencorporates.com/companies/hk/2442402
+    title: Network & Speed Limited, Hong Kong company 2442402 (OpenCorporates)
+  home-2013:
+    url: https://web.archive.org/web/20130615053501/http://www.hideallip.com/
+    title: Hide ALL IP homepage, June 2013 copy (Wayback Machine)
+  affiliate-2021:
+    url: https://web.archive.org/web/20210614063210/https://www.hideallip.com/help.html?AVGAFFILIATE=22107&__c=1
+    title: Hide ALL IP help page reached through an Avangate affiliate link, June 2021 (Wayback Machine)
