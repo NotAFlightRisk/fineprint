@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: IPVanish
 icon: ipvanish.png
-checked: 2026-10-21
+checked: 2026-11-01
 
 criteria:
   identity:
@@ -105,7 +105,7 @@ criteria:
       sources: [trust, audit-2025-post, audit-2022-post]
     report:
       value: regular
-      note: Quarterly since late 2024. The newest archived copy runs to March 2026.
+      note: Quarterly since late 2024.
       sources: [trust]
     canary:
       value: none
@@ -200,8 +200,8 @@ criteria:
       sources: [features]
     obfuscation:
       value: [proprietary]
-      note: Scramble, which disguises OpenVPN traffic, in the Windows and macOS apps.
-      sources: [windows-guide, macos-guide]
+      note: Scramble, which disguises OpenVPN traffic, in the Windows, macOS and Fire TV apps.
+      sources: [windows-guide, macos-guide, fire-tv-guide]
     port_forwarding:
       value: false
       sources: [port-forwarding]
@@ -229,12 +229,6 @@ criteria:
         Analytics and crash reports can be turned off in the Windows, macOS and iOS apps, and iOS asks
         first. The guides don't say whether it's on by default elsewhere.
       sources: [windows-guide, ios-guide, privacy-policy]
-    trackers:
-      value: 3
-      note: >-
-        Adjust, Google Crashlytics and Firebase Analytics in version 4.0.8 from June 2023, the newest
-        archived report. The Play Store version is now 4.1.22.
-      sources: [exodus]
     fdroid: false
 
   pricing:
@@ -352,6 +346,9 @@ refs:
   ios-guide:
     url: https://support.ipvanish.com/hc/en-us/articles/360009797374-How-to-Use-IPVanish-iOS
     title: IPVanish help, how to use IPVanish on iOS
+  fire-tv-guide:
+    url: https://support.ipvanish.com/hc/en-us/articles/7508253428379-How-to-use-IPVanish-for-the-Amazon-Fire-Stick-or-Fire-TV
+    title: IPVanish help, how to use IPVanish on Fire TV
   schellman-2025:
     url: https://www.ipvanish.com/wp-content/uploads/2025/04/J2-Global-Ventures-2025-IPVanish-No-Log-Assessment-Report.pdf
     title: Schellman, IPVanish no-log functionality validation assessment (February 2025)
@@ -397,9 +394,6 @@ refs:
   pcmag-review:
     url: https://www.pcmag.com/reviews/ipvanish-vpn
     title: IPVanish VPN review (PCMag)
-  exodus:
-    url: https://reports.exodus-privacy.eu.org/en/reports/com.ixolit.ipvanish/latest/
-    title: Exodus Privacy report for com.ixolit.ipvanish
   wayback-2012:
     url: https://web.archive.org/web/20120321163227/http://ipvanish.com/
     title: IPVanish homepage, archived March 2012
