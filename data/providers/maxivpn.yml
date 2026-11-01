@@ -1,0 +1,281 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: MaxiVPN
+icon: maxivpn.png
+checked: 2026-11-01
+
+criteria:
+  identity:
+    website:
+      value: https://www.maxivpn.com
+      sources: [home]
+    legal_entity:
+      value: Webistics Holdings Ltd
+      note: A New Jersey company that trades as VPNWholesaler.com.
+      sources: [terms, privacy, register]
+    owner:
+      value: null
+      note: Webistics doesn't say who owns it.
+      sources: [register]
+    founded:
+      value: 2020
+      note: Its first app came out in March 2020.
+      sources: [app-store]
+    team:
+      value: anonymous
+      note: Its homepage promises a "non-hidden team", but neither it nor VPNWholesaler names anyone.
+      sources: [home, vw-about]
+    sister_brands:
+      value: []
+      note: >-
+        Keenow, which calls MaxiVPN its newer product, closed in December 2024 and moved its paying
+        users across. Webistics also sells the same VPN network to other companies' brands.
+      sources: [keenow, vw-home]
+    acquisitions:
+      value: []
+      sources: [terms]
+
+  jurisdiction:
+    hq:
+      value: US
+      sources: [terms, register]
+    entities:
+      value: [US]
+      note: Its terms still mention Israel in two clauses, but put the contract under New Jersey law.
+      sources: [register, terms]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [privacy, vw-logging]
+    dns:
+      value: none
+      evidence: claimed
+      note: Lookups made through the VPN aren't logged. Lookups to its DNS from outside the VPN are kept for 7 days.
+      sources: [vw-logging, privacy]
+    timestamps:
+      value: 'yes'
+      evidence: claimed
+      note: >-
+        Its own policy keeps personal data until you ask for it to be deleted. The VPNWholesaler
+        network it runs on says up to 12 months.
+      sources: [privacy, vw-logging]
+    bandwidth:
+      value: 'yes'
+      evidence: claimed
+      note: Kept per session, for abuse checks and its fair usage policy.
+      sources: [privacy, vw-logging]
+    source_ip:
+      value: 'yes'
+      evidence: claimed
+      note: The IP you connect from is kept alongside your connection times.
+      sources: [privacy, vw-logging]
+    proven:
+      value: []
+    policy: https://www.maxivpn.com/legal/privacy.html
+
+  transparency:
+    audits: []
+    report:
+      value: none
+    canary:
+      value: none
+    bug_bounty:
+      value: false
+      note: The terms forbid probing or testing its systems for vulnerabilities.
+      sources: [terms]
+    incidents:
+      value: []
+
+  account:
+    email:
+      value: optional
+      note: Buying on the website needs an email. Subscribing in the iOS or Android app creates an account without one.
+      sources: [purchase, android-app]
+    personal_data:
+      value: []
+      sources: [purchase]
+    payment:
+      value: [card, paypal, app_store]
+      note: App store covers Apple and Google Play subscriptions.
+      sources: [purchase, terms, app-store, play]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn, ikev2]
+      note: IKEv2 is only on iOS and Windows, and OpenVPN isn't on iOS.
+      sources: [vw-platforms, windows-app]
+    post_quantum:
+      value: none
+      sources: [android-app]
+    kill_switch:
+      value: app
+      note: >-
+        Only the Windows and macOS apps have one, as an optional setting, though the site says all
+        its apps do.
+      sources: [windows-app, android-app, privacy-anonymity]
+    dns:
+      value: null
+      note: The apps point DNS at two resolvers on Scaleway and Microsoft servers, without saying who runs them.
+      sources: [android-app, dns-primary, dns-secondary]
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say whether its servers run from RAM.
+    hosting:
+      value: null
+      note: It doesn't say whether it owns any of its servers.
+    virtual_locations:
+      value: null
+      note: It doesn't say whether any locations, China among them, are virtual.
+      sources: [home]
+    servers:
+      value: 300
+      note: Given as 300+.
+      sources: [home]
+    countries:
+      value: 49
+      note: The location list on its homepage has 48.
+      sources: [home]
+
+  features:
+    connections:
+      value: unlimited
+      note: Subject to a fair usage policy it doesn't spell out.
+      sources: [home]
+    multihop:
+      value: false
+      sources: [windows-app]
+    obfuscation:
+      value: [shadowsocks]
+      note: Called Stealth Mode in the apps.
+      sources: [vw-platforms, windows-app]
+    port_forwarding:
+      value: false
+      sources: [windows-app]
+    split_tunnel:
+      value: false
+      sources: [android-app, windows-app]
+    blocking:
+      value: [ads]
+      note: An AdBlock switch in the apps, with no word on how it works.
+      sources: [windows-app]
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android, browser]
+      note: Also Android TV and Fire OS. The browser app is a Chrome extension.
+      sources: [apps, chrome]
+    open_source:
+      value: none
+      sources: [terms]
+    telemetry:
+      value: forced
+      evidence: claimed
+      note: >-
+        The policy says the apps report feature usage that may be linked to your account, and the
+        Android app includes AppsFlyer. No setting turns it off.
+      sources: [privacy, app-store, android-app]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 11.95, currency: USD }
+      sources: [purchase]
+    best:
+      value: { amount: 2.76, currency: USD }
+      note: $99.50 billed every three years, plus tax.
+      sources: [purchase]
+    best_term:
+      value: 36
+      sources: [purchase]
+    renewal_increase:
+      value: 0
+      note: The checkout says each renewal bills the same sum.
+      sources: [purchase]
+    free_tier:
+      value: false
+      note: The iOS app has a 3-day free trial.
+      sources: [app-store]
+    refund_days:
+      value: 30
+      note: Its terms, last updated in 2020, say any refund is at its sole discretion.
+      sources: [purchase, home, terms]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        Says shared IPs make it impossible to trace activity back to you and that it keeps no logs,
+        while its policy keeps your IP and connection times. Also sells "military grade" encryption.
+      sources: [privacy-anonymity, torrenting, home]
+    affiliates:
+      value: true
+      evidence: claimed
+      note: There's no public scheme, but its policy says it tracks app installs to reward affiliates and traffic sources.
+      sources: [privacy]
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://www.maxivpn.com/
+    title: MaxiVPN
+  terms:
+    url: https://www.maxivpn.com/legal/terms.html
+    title: Terms of Use
+  privacy:
+    url: https://www.maxivpn.com/legal/privacy.html
+    title: Privacy Policy
+  purchase:
+    url: https://www.maxivpn.com/purchase/
+    title: Get your MaxiVPN plan
+  apps:
+    url: https://www.maxivpn.com/apps.html
+    title: VPN apps for all major devices
+  privacy-anonymity:
+    url: https://www.maxivpn.com/what-is-a-vpn/features/privacy-anonymity.html
+    title: Privacy and Anonymity
+  torrenting:
+    url: https://www.maxivpn.com/what-is-a-vpn/features/torrenting.html
+    title: Torrenting
+  register:
+    url: https://opencorporates.com/companies/us_nj/0450281069
+    title: Webistics Holdings Ltd, New Jersey company 0450281069 (OpenCorporates)
+  vw-home:
+    url: https://www.vpnwholesaler.com/
+    title: VPNWholesaler, white label VPN apps and in-app SDKs
+  vw-about:
+    url: https://www.vpnwholesaler.com/about/
+    title: VPNWholesaler, About us
+  vw-logging:
+    url: https://docs.vpnwholesaler.com/docs/Legal/Logging%20Policy
+    title: VPNWholesaler logging policy
+  vw-platforms:
+    url: https://docs.vpnwholesaler.com/docs/Support%20Platforms
+    title: VPNWholesaler, supported platforms and protocols
+  keenow:
+    url: https://www.keenow.com/
+    title: 'Keenow VPN has been retired. Please migrate to MaxiVPN.'
+  app-store:
+    url: https://apps.apple.com/us/app/maxivpn-fastest-vpn-proxy/id1497922505
+    title: MaxiVPN on the App Store (US)
+  play:
+    url: https://play.google.com/store/apps/details?id=com.maxivpn.maxivpn
+    title: MaxiVPN on Google Play
+  chrome:
+    url: https://chromewebstore.google.com/detail/hjigadblghdmlgnemhfocfkjojeaemic
+    title: MaxiVPN on the Chrome Web Store
+  android-app:
+    url: https://apkpure.com/maxivpn-fastest-vpn-proxy/com.maxivpn.maxivpn
+    title: MaxiVPN for Android 1.03 (APK)
+  windows-app:
+    url: https://www.maxivpn.com/builds/maxivpn_setup_nsvc.msix
+    title: MaxiVPN for Windows 3.5.3 (MSIX installer)
+  dns-primary:
+    url: https://rdap.db.ripe.net/ip/62.210.122.43
+    title: RIPE record for 62.210.122.43 (Scaleway Dedibox)
+  dns-secondary:
+    url: https://rdap.arin.net/registry/ip/157.55.83.218
+    title: ARIN record for 157.55.83.218 (Microsoft)
