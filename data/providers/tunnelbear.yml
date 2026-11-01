@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: TunnelBear
 icon: tunnelbear.png
-checked: 2026-10-21
+checked: 2026-11-01
 
 criteria:
   identity:
@@ -141,7 +141,7 @@ criteria:
       sources: [transparency-2023]
     bug_bounty:
       value: null
-      note: Its site and help centre don't mention a bug bounty or a way to report security flaws.
+      note: TunnelBear doesn't mention a bug bounty or a way to report security flaws.
       sources: [help-centre]
     incidents:
       value:
@@ -238,8 +238,9 @@ criteria:
     platforms:
       value: [windows, macos, ios, android, browser]
       note: >-
-        No Linux app or router support. The Chrome, Firefox and Edge extensions only cover the browser.
-      sources: [help-devices, help-router, edge-extension]
+        No Linux app or router support, though it gives OpenVPN files for a manual Linux setup it only
+        partly supports. The Chrome, Firefox and Edge extensions only cover the browser.
+      sources: [help-devices, help-router, linux-setup, edge-extension]
     open_source:
       value: none
       note: Its GitHub holds libraries and forks, not the apps.
@@ -250,10 +251,6 @@ criteria:
         The apps send crash reports and device details, and the policy doesn't say whether you can turn
         this off.
       sources: [privacy-policy]
-    trackers:
-      value: 0
-      note: In version 4.0.9 from March 2023, the newest archived report.
-      sources: [exodus]
     fdroid: false
 
   pricing:
@@ -325,6 +322,9 @@ refs:
   blocker:
     url: https://www.tunnelbear.com/apps/blocker
     title: TunnelBear Blocker for Chrome
+  linux-setup:
+    url: https://www.tunnelbear.com/blog/setting-up-tunnelbear-on-linux/
+    title: Setting up TunnelBear on Linux (2024)
   edge-extension:
     url: https://www.tunnelbear.com/blog/tunnelbear-accidentally-installs-edge/
     title: TunnelBear accidentally installs Edge (browser extension)
@@ -445,6 +445,3 @@ refs:
   versprite-2018:
     url: https://github.com/VerSprite/research/blob/master/advisories/VS-2018-022.md
     title: VerSprite, TunnelBear for Windows privilege escalation (CVE-2018-10381)
-  exodus:
-    url: https://reports.exodus-privacy.eu.org/en/reports/com.tunnelbear.android/latest/
-    title: Exodus Privacy report for com.tunnelbear.android
