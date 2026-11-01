@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: NordVPN
 icon: nordvpn.svg
-checked: 2026-10-20
+checked: 2026-11-01
 
 criteria:
   identity:
@@ -143,7 +143,7 @@ criteria:
     canary:
       value: maintained
       note: >-
-        Kept inside the transparency report, whose daily counter read 15 October 2026 on the 20th.
+        Kept inside the transparency report, whose daily counter was up to date on 1 November 2026.
         NordVPN has said it plans to phase the canary out.
       sources: [transparency]
     bug_bounty:
@@ -245,12 +245,12 @@ criteria:
     virtual_locations:
       value: disclosed
       note: >-
-        95 of its 150 countries had only virtual servers on 2026-10-20. Its server list marks them as
+        95 of its 150 countries had only virtual servers on 2026-11-01. Its server list marks them as
         Virtual.
       sources: [server-api, servers, server-list-help]
     servers:
-      value: 7186
-      note: Servers in NordVPN's API on 2026-10-20. Its own pages quote anything from 7,200 to 8,400.
+      value: 7235
+      note: Servers in NordVPN's API on 2026-11-01. Its own pages quote anything from 7,200 to 8,400.
       sources: [server-api, servers, server-list-help]
     countries:
       value: 150
