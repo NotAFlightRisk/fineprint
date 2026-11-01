@@ -1,0 +1,329 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: VPN Master Pro
+icon: vmp-vpn.png
+checked: 2026-11-01
+
+criteria:
+  identity:
+    website:
+      value: https://vpnmasterpro.com
+      note: Its apps are called VMP VPN.
+      sources: [home, play]
+    legal_entity:
+      value: VPN VPN VPN Proxy Master Unlimited Inc.
+      note: >-
+        A Delaware corporation formed in March 2019, which sells the iPhone app and publishes the Android one.
+        The current terms name no company, while those up to 2022 named "VPN VPN VPN Unlimited Proxy Master Inc".
+        Despite the name, it's a different company from the one behind VPN Proxy Master.
+      sources: [register, app-store, play, terms, terms-2022, vpm-app-store]
+    owner:
+      value: null
+      note: >-
+        Payments on its website are taken by Minoti Inc., another Delaware company, which sells the SecureVPN
+        iPhone app. Who owns either company isn't public.
+      sources: [checkout, register-minoti, securevpn-app]
+    founded:
+      value: 2019
+      note: The iPhone app came out in June 2019, under three months after the company was formed.
+      sources: [app-store-lookup, register]
+    team:
+      value: anonymous
+      note: No one is named as running it.
+      sources: [about, terms, privacy]
+    sister_brands:
+      value: [VMP Arc, SecureVPN]
+      note: >-
+        VMP Arc is a second iPhone VPN app from the same seller. SecureVPN's iPhone app is sold by Minoti Inc.,
+        the company that takes VPN Master Pro's website payments.
+      sources: [app-store-dev, arc, securevpn-app, checkout]
+    acquisitions:
+      value: []
+      sources: [app-store-2019, app-store]
+
+  jurisdiction:
+    hq:
+      value: US
+      sources: [register, play]
+    entities:
+      value: [US]
+      note: Minoti Inc., which takes its website payments, is a Delaware company too.
+      sources: [register, register-minoti]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [privacy]
+    dns:
+      value: none
+      evidence: claimed
+      note: The policy rules out keeping your online activity and browsing history, without mentioning DNS separately.
+      sources: [privacy]
+    timestamps:
+      value: null
+      note: >-
+        Its no-logs page says connection times aren't recorded, but the privacy policy collects "basic connection
+        diagnostics" without saying what they include or how long they're kept.
+      sources: [no-logs, privacy]
+    bandwidth:
+      value: null
+      note: It doesn't say whether it records how much data you use, though the terms let it limit accounts that use more than average.
+      sources: [privacy, terms]
+    source_ip:
+      value: null
+      note: >-
+        Its no-logs page says your IP address isn't recorded, but the privacy policy collects "basic connection
+        diagnostics" without saying what they include.
+      sources: [no-logs, privacy]
+    proven: []
+    policy: https://vpnmasterpro.com/en/privacy-policy
+
+  transparency:
+    audits:
+      value: []
+      note: >-
+        It says its no-logs policy was reviewed by PwC in 2018 and 2020 and by Deloitte in 2022 and 2023, which is
+        NordVPN's own audit history. No report has been published.
+      sources: [no-logs, faq, nord-audits]
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: optional
+      note: The apps work without an account, though the Android app needs one to switch protocol. Buying on the website needs an email address.
+      sources: [play, apk, checkout]
+    personal_data: []
+    payment:
+      value: [card, app_store]
+      note: Checkout on the website goes through Stripe, which also takes Amazon Pay and Cash App Pay.
+      sources: [checkout, play]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn, other]
+      note: Other is VMPGuard, its stealth protocol, which the Android app runs on Xray-core.
+      sources: [pricing, app-store, apk]
+    post_quantum:
+      value: none
+      note: Nothing is published about its key exchange.
+    kill_switch:
+      value: app
+      evidence: claimed
+      sources: [features, about]
+    dns:
+      value: null
+      note: >-
+        It doesn't say whose DNS servers its own servers hand out. The Android app falls back to Cloudflare and
+        Google, and offers resolvers such as AdGuard, Quad9 and Mullvad as options.
+      sources: [apk]
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say how its servers are run.
+    hosting:
+      value: null
+      note: It doesn't say whether it owns or rents its servers.
+    virtual_locations:
+      value: null
+      note: Its servers page has a tab for virtual servers, but doesn't say which locations are virtual.
+      sources: [servers]
+    servers:
+      value: null
+      note: It claims both "hundreds" and "thousands" of servers without giving a number.
+      sources: [feature-vpn, high-speed]
+    countries:
+      value: null
+      note: >-
+        Its servers page lists 13 countries and the checkout promises over 50 locations, while the Android app
+        ships with a list of 58 servers in 44 countries.
+      sources: [servers, checkout, apk]
+
+  features:
+    connections:
+      value: 10
+      note: The checkout page says unlimited devices.
+      sources: [pricing, faq, checkout]
+    multihop:
+      value: null
+      note: >-
+        Its site advertises Double-Hop servers, but its servers page shows the same cities under every server type
+        and neither app store listing mentions it.
+      sources: [no-logs, servers, app-store, play]
+    obfuscation:
+      value: [v2ray]
+      note: V2Ray here is VMPGuard, sold as a stealth protocol, which runs on Xray-core.
+      sources: [app-store, apk]
+    port_forwarding: false
+    split_tunnel:
+      value: true
+      note: On Android.
+      sources: [play, apk]
+    blocking:
+      value: [ads, trackers, malware]
+      evidence: claimed
+      note: Paid plans only.
+      sources: [pricing, faq]
+
+  clients:
+    platforms:
+      value: [windows, linux_gui, ios, android, browser]
+      note: >-
+        The browser extensions, for Chrome, Firefox, Edge and Opera, are proxies. Its macOS page has no Mac
+        download, and Apple lists the iPhone app as designed for iPad and not verified for macOS.
+      sources: [download, download-linux, download-macos, app-store, chrome, firefox]
+    open_source:
+      value: none
+      note: Its Linux page calls the app "completely open source", but it publishes no source code and the terms forbid reverse engineering.
+      sources: [download-linux, terms]
+    telemetry:
+      value: null
+      note: >-
+        The Android app has a "Share anonymous usage data" switch and carries Firebase Analytics, Crashlytics and
+        Facebook's SDK. Its App Store label says usage data may be used to track you, while the policy only
+        mentions basic connection diagnostics.
+      sources: [apk, app-store, play-data-safety, privacy]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 9.99, currency: USD }
+      sources: [pricing]
+    best:
+      value: { amount: 5.83, currency: USD }
+      note: $69.99 a year.
+      sources: [pricing]
+    best_term:
+      value: 12
+      sources: [pricing]
+    renewal_increase:
+      value: 0
+      sources: [pricing, checkout]
+    free_tier:
+      value: null
+      note: >-
+        The apps give free VPN time earned through daily rewards, streaks, referrals and ads, which the developer
+        says depends on availability.
+      sources: [app-store, play, apk]
+    refund_days:
+      value: 30
+      note: First purchase only, on the website. App store purchases are refunded by the store.
+      sources: [money-back]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        It claims PwC and Deloitte no-logs reviews that are NordVPN's, calls a closed Linux app "completely open
+        source", and promises "military-grade" encryption.
+      sources: [no-logs, nord-audits, download-linux, feature-vpn]
+    affiliates:
+      value: true
+      note: 30 to 50% of the first payment.
+      sources: [affiliate]
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://vpnmasterpro.com/
+    title: VPN Master Pro homepage
+  privacy:
+    url: https://vpnmasterpro.com/en/privacy-policy
+    title: Privacy Policy (last updated 29 February 2024)
+  terms:
+    url: https://vpnmasterpro.com/en/terms-of-service
+    title: Terms of Service (last updated 28 June 2025)
+  terms-2022:
+    url: https://web.archive.org/web/20220705115220/https://vpnmasterpro.com/tos/
+    title: Terms of Service and privacy policy naming VPN VPN VPN Unlimited Proxy Master Inc (archived July 2022)
+  about:
+    url: https://vpnmasterpro.com/en/about-us
+    title: About Us
+  no-logs:
+    url: https://vpnmasterpro.com/en/no-user-tracking
+    title: No User Tracking (no-log VPN service)
+  faq:
+    url: https://vpnmasterpro.com/en/faq
+    title: FAQ
+  features:
+    url: https://vpnmasterpro.com/en/features
+    title: Features
+  feature-vpn:
+    url: https://vpnmasterpro.com/en/feature-vpn
+    title: Feature - VPN
+  high-speed:
+    url: https://vpnmasterpro.com/en/high-speed-vpn
+    title: High Speed VPN
+  servers:
+    url: https://vpnmasterpro.com/en/vpn-servers
+    title: VPN Servers
+  pricing:
+    url: https://vpnmasterpro.com/en/pricing
+    title: Pricing
+  checkout:
+    url: https://vmpaccount.com/checkout?plan=monthly
+    title: VMP checkout, billed by Minoti Inc through Stripe
+  money-back:
+    url: https://vpnmasterpro.com/en/money-back-guarantee
+    title: Money Back Guarantee
+  affiliate:
+    url: https://vpnmasterpro.com/en/affiliate
+    title: VPN Master Pro Affiliate Program
+  download:
+    url: https://vpnmasterpro.com/en/download
+    title: Download VPN Master Pro
+  download-linux:
+    url: https://vpnmasterpro.com/en/download-linux
+    title: Download Linux
+  download-macos:
+    url: https://vpnmasterpro.com/en/download-macos
+    title: Download macOS
+  chrome:
+    url: https://chromewebstore.google.com/detail/vpn-master-pro/egnhnfhdifmddfdjlohlolipcgkpchcb
+    title: VPN Master Pro - Secure proxy based VPN connection on the Chrome Web Store
+  firefox:
+    url: https://addons.mozilla.org/en-US/firefox/addon/vpn-master-pro/
+    title: VPN Master Pro - Secure proxy based VPN connection for Firefox
+  app-store:
+    url: https://apps.apple.com/us/app/vmp-vpn-trusted-since-2019/id1465229429
+    title: 'VMP VPN: Trusted Since 2019 on the App Store (US)'
+  app-store-lookup:
+    url: https://itunes.apple.com/lookup?id=1465229429&country=us
+    title: iTunes lookup for VMP VPN, released 13 June 2019
+  app-store-2019:
+    url: https://web.archive.org/web/20190726224154/https://apps.apple.com/us/app/vpn/id1465229429
+    title: The app on the App Store, sold by VPN VPN VPN Proxy Master Unlimited Inc. (archived July 2019)
+  app-store-dev:
+    url: https://apps.apple.com/us/developer/vpn-vpn-vpn-proxy-master-unlimited-inc/id1465229428
+    title: VPN VPN VPN Proxy Master Unlimited Inc apps on the App Store
+  arc:
+    url: https://apps.apple.com/us/app/vpn-proxy-master-vmp-arc/id1460589548
+    title: 'VPN & Proxy Master: VMP Arc on the App Store (US)'
+  play:
+    url: https://play.google.com/store/apps/details?id=com.vpnmasterpro.android&hl=en_US
+    title: 'VMP VPN: Fast Secure Proxy on Google Play'
+  play-data-safety:
+    url: https://play.google.com/store/apps/datasafety?id=com.vpnmasterpro.android&hl=en_US
+    title: VMP VPN data safety on Google Play
+  apk:
+    url: https://apkpure.net/vmp-vpn-fast-secure-proxy/com.vpnmasterpro.android
+    title: VMP VPN for Android 4.26, whose APK carries WireGuard, OpenVPN, Xray-core, Firebase, Crashlytics and Facebook's SDK
+  register:
+    url: https://icis.corp.delaware.gov/ecorp/entitysearch/NameSearch.aspx
+    title: Delaware Division of Corporations, VPN VPN VPN PROXY MASTER UNLIMITED INC. (file 7342728, formed 25 March 2019)
+  register-minoti:
+    url: https://icis.corp.delaware.gov/ecorp/entitysearch/NameSearch.aspx
+    title: Delaware Division of Corporations, MINOTI INC. (file 6518293, formed 21 August 2017)
+  securevpn-app:
+    url: https://apps.apple.com/us/app/vpn-fast-secure-vpn-proxy/id1474675452
+    title: VPN - Fast & Secure VPN Proxy (SecureVPN) by Minoti Inc on the App Store (US)
+  vpm-app-store:
+    url: https://apps.apple.com/us/app/vpn-proxy-master-super-vpn/id1025707485
+    title: VPN Proxy Master - Super VPN on the App Store, sold by All Connected Co., Ltd (US)
+  nord-audits:
+    url: https://nordsecurity.com/press-area/nordvpn-verifies-its-no-logs-assurance-assessment-for-the-fifth-time/
+    title: NordVPN verifies its no-logs assurance assessment for the fifth time (Nord Security)
