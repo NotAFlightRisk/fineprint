@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: CyberGhost VPN
 icon: cyberghost.png
-checked: 2026-10-20
+checked: 2026-11-01
 
 criteria:
   identity:
@@ -106,7 +106,7 @@ criteria:
     report:
       value: regular
       note: Quarterly, with figures up to mid-2026 when checked.
-      sources: [transparency, transparency-q4-2025]
+      sources: [transparency, transparency-q2-2026]
     canary:
       value: none
       sources: [transparency]
@@ -116,6 +116,13 @@ criteria:
       sources: [bug-bounty, yeswehack]
     incidents:
       value:
+        - date: 2024-02-01
+          summary: >-
+            Secuvera found the Windows app kept your login email and password in memory after you
+            logged out, where anyone on the PC could dump them. CyberGhost first said local attackers
+            were out of scope, then marked it resolved in March 2024.
+          handled: well
+          source: secuvera-2024
         - date: 2023-01-18
           summary: >-
             Pen Test Partners reported a Windows app flaw that let local software gain full control of
@@ -136,7 +143,7 @@ criteria:
             published what happened a week later.
           handled: well
           source: typeform-2018
-      sources: [ptp-2023, versprite-2018, typeform-2018]
+      sources: [secuvera-2024, ptp-2023, versprite-2018, typeform-2018]
 
   account:
     email:
@@ -185,7 +192,7 @@ criteria:
       note: Marked on the server list, which flags 56 of the 100 countries as virtual locations.
       sources: [server-list]
     servers:
-      value: 9682
+      value: 9645
       note: The sum of the per-city counts on its server list.
       sources: [server-list]
     countries:
@@ -355,9 +362,9 @@ refs:
   transparency:
     url: https://www.cyberghostvpn.com/transparency-report
     title: CyberGhost VPN's transparency reports
-  transparency-q4-2025:
-    url: https://www.cyberghostvpn.com/privacyhub/transparency-report-q4-2025/
-    title: 'CyberGhost quarterly transparency report: October to December 2025'
+  transparency-q2-2026:
+    url: https://www.cyberghostvpn.com/privacyhub/transparency-report-q2-2026/
+    title: 'CyberGhost quarterly transparency report: April to June 2026'
   bug-bounty:
     url: https://www.cyberghostvpn.com/privacyhub/cyberghost-bug-bounty/
     title: CyberGhost's bug bounty for VPN vulnerabilities
@@ -385,6 +392,9 @@ refs:
   audit-deloitte-2022-date:
     url: https://www.clubic.com/antivirus-securite-informatique/vpn/actualite-439017-vpn-no-log-cyberghost-joue-la-transparence-avec-un-audit-de-deloitte.html
     title: 'VPN no log : CyberGhost joue la transparence avec un audit de Deloitte (Clubic)'
+  secuvera-2024:
+    url: https://www.secuvera.de/advisories/secuvera-SA-2024-04.txt
+    title: Secuvera, CyberGhostVPN for Windows information disclosure (CVE-2024-26330)
   ptp-2023:
     url: https://www.pentestpartners.com/security-blog/bullied-by-bugcrowd-over-kape-cyberghost-disclosure/
     title: Bullied by Bugcrowd over Kape CyberGhost disclosure (Pen Test Partners)
