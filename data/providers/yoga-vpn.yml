@@ -1,0 +1,238 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Yoga VPN
+icon: yoga-vpn.png
+checked: 2026-11-01
+
+criteria:
+  identity:
+    website: https://yogavpn.com
+    legal_entity:
+      value: Smile Code Technology Limited
+      note: >-
+        The Google Play developer, registered in Hong Kong in December 2024. The policy names "Yoga Net
+        Ltd.", which Hong Kong's register doesn't list, and until 2025 it named "Yolo Net Ltd.".
+      sources: [play, register-smile, policy, policy-2025]
+    owner:
+      value: null
+      note: It doesn't say who owns Smile Code Technology Limited.
+      sources: [register-smile]
+    founded:
+      value: 2016
+      note: The Android app came out in November 2016.
+      sources: [play, play-2017]
+    team:
+      value: anonymous
+      note: No one is named as running it, though the Google Play developer account goes by Sarah Hawken.
+      sources: [play-dev]
+    sister_brands:
+      value: []
+      sources: [play-dev]
+    acquisitions:
+      value: null
+      note: >-
+        Google Play gave a British Virgin Islands address for the developer in 2017, and named Smile Code
+        Technology Limited by May 2025, which shares a registered office with Yolo Net Technology Limited.
+        Whether either change was a sale isn't public.
+      sources: [play-2017, play-2025, register-smile, register-yolo]
+
+  jurisdiction:
+    hq:
+      value: HK
+      sources: [register-smile]
+    entities:
+      value: [HK]
+      note: In 2017 the developer's address was a registered agent's in the British Virgin Islands.
+      sources: [register-smile, play-2017]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [policy]
+    dns:
+      value: none
+      evidence: claimed
+      note: The policy rules out logging the websites you visit, without mentioning DNS separately.
+      sources: [policy]
+    timestamps:
+      value: none
+      evidence: claimed
+      sources: [policy]
+    bandwidth:
+      value: none
+      evidence: claimed
+      note: Only each server's total, it says.
+      sources: [policy]
+    source_ip:
+      value: null
+      note: >-
+        The policy says your original IP address isn't logged while you're connected, but the Play listing
+        says the app shares your approximate location with third parties for analytics and advertising.
+      sources: [policy, play-data-safety]
+    proven: []
+    policy: https://yogavpn.com
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: none
+      note: There are no accounts.
+      sources: [play]
+    personal_data: []
+    payment:
+      value: []
+      note: It's free.
+      sources: [play]
+
+  security:
+    protocols:
+      value: [other]
+      note: Shadowsocks. The Android app is built on the open source shadowsocks-android client.
+      sources: [apk]
+    post_quantum:
+      value: none
+      note: Nothing is published about how its connections are encrypted.
+    kill_switch:
+      value: null
+      note: The Android app has no kill switch setting.
+      sources: [apk]
+    dns:
+      value: null
+      note: It says it proxies DNS to prevent leaks, without saying whose DNS servers answer.
+      sources: [play]
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say how its servers are run.
+    hosting:
+      value: null
+      note: The policy mentions hosting partners without naming them or saying whether any servers are its own.
+      sources: [policy]
+    virtual_locations:
+      value: null
+      note: It doesn't say whether any locations are virtual.
+    servers:
+      value: 1000
+      note: Its claim is "more than 1000+", with no server list published.
+      sources: [play]
+    countries:
+      value: null
+      note: It no longer gives a count. In 2024 it claimed more than 30 regions.
+      sources: [play-2024]
+
+  features:
+    connections:
+      value: unlimited
+      note: There are no accounts, so nothing ties it to a number of devices.
+      sources: [play]
+    multihop: false
+    obfuscation:
+      value: [shadowsocks]
+      note: Shadowsocks is its only protocol, and is built to get past network blocks.
+      sources: [apk]
+    port_forwarding: false
+    split_tunnel:
+      value: true
+      note: By app, on Android.
+      sources: [play, apk]
+    blocking: []
+
+  clients:
+    platforms:
+      value: [android]
+      note: >-
+        The same developer also has a lighter Yoga Easy VPN app for Android. An iOS app called Yoga VPN &
+        Blue Proxy Browser comes from a different company, NewStar Software.
+      sources: [play-dev, newstar-ios]
+    open_source:
+      value: none
+      note: The app is built on the open source shadowsocks-android, but its own code isn't published.
+      sources: [apk]
+    telemetry:
+      value: null
+      note: >-
+        The app carries Firebase Analytics and Crashlytics, and its Play data safety form says it shares
+        device IDs, installed apps and app activity for analytics. The policy only mentions anonymous crash
+        and performance data, and neither says whether you can opt out.
+      sources: [apk, play-data-safety, policy]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 0, currency: USD }
+      note: Free and ad-supported, with no paid plan.
+      sources: [play-2024]
+    best: { amount: 0, currency: USD }
+    best_term:
+      value: null
+      grade: na
+      note: It's free.
+    renewal_increase:
+      value: 0
+      note: Nothing renews.
+    free_tier:
+      value: true
+      note: >-
+        Ad-supported. Regions are unlocked with credits earned by watching ads and checking in daily, then
+        spent at 3 credits a minute and 3 per 10 MB.
+      sources: [apk]
+    refund_days:
+      value: null
+      grade: na
+      note: It's free.
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        The Play listing says it "will never upload your privacy information", while its data safety form
+        says it shares location, app activity and device IDs. The app's FAQ calls it "100% safe".
+      sources: [play, play-data-safety, apk]
+    affiliates: false
+    review_sites: false
+    activism: false
+
+refs:
+  policy:
+    url: https://yogavpn.com/
+    title: Yoga VPN Privacy Policy & Terms of Service (last updated 26 October 2025)
+  policy-2025:
+    url: https://web.archive.org/web/20250515025017/https://yogavpn.com/
+    title: Yoga VPN privacy policy (archived May 2025)
+  play:
+    url: https://play.google.com/store/apps/details?id=com.yogavpn
+    title: Yoga VPN -Secure Proxy VPN on Google Play
+  play-data-safety:
+    url: https://play.google.com/store/apps/datasafety?id=com.yogavpn
+    title: Yoga VPN data safety on Google Play
+  play-dev:
+    url: https://play.google.com/store/apps/developer?id=Sarah+Hawken
+    title: Sarah Hawken (Smile Code Technology Limited) apps on Google Play
+  play-2017:
+    url: https://web.archive.org/web/20170608133020/https://play.google.com/store/apps/details?id=com.yogavpn
+    title: Yoga VPN on Google Play (archived June 2017)
+  play-2024:
+    url: https://web.archive.org/web/20240527191929/https://play.google.com/store/apps/details?id=com.yogavpn
+    title: Yoga VPN on Google Play (archived May 2024)
+  play-2025:
+    url: https://web.archive.org/web/20250522104946/https://play.google.com/store/apps/details?id=com.yogavpn
+    title: Yoga VPN on Google Play (archived May 2025)
+  register-smile:
+    url: https://data.cr.gov.hk/cr/api/api/v1/api_builder/json/local/search?query%5B0%5D%5Bkey1%5D=Brn&query%5B0%5D%5Bkey2%5D=equal&query%5B0%5D%5Bkey3%5D=77426948
+    title: Smile Code Technology Limited (BRN 77426948), Hong Kong Companies Registry
+  register-yolo:
+    url: https://data.cr.gov.hk/cr/api/api/v1/api_builder/json/local/search?query%5B0%5D%5Bkey1%5D=Brn&query%5B0%5D%5Bkey2%5D=equal&query%5B0%5D%5Bkey3%5D=67676127
+    title: Yolo Net Technology Limited (BRN 67676127), Hong Kong Companies Registry
+  apk:
+    url: https://apkpure.net/yoga-vpn-secure-proxy-vpn/com.yogavpn
+    title: Yoga VPN for Android 9.1.729, whose APK is a shadowsocks-android build with AdMob, Firebase Analytics and Crashlytics
+  newstar-ios:
+    url: https://apps.apple.com/us/app/proxy-browser-blue-proxy-vpn/id1577227510
+    title: Yoga VPN & Blue Proxy Browser by NewStar Software on the App Store (US)
