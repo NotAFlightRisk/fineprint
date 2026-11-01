@@ -1,0 +1,272 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: SuperVPN
+icon: supervpn.png
+checked: 2026-11-01
+
+criteria:
+  identity:
+    website:
+      value: https://supervpn.best
+      sources: [home]
+    legal_entity:
+      value: NETWORKSUPER LTD
+      note: >-
+        Google Play, the App Store and the website's footer all name it, while the privacy policy only says
+        SuperVPN. The company was dormant, as LUNASPEED LTD, until 2024.
+      sources: [play, app-store, home, register, register-filings]
+    owner:
+      value: Jinrong Zheng
+      note: Sole director, holding over 75% of the shares since the company was set up in 2020.
+      sources: [register-psc, register-officers]
+    founded:
+      value: 2014
+      note: The Android app came out in March 2014.
+      sources: [play]
+    team:
+      value: partial
+      note: The site and apps name nobody, but Companies House names the company's sole director.
+      sources: [home, register-officers]
+    sister_brands:
+      value: []
+      note: >-
+        Its developer's only other app is SuperVPN Pro. Super VPN from TOPAPPS TECH, VPN Super, and Qingdao
+        Leyou Hudong's Super VPN for iOS are different apps from other companies.
+      sources: [play-dev, leyou-ios]
+    acquisitions:
+      value: null
+      note: >-
+        No sale is on record. The Play developer name and support email haven't changed since 2015, while its
+        address moved from Beijing to Singapore by 2018, then to the London company in 2025.
+      sources: [play-2015, play-2018, play-2025-01, play-2025-08]
+
+  jurisdiction:
+    hq:
+      value: GB
+      sources: [register]
+    entities:
+      value: [GB]
+      note: Google Play gave addresses in Beijing until 2017 and Singapore until early 2025, without naming a company.
+      sources: [register, play-2015, play-2018, play-2025-01]
+
+  logging:
+    traffic:
+      value: null
+      note: Its Play listing promises a "No-log policy", but the privacy policy doesn't say what's kept while you're connected.
+      sources: [play, privacy]
+    dns:
+      value: null
+      note: The privacy policy doesn't mention DNS requests.
+      sources: [privacy]
+    timestamps:
+      value: null
+      note: The policy's access logs cover your IP address, browser and operating system, without saying whether connection times are kept.
+      sources: [privacy]
+    bandwidth:
+      value: null
+      note: The privacy policy doesn't say whether data use is recorded.
+      sources: [privacy]
+    source_ip:
+      value: 'yes'
+      evidence: claimed
+      note: The policy says the app collects access logs that include your IP address, without saying how long they're kept.
+      sources: [privacy]
+    proven: []
+    policy: https://www.supervpn.best/privacy.html
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents:
+      value:
+        - date: 2020-04-07
+          summary: >-
+            Researchers found the Android app hard-coded the key protecting its server settings, so an attacker
+            could point it at a fake server and read users' traffic. The developer didn't answer them or Google
+            from October 2019, so Google pulled the app on 7 April 2020. A "Fix security issue" update followed
+            days later.
+          handled: poorly
+          source: nakedsecurity-2020
+      note: >-
+        A 2021 breach and a 2023 exposed database were reported as SuperVPN's, but neither has been confirmed
+        as this app's. The 2023 researcher traced his to Qingdao Leyou Hudong, which sold an iOS app of the same
+        name.
+      sources: [nakedsecurity-2020, play-2020, hibp-2021, cyberdaily-2023]
+
+  account:
+    email:
+      value: optional
+      note: The apps work without an account. Logging in takes an email address.
+      sources: [privacy, play-data-safety]
+    personal_data:
+      value: []
+      note: Google Play's data safety form also lists an optional phone number.
+      sources: [play-data-safety]
+    payment:
+      value: [app_store]
+      note: VIP is bought inside the Android app. The iOS app has nothing to buy.
+      sources: [play, app-store]
+
+  security:
+    protocols:
+      value: null
+      note: >-
+        Nothing it publishes names its protocols. Its developer's SuperVPN Pro app is built on strongSwan's
+        IKEv2 client, with a TCP mode.
+      sources: [apk-pro]
+    post_quantum:
+      value: none
+      note: Nothing is published about its key exchange.
+    kill_switch:
+      value: null
+      note: It doesn't mention a kill switch.
+      sources: [faq]
+    dns:
+      value: null
+      note: It doesn't say whose DNS servers the apps use.
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say how its servers are run.
+    hosting:
+      value: null
+      note: It doesn't say whether it owns or rents its servers.
+    virtual_locations:
+      value: null
+      note: It doesn't say whether any locations are virtual.
+    servers:
+      value: null
+      note: It doesn't publish a server count.
+      sources: [home]
+    countries:
+      value: null
+      note: It doesn't say how many countries it covers.
+      sources: [app-store]
+
+  features:
+    connections:
+      value: null
+      note: It doesn't say how many devices VIP covers.
+    multihop: false
+    obfuscation:
+      value: null
+      note: It says it gets past censorship without naming a method.
+      sources: [play]
+    port_forwarding: false
+    split_tunnel:
+      value: true
+      note: On Android, where it's called Smart Proxy.
+      sources: [faq]
+    blocking: []
+
+  clients:
+    platforms:
+      value: [android, ios]
+      note: The iOS app came out in September 2024.
+      sources: [play-dev, app-store]
+    open_source: none
+    telemetry:
+      value: null
+      note: >-
+        The policy mentions third parties for app diagnostics and analytics, and Play's data safety form lists
+        device IDs collected for analytics. Neither says whether you can opt out.
+      sources: [privacy, play-data-safety]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: null
+      note: VIP is sold only in the Android app, at $2.99 to $59.99 per item on Google Play, with no published plan list.
+      sources: [play]
+    best:
+      value: null
+      note: No plan list is published.
+    best_term:
+      value: null
+      note: No plan list is published.
+    renewal_increase:
+      value: null
+      note: No plan list is published.
+    free_tier:
+      value: true
+      note: Ad-supported, with no time or data limits.
+      sources: [play, faq]
+    refund_days:
+      value: null
+      note: It doesn't publish a refund policy.
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: Its Play listing promises a "No-log policy for full anonymity", while its privacy policy collects access logs with your IP address.
+      sources: [play, privacy]
+    affiliates: false
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://supervpn.best/
+    title: SuperVPN homepage
+  privacy:
+    url: https://www.supervpn.best/privacy.html
+    title: SuperVPN Privacy Policy (undated)
+  faq:
+    url: https://supervpn.best/faq.html
+    title: SuperVPN FAQ
+  play:
+    url: https://play.google.com/store/apps/details?id=com.jrzheng.supervpnfree&hl=en
+    title: SuperVPN - Fast VPN Proxy on Google Play
+  play-data-safety:
+    url: https://play.google.com/store/apps/datasafety?id=com.jrzheng.supervpnfree&hl=en
+    title: SuperVPN - Fast VPN Proxy data safety on Google Play
+  play-dev:
+    url: https://play.google.com/store/apps/developer?id=SuperSoftTech&hl=en
+    title: SuperSoftTech (NETWORKSUPER LTD) apps on Google Play
+  play-2015:
+    url: https://web.archive.org/web/20150701155024/https://play.google.com/store/apps/details?id=com.jrzheng.supervpnfree
+    title: SuperVPN on Google Play, with a Beijing address (archived July 2015)
+  play-2018:
+    url: https://web.archive.org/web/20180428125358/https://play.google.com/store/apps/details?id=com.jrzheng.supervpnfree&hl=en
+    title: SuperVPN on Google Play, with a Singapore address (archived April 2018)
+  play-2020:
+    url: https://web.archive.org/web/20200617170428/https://play.google.com/store/apps/details?id=com.jrzheng.supervpnfree
+    title: SuperVPN 2.6.6 on Google Play, "Fix security issue" (archived June 2020)
+  play-2025-01:
+    url: https://web.archive.org/web/20250119033422/https://play.google.com/store/apps/details?hl=en_US&id=com.jrzheng.supervpnfree
+    title: SuperVPN on Google Play, with a Singapore address (archived January 2025)
+  play-2025-08:
+    url: https://web.archive.org/web/20250812025119/https://play.google.com/store/apps/details?id=com.jrzheng.supervpnfree&hl=en_US
+    title: SuperVPN on Google Play, by NETWORKSUPER LTD (archived August 2025)
+  app-store:
+    url: https://apps.apple.com/us/app/supervpn-fast-vpn-client/id6673905322
+    title: SuperVPN Fast VPN Client on the App Store (US)
+  leyou-ios:
+    url: https://apps.apple.com/us/app/super-vpn-secure-vpn-master/id1490819262
+    title: Super VPN - Secure VPN Master by Qingdao Leyou Hudong Network Technology on the App Store (US)
+  register:
+    url: https://find-and-update.company-information.service.gov.uk/company/12451849
+    title: NETWORKSUPER LTD (12451849) at Companies House
+  register-officers:
+    url: https://find-and-update.company-information.service.gov.uk/company/12451849/officers
+    title: NETWORKSUPER LTD officers, Companies House
+  register-psc:
+    url: https://find-and-update.company-information.service.gov.uk/company/12451849/persons-with-significant-control
+    title: NETWORKSUPER LTD persons with significant control, Companies House
+  register-filings:
+    url: https://find-and-update.company-information.service.gov.uk/company/12451849/filing-history
+    title: NETWORKSUPER LTD filing history, Companies House
+  apk-pro:
+    url: https://ws75.aptoide.com/api/7/app/getMeta?package_name=com.jrzheng.supervpnpayment
+    title: SuperVPN Pro 1.9.1 for Android on Aptoide, whose APK is a strongSwan IKEv2 client with AdMob and Firebase
+  nakedsecurity-2020:
+    url: https://web.archive.org/web/20210116013559/https://nakedsecurity.sophos.com/2020/04/09/google-removes-android-vpn-with-critical-vulnerability-from-play-store/
+    title: Naked Security, Google removes Android VPN with critical vulnerability from Play Store (9 April 2020, archived)
+  hibp-2021:
+    url: https://haveibeenpwned.com/Breach/SuperVPNGeckoVPN
+    title: Have I Been Pwned, SuperVPN & GeckoVPN breach (February 2021)
+  cyberdaily-2023:
+    url: https://www.cyberdaily.au/security/9132-360-million-records-exposed-in-free-vpn-data-breach
+    title: Cyber Daily, 360 million records exposed in free VPN data breach (30 May 2023)
