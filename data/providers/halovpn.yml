@@ -1,0 +1,289 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: HaloVPN
+icon: halovpn.png
+checked: 2026-11-01
+
+criteria:
+  identity:
+    website:
+      value: https://myhalo.online
+      sources: [home]
+    legal_entity:
+      value: Halo Online Technology Co., Ltd.
+      note: >-
+        Based in Guangzhou, China. Google Play gives its Chinese name, 广州介个火科技有限公司 (Guangzhou
+        Jiegehuo Technology), at the same Nansha District address the App Store lists.
+      sources: [policy, play, app-store-eu]
+    owner:
+      value: null
+      note: It doesn't say who owns Halo Online Technology.
+      sources: [app-store-eu]
+    founded:
+      value: 2020
+      note: The first iOS app came out in January 2020, though the site's copyright line starts in 2019.
+      sources: [app-store-lookup, home]
+    team:
+      value: anonymous
+      note: No one is named as running it.
+      sources: [app-store-eu, play-dev]
+    sister_brands:
+      value: [HulaVPN]
+      note: >-
+        HulaVPN is sold by a different Guangzhou company, Hula Link Technology, but its Android app shares
+        HaloVPN's com.thehot app ID prefix and code, and its bundled server list carries HaloVPN's server
+        hostnames, labelled "halovpn". TTP listed HulaVPN among China-linked VPN apps in 2025.
+      sources: [hula-play, hula-app-store-eu, hula-apk, apk, ttp-2025]
+    acquisitions:
+      value: []
+      sources: [app-store-2020, play-2022, app-store-eu]
+
+  jurisdiction:
+    hq:
+      value: CN
+      sources: [app-store-eu, play]
+    entities:
+      value: [CN]
+      sources: [app-store-eu]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [policy, no-logs]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [policy, no-logs]
+    timestamps:
+      value: null
+      note: >-
+        The store listings say it never records when you browse, but the policy's connection diagnostics
+        include connection attempts, with no retention period given.
+      sources: [play, policy]
+    bandwidth:
+      value: null
+      note: The policy doesn't mention it, while the terms let it suspend users whose bandwidth use far exceeds the average.
+      sources: [policy, terms]
+    source_ip:
+      value: null
+      note: >-
+        The store listings say it never records where you browse from, but the policy's connection
+        diagnostics include your approximate country, and its App Store label lists coarse location used for
+        advertising.
+      sources: [play, policy, app-store]
+    proven: []
+    policy: https://myhalo.online/policy
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: optional
+      note: The free version and app store subscriptions need no account. Website plans need a Halo account, signed in with an email address, Apple or Google.
+      sources: [download, policy, pricing]
+    personal_data: []
+    payment:
+      value: [app_store, bitcoin]
+      note: Website plans are paid in Bitcoin, though the policy still says all payments go through Apple or Google.
+      sources: [pricing, billing-catalog, policy]
+
+  security:
+    protocols:
+      value: [ikev2, other]
+      note: Other is VLESS with REALITY through Xray, and Hysteria2. The app picks one for you, and not every location offers each.
+      sources: [protocols, apk]
+    post_quantum:
+      value: null
+      note: Nothing is published about its key exchange.
+      sources: [protocols]
+    kill_switch:
+      value: none
+      evidence: claimed
+      note: Its help centre points to Android's own always-on VPN setting, saying that isn't a HaloVPN kill switch.
+      sources: [guide-background, features]
+    dns:
+      value: null
+      note: It doesn't say whose DNS servers answer your lookups.
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say how its servers are run.
+    hosting:
+      value: null
+      note: It doesn't say whether it owns or rents its servers. The free servers listed in the Android app are on OVH addresses.
+      sources: [apk]
+    virtual_locations:
+      value: null
+      note: It doesn't say whether any locations are virtual.
+      sources: [servers]
+    servers:
+      value: null
+      note: It doesn't publish a server count.
+      sources: [servers, features]
+    countries:
+      value: 32
+      note: In 65 cities, most of them for paid users only.
+      sources: [servers]
+
+  features:
+    connections:
+      value: null
+      note: >-
+        Pro carries over to any device signed in to the same Halo account, and the store listings say it
+        "covers all your devices", without giving a limit.
+      sources: [pricing, play]
+    multihop: false
+    obfuscation:
+      value: [v2ray, quic]
+      note: V2Ray here is Xray with VLESS and REALITY. Hysteria2 runs over QUIC.
+      sources: [protocols, apk]
+    port_forwarding: false
+    split_tunnel:
+      value: true
+      note: By app, on Android only.
+      sources: [split-tunnel, features]
+    blocking: []
+
+  clients:
+    platforms:
+      value: [ios, android]
+      note: >-
+        Each store has two apps from the same developer, HaloVPN and HaloVPN Pro, and the site links to the
+        Pro ones.
+      sources: [download, play-dev, app-store]
+    open_source:
+      value: none
+      note: The Android app is built on open source Xray and strongSwan, but its own code isn't published.
+      sources: [apk]
+    telemetry:
+      value: null
+      note: >-
+        The Android app carries Firebase Analytics, Crashlytics and several ad networks. Its App Store label
+        says identifiers are used to track you, while its Play form says nothing is shared, and neither says
+        whether you can opt out.
+      sources: [apk, app-store, play-data-safety]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 8.88, currency: USD }
+      note: On the website. In the apps it's $9.99 a month, or $59.99 a year on Google Play and $58.99 on the App Store.
+      sources: [pricing, billing-catalog, play, app-store]
+    best:
+      value: { amount: 4.07, currency: USD }
+      note: $48.88 a year on the website.
+      sources: [pricing, billing-catalog]
+    best_term:
+      value: 12
+      sources: [pricing]
+    renewal_increase:
+      value: 0
+      note: Website plans don't renew automatically. App store plans start with a 7-day free trial, then renew at the same price.
+      sources: [pricing, terms, play]
+    free_tier:
+      value: true
+      note: Ad-supported, with fewer locations.
+      sources: [pricing, servers]
+    refund_days:
+      value: null
+      note: >-
+        The terms leave refunds to Apple and Google and say it processes none itself. They don't cover the
+        Bitcoin plans sold on its website.
+      sources: [terms, guide-refund]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        Both store listings promise "military-grade AES-256 encryption" and "no tracking", while its own App
+        Store label says identifiers are used to track you.
+      sources: [play, app-store]
+    affiliates: false
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://myhalo.online/
+    title: HaloVPN homepage
+  policy:
+    url: https://myhalo.online/policy
+    title: Privacy Policy (last updated 14 October 2026)
+  terms:
+    url: https://myhalo.online/terms
+    title: Terms of Service (last updated 14 October 2026)
+  no-logs:
+    url: https://myhalo.online/no-log-vpn
+    title: VPN activity logs and privacy information
+  pricing:
+    url: https://myhalo.online/pro
+    title: HaloVPN Pro subscriptions
+  billing-catalog:
+    url: https://myhalo.online/api/billing/catalog
+    title: HaloVPN website plan catalogue, as loaded by its pricing page
+  servers:
+    url: https://myhalo.online/servers
+    title: HaloVPN countries and cities
+  protocols:
+    url: https://myhalo.online/vpn-protocols
+    title: How HaloVPN connects on different networks
+  features:
+    url: https://myhalo.online/features
+    title: HaloVPN features and platform support
+  split-tunnel:
+    url: https://myhalo.online/features/split-tunneling
+    title: Android split tunneling
+  download:
+    url: https://myhalo.online/download
+    title: Download HaloVPN for iOS and Android
+  guide-background:
+    url: https://myhalo.online/guides/android-battery
+    title: Keep HaloVPN running on Android
+  guide-refund:
+    url: https://myhalo.online/guides/request-refund
+    title: Request a refund for an app store purchase
+  play:
+    url: https://play.google.com/store/apps/details?id=com.thehot.halovpnpro
+    title: 'HaloVPN Pro: Fast VPN Proxy on Google Play'
+  play-data-safety:
+    url: https://play.google.com/store/apps/datasafety?id=com.thehot.halovpnpro
+    title: HaloVPN Pro data safety on Google Play
+  play-dev:
+    url: https://play.google.com/store/apps/developer?id=Halo+Online
+    title: Halo Online apps on Google Play
+  play-2022:
+    url: https://web.archive.org/web/20220113183837/https://play.google.com/store/apps/details?id=com.thehot.halovpnpro
+    title: 'HaloVPN Pro: Fast VPN Proxy on Google Play (archived January 2022)'
+  app-store:
+    url: https://apps.apple.com/us/app/halovpn-pro-fast-vpn-proxy/id1541921405
+    title: 'HaloVPN Pro: Fast VPN Proxy on the App Store (US)'
+  app-store-eu:
+    url: https://apps.apple.com/fr/app/halovpn-pro-fast-vpn-proxy/id1541921405?l=en
+    title: 'HaloVPN Pro: Fast VPN Proxy on the App Store (France), with the trader details'
+  app-store-2020:
+    url: https://web.archive.org/web/20201202235530/https://apps.apple.com/us/app/halovpn-fast-secure-vpn-proxy/id1495112322
+    title: 'HaloVPN: Fast Secure VPN Proxy on the App Store (archived December 2020)'
+  app-store-lookup:
+    url: https://itunes.apple.com/lookup?id=1495112322&country=us
+    title: 'App Store record for HaloVPN: Fast Secure VPN Proxy, released 22 January 2020'
+  apk:
+    url: https://apkpure.net/halovpn-pro-fast-vpn-proxy/com.thehot.halovpnpro
+    title: HaloVPN Pro for Android 17.7.5, whose APK bundles Xray, Hysteria2, strongSwan, Firebase and several ad SDKs
+  hula-play:
+    url: https://play.google.com/store/apps/details?id=com.thehot.hulopro
+    title: 'HulaVPN Pro: Fast VPN Proxy on Google Play'
+  hula-app-store-eu:
+    url: https://apps.apple.com/fr/app/id1597830790?l=en
+    title: 'HulaVPN Pro: Fast VPN Proxy on the App Store (France), with the trader details'
+  hula-apk:
+    url: https://apkpure.net/hulavpn-pro-secure-fast-vpn/com.thehot.hulopro
+    title: HulaVPN Pro for Android 14.7.1, whose APK bundles HaloVPN's code and server hostnames
+  ttp-2025:
+    url: https://www.techtransparencyproject.org/articles/apple-offers-apps-with-ties-to-chinese-military
+    title: Tech Transparency Project, Apple Offers Apps With Ties to Chinese Military (1 April 2025)
