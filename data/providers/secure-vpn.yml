@@ -28,7 +28,7 @@ criteria:
       value: [Fastzilla VPN]
       note: >-
         Fastzilla VPN shares its Google Play developer and App Store seller. It isn't the Secure VPN from
-        Secure Signal Inc in 2025 research, or the Signal Secure VPN that TTP tied to Qihoo 360.
+        Secure Signal Inc in 2025 research, or the Signal Secure VPN (now SOLO VPN) that TTP tied to Qihoo 360.
       sources: [play-dev, app-store, hidden-links-2025, ttp-spot-check-2025]
     acquisitions: []
 

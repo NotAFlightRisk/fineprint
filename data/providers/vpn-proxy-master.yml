@@ -30,10 +30,10 @@ criteria:
       note: The privacy policy names a data protection officer, and TTP named a director of Lemon Clove from its 2025 filings. Nobody else is named.
       sources: [privacy, ttp-2025]
     sister_brands:
-      value: [Turbo VPN, VPN Monster, Snap VPN, Robot VPN, SuperNet VPN]
+      value: [Turbo VPN, VPN Monster, SOLO VPN, Snap VPN, SuperNet VPN]
       note: >-
         2025 research found the Android app shares code and VPN servers with these apps from sister companies
-        Innovative Connecting and Autumn Breeze. TTP also ties Thunder VPN and Signal Secure VPN to the group.
+        Innovative Connecting and Autumn Breeze. SOLO VPN was called Robot VPN, then Signal Secure VPN. TTP also ties Thunder VPN to the group.
       sources: [hidden-links-2025, ttp-2025, ttp-spot-check-2025]
     acquisitions:
       value:
