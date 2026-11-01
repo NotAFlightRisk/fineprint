@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: Private Internet Access
 icon: private-internet-access.png
-checked: 2026-10-21
+checked: 2026-11-01
 
 criteria:
   identity:
@@ -183,7 +183,6 @@ criteria:
       sources: [windows, apple-tv]
     post_quantum:
       value: none
-      note: Nothing on its site, help centre or open source apps mentions post-quantum key exchange.
       sources: [settings-advanced, github]
     kill_switch:
       value: system
@@ -207,7 +206,7 @@ criteria:
     virtual_locations:
       value: disclosed
       note: >-
-        Labelled as geo-located regions in the apps. The server list the apps use marks 63 of the 113
+        Labelled as geo-located regions in the apps. The server list the apps use marks 62 of the 113
         countries as virtual only.
       sources: [server-list, serverlist-api, settings-android]
     servers:
@@ -263,10 +262,6 @@ criteria:
         Anonymous connection statistics are only sent if you tick "Help improve PIA", though its no-logs
         page talks of opting out.
       sources: [privacy-policy, settings-basic, no-logs]
-    trackers:
-      value: 0
-      note: In version 4.0.18 from October 2024, the newest archived report.
-      sources: [exodus]
     fdroid:
       value: true
       sources: [fdroid]
@@ -300,8 +295,8 @@ criteria:
   ethics:
     misleading_claims:
       value: true
-      note: Its features page promises "unbreakable VPN encryption".
-      sources: [features]
+      note: Its router page promises "military-grade VPN encryption" and "a 100% effective Kill Switch".
+      sources: [vpn-router]
     affiliates:
       value: true
       note: Its affiliate page offers up to 33% commission on new sales.
@@ -333,9 +328,9 @@ refs:
   pricing:
     url: https://www.privateinternetaccess.com/buy-vpn-online
     title: Private Internet Access pricing
-  features:
-    url: https://www.privateinternetaccess.com/vpn-features
-    title: PIA VPN features
+  vpn-router:
+    url: https://www.privateinternetaccess.com/vpn-router
+    title: PIA VPN router
   server-list:
     url: https://www.privateinternetaccess.com/vpn-server
     title: PIA VPN server locations
@@ -402,9 +397,6 @@ refs:
   fdroid:
     url: https://f-droid.org/en/packages/com.privateinternetaccess.android/
     title: Private Internet Access VPN on F-Droid
-  exodus:
-    url: https://reports.exodus-privacy.eu.org/en/reports/com.privateinternetaccess.android/latest/
-    title: Exodus Privacy report for com.privateinternetaccess.android
   affiliates:
     url: https://www.privateinternetaccess.com/affiliate-program
     title: PIA affiliate program
