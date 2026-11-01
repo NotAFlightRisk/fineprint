@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: AVG Secure VPN
 icon: avg-secure-vpn.png
-checked: 2026-10-21
+checked: 2026-11-01
 
 criteria:
   identity:
@@ -110,9 +110,9 @@ criteria:
 
   security:
     protocols:
-      value: [wireguard, openvpn, proprietary]
-      note: OpenVPN, WireGuard and Mimic on Windows. The mobile guide lets you choose a protocol but doesn't name them.
-      sources: [faq, mobile-guide]
+      value: [wireguard, openvpn, proprietary, other]
+      note: OpenVPN, WireGuard and Mimic on Windows and Android. Macs get IPsec and Mimic, and iPhones OpenVPN, IPsec and Mimic.
+      sources: [faq]
     post_quantum:
       value: none
       note: Not mentioned on the VPN page, in the support FAQ or in the setup guides.
@@ -158,7 +158,7 @@ criteria:
       sources: [faq]
     split_tunnel:
       value: true
-      note: The mobile guide lets you exclude chosen apps. The desktop FAQ only mentions letting local network traffic bypass the VPN.
+      note: The Android app lets you exclude chosen apps. The desktop FAQ only mentions letting local network traffic bypass the VPN.
       sources: [mobile-guide, faq]
     blocking:
       value: []
