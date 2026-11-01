@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: PureVPN
 icon: purevpn.png
-checked: 2026-10-21
+checked: 2026-11-01
 
 criteria:
   identity:
@@ -121,11 +121,11 @@ criteria:
         lists 14 court orders and 53 subpoenas since 2021.
       sources: [trust-center, transparency-court, transparency-subpoena]
     bug_bounty:
-      value: false
+      value: true
       note: >-
-        Its paid Bugcrowd programme from 2018 is gone, and in 2025 it said it was still setting up a
-        disclosure process.
-      sources: [bugcrowd-2018, advisory-2025]
+        Its disclosure policy pays up to $1,500 a bug at PureVPN's discretion, and says researchers must
+        not disclose a flaw publicly.
+      sources: [vdp]
     incidents:
       value:
         - date: 2025-09-17
@@ -156,7 +156,15 @@ criteria:
             connection times.
           handled: poorly
           source: torrentfreak-2017
-      sources: [anagogistis-2025, advisory-2025, baloch-2023, trustwave-2018, securityaffairs-2018, torrentfreak-2017, doj-2017]
+        - date: 2013-10-05
+          summary: >-
+            Attackers used a zero-day flaw in its WHMCS billing system to take some customers' names and
+            email addresses, then emailed them a fake notice that PureVPN was shutting down and had handed
+            their data to the authorities. PureVPN denied the email the same day and confirmed the breach
+            within two days.
+          handled: well
+          source: cso-2013
+      sources: [anagogistis-2025, advisory-2025, baloch-2023, trustwave-2018, securityaffairs-2018, torrentfreak-2017, doj-2017, cso-2013, techcrunch-2013]
 
   account:
     email:
@@ -192,9 +200,10 @@ criteria:
 
   infra:
     ram_only:
-      value: null
-      note: PureVPN doesn't say its servers run from RAM.
-      sources: [trust-center]
+      value: none
+      evidence: claimed
+      note: PureVPN says its servers run from hard disks with full-disk encryption instead.
+      sources: [ram-only]
     hosting:
       value: null
       note: PureVPN doesn't say whether it owns or rents its servers.
@@ -393,11 +402,20 @@ refs:
     url: https://www.purevpn.com/affiliates
     title: PureVPN affiliate program
   exodus:
-    url: https://reports.exodus-privacy.eu.org/en/reports/com.gaditek.purevpnics/latest/
-    title: Exodus Privacy report for com.gaditek.purevpnics
-  bugcrowd-2018:
-    url: https://www.bugcrowd.com/blog/purevpn-tasks-bugcrowd-for-greater-assurance-of-user-security/
-    title: PureVPN tasks Bugcrowd for greater assurance of user security (2018)
+    url: https://web.archive.org/web/20250903011528/https://reports.exodus-privacy.eu.org/en/reports/com.gaditek.purevpnics/latest/
+    title: Exodus Privacy report for com.gaditek.purevpnics 8.86.129 (archived)
+  vdp:
+    url: https://www.purevpn.com/vulnerability-disclosure-policy
+    title: PureVPN vulnerability disclosure policy
+  ram-only:
+    url: https://www.purevpn.com/blog/ram-only-vpn-servers/
+    title: A complete guide to RAM-only VPN servers (PureVPN blog, 2025)
+  cso-2013:
+    url: https://www.csoonline.com/article/539942/privacy-whmcs-zero-day-vulnerability-used-against-purevpn.html
+    title: WHMCS zero-day vulnerability used against PureVPN (CSO, 2013)
+  techcrunch-2013:
+    url: https://techcrunch.com/2013/10/06/purevpn/
+    title: PureVPN hit with a zero day exploit, but CEO says email alleging data compromise was fake (TechCrunch, 2013)
   advisory-2025:
     url: https://www.purevpn.com/blog/security-advisory-linux-client-ipv6-leak-firewall-rule-reset/
     title: 'PureVPN security advisory: Linux client IPv6 leak and firewall rule reset'
