@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: ExpressVPN
 icon: expressvpn.png
-checked: 2026-10-20
+checked: 2026-11-01
 
 criteria:
   identity:
@@ -304,7 +304,6 @@ criteria:
       sources: [split-tunnel]
     blocking:
       value: [ads, trackers, malware]
-      note: Tracker blocking needs the Advanced tier or above.
       sources: [threat-manager, ad-blocker, pricing]
 
   clients:
