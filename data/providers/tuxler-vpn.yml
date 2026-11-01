@@ -1,0 +1,189 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Tuxler VPN
+icon: tuxler-vpn.svg
+checked: 2026-11-01
+
+criteria:
+  identity:
+    website:
+      value: https://www.tuxlervpn.com
+      sources: [about]
+    legal_entity:
+      value: Tuxler Privacy Technologies, Inc.
+      sources: [about, eula]
+    owner: null
+    founded:
+      value: 2011
+      note: The Tuxler brand dates from 2011 and its company from 2016, though it says the residential network behind it launched in 2007.
+      sources: [about]
+    team:
+      value: anonymous
+      note: Neither the site, the policies nor the store listings name anyone behind the company.
+      sources: [about, chrome]
+    sister_brands: []
+
+  jurisdiction:
+    hq:
+      value: US
+      note: A Delaware company with a mailing address in Walnut Creek, California.
+      sources: [about]
+    entities:
+      value: [US]
+      sources: [about]
+
+  logging:
+    traffic:
+      value: null
+      note: The privacy policy covers the website and marketing, and says nothing about what the VPN itself keeps.
+      sources: [privacy-policy]
+    dns: null
+    timestamps: null
+    bandwidth: null
+    source_ip:
+      value: null
+      note: On the free version your IP address is put in the shared pool that others connect through.
+      sources: [privacy-policy, faq]
+    proven: []
+    policy: https://www.tuxlervpn.com/privacy-policy/
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: required
+      sources: [eula, faq]
+    personal_data: []
+    payment:
+      value: [card, paypal, bitcoin, other_crypto]
+      note: Card and PayPal go through PayPal, and crypto (Bitcoin, Ethereum, USDC) through CoinPayments.
+      sources: [pricing]
+
+  security:
+    protocols:
+      value: [other]
+      note: The FAQ says it uses SOCKS5, a proxy protocol, while the site calls the connection encrypted without saying how.
+      sources: [faq]
+    post_quantum: none
+    kill_switch:
+      value: app
+      evidence: claimed
+      note: The FAQ says the app and extensions block the internet when the connection drops, on by default.
+      sources: [faq]
+    dns:
+      value: null
+      note: The FAQ admits the desktop app leaks DNS and suggests the browser extension instead.
+      sources: [faq]
+
+  infra:
+    hosting:
+      value: null
+      note: Residential locations are other users' home connections, and it doesn't say where its data-center ones are.
+      sources: [about, faq]
+    servers: null
+    countries:
+      value: null
+      note: The locations page lists 24 countries as examples and says the real list changes with who's online.
+      sources: [locations]
+
+  features:
+    connections:
+      value: 1
+      note: One active session per Premium account.
+      sources: [faq]
+    multihop: false
+    obfuscation: []
+    blocking: []
+
+  clients:
+    platforms:
+      value: [windows, browser]
+      note: >-
+        The free version and residential locations are Windows only. The Chrome and Firefox extensions need
+        Premium and only reach data-center locations, and the Firefox one hasn't been updated since 2022.
+      sources: [faq, chrome, firefox]
+    open_source:
+      value: none
+      note: The licence forbids reverse engineering the apps or trying to discover their protocol.
+      sources: [eula]
+    telemetry: null
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 7.99, currency: USD }
+      sources: [pricing]
+    best:
+      value: { amount: 7.99, currency: USD }
+      sources: [pricing]
+    best_term:
+      value: 1
+      sources: [pricing]
+    renewal_increase:
+      value: 0
+      sources: [pricing]
+    free_tier:
+      value: true
+      note: You pay for it with your connection, which other people's traffic leaves through.
+      sources: [eula]
+    refund_days:
+      value: 30
+      note: Renewals only within 7 days, and only if you've barely used it since.
+      sources: [refund-policy]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: Its Chrome listing promises "full browsing anonymity" and says it's "impossible to determine that you are using a VPN".
+      sources: [chrome]
+    affiliates:
+      value: true
+      note: Pays 50 to 70% of sales, and up to $0.50 for each free US install.
+      sources: [affiliates]
+    review_sites: false
+    activism: false
+
+  other:
+    concerns:
+      value:
+        - summary: >-
+            On the free version your device is an exit node for as long as the app's installed, connected or not,
+            and Tuxler resells that access to business customers, so their traffic leaves through your IP address.
+          severity: serious
+          source: eula
+
+refs:
+  about:
+    url: https://www.tuxlervpn.com/about/
+    title: About TuxlerVPN
+  privacy-policy:
+    url: https://www.tuxlervpn.com/privacy-policy/
+    title: Privacy Policy
+  eula:
+    url: https://www.tuxlervpn.com/end-user-license-agreement/
+    title: End-User License Agreement
+  faq:
+    url: https://www.tuxlervpn.com/faq/
+    title: TuxlerVPN FAQ
+  pricing:
+    url: https://www.tuxlervpn.com/buy-tuxler/
+    title: TuxlerVPN Premium
+  refund-policy:
+    url: https://www.tuxlervpn.com/refund-policy/
+    title: Refund Policy
+  locations:
+    url: https://www.tuxlervpn.com/locations/
+    title: TuxlerVPN Locations
+  affiliates:
+    url: https://www.tuxlervpn.com/affiliate-reseller/
+    title: Affiliate & Reseller Programs
+  chrome:
+    url: https://chromewebstore.google.com/detail/jpgljfpmoofbmlieejglhonfofmahini
+    title: Residential VPN | Tuxler, Chrome Web Store
+  firefox:
+    url: https://addons.mozilla.org/en-US/firefox/addon/free-residential-tuxler-vpn/
+    title: Free Residential VPN | Tuxler, Firefox Add-ons
