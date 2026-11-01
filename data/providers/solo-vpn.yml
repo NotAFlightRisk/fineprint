@@ -1,0 +1,271 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: SOLO VPN
+icon: solo-vpn.png
+checked: 2026-11-01
+
+criteria:
+  identity:
+    website:
+      value: https://signalsecurevpn.com
+      note: Called Signal Secure VPN until early 2026, and VPN Robot before that. The site kept its old address.
+      sources: [home, play, play-2026, play-2020]
+    legal_entity:
+      value: Autumn Breeze Pte. Limited
+      note: >-
+        It replaced Lemon Clove as the Google Play developer by March 2021. Until 2026 the site named Innovative
+        Connecting, which sold the iOS app.
+      sources: [terms, register, play, play-2021, site-2026, app-store-2023]
+    owner:
+      value: null
+      note: >-
+        Autumn Breeze doesn't say who owns it, and told TTP in 2025 it has no affiliation with Qihoo 360. Qihoo 360
+        bought it in 2019 and reported selling it to unnamed parties in 2020, but TTP found its March 2025 filings
+        still list one director whose name matches a former Qihoo 360 manager.
+      sources: [ttp-2025, ttp-spot-check-2025]
+    founded:
+      value: 2017
+      note: The Android app was released on Google Play in April 2017, as VPN Robot.
+      sources: [play, play-2017]
+    team:
+      value: partial
+      note: TTP named a director of Autumn Breeze from its 2025 filings. Nobody else is named.
+      sources: [ttp-2025]
+    sister_brands:
+      value: [Turbo VPN, VPN Proxy Master, VPN Monster, Snap VPN, SuperNet VPN]
+      note: >-
+        Snap VPN and SuperNet VPN share its Google Play developer, and 2025 research found it shares code and VPN
+        servers with the others through sister companies Innovative Connecting and Lemon Clove. TTP also ties
+        Thunder VPN to the group.
+      sources: [play-dev, hidden-links-2025, ttp-2025, ttp-spot-check-2025]
+    acquisitions:
+      value:
+        - date: 2020-09-01
+          acquirer: Undisclosed buyers
+          source: ttp-2025
+        - date: 2019-12-01
+          acquirer: Qihoo 360
+          source: ttp-2025
+      note: >-
+        Qihoo 360 bought Autumn Breeze, and Lemon Clove, the app's developer at the time, in December 2019. The 2020
+        sale is TTP's reading of an unnamed "Project L" in Qihoo's annual report.
+      sources: [ttp-2025, play-2020]
+
+  jurisdiction:
+    hq:
+      value: SG
+      sources: [register, play]
+    entities:
+      value: [SG]
+      sources: [register]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [privacy]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [privacy]
+    timestamps:
+      value: aggregate
+      evidence: claimed
+      note: It records whether you connected successfully on a given day, but not the time.
+      sources: [privacy]
+    bandwidth:
+      value: aggregate
+      evidence: claimed
+      note: It keeps a running total of the data each user transfers, for fair use.
+      sources: [privacy]
+    source_ip:
+      value: null
+      note: >-
+        The policy says it doesn't log your IP address, but it records your country and internet provider. 2025
+        research saw the Android app send the postcode of your IP address to Firebase, and the 2026 app still looks
+        your IP up with ip-api.com.
+      sources: [privacy, hidden-links-2025, apk]
+    proven: []
+    policy: https://www.signalsecurevpn.com/privacy.html
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents:
+      value: []
+      grade: ok
+      note: >-
+        In 2025 researchers found the Android app held a hard-coded Shadowsocks password that lets an eavesdropper
+        decrypt users' traffic, and sent location data its policy says it doesn't collect. No response or fix from
+        the company is on record, so it's graded ok rather than good.
+      sources: [hidden-links-2025]
+
+  account:
+    email:
+      value: optional
+      note: An account email is optional, and the app otherwise identifies you by your device.
+      sources: [privacy, play-data-safety]
+    personal_data: []
+    payment:
+      value: [app_store]
+      note: The terms also name the top-up sites Smileone and Codashop, which take their own payment methods.
+      sources: [terms]
+
+  security:
+    protocols:
+      value: [openvpn, ikev2, other]
+      note: Other is ShadowsocksR. In 2025 researchers found the OpenVPN option couldn't be selected in the Android app.
+      sources: [hidden-links-2025, apk]
+    post_quantum:
+      value: none
+      note: Nothing is published about its key exchange.
+      sources: [home]
+    kill_switch:
+      value: null
+      note: The Android app has a kill switch notification, but nothing published says how it works.
+      sources: [apk]
+    dns:
+      value: null
+      note: It doesn't say whose DNS servers the app uses.
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say its servers run from memory, and the policy mentions their disk encryption.
+      sources: [privacy]
+    hosting:
+      value: null
+      note: It doesn't say whether it owns or rents its servers. 2025 research found it shares VPN servers with its sister brands.
+      sources: [hidden-links-2025]
+    virtual_locations:
+      value: null
+      note: It doesn't say whether any locations are virtual.
+    servers:
+      value: null
+      note: It doesn't say how many servers it has.
+    countries:
+      value: null
+      note: It doesn't say how many countries it has servers in.
+
+  features:
+    connections:
+      value: 5
+      note: On a paid subscription.
+      sources: [home]
+    multihop: false
+    obfuscation:
+      value: [shadowsocks]
+      note: Its ShadowsocksR mode was found to use the deprecated rc4-md5 cipher with obfuscation set to plain.
+      sources: [hidden-links-2025, apk]
+    port_forwarding: false
+    split_tunnel:
+      value: true
+      sources: [apk]
+    blocking: []
+
+  clients:
+    platforms:
+      value: [android]
+      note: The iOS app, sold by Innovative Connecting, was removed from the App Store in 2025.
+      sources: [play, app-store-2023, ttp-spot-check-2025]
+    open_source:
+      value: none
+      sources: [terms]
+    telemetry:
+      value: null
+      note: >-
+        The policy says the app sends anonymised usage statistics and crash reports "with your permission", without
+        saying how it asks. The Android app bundles Firebase Analytics, Crashlytics and Adjust, and 2025 research saw
+        it upload location data to Firebase.
+      sources: [privacy, play-data-safety, apk, hidden-links-2025]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: null
+      note: Prices are only shown in the app. Google Play lists its in-app purchases at $0.99 to $35.99.
+      sources: [terms, play]
+    best:
+      value: null
+      note: Prices are only shown in the app.
+      sources: [terms]
+    best_term:
+      value: null
+      note: Prices are only shown in the app.
+    renewal_increase:
+      value: null
+      note: The terms say introductory prices only cover the first subscription period.
+      sources: [terms]
+    free_tier:
+      value: true
+      note: Ad-supported, with limits on speed and connection time.
+      sources: [play, apk]
+    refund_days:
+      value: null
+      note: Refunds are left to Google Play and the top-up sites. Its own pro-rata refund only applies if the service was consistently unusable.
+      sources: [terms]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        Its site promises "Military-grade encryption" and that your data is "never exposed online, even for a brief
+        moment", and its Play listing says it lets you browse "anonymously without being tracked".
+      sources: [home, play]
+    affiliates: false
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://signalsecurevpn.com/
+    title: SOLO VPN homepage
+  privacy:
+    url: https://www.signalsecurevpn.com/privacy.html
+    title: Privacy Policy (updated 9 April 2026)
+  terms:
+    url: https://www.signalsecurevpn.com/term.html
+    title: Terms of Service (updated 9 April 2026)
+  register:
+    url: https://data.gov.sg/api/action/datastore_search?resource_id=d_3f960c10fed6145404ca7b821f263b87&q=201813125N
+    title: Autumn Breeze Pte. Limited (UEN 201813125N), ACRA corporate entities dataset
+  play:
+    url: https://play.google.com/store/apps/details?id=free.vpn.unblock.proxy.freenetvpn
+    title: 'SOLO VPN: Keep Signal Secure on Google Play'
+  play-data-safety:
+    url: https://play.google.com/store/apps/datasafety?id=free.vpn.unblock.proxy.freenetvpn
+    title: SOLO VPN data safety on Google Play
+  play-dev:
+    url: https://play.google.com/store/apps/dev?id=6103772208994312807
+    title: AUTUMN BREEZE PTE. LIMITED apps on Google Play
+  play-2017:
+    url: https://web.archive.org/web/20170919131743/https://play.google.com/store/apps/details?id=free.vpn.unblock.proxy.freenetvpn
+    title: VPN Robot on Google Play (archived September 2017)
+  play-2020:
+    url: https://web.archive.org/web/20200119180119/https://play.google.com/store/apps/details?id=free.vpn.unblock.proxy.freenetvpn
+    title: VPN Robot on Google Play, offered by Lemon Clove (archived January 2020)
+  play-2021:
+    url: https://web.archive.org/web/20210303093431/https://play.google.com/store/apps/details?id=free.vpn.unblock.proxy.freenetvpn
+    title: Signal Secure VPN on Google Play, offered by Autumn Breeze (archived March 2021)
+  play-2026:
+    url: https://web.archive.org/web/20260302024607/https://play.google.com/store/apps/details?id=free.vpn.unblock.proxy.freenetvpn
+    title: Signal Secure VPN - Robot VPN on Google Play (archived March 2026)
+  site-2026:
+    url: https://web.archive.org/web/20260118063842/https://www.signalsecurevpn.com/
+    title: Signal Secure VPN homepage, footer naming Innovative Connecting (archived January 2026)
+  app-store-2023:
+    url: https://web.archive.org/web/20230130175052/https://apps.apple.com/us/app/id1439297761
+    title: Signal Secure VPN-Solo VPN on the App Store, sold by Innovative Connecting (archived January 2023)
+  apk:
+    url: https://vpn-robot.en.uptodown.com/android
+    title: SOLO VPN (listed as VPN Robot) for Android 2.5.5, whose APK bundles AdMob, Firebase and Adjust
+  ttp-2025:
+    url: https://www.techtransparencyproject.org/articles/apple-offers-apps-with-ties-to-chinese-military
+    title: Tech Transparency Project, Apple Offers Apps With Ties to Chinese Military (1 April 2025)
+  ttp-spot-check-2025:
+    url: https://www.techtransparencyproject.org/articles/spot-check-apple-and-google-still-have-a-chinese-vpn-problem
+    title: 'Tech Transparency Project, Spot Check: Apple and Google Still Have a Chinese VPN Problem (12 June 2025)'
+  hidden-links-2025:
+    url: https://www.petsymposium.org/foci/2025/foci-2025-0008.php
+    title: 'Mixon-Baca, Knockel and Crandall, Hidden Links: Analyzing Secret Families of VPN Apps (FOCI 2025)'
