@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: Bitdefender VPN
 icon: bitdefender-vpn.png
-checked: 2026-10-21
+checked: 2026-11-01
 
 criteria:
   identity:
@@ -91,9 +91,21 @@ criteria:
         which include Total Security and its websites, not the VPN app.
       sources: [bug-bounty]
     incidents:
-      value: []
-      note: Its security advisories list no VPN flaws. It says its kill switch stops TunnelVision, which hit VPNs in general.
-      sources: [advisories, tunnelvision]
+      value:
+        - date: 2022-03-07
+          summary: >-
+            A flaw reported through ZDI let a local attacker crash the standalone VPN app and other
+            Bitdefender products. It was fixed in version 25.5.0.48 and published with an advisory.
+          handled: well
+          source: va-10016
+        - date: 2020-05-26
+          summary: >-
+            A flaw in the Pango (AnchorFree) VPN SDK inside the Windows app let a local program run code
+            with SYSTEM rights. An automatic update fixed it, with an advisory crediting the researcher.
+          handled: well
+          source: va-8430
+      note: It says its kill switch stops TunnelVision, which hit VPNs in general.
+      sources: [va-10016, va-8430, advisories, tunnelvision]
 
   account:
     email:
@@ -149,8 +161,8 @@ criteria:
       note: Its page says more than 3,000.
       sources: [pricing]
     countries:
-      value: 110
-      note: From the FAQ's country list. The VPN page says 100+.
+      value: 109
+      note: Counted from the FAQ's list, which says 110. The VPN page says 100+.
       sources: [faq, pricing]
 
   features:
@@ -193,10 +205,6 @@ criteria:
         The Windows app has a "Help improve Bitdefender VPN" setting that sends anonymous product reports,
         but its default isn't stated.
       sources: [windows-guide]
-    trackers:
-      value: 3
-      note: Facebook Login, Crashlytics and Firebase Analytics, in version 1.2.9.109 from February 2023, the newest archived report.
-      sources: [exodus]
     fdroid: false
 
   pricing:
@@ -295,9 +303,12 @@ refs:
   advisories:
     url: https://www.bitdefender.com/support/security-advisories/
     title: Bitdefender security advisories
-  exodus:
-    url: https://web.archive.org/web/20230925033834/https://reports.exodus-privacy.eu.org/en/reports/com.bitdefender.vpn/latest/
-    title: Exodus Privacy report for com.bitdefender.vpn (archived)
+  va-8430:
+    url: https://www.bitdefender.com/support/security-advisories/privilege-escalation-bitdefender-premium-vpn-client-va-8430/
+    title: Privilege escalation in Bitdefender Premium VPN client (VA-8430, CVE-2020-12828)
+  va-10016:
+    url: https://www.bitdefender.com/support/security-advisories/messaging_ipc-dll-null-pointer-dereference-in-multiple-bitdefender-products-va-10016/
+    title: messaging_ipc.dll NULL pointer dereference in multiple Bitdefender products (VA-10016, CVE-2021-4198)
   affiliates:
     url: https://www.bitdefender.com/en-us/partners/affiliate-partners/
     title: Bitdefender affiliate program
