@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: ClearVPN
 icon: clearvpn.png
-checked: 2026-10-21
+checked: 2026-11-01
 
 criteria:
   identity:
@@ -70,7 +70,7 @@ criteria:
   transparency:
     audits:
       value: []
-      note: MacPaw holds ISO 27001 and SOC 2 Type I company-wide, but the reports are only available on request and no ClearVPN audit has been published.
+      note: MacPaw holds ISO 27001, with the certificate only on request, and Setapp's 2021 SOC 2 Type I wasn't renewed. No ClearVPN audit has been published.
       sources: [trust-center]
     report:
       value: none
@@ -102,7 +102,7 @@ criteria:
   security:
     protocols:
       value: [wireguard, openvpn, ikev2, proprietary, other]
-      note: The app picks one for you. Android lists IKEv2, WireGuard and Hysteria2 (Other), and iOS lists IKEv2, OpenVPN and its own custom protocol.
+      note: The app picks one for you. Android lists IKEv2, WireGuard and Hysteria2 (Other), and iOS lists IKEv2, OpenVPN and its own custom protocol, with WireGuard added in April 2026.
       sources: [protocols, play, app-store]
     post_quantum:
       value: none
@@ -114,7 +114,7 @@ criteria:
       sources: [kill-switch]
     dns:
       value: null
-      note: DNS goes through the tunnel and gets filtered by its DNS Adblock, but it doesn't say whose resolvers answer.
+      note: DNS goes through the tunnel and gets filtered by its DNS Adblock, but it doesn't say whose resolvers answer, beyond NextDNS powering its Kid Safe Mode.
       sources: [dns-leak, app-store]
 
   infra:
