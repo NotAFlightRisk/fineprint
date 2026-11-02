@@ -1,0 +1,212 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Free VPN LTD
+icon: free-vpn-ltd.png
+checked: 2026-11-02
+
+criteria:
+  identity:
+    website:
+      value: https://freevpnapp.co.uk
+      note: >-
+        Sold on iOS as Free VPN - Unlimited VPN Proxy. It's a different app and company from Free VPN .org,
+        whose site is freevpnapp.org.
+      sources: [home, app-store]
+    legal_entity:
+      value: Free VPN LTD
+      note: >-
+        Registered in England and Wales in March 2023. The same director's earlier Free VPN LTD, set up in
+        June 2021, was struck off in December 2022.
+      sources: [privacy, register, register-2021]
+    owner:
+      value: Firat Urasli
+      note: Its sole director, who holds over 75% of the company and lives in Turkey.
+      sources: [register-officers, register-psc]
+    founded:
+      value: 2021
+      note: The iOS app came out in July 2021.
+      sources: [itunes-lookup]
+    team:
+      value: partial
+      note: Its site names no one who runs it, but Companies House names the director and owner.
+      sources: [home, register-officers, register-psc]
+    sister_brands:
+      value: []
+      sources: [developer]
+    acquisitions:
+      value: []
+      sources: [register-psc, register-2021]
+
+  jurisdiction:
+    hq:
+      value: GB
+      note: The company is registered in London, but its only director lives in Turkey.
+      sources: [register, register-officers]
+    entities:
+      value: [GB]
+      sources: [register]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      note: The policy says it never ties your real IP address or device ID to what you do online.
+      sources: [privacy]
+    dns:
+      value: null
+      note: It doesn't say whether DNS lookups are logged.
+      sources: [privacy]
+    timestamps:
+      value: null
+      note: It doesn't say whether connection times are kept.
+      sources: [privacy, terms]
+    bandwidth:
+      value: null
+      note: >-
+        The terms say server logs record bandwidth use without saying whether that's per user or for how long,
+        and an account using over 250GB in a month can be slowed down.
+      sources: [terms]
+    source_ip:
+      value: temporary
+      evidence: claimed
+      note: Kept for the length of each VPN session, then deleted.
+      sources: [privacy]
+    proven: []
+    policy: https://freevpnapp.co.uk/privacy/
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: none
+      note: The app needs no account, and premium is bought through the App Store.
+      sources: [app-store, privacy]
+    personal_data: []
+    payment:
+      value: [app_store]
+      sources: [app-store]
+
+  security:
+    protocols:
+      value: null
+      note: The policy only says traffic is encrypted with TLS 1.2 and AES-256.
+      sources: [privacy]
+    post_quantum: null
+    kill_switch:
+      value: null
+      note: Nothing says whether the app has one.
+      sources: [home]
+    dns: null
+
+  infra:
+    ram_only: null
+    hosting: null
+    virtual_locations: null
+    servers:
+      value: null
+      note: It doesn't say how many servers it has.
+      sources: [home]
+    countries:
+      value: null
+      note: The listing promises "unlimited location options" without saying how many countries.
+      sources: [itunes-lookup]
+
+  features:
+    connections:
+      value: null
+      note: No limit is stated. The free app works on any device, and premium supports Family Sharing.
+      sources: [app-store]
+    multihop: false
+    obfuscation: []
+    port_forwarding: false
+    split_tunnel: false
+    blocking: []
+
+  clients:
+    platforms:
+      value: [ios]
+      note: The iPhone app also runs on iPad and Apple silicon Macs.
+      sources: [app-store, developer]
+    open_source: none
+    telemetry:
+      value: null
+      note: >-
+        The App Store label declares analytics, diagnostics and identifiers, some used to track you across other
+        companies' apps, and the policy says device details are collected for analytics. Nothing says whether it
+        can be turned off.
+      sources: [app-store, privacy]
+    trackers:
+      value: null
+      grade: na
+      note: There's no Android app.
+      sources: [developer]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: null
+      note: >-
+        The App Store lists premium at $3.99, $4.99, $12.99 and $89.99 without saying how long each lasts,
+        plus $17.99 for two months.
+      sources: [app-store]
+    best:
+      value: null
+      note: Plan lengths aren't published, apart from $17.99 for two months.
+      sources: [app-store]
+    best_term: null
+    renewal_increase: null
+    free_tier:
+      value: true
+      note: Free use is unlocked by watching ads.
+      sources: [itunes-lookup, home]
+    refund_days:
+      value: null
+      note: The terms say no refunds are given, but the app is only sold through the App Store, so refunds are up to Apple.
+      sources: [terms]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        The site promises "no caps" and "unlimited usage", though the terms let it slow accounts past 250GB a
+        month, and free use means watching ads.
+      sources: [home, terms, itunes-lookup]
+    affiliates: false
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://freevpnapp.co.uk/
+    title: Free VPN, the best free VPN
+  privacy:
+    url: https://freevpnapp.co.uk/privacy/
+    title: Free VPN iOS app privacy policy
+  terms:
+    url: https://freevpnapp.co.uk/terms/
+    title: Free VPN iOS app terms of service
+  app-store:
+    url: https://apps.apple.com/us/app/free-vpn-unlimited-vpn-proxy/id1575330471
+    title: Free VPN - Unlimited VPN Proxy on the App Store (US)
+  itunes-lookup:
+    url: https://itunes.apple.com/lookup?id=1575330471&country=us
+    title: App Store lookup for Free VPN - Unlimited VPN Proxy (release date and seller)
+  developer:
+    url: https://itunes.apple.com/lookup?id=1575330473&entity=software&country=us
+    title: App Store lookup for every app by Free VPN LTD (Apps)
+  register:
+    url: https://find-and-update.company-information.service.gov.uk/company/14760221
+    title: Companies House, FREE VPN LTD (14760221)
+  register-officers:
+    url: https://find-and-update.company-information.service.gov.uk/company/14760221/officers
+    title: Companies House, FREE VPN LTD (14760221) officers
+  register-psc:
+    url: https://find-and-update.company-information.service.gov.uk/company/14760221/persons-with-significant-control
+    title: Companies House, FREE VPN LTD (14760221) persons with significant control
+  register-2021:
+    url: https://find-and-update.company-information.service.gov.uk/company/13438185/filing-history
+    title: Companies House, FREE VPN LTD (13438185) filing history, dissolved 2022
