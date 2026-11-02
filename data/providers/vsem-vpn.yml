@@ -1,0 +1,213 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Vsem VPN
+icon: vsem-vpn.png
+checked: 2026-11-02
+
+criteria:
+  identity:
+    website:
+      value: https://vsemnetwork.com
+      sources: [home]
+    legal_entity:
+      value: VSEM NETWORK LLC
+      note: A Georgian limited company, registration code 404800836.
+      sources: [terms, play, register]
+    owner:
+      value: null
+      note: No parent company or owner is named.
+    founded:
+      value: 2026
+      note: The Android app came out in May 2026.
+      sources: [play, tg-launch]
+    team:
+      value: anonymous
+      note: Only the company is named, with no people behind it.
+      sources: [home, play]
+    sister_brands:
+      value: null
+      note: >-
+        PIPL NETWORK LLC, which sells Pipl VPN, was registered in Tbilisi at about the same time (code
+        404800827) and lists a phone number in the same range, but nothing published names a shared owner.
+      sources: [register, play, play-pipl]
+    acquisitions: []
+
+  jurisdiction:
+    hq:
+      value: GE
+      note: The policy says the data it does keep is stored only on servers in Russia.
+      sources: [terms, policy]
+    entities:
+      value: [GE]
+      sources: [terms, register]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [policy]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [policy]
+    timestamps:
+      value: none
+      evidence: claimed
+      note: The app reports each connect and disconnect to its API with an install ID, which the policy says isn't kept against you.
+      sources: [policy, apk]
+    bandwidth:
+      value: aggregate
+      note: >-
+        The policy says it doesn't keep how much each user transfers, but the free plan's traffic limit,
+        shown in the app as traffic left, needs a running total per install.
+      sources: [policy, apk]
+    source_ip:
+      value: none
+      evidence: claimed
+      sources: [policy]
+    proven: []
+    policy: https://vsemnetwork.com/privacy.html
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: none
+      sources: [terms]
+    personal_data:
+      value: []
+      sources: [policy]
+    payment:
+      value: null
+      note: Paid plans are bought through a web page the app opens, and the methods aren't published.
+      sources: [apk]
+
+  security:
+    protocols:
+      value: [other]
+      note: >-
+        The Android app runs Xray, which handles VLESS, VMess, Trojan, Shadowsocks and WireGuard. Its
+        server configs arrive encrypted, so which it uses isn't shown.
+      sources: [apk]
+    post_quantum: null
+    kill_switch:
+      value: app
+      evidence: claimed
+      sources: [home]
+    dns: null
+
+  infra:
+    ram_only: null
+    hosting: null
+    virtual_locations: null
+    servers: null
+    countries:
+      value: 13
+      sources: [terms]
+
+  features:
+    connections: null
+    multihop: null
+    obfuscation:
+      value: [v2ray]
+      note: V2Ray here is Xray, built into the Android app.
+      sources: [apk]
+    port_forwarding: null
+    split_tunnel:
+      value: true
+      sources: [home]
+    blocking: null
+
+  clients:
+    platforms:
+      value: [android]
+      note: The same app runs on Android TV.
+      sources: [play, tg-tv]
+    open_source:
+      value: none
+      note: The terms forbid decompiling the app, and no source is published.
+      sources: [terms]
+    telemetry:
+      value: null
+      note: The policy says crash reports may be sent, without saying whether you can turn them off.
+      sources: [policy]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: null
+      note: Paid plans and their prices only appear inside the app.
+      sources: [apk]
+    best: null
+    best_term: null
+    renewal_increase:
+      value: null
+      note: Paid plans renew automatically, at a price that isn't published.
+    free_tier:
+      value: true
+      note: The free plan has a traffic limit and shows Yandex ads.
+      sources: [apk]
+    refund_days: null
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        The Play listing promises unlimited free traffic and no data shared with third parties, while the
+        free plan has a traffic limit and the app carries Yandex's ad network. The policy says the service is
+        free, while the app sells subscriptions.
+      sources: [play, play-data-safety, policy, apk]
+    affiliates:
+      value: false
+      note: It pays video creators per view for showing its banner, but not a cut of sales.
+      sources: [tg-creators]
+    review_sites: false
+    activism: false
+
+  other:
+    concerns:
+      value:
+        - summary: >-
+            Its policy keeps the data it does hold, such as the install ID, device details and crash reports,
+            only on servers in Russia, though the company is Georgian.
+          severity: minor
+          source: policy
+
+refs:
+  home:
+    url: https://vsemnetwork.com/
+    title: VSEM VPN homepage
+  policy:
+    url: https://vsemnetwork.com/privacy.html
+    title: VSEM VPN privacy policy (in Russian, updated 13 May 2026)
+  terms:
+    url: https://vsemnetwork.com/terms.html
+    title: VSEM VPN terms of use (in Russian, effective 13 May 2026)
+  play:
+    url: https://play.google.com/store/apps/details?id=com.vsemnetwork.vsemvpn
+    title: 'Vsem VPN: Рабочая сеть by VSEM NETWORK LLC on Google Play'
+  play-data-safety:
+    url: https://play.google.com/store/apps/datasafety?id=com.vsemnetwork.vsemvpn
+    title: Vsem VPN data safety on Google Play
+  play-pipl:
+    url: https://play.google.com/store/apps/details?id=com.piplnetwork.piplvpn
+    title: 'Pipl VPN: рабочий впн by PIPL NETWORK LLC on Google Play'
+  register:
+    url: https://enreg.reestri.gov.ge/
+    title: Georgian public registry, entries 404800836 (VSEM NETWORK LLC) and 404800827 (PIPL NETWORK LLC)
+  apk:
+    url: https://d.apkpure.net/b/XAPK/com.vsemnetwork.vsemvpn?version=latest
+    title: Vsem VPN 2.0.7 for Android (APKPure)
+  tg-launch:
+    url: https://t.me/vsemvpn_app/3
+    title: VSEM VPN launch post on Telegram (24 May 2026)
+  tg-tv:
+    url: https://t.me/vsemvpn_app/9
+    title: VSEM VPN on Android TV, Telegram post (27 June 2026)
+  tg-creators:
+    url: https://t.me/vsemvpn_app/13
+    title: VSEM VPN's paid scheme for video creators, Telegram post (23 September 2026)
