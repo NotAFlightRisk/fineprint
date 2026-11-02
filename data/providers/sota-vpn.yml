@@ -1,0 +1,325 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Sota VPN
+icon: sota-vpn.png
+checked: 2026-11-02
+
+criteria:
+  identity:
+    website:
+      value: https://sotavpn.com
+      sources: [home]
+    legal_entity:
+      value: Cat Connect Oy
+      note: >-
+        Registered in Helsinki in December 2025, two and a half years after the VPN launched on
+        Telegram. Sota doesn't say who ran it before then.
+      sources: [privacy, terms, register, telegram]
+    owner:
+      value: null
+      note: Sota says it's self-funded with no outside shareholders, but doesn't say who owns Cat Connect Oy.
+      sources: [about, register]
+    founded:
+      value: 2023
+      note: Its Telegram channel and sign-up bot started in May 2023.
+      sources: [telegram]
+    team:
+      value: partial
+      note: Its site names nobody, but Finland's trade register names its managing director.
+      sources: [about, trade-register]
+    sister_brands:
+      value: []
+      sources: [about]
+    acquisitions:
+      value: []
+      sources: [about]
+
+  jurisdiction:
+    hq:
+      value: FI
+      sources: [terms, register]
+    entities:
+      value: [FI]
+      sources: [privacy, register]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [privacy-retention, faq, terms]
+    dns:
+      value: none
+      evidence: claimed
+      note: Lookups go to Cloudflare by default, though, see DNS servers below.
+      sources: [privacy-retention, faq]
+    timestamps:
+      value: temporary
+      evidence: claimed
+      note: The server holds your connection state while you're connected and nothing after you disconnect.
+      sources: [privacy-data, privacy-retention]
+    bandwidth:
+      value: none
+      evidence: claimed
+      note: The policy lists no usage data, and plans have no traffic limit.
+      sources: [privacy-data, pricing]
+    source_ip:
+      value: temporary
+      evidence: claimed
+      note: Held by the server only while you're connected, and deleted when you disconnect.
+      sources: [privacy-data, privacy-retention]
+    proven:
+      value: []
+      sources: [about]
+    policy:
+      value: https://sotavpn.com/en/privacy-policy
+      sources: [privacy]
+
+  transparency:
+    audits:
+      value: []
+      sources: [about]
+    report:
+      value: none
+      sources: [policies]
+    canary:
+      value: none
+      sources: [policies]
+    bug_bounty:
+      value: false
+      sources: [contact]
+    incidents:
+      value: []
+      sources: [telegram]
+
+  account:
+    email:
+      value: required
+      note: >-
+        Signing up just generates an account key, but the checkout asks for an email for the receipt.
+        Buying in the iOS app goes through Apple instead.
+      sources: [access-key, payment-guide]
+    personal_data:
+      value: []
+      sources: [privacy-data, dashboard-guide]
+    payment:
+      value: [card, paypal, app_store]
+      note: >-
+        Apple Pay, Google Pay, Russian bank cards and crypto too, without saying which coins. Crypto
+        payments can't be refunded.
+      sources: [payment-guide, terms]
+
+  security:
+    protocols:
+      value: [other]
+      note: It only says "a fast open source protocol". The Android app runs sing-box, and its code names VLESS.
+      sources: [about, apk]
+    post_quantum:
+      value: none
+      note: Nothing is published about how its connections are encrypted.
+      sources: [windows-guide]
+    kill_switch:
+      value: app
+      note: '"Block internet without VPN" in the advanced settings, off until you turn it on.'
+      sources: [windows-kill-switch]
+    dns:
+      value: third_party
+      note: Cloudflare by default, with Google, AdGuard and Quad9 to pick from instead.
+      sources: [windows-dns, apk]
+
+  infra:
+    ram_only:
+      value: null
+      note: Sota doesn't say.
+    hosting:
+      value: rented
+      evidence: claimed
+      note: The terms say the servers are operated for Sota, and the policy lists hosting providers among its processors.
+      sources: [terms, privacy-recipients]
+    virtual_locations:
+      value: null
+      note: Sota doesn't say whether every location is physically where it's listed.
+      sources: [offer]
+    servers:
+      value: 135
+      note: '"Over 135 servers" in its Windows app guide, updated 2026-10-12.'
+      sources: [windows-locations]
+    countries:
+      value: 37
+      sources: [offer, pricing]
+
+  features:
+    connections:
+      value: 10
+      sources: [pricing, faq]
+    multihop:
+      value: false
+      sources: [windows-guide]
+    obfuscation:
+      value: [v2ray]
+      note: V2Ray here is VLESS run through sing-box, which Sota sells as censorship bypass.
+      sources: [apk, windows-guide]
+    port_forwarding:
+      value: false
+      sources: [windows-guide]
+    split_tunnel:
+      value: true
+      note: >-
+        By app or domain, either way round. A ready-made "Russian sites" list sends banks and government
+        services around the tunnel.
+      sources: [windows-split, apk]
+    blocking:
+      value: [ads, trackers, malware]
+      note: By switching the app's DNS to AdGuard for ads and trackers, or Quad9 for malware.
+      sources: [windows-dns]
+
+  clients:
+    platforms:
+      value: [windows, macos, linux_gui, ios, android]
+      note: The iOS app runs on Apple TV too, and the Android one on Android TV.
+      sources: [offer, faq, linux, macos, play, app-store]
+    open_source:
+      value: none
+      note: The sotavpn GitHub repo only hosts release builds, no source.
+      sources: [github]
+    telemetry:
+      value: null
+      note: >-
+        The apps send crash reports to Sentry, with a switch to turn it off, which the privacy policy
+        doesn't mention. The site says there are no trackers or analytics, and the Play listing says no
+        data is collected.
+      sources: [apk, app-store, play, about, privacy-data]
+    fdroid:
+      value: false
+      sources: [fdroid-search]
+
+  pricing:
+    monthly:
+      value: { amount: 3.99, currency: EUR }
+      sources: [pricing]
+    best:
+      value: { amount: 3.15, currency: EUR }
+      note: 37.99 EUR a year.
+      sources: [pricing]
+    best_term:
+      value: 12
+      sources: [pricing]
+    renewal_increase:
+      value: 0
+      sources: [pricing, terms]
+    free_tier:
+      value: false
+      note: New users get a 7-day trial for 1.49 EUR, which then renews monthly.
+      sources: [pricing, payment-guide]
+    refund_days:
+      value: 14
+      note: The EU withdrawal right, refunded pro rata for the days you used, and never for crypto.
+      sources: [terms]
+
+  ethics:
+    misleading_claims:
+      value: false
+      sources: [home, faq]
+    affiliates:
+      value: false
+      note: It has a referral scheme that gives you 10 days per friend who subscribes instead.
+      sources: [friend]
+    review_sites:
+      value: false
+      sources: [about]
+    activism:
+      value: false
+      sources: [about]
+
+refs:
+  home:
+    url: https://sotavpn.com/en
+    title: Sota VPN
+  about:
+    url: https://sotavpn.com/en/about
+    title: About Us
+  offer:
+    url: https://sotavpn.com/en/offer
+    title: What We Offer
+  pricing:
+    url: https://sotavpn.com/en/pricing
+    title: Pricing
+  faq:
+    url: https://sotavpn.com/en/faq
+    title: FAQ
+  contact:
+    url: https://sotavpn.com/en/contact
+    title: Contact Us
+  friend:
+    url: https://sotavpn.com/en/friend
+    title: Referral program
+  policies:
+    url: https://sotavpn.com/en/policies
+    title: Policies and Conditions
+  privacy:
+    url: https://sotavpn.com/en/privacy-policy
+    title: Privacy Policy (updated 2026-09-21)
+  terms:
+    url: https://sotavpn.com/en/terms-of-service
+    title: Terms of Service (effective 2026-09-21)
+  privacy-data:
+    url: https://sotavpn.com/en/privacy-policy#privacy-2
+    title: Privacy Policy - Where we collect your personal data
+  privacy-recipients:
+    url: https://sotavpn.com/en/privacy-policy#privacy-4
+    title: Privacy Policy - Disclosures and transfers
+  privacy-retention:
+    url: https://sotavpn.com/en/privacy-policy#privacy-6
+    title: Privacy Policy - How long we keep your personal data
+  windows-dns:
+    url: https://sotavpn.com/en/guides/windows-app#dns
+    title: Sota Connect for Windows - DNS server
+  windows-kill-switch:
+    url: https://sotavpn.com/en/guides/windows-app#kill-switch
+    title: Sota Connect for Windows - Kill Switch
+  windows-locations:
+    url: https://sotavpn.com/en/guides/windows-app#locations
+    title: Sota Connect for Windows - Choosing a location
+  windows-split:
+    url: https://sotavpn.com/en/guides/windows-app#split-tunnel
+    title: Sota Connect for Windows - Split tunnelling
+  windows-guide:
+    url: https://sotavpn.com/en/guides/windows-app
+    title: 'Sota Connect for Windows: a tour of the app and its settings'
+  access-key:
+    url: https://sotavpn.com/en/guides/access-key
+    title: 'Sota VPN access key: how to get a key for Sota Connect'
+  dashboard-guide:
+    url: https://sotavpn.com/en/guides/dashboard
+    title: 'Sota VPN dashboard: login, key, subscription and devices'
+  payment-guide:
+    url: https://sotavpn.com/en/guides/payment
+    title: 'How to pay for Sota VPN: methods, prices and paying from Russia'
+  linux:
+    url: https://sotavpn.com/en/instructions/linux
+    title: Sota Connect for Linux
+  macos:
+    url: https://sotavpn.com/en/instructions/macos
+    title: Sota Connect for macOS
+  register:
+    url: https://avoindata.prh.fi/opendata-ytj-api/v3/companies?businessId=3586838-7
+    title: Finnish Patent and Registration Office open data, Cat Connect Oy (3586838-7)
+  trade-register:
+    url: https://www.kauppalehti.fi/yritykset/yritys/35868387
+    title: Cat Connect Oy on Kauppalehti (Finnish trade register data)
+  telegram:
+    url: https://t.me/s/sotavpn/1
+    title: Sota VPN channel on Telegram, first posts (May 2023)
+  play:
+    url: https://play.google.com/store/apps/details?id=org.interhive.sota.connect
+    title: Sota Connect on Google Play
+  app-store:
+    url: https://apps.apple.com/us/app/sota-connect-secure-network/id6757979058
+    title: 'Sota Connect: Secure Network on the App Store'
+  apk:
+    url: https://github.com/sotavpn/sotavpn-app/releases/tag/v1.8.11
+    title: Sota Connect 1.8.11 Android build (sotavpn GitHub releases)
+  github:
+    url: https://github.com/sotavpn/sotavpn-app
+    title: sotavpn/sotavpn-app on GitHub
+  fdroid-search:
+    url: https://search.f-droid.org/?q=sota&lang=en
+    title: F-Droid search for sota
