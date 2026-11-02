@@ -215,9 +215,10 @@ a {
 a[target='_blank']:not(.external)::after {
   content: '\00a0';
   padding-left: 0.9em;
-  background: var(--tint, color-mix(in srgb, currentColor 70%, transparent));
+  color: var(--tint, color-mix(in srgb, currentColor 70%, transparent));
+  background: linear-gradient(currentColor 0 0) right center / 0.8em 0.8em no-repeat;
   mask: var(--icon) right center / 0.8em no-repeat;
-  transition: background-color var(--quick) var(--ease);
+  transition: color var(--quick) var(--ease);
 
   /* high contrast mode paints over backgrounds, which would hide the icon */
   @media (forced-colors: active) {
