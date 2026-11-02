@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: HMA VPN
 icon: hma.png
-checked: 2026-10-21
+checked: 2026-11-02
 
 criteria:
   identity:
@@ -126,9 +126,9 @@ criteria:
 
   security:
     protocols:
-      value: [openvpn, ikev2]
-      note: OpenVPN on Windows and Android, IKEv2 on iOS and macOS.
-      sources: [servers, features]
+      value: [wireguard, openvpn, ikev2, proprietary]
+      note: OpenVPN, WireGuard and the Mimic protocol on Windows and Android. Macs and iPhones get IKEv2.
+      sources: [windows-app, troubleshooting, servers]
     post_quantum: null
     kill_switch:
       value: app
@@ -158,11 +158,22 @@ criteria:
       value: 5
       note: Ten on the dearer plan.
       sources: [pricing, home]
-    multihop: null
-    obfuscation: null
+    multihop:
+      value: false
+      sources: [features]
+    obfuscation:
+      value: [proprietary]
+      note: The Mimic protocol, for countries where OpenVPN is blocked. Windows and Android only.
+      sources: [windows-app, troubleshooting]
+    port_forwarding:
+      value: false
+      sources: [features]
     split_tunnel:
       value: true
-      sources: [features]
+      sources: [features, android-app]
+    blocking:
+      value: []
+      sources: [features, windows-app, android-app]
 
   clients:
     platforms:
@@ -177,10 +188,6 @@ criteria:
       evidence: claimed
       note: The apps send usage events kept for 18 months. Firebase analytics can be turned off in settings, but Crashlytics can't.
       sources: [privacy-policy, no-log-page]
-    trackers:
-      value: 3
-      note: AppsFlyer, Crashlytics and Firebase Analytics in version 5.69.6519 from January 2023, the newest report that would load. The current policy names Singular instead of AppsFlyer.
-      sources: [exodus]
     fdroid: false
 
   pricing:
@@ -217,6 +224,7 @@ criteria:
       value: true
       note: Its about page names an affiliate manager.
       sources: [about]
+    review_sites: false
     activism: null
 
 refs:
@@ -295,6 +303,12 @@ refs:
   avira-vpn:
     url: https://www.avira.com/en/free-vpn
     title: Avira Phantom VPN
-  exodus:
-    url: https://reports.exodus-privacy.eu.org/en/reports/com.hidemyass.hidemyassprovpn/latest/
-    title: Exodus Privacy report for com.hidemyass.hidemyassprovpn 5.69.6519
+  windows-app:
+    url: https://support.hidemyass.com/s/article/how-to-use-hma-windows
+    title: Learn how to use the HMA Windows app
+  android-app:
+    url: https://support.hidemyass.com/s/article/how-to-use-the-hma-android-app
+    title: Learn how to use the HMA Android app
+  troubleshooting:
+    url: https://support.hidemyass.com/s/article/connection-issues-with-hma-vpn-client-version-5
+    title: Troubleshooting connection issues with HMA VPN
