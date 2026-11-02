@@ -1,0 +1,213 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: VPN cat
+icon: vpn-cat.png
+checked: 2026-11-02
+
+criteria:
+  identity:
+    website:
+      value: https://www.vpncat.net
+      sources: [home]
+    legal_entity:
+      value: Safdar Network (SMC-Private) Limited
+      note: >-
+        The terms name no company, only VPN Cat. The App Store seller and the site's footer are this
+        single-member company, registered in Islamabad in 2020.
+      sources: [app-store, secp]
+    owner:
+      value: null
+      note: It's a single-member company whose owner isn't named.
+      sources: [secp]
+    founded:
+      value: 2016
+      sources: [lookup]
+    team:
+      value: anonymous
+      note: Nobody behind it is named on its site, policy, terms or App Store listing.
+      sources: [terms]
+    sister_brands:
+      value: []
+      sources: [developer]
+    acquisitions:
+      value: null
+      note: >-
+        The app dates from 2016, its seller was incorporated in 2020 and the vpncat.net domain was registered
+        afresh in 2024, but no earlier owner is on record.
+      sources: [lookup, secp, rdap]
+
+  jurisdiction:
+    hq:
+      value: PK
+      evidence: claimed
+      sources: [secp]
+    entities:
+      value: [PK]
+      sources: [secp]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [policy]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [policy]
+    timestamps:
+      value: null
+      note: >-
+        Each connection goes into a record kept for up to seven days, but the policy doesn't say whether
+        it holds the time.
+      sources: [policy]
+    bandwidth: null
+    source_ip:
+      value: 'yes'
+      evidence: claimed
+      note: >-
+        Kept for up to seven days in a per-connection record, with an app-generated ID, your country and
+        network, and the protocol used.
+      sources: [policy]
+    proven: []
+    policy: https://www.vpncat.net/privacy/com.vpn.cat.html
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: none
+      evidence: claimed
+      note: The app makes an anonymous ID on your device instead of an account.
+      sources: [terms]
+    personal_data:
+      value: []
+      sources: [terms]
+    payment:
+      value: [app_store]
+      sources: [terms]
+
+  security:
+    protocols:
+      value: [proprietary]
+      evidence: claimed
+      note: The App Store listing says it runs on a protocol of its own, without naming or describing it.
+      sources: [app-store]
+    post_quantum: null
+    kill_switch: null
+    dns: null
+
+  infra:
+    ram_only: null
+    hosting:
+      value: rented
+      evidence: claimed
+      note: The policy lists "the providers hosting our servers" among its processors, without naming them.
+      sources: [policy]
+    virtual_locations: null
+    servers: null
+    countries:
+      value: 16
+      note: Twelve on the free servers, and four more for subscribers.
+      sources: [home]
+
+  features:
+    connections:
+      value: unlimited
+      note: The terms say prices cover an unmetered number of devices, all on the one Apple ID.
+      sources: [terms]
+    multihop: false
+    obfuscation: null
+    port_forwarding: false
+    split_tunnel: false
+    blocking: []
+
+  clients:
+    platforms:
+      value: [ios, macos]
+      note: The Mac app comes from the same App Store listing as the iPhone and iPad one.
+      sources: [app-store, developer]
+    open_source: none
+    telemetry:
+      value: forced
+      evidence: claimed
+      note: >-
+        Once you accept the policy in the app, it sends Firebase Analytics events such as connection
+        attempts, and the policy gives no way to turn them off.
+      sources: [policy]
+    trackers:
+      value: null
+      grade: na
+      note: There's no Android app.
+      sources: [developer]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 4.99, currency: USD }
+      sources: [home]
+    best:
+      value: { amount: 2.5, currency: USD }
+      note: The yearly plan, at $29.99 after a seven-day free trial.
+      sources: [app-store]
+    best_term: 12
+    renewal_increase:
+      value: 0
+      sources: [home]
+    free_tier:
+      value: true
+      note: Ad-supported, with slower servers in twelve countries.
+      sources: [home]
+    refund_days:
+      value: null
+      note: It's only sold through the App Store, so refunds are up to Apple.
+      sources: [terms]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        It sells itself as the world's fastest VPN with zero logs that ensures anonymity, while it keeps your
+        IP address for up to seven days and shows tracking ads on the free plan.
+      sources: [app-store, policy]
+    affiliates: false
+    review_sites: false
+    activism: false
+
+  other:
+    concerns:
+      value:
+        - summary: >-
+            The free version shows Google ads, and its App Store label lists your device ID, coarse location
+            and usage data as linked to you and used to track you across other companies' apps.
+          severity: minor
+          source: app-store
+
+refs:
+  home:
+    url: https://www.vpncat.net/
+    title: VPN cat homepage, with plans and prices
+  policy:
+    url: https://www.vpncat.net/privacy/com.vpn.cat.html
+    title: VPN Cat privacy policy
+  terms:
+    url: https://www.vpncat.net/terms-of-service/com.vpn.cat.html
+    title: VPN Cat terms of service
+  app-store:
+    url: https://apps.apple.com/us/app/vpn-cat-fast-secure-unlimited/id1134784923
+    title: 'VPN cat: Fast Secure Unlimited on the App Store (seller Safdar Network SMC-Private Limited)'
+  developer:
+    url: https://apps.apple.com/us/developer/secure-network/id1771160587
+    title: Secure Network's apps on the App Store
+  lookup:
+    url: https://itunes.apple.com/lookup?id=1134784923&country=us
+    title: App Store record for VPN cat (first released 22 July 2016)
+  secp:
+    url: https://eservices.secp.gov.pk/eServices/NameSearch.jsp
+    title: SECP company name search (Safdar Network (SMC-Private) Limited, CRO Islamabad, no. 0154181, 21 July 2020)
+  rdap:
+    url: https://rdap.verisign.com/net/v1/domain/vpncat.net
+    title: vpncat.net domain registration record (registered 17 September 2024)
