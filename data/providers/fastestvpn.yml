@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: FastestVPN
 icon: fastestvpn.png
-checked: 2026-10-21
+checked: 2026-11-02
 
 criteria:
   identity:
@@ -198,14 +198,9 @@ criteria:
       value: null
       note: >-
         The policy names Firebase for app analytics and BugSnag for errors, without saying whether you
-        can turn them off. The iOS listing says usage data may be used to track you.
-      sources: [privacy-policy, app-store]
-    trackers:
-      value: 2
-      note: >-
-        Crashlytics and Firebase Analytics, in version 3.3.8 from December 2024, the newest report we
-        could read. Its Play listing says it collects no data.
-      sources: [exodus, google-play]
+        can turn them off. The Android app also carries AppsFlyer though its Play listing says it collects
+        no data, and the iOS listing says usage data may be used to track you.
+      sources: [privacy-policy, android-apk, google-play, app-store]
     fdroid: false
 
   pricing:
@@ -313,9 +308,9 @@ refs:
   github:
     url: https://github.com/fastestvpn
     title: fastestvpn on GitHub
-  exodus:
-    url: https://reports.exodus-privacy.eu.org/en/reports/com.vpn.fastestvpnservice/latest/
-    title: Exodus Privacy report for com.vpn.fastestvpnservice 3.3.8
+  android-apk:
+    url: https://apkpure.net/fastestvpn-best-privacy-tool/com.vpn.fastestvpnservice
+    title: FastestVPN Android app 3.5.5 (APKPure download)
   wayback-2016:
     url: https://web.archive.org/web/20160111224144/http://fastestvpn.com/
     title: fastestvpn.com, archived January 2016
