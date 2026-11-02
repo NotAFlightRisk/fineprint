@@ -1,0 +1,212 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: PlatoVPN
+icon: plato-vpn.png
+checked: 2026-11-02
+
+criteria:
+  identity:
+    website: https://www.platovpn.com
+    legal_entity:
+      value: Plato Master Technology Limited
+      note: >-
+        The iOS app is sold by MogoTech Inc., which the app terms named as the operator until at least
+        April 2025 and whose website is a copy of Plato Master's. The terms the apps link to now name
+        "Plato Master Super Fast VPN Proxy Ltd.".
+      sources: [terms, play, app-store, app-terms, terms-2025, mogotech, platomaster]
+    owner:
+      value: null
+      note: Neither company names a parent, and how Plato Master and MogoTech Inc. are related isn't stated.
+      sources: [terms, mogotech]
+    founded:
+      value: 2022
+      note: The iOS app came out in December 2022 and the terms date from November 2022.
+      sources: [app-store, terms]
+    team:
+      value: anonymous
+      sources: [platomaster, mogotech]
+    sister_brands: []
+    acquisitions: []
+
+  jurisdiction:
+    hq:
+      value: HK
+      evidence: claimed
+      sources: [terms]
+    entities:
+      value: [HK]
+      note: >-
+        MogoTech Inc., which sells the iOS app, gives addresses in Toronto and Shanghai without saying
+        where it's registered.
+      sources: [terms, mogotech]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      note: The privacy policy itself doesn't mention VPN use at all.
+      sources: [home, privacy]
+    dns:
+      value: null
+      note: The privacy policy doesn't cover the VPN, and the store listings only promise not to store browsing activity.
+      sources: [privacy, app-store]
+    timestamps:
+      value: null
+      note: The store listings say technical logs are kept "when necessary" for troubleshooting, without saying what's in them or for how long.
+      sources: [play]
+    bandwidth: null
+    source_ip:
+      value: null
+      note: >-
+        The privacy policy lists IP address and device ID among the data it collects, without saying
+        whether that covers VPN connections.
+      sources: [privacy, android-privacy]
+    proven: []
+    policy: https://www.platovpn.com/en/privacy
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: optional
+      note: The apps work without an account, but buying on the website needs an email address.
+      sources: [app-store, payment]
+    personal_data: []
+    payment:
+      value: [card, app_store]
+      sources: [payment, play]
+
+  security:
+    protocols:
+      value: [openvpn, proprietary]
+      note: >-
+        The Android app carries OpenVPN and a tunnel of its own. The store listings also name WireGuard,
+        IKEv2 and V2Ray, none of which are in the Android app.
+      sources: [apk, play, app-store]
+    post_quantum: null
+    kill_switch: null
+    dns:
+      value: null
+      note: It advertises DNS leak protection without saying whose DNS servers it uses.
+      sources: [home]
+
+  infra:
+    ram_only: null
+    hosting: null
+    virtual_locations: null
+    servers:
+      value: 2000
+      evidence: claimed
+      sources: [play]
+    countries:
+      value: null
+      note: The website and Play listing say 50+ countries, but the App Store listing says 50+ locations across 30+ countries.
+      sources: [home, app-store]
+
+  features:
+    connections:
+      value: 5
+      sources: [account-guide]
+    multihop: null
+    obfuscation:
+      value: null
+      note: The Play listing names V2Ray, but the Android app doesn't carry it.
+      sources: [play, apk]
+    port_forwarding: null
+    split_tunnel: null
+    blocking: null
+
+  clients:
+    platforms:
+      value: [android, ios]
+      note: The iOS app also installs on Apple silicon Macs from the App Store.
+      sources: [download-guide, app-store]
+    open_source: none
+    telemetry:
+      value: null
+      note: >-
+        The privacy policy uses device data to "track and analyze usage" and for tailored advertising,
+        and the free version shows ads, but it doesn't say whether any of it can be turned off.
+      sources: [privacy, play]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 6.99, currency: USD }
+      sources: [home]
+    best:
+      value: { amount: 3.33, currency: USD }
+      note: $39.99 for a year.
+      sources: [home]
+    best_term: 12
+    renewal_increase:
+      value: 0
+      note: Plans bought on the website are one-off payments that don't renew.
+      sources: [home, payment]
+    free_tier:
+      value: true
+      note: The free version has ads and fewer servers.
+      sources: [play, account-guide]
+    refund_days:
+      value: 30
+      note: App Store purchases go through Apple's own refund process.
+      sources: [terms]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        It promises "full anonymity" and "military-grade" encryption, and says it's "as fast as
+        ExpressVPN and Nord VPN".
+      sources: [app-store, home]
+    affiliates: false
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://www.platovpn.com/en
+    title: PlatoVPN homepage and pricing
+  privacy:
+    url: https://www.platovpn.com/en/privacy
+    title: PlatoVPN privacy policy
+  android-privacy:
+    url: https://www.platovpn.com/android/privacy.html
+    title: PlatoVPN Android app privacy policy
+  terms:
+    url: https://www.platovpn.com/en/tos
+    title: PlatoVPN general terms of service
+  app-terms:
+    url: https://www.platovpn.com/tos.html
+    title: PlatoVPN terms of service linked from the apps
+  terms-2025:
+    url: https://web.archive.org/web/20250430012112/https://platovpn.com/tos.html
+    title: PlatoVPN terms of service naming MogoTech Inc. (archived April 2025)
+  play:
+    url: https://play.google.com/store/apps/details?id=com.platovpn.vpn&hl=en
+    title: 'PlatoVPN: Super VPN Fast Proxy on Google Play'
+  app-store:
+    url: https://apps.apple.com/us/app/platovpn-super-vpn-fast-proxy/id6444485605
+    title: 'PlatoVPN: Super VPN Fast Proxy on the App Store'
+  mogotech:
+    url: https://mogotech.net/
+    title: MogoTech Inc. website
+  platomaster:
+    url: https://platomaster.com/
+    title: PlatoMaster website
+  payment:
+    url: https://www.platovpn.com/en/payment
+    title: PlatoVPN checkout
+  account-guide:
+    url: https://www.platovpn.com/en/blog/how-to-create-an-account-on-plato-vpn
+    title: How to Create an Account on PlatoVPN
+  download-guide:
+    url: https://www.platovpn.com/en/blog/how-to-download-platovpn
+    title: How to Download or Update PlatoVPN on Your Devices
+  apk:
+    url: https://ws75.aptoide.com/api/7/app/getMeta?package_name=com.platovpn.vpn
+    title: PlatoVPN 1.4.7 for Android on Aptoide
