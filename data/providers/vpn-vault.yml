@@ -1,0 +1,255 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: VPN Vault
+icon: vpn-vault.svg
+checked: 2026-11-02
+
+criteria:
+  identity:
+    website:
+      value: https://vpn.appsverse.com
+      sources: [home]
+    legal_entity:
+      value: Appsverse Inc.
+      note: A California corporation registered in 2011, with a mailing address in Las Vegas. It also makes call recorder, scanner and fax apps.
+      sources: [terms, register, play, app-store-dev]
+    owner:
+      value: null
+      note: Nobody is named as owning Appsverse.
+      sources: [register, about]
+    founded:
+      value: 2018
+      note: The iOS app came out in June 2018.
+      sources: [app-store-lookup]
+    team:
+      value: anonymous
+      note: Its about page lists the universities and employers its staff came from, but names nobody.
+      sources: [about, register]
+    sister_brands:
+      value: []
+      note: Appsverse sells no other VPN.
+      sources: [products, app-store-dev, play-dev]
+    acquisitions: []
+
+  jurisdiction:
+    hq:
+      value: US
+      sources: [register, play]
+    entities:
+      value: [US]
+      sources: [register]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [privacy]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [privacy]
+    timestamps:
+      value: null
+      note: >-
+        The VPN's privacy notice doesn't mention connection times, and the general Appsverse policy it sits under
+        records access times and dates whenever you use its apps.
+      sources: [privacy, appsverse-privacy]
+    bandwidth:
+      value: null
+      note: The free plan is metered by a daily data allowance, and the policy doesn't say what usage data it keeps.
+      sources: [privacy, pricing]
+    source_ip:
+      value: temporary
+      evidence: claimed
+      note: The policy says your IP address is purged when you disconnect.
+      sources: [privacy]
+    proven: []
+    policy: https://vpn.appsverse.com/privacy/
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: optional
+      sources: [privacy]
+    personal_data: []
+    payment:
+      value: [app_store, card]
+      sources: [privacy, terms, app-store]
+
+  security:
+    protocols:
+      value: [wireguard, proprietary]
+      note: Its own protocol runs over TLS on TCP. WireGuard was added to the mobile apps later.
+      sources: [protocol, play, app-store]
+    post_quantum:
+      value: none
+      note: Nothing is published about its key exchange.
+      sources: [protocol]
+    kill_switch:
+      value: app
+      note: Only in the Windows app.
+      sources: [features]
+    dns:
+      value: null
+      note: It doesn't say whose DNS servers the apps use.
+      sources: [protocol]
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say how its servers are run.
+    hosting:
+      value: null
+      note: It doesn't say who owns its servers.
+    virtual_locations:
+      value: null
+      note: It doesn't say whether any locations are virtual.
+      sources: [features]
+    servers:
+      value: null
+      note: It doesn't publish a server count.
+      sources: [features]
+    countries:
+      value: null
+      note: It names the US, UK, Canada, Australia, India, France and South Korea "and many other countries", without a count.
+      sources: [play]
+
+  features:
+    connections:
+      value: 5
+      note: Premium only.
+      sources: [features]
+    multihop: false
+    obfuscation:
+      value: [proprietary]
+      note: Its own protocol wraps traffic in TLS so it looks like ordinary web traffic.
+      sources: [protocol]
+    port_forwarding: false
+    split_tunnel:
+      value: null
+      note: It doesn't say whether the apps can split tunnel.
+      sources: [features]
+    blocking:
+      value: [malware]
+      note: Sold as blocking known phishing and hacked sites, without saying how.
+      sources: [features]
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android]
+      note: The Windows installer dates from 2020 and the Mac app was last updated in 2019.
+      sources: [apps, windows, mac-app, app-store, play]
+    open_source: none
+    telemetry:
+      value: null
+      note: >-
+        Its store listings say the apps collect crash logs, diagnostics, device IDs and usage data, some of it used
+        to track you, without saying whether you can turn it off.
+      sources: [play-data-safety, app-store]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 9.99, currency: USD }
+      note: Plans that start with the 3-day free trial cost more, $12.99 a month or $99.99 a year.
+      sources: [pricing, app-store]
+    best:
+      value: { amount: 4.15, currency: USD }
+      note: Billed yearly. The App Store sells the year for $49.99.
+      sources: [pricing, app-store]
+    best_term:
+      value: 12
+      sources: [pricing]
+    renewal_increase:
+      value: 0
+      sources: [terms, app-store]
+    free_tier:
+      value: true
+      note: Ad-supported, with a small daily data allowance topped up by referrals and check-ins.
+      sources: [pricing, play]
+    refund_days:
+      value: 0
+      note: The terms say subscriptions are non-refundable. App store purchases follow the store's own refund rules.
+      sources: [terms]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        It promises your location "can never be identified by government agencies", "military-grade" encryption
+        and speeds always faster than other VPNs. Its privacy notice says it shares "ZERO data" with third parties,
+        while its Play listing says it shares email addresses, approximate location and device IDs.
+      sources: [features, protocol, privacy, play-data-safety]
+    affiliates:
+      value: true
+      note: Its influencer programme pays a commission on every install or purchase, VPN Vault included.
+      sources: [influencers]
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://vpn.appsverse.com/
+    title: VPN Vault homepage
+  privacy:
+    url: https://vpn.appsverse.com/privacy/
+    title: VPN Vault Privacy Notice (last updated 8 April 2021)
+  terms:
+    url: https://vpn.appsverse.com/terms/
+    title: VPN Vault Software License and Terms of Service (last updated 8 April 2021)
+  appsverse-privacy:
+    url: https://www.appsverse.com/privacy/
+    title: Appsverse privacy policy (last updated 23 July 2021)
+  features:
+    url: https://vpn.appsverse.com/features/
+    title: VPN Vault features
+  protocol:
+    url: https://vpn.appsverse.com/what-is-vpn/
+    title: VPN Vault, What is VPN (VPN Vault protocol)
+  pricing:
+    url: https://vpn.appsverse.com/programs/
+    title: VPN Vault plans and pricing
+  apps:
+    url: https://vpn.appsverse.com/apps/
+    title: VPN Vault apps
+  windows:
+    url: https://www.appsverse.com/vpn-free/download/VPNVaultSetup_win_01.zip
+    title: VPN Vault Windows installer (July 2020 build)
+  products:
+    url: https://www.appsverse.com/
+    title: Appsverse homepage, product list
+  about:
+    url: https://www.appsverse.com/about/
+    title: About Appsverse
+  influencers:
+    url: https://www.appsverse.com/influencers/
+    title: Appsverse influencer program
+  register:
+    url: https://opencorporates.com/companies/us_ca/3356932
+    title: APPSVERSE INC. (California 3356932), OpenCorporates
+  play:
+    url: https://play.google.com/store/apps/details?id=com.appsverse.avvpn
+    title: VPN Vault - Super Proxy VPN on Google Play
+  play-data-safety:
+    url: https://play.google.com/store/apps/datasafety?id=com.appsverse.avvpn
+    title: VPN Vault data safety on Google Play
+  play-dev:
+    url: https://play.google.com/store/apps/developer?id=Appsverse,+Inc.
+    title: Appsverse, Inc. apps on Google Play
+  app-store:
+    url: https://apps.apple.com/us/app/vpn-vault-super-proxy-app/id1359212059
+    title: VPN Vault - Super Proxy App on the App Store (US)
+  app-store-lookup:
+    url: https://itunes.apple.com/lookup?id=1359212059&country=us
+    title: App Store lookup data for VPN Vault, with its release date
+  app-store-dev:
+    url: https://itunes.apple.com/lookup?id=430200227&entity=software&country=us
+    title: App Store lookup data for every Appsverse Inc. app
+  mac-app:
+    url: https://apps.apple.com/us/app/vpn-proxy-vault-unlimited/id1447391761
+    title: VPN Proxy Vault Unlimited on the Mac App Store
