@@ -55,7 +55,7 @@ criteria:
       evidence: claimed
       sources: [terms]
     source_ip:
-      value: none
+      value: temporary
       evidence: claimed
       note: The policy says your IP address isn't stored after you disconnect.
       sources: [terms, privacy]
