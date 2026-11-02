@@ -1,0 +1,205 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Viva VPN
+icon: viva-vpn.png
+checked: 2026-11-02
+
+criteria:
+  identity:
+    website:
+      value: https://www.vivavpn.pro
+      sources: [home]
+    legal_entity:
+      value: null
+      note: >-
+        The policy and terms only name "Viva team". Google Play lists the developer as Susan Sarafraz, a
+        private individual in Germany, with a Gmail address.
+      sources: [policy, terms, play]
+    owner:
+      value: null
+      note: No company is named anywhere.
+    founded:
+      value: 2023
+      note: The Android app came out in October 2023.
+      sources: [play, rdap]
+    team:
+      value: partial
+      note: Only the Google Play developer, Susan Sarafraz, is named. The site names nobody.
+      sources: [play, home]
+    sister_brands:
+      value: []
+      note: >-
+        The iOS app called Viva VPN is a different service, sold by EliteCore (HK) Limited from vivavpn.com
+        with its own Android app.
+      sources: [play-dev, ios-elitecore, vivavpn-com-play]
+    acquisitions:
+      value: []
+      sources: [play-2025]
+
+  jurisdiction:
+    hq:
+      value: DE
+      evidence: claimed
+      note: Google Play gives Germany for the developer, with no company or street address.
+      sources: [play]
+    entities:
+      value: null
+      note: It names no registered company in any country.
+      sources: [terms]
+
+  logging:
+    traffic:
+      value: null
+      note: The policy doesn't say whether it keeps what you do over the VPN.
+      sources: [policy]
+    dns: null
+    timestamps:
+      value: null
+      note: >-
+        The policy's log data, collected through third parties when the app errors, includes the time and
+        date you used it. It doesn't say what the VPN servers keep.
+      sources: [policy]
+    bandwidth: null
+    source_ip:
+      value: null
+      note: >-
+        The policy says it may collect your IP address while you use the VPN, "for a short amount of time",
+        without saying how long.
+      sources: [policy]
+    proven: []
+    policy: https://vivavpn.pro/vpn/static/privacy-policy.html
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: null
+      note: >-
+        The policy says it may ask for your email, but the Play data safety form lists only device IDs as
+        collected.
+      sources: [policy, play-data-safety]
+    personal_data:
+      value: []
+      sources: [play-data-safety]
+    payment:
+      value: []
+      note: It's free, with no in-app purchases.
+      sources: [play]
+
+  security:
+    protocols:
+      value: [other]
+      note: The Android app runs Xray, which handles VMess, VLESS, Trojan and Shadowsocks. Which of those its servers use isn't published.
+      sources: [apk]
+    post_quantum: null
+    kill_switch: null
+    dns: null
+
+  infra:
+    ram_only: null
+    hosting: null
+    virtual_locations: null
+    servers: null
+    countries: null
+
+  features:
+    connections: null
+    multihop: null
+    obfuscation:
+      value: [v2ray]
+      note: V2Ray here is Xray, built into the Android app.
+      sources: [apk]
+    port_forwarding: null
+    split_tunnel: null
+    blocking: null
+
+  clients:
+    platforms:
+      value: [android]
+      sources: [terms]
+    open_source:
+      value: none
+      note: The terms forbid extracting the app's source code, and none is published.
+      sources: [terms]
+    telemetry:
+      value: null
+      note: >-
+        The policy lists Google Analytics for Firebase and Crashlytics in the app, without saying whether
+        you can turn them off.
+      sources: [policy]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 0, currency: USD }
+      note: Free and ad-supported, with no paid plan.
+      sources: [play]
+    best: { amount: 0, currency: USD }
+    best_term:
+      value: null
+      grade: na
+      note: It's free.
+    renewal_increase:
+      value: 0
+      note: Nothing renews.
+    free_tier:
+      value: true
+      note: Ad-supported, through AdMob and a long list of ad resellers.
+      sources: [policy, app-ads]
+    refund_days:
+      value: null
+      grade: na
+      note: It's free.
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        It sells "military-grade encryption". Its Play form says no data is shared with third parties, while
+        its policy says AdMob and Firebase in the app may collect information that identifies you.
+      sources: [home, play-data-safety, policy]
+    affiliates: false
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://www.vivavpn.pro/
+    title: Viva VPN homepage
+  policy:
+    url: https://vivavpn.pro/vpn/static/privacy-policy.html
+    title: Viva VPN privacy policy (effective 7 October 2023)
+  terms:
+    url: https://vivavpn.pro/vpn/static/tos.html
+    title: Viva VPN terms and conditions (effective 7 October 2023)
+  app-ads:
+    url: https://vivavpn.pro/app-ads.txt
+    title: vivavpn.pro app-ads.txt, listing its ad networks
+  play:
+    url: https://play.google.com/store/apps/details?id=com.vivavpn.vpn
+    title: Viva VPN by Viva team on Google Play
+  play-data-safety:
+    url: https://play.google.com/store/apps/datasafety?id=com.vivavpn.vpn
+    title: Viva VPN data safety on Google Play
+  play-dev:
+    url: https://play.google.com/store/apps/developer?id=Viva+team
+    title: Viva team apps on Google Play
+  play-2025:
+    url: https://web.archive.org/web/20250615221645/https://play.google.com/store/apps/details?id=com.vivavpn.vpn
+    title: Viva VPN on Google Play (archived June 2025)
+  rdap:
+    url: https://rdap.org/domain/vivavpn.pro
+    title: vivavpn.pro domain registration record (registered 11 October 2023)
+  ios-elitecore:
+    url: https://apps.apple.com/us/app/viva-vpn-super-fast-vpn-proxy/id6648770469
+    title: Viva VPN - Fast & Secure Proxy by EliteCore (HK) Limited on the App Store (US)
+  vivavpn-com-play:
+    url: https://play.google.com/store/apps/details?id=com.free.viva.vpn
+    title: EliteCore (HK) Limited's Viva VPN on Google Play
+  apk:
+    url: https://ws75.aptoide.com/api/7/app/getMeta?package_name=com.vivavpn.vpn
+    title: Viva VPN 1.2.7 for Android on Aptoide
