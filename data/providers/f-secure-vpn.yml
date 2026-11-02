@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: F-Secure VPN
 icon: f-secure-vpn.svg
-checked: 2026-10-21
+checked: 2026-11-02
 
 criteria:
   identity:
@@ -17,7 +17,7 @@ criteria:
       grade: na
       note: >-
         F-Secure Corporation has no parent company and is listed on Nasdaq Helsinki. Its largest
-        shareholder is co-founder Risto Siilasmaa, with 34.36% on 30 September 2026.
+        shareholder is co-founder Risto Siilasmaa, with 34.35% on 31 October 2026.
       sources: [about, shareholders]
     founded:
       value: 2014
@@ -54,8 +54,8 @@ criteria:
       evidence: claimed
       note: >-
         It says it keeps no logs of connections to external addresses, but it scans traffic and
-        collects the web addresses it blocks. Newer app versions run on an unnamed third-party
-        provider that processes the same data.
+        collects the web addresses it blocks. Newer app versions run on Pango, which processes the
+        same data.
       sources: [privacy, home]
     dns:
       value: null
@@ -126,11 +126,10 @@ criteria:
       value: [openvpn, ikev2, wireguard, other]
       note: >-
         The older app uses OpenVPN and IPSec/IKEv2, the newer one Hydra, WireGuard and IPSec. Hydra
-        belongs to the third-party provider behind the newer app.
+        is the protocol of Pango, which runs the newer app's VPN.
       sources: [privacy, help-encryption]
     post_quantum:
       value: none
-      note: Not mentioned on the product page or in the help guide.
       sources: [help-encryption, help-what]
     kill_switch:
       value: app
@@ -143,12 +142,13 @@ criteria:
   infra:
     ram_only:
       value: null
-      note: Not mentioned on the product page, in the help guide or in the privacy notice.
       sources: [help-what, privacy]
     hosting:
       value: null
-      note: Not stated. The BitTorrent help page says some gateways are hosted by US-based companies.
-      sources: [help-bittorrent]
+      note: >-
+        Newer app versions run on Pango's VPN service. Some gateways are hosted by US-based
+        companies.
+      sources: [privacy, help-bittorrent]
     virtual_locations:
       value: none
       evidence: claimed
@@ -173,11 +173,9 @@ criteria:
       sources: [help-direct]
     obfuscation:
       value: []
-      note: Not mentioned on the product page or in the help guide.
       sources: [help-encryption, help-what]
     port_forwarding:
       value: false
-      note: Not mentioned on the product page or in the help guide.
       sources: [help-buy, help-bittorrent]
     split_tunnel:
       value: true
@@ -215,8 +213,8 @@ criteria:
     best:
       value: { amount: 6.04, currency: EUR }
       note: >-
-        Prices from the global English page including VAT, for 5 devices at €144.99 for two years.
-        One device is €89.99 for two years. The US page charges in USD at different prices.
+        For 5 devices at €144.99 for two years, VAT included. One device is €89.99 for two years.
+        US prices are in USD, $124.99 for 5 devices.
       sources: [home, home-us]
     best_term:
       value: 24
