@@ -1,0 +1,245 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Fusvob VPN
+icon: fusvob-vpn.png
+checked: 2026-11-02
+
+criteria:
+  identity:
+    website:
+      value: https://fusvobvpn.com
+      note: The App Store also links cipheravpn.com, an older copy of the site that was branded Ciphera VPN until April 2026.
+      sources: [home, cipheravpn, cipheravpn-2026]
+    legal_entity:
+      value: Shenzhen Fuxin Hudong Technology Co., Ltd.
+      note: >-
+        The App Store seller. The terms and policies name no operator, only a Hong Kong payment processor,
+        NOVABEYOND LIMITED. The Android app is published by Red Seek Limited, a Hong Kong company registered in
+        March 2026, and the refund policy names a Fusvob Technology Limited.
+      sources: [app-store, terms, refund, play, hk-register-red-seek]
+    owner:
+      value: null
+      note: >-
+        Nothing public links the Shenzhen company and Red Seek Limited beyond the shared site and payment
+        processor, and neither company's owners are published.
+      sources: [privacy, android-privacy, hk-register-red-seek]
+    founded:
+      value: 2026
+      note: The iOS app came out in January 2026. The Shenzhen company ran another VPN site, FuXin Net, in 2024.
+      sources: [app-store, fuxinnet-2024]
+    team:
+      value: anonymous
+      sources: [play, hk-register-red-seek]
+    sister_brands:
+      value: [PaperVPN]
+      note: PaperVPN is another Android VPN from Red Seek Limited.
+      sources: [play-papervpn]
+    acquisitions:
+      value: null
+      note: No sale is on record, but who's behind the two companies isn't clear.
+
+  jurisdiction:
+    hq:
+      value: CN
+      note: The iOS seller is in Shenzhen. The terms are governed by Hong Kong law, where the Android publisher is registered.
+      sources: [fuxinnet-2024, terms, play]
+    entities:
+      value: [CN, HK]
+      sources: [fuxinnet-2024, hk-register-red-seek]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [privacy, android-privacy]
+    dns:
+      value: none
+      evidence: claimed
+      note: Both policies rule out browsing history and the sites you visit, but neither mentions DNS by name.
+      sources: [privacy, android-privacy]
+    timestamps:
+      value: 'yes'
+      evidence: claimed
+      note: >-
+        The policy says it doesn't keep connection logs, then lists "connection times, duration" among what it
+        collects. The Android app sends a report for each connection, kept for as long as it's "needed".
+      sources: [privacy, android-privacy]
+    bandwidth:
+      value: aggregate
+      evidence: claimed
+      sources: [privacy]
+    source_ip:
+      value: 'yes'
+      evidence: claimed
+      note: >-
+        The website policy says your IP isn't kept after the session ends, but the Android policy collects your
+        public IP, city and ISP for connection reporting, with no time limit.
+      sources: [privacy, android-privacy, apk]
+    proven: []
+    policy: https://fusvobvpn.com/privacy-policy.html
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: none
+      note: There are no accounts. Premium is bought in the app.
+      sources: [cipheravpn, vpn-faq]
+    personal_data: []
+    payment:
+      value: [app_store, card]
+      note: Through the App Store or Google Play, or by card in the iOS app.
+      sources: [vpn-faq, app-store, play]
+
+  security:
+    protocols:
+      value: [other]
+      note: Taken from the Android app, which connects with VLESS over REALITY or WebSocket through sing-box. The site doesn't name any protocol.
+      sources: [apk, home]
+    post_quantum:
+      value: none
+      note: Nothing is published about its key exchange.
+      sources: [home]
+    kill_switch:
+      value: none
+      note: The Android app has no kill switch setting, and none is mentioned.
+      sources: [apk, home]
+    dns:
+      value: third_party
+      note: The Android app points lookups at Google (8.8.8.8) and Cloudflare (1.1.1.1).
+      sources: [apk]
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say how its servers are run.
+    hosting:
+      value: null
+      note: It doesn't say whether it owns or rents its servers.
+    virtual_locations:
+      value: null
+      note: It doesn't say whether any locations are virtual.
+    servers:
+      value: null
+      note: No server count is published.
+    countries:
+      value: null
+      note: No list of locations is published.
+
+  features:
+    connections:
+      value: null
+      note: >-
+        Card-paid memberships work on one device only. App Store ones can be restored on other devices with the
+        same Apple ID, with no limit given.
+      sources: [vpn-faq]
+    multihop: false
+    obfuscation:
+      value: [v2ray]
+      note: V2Ray here is VLESS with REALITY, which disguises the connection as ordinary HTTPS.
+      sources: [apk]
+    port_forwarding: false
+    split_tunnel:
+      value: true
+      note: By app, in the Android app.
+      sources: [apk]
+    blocking: []
+
+  clients:
+    platforms:
+      value: [ios, android]
+      sources: [home, app-store, play]
+    open_source: none
+    telemetry:
+      value: null
+      note: >-
+        The policies list AdMob, Firebase, Meta and AppsFlyer, and the Android app also bundles Yandex ads and
+        AppMetrica. No way to turn analytics off is mentioned, though Google Play's listing says no data is collected.
+      sources: [privacy, android-privacy, apk, play]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 12.99, currency: USD }
+      note: US App Store price. There's no pricing page.
+      sources: [app-store]
+    best:
+      value: { amount: 4.17, currency: USD }
+      note: $49.99 a year on the US App Store. There's also a $4.99 weekly plan.
+      sources: [app-store]
+    best_term:
+      value: 12
+      sources: [app-store]
+    renewal_increase:
+      value: 0
+      note: In-app subscriptions renew at the listed App Store price.
+      sources: [app-store]
+    free_tier:
+      value: true
+      note: Ad-supported, on free servers only, with a daily time limit.
+      sources: [apk, play]
+    refund_days:
+      value: 7
+      note: >-
+        For a first monthly or yearly card purchase (3 days for weekly). Any later purchase can't be refunded,
+        and App Store purchases follow Apple's rules.
+      sources: [refund, vpn-faq]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        Its site promises you'll stay "completely anonymous" and "zero logs", while its policy collects connection
+        times and the Android one your IP address.
+      sources: [cipheravpn, privacy, android-privacy]
+    affiliates: false
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://fusvobvpn.com/
+    title: Fusvob VPN homepage
+  cipheravpn:
+    url: https://cipheravpn.com/
+    title: Fusvob VPN homepage on cipheravpn.com
+  cipheravpn-2026:
+    url: https://web.archive.org/web/20260406185342/https://cipheravpn.com/
+    title: Ciphera VPN homepage on cipheravpn.com (archived April 2026)
+  privacy:
+    url: https://fusvobvpn.com/privacy-policy.html
+    title: Fusvob VPN Privacy Policy
+  android-privacy:
+    url: https://sites.google.com/view/fsvob-privacy
+    title: Fusvob Privacy Policy for the Android app (revised 17 August 2026)
+  terms:
+    url: https://fusvobvpn.com/terms-of-use.html
+    title: Fusvob VPN Terms of Use
+  refund:
+    url: https://fusvobvpn.com/RefundPolicy.html
+    title: Fusvob VPN Refund Policy
+  vpn-faq:
+    url: https://fusvobvpn.com/vpn-faq.html
+    title: Fusvob VPN FAQ
+  app-store:
+    url: https://apps.apple.com/us/app/fusvob-vpn-super-vpn-2026/id6758184735
+    title: 'Fusvob VPN : Super VPN 2026 on the App Store (US), sold by Shenzhen Fuxin Hudong Technology Co., Ltd.'
+  play:
+    url: https://play.google.com/store/apps/details?id=com.fusvob.liapp&hl=en
+    title: Fusvob VPN on Google Play (Red Seek Limited)
+  play-papervpn:
+    url: https://play.google.com/store/apps/details?id=com.aeris.vpn.app&hl=en
+    title: PaperVPN on Google Play (Red Seek Limited)
+  fuxinnet-2024:
+    url: https://web.archive.org/web/20240516070639/https://www.fuxinnet.com/
+    title: FuXin Net, Shenzhen Fuxin Hudong Technology's VPN site with its Shenzhen address (archived May 2024)
+  hk-register-red-seek:
+    url: https://data.cr.gov.hk/cr/api/api/v1/api_builder/json/local/search?query[0][key1]=Comp_name&query[0][key2]=begins_with&query[0][key3]=RED+SEEK
+    title: Hong Kong Companies Registry, Red Seek Limited (79954094), incorporated 13 March 2026
+  apk:
+    url: https://apkpure.net/fusvob-vpn/com.fusvob.liapp
+    title: Fusvob VPN for Android (APK)
