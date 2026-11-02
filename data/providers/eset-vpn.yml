@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: ESET VPN
 icon: eset-vpn.png
-checked: 2026-10-21
+checked: 2026-11-02
 
 criteria:
   identity:
@@ -134,8 +134,10 @@ criteria:
       sources: [vpn-help]
     hosting:
       value: null
-      note: ESET doesn't say who runs the VPN servers, and its subprocessor list names no VPN provider.
-      sources: [processors]
+      note: >-
+        ESET doesn't say who runs the VPN servers, and its subprocessor list names no VPN provider. Its
+        Android app is built on Windscribe's app code and talks to Windscribe's API.
+      sources: [processors, android-apk]
     virtual_locations:
       value: null
       note: The location list includes one called "Fake Antarctica", but ESET doesn't say where any server physically sits.
@@ -146,7 +148,7 @@ criteria:
       sources: [countries]
     countries:
       value: 70
-      note: On Ultimate. ESET says 71, counting a location called Fake Antarctica. Premium lists 41 countries.
+      note: On Ultimate. ESET says 71, counting a location called Fake Antarctica. Premium lists 40 countries.
       sources: [countries, faq-locations]
 
   features:
@@ -310,6 +312,9 @@ refs:
   affiliates:
     url: https://www.eset.com/us/business/partner/online-affiliates/
     title: ESET affiliate program
+  android-apk:
+    url: https://apkpure.net/eset-vpn/com.eset.vpn
+    title: ESET VPN for Android (APK)
   play:
     url: https://play.google.com/store/apps/details?id=com.eset.vpn
     title: ESET VPN on Google Play
