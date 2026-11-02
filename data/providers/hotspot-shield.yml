@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: Hotspot Shield
 icon: hotspot-shield.png
-checked: 2026-10-21
+checked: 2026-11-02
 
 criteria:
   identity:
@@ -16,6 +16,10 @@ criteria:
         Aura bought Pango, Hotspot Shield's maker, in 2020 and spun it off to its own shareholders in
         2024. Pango Group then merged with Total Security, TotalAV's maker, to form Point Wild.
       sources: [aura-pango-2020, aura-split-2024, point-wild-merger, comparitech-disclosure]
+    founded:
+      value: 2006
+      note: Its site was already offering it as a free app that encrypts your traffic on public Wi-Fi in July 2006.
+      sources: [home-2006]
     team:
       value: public
       note: Pango, which runs it, names its president and other executives.
@@ -240,12 +244,6 @@ criteria:
         The policy says it collects which app features you use and when, tied to a random device ID, but
         doesn't mention a way to turn this off.
       sources: [privacy-policy, privacy-vpn]
-    trackers:
-      value: 10
-      note: >-
-        Mostly ad networks such as AdMob, ironSource, Pangle and Unity Ads, in version 10.1.2 from
-        February 2023, the newest archived report.
-      sources: [exodus]
     fdroid: false
 
   pricing:
@@ -287,6 +285,7 @@ criteria:
       value: true
       note: Point Wild also owns Comparitech, a VPN review site, which discloses it.
       sources: [comparitech-disclosure]
+    activism: false
 
 refs:
   pango-transparency-2023:
@@ -388,9 +387,9 @@ refs:
   eweek-2017:
     url: https://www.eweek.com/security/ftc-asked-to-investigate-hotspot-shield-vpn-privacy-risks/
     title: AnchorFree disputes privacy risk claims against Hotspot Shield VPN (eWeek)
-  exodus:
-    url: https://reports.exodus-privacy.eu.org/en/reports/hotspotshield.android.vpn/latest/
-    title: Exodus Privacy report for hotspotshield.android.vpn
+  home-2006:
+    url: https://web.archive.org/web/20060719171954/http://hotspotshield.com/
+    title: Hotspot Shield home page (July 2006, archived)
   antivirus:
     url: https://support.hotspotshield.com/en/android-hotspot-shield/general-information/is-hotspot-shield-anti-virus-software
     title: Is Hotspot Shield anti-virus software?
