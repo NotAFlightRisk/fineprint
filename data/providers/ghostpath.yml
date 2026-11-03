@@ -210,7 +210,8 @@ criteria:
   other:
     concerns:
       value:
-        - summary: Every IPsec user gets the same shared secret, printed in its setup guide, so anyone on the same network can pose as its servers.
+        - title: Every IPsec user shares one secret
+          summary: Every IPsec user gets the same shared secret, printed in its setup guide, so anyone on the same network can pose as its servers.
           severity: minor
           source: ipsec
 

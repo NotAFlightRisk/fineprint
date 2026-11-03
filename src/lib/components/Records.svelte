@@ -34,6 +34,8 @@
               <GradeMark grade={marks[item[name]]} label="" />
               {show(name, item[name])}
             </span>
+          {:else if name === 'title'}
+            <strong class="title">{item.title}</strong>
           {:else}
             <span class:tag={field.type === 'enum'}>{show(name, item[name])}</span>
           {/if}
@@ -80,6 +82,11 @@
       gap: var(--space-1) var(--space-3);
       font-size: var(--text-sm);
     }
+  }
+
+  .title {
+    flex-basis: 100%;
+    font-weight: 600;
   }
 
   .tag {

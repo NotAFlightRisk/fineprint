@@ -112,7 +112,10 @@
               <li>
                 <GradeMark grade="bad" />
                 <span
-                  ><a href="#{flag.id}">{flag.label}</a>: {flag.value}
+                  ><a href="#{flag.id}">{flag.label}</a>:
+                  {#if flag.detail}<button type="button" class="noted" {@attach tip(flag.detail)}
+                      >{flag.value}</button
+                    >{:else}{flag.value}{/if}
                   {#if flag.serious}<span class="tag serious">Serious</span>{/if}</span
                 >
               </li>

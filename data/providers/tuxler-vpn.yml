@@ -150,7 +150,8 @@ criteria:
   other:
     concerns:
       value:
-        - summary: >-
+        - title: Free version makes your device an exit node
+          summary: >-
             On the free version your device is an exit node for as long as the app's installed, connected or not,
             and Tuxler resells that access to business customers, so their traffic leaves through your IP address.
           severity: serious

@@ -237,12 +237,14 @@ criteria:
   other:
     concerns:
       value:
-        - summary: >-
+        - title: Beta software that may leak information
+          summary: >-
             The Tor Project calls it beta software that may leak information, and says not to rely on it
             for anything sensitive.
           severity: minor
           source: support
-        - summary: >-
+        - title: Exit relays can read unencrypted traffic
+          summary: >-
             Exit relays are run by volunteers, and a bad one can read anything you send unencrypted, though
             it can't tell who sent it.
           severity: serious

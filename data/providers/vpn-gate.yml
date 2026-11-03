@@ -229,7 +229,8 @@ criteria:
   other:
     concerns:
       value:
-        - summary: >-
+        - title: Strangers' relays can see unencrypted traffic
+          summary: >-
             Anyone can turn their own computer into a relay, so your traffic runs through a stranger's
             machine, and they can see whatever isn't encrypted.
           severity: serious

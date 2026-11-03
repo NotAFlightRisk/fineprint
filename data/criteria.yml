@@ -576,6 +576,7 @@ categories:
           Anything else that puts you at risk, one line each with a source. Each one is its own red
           flag, serious or minor.
         fields:
+          title: { type: text, max: 50 }
           summary: { type: text }
           severity:
             type: enum

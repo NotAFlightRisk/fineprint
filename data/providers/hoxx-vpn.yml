@@ -206,10 +206,12 @@ criteria:
   other:
     concerns:
       value:
-        - summary: The EULA reserves the right to tag your traffic with HTTP headers that identify you.
+        - title: May tag your traffic with identifying headers
+          summary: The EULA reserves the right to tag your traffic with HTTP headers that identify you.
           severity: minor
           source: eula
-        - summary: >-
+        - title: Blacklisted sites see your real IP
+          summary: >-
             Sites on its blacklist bypass the proxy, so they see your real IP address, and the list can
             change at any time.
           severity: serious

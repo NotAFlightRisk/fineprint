@@ -54,6 +54,10 @@ describe('validator', () => {
     expect(said('other.concerns[0]')[0].message).toBe('is missing "source"');
   });
 
+  it('keeps other red flag titles short', () => {
+    expect(said('other.concerns[1]')[0].message).toBe('title should be 50 characters or fewer');
+  });
+
   it('flags missing required criteria', () => {
     expect(said('logging')[0].message).toMatch(/needs policy/);
   });

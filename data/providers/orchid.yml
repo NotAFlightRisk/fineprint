@@ -214,7 +214,8 @@ criteria:
   other:
     concerns:
       value:
-        - summary: >-
+        - title: Some payments land on a public blockchain
+          summary: >-
             Payments from a self-funded account now and then settle on a public blockchain, recording your
             wallet address, the provider's payment address and the time for anyone to see.
           severity: minor

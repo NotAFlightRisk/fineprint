@@ -82,6 +82,7 @@ export interface RedFlag {
   id: string;
   label: string;
   value: string;
+  detail?: string;
   serious: boolean;
 }
 
@@ -96,7 +97,8 @@ export const redFlagsOf = (provider: Provider, criteria: Map<string, Criterion>)
         return [{ ...flag, value: showEntry(criterion, entry), serious: !!criterion.serious }];
       return (entry.value as Item[]).map((item) => ({
         ...flag,
-        value: item.summary,
+        value: item.title,
+        detail: item.summary,
         serious: item.severity === 'serious'
       }));
     })

@@ -6,7 +6,8 @@ export interface Slip {
   message: string;
 }
 
-type Spec = Pick<Criterion, 'options' | 'fields'> & { type: Criterion['type'] | Field['type'] };
+type Spec = Pick<Criterion, 'options' | 'fields'> &
+  Pick<Field, 'max'> & { type: Criterion['type'] | Field['type'] };
 
 const show = (value: unknown) => JSON.stringify(value);
 const isDate = (value: unknown) =>
@@ -38,7 +39,12 @@ const scalar: Partial<Record<Spec['type'], (value: unknown, spec: Spec) => strin
     value === 'unlimited' || (Number.isInteger(value) && Number(value) > 0)
       ? undefined
       : 'should be a whole number, or unlimited',
-  text: (value) => (typeof value === 'string' && value.trim() ? undefined : 'should be some text'),
+  text: (value, spec) =>
+    typeof value !== 'string' || !value.trim()
+      ? 'should be some text'
+      : spec.max && value.length > spec.max
+        ? `should be ${spec.max} characters or fewer`
+        : undefined,
   url: (value) =>
     typeof value === 'string' && URL.canParse(value) && value.startsWith('https://')
       ? undefined

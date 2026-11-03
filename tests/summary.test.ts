@@ -3,7 +3,15 @@ import { unify } from '#lib/data/build.ts';
 import { loadCriteria, readProvider } from '#lib/data/load.ts';
 import { absolute, ogPage } from '#lib/site.ts';
 import type { Entry, Grade, Value } from '#lib/data/types.ts';
-import { byId, checks, completeness, redFlags, summarise, verdict } from '#lib/summary.ts';
+import {
+  byId,
+  checks,
+  completeness,
+  redFlags,
+  redFlagsOf,
+  summarise,
+  verdict
+} from '#lib/summary.ts';
 
 const categories = loadCriteria();
 const criteria = byId(categories);
@@ -49,25 +57,42 @@ describe('provider summary', () => {
     expect(summarise(flagged, criteria).serious).toBe(1);
   });
 
-  it('counts each other red flag on its own, at its own severity', () => {
-    const value = [
-      { summary: 'Sells your IP', severity: 'minor', source: 'policy' },
-      { summary: 'Reads your mail', severity: 'serious', source: 'policy' }
-    ];
-    const summary = summarise(
+  const concerns = {
+    value: [
       {
-        ...provider,
-        flags: ['account.email', 'other.concerns'],
-        criteria: { ...provider.criteria, 'other.concerns': { value, grade: 'bad', sources: [] } }
+        title: 'Sells your IP',
+        summary: 'Sells it to anyone.',
+        severity: 'minor',
+        source: 'policy'
       },
-      criteria
-    );
+      { title: 'Reads your mail', summary: 'And keeps it.', severity: 'serious', source: 'policy' }
+    ],
+    grade: 'bad' as const,
+    sources: []
+  };
+  const concerned = {
+    ...provider,
+    flags: ['account.email', 'other.concerns'],
+    criteria: { ...provider.criteria, 'other.concerns': concerns }
+  };
+
+  it('counts each other red flag on its own, at its own severity', () => {
+    const summary = summarise(concerned, criteria);
     expect(summary.flags).toEqual([
       'Other red flags: Reads your mail',
       'Email: Not checked',
       'Other red flags: Sells your IP'
     ]);
     expect(summary.serious).toBe(1);
+  });
+
+  it('names each other red flag by its title, with the summary as the detail', () => {
+    const details = redFlagsOf(concerned, criteria).map(({ value, detail }) => [value, detail]);
+    expect(details).toEqual([
+      ['Reads your mail', 'And keeps it.'],
+      ['Not checked', undefined],
+      ['Sells your IP', 'Sells it to anyone.']
+    ]);
   });
 
   it('reads no other red flags as none, without counting it as research done', () => {

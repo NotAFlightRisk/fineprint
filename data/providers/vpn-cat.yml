@@ -180,7 +180,8 @@ criteria:
   other:
     concerns:
       value:
-        - summary: >-
+        - title: Tracks you across other companies' apps
+          summary: >-
             The free version shows Google ads, and its App Store label lists your device ID, coarse location
             and usage data as linked to you and used to track you across other companies' apps.
           severity: minor

@@ -241,7 +241,8 @@ criteria:
   other:
     concerns:
       value:
-        - summary: >-
+        - title: Signup ties it to your Telegram account
+          summary: >-
             Signup is through a Telegram bot, so the VPN is tied to your Telegram account, and Telegram can
             see that you use it. Friends you invite only get a config file.
           severity: minor
