@@ -1,0 +1,289 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: bVPN
+icon: bvpn.png
+checked: 2026-11-03
+
+criteria:
+  identity:
+    website:
+      value: https://www.bvpn.com
+      sources: [home]
+    legal_entity:
+      value: iElement B.V.
+      note: The same company is the Google Play developer and the App Store seller.
+      sources: [terms, play, app-store]
+    owner:
+      value: null
+      note: It doesn't say who owns iElement B.V.
+    founded:
+      value: 2014
+      note: Its earliest setup guides date from January 2015, and the iOS app from February 2015.
+      sources: [home, faq, app-store]
+    team:
+      value: anonymous
+      note: No one is named as running it.
+      sources: [terms]
+    sister_brands:
+      value: [iWASEL, WASEL Pro]
+      note: >-
+        Both are sold by iElement B.V. from the same Breda address and send Android users to the bVPN
+        app, whose listing says their accounts and servers were being merged into bVPN by mid 2022.
+      sources: [iwasel-contact, iwasel-download, waselpro-contact, play]
+    acquisitions:
+      value: null
+      note: Google Play named the developer as iSpire in 2016 and as iElement B.V. by 2019. Whether that was a sale isn't public.
+      sources: [play-2016, play-2019]
+
+  jurisdiction:
+    hq:
+      value: NL
+      sources: [terms, play]
+    entities:
+      value: [NL]
+      sources: [terms]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [privacy]
+    dns:
+      value: none
+      evidence: claimed
+      note: The policy rules out logging what you browse, without mentioning DNS separately.
+      sources: [privacy]
+    timestamps:
+      value: null
+      note: The policy lists timestamps among the technical data it collects, without saying what they record or how long they're kept.
+      sources: [privacy]
+    bandwidth:
+      value: null
+      note: The policy lists bandwidth usage among the technical data it collects, without saying how long it's kept or in what form.
+      sources: [privacy]
+    source_ip:
+      value: null
+      note: The policy collects your approximate location to pick a nearby server, without saying whether your IP address is stored.
+      sources: [privacy]
+    proven: []
+    policy: https://www.bvpn.com/en/privacypolicy/
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents:
+      value: []
+      grade: ok
+      note: >-
+        An unquoted service path flaw in the Windows app (CVE-2021-43457, version 2.5.1) was published with
+        a working exploit in 2021. No response or fix from the company is on record, so it's graded ok
+        rather than good.
+      sources: [cve-2021-43457, exploit]
+
+  account:
+    email:
+      value: required
+      note: The apps' limited free time works without an account.
+      sources: [register, app-store]
+    personal_data:
+      value: []
+      note: Sign-up asks for an email address, a password and your country.
+      sources: [register]
+    payment:
+      value: [card, paypal, bitcoin, app_store, gift_card]
+      note: Also Alipay, WebMoney and other local methods. Vouchers and premium tokens are sold through resellers.
+      sources: [play, faq-bitcoin, faq-vouchers, news-tokens, affiliates]
+
+  security:
+    protocols:
+      value: [openvpn, proprietary]
+      note: >-
+        Its own protocol is SmokeV2, and OpenVPN runs inside its older Smoke tunnel. L2TP, SSH and
+        Shadowsocks have all been dropped.
+      sources: [home, play, apk, news-ssh-l2tp, news-shadowsocks]
+    post_quantum:
+      value: none
+      note: Its SmokeV2 library uses ordinary X25519 key exchange, and nothing post-quantum is published.
+      sources: [apk]
+    kill_switch:
+      value: null
+      note: The Play listing promises a kill switch, but the Android app has no setting for one.
+      sources: [play, apk]
+    dns:
+      value: null
+      note: It claims DNS leak protection without saying whose DNS servers answer.
+      sources: [discount]
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say how its servers are run.
+    hosting:
+      value: null
+      note: It calls its servers "Tier 4 Hosted" without saying whether it owns any of them.
+      sources: [home]
+    virtual_locations:
+      value: null
+      note: It doesn't say whether any locations are virtual.
+    servers:
+      value: null
+      note: It doesn't publish a server count.
+    countries:
+      value: null
+      note: It doesn't publish a country count.
+
+  features:
+    connections:
+      value: 6
+      note: Three on OpenVPN over Smoke and three on SmokeV2.
+      sources: [home, play]
+    multihop: false
+    obfuscation:
+      value: [proprietary]
+      note: Its Smoke tunnel wraps OpenVPN to get past VPN blocking, and SmokeV2 is built to be harder to block.
+      sources: [play, news-l2tp]
+    port_forwarding: false
+    split_tunnel:
+      value: true
+      note: By app, on Android.
+      sources: [play, apk]
+    blocking: []
+
+  clients:
+    platforms:
+      value: [windows, macos, linux_gui, ios, android]
+      note: The Linux app is a beta last built for Ubuntu 20.04.
+      sources: [download, faq-linux, app-store]
+    open_source:
+      value: none
+      sources: [home]
+    telemetry:
+      value: null
+      note: >-
+        The policy collects app diagnostics and analytics through third parties, and the Android app carries
+        Firebase Analytics, Crashlytics and Facebook's SDK. Neither says whether you can opt out.
+      sources: [privacy, apk]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 9.99, currency: USD }
+      sources: [pricing]
+    best:
+      value: { amount: 7.5, currency: USD }
+      note: $90 a year.
+      sources: [pricing]
+    best_term:
+      value: 12
+      sources: [pricing]
+    renewal_increase:
+      value: 0
+      sources: [pricing, terms]
+    free_tier:
+      value: true
+      note: A limited amount of time a day on OpenVPN over Smoke, one device per network, with ads to watch for more.
+      sources: [app-store, apk, terms]
+    refund_days:
+      value: 0
+      note: >-
+        Purchases aren't refundable once you've used any data. It may give a pro-rata refund, at its
+        discretion, for time the service didn't work.
+      sources: [terms, news-refunds]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        It says there's "no chance" your connection could be traced by anyone, and calls itself "the Only VPN
+        Working in China".
+      sources: [discount, affiliates]
+    affiliates:
+      value: true
+      note: Affiliates get 30% of every sale.
+      sources: [affiliates]
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://www.bvpn.com/en/
+    title: bVPN homepage
+  pricing:
+    url: https://www.bvpn.com/en/#pricing
+    title: bVPN pricing
+  download:
+    url: https://www.bvpn.com/en/#download
+    title: Download bVPN
+  privacy:
+    url: https://www.bvpn.com/en/privacypolicy/
+    title: bVPN Privacy Policy
+  terms:
+    url: https://www.bvpn.com/en/termsofservice/
+    title: bVPN Terms of Service
+  register:
+    url: https://www.bvpn.com/en/accounts/register/
+    title: bVPN account registration
+  faq:
+    url: https://www.bvpn.com/en/faq/
+    title: bVPN FAQ
+  faq-linux:
+    url: https://www.bvpn.com/en/faq/1047/
+    title: How to Use b.VPN - OpenVPN Client for Linux
+  faq-bitcoin:
+    url: https://www.bvpn.com/en/faq/18/
+    title: How to Purchase b.VPN Account Using Bitcoin
+  faq-vouchers:
+    url: https://www.bvpn.com/en/faq/11/
+    title: How to Purchase b.VPN Account Using b.VPN Vouchers
+  discount:
+    url: https://www.bvpn.com/en/discount/
+    title: b.VPN Discount
+  affiliates:
+    url: https://www.bvpn.com/en/affiliatesandresellers/
+    title: bVPN Affiliates and Resellers
+  news-refunds:
+    url: https://www.bvpn.com/en/news/1033/
+    title: Changes to refund policy due to abuse
+  news-l2tp:
+    url: https://www.bvpn.com/en/news/1038/
+    title: L2TP is No Longer Supported Over Serious Security Concerns!
+  news-ssh-l2tp:
+    url: https://www.bvpn.com/en/news/1042/
+    title: SSH & L2TP are No Longer Supported!
+  news-shadowsocks:
+    url: https://www.bvpn.com/en/news/1049/
+    title: 'Important Announcement: Discontinuation of Shadowsocks on bVPN Network (November 2023)'
+  news-tokens:
+    url: https://www.bvpn.com/en/news/1048/
+    title: 'Simpler, Safer, Better: Activate Premium Tokens Within bVPN App! (July 2023)'
+  play:
+    url: https://play.google.com/store/apps/details?id=com.steelkiwi.bvpn
+    title: bVPN - Fast VPN tunnel SmokeV2 on Google Play
+  play-2016:
+    url: https://web.archive.org/web/20160508011338/https://play.google.com/store/apps/details?id=com.steelkiwi.bvpn
+    title: bVPN on Google Play (archived May 2016)
+  play-2019:
+    url: https://web.archive.org/web/20190724003028/https://play.google.com/store/apps/details?id=com.steelkiwi.bvpn
+    title: bVPN on Google Play (archived July 2019)
+  app-store:
+    url: https://apps.apple.com/us/app/bvpn/id955436453
+    title: 'B VPN: Fast VPN Tunnel Smoke on the App Store (US)'
+  apk:
+    url: https://ws75.aptoide.com/api/7/app/getMeta?package_name=com.steelkiwi.bvpn
+    title: bVPN for Android 3.1.18 on Aptoide, whose APK holds OpenVPN and SmokeV2 libraries with Firebase Analytics, Crashlytics and Facebook's SDK
+  iwasel-contact:
+    url: https://www.iwasel.com/en/contact/
+    title: iWASEL contact page
+  iwasel-download:
+    url: https://www.iwasel.com/en/download/
+    title: iWASEL downloads
+  waselpro-contact:
+    url: https://www.waselpro.com/en/contact/
+    title: WASEL Pro contact page
+  cve-2021-43457:
+    url: https://nvd.nist.gov/vuln/detail/CVE-2021-43457
+    title: CVE-2021-43457, unquoted service path in bVPN 2.5.1 for Windows (NVD)
+  exploit:
+    url: https://github.com/M507/Miner
+    title: M507, Miner, unquoted service path findings including bVPN 2.5.1 (2021)
