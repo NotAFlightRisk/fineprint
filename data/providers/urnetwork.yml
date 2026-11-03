@@ -249,7 +249,8 @@ criteria:
   other:
     concerns:
       value:
-        - summary: >-
+        - title: Some traffic bypasses the VPN by default
+          summary: >-
             With the kill switch off, as it ships, traffic the apps' own filter won't pass to an exit, such as
             SSH and other unlisted low ports or unrecognised encrypted protocols, goes out over your own
             connection with your real IP.

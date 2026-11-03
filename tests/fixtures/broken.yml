@@ -31,8 +31,13 @@ criteria:
     monthly: { amount: 4.999, currency: EURO }
   other:
     concerns:
-      - summary: Sells your IP to the neighbours.
+      - title: Sells your IP
+        summary: Sells your IP to the neighbours.
         severity: serious
+      - title: Sells your IP to the neighbours, then to their neighbours
+        summary: Sells your IP to the neighbours, who sell it on.
+        severity: minor
+        source: policy
   vibes:
     cool: true
 refs:

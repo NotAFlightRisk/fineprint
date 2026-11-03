@@ -212,7 +212,8 @@ criteria:
   other:
     concerns:
       value:
-        - summary: >-
+        - title: Chrome extension reports every page you open
+          summary: >-
             The Chrome extension sends the address of every page you open, and the page you came from, to its
             own server under an install ID, whether or not the VPN is connected.
           severity: serious

@@ -1,8 +1,9 @@
 <script lang="ts">
   import GradeMark from '#lib/components/GradeMark.svelte';
   import Seo from '#lib/components/Seo.svelte';
+  import { evidences } from '#lib/data/types.ts';
   import { minComplete } from '#lib/filters.ts';
-  import { gradeNames } from '#lib/marks.ts';
+  import { evidenceMeanings, evidenceNames, gradeNames } from '#lib/marks.ts';
   import { site } from '#lib/site.ts';
   import { describeRule } from '#lib/summary.ts';
 
@@ -18,11 +19,7 @@
     [null, "Looked for, but the provider doesn't say, or nobody knows."]
   ] as const;
 
-  const evidence = [
-    ['Claimed', "The provider's own word: its policy, website or support."],
-    ['Verified', 'Confirmed by someone else: an audit, a court case, a raid.'],
-    ['Tested', 'We checked it ourselves.']
-  ];
+  const evidence = evidences.map((key) => [evidenceNames[key], evidenceMeanings[key]]);
 
   const flags = [
     [
@@ -119,15 +116,15 @@
           {#if criterion.rules}
             <ul class="rules">
               {#each levels as level (level)}
-                {#if criterion.rules[level]}
+                {#each [criterion.rules[level] ?? []].flat() as match, index (index)}
                   <li>
                     <GradeMark grade={level} />
-                    {describeRule(criterion, criterion.rules[level])}
+                    {describeRule(criterion, match)}
                     {#if level === 'bad' && criterion.serious}
                       <span class="tag serious">Serious</span>
                     {/if}
                   </li>
-                {/if}
+                {/each}
               {/each}
             </ul>
           {:else}

@@ -1,3 +1,5 @@
+import type { Evidence } from '#lib/data/types.ts';
+
 export const gradeNames = {
   good: 'Good',
   ok: 'OK',
@@ -17,4 +19,16 @@ export const markPaths: Record<MarkKey, string> = {
   info: 'M8 7v5M8 4v.5',
   na: 'M4 8h8',
   unknown: 'M6 6.2a2 2 0 1 1 3 1.7c-.7.4-1 .9-1 1.6M8 11.8v.4'
+};
+
+export const evidenceNames: Record<Evidence, string> = {
+  claimed: 'Claimed',
+  verified: 'Verified',
+  tested: 'Tested'
+};
+
+export const evidenceMeanings: Record<Evidence, string> = {
+  claimed: "The provider's own word: its policy, website or support.",
+  verified: 'Confirmed by someone else: an audit, a court case, a raid.',
+  tested: 'We checked it ourselves.'
 };

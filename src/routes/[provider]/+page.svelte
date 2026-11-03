@@ -1,11 +1,13 @@
 <script lang="ts">
   import Checklist from '#lib/components/Checklist.svelte';
+  import Cite from '#lib/components/Cite.svelte';
   import Flag from '#lib/components/Flag.svelte';
   import GradeMark from '#lib/components/GradeMark.svelte';
   import Records from '#lib/components/Records.svelte';
   import Seo from '#lib/components/Seo.svelte';
   import type { Item } from '#lib/data/types.ts';
-  import { formatDate, formatValue, showEntry } from '#lib/format.ts';
+  import { formatDate, formatValue, newestFirst, showEntry } from '#lib/format.ts';
+  import { evidenceMeanings } from '#lib/marks.ts';
   import { absolute, editUrl, historyUrl, site } from '#lib/site.ts';
   import { byId, redFlags, redFlagsOf, summarise, verdict } from '#lib/summary.ts';
   import { tip } from '#lib/tip.ts';
@@ -18,21 +20,30 @@
   const flags = $derived(redFlagsOf(provider, criteria));
   const { website, hq, where, checks } = $derived(summary);
 
+  // a criterion's own sources, then its records' in the order they're shown
+  const sourcesOf = (id: string) => {
+    const entry = provider.criteria[id];
+    const items =
+      criteria.get(id)?.type === 'records' && Array.isArray(entry?.value)
+        ? newestFirst(entry.value as Item[])
+        : [];
+    return [...(entry?.sources ?? []), ...items.flatMap((item) => item.source ?? [])];
+  };
+
   const cited = $derived.by(() => {
     const order = new Map<string, number>();
     for (const category of categories)
       for (const { id } of category.criteria)
-        for (const ref of provider.criteria[id]?.sources ?? [])
-          if (!order.has(ref)) order.set(ref, order.size + 1);
+        for (const ref of sourcesOf(id)) if (!order.has(ref)) order.set(ref, order.size + 1);
     for (const ref of Object.keys(provider.refs))
       if (!order.has(ref)) order.set(ref, order.size + 1);
     return order;
   });
 
   const backs = (ref: string) =>
-    Object.entries(provider.criteria)
-      .filter(([, entry]) => entry.sources.includes(ref))
-      .map(([id]) => criteria.get(id)!.label);
+    Object.keys(provider.criteria)
+      .filter((id) => sourcesOf(id).includes(ref))
+      .map((id) => criteria.get(id)!.label);
 
   // "Windscribe VPN", but never "Mullvad VPN VPN"
   const product = $derived(/vpn/i.test(provider.name) ? provider.name : `${provider.name} VPN`);
@@ -96,9 +107,13 @@
     <div class="lead">
       <h2 id="summary">Summary</h2>
       <p>{verdict(summary)}</p>
+      <p><a href="/methodology">How grading works</a></p>
     </div>
     <div class="facts">
-      <Checklist {checks} />
+      <div class="checks">
+        <h3>Privacy checks</h3>
+        <Checklist {checks} />
+      </div>
       <div class="flags">
         <h3 class:none={!flags.length} data-grade={summary.serious ? 'bad' : 'ok'}>
           {redFlags(flags.length)}
@@ -109,7 +124,10 @@
               <li>
                 <GradeMark grade="bad" />
                 <span
-                  ><a href="#{flag.id}">{flag.label}</a>: {flag.value}
+                  ><a href="#{flag.id}">{flag.label}</a>:
+                  {#if flag.detail}<button type="button" class="noted" {@attach tip(flag.detail)}
+                      >{flag.value}</button
+                    >{:else}{flag.value}{/if}
                   {#if flag.serious}<span class="tag serious">Serious</span>{/if}</span
                 >
               </li>
@@ -138,20 +156,30 @@
               >
             </dt>
             <dd>
-              <p class="value">
+              <p class="value" class:graded={entry?.grade !== 'info'}>
                 {#if entry?.grade !== 'info'}<GradeMark grade={entry?.grade} />{/if}
-                {#if criterion.type === 'country' && typeof entry?.value === 'string'}
-                  <Flag code={entry.value} />
-                {/if}
-                <span class:unknown={!entry || entry.value === null}
-                  >{showEntry(criterion, entry)}</span
-                >
-                {#if entry?.evidence}<span class="tag">{entry.evidence}</span>{/if}
-                {#each entry?.sources ?? [] as ref (ref)}
-                  <a class="cite" href="#ref-{ref}" {@attach tip(provider.refs[ref].title)}
-                    ><span class="visually-hidden">Source </span>{cited.get(ref)}</a
-                  >
-                {/each}
+                <span class="text">
+                  {#if criterion.type === 'country' && typeof entry?.value === 'string'}
+                    <Flag code={entry.value} />
+                  {/if}
+                  {#if criterion.type === 'url' && typeof entry?.value === 'string'}
+                    <a class="url" href={entry.value} target="_blank" rel="noopener external"
+                      >{showEntry(criterion, entry)}</a
+                    >
+                  {:else}
+                    <span class:unknown={!entry || entry.value === null}
+                      >{showEntry(criterion, entry)}</span
+                    >
+                  {/if}
+                  {#if entry?.evidence}<button
+                      type="button"
+                      class="tag noted"
+                      {@attach tip(evidenceMeanings[entry.evidence])}>{entry.evidence}</button
+                    >{/if}
+                  {#each entry?.sources ?? [] as ref (ref)}
+                    <Cite {ref} number={cited.get(ref)} title={provider.refs[ref].title} />
+                  {/each}
+                </span>
               </p>
               {#if entry?.note}<p class="note">{entry.note}</p>{/if}
               {#if criterion.type === 'records' && Array.isArray(entry?.value) && entry.value.length}
@@ -188,10 +216,7 @@
   <section class="section" aria-labelledby="contribute">
     <div class="lead">
       <h2 id="contribute">Spotted something?</h2>
-      <p>
-        This page is built from one YAML file. Fix it on GitHub and the checks will tell you if
-        anything's off.
-      </p>
+      <p>Everything on this page comes from one public file, so anyone can fix it on GitHub.</p>
     </div>
     <p class="actions">
       <a href={editUrl(provider.id)} target="_blank" rel="noopener external">Suggest an edit</a>
@@ -301,7 +326,12 @@
       width: 0.5rem;
       height: 0.5rem;
       background: var(--grade, transparent);
-      box-shadow: inset 0 0 0 var(--rule-thin) var(--grade, var(--rule-faint));
+      box-shadow: inset 0 0 0 var(--rule-thin) var(--grade, var(--text-muted));
+    }
+
+    /* only grades get a colour */
+    & [data-grade='info'] {
+      --grade: var(--rule-faint);
     }
   }
 
@@ -329,6 +359,7 @@
     }
   }
 
+  .checks,
   .flags {
     display: grid;
     align-content: start;
@@ -336,6 +367,11 @@
 
     & h3 {
       font-size: var(--text-md);
+    }
+  }
+
+  .flags {
+    & h3 {
       color: var(--grade);
 
       &.none {
@@ -397,32 +433,34 @@
     margin: 0;
   }
 
+  /* a mark gets its own column, so a value that wraps stays clear of it */
   .value {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
     align-items: baseline;
-    gap: var(--space-1) var(--space-2);
+    gap: var(--space-2);
+
+    &.graded {
+      grid-template-columns: var(--mark) 1fr;
+    }
+  }
+
+  .text {
+    & .tag,
+    & :global(.cite) {
+      margin-left: var(--space-1);
+    }
   }
 
   .unknown {
     color: var(--text-muted);
   }
 
-  .cite {
-    font-size: var(--text-xs);
-    min-width: 1.25rem;
-    padding-inline: var(--space-1);
-    text-align: center;
-    text-decoration: none;
-    border: var(--rule-thin) solid var(--rule-faint);
-
-    &:hover {
-      border-color: var(--rule);
-    }
+  .url {
+    overflow-wrap: anywhere;
   }
 
   .note {
-    max-width: 68ch;
+    max-width: 55ch;
     font-size: var(--text-sm);
     color: var(--text-muted);
   }

@@ -8,7 +8,9 @@ const options = (spec: { options?: Record<string, string> }) => ({
   enum: Object.keys(spec.options ?? {})
 });
 
-function valueSchema(spec: Pick<Criterion, 'options' | 'fields'> & { type: string }): object {
+function valueSchema(
+  spec: Pick<Criterion, 'options' | 'fields'> & Pick<Field, 'max'> & { type: string }
+): object {
   switch (spec.type) {
     case 'bool':
       return { type: 'boolean' };
@@ -50,7 +52,7 @@ function valueSchema(spec: Pick<Criterion, 'options' | 'fields'> & { type: strin
       });
     }
     default:
-      return text;
+      return spec.max ? { ...text, maxLength: spec.max } : text;
   }
 }
 

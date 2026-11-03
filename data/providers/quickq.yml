@@ -196,10 +196,12 @@ criteria:
   other:
     concerns:
       value:
-        - summary: The Android app's Trojan connections don't check the server's TLS certificate, so anyone able to intercept them could pose as its server.
+        - title: Android app skips some certificate checks
+          summary: The Android app's Trojan connections don't check the server's TLS certificate, so anyone able to intercept them could pose as its server.
           severity: serious
           source: apk
-        - summary: The Android app routes BitTorrent traffic outside the VPN, so torrent peers see your real IP address.
+        - title: Torrents bypass the VPN on Android
+          summary: The Android app routes BitTorrent traffic outside the VPN, so torrent peers see your real IP address.
           severity: serious
           source: apk
 

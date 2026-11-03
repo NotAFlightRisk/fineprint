@@ -41,7 +41,7 @@ export function matches(match: Match, value: Value, today: Date) {
 export function grade({ rules }: Criterion, value: Value, today: Date): Grade | undefined {
   if (value === null) return null;
   if (!rules) return 'info';
-  return (['good', 'ok', 'bad'] as const).find(
-    (level) => rules[level] && matches(rules[level], value, today)
+  return (['good', 'ok', 'bad'] as const).find((level) =>
+    [rules[level] ?? []].flat().some((match) => matches(match, value, today))
   );
 }

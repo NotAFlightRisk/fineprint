@@ -253,7 +253,8 @@ criteria:
   other:
     concerns:
       value:
-        - summary: >-
+        - title: Classic mode intercepts every connection
+          summary: >-
             The Windows client's Classic mode installs a system-wide interceptor for every connection, which has
             to keep running even when Easy Hide IP isn't.
           severity: minor

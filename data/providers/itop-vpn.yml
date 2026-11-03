@@ -216,7 +216,8 @@ criteria:
   other:
     concerns:
       value:
-        - summary: >-
+        - title: Android app falls outside iTop's policy
+          summary: >-
             Its Android download sends you to iFlip VPN, a Google Play app from a personal developer account
             run under another company's terms and privacy policy, so iTop's own policy doesn't cover it.
           severity: minor

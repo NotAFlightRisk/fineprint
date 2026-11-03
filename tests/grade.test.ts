@@ -41,9 +41,10 @@ describe('grading rules', () => {
     expect(gradeOf('features.connections', 1)).toBe('bad');
   });
 
-  it('grades payment on whether any anonymous method is offered', () => {
+  it('grades payment on whether any anonymous method is offered, and free as a warning', () => {
     expect(gradeOf('account.payment', ['card', 'cash'])).toBe('good');
     expect(gradeOf('account.payment', ['card', 'bitcoin'])).toBe('ok');
+    expect(gradeOf('account.payment', [])).toBe('ok');
     expect(gradeOf('account.payment', ['card', 'paypal'])).toBe('bad');
   });
 

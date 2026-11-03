@@ -236,7 +236,8 @@ criteria:
   other:
     concerns:
       value:
-        - summary: >-
+        - title: Affiliate links log your IP indefinitely
+          summary: >-
             Visitors who arrive through an affiliate link have their IP address logged and stored indefinitely,
             so a later order can be credited to the affiliate.
           severity: minor

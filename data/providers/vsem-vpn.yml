@@ -171,7 +171,8 @@ criteria:
   other:
     concerns:
       value:
-        - summary: >-
+        - title: Your data is stored only in Russia
+          summary: >-
             Its policy keeps the data it does hold, such as the install ID, device details and crash reports,
             only on servers in Russia, though the company is Georgian.
           severity: minor

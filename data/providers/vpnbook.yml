@@ -205,7 +205,8 @@ criteria:
   other:
     concerns:
       value:
-        - summary: >-
+        - title: Every OpenVPN user shares one published key
+          summary: >-
             Every OpenVPN config carries the same published client key and doesn't check it's talking to a
             real VPNBook server, so anyone who can intercept your connection can pose as one and see your traffic.
           severity: serious

@@ -36,11 +36,12 @@ export interface Match {
   within?: number;
 }
 
-export type Rules = Partial<Record<'good' | 'ok' | 'bad', Match>>;
+export type Rules = Partial<Record<'good' | 'ok' | 'bad', Match | Match[]>>;
 
 export interface Field {
   type: 'date' | 'text' | 'enum';
   options?: Record<string, string>;
+  max?: number;
 }
 
 export interface Criterion {

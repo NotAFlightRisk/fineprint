@@ -221,7 +221,8 @@ criteria:
   other:
     concerns:
       value:
-        - summary: Its Ubuntu 22.04 guide has you set OpenSSL's security level to 0 to connect, which lets the tunnel use weak, outdated TLS settings.
+        - title: Ubuntu guide has you weaken TLS
+          summary: Its Ubuntu 22.04 guide has you set OpenSSL's security level to 0 to connect, which lets the tunnel use weak, outdated TLS settings.
           severity: minor
           source: linux-2204
 

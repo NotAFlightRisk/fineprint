@@ -227,7 +227,8 @@ criteria:
   other:
     concerns:
       value:
-        - summary: >-
+        - title: Default server uses a key everyone shares
+          summary: >-
             The app offers a built-in default server whose key everyone shares, so anyone watching your
             network, your ISP included, can see which sites you visit and read unencrypted traffic. The app
             warns you before you use it.

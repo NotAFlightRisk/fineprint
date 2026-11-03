@@ -235,7 +235,8 @@ criteria:
   other:
     concerns:
       value:
-        - summary: >-
+        - title: Some apps make your device an exit node
+          summary: >-
             On the free Windows app, and Android builds from outside Google Play, your device becomes an exit
             node for Bright Data's proxy customers, so other people's traffic leaves through your IP address.
           severity: serious

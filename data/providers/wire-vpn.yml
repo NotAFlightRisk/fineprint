@@ -220,7 +220,8 @@ criteria:
 
   other:
     concerns:
-      - summary: >-
+      - title: Chinese law, with records kept for the authorities
+        summary: >-
           The user agreement is governed by Chinese law and bans using the app for anything that "endangers national
           security, national reunification, and social stability", and the account can be closed with records kept
           for the authorities.
