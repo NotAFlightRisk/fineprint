@@ -119,15 +119,15 @@
           {#if criterion.rules}
             <ul class="rules">
               {#each levels as level (level)}
-                {#if criterion.rules[level]}
+                {#each [criterion.rules[level] ?? []].flat() as match, index (index)}
                   <li>
                     <GradeMark grade={level} />
-                    {describeRule(criterion, criterion.rules[level])}
+                    {describeRule(criterion, match)}
                     {#if level === 'bad' && criterion.serious}
                       <span class="tag serious">Serious</span>
                     {/if}
                   </li>
-                {/if}
+                {/each}
               {/each}
             </ul>
           {:else}

@@ -259,7 +259,9 @@ categories:
       - key: payment
         label: Payment methods
         type: set
-        description: Ways to pay. Cash and Monero are the only ones that don't point back at you.
+        description: >-
+          Ways to pay. Cash and Monero are the only ones that don't point back at you. Free gets a
+          warning: if you're not paying, you're probably the product.
         options:
           card: Card
           paypal: PayPal
@@ -273,7 +275,7 @@ categories:
           gift_card: Gift cards or vouchers
         rules:
           good: { any: [monero, cash] }
-          ok: { any: [bitcoin, lightning, other_crypto, gift_card] }
+          ok: [{ any: [bitcoin, lightning, other_crypto, gift_card] }, { max: 0 }]
           bad: {}
 
   - id: security

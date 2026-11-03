@@ -36,7 +36,7 @@ export interface Match {
   within?: number;
 }
 
-export type Rules = Partial<Record<'good' | 'ok' | 'bad', Match>>;
+export type Rules = Partial<Record<'good' | 'ok' | 'bad', Match | Match[]>>;
 
 export interface Field {
   type: 'date' | 'text' | 'enum';
