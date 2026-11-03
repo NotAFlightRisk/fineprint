@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: Speedify
 icon: speedify.png
-checked: 2026-10-21
+checked: 2026-11-03
 
 criteria:
   identity:
@@ -144,7 +144,7 @@ criteria:
       sources: [home]
     countries:
       value: 37
-      note: Counted from its server location list. Other pages say 35 countries, or 82 locations.
+      note: Its features page says 35 countries, and its press page 82 locations.
       sources: [speed-servers, features, press]
 
   features:
@@ -182,10 +182,6 @@ criteria:
       value: null
       note: The app's privacy settings have no analytics or crash report option, and the privacy policy doesn't mention either.
       sources: [privacy-settings]
-    trackers:
-      value: null
-      note: The newest Exodus report that would load is for version 12.1.1 from June 2022, which found none. That's too old to stand for today's app.
-      sources: [exodus]
     fdroid: false
 
   pricing:
@@ -215,8 +211,10 @@ criteria:
   ethics:
     misleading_claims:
       value: true
-      note: Its FAQ and help centre say it logs no IP addresses, while the privacy policy takes your IP with each connection and deletes it after six months.
-      sources: [features, privacy-settings, privacy-policy]
+      note: >-
+        Its FAQ and help centre say it logs no IP addresses, while the privacy policy takes your IP with each
+        connection and deletes it after six months. Its homepage cites "regular audits", with one published, from 2024.
+      sources: [features, privacy-settings, privacy-policy, home]
     affiliates:
       value: true
       note: Its site files discount pages for TechRadar and MacUpdate readers as affiliate pages, and FlexOffers listed a Speedify scheme paying 40% of sales.
@@ -323,9 +321,6 @@ refs:
   github:
     url: https://github.com/speedify
     title: Speedify on GitHub
-  exodus:
-    url: https://reports.exodus-privacy.eu.org/en/reports/com.speedify.speedifyandroid/latest/
-    title: Exodus Privacy report for com.speedify.speedifyandroid
   affiliate-pages:
     url: https://speedify.com/wp-json/wp/v2/search?search=AFFILIATE
     title: Speedify site search for affiliate pages
