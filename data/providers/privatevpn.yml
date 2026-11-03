@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: PrivateVPN
 icon: privatevpn.png
-checked: 2026-10-21
+checked: 2026-11-03
 
 criteria:
   identity:
@@ -11,7 +11,7 @@ criteria:
     legal_entity:
       value: PrivateVPN Global AB
       note: Swedish company 559282-2182, registered in November 2020.
-      sources: [privacy-policy, terms, register-privatevpn]
+      sources: [terms, register-privatevpn]
     owner:
       value: Miss Group
       note: >-
@@ -80,7 +80,7 @@ criteria:
       sources: [no-log]
     report:
       value: none
-      note: Neither its site nor any of its 185 help centre articles mentions one.
+      note: Neither its site nor its help centre mentions one.
       sources: [no-log, help-centre]
     canary:
       value: none
@@ -113,7 +113,7 @@ criteria:
     payment:
       value: [card, paypal, app_store, bitcoin]
       note: Cards go through Stripe, Apple Pay or Google Pay. Bitcoin payments can't be refunded.
-      sources: [privacy-policy, terms, faq]
+      sources: [terms, faq]
 
   security:
     protocols:
@@ -181,8 +181,8 @@ criteria:
   clients:
     platforms:
       value: [windows, macos, ios, android]
-      note: Linux, Chrome OS and routers use manual OpenVPN or WireGuard setups rather than an app.
-      sources: [download, faq, linux-guides]
+      note: Linux and routers use manual OpenVPN or WireGuard setups rather than an app. Chromebooks run the Android app.
+      sources: [download, faq, linux-guides, chromeos-app]
     open_source:
       value: none
       note: The terms forbid modifying or reverse engineering the apps, and no source is published.
@@ -191,10 +191,6 @@ criteria:
       value: null
       note: Neither the privacy policy nor the help centre says whether the apps send usage or crash data.
       sources: [privacy-policy, help-centre]
-    trackers:
-      value: 2
-      note: The newest Exodus report that would load was for version 4.1.9, from November 2022.
-      sources: [exodus]
     fdroid:
       value: false
       sources: [google-play]
@@ -290,6 +286,9 @@ refs:
   linux-guides:
     url: https://help.privatevpn.com/en/collections/670721-linux-setup-guides
     title: Linux setup guides
+  chromeos-app:
+    url: https://help.privatevpn.com/en/articles/830640-privatevpn-app-installation-guide-for-chrome-os
+    title: PrivateVPN app Installation Guide for Chrome OS
   server-list:
     url: https://privatevpn.com/serverlist/
     title: Server list
@@ -314,9 +313,6 @@ refs:
   versprite-005:
     url: https://github.com/VerSprite/research/blob/master/advisories/VS-2018-005.md
     title: VerSprite advisory VS-2018-005, PrivateVPN for macOS
-  exodus:
-    url: https://web.archive.org/web/20230928053812/https://reports.exodus-privacy.eu.org/en/reports/com.pvpn.privatevpn/latest/
-    title: Exodus Privacy report for com.pvpn.privatevpn 4.1.9 (archived)
   google-play:
     url: https://play.google.com/store/apps/details?id=com.pvpn.privatevpn
     title: PrivateVPN on Google Play
