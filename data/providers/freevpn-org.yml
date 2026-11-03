@@ -27,11 +27,11 @@ criteria:
       value: anonymous
       sources: [about, trust]
     sister_brands:
-      value: [VPN Pro, Dash Free VPN]
+      value: [VPN Pro, Dash Free VPN, Best VPN, VPN US]
       note: >-
         VPN Pro - for Private Browsing is also sold by Free VPN LLC. Dash Free VPN is ActMobile's own app on the same
-        network, and the two companies' ownership link isn't public.
-      sources: [vpn-pro-app-store, dash-app-store, actmobile]
+        network, and Best VPN and VPN US are VPN LLC US apps built on it. The companies' ownership links aren't public.
+      sources: [vpn-pro-app-store, dash-app-store, actmobile, vpn-llc-apps]
     acquisitions:
       value: null
       note: No sale is on record, but who owns the company isn't public.
@@ -275,6 +275,9 @@ refs:
   actmobile:
     url: https://actmobile.com/
     title: ActMobile Networks
+  vpn-llc-apps:
+    url: https://apps.apple.com/us/developer/vpn-llc-us/id1308745207
+    title: VPN LLC US apps on the App Store
   actmobile-about:
     url: https://actmobile.com/about.html
     title: ActMobile Networks, About Us (head office address)
