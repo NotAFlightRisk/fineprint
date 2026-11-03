@@ -146,18 +146,20 @@
             <dd>
               <p class="value">
                 {#if entry?.grade !== 'info'}<GradeMark grade={entry?.grade} />{/if}
-                {#if criterion.type === 'country' && typeof entry?.value === 'string'}
-                  <Flag code={entry.value} />
-                {/if}
-                <span class:unknown={!entry || entry.value === null}
-                  >{showEntry(criterion, entry)}</span
-                >
-                {#if entry?.evidence}<span class="tag">{entry.evidence}</span>{/if}
-                {#each entry?.sources ?? [] as ref (ref)}
-                  <a class="cite" href="#ref-{ref}" {@attach tip(provider.refs[ref].title)}
-                    ><span class="visually-hidden">Source </span>{cited.get(ref)}</a
+                <span class="text">
+                  {#if criterion.type === 'country' && typeof entry?.value === 'string'}
+                    <Flag code={entry.value} />
+                  {/if}
+                  <span class:unknown={!entry || entry.value === null}
+                    >{showEntry(criterion, entry)}</span
                   >
-                {/each}
+                  {#if entry?.evidence}<span class="tag">{entry.evidence}</span>{/if}
+                  {#each entry?.sources ?? [] as ref (ref)}
+                    <a class="cite" href="#ref-{ref}" {@attach tip(provider.refs[ref].title)}
+                      ><span class="visually-hidden">Source </span>{cited.get(ref)}</a
+                    >
+                  {/each}
+                </span>
               </p>
               {#if entry?.note}<p class="note">{entry.note}</p>{/if}
               {#if criterion.type === 'records' && Array.isArray(entry?.value) && entry.value.length}
@@ -409,11 +411,20 @@
     margin: 0;
   }
 
+  /* the mark keeps its own column, so every value starts at the same place */
   .value {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: var(--mark) 1fr;
     align-items: baseline;
-    gap: var(--space-1) var(--space-2);
+    gap: var(--space-2);
+  }
+
+  .text {
+    grid-column: 2;
+
+    & :is(.tag, .cite) {
+      margin-left: var(--space-1);
+    }
   }
 
   .unknown {
@@ -421,6 +432,7 @@
   }
 
   .cite {
+    display: inline-block;
     font-size: var(--text-xs);
     min-width: 1.25rem;
     padding-inline: var(--space-1);
