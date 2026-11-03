@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: PrivadoVPN
 icon: privadovpn.svg
-checked: 2026-10-21
+checked: 2026-11-03
 
 criteria:
   identity:
@@ -148,9 +148,9 @@ criteria:
     multihop:
       value: true
       note: >-
-        SmartRoute, added to the Windows and macOS apps in 2026, picks the entry server for you. Until
-        March 2026 the apps used the name SmartRoute for split tunnelling.
-      sources: [smart-route, smartroute-kb, windows-log, macos-log]
+        SmartRoute, added to the Windows, macOS and Android apps in 2026, picks the entry server for
+        you. Until March 2026 the apps used the name SmartRoute for split tunnelling.
+      sources: [smart-route, smartroute-kb, windows-log, macos-log, android-log]
     obfuscation:
       value: [proprietary]
       note: Scramble disguises OpenVPN traffic, and a WireGuard "protocol inspection bypass" option isn't explained.
@@ -354,7 +354,7 @@ refs:
     url: https://github.com/privadovpn
     title: PrivadoVPN on GitHub
   exodus:
-    url: https://reports.exodus-privacy.eu.org/en/reports/io.privado.android/latest/
+    url: https://web.archive.org/web/20251208044815/https://reports.exodus-privacy.eu.org/en/reports/io.privado.android/latest/
     title: Exodus Privacy report for io.privado.android
   free-plans:
     url: https://support.privadovpn.com/kb/article/875-what-is-the-difference-between-the-free-and-paid-vpn-plans/
