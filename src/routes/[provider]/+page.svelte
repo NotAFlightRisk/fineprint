@@ -156,7 +156,7 @@
               >
             </dt>
             <dd>
-              <p class="value">
+              <p class="value" class:graded={entry?.grade !== 'info'}>
                 {#if entry?.grade !== 'info'}<GradeMark grade={entry?.grade} />{/if}
                 <span class="text">
                   {#if criterion.type === 'country' && typeof entry?.value === 'string'}
@@ -433,17 +433,18 @@
     margin: 0;
   }
 
-  /* the mark keeps its own column, so every value starts at the same place */
+  /* a mark gets its own column, so a value that wraps stays clear of it */
   .value {
     display: grid;
-    grid-template-columns: var(--mark) 1fr;
     align-items: baseline;
     gap: var(--space-2);
+
+    &.graded {
+      grid-template-columns: var(--mark) 1fr;
+    }
   }
 
   .text {
-    grid-column: 2;
-
     & .tag,
     & :global(.cite) {
       margin-left: var(--space-1);
