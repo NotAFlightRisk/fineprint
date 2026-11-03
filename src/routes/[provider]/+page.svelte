@@ -1,11 +1,12 @@
 <script lang="ts">
   import Checklist from '#lib/components/Checklist.svelte';
+  import Cite from '#lib/components/Cite.svelte';
   import Flag from '#lib/components/Flag.svelte';
   import GradeMark from '#lib/components/GradeMark.svelte';
   import Records from '#lib/components/Records.svelte';
   import Seo from '#lib/components/Seo.svelte';
   import type { Item } from '#lib/data/types.ts';
-  import { formatDate, formatValue, showEntry } from '#lib/format.ts';
+  import { formatDate, formatValue, newestFirst, showEntry } from '#lib/format.ts';
   import { evidenceMeanings } from '#lib/marks.ts';
   import { absolute, editUrl, historyUrl, site } from '#lib/site.ts';
   import { byId, redFlags, redFlagsOf, summarise, verdict } from '#lib/summary.ts';
@@ -19,21 +20,30 @@
   const flags = $derived(redFlagsOf(provider, criteria));
   const { website, hq, where, checks } = $derived(summary);
 
+  // a criterion's own sources, then its records' in the order they're shown
+  const sourcesOf = (id: string) => {
+    const entry = provider.criteria[id];
+    const items =
+      criteria.get(id)?.type === 'records' && Array.isArray(entry?.value)
+        ? newestFirst(entry.value as Item[])
+        : [];
+    return [...(entry?.sources ?? []), ...items.flatMap((item) => item.source ?? [])];
+  };
+
   const cited = $derived.by(() => {
     const order = new Map<string, number>();
     for (const category of categories)
       for (const { id } of category.criteria)
-        for (const ref of provider.criteria[id]?.sources ?? [])
-          if (!order.has(ref)) order.set(ref, order.size + 1);
+        for (const ref of sourcesOf(id)) if (!order.has(ref)) order.set(ref, order.size + 1);
     for (const ref of Object.keys(provider.refs))
       if (!order.has(ref)) order.set(ref, order.size + 1);
     return order;
   });
 
   const backs = (ref: string) =>
-    Object.entries(provider.criteria)
-      .filter(([, entry]) => entry.sources.includes(ref))
-      .map(([id]) => criteria.get(id)!.label);
+    Object.keys(provider.criteria)
+      .filter((id) => sourcesOf(id).includes(ref))
+      .map((id) => criteria.get(id)!.label);
 
   // "Windscribe VPN", but never "Mullvad VPN VPN"
   const product = $derived(/vpn/i.test(provider.name) ? provider.name : `${provider.name} VPN`);
@@ -167,9 +177,7 @@
                       {@attach tip(evidenceMeanings[entry.evidence])}>{entry.evidence}</button
                     >{/if}
                   {#each entry?.sources ?? [] as ref (ref)}
-                    <a class="cite" href="#ref-{ref}" {@attach tip(provider.refs[ref].title)}
-                      ><span class="visually-hidden">Source </span>{cited.get(ref)}</a
-                    >
+                    <Cite {ref} number={cited.get(ref)} title={provider.refs[ref].title} />
                   {/each}
                 </span>
               </p>
@@ -439,7 +447,8 @@
   .text {
     grid-column: 2;
 
-    & :is(.tag, .cite) {
+    & .tag,
+    & :global(.cite) {
       margin-left: var(--space-1);
     }
   }
@@ -450,20 +459,6 @@
 
   .url {
     overflow-wrap: anywhere;
-  }
-
-  .cite {
-    display: inline-block;
-    font-size: var(--text-xs);
-    min-width: 1.25rem;
-    padding-inline: var(--space-1);
-    text-align: center;
-    text-decoration: none;
-    border: var(--rule-thin) solid var(--rule-faint);
-
-    &:hover {
-      border-color: var(--rule);
-    }
   }
 
   .note {

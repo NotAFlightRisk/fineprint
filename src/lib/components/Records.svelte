@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Cite from '#lib/components/Cite.svelte';
   import GradeMark from '#lib/components/GradeMark.svelte';
   import type { Criterion, Grade, Item, Ref } from '#lib/data/types.ts';
   import { formatDate, newestFirst, optionLabel } from '#lib/format.ts';
@@ -21,9 +22,16 @@
   const show = (name: string, value: string) =>
     optionLabel({ options: criterion.fields?.[name].options }, value);
   const marks: Record<string, Grade> = { well: 'good', poorly: 'bad', serious: 'bad', minor: 'ok' };
+  // dated records without a summary are short enough to line up in columns
+  const columns = $derived(!!criterion.fields?.date && !criterion.fields?.summary);
 </script>
 
-<ol class="timeline" class:undated={!criterion.fields?.date}>
+<ol
+  class="timeline"
+  class:undated={!criterion.fields?.date}
+  class:columns
+  style:--fields={fields.length}
+>
   {#each newestFirst(items) as item, index (index)}
     <li>
       {#if item.date}<time datetime={item.date}>{formatDate(item.date, true)}</time>{/if}
@@ -41,10 +49,7 @@
           {/if}
         {/each}
         {#if item.source && refs[item.source]}
-          <a href={refs[item.source].url} target="_blank" rel="noopener external"
-            >Read it<span class="visually-hidden">: {refs[item.source].title}</span></a
-          >
-          <span class="visually-hidden">(source {cited.get(item.source)})</span>
+          <Cite ref={item.source} number={cited.get(item.source)} title={refs[item.source].title} />
         {/if}
       </p>
     </li>
@@ -55,7 +60,7 @@
   .timeline {
     display: grid;
     margin: 0;
-    padding: 0;
+    padding: 0 0 0 var(--space-3);
     list-style: none;
     border-left: var(--rule-thin) solid var(--rule);
 
@@ -63,11 +68,28 @@
       display: grid;
       grid-template-columns: 5.5rem 1fr;
       gap: var(--space-3);
-      padding: var(--space-1) 0 var(--space-1) var(--space-3);
+      padding-block: var(--space-1);
     }
 
     &.undated li {
       grid-template-columns: 1fr;
+    }
+
+    &.columns {
+      grid-template-columns: 5.5rem repeat(var(--fields), auto) auto;
+      justify-content: start;
+      column-gap: var(--space-3);
+
+      & li {
+        grid-column: 1 / -1;
+        grid-template-columns: subgrid;
+        align-items: baseline;
+        justify-items: start;
+      }
+
+      & p {
+        display: contents;
+      }
     }
 
     & time {
