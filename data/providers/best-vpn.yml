@@ -1,0 +1,290 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Best VPN
+icon: best-vpn.png
+checked: 2026-11-03
+
+criteria:
+  identity:
+    website:
+      value: https://thevpnapp.com
+      note: The app was sold as VPN™ until 2026, and on Android it was last listed as VON.
+      sources: [home, home-2023, home-2026, play-2026]
+    legal_entity:
+      value: VPN, LLC
+      note: >-
+        Google Play named VPN, LLC as the developer and the App Store seller is VPN LLC US, while the site
+        and the app's description credit Open VPN LLC. The terms and policy name no company.
+      sources: [play-2026, seller-apps, home, terms, privacy]
+    owner:
+      value: null
+      note: >-
+        ActMobile Networks says it runs the FreeVPN.org network behind its partners' apps, and the Android app
+        is built on ActMobile's VPN client. Who owns VPN, LLC isn't published.
+      sources: [actmobile, apk]
+    founded:
+      value: 2017
+      note: The iOS app came out in April 2017.
+      sources: [ios-lookup]
+    team:
+      value: anonymous
+      sources: [about]
+    sister_brands:
+      value: [VPN US, Messenger VPN, Free VPN .org, Dash Free VPN]
+      note: >-
+        VPN US using Free VPN .org and Messenger VPN are sold by the same company. Free VPN .org and Dash Free VPN
+        run on the same ActMobile network, and the companies' ownership link isn't public.
+      sources: [seller-apps, open-vpn, actmobile, free-vpn-org-app-store, dash-app-store]
+    acquisitions:
+      value: null
+      note: >-
+        No sale is on record, but who owns the company isn't public. Google Play gave a Pleasanton, California
+        address in 2020 and 2023, and one in Gardena, California by 2026.
+      sources: [play-2020, play-2023, play-2026]
+
+  jurisdiction:
+    hq:
+      value: US
+      note: Google Play gave an address in Gardena, California, with an Indian phone number.
+      sources: [play-2026]
+    entities:
+      value: [US]
+      sources: [play-2026, seller-apps]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      note: The policy, last updated in 2021, says no user data is collected at all, without going into detail.
+      sources: [privacy]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [privacy]
+    timestamps:
+      value: none
+      evidence: claimed
+      sources: [privacy]
+    bandwidth:
+      value: null
+      note: >-
+        The policy says nothing is collected, but free VPN time is earned by watching ads and the iOS listing
+        sells unlimited bandwidth as a premium feature, without saying how use is counted.
+      sources: [privacy, faq-android, app-store]
+    source_ip:
+      value: null
+      note: >-
+        The policy says nothing is collected, but a 2021 database a researcher attributed to ActMobile, whose
+        backend the app runs on, held users' IP addresses while that policy was in force.
+      sources: [privacy, hibp, databreaches]
+    proven: []
+    policy: https://thevpnapp.com/privacy-policy/
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty:
+      value: false
+      note: Bugs go to the support address, with no reward offered.
+      sources: [faq-android]
+    incidents:
+      value: null
+      note: >-
+        In 2021 a researcher found an open database he attributed to ActMobile, whose backend this app is built
+        on, but he named Dash VPN and FreeVPN.org among the apps affected rather than this one.
+      sources: [databreaches, hibp]
+
+  account:
+    email:
+      value: none
+      note: There are no accounts. Subscriptions are bought and restored through the app store.
+      sources: [home, faq-ios]
+    personal_data: []
+    payment:
+      value: [app_store]
+      sources: [faq-ios, faq-android]
+
+  security:
+    protocols:
+      value: [proprietary]
+      note: ActMobile's closed VPN client, built on OpenSSL.
+      sources: [apk, actmobile]
+    post_quantum:
+      value: none
+      note: Nothing is published about its key exchange, and the 2024 Android build's VPN core uses OpenSSL 1.1.1, which has none.
+      sources: [apk]
+    kill_switch:
+      value: null
+      note: >-
+        The iOS app's premium auto-connect starts the VPN when an app tries to go online, but nothing says
+        traffic is blocked if the tunnel drops. The Android app has no kill switch setting.
+      sources: [faq-ios, apk]
+    dns:
+      value: null
+      note: The iOS listing sells "encrypted DNS" as a premium feature without saying whose servers answer. The Android app's VPN core carries Google's public DNS addresses.
+      sources: [app-store, apk]
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say how its servers are run.
+    hosting:
+      value: null
+      note: The network is run by ActMobile Networks, which doesn't say whether it owns or rents the servers.
+      sources: [actmobile]
+    virtual_locations:
+      value: null
+      note: Google Play advertised "over 1000 global virtual locations" without saying which ones, or where they really are.
+      sources: [play-2026]
+    servers:
+      value: null
+      note: No server count is published.
+    countries:
+      value: null
+      note: The iOS listing names the US, UK, Japan and Germany among its locations, with no count.
+      sources: [app-store]
+
+  features:
+    connections:
+      value: 1
+      note: A subscription covers the device it was bought on, and the free app works on any number.
+      sources: [faq, faq-ios]
+    multihop: false
+    obfuscation:
+      value: null
+      note: Where VPNs are blocked it switches to unblocked servers and offers an alternate IP, without saying whether traffic is disguised.
+      sources: [faq-ios]
+    port_forwarding: false
+    split_tunnel:
+      value: true
+      note: Android only, by app.
+      sources: [apk]
+    blocking:
+      value: [ads, trackers]
+      evidence: claimed
+      note: DNS-based, and a premium feature.
+      sources: [faq-ios, adblock, apk]
+
+  clients:
+    platforms:
+      value: [ios, macos, android]
+      note: >-
+        The Mac app is the iOS one. The Android app is no longer on Google Play, and the site's direct
+        download is a February 2024 build.
+      sources: [ios-lookup, home, apk]
+    open_source:
+      value: none
+      note: The terms forbid reverse engineering the app.
+      sources: [terms]
+    telemetry:
+      value: null
+      note: >-
+        The policy and both store forms say no data is collected, but the Android app carries Firebase, Google
+        Analytics and Adjust, which the policy doesn't mention. Nothing says you can turn them off.
+      sources: [privacy, app-store, play-2026, apk]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 24.99, currency: USD }
+      note: In-app on the US App Store, which also lists a $29.99 Gold monthly plan and weekly plans from $8.99.
+      sources: [app-store]
+    best:
+      value: { amount: 10, currency: USD }
+      note: $119.99 a year in the iOS app.
+      sources: [app-store]
+    best_term: 12
+    renewal_increase:
+      value: null
+      note: The App Store lists the in-app prices without saying whether any are introductory.
+      sources: [app-store]
+    free_tier:
+      value: true
+      note: Ad-supported. VPN time is earned by watching ads, and runs out whether or not you're connected.
+      sources: [faq-android, faq-ios]
+    refund_days:
+      value: null
+      note: Refunds are left to Apple and Google.
+      sources: [faq-ios]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        The policy promises "100% privacy" and "absolute anonymity", and the iOS listing "true anonymity". Google
+        Play placed the US company "in the Swiss haven of privacy".
+      sources: [privacy, app-store, play-2026]
+    affiliates: false
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://thevpnapp.com/
+    title: VPN App for iPhone, Android & Mac | Best VPN
+  home-2023:
+    url: https://web.archive.org/web/20230214092405/https://www.thevpnapp.com/
+    title: VPN™ homepage (archived February 2023)
+  home-2026:
+    url: https://web.archive.org/web/20260218181430/https://thevpnapp.com/
+    title: VPN homepage (archived February 2026)
+  about:
+    url: https://thevpnapp.com/about/
+    title: About Best VPN
+  privacy:
+    url: https://thevpnapp.com/privacy-policy/
+    title: Best VPN Privacy Policy (last updated 3 October 2021)
+  terms:
+    url: https://thevpnapp.com/terms-of-use/
+    title: Best VPN Terms of Use (last updated 3 October 2021)
+  faq:
+    url: https://thevpnapp.com/faq/
+    title: Best VPN FAQ
+  faq-ios:
+    url: https://thevpnapp.com/faq/ios/
+    title: Best VPN for iPhone and iPad FAQ
+  faq-android:
+    url: https://thevpnapp.com/faq/android/
+    title: Best VPN for Android FAQ
+  adblock:
+    url: https://thevpnapp.com/adblock/
+    title: Super Adblock by Best VPN
+  open-vpn:
+    url: https://open-vpn.org/
+    title: Open-VPN.Org products (VPN, VPN US and Messenger VPN)
+  app-store:
+    url: https://apps.apple.com/us/app/best-vpn-unlimited-vpn-proxy/id1221368520
+    title: 'Best VPN : Unlimited VPN Proxy on the App Store (US), sold by VPN LLC US'
+  ios-lookup:
+    url: https://itunes.apple.com/lookup?id=1221368520&country=us
+    title: App Store lookup for Best VPN (release date 6 April 2017)
+  seller-apps:
+    url: https://apps.apple.com/us/developer/vpn-llc-us/id1308745207
+    title: VPN LLC US apps on the App Store
+  free-vpn-org-app-store:
+    url: https://apps.apple.com/us/app/free-vpn-by-free-vpn-org/id1050171910
+    title: Free VPN by Free VPN .org on the App Store (US), sold by Free VPN LLC
+  dash-app-store:
+    url: https://apps.apple.com/us/app/dash-free-vpn-fast-secure/id570036360
+    title: Dash Free VPN on the App Store (US), sold by ActMobile
+  play-2020:
+    url: https://web.archive.org/web/20200213071832/https://play.google.com/store/apps/details?id=openvpn.vpn
+    title: VPN by VPN LLC (open-vpn.org) on Google Play (archived February 2020)
+  play-2023:
+    url: https://web.archive.org/web/20230605082422/https://play.google.com/store/apps/details?id=openvpn.vpn
+    title: 'VPN ™: Turbo Fast, Secure VPN on Google Play (archived June 2023)'
+  play-2026:
+    url: https://web.archive.org/web/20260125072255/https://play.google.com/store/apps/details?id=openvpn.vpn
+    title: VON - Fast & Secure VPN App on Google Play (archived January 2026)
+  apk:
+    url: https://speedcheck.pro/downloads/vpn.apk
+    title: VPN for Android (openvpn.vpn), the site's direct download from February 2024, built on ActMobile's VPN client
+  actmobile:
+    url: https://actmobile.com/
+    title: ActMobile Networks
+  databreaches:
+    url: https://web.archive.org/web/20230131105735/https://www.databreaches.net/shoot-the-messenger-monday-edition-actmobile-threatens-researcher-whose-only-sin-was-trying-to-let-them-know-they-are-leaking-data/
+    title: 'DataBreaches.net, Shoot-the-Messenger, Monday edition: ActMobile threatens researcher (November 2021, archived)'
+  hibp:
+    url: https://haveibeenpwned.com/Breach/ActMobile
+    title: Have I Been Pwned, ActMobile breach (unverified)
