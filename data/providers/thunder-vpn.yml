@@ -1,0 +1,250 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Thunder VPN
+icon: thunder-vpn.png
+checked: 2026-11-03
+
+criteria:
+  identity:
+    website:
+      value: https://www.securesignal.app
+      note: >-
+        The Android app links Secure Signal's site, which it shares with Secure VPN. An older Thunder VPN site at
+        thunder.free-signal.com is still up under Signal Lab's name.
+      sources: [home, apk, old-site]
+    legal_entity:
+      value: Secure Signal Inc
+      note: The same company is the Google Play developer, at a Delaware address.
+      sources: [terms, play]
+    owner:
+      value: null
+      note: >-
+        It doesn't say who owns Secure Signal Inc. 2025 research found no links between its sister app Secure VPN
+        and other VPN families, but didn't look at Thunder VPN.
+      sources: [hidden-links-2025]
+    founded:
+      value: null
+      note: The Android app was already on Google Play, from Signal Lab, by July 2018.
+      sources: [play-2018]
+    team:
+      value: anonymous
+      note: The privacy policy gives a data protection officer's email address, but no name.
+      sources: [privacy]
+    sister_brands:
+      value: [Secure VPN (Secure Signal)]
+      note: >-
+        Secure VPN shares its Google Play developer account. TTP tied an iOS Thunder VPN, from Free Secure
+        Connected Software Co., Ltd, to Qihoo 360's Turbo VPN group, but that one comes from a different
+        developer.
+      sources: [play-dev, ttp-2025, thunder-ios-2023]
+    acquisitions:
+      value: null
+      note: >-
+        Google Play named the developer Signal Lab, with an address in Alhambra, California, until 2024, when the
+        same account became Secure Signal Inc in Delaware. Whether that was a sale isn't public.
+      sources: [play-2018, play-2024-01, play-2024-05]
+
+  jurisdiction:
+    hq:
+      value: US
+      evidence: claimed
+      sources: [play]
+    entities:
+      value: [US]
+      note: Google Play gives Secure Signal Inc an address in Dover, Delaware.
+      sources: [play]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [privacy]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [privacy]
+    timestamps:
+      value: aggregate
+      evidence: claimed
+      note: >-
+        It says it keeps no connection timestamps, but counts connection attempts and successful connections by
+        the hour, along with your country and app version.
+      sources: [privacy]
+    bandwidth:
+      value: null
+      note: It doesn't say whether it records how much data you use.
+      sources: [privacy]
+    source_ip:
+      value: none
+      evidence: claimed
+      note: It records the country you connect from, but not your IP address, it says.
+      sources: [privacy]
+    proven: []
+    policy: https://www.securesignal.app/privacy-policy.html
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: none
+      note: There are no accounts.
+      sources: [home]
+    personal_data: []
+    payment:
+      value: [app_store]
+      note: VIP plans are Google Play subscriptions in the Android app.
+      sources: [apk]
+
+  security:
+    protocols:
+      value: [proprietary]
+      note: Its own tunnel protocol, using AES-GCM and ChaCha20, inside a native library with an obfuscation layer.
+      sources: [apk]
+    post_quantum:
+      value: none
+      note: Nothing is published about how its connections are encrypted.
+    kill_switch:
+      value: null
+      note: The Android app has no kill switch setting.
+      sources: [apk]
+    dns:
+      value: null
+      note: It doesn't say whose DNS servers answer inside the tunnel.
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say how its servers are run.
+    hosting:
+      value: null
+      note: It doesn't say whether it owns or rents its servers.
+    virtual_locations:
+      value: null
+      note: It doesn't say whether any locations are virtual.
+    servers:
+      value: null
+      note: It only says it has a "large number of servers" in America, Europe and Asia.
+      sources: [play]
+    countries:
+      value: null
+      note: It doesn't give a count.
+
+  features:
+    connections:
+      value: unlimited
+      evidence: claimed
+      note: There are no accounts, and the terms refer to its unlimited simultaneous devices.
+      sources: [terms]
+    multihop: false
+    obfuscation:
+      value: [proprietary]
+      note: The app's own protocol has an obfuscation layer, and the website sells its apps for getting past censorship.
+      sources: [apk, home]
+    port_forwarding: false
+    split_tunnel:
+      value: true
+      note: By app, on Android.
+      sources: [play, apk]
+    blocking: []
+
+  clients:
+    platforms:
+      value: [android]
+      note: >-
+        The website has an App Store button that doesn't lead to an app. The iOS Thunder VPN came from another
+        developer.
+      sources: [home, play-dev, thunder-ios-2023]
+    open_source:
+      value: none
+      note: The terms forbid reverse engineering the apps.
+      sources: [terms]
+    telemetry:
+      value: null
+      note: >-
+        The app carries Firebase Analytics and Google's ad SDK, and the policy collects device details, your
+        advertising ID and usage events, without mentioning a way to opt out.
+      sources: [privacy, apk, play-data-safety]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: null
+      note: VIP plans are only sold inside the Android app, and no prices are published.
+      sources: [apk]
+    best:
+      value: null
+      note: No prices are published.
+    best_term:
+      value: null
+      note: No prices are published.
+    renewal_increase:
+      value: null
+      note: No prices are published.
+    free_tier:
+      value: true
+      note: Ad-supported, with no data or time limit. Paying unlocks the remaining servers and more bandwidth.
+      sources: [play, home]
+    refund_days:
+      value: null
+      note: Subscriptions go through Google Play, so refunds follow Google's rules.
+      sources: [play]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        The Play listing promises a "Strict no-logging policy" and says the app collects less sensitive
+        information, while the policy collects your advertising ID and device details. It also calls it "the
+        world's fastest secure virtual private network".
+      sources: [play, privacy]
+    affiliates: false
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://www.securesignal.app/
+    title: Secure Signal homepage
+  old-site:
+    url: https://thunder.free-signal.com/
+    title: Thunder VPN's older website, copyright Signal Lab
+  privacy:
+    url: https://www.securesignal.app/privacy-policy.html
+    title: Secure Signal Privacy Policy (last updated January 2024)
+  terms:
+    url: https://www.securesignal.app/terms.html
+    title: Secure Signal Terms of Service (last updated January 2024)
+  play:
+    url: https://play.google.com/store/apps/details?id=com.fast.free.unblock.thunder.vpn
+    title: Thunder VPN - Fast, Safe VPN on Google Play
+  play-data-safety:
+    url: https://play.google.com/store/apps/datasafety?id=com.fast.free.unblock.thunder.vpn
+    title: Thunder VPN data safety on Google Play
+  play-dev:
+    url: https://play.google.com/store/apps/dev?id=6481577571535301345
+    title: Secure Signal Inc. apps on Google Play
+  play-2018:
+    url: https://web.archive.org/web/20180717203314/https://play.google.com/store/apps/details?id=com.fast.free.unblock.thunder.vpn
+    title: Thunder VPN on Google Play, offered by Signal Lab (archived July 2018)
+  play-2024-01:
+    url: https://web.archive.org/web/20240102022510/https://play.google.com/store/apps/details?id=com.fast.free.unblock.thunder.vpn
+    title: Thunder VPN on Google Play, offered by Signal Lab in Alhambra, California (archived January 2024)
+  play-2024-05:
+    url: https://web.archive.org/web/20240525000538/https://play.google.com/store/apps/details?id=com.fast.free.unblock.thunder.vpn
+    title: Thunder VPN on Google Play, offered by Secure Signal Inc. (archived May 2024)
+  thunder-ios-2023:
+    url: https://web.archive.org/web/20230423222040/https://apps.apple.com/app/id1271721929
+    title: Thunder VPN - Secure VPN Proxy on the App Store, from Free Secure Connected Software Co., Ltd (archived April 2023)
+  apk:
+    url: https://ws75.aptoide.com/api/7/app/getMeta?package_name=com.fast.free.unblock.thunder.vpn
+    title: Thunder VPN for Android 5.4.8, whose APK has its own tunnel protocol in libchannel.so, with AdMob and Firebase Analytics
+  ttp-2025:
+    url: https://www.techtransparencyproject.org/articles/apple-offers-apps-with-ties-to-chinese-military
+    title: Tech Transparency Project, Apple Offers Apps With Ties to Chinese Military (1 April 2025)
+  hidden-links-2025:
+    url: https://www.petsymposium.org/foci/2025/foci-2025-0008.php
+    title: 'Mixon-Baca, Knockel and Crandall, Hidden Links: Analyzing Secret Families of VPN Apps (FOCI 2025)'
