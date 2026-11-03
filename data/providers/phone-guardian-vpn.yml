@@ -1,0 +1,259 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Phone Guardian VPN
+icon: phone-guardian-vpn.png
+checked: 2026-11-03
+
+criteria:
+  identity:
+    website:
+      value: https://phoneguardian.us
+      sources: [home]
+    legal_entity:
+      value: Sensor Tower, Inc.
+      note: >-
+        The Google Play developer is Sensor Tower's ST Advanced account, and the App Store seller is still
+        Distimo B.V., the Dutch company that first published the app.
+      sources: [terms, play, app-store]
+    owner:
+      value: Sensor Tower
+      note: It runs the app through its ST Advanced brand and Distimo B.V.
+      sources: [terms, play, app-store]
+    founded:
+      value: 2015
+      note: The iOS app was first released on 13 August 2015.
+      sources: [itunes-lookup]
+    team:
+      value: anonymous
+      note: Sensor Tower's own pages don't name its leadership.
+      sources: [st-about]
+    sister_brands:
+      value: [Luna VPN]
+      note: >-
+        Luna VPN shares its Google Play developer account and privacy policy. So do Adblock Mobile and My Data
+        Manager, which also route traffic through a VPN connection on the phone.
+      sources: [play-dev]
+    acquisitions:
+      value:
+        - date: 2024-03-18
+          acquirer: Sensor Tower
+          source: st-acquisition
+      note: >-
+        It was a data.ai (formerly App Annie) app, built on App Annie's own VPN code, until Sensor Tower bought
+        data.ai in March 2024. In 2020 BuzzFeed News found Sensor Tower had secretly run VPN and ad-blocking apps,
+        Luna VPN among them, that fed its analytics without naming it.
+      sources: [st-acquisition, play, apk, buzzfeed-2020]
+
+  jurisdiction:
+    hq:
+      value: US
+      sources: [terms]
+    entities:
+      value: [US, NL]
+      note: NL is for Distimo B.V., the App Store seller.
+      sources: [terms, app-store]
+
+  logging:
+    traffic:
+      value: 'yes'
+      evidence: claimed
+      note: >-
+        With the consent it asks for, it collects which websites you visit, how you use apps and the ads you
+        see, filed under a random install ID and kept as long as it's needed.
+      sources: [policy]
+    dns:
+      value: null
+      note: The policy doesn't mention DNS lookups, though it collects which websites you visit.
+    timestamps:
+      value: null
+      note: The policy doesn't say whether it keeps connection times.
+      sources: [policy]
+    bandwidth:
+      value: null
+      note: The policy doesn't say whether it keeps how much data you use.
+    source_ip:
+      value: temporary
+      evidence: claimed
+      note: >-
+        Your IP address is sent with the rest of the collected data and obfuscated in its logs within hours,
+        or later while an error is being debugged.
+      sources: [policy]
+    proven: []
+    policy: https://sensortower.com/panel-privacy
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty:
+      value: false
+      note: Sensor Tower runs a responsible disclosure programme with no rewards.
+      sources: [st-security]
+    incidents: []
+
+  account:
+    email:
+      value: optional
+      note: The VPN needs no account. Linking a Google account is optional, for its email scanning and Web Guardian.
+      sources: [home, apk]
+    personal_data:
+      value: []
+      note: There's no signup, but the app may ask for your birth year, gender, salary range and education in a survey.
+      sources: [policy]
+    payment:
+      value: []
+      note: It's free.
+
+  security:
+    protocols:
+      value: [proprietary]
+      note: >-
+        The Android app uses App Annie's own Falcon VPN code, which routes traffic it finds unencrypted through
+        its server. There's no WireGuard, OpenVPN or IKEv2 in it.
+      sources: [apk]
+    post_quantum:
+      value: none
+      note: Nothing is published about how its connections are encrypted.
+    kill_switch:
+      value: null
+      note: The Android app has no kill switch setting.
+      sources: [apk]
+    dns:
+      value: null
+      note: It doesn't say whose DNS servers answer your lookups.
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say how its servers are run.
+    hosting:
+      value: null
+      note: The policy names AWS for storing usage data, without saying where the VPN servers run.
+      sources: [policy]
+    virtual_locations:
+      value: null
+      note: It doesn't say where its servers are.
+    servers:
+      value: null
+      note: It publishes no server count.
+    countries:
+      value: null
+      note: It only says there are servers around the world.
+      sources: [home]
+
+  features:
+    connections:
+      value: unlimited
+      note: There are no accounts, so nothing ties it to a number of devices.
+      sources: [home]
+    multihop: false
+    obfuscation: []
+    port_forwarding: false
+    split_tunnel:
+      value: null
+      note: The app decides what goes through its server, and there's no setting to pick apps.
+      sources: [apk]
+    blocking:
+      value: [malware]
+      note: Phishing and scam sites, blocked by reading the sites you visit through Android's Accessibility Service.
+      sources: [play, apk]
+
+  clients:
+    platforms:
+      value: [android, ios]
+      note: Its Web Guardian extensions for Chrome and Safari block phishing sites but aren't a VPN.
+      sources: [home, play, app-store]
+    open_source:
+      value: none
+      note: The terms forbid reverse engineering the apps.
+      sources: [terms]
+    telemetry:
+      value: null
+      note: >-
+        The policy names Amplitude, Firebase, Google Analytics and Bugsnag for app analytics and crash reports,
+        without saying whether you can turn them off.
+      sources: [policy, play-data-safety]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 0, currency: USD }
+      note: Free, with no paid plan.
+      sources: [home]
+    best: { amount: 0, currency: USD }
+    best_term:
+      value: null
+      grade: na
+      note: It's free.
+    renewal_increase:
+      value: 0
+      note: Nothing renews.
+    free_tier:
+      value: true
+      note: Paid for by the app and web usage data it collects.
+      sources: [policy]
+    refund_days:
+      value: null
+      grade: na
+      note: It's free.
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        The website says it hides your real location and IP address so you can "Be invisible", while the
+        Google Play listing says it "does not hide your IP address or physical location".
+      sources: [home, play]
+    affiliates: false
+    review_sites: false
+    activism: false
+
+  other:
+    concerns:
+      value:
+        - title: Your app and web use feeds Sensor Tower's data
+          summary: >-
+            With the consent it asks for, the app sends the websites you visit, your app use, the ads you see and
+            your rough location to Sensor Tower, which sells insights from it in anonymised form to its customers.
+          severity: minor
+          source: policy
+
+refs:
+  home:
+    url: https://phoneguardian.us/
+    title: Phone Guardian homepage
+  policy:
+    url: https://sensortower.com/panel-privacy
+    title: Sensor Tower Panel Privacy Policy (effective 23 September 2026)
+  terms:
+    url: https://sensortower.com/panel-terms
+    title: Sensor Tower Panel Terms of Service
+  st-about:
+    url: https://sensortower.com/about
+    title: About Sensor Tower
+  st-security:
+    url: https://sensortower.com/security
+    title: Sensor Tower security and responsible disclosure programme
+  st-acquisition:
+    url: https://sensortower.com/press/press-release-sensor-tower-acquires-market-intelligence-platform-data-ai
+    title: Sensor Tower acquires market intelligence platform data.ai (18 March 2024)
+  play:
+    url: https://play.google.com/store/apps/details?id=com.distimo.phoneguardian
+    title: 'Phone Guardian VPN: Safe WiFi on Google Play'
+  play-data-safety:
+    url: https://play.google.com/store/apps/datasafety?id=com.distimo.phoneguardian
+    title: Phone Guardian data safety on Google Play
+  play-dev:
+    url: https://play.google.com/store/apps/developer?id=ST+Advanced
+    title: ST Advanced apps on Google Play
+  app-store:
+    url: https://apps.apple.com/us/app/phone-guardian-safe-mobile-vpn/id1016814119
+    title: Phone Guardian Safe Mobile VPN on the App Store (US)
+  itunes-lookup:
+    url: https://itunes.apple.com/lookup?id=1016814119&country=us
+    title: App Store record for Phone Guardian (released 13 August 2015)
+  apk:
+    url: https://apkpure.net/phone-guardian-vpn-safe-wifi/com.distimo.phoneguardian
+    title: Phone Guardian for Android 5.18.2, whose APK carries App Annie's Falcon VPN SDK, Firebase, Crashlytics and Bugsnag
+  buzzfeed-2020:
+    url: https://www.buzzfeednews.com/article/craigsilverman/vpn-and-ad-blocking-apps-sensor-tower
+    title: Sensor Tower Secretly Owns Ad Blocker And VPN Apps That Collect User Data (BuzzFeed News, 9 March 2020)
