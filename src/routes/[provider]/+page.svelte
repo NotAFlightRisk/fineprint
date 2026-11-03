@@ -150,9 +150,15 @@
                   {#if criterion.type === 'country' && typeof entry?.value === 'string'}
                     <Flag code={entry.value} />
                   {/if}
-                  <span class:unknown={!entry || entry.value === null}
-                    >{showEntry(criterion, entry)}</span
-                  >
+                  {#if criterion.type === 'url' && typeof entry?.value === 'string'}
+                    <a class="url" href={entry.value} target="_blank" rel="noopener external"
+                      >{showEntry(criterion, entry)}</a
+                    >
+                  {:else}
+                    <span class:unknown={!entry || entry.value === null}
+                      >{showEntry(criterion, entry)}</span
+                    >
+                  {/if}
                   {#if entry?.evidence}<span class="tag">{entry.evidence}</span>{/if}
                   {#each entry?.sources ?? [] as ref (ref)}
                     <a class="cite" href="#ref-{ref}" {@attach tip(provider.refs[ref].title)}
@@ -429,6 +435,10 @@
 
   .unknown {
     color: var(--text-muted);
+  }
+
+  .url {
+    overflow-wrap: anywhere;
   }
 
   .cite {
