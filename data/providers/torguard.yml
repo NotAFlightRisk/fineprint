@@ -186,8 +186,9 @@ criteria:
 
   clients:
     platforms:
-      value: [windows, macos, linux_gui, ios, android]
-      sources: [downloads, anonymous-vpn]
+      value: [windows, macos, linux_gui, ios, android, router, browser]
+      note: The browser extensions are SSL proxies for the browser alone. Routers get its OpenWrt apps from GitHub.
+      sources: [downloads, github]
     open_source:
       value: some
       note: Only router and server tools are on GitHub, with no licence. The desktop and mobile apps' code isn't published.
@@ -196,10 +197,6 @@ criteria:
       value: null
       note: The privacy policy covers website analytics only, and says nothing about app usage or crash data.
       sources: [privacy]
-    trackers:
-      value: 0
-      note: The newest Exodus report that would load was for version 1.60.11, from December 2022. The current app is newer.
-      sources: [exodus]
     fdroid:
       value: false
       sources: [fdroid]
@@ -313,9 +310,6 @@ refs:
   affiliates:
     url: https://torguard.net/vpn-reseller-affiliate/
     title: VPN reseller and affiliate program
-  exodus:
-    url: https://web.archive.org/web/20221222092143/https://reports.exodus-privacy.eu.org/en/reports/net.torguard.openvpn.client/latest/
-    title: Exodus Privacy report for net.torguard.openvpn.client 1.60.11 (archived)
   fdroid:
     url: https://search.f-droid.org/?q=torguard&lang=en
     title: F-Droid search for TorGuard
