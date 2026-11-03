@@ -1,0 +1,332 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Geph
+icon: geph.png
+checked: 2026-11-03
+
+criteria:
+  identity:
+    website:
+      value: https://geph.io
+      sources: [home]
+    legal_entity:
+      value: Gephyra OÜ
+      note: An Estonian private limited company, registered on 14 May 2018.
+      sources: [policy, register, play]
+    owner:
+      value: Yu Hao Dong
+      note: Estonia's register names him as the only shareholder, board member and beneficial owner, resident in Canada.
+      sources: [register]
+    founded:
+      value: null
+      note: No launch year is given. Gephyra OÜ was registered in May 2018.
+      sources: [register]
+    team:
+      value: partial
+      note: Its site names nobody, but the Estonian register names the company's owner and board member.
+      sources: [home, register]
+    sister_brands: []
+    acquisitions:
+      value: []
+      sources: [register]
+
+  jurisdiction:
+    hq:
+      value: EE
+      note: It commits to moving jurisdiction if Estonia ever makes backdoor access to servers compulsory.
+      sources: [non-cooperation, register]
+    entities:
+      value: [EE]
+      sources: [register]
+
+  logging:
+    traffic:
+      value: temporary
+      evidence: claimed
+      note: The policy says user traffic is never stored for more than 24 hours.
+      sources: [no-logs]
+    dns:
+      value: temporary
+      evidence: claimed
+      note: The policy says DNS requests are never stored for more than 24 hours.
+      sources: [no-logs]
+    timestamps:
+      value: aggregate
+      evidence: claimed
+      note: >-
+        Each account keeps its creation time and last login time. Servers only see an anonymous
+        token that changes daily, so connections aren't tied to the account.
+      sources: [no-logs, mizaru]
+    bandwidth:
+      value: null
+      note: >-
+        The policy doesn't say whether data use is kept per account. The Basic plan is capped at
+        5,000 MB.
+      sources: [no-logs, broker-prices]
+    source_ip:
+      value: temporary
+      evidence: claimed
+      note: >-
+        The policy says IP addresses are never stored for more than 24 hours. The app sends the broker
+        your IP with the last octet zeroed to pick bridges.
+      sources: [no-logs, client-metadata]
+    proven:
+      value: []
+      note: Atredis Partners' 2025 audit tested the servers' security, not the no-logs claim.
+      sources: [audit-2025]
+    policy: https://github.com/geph-official/geph5/blob/master/PRIVACY.md
+
+  transparency:
+    audits:
+      value:
+        - date: 2025-08-08
+          auditor: Atredis Partners
+          scope: full
+          source: audit-2025
+        - date: 2023-02-06
+          auditor: Include Security
+          scope: apps
+          source: audit-2023
+      evidence: verified
+      note: >-
+        Both were commissioned by the Open Technology Fund. Atredis covered the protocols, server
+        software and configuration and the clients; Include Security retested its app findings in May 2023.
+      sources: [otf-2025, otf-2023, audit-2023-retest]
+    report:
+      value: none
+      note: The policy says it had received no legal requests for user data as of 24 April 2026, and that any would be documented.
+      sources: [non-cooperation]
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: none
+      note: Signing up solves a puzzle and gives you an account secret.
+      sources: [broker-protocol]
+    personal_data:
+      value: []
+      sources: [broker-protocol, no-logs]
+    payment:
+      value: [card, other_crypto, app_store]
+      note: >-
+        Cards go through Stripe and crypto through ChangeNOW, with a €20 minimum, and Alipay and
+        WeChat Pay are also taken. The coins accepted aren't listed.
+      sources: [no-logs, buy-plus, app-store]
+
+  security:
+    protocols:
+      value: [proprietary]
+      note: >-
+        Its own multiplexed tunnel, encrypted end to end with the exit using an X25519 key exchange,
+        relayed through bridges in China and Iran.
+      sources: [how-it-works, session-code]
+    post_quantum:
+      value: none
+      sources: [session-code]
+    kill_switch:
+      value: system
+      note: >-
+        In VPN mode the desktop apps block anything outside the tunnel at the system firewall. The
+        apps also have a proxy-only mode.
+      sources: [kill-switch-linux, kill-switch-windows]
+    dns:
+      value: third_party
+      note: Exits forward lookups to Cloudflare over DNS-over-HTTPS unless set up with another resolver.
+      sources: [exit-dns]
+
+  infra:
+    ram_only:
+      value: null
+      sources: [policy]
+    hosting:
+      value: rented
+      note: Exits are hosted by outside providers, with bridges picked for their connectivity to censored countries.
+      sources: [how-it-works]
+    virtual_locations: null
+    servers: null
+    countries: null
+
+  features:
+    connections:
+      value: null
+      note: No device limit is stated. The broker signs up to 20 tokens per account a day.
+      sources: [audit-2025]
+    multihop:
+      value: false
+      note: >-
+        Traffic from censored countries goes through a bridge to the exit, but you can't choose a
+        second hop, and the bridge sees your IP.
+      sources: [how-it-works]
+    obfuscation:
+      value: [proprietary]
+      note: >-
+        Bridges use its own probing-resistant sosistab3 protocol, plain TLS or a meek-style transport,
+        and the broker is reached by domain fronting through CDNs and AWS Lambda.
+      sources: [how-it-works, route-code, sla]
+    port_forwarding: false
+    split_tunnel:
+      value: true
+      note: >-
+        Android can exclude apps. The desktop apps can only let mainland China destinations skip
+        the tunnel.
+      sources: [android-split, china-passthrough]
+    blocking:
+      value: [ads]
+      note: Optional ad and adult-site blocklists, applied at the exit from OISD's lists.
+      sources: [exit-dns]
+
+  clients:
+    platforms:
+      value: [windows, macos, linux_gui, linux_cli, ios, android]
+      note: The Linux app is a Flatpak for x86-64 only.
+      sources: [home, readme]
+    open_source:
+      value: all
+      note: The apps, servers and website are on GitHub under the MPL 2.0 and ISC licences.
+      sources: [home, github, readme]
+    telemetry:
+      value: none
+      note: >-
+        Each route request sends the app version and your IP with the last octet zeroed, used to pick
+        bridges. There's no crash reporter, and debug logs only go if you send them.
+      sources: [client-metadata, get-dialer]
+    fdroid:
+      value: false
+      sources: [fdroid]
+
+  pricing:
+    monthly:
+      value: { amount: 5.99, currency: USD }
+      note: >-
+        The US App Store's price, as its own plans are only priced once you sign in. The listing's
+        description still says €6 a month.
+      sources: [app-store]
+    best:
+      value: { amount: 5.99, currency: USD }
+      note: The App Store only lists the monthly plan.
+      sources: [app-store]
+    best_term:
+      value: 1
+      sources: [app-store]
+    renewal_increase:
+      value: 0
+      note: Store subscriptions renew at the listed price.
+      sources: [app-store]
+    free_tier:
+      value: true
+      note: The free plan is speed-limited with fewer servers.
+      sources: [app-store]
+    refund_days:
+      value: null
+      note: No refund policy is published.
+      sources: [policy]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        It says "we don't log you, because we can't" and that servers can never link browsing to you
+        even if fully compromised, but its policy keeps traffic and IP addresses for up to 24 hours,
+        and blind tokens only unlink your account.
+      sources: [app-store, home, no-logs]
+    affiliates: false
+    review_sites: false
+    activism:
+      value: true
+      note: >-
+        It exists to get people past censorship in China and Iran, keeps a free plan, and extends paid
+        users' time for any period it's blocked there.
+      sources: [home, sla]
+
+refs:
+  home:
+    url: https://geph.io/en
+    title: Geph home page
+  policy:
+    url: https://github.com/geph-official/geph5/blob/master/PRIVACY.md
+    title: Geph terms, non-cooperation and no-logging policy (PRIVACY.md)
+  no-logs:
+    url: https://github.com/geph-official/geph5/blob/master/PRIVACY.md#no-logging-policy
+    title: Geph no-logging policy
+  non-cooperation:
+    url: https://github.com/geph-official/geph5/blob/master/PRIVACY.md#non-cooperation-policy
+    title: Geph non-cooperation policy
+  mizaru:
+    url: https://github.com/geph-official/geph5/blob/master/libraries/mizaru2/README.md
+    title: Mizaru, Geph's blind-signature authentication
+  how-it-works:
+    url: https://github.com/geph-official/geph5/wiki/How-Geph-works
+    title: How Geph works (geph5 wiki)
+  sla:
+    url: https://github.com/geph-official/geph4-client/wiki/Service-SLA-(%E5%B0%81%E4%B8%80%E5%A4%A9%E8%B3%A0%E4%B8%80%E5%A4%A9%E6%94%BF%E7%AD%96)
+    title: Geph service SLA
+  register:
+    url: https://ariregister.rik.ee/eng/company/14488270/Gephyra-O%C3%9C
+    title: Estonian e-Business Register, Gephyra OÜ (14488270)
+  play:
+    url: https://play.google.com/store/apps/details?id=io.geph.android
+    title: Geph on Google Play
+  app-store:
+    url: https://apps.apple.com/us/app/geph/id1638148282
+    title: Geph on the US App Store
+  github:
+    url: https://github.com/geph-official
+    title: geph-official on GitHub
+  readme:
+    url: https://github.com/geph-official/geph5/blob/master/README.md
+    title: geph5 README
+  broker-protocol:
+    url: https://github.com/geph-official/geph5/blob/master/libraries/geph5-broker-protocol/src/lib.rs
+    title: geph5 broker protocol, register_user_secret
+  broker-prices:
+    url: https://github.com/geph-official/geph5/blob/master/binaries/geph5-broker/src/rpc_impl.rs
+    title: geph5 broker, price points and Basic data limit
+  buy-plus:
+    url: https://github.com/geph-official/geph-website/blob/master/src/routes/%5Blang%5D/portal/BuyPlus.svelte
+    title: geph-website, user portal Plus purchase
+  session-code:
+    url: https://github.com/geph-official/geph5/blob/master/binaries/geph5-client/src/session.rs
+    title: geph5 client, exit session handshake
+  route-code:
+    url: https://github.com/geph-official/geph5/blob/master/libraries/geph5-broker-protocol/src/route.rs
+    title: geph5 broker protocol, bridge route types
+  exit-dns:
+    url: https://github.com/geph-official/geph5/blob/master/binaries/geph5-exit/src/dns.rs
+    title: geph5 exit, DNS resolution and filters
+  client-metadata:
+    url: https://github.com/geph-official/geph5/blob/master/binaries/geph5-client/src/device_metadata.rs
+    title: geph5 client, device metadata
+  get-dialer:
+    url: https://github.com/geph-official/geph5/blob/master/binaries/geph5-client/src/get_dialer.rs
+    title: geph5 client, exit route request
+  kill-switch-linux:
+    url: https://github.com/geph-official/geph5/blob/master/binaries/geph5-app/src/vpn/linux.rs
+    title: geph5 app, Linux VPN mode and kill switch
+  kill-switch-windows:
+    url: https://github.com/geph-official/geph5/blob/master/binaries/geph5-app/src/vpn/windows.rs
+    title: geph5 app, Windows VPN mode and kill switch
+  china-passthrough:
+    url: https://github.com/geph-official/geph5/blob/master/binaries/geph5-app/src/supervisor.rs
+    title: geph5 app, China passthrough setting
+  android-split:
+    url: https://github.com/geph-official/geph-android/blob/master/app/src/main/java/io/geph/android/tun2socks/TunnelManager.kt
+    title: geph-android, app exclusion list
+  otf-2025:
+    url: https://www.opentech.fund/security-safety-audits/geph-vpn/
+    title: Open Technology Fund, Geph VPN audit (2025)
+  audit-2025:
+    url: https://www.opentech.fund/wp-content/uploads/2026/03/Atredis-Partners-OTF-Geph-VPN-Audit-Report-v1.1_FINAL.pdf
+    title: Atredis Partners, OTF Geph VPN Audit Report v1.1 (2026)
+  otf-2023:
+    url: https://www.opentech.fund/security-safety-audits/geph-remediation-test/
+    title: Open Technology Fund, Geph security audit (2023)
+  audit-2023:
+    url: https://www.opentech.fund/wp-content/uploads/2023/11/OTF_-_2023_Q1_Geph_Final_Report-1.pdf
+    title: Include Security, Security Assessment of the Geph Desktop and Mobile Applications (2023)
+  audit-2023-retest:
+    url: https://www.opentech.fund/wp-content/uploads/2023/06/OTF-2023-Q1-Geph-Remediation-Report.pdf
+    title: Include Security, Geph remediation report (2023)
+  fdroid:
+    url: https://search.f-droid.org/?q=geph&lang=en
+    title: F-Droid search for geph
