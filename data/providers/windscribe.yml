@@ -188,18 +188,18 @@ criteria:
       sources: [ethics, nodeos]
     virtual_locations:
       value: disclosed
-      note: Fake India, Fake Russia and Fake Antarctica are virtual and labelled as fake.
-      sources: [physical-servers]
+      note: Fake Mumbai, Fake St Petersburg and Fake Antarctica are virtual and labelled as fake.
+      sources: [physical-servers, server-list-pro]
     servers:
       value: null
       note: Lists locations and data centres rather than a server count.
       sources: [upgrade]
     countries:
-      value: 69
+      value: 70
       note: >-
-        The figure on its feature pages. Its server status page says over 85, and the Build A Plan
-        picker lists 71 plus Fake Antarctica.
-      sources: [features, vpn-servers, upgrade]
+        Leaves out the virtual Russia and Antarctica locations. Its own pages say over 69
+        countries, and its server status page over 85.
+      sources: [server-list-pro, features, vpn-servers, upgrade]
 
   features:
     connections:
@@ -396,6 +396,9 @@ refs:
   vpn-servers:
     url: https://windscribe.com/vpn-servers
     title: Windscribe VPN Server List
+  server-list-pro:
+    url: https://assets.totallyacdn.com/serverlist/mob-v2/1/1
+    title: Windscribe app server list (Pro)
   unlimited-devices:
     url: https://windscribe.com/features/unlimited-devices
     title: Unlimited Devices
