@@ -1,0 +1,260 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: BullVPN
+icon: bullvpn.png
+checked: 2026-11-03
+
+criteria:
+  identity:
+    website:
+      value: https://www.bullvpn.com
+      sources: [home]
+    legal_entity:
+      value: Persec Company Limited
+      note: Registered in Chonburi, Thailand, in March 2014. The same company is the Google Play developer and the App Store seller.
+      sources: [policy, register, play, app-store]
+    owner:
+      value: null
+      note: It doesn't say who owns Persec.
+      sources: [register]
+    founded:
+      value: 2014
+      note: Its site was live by July 2014, four months after Persec was registered.
+      sources: [home-2014, register]
+    team:
+      value: anonymous
+      note: Nobody behind Persec is named on its site or app listings.
+      sources: [home, play]
+    sister_brands:
+      value: [VPN4Games]
+      note: A gaming VPN from the same Google Play developer account.
+      sources: [play-dev, vpn4games]
+    acquisitions:
+      value: []
+      note: Persec has run it since 2014.
+      sources: [home-2014, play-2021]
+
+  jurisdiction:
+    hq:
+      value: TH
+      sources: [register]
+    entities:
+      value: [TH]
+      sources: [register]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      note: The app listings say it "will not record your online behavior", and traffic isn't on the policy's list of what it records.
+      sources: [play, app-store, policy]
+    dns:
+      value: null
+      note: It promises DNS leak protection and that it never tracks your online activity, without saying whether DNS lookups are logged.
+      sources: [play, app-store]
+    timestamps:
+      value: 'yes'
+      evidence: claimed
+      note: The policy records the date and time you connect. The Thai version, which it says takes precedence, keeps personal data for 90 days.
+      sources: [policy, policy-th]
+    bandwidth:
+      value: null
+      note: The policy doesn't mention how much data you use.
+      sources: [policy]
+    source_ip:
+      value: null
+      note: The policy records the VPN IP address assigned to you (the VPN server, in the Thai text), without saying whether your own IP address is kept.
+      sources: [policy, policy-th]
+    proven: []
+    policy: https://www.bullvpn.com/en/term
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: required
+      note: Disposable email addresses aren't accepted.
+      sources: [policy, signup]
+    personal_data: []
+    payment:
+      value: [card, paypal, bank, app_store]
+      note: Also Thai QR payments and TrueMoney Wallet.
+      sources: [faq]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn, ikev2]
+      note: Its FAQ also lists a "Super Protocol" for countries that restrict VPNs, without saying what it is.
+      sources: [apk, setup-windows, faq]
+    post_quantum:
+      value: none
+      note: Nothing is published about its key exchange.
+    kill_switch:
+      value: app
+      evidence: claimed
+      note: A setting in the Windows app. The Android app has no kill switch of its own.
+      sources: [setup-windows, apk]
+    dns:
+      value: null
+      note: It promises DNS leak protection without saying whose DNS servers answer.
+      sources: [play]
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say how its servers are run.
+    hosting:
+      value: null
+      note: It doesn't say whether it owns or rents its servers.
+    virtual_locations:
+      value: null
+      note: It doesn't say whether any locations are virtual.
+    servers:
+      value: 291
+      note: Its homepage claims 300 servers in 49 countries, and its FAQ 266 in 56.
+      sources: [locations, home, faq]
+    countries:
+      value: 55
+      sources: [locations]
+
+  features:
+    connections:
+      value: 4
+      note: More can be bought as add-ons. The 7-day plan allows 1.
+      sources: [faq, order]
+    multihop: false
+    obfuscation:
+      value: [v2ray]
+      evidence: claimed
+      note: Its support team offers V2Ray to users in China when nothing else connects. The apps' Stealth mode is OpenVPN over TCP port 443.
+      sources: [faq, location, setup-windows]
+    port_forwarding: false
+    split_tunnel: false
+    blocking: []
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android, browser]
+      note: The browser extension is for Chrome, and the Android app also runs on Android TV.
+      sources: [setup]
+    open_source:
+      value: none
+      note: The Android app is built on the open source OpenVPN, strongSwan and WireGuard clients, but its own code isn't published.
+      sources: [apk]
+    telemetry:
+      value: null
+      note: >-
+        The Android app carries Firebase Analytics, Crashlytics and Facebook's app events SDK, and the App
+        Store listing says usage data may be used to track you across other companies' apps. Nothing says
+        whether you can turn it off.
+      sources: [apk, app-store, play-data-safety]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 7.79, currency: USD }
+      note: 249 baht on its Thai pricing page.
+      sources: [pricing, pricing-th]
+    best:
+      value: { amount: 4.83, currency: USD }
+      note: $116 for two years.
+      sources: [pricing]
+    best_term:
+      value: 24
+      sources: [pricing]
+    renewal_increase:
+      value: 0
+      note: Website plans are prepaid time, topped up at the same prices.
+      sources: [policy, pricing]
+    free_tier:
+      value: false
+      note: There's a one-day free trial once you verify your email address.
+      sources: [faq]
+    refund_days:
+      value: 7
+      note: Only when its own system or servers stop the service working and it can't fix them, on plans of a month or more bought at full price.
+      sources: [policy, faq]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: It sells "secure and anonymous" browsing that "never tracks your online activity", while the App Store listing says usage data may be used to track you.
+      sources: [home, app-store]
+    affiliates:
+      value: true
+      note: Up to 20% commission on sales.
+      sources: [affiliate]
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://www.bullvpn.com/en
+    title: BullVPN homepage
+  home-2014:
+    url: https://web.archive.org/web/20140709020512/http://www.bullvpn.com/
+    title: BullVPN homepage, Copyright 2014 Persec Co., Ltd. (archived July 2014)
+  policy:
+    url: https://www.bullvpn.com/en/term
+    title: BullVPN Privacy Policy and terms
+  policy-th:
+    url: https://www.bullvpn.com/th/term
+    title: BullVPN นโยบายความเป็นส่วนตัว (Thai privacy policy and terms)
+  pricing:
+    url: https://www.bullvpn.com/en/pricing
+    title: BullVPN packages and prices
+  pricing-th:
+    url: https://www.bullvpn.com/th/pricing
+    title: BullVPN แพ็กเกจและราคา (Thai pricing)
+  order:
+    url: https://www.bullvpn.com/en/order
+    title: BullVPN upgrade account
+  signup:
+    url: https://www.bullvpn.com/en/signup
+    title: BullVPN sign up
+  faq:
+    url: https://www.bullvpn.com/en/faq
+    title: BullVPN FAQ
+  location:
+    url: https://www.bullvpn.com/en/location
+    title: BullVPN server locations
+  locations:
+    url: https://www.bullvpn.com/en/location/getLocations
+    title: BullVPN server list data, as loaded by its locations page
+  setup:
+    url: https://www.bullvpn.com/en/setup
+    title: Download BullVPN
+  setup-windows:
+    url: https://www.bullvpn.com/en/setup/windows_client
+    title: BullVPN for Windows
+  affiliate:
+    url: https://www.bullvpn.com/en/affiliate/how-it-work
+    title: BullVPN Affiliate Program
+  register:
+    url: https://data.creden.co/company/general/0205557008118
+    title: Persec Company Limited (0205557008118), Thai Department of Business Development data via Creden
+  play:
+    url: https://play.google.com/store/apps/details?id=th.co.persec.bullvpn
+    title: 'BullVPN: VPN & Secure Proxy on Google Play'
+  play-data-safety:
+    url: https://play.google.com/store/apps/datasafety?id=th.co.persec.bullvpn
+    title: BullVPN data safety on Google Play
+  play-dev:
+    url: https://play.google.com/store/apps/dev?id=4636466165295097739
+    title: Persec Co., Ltd. apps on Google Play
+  play-2021:
+    url: https://web.archive.org/web/20211024041751/https://play.google.com/store/apps/details?id=th.co.persec.bullvpn
+    title: BullVPN on Google Play (archived October 2021)
+  vpn4games:
+    url: https://play.google.com/store/apps/details?id=com.vpn4games.android
+    title: VPN4Games on Google Play
+  app-store:
+    url: https://apps.apple.com/us/app/bullvpn-vpn-proxy/id1156815020
+    title: BullVPN on the App Store (US)
+  apk:
+    url: https://apkpure.net/bullvpn-vpn-secure-proxy/th.co.persec.bullvpn
+    title: BullVPN for Android 12.2, whose APK holds strongSwan, OpenVPN and WireGuard with Firebase, Crashlytics and Facebook SDKs
