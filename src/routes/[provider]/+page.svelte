@@ -462,7 +462,7 @@
   }
 
   .note {
-    max-width: 68ch;
+    max-width: 55ch;
     font-size: var(--text-sm);
     color: var(--text-muted);
   }
