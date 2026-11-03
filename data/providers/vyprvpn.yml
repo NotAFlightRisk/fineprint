@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: VyprVPN
 icon: vyprvpn.png
-checked: 2026-10-21
+checked: 2026-11-03
 
 criteria:
   identity:
@@ -224,9 +224,7 @@ criteria:
       sources: [crash-android, crash-windows, audit-leviathan-2018]
     trackers:
       value: 4
-      note: >-
-        Adjust, Google Analytics, Crashlytics and Google Tag Manager. The newest Exodus report that
-        would load was for version 5.0.1, from July 2023.
+      note: Adjust, Google Analytics, Google Tag Manager and Sentry, in version 6.0.1 from August 2025.
       sources: [exodus, trackers-faq]
     fdroid: false
 
@@ -262,7 +260,8 @@ criteria:
       sources: [home, certida-faq]
     affiliates:
       value: true
-      sources: [affiliates]
+      note: Its site still links an affiliate programme, but the signup page now says the account isn't active.
+      sources: [affiliates, affiliate-signup]
     review_sites: false
     activism:
       value: false
@@ -429,8 +428,8 @@ refs:
     url: https://support.vyprvpn.com/hc/en-us/articles/360039433632-Does-the-VyprVPN-application-use-any-trackers
     title: Does the VyprVPN application use any "trackers"?
   exodus:
-    url: https://reports.exodus-privacy.eu.org/en/reports/com.goldenfrog.vyprvpn.app/latest/
-    title: Exodus Privacy report for com.goldenfrog.vyprvpn.app (5.0.1, July 2023)
+    url: https://web.archive.org/web/20250827105854/https://reports.exodus-privacy.eu.org/en/reports/com.goldenfrog.vyprvpn.app/latest/
+    title: Exodus Privacy report for com.goldenfrog.vyprvpn.app (6.0.1, August 2025, archived)
   what-is-vyprvpn:
     url: https://support.vyprvpn.com/hc/en-us/articles/360038096151-What-is-VyprVPN
     title: What is VyprVPN?
@@ -441,5 +440,8 @@ refs:
     url: https://support.vyprvpn.com/hc/en-us/articles/360038081191-How-can-I-request-a-refund
     title: How can I request a refund?
   affiliates:
-    url: https://support.vyprvpn.com/hc/en-us/articles/360040962571-I-m-interested-in-becoming-an-affiliate-Who-do-I-contact
-    title: I'm interested in becoming an affiliate. Who do I contact?
+    url: https://web.archive.org/web/20260713132646/https://support.vyprvpn.com/hc/en-us/articles/360040962571-I-m-interested-in-becoming-an-affiliate-Who-do-I-contact
+    title: I'm interested in becoming an affiliate. Who do I contact? (July 2026, archived)
+  affiliate-signup:
+    url: https://www.vyprvpn.com/affiliate-program
+    title: Affiliate program signup (Certida on HasOffers)
