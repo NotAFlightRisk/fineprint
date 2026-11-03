@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: Norton VPN
 icon: norton-vpn.png
-checked: 2026-10-21
+checked: 2026-11-03
 
 criteria:
   identity:
@@ -10,9 +10,7 @@ criteria:
       value: Gen Digital Inc.
       note: Sells and licenses it in the Americas. Who sells it elsewhere depends on where you live, such as NortonLifeLock Ireland Limited in the UK and Ireland and Avast Software s.r.o. in the rest of Europe.
       sources: [terms-of-sale, lsa, lsa-emea]
-    founded:
-      value: null
-      note: Norton's pages don't give a launch year, and Gen's newsroom has no releases from the Symantec era.
+    founded: null
     owner:
       value: Gen Digital
       sources: [terms-of-sale, lsa]
@@ -128,12 +126,12 @@ criteria:
       sources: [locations]
     post_quantum:
       value: optional
-      note: Only over Mimic, which the app may pick for you or you can choose. Not on iOS.
-      sources: [product, no-log-page, audit-mimic-2025]
+      note: On by default over Mimic, Norton's own protocol, and a setting for WireGuard.
+      sources: [pq-blog, pq-help, ios-26-12]
     kill_switch:
       value: app
-      note: Not on iOS.
-      sources: [windows-vpn]
+      note: Doesn't work over IPsec on iPhone and iPad.
+      sources: [kill-switch-help, ios-protocols]
     dns:
       value: null
       note: The VPN privacy notice says DNS queries aren't collected, but nothing says whose DNS servers answer them.
@@ -142,7 +140,6 @@ criteria:
   infra:
     ram_only:
       value: null
-      note: Not mentioned on the locations page, the no-log page or in the audit summaries.
       sources: [locations, no-log-page]
     hosting:
       value: null
@@ -150,7 +147,7 @@ criteria:
       sources: [locations]
     virtual_locations:
       value: disclosed
-      note: The locations table marks 39 of its 146 locations as having no physical server there.
+      note: 39 of its 145 locations have no physical server in that country.
       sources: [locations]
     servers:
       value: null
@@ -158,7 +155,7 @@ criteria:
       sources: [locations]
     countries:
       value: 103
-      note: Counted from the locations table, which includes territories such as Hong Kong, Puerto Rico and Jersey.
+      note: Includes territories such as Hong Kong, Puerto Rico and Jersey.
       sources: [locations]
 
   features:
@@ -176,7 +173,6 @@ criteria:
       sources: [audit-mimic-2025]
     port_forwarding:
       value: false
-      note: Not mentioned on the product, locations or Windows pages.
       sources: [locations, windows-vpn]
     blocking:
       value: []
@@ -184,13 +180,13 @@ criteria:
       sources: [product]
     split_tunnel:
       value: true
-      note: Not on Mac or iOS.
-      sources: [windows-vpn]
+      note: Not on iOS.
+      sources: [split-mac]
 
   clients:
     platforms:
       value: [windows, macos, ios, android]
-      note: Also Google TV and Apple TV. No Linux app.
+      note: Also Google TV, Fire TV and Apple TV. No Linux app.
       sources: [windows-vpn]
     open_source:
       value: none
@@ -237,6 +233,7 @@ criteria:
       value: true
       note: Pays a commission per customer through Impact.
       sources: [affiliates]
+    review_sites: false
     activism:
       value: true
       note: A founding member of the Coalition Against Stalkerware in 2019.
@@ -276,6 +273,24 @@ refs:
   audit-mimic-2025:
     url: https://us.norton.com/content/dam/norton/pdfs/other-resources/VS_NortonVPN_MimicProtocol_ExecSummary_Nov2025.pdf
     title: VerSprite, Mimic protocol security assessment (November 2025)
+  pq-blog:
+    url: https://us.norton.com/blog/vpn/norton-vpn-july-2026-release-updates
+    title: Norton VPN performance and experience updates for July 2026
+  pq-help:
+    url: https://support.norton.com/sp/en/us/home/current/solutions/v20260617235055760
+    title: Learn more about Post-Quantum Encryption in Norton VPN
+  ios-26-12:
+    url: https://community.norton.com/t/norton-vpn-standard-plus-ultimate-26-12-0-for-ios/526237
+    title: Norton VPN 26.12.0 for iOS release notes
+  kill-switch-help:
+    url: https://support.norton.com/sp/en/us/home/current/solutions/v138204009
+    title: Enable Kill Switch in Norton VPN
+  ios-protocols:
+    url: https://support.norton.com/sp/en/us/home/current/solutions/v20250602120458412
+    title: Configure Norton VPN protocols on your iOS device
+  split-mac:
+    url: https://us.norton.com/blog/vpn/norton-vpn-split-tunneling-on-mac
+    title: Norton VPN brings Split Tunneling to Mac (June 2026)
   locations:
     url: https://us.norton.com/feature/vpn-server-locations
     title: Norton VPN server locations
