@@ -37,7 +37,7 @@
           {:else if name === 'title'}
             <strong class="title">{item.title}</strong>
           {:else}
-            <span class:tag={field.type === 'enum'}>{show(name, item[name])}</span>
+            <span class:muted={field.type === 'enum'}>{show(name, item[name])}</span>
           {/if}
         {/each}
         {#if item.source && refs[item.source]}
@@ -89,7 +89,7 @@
     font-weight: 600;
   }
 
-  .tag {
+  .muted {
     color: var(--text-muted);
   }
 

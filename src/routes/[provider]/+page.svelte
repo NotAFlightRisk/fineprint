@@ -6,6 +6,7 @@
   import Seo from '#lib/components/Seo.svelte';
   import type { Item } from '#lib/data/types.ts';
   import { formatDate, formatValue, showEntry } from '#lib/format.ts';
+  import { evidenceMeanings } from '#lib/marks.ts';
   import { absolute, editUrl, historyUrl, site } from '#lib/site.ts';
   import { byId, redFlags, redFlagsOf, summarise, verdict } from '#lib/summary.ts';
   import { tip } from '#lib/tip.ts';
@@ -96,6 +97,7 @@
     <div class="lead">
       <h2 id="summary">Summary</h2>
       <p>{verdict(summary)}</p>
+      <p><a href="/methodology">How grading works</a></p>
     </div>
     <div class="facts">
       <div class="checks">
@@ -159,7 +161,11 @@
                       >{showEntry(criterion, entry)}</span
                     >
                   {/if}
-                  {#if entry?.evidence}<span class="tag">{entry.evidence}</span>{/if}
+                  {#if entry?.evidence}<button
+                      type="button"
+                      class="tag noted"
+                      {@attach tip(evidenceMeanings[entry.evidence])}>{entry.evidence}</button
+                    >{/if}
                   {#each entry?.sources ?? [] as ref (ref)}
                     <a class="cite" href="#ref-{ref}" {@attach tip(provider.refs[ref].title)}
                       ><span class="visually-hidden">Source </span>{cited.get(ref)}</a
@@ -315,7 +321,12 @@
       width: 0.5rem;
       height: 0.5rem;
       background: var(--grade, transparent);
-      box-shadow: inset 0 0 0 var(--rule-thin) var(--grade, var(--rule-faint));
+      box-shadow: inset 0 0 0 var(--rule-thin) var(--grade, var(--text-muted));
+    }
+
+    /* only grades get a colour */
+    & [data-grade='info'] {
+      --grade: var(--rule-faint);
     }
   }
 
