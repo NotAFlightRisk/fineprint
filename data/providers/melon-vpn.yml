@@ -1,0 +1,285 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Melon VPN
+icon: melon-vpn.png
+checked: 2026-11-03
+
+criteria:
+  identity:
+    website:
+      value: https://vpnmelon.com
+      sources: [home, play]
+    legal_entity:
+      value: Wildlook Tech Pte. Ltd.
+      note: >-
+        The Google Play developer and App Store seller, registered in Singapore in 2016. The policy and
+        terms only say the company is registered in Singapore, without naming it.
+      sources: [register-wildlook, play, app-store, privacy]
+    owner:
+      value: null
+      note: It isn't public who owns Wildlook Tech. Its Google Play contact number is a Hong Kong one.
+      sources: [register-wildlook, play]
+    founded:
+      value: 2018
+      note: Its Google Play listing says it has worked since 2018, and the Android app had over a million installs by April 2019.
+      sources: [play, play-2019]
+    team:
+      value: anonymous
+      note: No one is named as running it.
+      sources: [faq, play]
+    sister_brands:
+      value: [VPN Inf, MATE VPN, XY VPN, Global VPN, Super Z VPN, 3X VPN, VPN ProMaster]
+      note: >-
+        VPN Inf shares its Google Play developer account. 2025 research found it shares code and servers
+        with XY VPN and Global VPN from Matrix Mobile, which also publishes MATE VPN, and with Super Z VPN,
+        3X VPN, VPN ProMaster and a Touch VPN that isn't Pango's.
+      sources: [play-dev, hidden-links-2025, play-mate]
+    acquisitions:
+      value: null
+      note: >-
+        The App Store seller was Lanpiper Pte. Ltd. until at least December 2020 and Wildlook Tech by July
+        2022. Lanpiper has since been struck off, and the Android app still uses a lanpiper.net backup
+        server. Whether the change was a sale isn't public.
+      sources: [app-store-2020, app-store-2022, register-lanpiper, apk]
+
+  jurisdiction:
+    hq:
+      value: SG
+      sources: [register-wildlook, play]
+    entities:
+      value: [SG]
+      note: The earlier App Store seller, Lanpiper Pte. Ltd., was also a Singapore company.
+      sources: [register-wildlook, register-lanpiper]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      note: The policy Google Play links for the Android app is a short generic one that doesn't mention VPN traffic.
+      sources: [privacy, terms, policy-android]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [privacy, terms]
+    timestamps:
+      value: none
+      evidence: claimed
+      note: The terms add that it logs server access attempts for security and troubleshooting, without saying what that covers.
+      sources: [privacy, terms]
+    bandwidth:
+      value: null
+      note: Neither the policy nor the terms say whether data use is recorded, though the fair use rules let it suspend users who consume excessive bandwidth.
+      sources: [privacy, terms]
+    source_ip:
+      value: null
+      note: >-
+        The policy says it doesn't keep IP addresses, but the App Store privacy label says the iPhone app
+        collects location data and may use it to track you across other companies' apps.
+      sources: [privacy, app-store]
+    proven: []
+    policy: https://vpnmelon.com/privacy_policy
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents:
+      value: []
+      grade: ok
+      note: >-
+        In 2025 researchers found the Android app connected with Shadowsocks passwords hard-coded in its
+        code and shared across a family of apps, which they warned lets an eavesdropper decrypt traffic. No
+        response or fix from the company is on record, so it's graded ok rather than good.
+      sources: [hidden-links-2025]
+
+  account:
+    email:
+      value: none
+      note: There are no accounts. On iOS an optional Sign in with Apple shares a subscription across two devices.
+      sources: [faq, privacy]
+    personal_data: []
+    payment:
+      value: [app_store]
+      note: Only through the App Store and Google Play.
+      sources: [pricing]
+
+  security:
+    protocols:
+      value: [other]
+      note: >-
+        Shadowsocks. Its site calls the protocol Melon-Link, its own, but the Android app is a
+        shadowsocks-android build running shadowsocks-rust.
+      sources: [apk, protocol]
+    post_quantum:
+      value: none
+      note: Shadowsocks uses a shared password rather than a key exchange.
+      sources: [apk]
+    kill_switch:
+      value: null
+      note: The Android app has no kill switch setting.
+      sources: [apk]
+    dns:
+      value: null
+      note: It doesn't say whose DNS servers answer inside the tunnel.
+      sources: [safety, faq]
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say how its servers are run.
+    hosting:
+      value: rented
+      note: 2025 research found every server in its family of apps at one hosting company, GTHost.
+      sources: [hidden-links-2025]
+    virtual_locations:
+      value: null
+      note: It doesn't say whether any locations are virtual.
+      sources: [faq]
+    servers:
+      value: 631
+      note: 2025 research found 33 servers built into the Android app.
+      sources: [faq, hidden-links-2025]
+    countries:
+      value: null
+      note: It claims more than 100 regions, without giving a country count.
+      sources: [faq]
+
+  features:
+    connections:
+      value: null
+      note: >-
+        The pricing page says one subscription covers all supported devices, while the policy and terms
+        allow two iOS devices through Sign in with Apple.
+      sources: [pricing, privacy, terms]
+    multihop:
+      value: false
+      note: Its protocol page says traffic can go through a relay when the direct path is blocked, which it picks itself rather than offering as a setting.
+      sources: [protocol]
+    obfuscation:
+      value: [shadowsocks]
+      note: Shadowsocks is its only protocol, and is built to get past network blocks.
+      sources: [apk, safety]
+    port_forwarding: false
+    split_tunnel:
+      value: true
+      note: By app.
+      sources: [faq, play]
+    blocking: []
+
+  clients:
+    platforms:
+      value: [ios, android]
+      note: The iPhone app also runs on Apple silicon Macs. There are no desktop apps or browser extensions.
+      sources: [download, app-store]
+    open_source:
+      value: none
+      note: The Android app is built on the open source shadowsocks-android and shadowsocks-rust, but its own code isn't published.
+      sources: [apk]
+    telemetry:
+      value: null
+      note: >-
+        The Android app carries Firebase Analytics and Crashlytics, and the site lists crash
+        diagnostics among what it collects. Neither says whether you can opt out.
+      sources: [apk, safety, play-data-safety]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 9.99, currency: USD }
+      sources: [pricing]
+    best:
+      value: { amount: 4.17, currency: USD }
+      note: >-
+        $49.99 a year. There's also a $4.99 weekly plan, and the App Store lists discounted yearly plans
+        from $29.99 and a $99.99 lifetime one.
+      sources: [pricing, app-store]
+    best_term:
+      value: 12
+      sources: [pricing]
+    renewal_increase:
+      value: 0
+      sources: [pricing]
+    free_tier:
+      value: true
+      note: Ad-supported on Android, with sessions limited in time and extended by watching ads.
+      sources: [faq, safety]
+    refund_days:
+      value: null
+      note: Payments go through Apple and Google, so refunds follow their rules.
+      sources: [pricing]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        It sells Melon-Link as its own in-house protocol while the Android app runs Shadowsocks, and the App
+        Store listing promises "Totally NO ADS SDK" while its privacy label lists data used to track you.
+      sources: [protocol, apk, app-store]
+    affiliates: false
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://vpnmelon.com/
+    title: Melon VPN homepage
+  privacy:
+    url: https://vpnmelon.com/privacy_policy
+    title: Melon VPN Privacy Policy (last updated 28 November 2024)
+  terms:
+    url: https://vpnmelon.com/terms_of_use
+    title: Melon VPN Terms of Service (last updated 19 January 2024)
+  policy-android:
+    url: https://api.vpnmelon.co/static/melon/privacy-policy.html
+    title: Privacy policy linked from the Google Play listing
+  faq:
+    url: https://vpnmelon.com/faq
+    title: Melon VPN frequently asked questions
+  safety:
+    url: https://vpnmelon.com/safety
+    title: Is Melon VPN safe?
+  protocol:
+    url: https://vpnmelon.com/melon-link
+    title: Melon-Link, our proprietary VPN protocol
+  pricing:
+    url: https://vpnmelon.com/pricing
+    title: Melon VPN pricing
+  download:
+    url: https://vpnmelon.com/download
+    title: Download Melon VPN
+  play:
+    url: https://play.google.com/store/apps/details?id=com.vpnbottle.melon.free.unblock.fast.vpn
+    title: Melon VPN - lowcost proxy fast on Google Play
+  play-data-safety:
+    url: https://play.google.com/store/apps/datasafety?id=com.vpnbottle.melon.free.unblock.fast.vpn
+    title: Melon VPN data safety on Google Play
+  play-dev:
+    url: https://play.google.com/store/apps/developer?id=WILDLOOK+TECH
+    title: WILDLOOK TECH apps on Google Play
+  play-2019:
+    url: https://web.archive.org/web/20190411080339/https://play.google.com/store/apps/details?id=com.vpnbottle.melon.free.unblock.fast.vpn
+    title: Melon VPN on Google Play (archived April 2019)
+  play-mate:
+    url: https://play.google.com/store/apps/details?id=com.mate.vpn
+    title: MATE VPN by Matrix Mobile Pte. Ltd. on Google Play
+  app-store:
+    url: https://apps.apple.com/us/app/melon-vpn-fast-proxy-lowcost/id1458080487
+    title: Melon VPN - Fast Proxy LowCost on the App Store (US)
+  app-store-2020:
+    url: https://web.archive.org/web/20201203174318/https://apps.apple.com/us/app/melon-vpn-easy-fast-vpn/id1458080487
+    title: Melon VPN on the App Store, seller Lanpiper Pte. Ltd. (archived December 2020)
+  app-store-2022:
+    url: https://web.archive.org/web/20220705174329/https://apps.apple.com/us/app/melon-vpn-easy-fast-vpn/id1458080487
+    title: Melon VPN on the App Store, seller Wildlook Tech Pte. Ltd. (archived July 2022)
+  register-wildlook:
+    url: https://data.gov.sg/api/action/datastore_search?resource_id=d_3f960c10fed6145404ca7b821f263b87&q=201631758H
+    title: Wildlook Tech Pte. Ltd. (UEN 201631758H), ACRA corporate entities dataset
+  register-lanpiper:
+    url: https://data.gov.sg/api/action/datastore_search?resource_id=d_a2141adf93ec2a3c2ec2837b78d6d46e&q=201816616N
+    title: Lanpiper Pte. Ltd. (UEN 201816616N, struck off), ACRA corporate entities data on data.gov.sg
+  apk:
+    url: https://apkpure.net/melon-vpn-lowcost-proxy-fast/com.vpnbottle.melon.free.unblock.fast.vpn
+    title: Melon VPN for Android 9.1.079, whose APK is a shadowsocks-android build with shadowsocks-rust, AdMob, Firebase Analytics and Crashlytics
+  hidden-links-2025:
+    url: https://www.petsymposium.org/foci/2025/foci-2025-0008.php
+    title: 'Mixon-Baca, Knockel and Crandall, Hidden Links: Analyzing Secret Families of VPN Apps (FOCI 2025)'
