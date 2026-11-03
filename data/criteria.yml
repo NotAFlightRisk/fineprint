@@ -78,9 +78,7 @@ categories:
         serious: true
         type: enum
         derived: true
-        description: >-
-          The intelligence sharing alliance its headquarters belongs to. Worked out from the
-          headquarters, so you never enter it.
+        description: The intelligence sharing alliance its headquarters belongs to.
         options:
           none: Outside 14 Eyes
           fourteen: 14 Eyes
@@ -567,7 +565,7 @@ categories:
           ok: {}
 
   - id: other
-    label: Other red flags
+    label: Anything else
     description: Problems the rest of the list doesn't cover.
     criteria:
       - key: concerns
@@ -575,8 +573,7 @@ categories:
         type: records
         default: []
         description: >-
-          Anything else that puts you at risk, one line each with a source. Each one is its own red
-          flag, serious or minor.
+          Anything else that puts you at risk. Each one counts as its own red flag, serious or minor.
         fields:
           title: { type: text, max: 50 }
           summary: { type: text }

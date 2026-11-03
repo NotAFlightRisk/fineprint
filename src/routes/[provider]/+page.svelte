@@ -216,10 +216,7 @@
   <section class="section" aria-labelledby="contribute">
     <div class="lead">
       <h2 id="contribute">Spotted something?</h2>
-      <p>
-        This page is built from one YAML file. Fix it on GitHub and the checks will tell you if
-        anything's off.
-      </p>
+      <p>Everything on this page comes from one public file, so anyone can fix it on GitHub.</p>
     </div>
     <p class="actions">
       <a href={editUrl(provider.id)} target="_blank" rel="noopener external">Suggest an edit</a>
