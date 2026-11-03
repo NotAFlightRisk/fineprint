@@ -1,0 +1,289 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: EventVPN
+icon: eventvpn.png
+checked: 2026-11-03
+
+criteria:
+  identity:
+    website:
+      value: https://www.eventvpn.com
+      sources: [home]
+    legal_entity:
+      value: Netshield Limited
+      note: Also the App Store seller. It's a Cyprus company registered in 2014.
+      sources: [terms, privacy, app-store, register]
+    owner:
+      value: Kape Technologies
+      note: >-
+        ExpressVPN says its team built EventVPN, and Cure53 found the app signs in through Kape's client
+        SDK. Kape is controlled by Teddy Sagi through Unikmind Holdings, which held 98.5% when it took Kape
+        private in 2023.
+      sources: [eventvpn-launch, audit-cure53-2026, kape-holding-2023]
+    founded:
+      value: 2025
+      note: The iOS app came out in August 2025.
+      sources: [app-store]
+    team:
+      value: partial
+      note: EventVPN names no one running it, but its owner Kape names its leadership team.
+      sources: [kape-leadership]
+    sister_brands:
+      value: [ExpressVPN, CyberGhost, Private Internet Access, Intego VPN]
+      note: ZenMate's users were moved to CyberGhost in 2023.
+      sources: [eventvpn-launch, kape-brands, zenmate]
+    acquisitions:
+      value: []
+
+  jurisdiction:
+    hq:
+      value: CY
+      sources: [register]
+    entities:
+      value: [CY]
+      note: >-
+        Netshield Limited is the only EventVPN company named. Its owner, Kape, is incorporated in the Isle
+        of Man with a branch in London.
+      sources: [register, companies-house]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [privacy]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [privacy]
+    timestamps:
+      value: none
+      evidence: claimed
+      sources: [privacy]
+    bandwidth:
+      value: none
+      evidence: claimed
+      sources: [privacy]
+    source_ip:
+      value: none
+      evidence: claimed
+      note: The policy does collect a general location, with consent, for regional features and ads.
+      sources: [privacy]
+    proven: []
+    policy: https://www.eventvpn.com/privacy/
+
+  transparency:
+    audits:
+      value:
+        - date: 2026-03-06
+          auditor: Cure53
+          scope: apps
+          source: audit-cure53-2026
+      evidence: verified
+      note: >-
+        A design review and white-box test of the iOS and macOS apps and their sign-in system, in calendar
+        weeks 9 and 10, dated to the end of week 10. It found 13 issues, including an IPv6 leak and a kill
+        switch bypass, all fixed or mitigated by April 2026.
+      sources: [audit-cure53-2026, audits-page]
+    report:
+      value: none
+      note: ExpressVPN's transparency reports don't cover EventVPN.
+      sources: [transparency-2026]
+    canary: none
+    bug_bounty:
+      value: false
+      note: ExpressVPN's bug bounty lists only ExpressVPN's own apps and services.
+      sources: [bug-bounty]
+    incidents: []
+
+  account:
+    email:
+      value: none
+      evidence: claimed
+      note: >-
+        Plans are checked against your Apple purchase receipts, with no account of its own. New users pay
+        a one-time $0.29 through Apple, which it calls age verification.
+      sources: [eventvpn-launch, app-store]
+    personal_data: []
+    payment:
+      value: [app_store]
+      note: Subscriptions are only sold through the App Store.
+      sources: [terms]
+
+  security:
+    protocols:
+      value: [wireguard]
+      sources: [eventvpn-launch, audit-cure53-2026]
+    post_quantum:
+      value: default
+      evidence: claimed
+      note: It uses ExpressVPN's WireGuard with a hybrid post-quantum handshake, its only protocol.
+      sources: [eventvpn-launch]
+    kill_switch:
+      value: app
+      evidence: claimed
+      note: >-
+        Cure53 found it let IPv6 traffic out and could leave you cut off with no tunnel up, both fixed in
+        2026.
+      sources: [audit-cure53-2026]
+    dns:
+      value: null
+      note: It doesn't say whose DNS servers answer inside the tunnel.
+      sources: [audit-cure53-2026]
+
+  infra:
+    ram_only:
+      value: all
+      evidence: claimed
+      sources: [eventvpn-launch]
+    hosting:
+      value: null
+      note: >-
+        ExpressVPN says it runs on a 10 Gbps network built by ExpressVPN's team, while EventVPN's own terms
+        call it serverless with no backend. Neither says who owns the servers.
+      sources: [eventvpn-launch, terms]
+    virtual_locations:
+      value: null
+      note: It doesn't say whether any locations are virtual.
+    servers:
+      value: null
+      note: No server count is published.
+    countries:
+      value: null
+      note: >-
+        Premium claims 125 or more locations, which the App Store listing calls countries in one line and
+        locations in another. The free tier has 35 or more.
+      sources: [app-store]
+
+  features:
+    connections:
+      value: 8
+      note: On Premium. The free tier allows 1.
+      sources: [app-store]
+    multihop: false
+    obfuscation: []
+    port_forwarding: false
+    split_tunnel:
+      value: false
+      note: ExpressVPN's launch post names split tunnelling as one of the features only ExpressVPN has.
+      sources: [eventvpn-launch]
+    blocking: []
+
+  clients:
+    platforms:
+      value: [ios, macos]
+      note: The Mac version is the iPad app, on Apple silicon Macs only.
+      sources: [app-store, home]
+    open_source:
+      value: none
+      note: The terms forbid reverse engineering the app.
+      sources: [terms]
+    telemetry:
+      value: null
+      note: >-
+        The terms say Firebase analytics and crash reports need your consent at onboarding and can be
+        turned off in settings, but the privacy policy only asks for consent in the EEA and UK.
+      sources: [terms, privacy]
+    trackers:
+      value: null
+      grade: na
+      note: There's no Android app.
+      sources: [eventvpn-launch]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: null
+      note: >-
+        The App Store lists monthly plans at $8.99 and $10.99, and ExpressVPN's launch post gave $9.99,
+        with no pricing page to say which is current.
+      sources: [app-store, eventvpn-launch]
+    best:
+      value: null
+      note: Yearly plans are listed at $59.99 and $69.99, which is $5.00 or $5.83 a month.
+      sources: [app-store]
+    best_term:
+      value: 12
+      sources: [app-store]
+    renewal_increase:
+      value: null
+      note: The App Store also lists a "Yearly Offer" at $69.99, without saying what it renews at.
+      sources: [app-store]
+    free_tier:
+      value: true
+      note: >-
+        Ad-supported, with an ad before and after each session, on 1 device. Since April 2026 it's also
+        needed a one-time $0.29 payment, added to the terms without changing their date.
+      sources: [app-store, eventvpn-launch, terms, terms-2025]
+    refund_days:
+      value: null
+      note: Refunds are up to Apple.
+      sources: [terms]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        Its terms call it serverless with no backend, while Cure53 tested its VPN servers' sign-in and its
+        receipt service. The App Store listing promises "Military-Grade Encryption".
+      sources: [terms, audit-cure53-2026, app-store]
+    affiliates: false
+    review_sites:
+      value: true
+      note: Its owner, Kape, also owns VPN review sites such as vpnMentor and Safety Detectives, which disclose it.
+      sources: [kape-brands, vpnmentor, safety-detectives]
+    activism: false
+
+refs:
+  home:
+    url: https://www.eventvpn.com/
+    title: EventVPN homepage
+  terms:
+    url: https://www.eventvpn.com/terms/
+    title: EventVPN terms of service (effective 30 July 2025)
+  terms-2025:
+    url: https://web.archive.org/web/20251219064229/https://www.eventvpn.com/terms/
+    title: EventVPN terms of service (archived December 2025)
+  privacy:
+    url: https://www.eventvpn.com/privacy/
+    title: EventVPN privacy policy
+  app-store:
+    url: https://apps.apple.com/us/app/eventvpn-unlimited-secure-vpn/id6748814755
+    title: 'EventVPN: Unlimited Secure VPN on the App Store (US)'
+  register:
+    url: https://efiling.drcor.mcit.gov.cy/DrcorPublic/SearchResults.aspx?name=netshield&number=%25&searchtype=optStartMatch&index=1&tname=%25&sc=0
+    title: Netshield Limited (HE 330280), Cyprus Registrar of Companies
+  eventvpn-launch:
+    url: https://www.expressvpn.com/blog/free-vpn-eventvpn/
+    title: 'EventVPN: A free VPN from the team behind ExpressVPN'
+  audit-cure53-2026:
+    url: https://cure53.de/pentest-report_expressvpn-eventvpn.pdf
+    title: Cure53, EventVPN architecture and software pentest (2026)
+  audits-page:
+    url: https://www.expressvpn.com/security-audit-reports
+    title: ExpressVPN security audit reports
+  transparency-2026:
+    url: https://www.expressvpn.com/blog/transparency-report-h1-2026/
+    title: 'ExpressVPN transparency report: January to June 2026'
+  bug-bounty:
+    url: https://www.expressvpn.com/bug-bounty
+    title: ExpressVPN bug bounty program
+  kape-holding-2023:
+    url: https://www.investegate.co.uk/announcement/rns/kape-technologies--kape/holding-s-in-company/7541123
+    title: Kape Technologies, holding(s) in company (RNS, May 2023)
+  kape-brands:
+    url: https://www.kape.com/our-brands/
+    title: Kape, our brands
+  kape-leadership:
+    url: https://www.kape.com/our-leadership-team/
+    title: Kape, our leadership team
+  companies-house:
+    url: https://find-and-update.company-information.service.gov.uk/company/FC038564
+    title: Kape Technologies (Companies House)
+  zenmate:
+    url: https://zenmate.com/blog/zenmate-changes
+    title: Important changes to ZenMate
+  vpnmentor:
+    url: https://www.vpnmentor.com/about-us/
+    title: About vpnMentor
+  safety-detectives:
+    url: https://www.safetydetectives.com/
+    title: Safety Detectives homepage
