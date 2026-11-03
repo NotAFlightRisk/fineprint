@@ -28,7 +28,7 @@ criteria:
     sister_brands:
       value: [Thunder VPN]
       note: >-
-        Thunder VPN shares its Google Play developer account. TTP tied an iOS Thunder VPN, sold by Free Secure
+        Thunder VPN shares its Google Play developer account. TTP tied an iOS Thunder VPN, from Free Secure
         Connected Software Co., Ltd, to Qihoo 360's Turbo VPN group, but it isn't clear that's the same app, and
         2025 research found no links between Secure VPN and that group.
       sources: [play-dev, thunder-play, ttp-2025, thunder-ios-2023, hidden-links-2025]
@@ -43,10 +43,10 @@ criteria:
     hq:
       value: US
       evidence: claimed
-      sources: [home, terms]
+      sources: [play]
     entities:
       value: [US]
-      sources: [terms]
+      sources: [play]
 
   logging:
     traffic:
