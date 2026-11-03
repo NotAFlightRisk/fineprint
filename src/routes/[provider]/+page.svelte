@@ -98,7 +98,10 @@
       <p>{verdict(summary)}</p>
     </div>
     <div class="facts">
-      <Checklist {checks} />
+      <div class="checks">
+        <h3>Privacy checks</h3>
+        <Checklist {checks} />
+      </div>
       <div class="flags">
         <h3 class:none={!flags.length} data-grade={summary.serious ? 'bad' : 'ok'}>
           {redFlags(flags.length)}
@@ -329,6 +332,7 @@
     }
   }
 
+  .checks,
   .flags {
     display: grid;
     align-content: start;
@@ -336,6 +340,11 @@
 
     & h3 {
       font-size: var(--text-md);
+    }
+  }
+
+  .flags {
+    & h3 {
       color: var(--grade);
 
       &.none {

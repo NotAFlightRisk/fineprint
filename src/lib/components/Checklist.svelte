@@ -18,6 +18,7 @@
 <style>
   ul {
     display: grid;
+    align-content: start;
     gap: var(--space-2);
     margin: 0;
     padding: 0;
