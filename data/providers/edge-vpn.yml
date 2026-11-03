@@ -1,0 +1,221 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Edge VPN
+icon: edge-vpn.png
+checked: 2026-11-03
+
+criteria:
+  identity:
+    website: https://edgevpn.app
+    legal_entity:
+      value: Orifik LLC
+      note: The privacy policy doesn't name a company. Orifik LLC is the Google Play developer and the name in the site's footer.
+      sources: [play, home]
+    owner:
+      value: null
+      note: It doesn't say who owns Orifik LLC.
+    founded:
+      value: 2024
+      note: The Android app was on Google Play by October 2024.
+      sources: [play-2024]
+    team:
+      value: anonymous
+      note: No one is named as running it.
+      sources: [home]
+    sister_brands:
+      value: []
+      sources: [play-dev]
+    acquisitions:
+      value: []
+      note: Orifik LLC has been the Google Play developer since at least November 2024.
+      sources: [play-2024, play]
+
+  jurisdiction:
+    hq:
+      value: US
+      note: Orifik LLC gives an address in Henrico, Virginia, without saying which state it's registered in.
+      sources: [play]
+    entities: [US]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      note: >-
+        The homepage FAQ answers "Does EdgeVPN keep logs of my online activity?" with an unrelated reply
+        that starts "Absolutely!".
+      sources: [policy, home]
+    dns:
+      value: none
+      evidence: claimed
+      note: The policy rules out logging the websites you visit, without mentioning DNS separately.
+      sources: [policy]
+    timestamps:
+      value: null
+      note: >-
+        The policy says it doesn't log when you connect or disconnect, but collects the time and country
+        of each connection attempt, which it calls anonymous, with no retention period.
+      sources: [policy]
+    bandwidth:
+      value: none
+      evidence: claimed
+      note: Only a total across its network, it says.
+      sources: [policy]
+    source_ip:
+      value: none
+      evidence: claimed
+      sources: [policy]
+    proven: []
+    policy: https://edgevpn.app/privacypolicy/
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: none
+      note: There are no accounts. Premium is a Google Play subscription.
+      sources: [policy]
+    personal_data: []
+    payment:
+      value: [app_store]
+      note: Premium is bought in the Android app through Google Play.
+      sources: [play]
+
+  security:
+    protocols:
+      value: [openvpn, other]
+      note: Other is Shadowsocks.
+      sources: [apk]
+    post_quantum:
+      value: none
+      note: Nothing is published about its key exchange.
+    kill_switch:
+      value: app
+      note: The Android app has a Kill Switch setting, which it doesn't describe anywhere.
+      sources: [apk]
+    dns:
+      value: null
+      note: It doesn't say whose DNS servers answer inside the tunnel.
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say how its servers are run.
+    hosting:
+      value: null
+      note: It doesn't say whether it owns or rents its servers.
+    virtual_locations:
+      value: null
+      note: It doesn't say whether any locations are virtual.
+    servers:
+      value: null
+      note: It doesn't give a count.
+    countries:
+      value: null
+      note: It doesn't give a count. The Play listing names servers in India, Indonesia, Singapore, the US, the UK and Germany.
+      sources: [play]
+
+  features:
+    connections:
+      value: null
+      note: The site promises "Multiple Device Connections" without a number.
+      sources: [home]
+    multihop: false
+    obfuscation:
+      value: [shadowsocks]
+      note: Shadowsocks is one of its two protocols, and is built to get past network blocks.
+      sources: [apk]
+    port_forwarding: false
+    split_tunnel:
+      value: true
+      note: By app, on Android.
+      sources: [apk]
+    blocking: []
+
+  clients:
+    platforms:
+      value: [android]
+      note: >-
+        The site says it works on desktops too, but only links an Android app. An iOS app called EdgeVPN
+        comes from a different company, FastTec BV.
+      sources: [home, play, fasttec-ios]
+    open_source:
+      value: none
+      note: The Android app is built on the open source ics-openvpn and shadowsocks-android, but its own code isn't published.
+      sources: [apk]
+    telemetry:
+      value: null
+      note: >-
+        The policy says the app sends crash reports and diagnostics and collects your advertising ID, and
+        the app carries Firebase Analytics, Crashlytics and Yandex AppMetrica. Its Play data safety form
+        says it collects nothing, and none of them say whether you can opt out.
+      sources: [policy, apk, play-data-safety]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: null
+      note: >-
+        Premium is sold in the Android app through Google Play, on weekly, monthly, yearly and lifetime
+        plans, and the prices aren't published. Google Play lists in-app purchases from $0.99 to $49.99.
+      sources: [play, apk]
+    best:
+      value: null
+      note: It doesn't publish its prices.
+    best_term:
+      value: null
+      note: It doesn't publish its prices.
+    renewal_increase:
+      value: null
+      note: It doesn't publish its prices.
+    free_tier:
+      value: true
+      note: >-
+        Ad-supported. The site says the free plan is capped at 500 MB a month, while the Play listing calls
+        it unlimited and the app hands out extra free time for watching ads.
+      sources: [home, play, apk]
+    refund_days:
+      value: null
+      note: It publishes no refund policy or terms of service, and purchases go through Google Play.
+      sources: [home]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        The site promises "total anonymity" and "Military-Grade Encryption", and the Play data safety form
+        says the app collects no data while the policy lists crash reports and your advertising ID.
+      sources: [home, policy, play-data-safety]
+    affiliates: false
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://edgevpn.app/
+    title: Edge VPN homepage
+  policy:
+    url: https://edgevpn.app/privacypolicy/
+    title: Edge VPN Privacy Policy (last updated 16 December 2025)
+  play:
+    url: https://play.google.com/store/apps/details?id=com.edgevpn.secure.proxy.unblock
+    title: 'Edge VPN: Super Fast VPN Proxy on Google Play'
+  play-data-safety:
+    url: https://play.google.com/store/apps/datasafety?id=com.edgevpn.secure.proxy.unblock
+    title: Edge VPN data safety on Google Play
+  play-dev:
+    url: https://play.google.com/store/apps/developer?id=Orifik+LLC
+    title: Orifik LLC apps on Google Play
+  play-2024:
+    url: https://web.archive.org/web/20241106052908/https://play.google.com/store/apps/details?id=com.edgevpn.secure.proxy.unblock
+    title: Edge VPN on Google Play (archived November 2024)
+  apk:
+    url: https://apkpure.com/edge-vpn-super-fast-vpn-proxy/com.edgevpn.secure.proxy.unblock
+    title: Edge VPN for Android 1.7.6, whose APK carries ics-openvpn, shadowsocks-android, RevenueCat, Firebase, AppMetrica and ad SDKs
+  fasttec-ios:
+    url: https://apps.apple.com/us/app/edgevpn-fast-vpn-proxy/id6448475881
+    title: EdgeVPN - Fast VPN & Proxy by FastTec BV on the App Store (US)
