@@ -1,0 +1,238 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: SkyBlueVPN
+icon: skybluevpn.png
+checked: 2026-11-03
+
+criteria:
+  identity:
+    website:
+      value: https://skybluevpn.co
+      sources: [home]
+    legal_entity:
+      value: Circo, Inc.
+      note: >-
+        The terms only name SkyBlueVPN. Circo, Inc. is the App Store seller, was the Google Play developer,
+        and puts its name on the pricing page.
+      sources: [terms, pricing, app-store, play-2022]
+    owner:
+      value: null
+      note: Who owns Circo, Inc. isn't public.
+      sources: [app-store-dev]
+    founded:
+      value: 2019
+      note: The iOS app came out in February 2019.
+      sources: [itunes-lookup]
+    team:
+      value: anonymous
+      note: Nobody running SkyBlueVPN or Circo, Inc. is named.
+      sources: [home, app-store-dev]
+    sister_brands:
+      value: []
+      note: >-
+        Circo, Inc.'s other apps are a QR scanner, a PDF scanner and a password manager. SkyVPN, despite the
+        similar name, is sold by different companies.
+      sources: [app-store-dev]
+    acquisitions:
+      value: []
+      sources: [app-store-2019, app-store]
+
+  jurisdiction:
+    hq:
+      value: US
+      note: Circo, Inc. gave an address in San Carlos, California on Google Play.
+      sources: [play-2022]
+    entities:
+      value: [US]
+      note: Circo, Inc. gives a California address, and its state of incorporation isn't stated.
+      sources: [play-2022]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [terms, privacy]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [terms]
+    timestamps:
+      value: null
+      note: The terms log "access attempts" to its servers for security and troubleshooting, without saying what that covers or for how long.
+      sources: [terms]
+    bandwidth:
+      value: null
+      note: Neither the policy nor the terms say whether data use is recorded, though the terms can cut off anyone using far more than average.
+      sources: [terms, privacy]
+    source_ip:
+      value: null
+      note: >-
+        The policy collects your device's IP address as "non-personal information", and the terms log access
+        attempts to its servers, without saying how long either is kept.
+      sources: [privacy, terms]
+    proven: []
+    policy:
+      value: https://skybluevpn.co/privacy-policy
+      note: The App Store listing still links an older policy on WordPress, which has been deleted.
+      sources: [app-store]
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: optional
+      note: The apps' free servers need no account, but buying on the website needs an email address.
+      sources: [app-store, checkout, faq]
+    personal_data: []
+    payment:
+      value: [card, app_store]
+      note: Card through Stripe on the website, or Apple's in-app purchase.
+      sources: [checkout, app-store]
+
+  security:
+    protocols:
+      value: [openvpn]
+      note: The Android app and Windows client are built on OpenVPN. What the iOS app uses isn't stated.
+      sources: [apk, windows-app]
+    post_quantum:
+      value: none
+      note: Nothing is published about its key exchange.
+    kill_switch:
+      value: null
+      note: None is advertised. Premium's "always-on connection" reconnects after a drop rather than blocking traffic.
+      sources: [faq]
+    dns:
+      value: null
+      note: It doesn't say whose DNS servers answer inside the tunnel.
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say how its servers are run.
+    hosting:
+      value: null
+      note: It doesn't say whether it owns or rents its servers.
+    virtual_locations:
+      value: null
+      note: It doesn't say whether any locations are virtual.
+    servers:
+      value: null
+      note: It doesn't publish a server count.
+    countries:
+      value: null
+      note: Free servers are in the US, UK and Japan, and it doesn't say how many countries premium covers.
+      sources: [faq, pricing]
+
+  features:
+    connections:
+      value: 5
+      sources: [pricing]
+    multihop: false
+    obfuscation: []
+    port_forwarding: false
+    split_tunnel:
+      value: false
+      note: The Android app has no setting for it, and it isn't advertised for the others.
+      sources: [apk]
+    blocking:
+      value: [malware]
+      evidence: claimed
+      note: Advertised as blocking malware and phishing sites, with nothing published on how.
+      sources: [home]
+
+  clients:
+    platforms:
+      value: [windows, macos, ios]
+      note: >-
+        The Android app is no longer on Google Play and was last updated in late 2021. The iOS app was last
+        updated in September 2022, and the desktop installers date from 2021.
+      sources: [home, app-store, play-2022, apk, windows-app]
+    open_source:
+      value: none
+      note: Its apps are built on OpenVPN, but its own code isn't published.
+      sources: [apk, windows-app]
+    telemetry:
+      value: null
+      note: >-
+        The Android app carries Firebase Analytics, Crashlytics, Singular and 1Flow, and the policy collects
+        your device ID and a list of your installed apps. Nothing says whether you can opt out.
+      sources: [apk, privacy, app-store]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 29.99, currency: USD }
+      note: In the iOS app it's $12.99 a month, or $79.99 a year.
+      sources: [pricing, app-store]
+    best:
+      value: { amount: 7.99, currency: USD }
+      note: $95.88 a year.
+      sources: [pricing, checkout]
+    best_term:
+      value: 12
+      sources: [pricing]
+    renewal_increase:
+      value: 0
+      sources: [pricing, checkout]
+    free_tier:
+      value: true
+      note: Ad-supported, on servers in the US, UK and Japan.
+      sources: [faq]
+    refund_days:
+      value: 0
+      note: The terms and FAQ say it doesn't give refunds, though the homepage promises a 60-day satisfaction guarantee.
+      sources: [terms, faq, home]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: It sells "military-grade encryption", and promises a 60-day money-back guarantee that its terms rule out.
+      sources: [home, terms]
+    affiliates: false
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://skybluevpn.co/
+    title: SkyBlueVPN homepage
+  privacy:
+    url: https://skybluevpn.co/privacy-policy
+    title: SkyBlueVPN Privacy Policy
+  terms:
+    url: https://skybluevpn.co/terms-of-services
+    title: SkyBlueVPN Terms of Services
+  pricing:
+    url: https://skybluevpn.co/pricing
+    title: SkyBlueVPN pricing
+  faq:
+    url: https://skybluevpn.co/faq
+    title: SkyBlueVPN frequently asked questions
+  checkout:
+    url: https://buy.stripe.com/6oE6qb2cDdjiaQwdQS
+    title: SkyBlueVPN annual plan checkout (Stripe)
+  app-store:
+    url: https://apps.apple.com/us/app/skybluevpn-vpn-fast-secure/id1450492940
+    title: 'SkyBlueVPN: VPN Fast & Secure on the App Store (US)'
+  app-store-2019:
+    url: https://web.archive.org/web/20190726214131/https://apps.apple.com/us/app/skybluevpn-vpn-wifi-proxy/id1450492940
+    title: SkyBlueVPN on the App Store (archived July 2019)
+  app-store-dev:
+    url: https://apps.apple.com/us/developer/circo-inc/id1272023623
+    title: Circo, Inc. apps on the App Store
+  itunes-lookup:
+    url: https://itunes.apple.com/lookup?id=1450492940&country=us
+    title: App Store record for SkyBlueVPN (released 16 February 2019)
+  play-2022:
+    url: https://web.archive.org/web/20220924195403/https://play.google.com/store/apps/details?id=com.skybluevpn
+    title: 'SkyBlueVPN: Free VPN Proxy Server on Google Play (archived September 2022)'
+  apk:
+    url: https://apkpure.net/skybluevpn-free-vpn-proxy-ser/com.skybluevpn
+    title: SkyBlueVPN for Android 1.0.16, whose APK is an OpenVPN for Android build with AdMob, Firebase, Singular and 1Flow
+  windows-app:
+    url: https://skybluevpn.co/static/download/SkyBlueVPN%20(Windows)%20Installer_v2021.08.08.exe
+    title: SkyBlueVPN Windows installer v2021.08.08, which bundles OpenVPN
