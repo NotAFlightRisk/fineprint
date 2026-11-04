@@ -1,0 +1,301 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Guru VPN
+icon: guru-vpn.png
+checked: 2026-11-04
+
+criteria:
+  identity:
+    website:
+      value: https://guruvpn.com
+      sources: [home]
+    legal_entity:
+      value: GURU NETWORK S.R.L.
+      note: >-
+        Registered in Romania in August 2025. The Google Play and App Store listings still name
+        TapGeneration LP, a Scottish limited partnership.
+      sources: [terms, register-guru, play, app-store]
+    owner:
+      value: null
+      note: >-
+        The UK register names Denis Syazantsev as the person controlling TapGeneration LP. Romania's free
+        register records don't name GURU NETWORK S.R.L.'s single shareholder.
+      sources: [register-tapgen, register-guru]
+    founded:
+      value: 2018
+      note: The iOS app came out in September 2018. Its About page says 2019.
+      sources: [app-store, terms-2024, about]
+    team:
+      value: partial
+      note: Nobody is named on its site. The UK register names TapGeneration LP's controlling partner, Denis Syazantsev.
+      sources: [about, register-tapgen]
+    sister_brands:
+      value: []
+      note: The only other app on the developer's store accounts is a fitness app.
+      sources: [play-dev, app-store-dev]
+    acquisitions:
+      value: null
+      note: >-
+        Its site named Zilla Technology LP in 2024, TapGeneration LP in 2025 and GURU NETWORK S.R.L. now,
+        and the iOS app moved to a new developer account. Whether any change was a sale isn't public.
+      sources: [terms-2024, terms-2025, terms, register-zilla, app-store-dev]
+
+  jurisdiction:
+    hq:
+      value: RO
+      sources: [terms, register-guru]
+    entities:
+      value: [RO, GB]
+      note: TapGeneration LP, the app store developer, is registered in Scotland.
+      sources: [register-guru, register-tapgen]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      note: >-
+        Content, payloads and full URLs aren't kept, but the domain names you look up are, and IDS/IPS alerts
+        that can be tied to an account are kept for 14 days.
+      sources: [no-logs]
+    dns:
+      value: 'yes'
+      evidence: claimed
+      note: >-
+        Each lookup's domain, time and VPN server is kept for 14 days, then copied to BigQuery with no fixed
+        expiry. The records carry no account or IP field, which it says doesn't make them anonymous.
+      sources: [no-logs, policy]
+    timestamps:
+      value: 'yes'
+      evidence: claimed
+      note: >-
+        Each connection's start time is kept against your account until you delete it. Connection start and
+        end events also go to Amplitude and BigQuery with no fixed expiry.
+      sources: [no-logs]
+    bandwidth:
+      value: none
+      evidence: claimed
+      note: Only each server's total, it says.
+      sources: [no-logs, policy]
+    source_ip:
+      value: 'yes'
+      evidence: claimed
+      note: >-
+        Its main connection table leaves out your IP, but Amplitude analytics events can hold the IP you
+        connect from, and are exported to BigQuery with no fixed expiry.
+      sources: [no-logs]
+    proven: []
+    policy: https://guruvpn.com/policy
+
+  transparency:
+    audits:
+      value: []
+      note: Its About page mentions regular security reviews and audits, but none is published.
+      sources: [about]
+    report:
+      value: none
+      note: Its About page lists a transparency report and warrant canary among its policies, but neither is published.
+      sources: [about]
+    canary:
+      value: none
+      sources: [about]
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: required
+      note: Sign-in with Apple or Google works too.
+      sources: [policy]
+    personal_data: []
+    payment:
+      value: [card, app_store]
+      note: Apple Pay too, through Stripe.
+      sources: [pricing]
+
+  security:
+    protocols:
+      value: [wireguard, other]
+      note: Other is GuruShadow, its own name for a stealth protocol. The Android app runs on a sing-box core and its protocol list also names VLESS.
+      sources: [pricing, apk]
+    post_quantum:
+      value: none
+      note: Nothing is published about its key exchange.
+      sources: [features]
+    kill_switch:
+      value: app
+      evidence: claimed
+      note: On iOS and Android only.
+      sources: [features, apk]
+    dns:
+      value: first_party
+      evidence: claimed
+      sources: [policy, apk]
+
+  infra:
+    ram_only:
+      value: all
+      evidence: claimed
+      sources: [features]
+    hosting:
+      value: rented
+      note: It names Vultr, Inferno, M247 and Timeweb as its VPN hosts.
+      sources: [policy]
+    virtual_locations:
+      value: null
+      note: It doesn't say whether any locations are virtual.
+      sources: [servers]
+    servers:
+      value: 110
+      note: Its claim is "110+". The Android app says 79+.
+      sources: [about]
+    countries:
+      value: 42
+      note: Its other pages claim 49+ and 50+.
+      sources: [servers, home, about]
+
+  features:
+    connections:
+      value: 4
+      note: >-
+        The pricing page says 10, but the privacy policy and the Android app both put the limit at 4
+        registered devices.
+      sources: [policy, apk, pricing]
+    multihop: false
+    obfuscation:
+      value: [proprietary]
+      note: GuruShadow, sold as a stealth protocol for getting past censorship, without saying what it's built on.
+      sources: [apk]
+    port_forwarding: false
+    split_tunnel:
+      value: true
+      note: On iOS and Android only.
+      sources: [features]
+    blocking:
+      value: [ads, trackers, malware]
+      note: Its Clean Web DNS filter, which can also block adult sites.
+      sources: [apk, features]
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android]
+      sources: [download-windows, download-mac, app-store, play]
+    open_source:
+      value: none
+      note: The terms forbid reverse engineering the apps.
+      sources: [terms]
+    telemetry:
+      value: null
+      note: >-
+        The policy lists Amplitude, Firebase, AppsFlyer and Singular analytics, with consent only where the law
+        requires it, and the Android app carries Amplitude, Firebase, Sentry and Singular. Neither says whether
+        you can turn them off.
+      sources: [policy, apk, play-data-safety]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 11.99, currency: USD }
+      sources: [pricing]
+    best:
+      value: { amount: 4.17, currency: USD }
+      note: $49.99 a year.
+      sources: [pricing]
+    best_term:
+      value: 12
+      sources: [pricing]
+    renewal_increase:
+      value: 0
+      sources: [pricing]
+    free_tier:
+      value: true
+      note: With limited daily access.
+      sources: [play, app-store]
+    refund_days:
+      value: 30
+      note: Website purchases only. App store purchases follow the store's own refund rules.
+      sources: [refund]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        Its pricing page says it doesn't "collect, store, or share your online activity" and the app says it's
+        "based in a strict no-log jurisdiction", while its own policy keeps your DNS lookups and IP-bearing
+        connection events with no fixed expiry.
+      sources: [pricing, apk, policy]
+    affiliates:
+      value: true
+      note: Up to 70% revenue share, or a fixed fee per sale.
+      sources: [affiliate]
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://guruvpn.com
+    title: Guru VPN
+  terms:
+    url: https://guruvpn.com/terms
+    title: Guru VPN Terms of Service (last updated 1 July 2026)
+  policy:
+    url: https://guruvpn.com/policy
+    title: GuruVPN Privacy Policy (last updated 1 July 2026)
+  no-logs:
+    url: https://guruvpn.com/policy/no-logs
+    title: Guru VPN No-Logs Policy
+  refund:
+    url: https://guruvpn.com/policy/refund
+    title: Guru VPN Refund Policy
+  pricing:
+    url: https://guruvpn.com/pricing
+    title: Guru VPN pricing
+  servers:
+    url: https://guruvpn.com/servers
+    title: Guru VPN server locations
+  about:
+    url: https://guruvpn.com/about
+    title: About Guru VPN
+  features:
+    url: https://guruvpn.com/features
+    title: Guru VPN features
+  affiliate:
+    url: https://guruvpn.com/affiliate
+    title: Guru VPN Affiliate Program
+  download-windows:
+    url: https://guruvpn.com/download/windows
+    title: Guru VPN for Windows
+  download-mac:
+    url: https://guruvpn.com/download/mac
+    title: Guru VPN for macOS
+  terms-2024:
+    url: https://web.archive.org/web/20240914141316/https://guruvpn.com/terms
+    title: Guru VPN terms, footer naming Zilla Technology LP (archived September 2024)
+  terms-2025:
+    url: https://web.archive.org/web/20250711212518/https://guruvpn.com/terms
+    title: Guru VPN terms naming TapGeneration LP (archived July 2025)
+  play:
+    url: https://play.google.com/store/apps/details?id=com.tapgen.guruvpn
+    title: 'Guru VPN: Fast & Secure VPN on Google Play'
+  play-data-safety:
+    url: https://play.google.com/store/apps/datasafety?id=com.tapgen.guruvpn
+    title: Guru VPN data safety on Google Play
+  play-dev:
+    url: https://play.google.com/store/apps/dev?id=5871020998722520947
+    title: TapGeneration apps on Google Play
+  app-store:
+    url: https://apps.apple.com/us/app/vpn-guru-super-unlimited-proxy/id1420374639
+    title: 'Guru VPN: Fast, Secure Proxy on the App Store (US)'
+  app-store-dev:
+    url: https://apps.apple.com/us/developer/tapgeneration-lp/id1711915487
+    title: TapGeneration LP apps on the App Store (US)
+  apk:
+    url: https://apkpure.net/guru-vpn-fast-secure-vpn/com.tapgen.guruvpn
+    title: Guru VPN for Android 2.1.9, whose APK runs a sing-box core with Amplitude, Firebase, Sentry and Singular
+  register-guru:
+    url: https://www.termene.ro/firma/52319720-GURU-NETWORK-SRL
+    title: GURU NETWORK S.R.L. (CUI 52319720, J2025060746006), Romanian trade register record
+  register-tapgen:
+    url: https://find-and-update.company-information.service.gov.uk/company/SL036127/persons-with-significant-control
+    title: TAPGENERATION LP (SL036127), persons with significant control, Companies House
+  register-zilla:
+    url: https://find-and-update.company-information.service.gov.uk/company/SL032929
+    title: ZILLA TECHNOLOGY LP (SL032929), Companies House
