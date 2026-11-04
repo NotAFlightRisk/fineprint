@@ -1,0 +1,222 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: SafeShell VPN
+icon: safeshell-vpn.png
+checked: 2026-11-04
+
+criteria:
+  identity:
+    website:
+      value: https://www.safeshellvpn.com
+      sources: [home]
+    legal_entity:
+      value: GearUP Portal Pte. Ltd.
+      note: The company behind the GearUP Booster gaming app, at 1 Raffles Quay in Singapore.
+      sources: [policy, play, protocols]
+    owner:
+      value: null
+      note: The policy and store listings don't name a parent company.
+      sources: [policy, play]
+    founded:
+      value: 2023
+      note: The iOS app came out in May 2023.
+      sources: [app-store]
+    team:
+      value: anonymous
+      sources: [policy, home]
+    sister_brands:
+      value: []
+      note: GearUP Booster, the same company's gaming network accelerator, is linked as a partner.
+      sources: [protocols]
+    acquisitions: []
+
+  jurisdiction:
+    hq:
+      value: SG
+      sources: [policy, play]
+    entities:
+      value: [SG]
+      sources: [policy]
+
+  logging:
+    traffic:
+      value: null
+      note: >-
+        The site says it keeps no logs, but the privacy policy is a general one for its games and apps, and says
+        nothing either way about VPN traffic.
+      sources: [features, policy]
+    dns:
+      value: null
+      sources: [policy]
+    timestamps:
+      value: null
+      note: The policy collects time stamps of your actions in its services, without excluding the VPN.
+      sources: [policy]
+    bandwidth:
+      value: null
+      sources: [policy]
+    source_ip:
+      value: null
+      note: The policy collects your IP address and location from it, without excluding the VPN.
+      sources: [policy]
+    proven: []
+    policy: https://www.safeshellvpn.com/license/Privacy-Policy.html
+
+  transparency:
+    audits:
+      value: []
+      note: Its no-logs blog post mentions independent confirmation, but no audit has been published.
+      sources: [no-logs]
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: optional
+      note: The apps run a free trial without an account, but you sign in with Google, Apple or email to use it on other devices.
+      sources: [devices, data-safety]
+    personal_data:
+      value: []
+      sources: [policy]
+    payment:
+      value: [card, paypal, bank, app_store]
+      note: Card payments include Apple Pay and Google Pay. Alipay and WeChat Pay are taken too.
+      sources: [pricing, refunds]
+
+  security:
+    protocols:
+      value: [proprietary]
+      note: ShellGuard, its own protocol over TLS 1.3, and Stealth, which wraps traffic in QUIC.
+      sources: [protocols]
+    post_quantum: null
+    kill_switch: null
+    dns:
+      value: first_party
+      evidence: claimed
+      sources: [features]
+
+  infra:
+    ram_only: null
+    hosting: null
+    virtual_locations: null
+    servers:
+      value: 10000
+      note: It claims over 10,000 server nodes.
+      sources: [countries]
+    countries:
+      value: 40
+      note: The help centre says over 40 countries, while the features page says over 100 locations.
+      sources: [countries, features]
+
+  features:
+    connections: 5
+    multihop: false
+    obfuscation:
+      value: [quic]
+      note: The Stealth protocol disguises VPN traffic as QUIC.
+      sources: [protocols]
+    port_forwarding: null
+    split_tunnel:
+      value: true
+      note: You can send chosen apps outside the VPN, or send different apps to different countries.
+      sources: [modes]
+    blocking:
+      value: [ads, trackers]
+      note: Its SafeNet ad and tracker blocking.
+      sources: [features]
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android]
+      note: Also on Apple TV, Android TV and Apple Vision Pro.
+      sources: [devices]
+    open_source: none
+    telemetry:
+      value: null
+      note: >-
+        The Android app includes Sensors Analytics, AppsFlyer, Sentry with session replay and Facebook's SDK, and
+        Google Play's data safety form lists app interactions, installed apps and device IDs collected for analytics.
+      sources: [play, data-safety]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 12.99, currency: USD }
+      note: >-
+        Shown in your local currency (£9.65 in the UK), converted from US prices. A 15-minute countdown deal on
+        the pricing page offers a year for $59.99.
+      sources: [pricing]
+    best:
+      value: { amount: 6.67, currency: USD }
+      note: $79.99 a year.
+      sources: [pricing]
+    best_term:
+      value: 12
+      sources: [pricing]
+    renewal_increase:
+      value: 0
+      sources: [pricing]
+    free_tier:
+      value: false
+      note: New users get a free trial.
+      sources: [trial]
+    refund_days:
+      value: 7
+      note: Only for a first purchase made on its website, not renewals or app store subscriptions.
+      sources: [refunds]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        It says it keeps no logs at all, while its privacy policy collects IP addresses and time stamps, and its
+        no-logs post points to independent confirmation it hasn't published.
+      sources: [features, policy, no-logs]
+    affiliates: null
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://www.safeshellvpn.com/
+    title: SafeShell VPN home page
+  features:
+    url: https://www.safeshellvpn.com/features/
+    title: SafeShell VPN features
+  pricing:
+    url: https://www.safeshellvpn.com/pricing/
+    title: SafeShell VPN pricing
+  policy:
+    url: https://www.safeshellvpn.com/license/Privacy-Policy.html
+    title: SafeShell VPN Privacy Policy
+  no-logs:
+    url: https://www.safeshellvpn.com/blog/safeshell-vpn-no-logs-policy.html
+    title: "SafeShell VPN's No Logs Policy: Your Privacy, Our Commitment"
+  protocols:
+    url: https://www.safeshellvpn.com/help/safeshell-vpn-protocols.html
+    title: Guide to SafeShell's VPN Protocols
+  refunds:
+    url: https://www.safeshellvpn.com/help/what-is-safeshellvpn-refund-policy.html
+    title: What is SafeShell VPN's refund policy?
+  trial:
+    url: https://www.safeshellvpn.com/help/what-is-safeshell-free-trial.html
+    title: What is SafeShell's Free Trial?
+  devices:
+    url: https://www.safeshellvpn.com/help/what-devices-does-safeshell-support.html
+    title: What devices does SafeShell VPN support?
+  countries:
+    url: https://www.safeshellvpn.com/help/how-many-countries-does-safeshell-have-servers.html
+    title: How many countries does SafeShell have servers?
+  modes:
+    url: https://www.safeshellvpn.com/help/differences-between-global-mode-and-app-mode.html
+    title: What are the differences between Global Mode and App Mode?
+  play:
+    url: https://play.google.com/store/apps/details?id=com.safeshellvpn
+    title: SafeShell VPN on Google Play
+  data-safety:
+    url: https://play.google.com/store/apps/datasafety?id=com.safeshellvpn
+    title: SafeShell VPN data safety on Google Play
+  app-store:
+    url: https://apps.apple.com/us/app/id6445987502
+    title: SafeShell VPN on the US App Store
