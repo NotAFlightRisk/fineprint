@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: Brave VPN
 icon: brave-vpn.svg
-checked: 2026-10-22
+checked: 2026-11-04
 
 criteria:
   identity:
@@ -67,15 +67,14 @@ criteria:
       sources: [vpn, guardian-policy]
     source_ip:
       value: none
-      evidence: verified
+      evidence: claimed
       note: >-
-        Assured's 2026 audit found client IPs logged on rare TLS errors and when the API was reached directly,
-        both fixed by its retest.
+        Assured's 2026 audit of Guardian's servers found client IPs logged on rare TLS errors and when the API was
+        reached directly, both fixed by its retest.
       sources: [privacy, guardian-policy, audit-2026]
     proven:
-      value: [audit]
-      evidence: verified
-      note: Assured audited logging on Guardian's VPN servers in 2024 and 2026.
+      value: []
+      note: Assured audited Guardian's VPN servers in 2024 and 2026, but the reports don't name Brave.
       sources: [audit-2024-infra, audit-2026]
     policy:
       value: https://brave.com/privacy/browser/
@@ -84,29 +83,11 @@ criteria:
 
   transparency:
     audits:
-      value:
-        - date: 2026-09-22
-          auditor: Assured
-          scope: infra
-          source: audit-2026
-        - date: 2025-08-29
-          auditor: Assured
-          scope: apps
-          source: audit-2025
-        - date: 2024-07-02
-          auditor: Assured
-          scope: infra
-          source: audit-2024-infra
-        - date: 2024-03-13
-          auditor: Assured
-          scope: apps
-          source: audit-2024-api
-      evidence: verified
+      value: []
       note: >-
-        All commissioned by Guardian or DNSFilter. The 2024 and 2026 audits covered the VPN servers, the others
-        the web, API and cloud backend. The 2026 report dates its retest 2025-09-21 to 22, which reads as a typo
-        for 2026.
-      sources: [guardian-policy, guardian-audit-2026]
+        Guardian, which runs the network, had Assured audit its VPN servers in 2024 and 2026 and its web, API and
+        cloud backend in 2024 and 2025. None of the reports names Brave.
+      sources: [audit-2026, audit-2025, audit-2024-infra, audit-2024-api]
     report:
       value: none
       note: >-
@@ -173,7 +154,7 @@ criteria:
       sources: [vpn]
     servers:
       value: 300
-      note: Brave's page says 300+. Guardian's region list, which Brave's apps load, counted 636 on 2026-10-22.
+      note: Brave's page says 300+. Guardian's region list, which Brave's apps load, counted 646 on 2026-11-04.
       sources: [vpn, regions-api, vpn-constants]
     countries:
       value: 43
@@ -328,9 +309,6 @@ refs:
   dnsfilter-acquisition:
     url: https://guardianapp.com/newsroom/dnsfilter-acquistion-release/
     title: DNSFilter provides a better Secure Web Gateway with Guardian (2022-08-10)
-  guardian-audit-2026:
-    url: https://guardianapp.com/blog/2026/10/independent-security-audit-2026-report/
-    title: Independent Security Audit 2026 Report
   audit-2026:
     url: https://www.assured.se/publications/assured-dnsfilter-guardian-infrastructure-audit-verification-report-20261002.pdf
     title: Assured, DNSFilter infrastructure verification test (2026)
