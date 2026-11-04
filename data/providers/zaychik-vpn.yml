@@ -1,0 +1,231 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Zaychik VPN
+icon: zaychik-vpn.png
+checked: 2026-11-04
+
+criteria:
+  identity:
+    website:
+      value: https://free-vpn.club
+      sources: [home]
+    legal_entity:
+      value: Free VPN Unlimited AG
+      note: >-
+        The Google Play developer, registered in Zug. Its own terms and policy only name the "Free VPN
+        developers team", and the policy points to whoever offers the app on its download page.
+      sources: [play, register, terms, policy]
+    owner:
+      value: null
+      note: It doesn't say who owns Free VPN Unlimited AG.
+      sources: [register]
+    founded:
+      value: 2024
+      note: >-
+        free-vpn.club was registered in July 2024, and the Android app, then called VPN ASTRO, had around
+        500 installs in January 2025. The company was renamed from Media Target AG in 2022.
+      sources: [rdap, play-2025, register]
+    team:
+      value: partial
+      note: Its site names nobody, but Zug's commercial register names its one board member.
+      sources: [home, register]
+    sister_brands:
+      value: [VPNLY, VPN ASTRO, VPN MARS]
+      note: All three share its Google Play developer account.
+      sources: [play-dev]
+    acquisitions:
+      value: []
+      sources: [play-dev, play-2025]
+
+  jurisdiction:
+    hq:
+      value: CH
+      sources: [register]
+    entities:
+      value: [CH]
+      sources: [register]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [policy]
+    dns:
+      value: none
+      evidence: claimed
+      note: The policy rules out records of what you browse or access through the VPN, without mentioning DNS separately.
+      sources: [policy]
+    timestamps:
+      value: null
+      note: >-
+        The policy says it collects when and for how long you use the service, then says it doesn't store
+        any data on users, without giving a retention period.
+      sources: [policy]
+    bandwidth:
+      value: null
+      note: >-
+        The policy says it collects how much bandwidth you use, then says it doesn't store any data on users,
+        without giving a retention period.
+      sources: [policy]
+    source_ip:
+      value: null
+      note: >-
+        The policy doesn't say whether it keeps your IP address, but it collects your internet provider and
+        may work out your approximate location from your IP address.
+      sources: [policy]
+    proven: []
+    policy: https://free-vpn.club/privacy-policy.html
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: none
+      note: There are no accounts.
+      sources: [play]
+    personal_data: []
+    payment:
+      value: []
+      note: It's free, with nothing to buy in the app.
+      sources: [play]
+
+  security:
+    protocols:
+      value: null
+      note: It doesn't say which protocols it uses.
+      sources: [home]
+    post_quantum:
+      value: none
+      note: Nothing is published about how its connections are encrypted.
+    kill_switch:
+      value: null
+      note: It doesn't mention one.
+    dns:
+      value: null
+      note: It doesn't say whose DNS servers answer your lookups.
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say how its servers are run.
+    hosting:
+      value: null
+      note: It doesn't say whether it owns or rents its servers.
+    virtual_locations:
+      value: null
+      note: It doesn't say whether any locations are virtual.
+    servers:
+      value: null
+      note: It doesn't give a server count.
+    countries:
+      value: null
+      note: It doesn't say how many countries it has servers in.
+
+  features:
+    connections:
+      value: unlimited
+      note: There are no accounts, so nothing ties it to a number of devices.
+      sources: [play]
+    multihop: false
+    obfuscation:
+      value: null
+      note: It's sold as working reliably in Russia, without saying how it gets past blocks.
+      sources: [play]
+    port_forwarding: false
+    split_tunnel:
+      value: null
+      note: It doesn't say whether you can choose which apps use the VPN.
+    blocking: []
+
+  clients:
+    platforms:
+      value: [android]
+      note: >-
+        Its site shows an App Store badge, but the App Store apps called ВПН Зайчик come from other companies.
+        On iOS the same company only sells VPNLY.
+      sources: [play, home, app-store-copy-1, app-store-copy-2, vpnly-ios]
+    open_source:
+      value: none
+      sources: [home]
+    telemetry:
+      value: null
+      note: >-
+        The policy collects usage, device and diagnostic data from its apps, while the Play data safety form
+        says the app collects nothing. Neither says whether you can opt out.
+      sources: [policy, play-data-safety]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 0, currency: USD }
+      note: Free, with no paid plan and no ads in the app.
+      sources: [play]
+    best: { amount: 0, currency: USD }
+    best_term:
+      value: null
+      grade: na
+      note: It's free.
+    renewal_increase:
+      value: 0
+      note: Nothing renews.
+    free_tier:
+      value: true
+      note: Unlimited traffic, it says.
+      sources: [play]
+    refund_days:
+      value: null
+      grade: na
+      note: It's free.
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        Its site promises a "Really 100% Secure" VPN and "complete anonymity", and its Play data safety form
+        says the app collects no data while its privacy policy lists usage, device and location data.
+      sources: [home, play-data-safety, policy]
+    affiliates: false
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://free-vpn.club/
+    title: Free VPN (Zaychik VPN) homepage
+  policy:
+    url: https://free-vpn.club/privacy-policy.html
+    title: Free VPN Privacy Policy
+  terms:
+    url: https://free-vpn.club/terms-of-services.html
+    title: Free VPN Terms of Services
+  rdap:
+    url: https://rdap.nic.club/domain/free-vpn.club
+    title: free-vpn.club registration record (RDAP, registered 11 July 2024)
+  play:
+    url: https://play.google.com/store/apps/details?id=free.vpn.astro.rus
+    title: ВПН Зайчик - безлимитный VPN on Google Play
+  play-data-safety:
+    url: https://play.google.com/store/apps/datasafety?id=free.vpn.astro.rus
+    title: ВПН Зайчик data safety on Google Play
+  play-dev:
+    url: https://play.google.com/store/apps/developer?id=Free+VPN+Unlimited+AG
+    title: Free VPN Unlimited AG apps on Google Play
+  play-2025:
+    url: https://web.archive.org/web/20250119111753/https://play.google.com/store/apps/details?id=free.vpn.astro.rus
+    title: VPN ASTRO - Супер Быстрый ВПН on Google Play (archived January 2025)
+  register:
+    url: https://www.zefix.ch/en/search/entity/list/firm/1444918
+    title: Free VPN Unlimited AG (CHE-467.694.739), Swiss commercial register (Zefix)
+  vpnly-ios:
+    url: https://apps.apple.com/us/app/id6739255199
+    title: VPNLY - VPN Unlimited Proxy by Free VPN Unlimited AG on the App Store (US)
+  app-store-copy-1:
+    url: https://apps.apple.com/ru/app/id6767169934
+    title: ВПН Зайчик - безлимитный VPN by ZHONGYA TRADING CO., LIMITED on the App Store (Russia)
+  app-store-copy-2:
+    url: https://apps.apple.com/ru/app/id6757589352
+    title: ВПН Зайчик - Супер Быстрый VPN by Benefit Virtue Technologies Limited on the App Store (Russia)
