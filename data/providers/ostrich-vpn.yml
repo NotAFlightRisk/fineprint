@@ -1,0 +1,246 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Ostrich VPN
+icon: ostrich-vpn.png
+checked: 2026-11-04
+
+criteria:
+  identity:
+    website:
+      value: https://ostrichvpn.net
+      note: Both app store listings link to it.
+      sources: [home, play, app-store]
+    legal_entity:
+      value: Geware Mobile Limited
+      note: >-
+        The Google Play developer, registered in Hong Kong in December 2023. The privacy policies and the
+        App Store still name GeWare Technology Limited, which TTP found had been dissolved.
+      sources: [play, register, home, policy-ios, app-store, ttp-2025]
+    owner:
+      value: null
+      note: >-
+        TTP found Geware Mobile Limited is owned by a Chinese citizen with a Hong Kong address, and that
+        GeWare Technology Limited's sole shareholder was a Chinese citizen with a mainland China address.
+      sources: [ttp-2025]
+    founded:
+      value: 2021
+      note: The iOS app came out in March 2021.
+      sources: [itunes-lookup]
+    team:
+      value: anonymous
+      sources: [home, policy-android]
+    sister_brands:
+      value: []
+      sources: [play-dev, app-store-dev]
+    acquisitions:
+      value: null
+      note: Whether the move from GeWare Technology Limited to Geware Mobile Limited was a sale isn't public.
+      sources: [play-2023, play-2025, ttp-2025]
+
+  jurisdiction:
+    hq:
+      value: HK
+      sources: [register]
+    entities:
+      value: [HK]
+      sources: [register]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [policy-ios, policy-android]
+    dns:
+      value: none
+      evidence: claimed
+      note: The policies rule out logging the websites you visit, without mentioning DNS separately.
+      sources: [policy-ios, policy-android]
+    timestamps:
+      value: 'yes'
+      evidence: claimed
+      note: The iOS policy collects when and for how long you use the service, with no time limit given.
+      sources: [policy-ios]
+    bandwidth:
+      value: aggregate
+      evidence: claimed
+      note: The iOS policy collects how much bandwidth you use, without saying for how long.
+      sources: [policy-ios]
+    source_ip:
+      value: null
+      note: >-
+        The policies don't rule out logging your IP address, and the iOS one works out your approximate
+        location from it.
+      sources: [policy-ios, policy-android]
+    proven: []
+    policy: https://ostrichvpn.net/doc/osi/privacy-policy.html
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: none
+      note: There are no accounts.
+      sources: [play, itunes-lookup]
+    personal_data: []
+    payment:
+      value: [app_store]
+      note: Premium is only sold in the iOS app. The Android app is free, with no in-app purchases.
+      sources: [app-store, play]
+
+  security:
+    protocols:
+      value: [openvpn, ikev2, other]
+      note: >-
+        Other is VMess, run over WebSocket and TLS. The Android app's OpenVPN is a 2017 ics-openvpn build
+        on OpenSSL 1.1.0f, which stopped getting security fixes in 2019.
+      sources: [apk]
+    post_quantum:
+      value: none
+      note: Nothing is published about its key exchange.
+    kill_switch:
+      value: null
+      note: The Android app has no kill switch setting.
+      sources: [apk]
+    dns:
+      value: null
+      note: The Android app's VMess mode looks names up through Cloudflare's and Google's public DNS. Nothing is published for its other protocols.
+      sources: [apk]
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say how its servers are run.
+    hosting:
+      value: null
+      note: The policies mention hosting providers without naming them or saying whether any servers are its own.
+      sources: [policy-android]
+    virtual_locations:
+      value: null
+      note: It doesn't say whether any locations are virtual.
+    servers:
+      value: null
+      note: Its site claims both hundreds and thousands of servers, with no list.
+      sources: [home]
+    countries:
+      value: null
+      note: It doesn't give a count.
+
+  features:
+    connections:
+      value: null
+      note: It doesn't say. The free version needs no account, and Premium is an App Store subscription.
+      sources: [play, itunes-lookup]
+    multihop: false
+    obfuscation:
+      value: [v2ray]
+      note: Its VMess mode runs over WebSocket and TLS, so it looks like web traffic.
+      sources: [apk]
+    port_forwarding: false
+    split_tunnel:
+      value: true
+      note: By app, on Android.
+      sources: [policy-android, play, apk]
+    blocking: []
+
+  clients:
+    platforms:
+      value: [ios, android]
+      note: The iOS app also runs on Apple silicon Macs.
+      sources: [app-store, play]
+    open_source: none
+    telemetry:
+      value: null
+      note: >-
+        Both policies say the apps send product analytics, like whether a tunnel connected and your
+        rough country, to GameAnalytics, without mentioning a way to turn it off. The Android app also
+        carries Firebase Analytics.
+      sources: [policy-ios, policy-android, apk, play-data-safety]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 3.99, currency: USD }
+      note: The App Store also lists a $6.49 Monthly Premium purchase.
+      sources: [app-store]
+    best:
+      value: { amount: 2.08, currency: USD }
+      note: $24.99 a year.
+      sources: [app-store]
+    best_term:
+      value: 12
+      sources: [itunes-lookup]
+    renewal_increase:
+      value: 0
+      sources: [itunes-lookup]
+    free_tier:
+      value: true
+      note: >-
+        Ad-supported, with a daily time limit you can extend by watching ads. The Android app is free
+        only.
+      sources: [play, itunes-lookup]
+    refund_days:
+      value: null
+      note: Premium is only sold through the App Store, so refunds are Apple's call.
+      sources: [app-store]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        Its site says "we do not track or keep logs from any user", while the iOS policy collects when and
+        how long you connect, and the App Store label says identifiers and usage data may be used to track
+        you.
+      sources: [home, policy-ios, app-store]
+    affiliates: false
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://ostrichvpn.net/
+    title: Ostrich VPN homepage
+  policy-ios:
+    url: https://ostrichvpn.net/doc/osi/privacy-policy.html
+    title: Ostrich VPN Privacy Policy, iOS (last updated 26 September 2026)
+  policy-android:
+    url: https://ostrichvpn.net/doc/osa/privacy-policy.html
+    title: Ostrich VPN for Android Privacy Policy (last updated 26 September 2026)
+  register:
+    url: https://data.cr.gov.hk/cr/api/api/v1/api_builder/json/local/search?query%5B0%5D%5Bkey1%5D=Brn&query%5B0%5D%5Bkey2%5D=equal&query%5B0%5D%5Bkey3%5D=75993787
+    title: Geware Mobile Limited (BRN 75993787), Hong Kong Companies Registry
+  play:
+    url: https://play.google.com/store/apps/details?id=com.best.free.vpn.proxy
+    title: 'Ostrich VPN: Fast Secure Proxy on Google Play'
+  play-data-safety:
+    url: https://play.google.com/store/apps/datasafety?id=com.best.free.vpn.proxy
+    title: Ostrich VPN data safety on Google Play
+  play-dev:
+    url: https://play.google.com/store/apps/developer?id=Geware+VPN
+    title: Geware VPN (Geware Mobile Limited) apps on Google Play
+  play-2023:
+    url: https://web.archive.org/web/20230515155227/https://play.google.com/store/apps/details?id=com.best.free.vpn.proxy
+    title: Ostrich VPN on Google Play, developer Geware VPN Pro (archived May 2023)
+  play-2025:
+    url: https://web.archive.org/web/20250519223124/https://play.google.com/store/apps/details?id=com.best.free.vpn.proxy
+    title: Ostrich VPN on Google Play, developer Geware Mobile Limited (archived May 2025)
+  app-store:
+    url: https://apps.apple.com/us/app/ostrich-vpn-proxy-master/id1532634346
+    title: Ostrich VPN - Proxy Master on the App Store (US)
+  app-store-dev:
+    url: https://apps.apple.com/us/developer/geware-technology-limited/id1461689857
+    title: GeWare Technology Limited apps on the App Store (US)
+  itunes-lookup:
+    url: https://itunes.apple.com/lookup?id=1532634346&country=us
+    title: Ostrich VPN - Proxy Master, App Store lookup (released 15 March 2021)
+  apk:
+    url: https://web.archive.org/web/20260207025226/https://www.ostrichvpn.net/
+    title: >-
+      Ostrich VPN site linking its Android 3.5.1 APK (archived February 2026), an ics-openvpn, strongSwan
+      and leaf VMess build with AdMob, Firebase Analytics and GameAnalytics
+  ttp-2025:
+    url: https://www.techtransparencyproject.org/articles/apple-offers-apps-with-ties-to-chinese-military
+    title: Tech Transparency Project, Apple Offers Apps With Ties to Chinese Military (1 April 2025)
