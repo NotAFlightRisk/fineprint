@@ -1,0 +1,233 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Stolitomson VPN
+icon: stolitomson-vpn.png
+checked: 2026-11-04
+
+criteria:
+  identity:
+    website:
+      value: https://stolitomsonvpn.com
+      sources: [home]
+    legal_entity:
+      value: Stolitomson Company DOO
+      note: >-
+        Registered in Belgrade in May 2022 and the App Store seller. Google Play lists a private individual,
+        Dragana Maria Visconti, as the Android developer.
+      sources: [terms, register, app-store, play]
+    owner:
+      value: Kirill Mizin
+      note: Serbia's register lists him as the company's sole owner and its director.
+      sources: [register]
+    founded:
+      value: 2022
+      note: The Android app came out in April 2022, a month before the company was registered.
+      sources: [play, register]
+    team:
+      value: partial
+      note: >-
+        The company names no one itself. The register names its owner and director, and Google Play names
+        the Android developer.
+      sources: [register, play]
+    sister_brands:
+      value: []
+      note: >-
+        The same developer accounts publish several more VPN apps under the Stolitomson name, including
+        VPN - secure, fast VPN and Jet browser - VPN + AdBlock.
+      sources: [play-dev, app-store-dev]
+    acquisitions:
+      value: []
+      sources: [play-2022, register]
+
+  jurisdiction:
+    hq:
+      value: RS
+      sources: [register]
+    entities:
+      value: [RS]
+      sources: [register]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [terms]
+    dns:
+      value: none
+      evidence: claimed
+      note: The terms rule out logging the IP addresses and sites you visit, without mentioning DNS separately.
+      sources: [terms]
+    timestamps:
+      value: temporary
+      evidence: claimed
+      note: Connection times are kept with your user ID until 15 minutes after the session ends, it says.
+      sources: [terms]
+    bandwidth:
+      value: none
+      evidence: claimed
+      sources: [terms]
+    source_ip:
+      value: null
+      note: >-
+        The terms don't mention your own IP address. The privacy policy says third-party tools collect it
+        when the app hits an error.
+      sources: [terms, policy]
+    proven: []
+    policy: https://docs.google.com/document/d/1iKq8rnj7IIDWW4m_DBjx5saAzsdmBtGvtVnwbc54IoM/edit
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: null
+      note: >-
+        It doesn't say whether the apps need an account. The Play data safety form lists a name and email
+        address, for developer communications.
+      sources: [play-data-safety]
+    personal_data:
+      value: null
+      note: It doesn't say what, if anything, signing up asks for.
+      sources: [play-data-safety]
+    payment:
+      value: [app_store]
+      note: Premium is an in-app subscription.
+      sources: [app-store]
+
+  security:
+    protocols:
+      value: null
+      note: It doesn't say which protocol the apps use.
+    post_quantum:
+      value: none
+      note: Nothing is published about how its connections are encrypted.
+    kill_switch:
+      value: null
+      note: It doesn't say whether the apps have one.
+    dns:
+      value: null
+      note: It doesn't say whose DNS servers answer inside the tunnel.
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say how its servers are run.
+    hosting:
+      value: null
+      note: It doesn't say whether it owns or rents its servers.
+    virtual_locations:
+      value: null
+      note: It doesn't say whether any locations are virtual.
+    servers:
+      value: null
+      note: It claims a "large number of free VPN proxy servers" without giving a figure.
+      sources: [play]
+    countries:
+      value: null
+      note: It only says it has servers "all around the world".
+      sources: [app-store]
+
+  features:
+    connections:
+      value: null
+      note: It doesn't say how many devices a subscription covers.
+    multihop: false
+    obfuscation:
+      value: null
+      note: It doesn't say how it gets past network blocks.
+    port_forwarding: false
+    split_tunnel:
+      value: null
+      note: It doesn't say whether you can choose which apps use the VPN.
+    blocking: []
+
+  clients:
+    platforms:
+      value: [android, ios]
+      sources: [play, app-store]
+    open_source: none
+    telemetry:
+      value: null
+      note: >-
+        The privacy policy names Firebase Analytics, Yandex AppMetrica and myTarget, and the Play data
+        safety form says it shares device IDs, approximate location and performance data. Neither says
+        whether you can opt out.
+      sources: [policy, play-data-safety]
+    trackers:
+      value: 18
+      note: Version 2.8.4 from August 2025, mostly advertising SDKs, including Yandex's and myTarget's.
+      sources: [exodus]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: null
+      note: Premium is sold in the apps only, and Google Play gives a range of $2.99 to $11.99 per item without naming the plans.
+      sources: [play]
+    best:
+      value: null
+      note: No plan prices are published.
+    best_term:
+      value: null
+      note: No plan prices are published.
+    renewal_increase:
+      value: null
+      note: The terms say prices can change and you accept them by carrying on using it.
+      sources: [terms]
+    free_tier:
+      value: true
+      note: Ad-supported.
+      sources: [play, app-store]
+    refund_days:
+      value: 0
+      note: The terms rule out refunds for unused time. App store purchases follow the store's own refund rules.
+      sources: [terms]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        The Play listing promises "complete safety online" and that "nobody can track your activity online",
+        while the app carries 18 advertising and analytics trackers.
+      sources: [play, exodus]
+    affiliates: false
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://stolitomsonvpn.com/
+    title: Stolitomson Apps
+  terms:
+    url: https://docs.google.com/document/d/19frdep3_HPB8pXL9pCydH_8Zny8FstmlKCvG3ULkaL0/edit
+    title: Stolitomson company DOO Terms of Service
+  policy:
+    url: https://docs.google.com/document/d/1iKq8rnj7IIDWW4m_DBjx5saAzsdmBtGvtVnwbc54IoM/edit
+    title: Stolitomson VPN Privacy Policy (effective 4 April 2022)
+  register:
+    url: https://www.companywall.rs/firma/stolitomson-company-doo/MMx3zH5GR
+    title: STOLITOMSON COMPANY DOO (MB 21788341), Serbian Business Registers Agency data on CompanyWall
+  play:
+    url: https://play.google.com/store/apps/details?id=free.vpn.proxy.secure
+    title: VPN - fast proxy + secure on Google Play
+  play-data-safety:
+    url: https://play.google.com/store/apps/datasafety?id=free.vpn.proxy.secure
+    title: VPN - fast proxy + secure data safety on Google Play
+  play-dev:
+    url: https://play.google.com/store/apps/developer?id=Stolitomson+VPN
+    title: Stolitomson VPN apps on Google Play
+  play-2022:
+    url: https://web.archive.org/web/20220720060445/https://play.google.com/store/apps/details?id=free.vpn.proxy.secure
+    title: VPN - fast proxy + secure on Google Play (archived July 2022)
+  app-store:
+    url: https://apps.apple.com/us/app/vpn-fast-secure-no-limits/id6443951277
+    title: VPN - fast, secure, no limits by STOLITOMSON COMPANY DOO on the App Store (US)
+  app-store-dev:
+    url: https://apps.apple.com/us/developer/com-stolitomson-vpn/id1650934636
+    title: STOLITOMSON COMPANY DOO apps on the App Store (US)
+  exodus:
+    url: https://web.archive.org/web/20260217161129/https://reports.exodus-privacy.eu.org/en/reports/free.vpn.proxy.secure/latest/
+    title: Exodus Privacy report for VPN - fast proxy + secure 2.8.4 (August 2025, archived)
