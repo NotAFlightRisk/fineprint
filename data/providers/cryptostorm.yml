@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: cryptostorm
 icon: cryptostorm.png
-checked: 2026-10-22
+checked: 2026-11-04
 
 criteria:
   identity:
@@ -193,7 +193,9 @@ criteria:
       sources: [windows, android, routers, xray]
     open_source:
       value: all
-      note: The Windows client and the Android Xray app are on GitHub, without a licence file.
+      note: >-
+        The Windows client and the Android Xray app are both on GitHub. The Xray app is MIT licensed, the
+        Windows client has no licence file.
       sources: [widget-src, csxray]
     telemetry:
       value: none
@@ -202,6 +204,7 @@ criteria:
       sources: [widget-src]
     trackers:
       value: null
+      grade: na
       note: There's no Android VPN app, and the Xray helper isn't on Google Play.
       sources: [android, xray]
     fdroid:
