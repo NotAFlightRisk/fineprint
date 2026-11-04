@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: Steganos VPN Online Shield
 icon: steganos-vpn.svg
-checked: 2026-10-22
+checked: 2026-11-04
 
 criteria:
   identity:
@@ -30,7 +30,7 @@ criteria:
       sources: [legal-notice, about, register]
     sister_brands:
       value: [OkayFreedom VPN]
-      note: OkayFreedom, Steganos's free and paid VPN for Windows and Android, lists the same 239 server locations in 43 countries.
+      note: OkayFreedom, Steganos's free and paid VPN for Windows and Android, lists the same 240 server locations in 44 countries.
       sources: [okayfreedom, licence]
     acquisitions:
       value:
@@ -111,7 +111,9 @@ criteria:
   account:
     email:
       value: required
-      note: The apps run on a mySteganos account, and the store asks for an email address.
+      note: >-
+        The web store asks for an email address. The Play listing says you can subscribe in the Android app and
+        sign in to mySteganos only to use it on other devices.
       sources: [play, checkout]
     personal_data:
       value: [name]
@@ -125,10 +127,8 @@ criteria:
   security:
     protocols:
       value: [openvpn, ikev2]
-      note: >-
-        OpenVPN on Windows, IKEv2 on macOS and iOS. The Android help page says OpenVPN, but the Play listing
-        says IKEv2.
-      sources: [checklist, mac-help, ios-help, android-help, play]
+      note: OpenVPN on Windows and Android, IKEv2 on macOS and iOS.
+      sources: [checklist, mac-help, ios-help, android-help]
     post_quantum:
       value: none
       note: Not mentioned on the product page or in the help centre.
@@ -160,10 +160,10 @@ criteria:
       sources: [product]
     servers:
       value: null
-      note: The product page gives 239 "server locations" in 43 countries, but no server count.
+      note: The product page gives 240 "server locations" in 44 countries, but no server count.
       sources: [product]
     countries:
-      value: 43
+      value: 44
       sources: [product]
 
   features:
@@ -209,7 +209,7 @@ criteria:
       sources: [product]
     best:
       value: { amount: 2.91, currency: EUR }
-      note: €69.90 for two years, for 5 devices. A year is €34.95. The US Play listing sells it for $7.95 a month or $49.95 a year.
+      note: €69.90 for two years, for 5 devices. A year is €34.95. In-app prices on the US Play listing run from $7.95 to $49.99.
       sources: [product, play]
     best_term:
       value: 24
@@ -231,8 +231,8 @@ criteria:
   ethics:
     misleading_claims:
       value: true
-      note: Promises "absolute security and privacy", "maximum anonymity" and that "nobody spies on you".
-      sources: [product, play]
+      note: Promises "absolute security and privacy", that you "surf anonymously" and that "nobody spies on you".
+      sources: [product]
     affiliates:
       value: true
       note: Its sales page pointed to an affiliate programme on CJ until at least June 2026. The redesigned page no longer mentions it.
