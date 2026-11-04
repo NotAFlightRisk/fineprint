@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: DuckDuckGo VPN
 icon: duckduckgo-vpn.svg
-checked: 2026-10-22
+checked: 2026-11-04
 
 criteria:
   identity:
@@ -255,7 +255,7 @@ criteria:
       sources: [who-owns]
     activism:
       value: true
-      note: DuckDuckGo gave $1.1 million to privacy and digital rights groups in 2025, including the EFF and Signal.
+      note: DuckDuckGo gave $1 million to privacy and digital rights groups in 2026, including the EFF and Signal.
       sources: [donations]
 
 refs:
@@ -368,5 +368,5 @@ refs:
     url: https://duckduckgo.com/duckduckgo-help-pages/company/partnerships
     title: Is DuckDuckGo open to partnerships?
   donations:
-    url: https://spreadprivacy.com/2025-duckduckgo-charitable-donations/
-    title: '2025 DuckDuckGo Charitable Donations: $1.1M to privacy and digital competition non-profits'
+    url: https://spreadprivacy.com/2026-duckduckgo-charitable-donations/
+    title: '2026 DuckDuckGo Charitable Donations: $1M to privacy and digital competition non-profits around the world'
