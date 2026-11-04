@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: Guardian Firewall + VPN
 icon: guardian.png
-checked: 2026-10-22
+checked: 2026-11-04
 
 criteria:
   identity:
@@ -168,15 +168,17 @@ criteria:
       sources: [guardian-policy, audit-2026]
     hosting:
       value: null
-      note: Guardian told Assured it always controls the physical servers its VPN machines run on, without saying whether it owns them.
-      sources: [audit-2026]
+      note: >-
+        Brave, which runs on Guardian's network, says Guardian keeps exclusive control of the physical servers its
+        VPN machines run on, without saying whether it owns them.
+      sources: [brave-vpn, audit-2026]
     virtual_locations:
       value: null
       note: Guardian doesn't say. Its region list gives each region an ISO country code.
       sources: [locations, regions-api]
     servers:
       value: 400
-      note: The pricing page says 400+. Guardian's region list counted 636 on 2026-10-22.
+      note: The pricing page says 400+. Guardian's region list counted 646 on 2026-11-04.
       sources: [pricing, regions-api]
     countries:
       value: 43
@@ -219,9 +221,9 @@ criteria:
         exported from the app.
       sources: [platforms, pricing, linux-config, router-config]
     open_source:
-      value: none
+      value: some
       note: >-
-        The apps aren't published, but the MIT VPN frameworks under the iOS, macOS, Android and Windows apps are.
+        Only the MIT-licensed VPN frameworks under the iOS, macOS, Android and Windows apps. The apps themselves are closed.
       sources: [guardian-connect, guardian-github]
     telemetry:
       value: none
@@ -334,6 +336,9 @@ refs:
   dnsfilter-retention:
     url: https://help.guardianapp.com/help-center-articles/dnsfilter-data-retention-policy
     title: DNSFilter Data Retention Policy
+  brave-vpn:
+    url: https://brave.com/firewall-vpn/
+    title: Brave VPN, which runs on Guardian's network (server FAQ)
   guardian-brave-pr:
     url: https://guardianapp.com/newsroom/brave-press-release/
     title: Brave and Guardian partner to integrate Brave iOS browser with Guardian Firewall + VPN (2020-07-27)
