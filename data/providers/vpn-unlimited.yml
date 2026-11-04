@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: VPN Unlimited
 icon: vpn-unlimited.svg
-checked: 2026-10-21
+checked: 2026-11-04
 
 criteria:
   identity:
@@ -119,8 +119,8 @@ criteria:
   security:
     protocols:
       value: [wireguard, openvpn, ikev2, proprietary, other]
-      note: Its own protocol is KeepSolid Wise, built on OpenVPN. Other is L2TP for manual setups.
-      sources: [protocols, wise]
+      note: Its own protocol is KeepSolid Wise, built on OpenVPN. Other covers VLESS over Xray, in the apps since April 2026, and L2TP for manual setups.
+      sources: [protocols, wise, history]
     post_quantum:
       value: none
       note: Its protocol pages don't mention post-quantum key exchange.
@@ -162,9 +162,9 @@ criteria:
       sources: [account-faq, additional-devices]
     multihop: false
     obfuscation:
-      value: [proprietary]
-      note: KeepSolid Wise wraps OpenVPN to look like HTTPS traffic.
-      sources: [wise]
+      value: [proprietary, v2ray]
+      note: KeepSolid Wise wraps OpenVPN to look like HTTPS traffic. V2Ray here is VLESS over Xray, added to the apps in April 2026.
+      sources: [wise, history, telegram-bot]
     port_forwarding: false
     split_tunnel:
       value: true
@@ -188,10 +188,6 @@ criteria:
       value: null
       note: The policy lists app usage data for statistics and product planning, and the Android app includes Firebase Analytics, AppsFlyer and Crashlytics. Neither says whether you can turn it off.
       sources: [privacy, exodus]
-    trackers:
-      value: 6
-      note: The newest Exodus report that would load was for version 9.1.25, from December 2024.
-      sources: [exodus]
     fdroid:
       value: false
       sources: [exodus]
@@ -336,3 +332,6 @@ refs:
   vpn-lite:
     url: https://apps.apple.com/us/app/vpn-lite-without-registration/id1424247267
     title: VPN Lite Without Registration on the App Store
+  telegram-bot:
+    url: https://www.vpnunlimited.com/downloads/telegram-bot
+    title: VPN Unlimited Telegram Bot
