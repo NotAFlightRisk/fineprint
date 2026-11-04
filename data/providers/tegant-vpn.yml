@@ -1,0 +1,227 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Tegant VPN
+icon: tegant-vpn.svg
+checked: 2026-11-04
+
+criteria:
+  identity:
+    website: https://tegant.com
+    legal_entity:
+      value: Venus Cloud Ltd
+      note: Registered in England in March 2011, company number 07563716.
+      sources: [terms, register]
+    owner:
+      value: Houman Khorasani
+      note: The sole director, who holds 75% or more of Venus Cloud Ltd.
+      sources: [register-officers, register-psc]
+    founded:
+      value: 2018
+      note: The iOS app came out in May 2018.
+      sources: [app-store]
+    team:
+      value: partial
+      note: >-
+        Its About page names only a founder, Hermann. The register's sole director and owner is Houman
+        Khorasani.
+      sources: [about, register-officers]
+    sister_brands:
+      value: []
+      note: The same developer's other apps aren't VPNs, among them the CallSky calling app.
+      sources: [play, app-store]
+    acquisitions:
+      value: []
+      sources: [play-2023, play]
+
+  jurisdiction:
+    hq:
+      value: GB
+      sources: [register]
+    entities:
+      value: [GB]
+      sources: [register]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [policy]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [policy]
+    timestamps:
+      value: none
+      evidence: claimed
+      note: The policy rules out connection times and session lengths tied to your identity.
+      sources: [policy]
+    bandwidth:
+      value: null
+      note: >-
+        The terms mention aggregate server metrics, and the apps apply a fair usage limit on some servers,
+        without saying whether data use is kept per user.
+      sources: [terms, app-store]
+    source_ip:
+      value: none
+      evidence: claimed
+      sources: [policy]
+    proven: []
+    policy: https://tegant.com/privacy/
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: none
+      note: There are no accounts. Subscriptions are tied to your Apple ID or Google account.
+      sources: [terms]
+    personal_data: []
+    payment:
+      value: [app_store]
+      sources: [terms]
+
+  security:
+    protocols:
+      value: [wireguard, other]
+      note: Other is Xray (VLESS with Reality, Trojan and XHTTP), for Premium only.
+      sources: [about, apk]
+    post_quantum:
+      value: none
+      note: Nothing is published about its key exchange.
+    kill_switch:
+      value: null
+      note: It doesn't say whether it has one.
+    dns:
+      value: null
+      note: >-
+        Premium users can pick its own DNS, AdGuard, Quad9, Google or their own, without it saying which
+        answers by default.
+      sources: [apk, app-store]
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say how its servers are run.
+    hosting:
+      value: null
+      note: It doesn't say whether it owns or rents its servers.
+    virtual_locations:
+      value: null
+      note: It doesn't say whether any locations are virtual.
+    servers:
+      value: null
+      note: It lists locations, not a server count.
+      sources: [play]
+    countries:
+      value: 18
+      note: Xray is offered in 16 of them.
+      sources: [play]
+
+  features:
+    connections:
+      value: null
+      note: >-
+        No device limit is given. One Apple subscription covers every device on the same Apple ID, and
+        Android subscriptions are separate.
+      sources: [terms]
+    multihop: false
+    obfuscation:
+      value: [v2ray]
+      note: V2Ray here is Xray with VLESS and Reality, for Premium only.
+      sources: [about, terms, apk]
+    port_forwarding:
+      value: false
+      note: P2P and BitTorrent traffic is blocked on every server.
+      sources: [terms]
+    split_tunnel:
+      value: null
+      note: It doesn't say whether you can choose which apps use the VPN.
+    blocking:
+      value: [ads, malware]
+      note: Premium only, at the DNS level.
+      sources: [terms]
+
+  clients:
+    platforms:
+      value: [ios, macos, android]
+      sources: [app-store, play]
+    open_source:
+      value: none
+      note: The apps are built on open source WireGuard and Xray, but their own code isn't published.
+      sources: [apk]
+    telemetry:
+      value: null
+      note: >-
+        The policy says the apps send Firebase analytics and Crashlytics crash reports, tied to a random
+        install ID and the advertising ID. It only points to device ad settings for opting out of some of it.
+      sources: [policy, apk]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 12.99, currency: USD }
+      sources: [home, app-store]
+    best:
+      value: { amount: 6.67, currency: USD }
+      note: $79.99 a year.
+      sources: [home, app-store]
+    best_term:
+      value: 12
+      sources: [home]
+    renewal_increase:
+      value: 0
+      sources: [app-store]
+    free_tier:
+      value: true
+      note: >-
+        Watching ads unlocks 1 to 5 hours at a time, on WireGuard and free servers only.
+      sources: [terms, home]
+    refund_days:
+      value: null
+      note: Refunds follow Apple's and Google's own rules.
+      sources: [terms]
+
+  ethics:
+    misleading_claims: false
+    affiliates: false
+    review_sites: false
+    activism: false
+
+refs:
+  policy:
+    url: https://tegant.com/privacy/
+    title: Tegant VPN Privacy Policy (last updated 2 November 2026)
+  terms:
+    url: https://tegant.com/terms/
+    title: Tegant VPN Terms and Conditions (last updated 2 November 2026)
+  about:
+    url: https://tegant.com/about/
+    title: About Tegant, the company behind the VPN
+  home:
+    url: https://tegant.com/
+    title: Tegant VPN home page and pricing
+  register:
+    url: https://find-and-update.company-information.service.gov.uk/company/07563716
+    title: Venus Cloud Ltd (07563716), Companies House
+  register-officers:
+    url: https://find-and-update.company-information.service.gov.uk/company/07563716/officers
+    title: Venus Cloud Ltd officers, Companies House
+  register-psc:
+    url: https://find-and-update.company-information.service.gov.uk/company/07563716/persons-with-significant-control
+    title: Venus Cloud Ltd persons with significant control, Companies House
+  play:
+    url: https://play.google.com/store/apps/details?id=com.venuscloud.tegant.vpn.android
+    title: "Tegant VPN: Fast & Secure VPN on Google Play"
+  play-2023:
+    url: https://web.archive.org/web/20230520114150/https://play.google.com/store/apps/details?id=com.venuscloud.tegant.vpn.android
+    title: Tegant VPN on Google Play (archived May 2023)
+  app-store:
+    url: https://apps.apple.com/us/app/tegant-vpn/id1305241374
+    title: Tegant VPN on the App Store (US)
+  apk:
+    url: https://apkpure.net/tegant-vpn/com.venuscloud.tegant.vpn.android
+    title: Tegant VPN for Android 2.1.0.0, whose APK holds wireguard-go, Xray core, AdMob, Firebase Analytics and Crashlytics
