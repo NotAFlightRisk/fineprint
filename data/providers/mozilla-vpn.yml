@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: Mozilla VPN
 icon: mozilla-vpn.png
-checked: 2026-10-22
+checked: 2026-11-04
 
 criteria:
   identity:
@@ -290,8 +290,8 @@ refs:
     url: https://www.mozilla.org/en-US/about/leadership/
     title: Mozilla leadership
   launch-2020:
-    url: https://www.newswire.ca/news-releases/mozilla-vpn-is-available-in-canada-offering-a-trusted-way-to-keep-users-online-lives-safe-and-secure-819011123.html
-    title: Mozilla VPN is available in Canada (Mozilla press release, 2020-07-15)
+    url: https://web.archive.org/web/20200717072810/https://www.newswire.ca/news-releases/mozilla-vpn-is-available-in-canada-offering-a-trusted-way-to-keep-users-online-lives-safe-and-secure-819011123.html
+    title: Mozilla VPN is available in Canada (Mozilla press release, 2020-07-15, archived)
   builtin-vpn:
     url: https://web.archive.org/web/20260323204844/https://support.mozilla.org/en-US/kb/built-in-vpn
     title: Firefox built-in VPN help article (archived March 2026)
@@ -317,17 +317,17 @@ refs:
     url: https://mullvad.net/en/blog/quantum-resistant-tunnels-are-now-the-default-on-desktop
     title: Mullvad quantum-resistant tunnels are now the default on desktop
   audit-cure53-2023:
-    url: https://web.archive.org/web/20251128235330/https://blog.mozilla.org/security/files/2023/12/Cure53-Final-Audit-Report.pdf
-    title: Cure53, Mozilla VPN client apps pentest (FVP-03, 2023, archived)
+    url: https://blog.mozilla.org/security/files/2023/12/Cure53-Final-Audit-Report.pdf
+    title: Cure53, Mozilla VPN client apps pentest (FVP-03, 2023)
   audit-cure53-2021:
     url: https://cure53.de/pentest-report_mozilla-vpn.pdf
     title: Cure53, Mozilla VPN apps and clients pentest (FVP-02, 2021)
   audit-blog-2023:
-    url: https://web.archive.org/web/20260102071430/https://blog.mozilla.org/security/2023/12/06/mozilla-vpn-security-audit-2023/
-    title: Mozilla VPN Security Audit 2023 (archived)
+    url: https://blog.mozilla.org/security/2023/12/06/mozilla-vpn-security-audit-2023/
+    title: Mozilla VPN Security Audit 2023
   audit-blog-2021:
-    url: https://web.archive.org/web/20260201010802/https://blog.mozilla.org/security/2021/08/31/mozilla-vpn-security-audit/
-    title: Mozilla VPN Security Audit, 2021 (archived)
+    url: https://blog.mozilla.org/security/2021/08/31/mozilla-vpn-security-audit/
+    title: Mozilla VPN Security Audit, 2021
   transparency:
     url: https://www.mozilla.org/en-US/about/policy/transparency/
     title: Mozilla transparency reports
