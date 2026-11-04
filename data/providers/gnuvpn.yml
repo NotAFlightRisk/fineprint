@@ -1,0 +1,294 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: GnuVPN
+icon: gnuvpn.png
+checked: 2026-11-04
+
+criteria:
+  identity:
+    website:
+      value: https://gnuvpn.com
+      sources: [home]
+    legal_entity:
+      value: GNUAPP, Unipessoal, Lda
+      note: The same Lisbon company is the Google Play developer and the App Store seller.
+      sources: [terms, register, play, app-store]
+    owner:
+      value: null
+      note: GNUAPP is a single-member company, and it doesn't say who the member is.
+      sources: [register]
+    founded:
+      value: 2022
+      note: >-
+        The first Android build on its GitHub is from November 2022, before the Portuguese company was set
+        up in January 2023. The homepage claims six years of protecting user data.
+      sources: [github-android, register, home]
+    team:
+      value: anonymous
+      note: No one is named as running it.
+      sources: [play, gnuapp]
+    sister_brands:
+      value: []
+      note: >-
+        The same Google Play account publishes GNU Adapter apps, which are bare SoftEther and AmneziaWG
+        clients with no servers of their own, plus a crypto wallet and business software.
+      sources: [play-dev, play-adapter-mini, play-softether-adapter]
+    acquisitions:
+      value: []
+      sources: [play-2024, play, app-store]
+
+  jurisdiction:
+    hq:
+      value: PT
+      evidence: claimed
+      note: >-
+        The privacy policy puts its headquarters in Saint Vincent and the Grenadines and calls GNUAPP its
+        holding company, but names no company there, and the terms fall under Portuguese law.
+      sources: [register, terms, privacy]
+    entities:
+      value: [PT]
+      sources: [register]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [privacy]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [privacy]
+    timestamps:
+      value: aggregate
+      evidence: claimed
+      note: Keeps the date of each successful connection and the location picked, and says it doesn't keep connection times beyond what running the service needs.
+      sources: [privacy]
+    bandwidth:
+      value: aggregate
+      evidence: claimed
+      note: The policy says it may keep a total of the data transferred on each account.
+      sources: [privacy]
+    source_ip:
+      value: null
+      note: >-
+        The policy keeps the country and internet provider you connect from, and rules out IP addresses
+        only beyond what running the service needs. The Play listing says the app shares your approximate location.
+      sources: [privacy, play-data-safety]
+    proven: []
+    policy: https://gnuvpn.com/page/privacy-policy
+
+  transparency:
+    audits:
+      value:
+        - date: 2026-02-11
+          auditor: Leviathan Security Group
+          scope: apps
+          source: ada
+      evidence: verified
+      note: A Google Play MASA check of the Android app, dated to when it was issued. No report is published.
+      sources: [ada]
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: optional
+      note: The apps have a guest mode for app store subscriptions. Buying on the website needs an email address.
+      sources: [apk, app-store, signup]
+    personal_data:
+      value: []
+      sources: [signup]
+    payment:
+      value: [card, paypal, app_store, bitcoin, other_crypto]
+      note: Other crypto is USDT (TRC20), TRON and Litecoin.
+      sources: [payment-methods, instructions]
+
+  security:
+    protocols:
+      value: [openvpn, other]
+      note: >-
+        Other is SoftEther and AmneziaWG, an obfuscated WireGuard fork. The Play listing also names PPTP,
+        SSTP, IKEv2 and L2TP/IPsec, which the Android app doesn't include.
+      sources: [apk, app-store, play, faq-mobile]
+    post_quantum:
+      value: none
+      note: Nothing is published about its key exchange.
+    kill_switch:
+      value: app
+      evidence: claimed
+      note: On Android it points you to the system's Always-on VPN setting.
+      sources: [home, apk]
+    dns:
+      value: null
+      note: It doesn't say whose DNS servers answer inside the tunnel.
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say how its servers are run.
+    hosting:
+      value: null
+      note: The policy says its servers sit in professional data centres, without saying whether any are its own.
+      sources: [privacy]
+    virtual_locations:
+      value: null
+      note: It doesn't say whether any locations are virtual.
+    servers:
+      value: 1000
+      note: The App Store listing's claim, with no server list published.
+      sources: [app-store]
+    countries:
+      value: 55
+      note: Its claim is "55+ countries".
+      sources: [app-store]
+
+  features:
+    connections:
+      value: 5
+      note: Only with a full account, not the apps' guest mode.
+      sources: [home, apk]
+    multihop: false
+    obfuscation:
+      value: [amneziawg]
+      note: The app suggests AmneziaWG, then SoftEther, where the internet is restricted.
+      sources: [apk]
+    port_forwarding: false
+    split_tunnel:
+      value: true
+      note: By app, on Android.
+      sources: [apk, play]
+    blocking: []
+
+  clients:
+    platforms:
+      value: [windows, macos, linux_gui, ios, android]
+      note: The Ubuntu and Debian app hasn't been updated since July 2023.
+      sources: [downloads, github-linux]
+    open_source:
+      value: none
+      note: Its GitHub only hosts release builds, and the terms forbid reverse engineering the apps.
+      sources: [github-android, terms]
+    telemetry:
+      value: null
+      note: >-
+        The policy says crash reports and diagnostics are opt-in, and the Android app asks before turning on
+        analytics, but it also carries Adjust and Facebook's SDK. The Play form lists device IDs, location
+        and app activity shared for advertising.
+      sources: [privacy, apk, play-data-safety]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 4, currency: USD }
+      note: Shown as half of a crossed-out $8.
+      sources: [home]
+    best:
+      value: { amount: 3.5, currency: USD }
+      note: $42 for a year.
+      sources: [home]
+    best_term:
+      value: 12
+      sources: [home]
+    renewal_increase:
+      value: null
+      note: >-
+        Each plan is shown at about half a crossed-out price, and neither the page nor the terms say which
+        one it renews at.
+      sources: [home, terms]
+    free_tier:
+      value: false
+      note: There's a 3-day free trial through the app stores.
+      sources: [faq-pay, apk]
+    refund_days:
+      value: 14
+      note: For a year or longer. A month gets 3 days and six months 7, once per account, and app store purchases go through the store.
+      sources: [terms, faq-refund]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        The App Store listing promises "military-level encryption" and that your data is "never collected,
+        stored, or shared with third parties", while its Play form lists data shared for advertising.
+      sources: [app-store, play-data-safety]
+    affiliates:
+      value: false
+      note: Only a referral scheme that pays users in account credit.
+      sources: [faq-referral]
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://gnuvpn.com/
+    title: GnuVPN homepage and pricing plans
+  privacy:
+    url: https://gnuvpn.com/page/privacy-policy
+    title: GnuVPN Privacy Policy
+  terms:
+    url: https://gnuvpn.com/page/terms-of-use
+    title: GnuVPN Terms of Use
+  downloads:
+    url: https://gnuvpn.com/downloads
+    title: Download the latest version of GnuVPN
+  signup:
+    url: https://gnuvpn.com/register
+    title: Create a GnuVPN account
+  instructions:
+    url: https://gnuvpn.com/instructions
+    title: Instructions for payment
+  payment-methods:
+    url: https://gnuvpn.com/faq/payment-methods
+    title: Payment methods
+  faq-pay:
+    url: https://gnuvpn.com/faq/do-i-have-to-pay-for-it
+    title: Do I have to pay for it?
+  faq-refund:
+    url: https://gnuvpn.com/faq/what-is-your-refund-policy
+    title: What is your refund policy?
+  faq-referral:
+    url: https://gnuvpn.com/faq/how-to-work-with-gnuvpn-referral-program
+    title: How to work with GnuVPN referral program?
+  faq-mobile:
+    url: https://gnuvpn.com/faq/how-to-set-up-gnuvpn-in-the-mobile-app
+    title: How to set up GnuVPN in the mobile app?
+  gnuapp:
+    url: https://gnuapp.com/en
+    title: GNUAPP company site
+  register:
+    url: https://www.racius.com/gnuapp-unipessoal-lda/
+    title: Gnuapp, Unipessoal Lda (NIF 517328879), set up 6 January 2023, Racius company record
+  play:
+    url: https://play.google.com/store/apps/details?id=com.gnu.vpn
+    title: 'GnuVPN: Super Fast VPN Proxy on Google Play'
+  play-data-safety:
+    url: https://play.google.com/store/apps/datasafety?id=com.gnu.vpn
+    title: GnuVPN data safety on Google Play
+  play-dev:
+    url: https://play.google.com/store/apps/dev?id=9044797487643006410
+    title: GNUAPP UNIPESSOAL LDA apps on Google Play
+  play-2024:
+    url: https://web.archive.org/web/20240101135349/https://play.google.com/store/apps/details?id=com.gnu.vpn&pli=1
+    title: GnuVPN on Google Play (archived January 2024)
+  play-adapter-mini:
+    url: https://play.google.com/store/apps/details?id=com.adaptermini.vpn
+    title: GNU Adapter Mini on Google Play
+  play-softether-adapter:
+    url: https://play.google.com/store/apps/details?id=com.excdev.vpn
+    title: Gnu Adapter Softether Amnezia on Google Play
+  app-store:
+    url: https://apps.apple.com/us/app/gnuvpn-fast-vpn-proxy-esim/id1668762886
+    title: 'GnuVPN: Fast VPN, Proxy & eSIM on the App Store (US)'
+  apk:
+    url: https://github.com/gnuvpn/gnuvpn/releases/tag/v1.8.14
+    title: GnuVPN for Android 1.8.14, whose APK holds OpenVPN, SoftEther and AmneziaWG, plus Adjust, Firebase Analytics and Facebook SDKs
+  github-android:
+    url: https://github.com/gnuvpn/gnuvpn/releases
+    title: GnuVPN Android releases on GitHub (from November 2022)
+  github-linux:
+    url: https://github.com/gnuvpn/gnuvpnubuntu/releases
+    title: GnuVPN Ubuntu and Debian releases on GitHub
+  ada:
+    url: https://cert.appdefensealliance.org/certifications/10073
+    title: App Defense Alliance, GnuVPN MASA record (Leviathan Security, issued 11 February 2026)
