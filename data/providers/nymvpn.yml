@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: NymVPN
 icon: nymvpn.svg
-checked: 2026-10-24
+checked: 2026-11-04
 
 criteria:
   identity:
@@ -148,12 +148,12 @@ criteria:
       note: Nym places exit servers by IP geolocation rather than trusting where operators say they are.
       sources: [server-location]
     servers:
-      value: 621
-      note: VPN gateways in Nym's directory on 2026-10-24, 477 of them usable as exits.
+      value: 627
+      note: VPN gateways in Nym's directory on 2026-11-04, 480 of them usable as exits.
       sources: [gateways-api, server-list]
     countries:
       value: 71
-      note: Countries with a gateway on 2026-10-24. Exit servers were in 59 of them.
+      note: Countries with a gateway on 2026-11-04. Exit servers were in 60 of them.
       sources: [gateways-api]
 
   features:
