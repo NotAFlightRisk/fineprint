@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: OVPN
 icon: ovpn.svg
-checked: 2026-10-22
+checked: 2026-11-04
 
 criteria:
   identity:
@@ -80,7 +80,7 @@ criteria:
       value: none
       evidence: claimed
       note: The monthly transparency reports give traffic per data centre only.
-      sources: [privacy, report-2026-09]
+      sources: [privacy, report-2026-10]
     source_ip:
       value: temporary
       evidence: claimed
@@ -109,7 +109,7 @@ criteria:
       note: >-
         Monthly reports of data requests and traffic per data centre, though several in 2024 and 2025 came
         out months late.
-      sources: [transparency, report-2026-09, blog-feed]
+      sources: [transparency, report-2026-10, blog-feed]
     canary:
       value: none
       sources: [transparency, how-secure]
@@ -181,8 +181,8 @@ criteria:
       sources: [network]
     servers:
       value: 96
-      note: The September 2026 transparency report only lists 90 servers, in 26 of the 32 cities.
-      sources: [press, network, report-2026-09]
+      note: The October 2026 transparency report only lists 90 servers, in 26 of the 32 cities.
+      sources: [press, network, report-2026-10]
     countries:
       value: 20
       note: Across 32 cities.
@@ -234,10 +234,7 @@ criteria:
         Desktop usage statistics are opt-in. The iOS App Store listing says the app collects crash data,
         without saying whether that can be turned off.
       sources: [usage-stats-help, usage-stats-release, app-store]
-    trackers:
-      value: 0
-      note: The newest Exodus report that would load was for version 0.9.0, from October 2022.
-      sources: [exodus]
+    fdroid: false
 
   pricing:
     monthly:
@@ -312,9 +309,9 @@ refs:
   transparency:
     url: https://www.ovpn.com/en/transparency
     title: Transparency
-  report-2026-09:
-    url: https://www.ovpn.com/en/blog/transparency-report-september-2026
-    title: 'Transparency report: September 2026'
+  report-2026-10:
+    url: https://www.ovpn.com/en/blog/transparency-report-october-2026
+    title: 'Transparency report: October 2026'
   blog-feed:
     url: https://www.ovpn.com/en/blog/rss
     title: OVPN blog feed (publication dates)
@@ -438,9 +435,6 @@ refs:
   play-store:
     url: https://play.google.com/store/apps/details?id=com.ovpn.android
     title: OVPN on Google Play
-  exodus:
-    url: https://web.archive.org/web/20230314114204/https://reports.exodus-privacy.eu.org/en/reports/com.ovpn.android/latest/
-    title: Exodus Privacy report for com.ovpn.android 0.9.0 (archived)
   point-wild-team:
     url: https://www.pointwild.com/our-team/
     title: Point Wild, our team
