@@ -1,0 +1,252 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: RunVPN
+icon: runvpn.png
+checked: 2026-11-04
+
+criteria:
+  identity:
+    website:
+      value: https://runvpn.app
+      sources: [home]
+    legal_entity:
+      value: Sparrow Tech, Inc.
+      note: A Delaware corporation, also named as the Google Play developer behind the Sparrowlab account.
+      sources: [terms, play]
+    owner:
+      value: null
+      note: It doesn't say who owns Sparrow Tech, Inc. Its Google Play contact address is at sparrowcorp.io, the domain of a mobile app marketing agency.
+      sources: [play, sparrowcorp]
+    founded:
+      value: 2026
+      note: The Android app came out in June 2026. An unrelated Run VPN app used the runvpn.app domain in 2023.
+      sources: [play, domain-2023]
+    team:
+      value: anonymous
+      note: Nobody is named as running it, on its own site or Sparrowcorp's.
+      sources: [home, sparrowcorp]
+    sister_brands:
+      value: [Kapa VPN]
+      note: Kapa VPN came out on the same Google Play developer account in October 2026, and also lets you add your own VLESS servers.
+      sources: [play-dev, kapa-play]
+    acquisitions: []
+
+  jurisdiction:
+    hq:
+      value: US
+      sources: [terms, play]
+    entities:
+      value: [US]
+      sources: [terms]
+
+  logging:
+    traffic:
+      value: 'yes'
+      evidence: claimed
+      note: >-
+        For 30 days it keeps a keyed one-way fingerprint of each connection's destination IP address and
+        port, alongside your account, source IP and times, so a reported destination can be matched to you.
+        It says it keeps no domains, DNS queries or traffic content.
+      sources: [privacy]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [privacy]
+    timestamps:
+      value: 'yes'
+      evidence: claimed
+      note: Connection opening and closing times are kept for up to 30 days.
+      sources: [home]
+    bandwidth:
+      value: aggregate
+      evidence: claimed
+      note: Only for free accounts, as how much of their data allowance they've used. Its connection records hold no traffic counts.
+      sources: [privacy]
+    source_ip:
+      value: 'yes'
+      evidence: claimed
+      note: The IP address you connect from is kept for up to 30 days.
+      sources: [privacy, home]
+    proven: []
+    policy: https://runvpn.app/privacy/
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: optional
+      note: You need an account, even on the free plan, but can sign in with Google or Telegram instead of an email code.
+      sources: [android, apk]
+    personal_data: []
+    payment:
+      value: [card, bank, app_store, other_crypto]
+      note: Bank transfer is Russia's SBP and crypto is USDT through CryptoBot, both on its Russian payment page. The policy also mentions Telegram Stars.
+      sources: [pay, privacy, play]
+
+  security:
+    protocols:
+      value: [other]
+      note: VLESS with REALITY through Xray. Its site also says it uses AmneziaWG by default, but the Android app doesn't include it.
+      sources: [vless, amneziawg, apk]
+    post_quantum:
+      value: null
+      note: It doesn't say anything about its key exchange beyond TLS 1.3.
+      sources: [vless]
+    kill_switch:
+      value: null
+      note: It doesn't advertise one.
+    dns:
+      value: null
+      note: It says DNS goes through the tunnel, without saying whose servers answer it.
+      sources: [dns-leak]
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say how its servers are run.
+    hosting:
+      value: rented
+      evidence: claimed
+      note: The policy says cloud hosting providers run its servers and VPN infrastructure, without naming them.
+      sources: [privacy]
+    virtual_locations:
+      value: null
+      note: It doesn't say whether any locations are virtual.
+    servers:
+      value: null
+      note: It doesn't publish a server count.
+    countries:
+      value: null
+      note: It doesn't publish a country count.
+
+  features:
+    connections:
+      value: 5
+      note: Premium only. The free plan works on one device.
+      sources: [download, android]
+    multihop: false
+    obfuscation:
+      value: [v2ray]
+      note: V2Ray here is VLESS with REALITY through Xray, which it sells as hard to spot on networks that inspect traffic.
+      sources: [vless, apk]
+    port_forwarding: false
+    split_tunnel:
+      value: true
+      note: By app, on Android.
+      sources: [android]
+    blocking:
+      value: [trackers]
+      note: A tracker blocking setting in the Android app.
+      sources: [apk]
+
+  clients:
+    platforms:
+      value: [windows, android]
+      note: The Android app also runs on Android TV. An iOS app is announced as coming soon, and an FAQ mentions routers without any app or guide for them.
+      sources: [download, home]
+    open_source:
+      value: none
+      note: The Android app is built on the open source Xray-core, but its own code isn't published.
+      sources: [apk]
+    telemetry:
+      value: null
+      note: >-
+        On Android the policy says Firebase crash and performance diagnostics and an advertising ID for
+        campaign measurement are disclosed before use and controlled through device settings, without saying
+        whether you can turn them off. On iOS it promises they're opt-in.
+      sources: [privacy, play-data-safety]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 249, currency: RUB }
+      note: Paid direct on its Russian payment page. Google Play lists in-app prices from $6.99 to $69.99.
+      sources: [pay, play]
+    best:
+      value: { amount: 165.83, currency: RUB }
+      note: 1,990 roubles a year.
+      sources: [pay]
+    best_term:
+      value: 12
+      sources: [pay]
+    renewal_increase:
+      value: null
+      note: It doesn't say what plans renew at.
+      sources: [pay, terms]
+    free_tier:
+      value: null
+      note: The free plan works on one device with a data allowance, but it doesn't say how much or whether it renews.
+      sources: [download, android]
+    refund_days:
+      value: 7
+      note: >-
+        Only for direct payments where the VPN didn't work on your device, and not once a monthly plan has
+        been used for over 7 days or 4 GB. Otherwise a paid period isn't refundable once used, and app store
+        purchases follow the store's rules.
+      sources: [terms]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        Its homepage says it doesn't record traffic destinations and Google Play promises "No activity
+        logs", while the policy keeps a fingerprint of each connection's destination with your IP address
+        for 30 days.
+      sources: [home, play, privacy]
+    affiliates: false
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://runvpn.app/
+    title: RunVPN, fast, private VPN for every device
+  privacy:
+    url: https://runvpn.app/privacy/
+    title: RunVPN Privacy Policy (last updated 20 October 2026)
+  terms:
+    url: https://runvpn.app/terms/
+    title: RunVPN Terms of Service (last updated 29 July 2026)
+  download:
+    url: https://runvpn.app/download/
+    title: Download RunVPN
+  android:
+    url: https://runvpn.app/android/
+    title: 'RunVPN for Android: one-tap VPN on Google Play'
+  vless:
+    url: https://runvpn.app/protocols/vless-reality/
+    title: 'VLESS-Reality protocol: how it works'
+  amneziawg:
+    url: https://runvpn.app/protocols/amneziawg/
+    title: 'AmneziaWG protocol: WireGuard speed, better stability'
+  dns-leak:
+    url: https://runvpn.app/blog/dns-leak-test/
+    title: "DNS Leak Test: How to Check Your VPN Isn't Exposing Your Traffic"
+  pay:
+    url: https://runvpn.app/pay/
+    title: RunVPN payment page (Russian)
+  play:
+    url: https://play.google.com/store/apps/details?id=com.runvpn.app
+    title: RunVPN – Secure Private VPN on Google Play
+  play-data-safety:
+    url: https://play.google.com/store/apps/datasafety?id=com.runvpn.app
+    title: RunVPN data safety on Google Play
+  play-dev:
+    url: https://play.google.com/store/apps/developer?id=Sparrowlab
+    title: Sparrowlab apps on Google Play
+  kapa-play:
+    url: https://play.google.com/store/apps/details?id=com.kapavpn.app
+    title: Kapa VPN on Google Play
+  sparrowcorp:
+    url: https://sparrowcorp.io/
+    title: Sparrowcorp, growth team for mobile apps
+  domain-2023:
+    url: https://web.archive.org/web/20230722170004/https://runvpn.app/
+    title: Run VPN at runvpn.app, an unrelated app (archived July 2023)
+  apk:
+    url: https://apkpure.net/runvpn-%E2%80%93-secure-private-vpn/com.runvpn.app
+    title: RunVPN for Android 3.0.0, a Flutter app on Xray-core with Firebase Analytics and Tenjin
