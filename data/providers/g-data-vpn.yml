@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: G DATA VPN
 icon: g-data-vpn.png
-checked: 2026-10-22
+checked: 2026-11-04
 
 criteria:
   identity:
@@ -267,8 +267,8 @@ refs:
     url: https://www.gdata.de/en/who-we-are
     title: G DATA, who we are
   accounts-2024:
-    url: https://www.lobbyregister.bundestag.de/media/d9/8d/857096/JA-Offenlegung-31-12-2024.pdf
-    title: G DATA CyberDefense AG annual accounts and management report 2024, filed with the Bundestag lobby register (in German)
+    url: https://web.archive.org/web/20261009201428/https://www.lobbyregister.bundestag.de/media/d9/8d/857096/JA-Offenlegung-31-12-2024.pdf
+    title: G DATA CyberDefense AG annual accounts and management report 2024, filed with the Bundestag lobby register (in German, archived)
   launch-2022:
     url: https://web.archive.org/web/20220810142951/https://www.gdatasoftware.co.uk/news/2022/03/37310-safe-private-surfing-with-g-data-vpn
     title: Safe and private surfing with G DATA VPN, 7 March 2022 (archived)
