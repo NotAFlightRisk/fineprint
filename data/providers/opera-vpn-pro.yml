@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: Opera VPN Pro
 icon: opera-vpn-pro.png
-checked: 2026-10-22
+checked: 2026-11-04
 
 criteria:
   identity:
@@ -149,7 +149,7 @@ criteria:
       sources: [product]
     countries:
       value: 47
-      note: Counted from its help centre's location list. The VPN Pro page says both 47 and 48 locations.
+      note: The VPN Pro page says both 47 and 48 locations.
       sources: [locations, product]
 
   features:
@@ -221,7 +221,7 @@ criteria:
       sources: [revamp-press, audit-post]
     refund_days:
       value: 30
-      note: For the first payment only, not renewals.
+      note: For the first payment. The terms also refund a first renewal paid by card if you ask within 48 hours.
       sources: [terms, refund]
 
   ethics:
