@@ -1,0 +1,217 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: nthLink
+icon: nthlink.png
+checked: 2026-11-04
+
+criteria:
+  identity:
+    website:
+      value: https://nthlink.com
+      sources: [home]
+    legal_entity:
+      value: Advanced Circuiting Inc
+      note: Named as the developer on Google Play and the App Store, at an office address in Reston, Virginia.
+      sources: [play, app-store, audit-2019]
+    owner:
+      value: null
+      grade: na
+      note: No parent company is named.
+      sources: [play]
+    founded:
+      value: 2016
+      note: The FAQ says it started in 2016 to help human rights lawyers. The iOS app came out in 2019.
+      sources: [faq, app-store]
+    team:
+      value: anonymous
+      note: The site only says it's a group of software and security engineers, and names nobody.
+      sources: [faq]
+    sister_brands: []
+    acquisitions: []
+
+  jurisdiction:
+    hq:
+      value: US
+      sources: [play, policies]
+    entities:
+      value: [US]
+      sources: [play]
+
+  logging:
+    traffic:
+      value: null
+      note: >-
+        The policy says it doesn't track your activity or browsing history, but its Google Play data safety form
+        says it collects web browsing history for analytics.
+      sources: [policies, faq, data-safety]
+    dns:
+      value: null
+      sources: [policies]
+    timestamps:
+      value: null
+      note: The policy says it only counts which countries and operating systems people use it from.
+      sources: [policies]
+    bandwidth:
+      value: null
+      sources: [policies]
+    source_ip:
+      value: null
+      note: >-
+        The FAQ says it collects your IP address, device type and operating system, without saying how long
+        they're kept.
+      sources: [faq]
+    proven: []
+    policy: https://nthlink.com/policies
+
+  transparency:
+    audits:
+      value:
+        - date: 2019-06-30
+          auditor: Cure53
+          scope: apps
+          source: audit-2019
+      evidence: verified
+      note: >-
+        A source code review and pentest of the Android and iOS apps, done in June 2019 for the US Agency for
+        Global Media. The policy also lists a 2020 Cure53 audit and a 2023 Include Security one, but links
+        neither report.
+      sources: [audit-2019, policies]
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: none
+      note: There are no accounts.
+      sources: [policies]
+    personal_data:
+      value: []
+      sources: [policies]
+    payment:
+      value: []
+      note: It's free, paid for by sponsors such as the Open Technology Fund and Google's Jigsaw.
+      sources: [faq]
+
+  security:
+    protocols:
+      value: [other]
+      note: >-
+        Shadowsocks through Jigsaw's Outline client. The newer Android app also bundles the leaf proxy core,
+        which can do Trojan and VLESS Reality.
+      sources: [policies, play]
+    post_quantum: none
+    kill_switch: null
+    dns:
+      value: null
+      note: The site only says it uses trusted DNS.
+      sources: [home]
+
+  infra:
+    ram_only: null
+    hosting: null
+    virtual_locations: null
+    servers: null
+    countries: null
+
+  features:
+    connections:
+      value: unlimited
+      note: There are no accounts, so nothing limits devices.
+      sources: [policies]
+    multihop: false
+    obfuscation:
+      value: [shadowsocks]
+      note: The apps work out fresh server addresses for your location, so they can reconnect when most are blocked.
+      sources: [home, policies]
+    port_forwarding: null
+    split_tunnel: null
+    blocking: []
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android]
+      sources: [home, releases]
+    open_source:
+      value: some
+      note: >-
+        The apps are on GitHub under the BSD licence, but only up to version 6.8 from December 2025. The Android
+        app on Google Play is 7.3.1 and has code that isn't in the repo, including Firebase Analytics.
+      sources: [github-android, play]
+    telemetry:
+      value: null
+      note: >-
+        The Android app includes Firebase Analytics, and Google Play's data safety form lists device IDs, app
+        interactions and crash logs as collected for analytics. The policy says there's no analytics in the apps.
+      sources: [play, data-safety, policies]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 0, currency: USD }
+      note: Free, paid for by sponsors.
+      sources: [faq]
+    best:
+      value: { amount: 0, currency: USD }
+      sources: [faq]
+    best_term:
+      value: null
+      grade: na
+      note: It's free.
+      sources: [faq]
+    renewal_increase:
+      value: 0
+      note: Nothing renews.
+      sources: [faq]
+    free_tier:
+      value: true
+      sources: [faq]
+    refund_days:
+      value: null
+      grade: na
+      note: It's free.
+      sources: [faq]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        The policy says no analytics tool is used in the apps and that it doesn't track your activity, but the
+        Android app ships Firebase Analytics and its Play listing declares browsing history collected for
+        analytics.
+      sources: [policies, data-safety, play]
+    affiliates: false
+    review_sites: false
+    activism:
+      value: true
+      note: Built to get people past censorship, starting with human rights lawyers.
+      sources: [faq]
+
+refs:
+  home:
+    url: https://nthlink.com/
+    title: nthLink home page
+  faq:
+    url: https://nthlink.com/#faq
+    title: nthLink FAQ
+  policies:
+    url: https://nthlink.com/policies
+    title: nthLink policies and privacy policy
+  releases:
+    url: https://nthlink.com/releases
+    title: nthLink releases
+  play:
+    url: https://play.google.com/store/apps/details?id=com.nthlink.android.client
+    title: nthLink on Google Play
+  data-safety:
+    url: https://play.google.com/store/apps/datasafety?id=com.nthlink.android.client
+    title: nthLink data safety on Google Play
+  app-store:
+    url: https://apps.apple.com/us/app/nthlink/id1467297604
+    title: nthLink on the US App Store
+  github-android:
+    url: https://github.com/nthlink/nthlink-os-android
+    title: nthlink-os-android on GitHub
+  audit-2019:
+    url: https://web.archive.org/web/20220926135138/https://www.nthlink.com/file/2019-nthLink-Security-Audit.pdf
+    title: Cure53, Pentest-Report nthLink VPN Apps 06.-07.2019 (Wayback Machine)
