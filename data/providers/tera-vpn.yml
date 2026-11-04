@@ -1,0 +1,214 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Tera VPN
+icon: tera-vpn.png
+checked: 2026-11-04
+
+criteria:
+  identity:
+    website:
+      value: https://tera-vpn.com
+      sources: [home]
+    legal_entity:
+      value: VRMN Tech
+      note: The name its privacy policy and Google Play give. Google Play's developer details name an individual in the United Arab Emirates rather than a company.
+      sources: [privacy, play]
+    owner:
+      value: null
+      note: It doesn't say who's behind VRMN Tech.
+      sources: [privacy]
+    founded:
+      value: 2025
+      note: The Android app came out in July 2025.
+      sources: [play-2025]
+    team:
+      value: partial
+      note: Its own pages name nobody, but Google Play's developer details give the name of an individual.
+      sources: [play]
+    sister_brands:
+      value: [Line VPN, Puzzle VPN, Zing VPN]
+      note: All on the same Google Play developer account. The Android app's own help text still refers to Line VPN.
+      sources: [play-dev, apk]
+    acquisitions:
+      value: []
+      sources: [play-2025, play]
+
+  jurisdiction:
+    hq:
+      value: AE
+      evidence: claimed
+      note: Google Play gives the developer's country as the United Arab Emirates, while the terms are governed by Hong Kong law.
+      sources: [play, terms]
+    entities:
+      value: null
+      note: No registered company is named.
+      sources: [privacy, terms]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      note: Its FAQ says browsing activity isn't logged. The privacy policy says nothing about the VPN connection.
+      sources: [home, play, privacy]
+    dns:
+      value: none
+      evidence: claimed
+      note: It says browsing activity isn't logged, without mentioning DNS separately.
+      sources: [home]
+    timestamps:
+      value: null
+      note: It doesn't say whether connection times are kept. The privacy policy's error logs include the time and date you used the app.
+      sources: [privacy]
+    bandwidth:
+      value: null
+      note: It doesn't say.
+      sources: [privacy]
+    source_ip:
+      value: null
+      note: >-
+        It doesn't say whether your IP address is kept, and the Play data safety form says the app shares your
+        approximate and precise location for analytics. The app doesn't ask for location permission.
+      sources: [privacy, play-data-safety, play]
+    proven: []
+    policy: https://tera-vpn.com/en/privacy/
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: none
+      note: There are no accounts.
+      sources: [home]
+    personal_data: []
+    payment:
+      value: []
+      note: It's free.
+      sources: [play]
+
+  security:
+    protocols:
+      value: [openvpn, other]
+      note: Other is VLESS through Xray. The site and Play listing only mention OpenVPN.
+      sources: [apk, home]
+    post_quantum:
+      value: none
+      note: Nothing is published about its key exchange.
+    kill_switch:
+      value: none
+      note: The Android app's help points you to Android's own Block connections without VPN setting rather than having one.
+      sources: [apk]
+    dns:
+      value: third_party
+      note: The Android app sets Cloudflare's 1.1.1.1 as the DNS server for OpenVPN connections.
+      sources: [apk]
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say how its servers are run.
+    hosting:
+      value: null
+      note: It doesn't say whether it owns or rents its servers.
+    virtual_locations:
+      value: null
+      note: It doesn't say whether any locations are virtual.
+    servers:
+      value: null
+      note: It doesn't publish a server count.
+    countries:
+      value: null
+      note: It doesn't publish a country count.
+
+  features:
+    connections:
+      value: unlimited
+      note: There are no accounts, so nothing ties it to a number of devices.
+      sources: [home]
+    multihop: false
+    obfuscation:
+      value: [stunnel, v2ray]
+      note: >-
+        OpenVPN wrapped in stunnel with borrowed domain names in the TLS handshake, and VLESS through Xray. The
+        app also carries an SSH tunnel for OpenVPN.
+      sources: [apk]
+    port_forwarding: false
+    split_tunnel:
+      value: false
+      note: The Android app has no split tunnelling setting.
+      sources: [apk]
+    blocking: []
+
+  clients:
+    platforms:
+      value: [android]
+      note: An iOS version is promised as coming soon.
+      sources: [home]
+    open_source:
+      value: none
+      note: The Android app is built on the open source OpenVPN for Android and Xray, but its own code isn't published.
+      sources: [apk]
+    telemetry:
+      value: null
+      note: >-
+        The app carries Flurry Analytics and Sentry crash reporting, and its Play data safety form says it shares
+        crash logs, app interactions, device IDs and location for analytics. Neither says whether you can opt out.
+      sources: [apk, play-data-safety, privacy]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 0, currency: USD }
+      note: Free and ad-supported, with no paid plan.
+      sources: [play]
+    best: { amount: 0, currency: USD }
+    best_term:
+      value: null
+      grade: na
+      note: It's free.
+    renewal_increase:
+      value: 0
+      note: Nothing renews.
+    free_tier:
+      value: true
+      note: Ad-supported.
+      sources: [home]
+    refund_days:
+      value: null
+      grade: na
+      note: It's free.
+
+  ethics:
+    misleading_claims: false
+    affiliates: false
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://tera-vpn.com/en/
+    title: Tera VPN homepage and FAQ
+  privacy:
+    url: https://tera-vpn.com/en/privacy/
+    title: Tera VPN Privacy Policy (last updated 5 March 2026)
+  terms:
+    url: https://tera-vpn.com/en/terms/
+    title: Tera VPN Terms of Service (last updated 5 March 2026)
+  play:
+    url: https://play.google.com/store/apps/details?id=tera.aiapp.com
+    title: Tera VPN on Google Play
+  play-data-safety:
+    url: https://play.google.com/store/apps/datasafety?id=tera.aiapp.com
+    title: Tera VPN data safety on Google Play
+  play-dev:
+    url: https://play.google.com/store/apps/developer?id=VRMN+Tech
+    title: VRMN Tech apps on Google Play
+  play-2025:
+    url: https://web.archive.org/web/20250713075030/https://play.google.com/store/apps/details?id=tera.aiapp.com
+    title: Tera VPN on Google Play (archived July 2025)
+  apk:
+    url: https://apkpure.net/tera-vpn/tera.aiapp.com
+    title: Tera VPN for Android 5.2, whose APK is built on OpenVPN for Android and Xray, with AdMob, Flurry Analytics and Sentry
