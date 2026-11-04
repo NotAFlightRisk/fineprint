@@ -1,0 +1,263 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: FlowVPN
+icon: flowvpn.png
+checked: 2026-11-04
+
+criteria:
+  identity:
+    website: https://www.flowvpn.com
+    legal_entity:
+      value: Portable Ltd
+      note: The same company is the Google Play developer and the App Store seller.
+      sources: [terms, register, play, app-store]
+    owner:
+      value: Richard Ablewhite
+      note: He owns 75% or more of Groupable Ltd, which owns 75% or more of Portable Ltd.
+      sources: [register-psc, groupable-psc]
+    founded:
+      value: 2011
+      evidence: claimed
+      note: It says it has run since 2011, the year Portable Ltd was registered under its old name, BeWhere Projects Ltd.
+      sources: [about, register]
+    team:
+      value: partial
+      note: The company register names Richard Ablewhite as its only director. Nobody is named on its own site.
+      sources: [register-officers]
+    sister_brands:
+      value: []
+      note: Its terms also name client apps called Global VPN, US VPN and VPN Asia.
+      sources: [terms, play-dev]
+    acquisitions:
+      value: []
+      sources: [register-officers, register-psc]
+
+  jurisdiction:
+    hq:
+      value: GB
+      sources: [register]
+    entities:
+      value: [GB]
+      sources: [register, groupable-psc]
+
+  logging:
+    traffic:
+      value: null
+      note: >-
+        The terms say it "may monitor and record data transferred across our network" for capacity
+        planning and abuse, and uses automated systems to spot BitTorrent, without saying what's kept or
+        for how long.
+      sources: [terms]
+    dns:
+      value: null
+      note: The terms don't mention DNS requests.
+    timestamps:
+      value: 'yes'
+      evidence: claimed
+      note: The terms reserve the right to log session data, including connection date, time and duration.
+      sources: [terms]
+    bandwidth:
+      value: null
+      note: >-
+        The terms don't list data use among what's logged, though refunds depend on less than 5 GB having
+        been transferred.
+      sources: [terms]
+    source_ip:
+      value: 'yes'
+      evidence: claimed
+      note: The terms say it stores the connecting IP address and port, date and time when you connect.
+      sources: [terms]
+    proven: []
+    policy:
+      value: https://www.flowvpn.com/terms-vpn/
+      note: The VPN's data handling is in the terms. The separate privacy page only covers the website.
+      sources: [terms, privacy]
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: optional
+      note: The terms say app installs get an account name, and an email is stored once you make an account to share a plan across devices or pay by PayPal.
+      sources: [terms]
+    personal_data: []
+    payment:
+      value: [card, paypal, app_store]
+      note: The terms also name PaymentWall and Amazon as payment routes.
+      sources: [terms, signup]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn, ikev2, proprietary, other]
+      note: >-
+        Proprietary is FlowTCP, its WireGuard-based TCP protocol. Other is SSH, IKEv1, L2TP and PPTP. The
+        Android app holds OpenVPN, IPsec and SSH, but not WireGuard.
+      sources: [protocols, home, download]
+    post_quantum:
+      value: none
+      note: Nothing is published about its key exchange.
+      sources: [protocols]
+    kill_switch:
+      value: app
+      evidence: claimed
+      note: Claimed on the iOS app listing.
+      sources: [app-store]
+    dns:
+      value: null
+      note: It doesn't say whose DNS servers answer inside the tunnel.
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say how its servers are run.
+    hosting:
+      value: null
+      note: >-
+        It says it built and manages its own network, while the terms say traffic crosses third-party
+        servers and data is shared with server providers.
+      sources: [about, play, terms]
+    virtual_locations:
+      value: null
+      note: It doesn't say whether any locations are virtual.
+    servers:
+      value: 100
+      note: Its claim is "100+". The Play listing says hundreds.
+      sources: [about, play]
+    countries:
+      value: 70
+      note: Its claim is "70+". The Play listing says 50.
+      sources: [about, play]
+
+  features:
+    connections:
+      value: 10
+      note: The Play listing still says 5.
+      sources: [about, download, play]
+    multihop:
+      value: true
+      sources: [about, download]
+    obfuscation:
+      value: [proprietary]
+      note: FlowTCP, TLS tunnels dressed as HTTPS or SMTP, and SSH, offered for networks that block VPNs.
+      sources: [protocols]
+    port_forwarding:
+      value: false
+      note: It doesn't support BitTorrent, and the terms ban peer-to-peer file sharing.
+      sources: [no-bittorrent, terms]
+    split_tunnel:
+      value: true
+      note: In the Windows app, and with OpenVPN and WireGuard on iOS and macOS.
+      sources: [home, about]
+    blocking:
+      value: [ads]
+      note: Through dedicated ad-blocking servers.
+      sources: [about]
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android, browser]
+      note: The browser extension is for Chrome. There are also Apple TV and Amazon Fire apps, and manual setup guides for Linux and routers.
+      sources: [download]
+    open_source: none
+    telemetry:
+      value: null
+      note: It doesn't say whether the apps send usage or crash data.
+      sources: [privacy]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 6.99, currency: USD }
+      sources: [home]
+    best:
+      value: { amount: 3.33, currency: USD }
+      note: Billed yearly. The same 52% off "special offer", with a countdown, was on the page in both July and November 2026.
+      sources: [home, home-2026-07]
+    best_term:
+      value: 12
+      sources: [home]
+    renewal_increase:
+      value: null
+      note: It doesn't say what the discounted yearly plan renews at.
+      sources: [home]
+    free_tier:
+      value: false
+      note: There's a 5-day free trial.
+      sources: [home]
+    refund_days:
+      value: 0
+      note: >-
+        The terms rule out refunds because of the free trial, unless a sign-up page offers one, and then only
+        if the account was used fewer than 10 times and under 5 GB.
+      sources: [terms]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        The iOS listing promises a "No-Logs Policy", while the terms keep your IP address and connection
+        times. Its yearly price sits behind a countdown "special offer" that was still running months later.
+      sources: [app-store, terms, home, home-2026-07]
+    affiliates:
+      value: true
+      note: Up to 25% recurring commission on sales.
+      sources: [affiliate]
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://www.flowvpn.com/
+    title: FlowVPN homepage and plans
+  home-2026-07:
+    url: https://web.archive.org/web/20260714073244/https://www.flowvpn.com/
+    title: FlowVPN homepage with its "July special offer" (archived July 2026)
+  about:
+    url: https://www.flowvpn.com/about/
+    title: About FlowVPN
+  protocols:
+    url: https://www.flowvpn.com/protocols/
+    title: FlowVPN advanced VPN protocols
+  download:
+    url: https://www.flowvpn.com/download/
+    title: Download FlowVPN (with a direct Android APK holding OpenVPN, strongSwan and SSH)
+  no-bittorrent:
+    url: https://www.flowvpn.com/support/knowledgebase/why-no-bit-torrent/
+    title: Why Flow VPN doesn't support BitTorrent
+  signup:
+    url: https://www.flowvpn.com/sign-up/
+    title: How to subscribe to Flow VPN
+  affiliate:
+    url: https://www.flowvpn.com/affiliate/
+    title: Flow VPN Affiliate Program
+  terms:
+    url: https://www.flowvpn.com/flowssl/client/Flow%20VPN%20terms%20and%20conditions.pdf
+    title: Flow VPN terms and conditions (PDF, August 2024)
+  privacy:
+    url: https://www.flowvpn.com/privacy-and-cookies/
+    title: Privacy and cookies
+  register:
+    url: https://find-and-update.company-information.service.gov.uk/company/07820471
+    title: Portable Ltd (07820471), Companies House
+  register-officers:
+    url: https://find-and-update.company-information.service.gov.uk/company/07820471/officers
+    title: Portable Ltd officers, Companies House
+  register-psc:
+    url: https://find-and-update.company-information.service.gov.uk/company/07820471/persons-with-significant-control
+    title: Portable Ltd persons with significant control, Companies House
+  groupable-psc:
+    url: https://find-and-update.company-information.service.gov.uk/company/10085359/persons-with-significant-control
+    title: Groupable Ltd (10085359) persons with significant control, Companies House
+  play:
+    url: https://play.google.com/store/apps/details?id=uk.co.bewhere.flow.android.ipsec
+    title: FlowVPN - Get Better Internet on Google Play
+  play-dev:
+    url: https://play.google.com/store/apps/developer?id=Portable+Ltd
+    title: Portable Ltd apps on Google Play
+  app-store:
+    url: https://apps.apple.com/us/app/id621194818
+    title: 'FlowVPN: Fast Secure VPN App on the App Store (US)'
