@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: AirVPN
 icon: airvpn.png
-checked: 2026-10-22
+checked: 2026-11-04
 
 criteria:
   identity:
@@ -94,7 +94,7 @@ criteria:
       sources: [specs]
     bug_bounty:
       value: true
-      note: Pays 100 to 300 EUR or more per bug, covering its servers, websites and apps.
+      note: Pays 250 EUR for a very high risk bug and at least 300 EUR for a critical one, covering its servers, websites and apps.
       sources: [security-policy]
     incidents:
       value:
@@ -194,7 +194,7 @@ criteria:
     obfuscation:
       value: [stunnel, amneziawg]
       note: >-
-        Every server also takes OpenVPN over SSH. AmneziaWG is Android only, in Eddie 4.0 and later, with
+        Every server also takes OpenVPN over SSH. AmneziaWG is in Eddie for Android 4.0 and later, with
         presets that mimic QUIC traffic.
       sources: [ssl, ssh, eddie-android-400]
     port_forwarding:
@@ -224,12 +224,8 @@ criteria:
     telemetry:
       value: none
       evidence: claimed
-      note: The Play Store listing declares no data collected.
-      sources: [play-data-safety]
-    trackers:
-      value: 0
-      note: The newest Exodus report that would load is for version 3.0, from December 2022. The app has since been rebuilt as 4.x.
-      sources: [exodus]
+      note: The Play Store listing declares no data collected, and the open-source Android app pulls in no analytics or crash-reporting libraries.
+      sources: [play-data-safety, eddie-android-gitlab]
     fdroid:
       value: false
       note: The APK is offered on AirVPN's own site.
@@ -241,7 +237,7 @@ criteria:
       sources: [buy]
     best:
       value: { amount: 2.75, currency: EUR }
-      note: 99 EUR for three years. A Halloween coupon on the buy page cut that to 64.35 EUR in October 2026.
+      note: 99 EUR for three years.
       sources: [buy]
     best_term:
       value: 36
@@ -368,9 +364,6 @@ refs:
   suite-gitlab:
     url: https://gitlab.com/AirVPN/AirVPN-Suite
     title: AirVPN/AirVPN-Suite on GitLab
-  exodus:
-    url: https://web.archive.org/web/20221206143113/https://reports.exodus-privacy.eu.org/en/reports/org.airvpn.eddie/latest/
-    title: Exodus Privacy report for org.airvpn.eddie 3.0 (archived)
   play-data-safety:
     url: https://play.google.com/store/apps/datasafety?id=org.airvpn.eddie&hl=en
     title: AirVPN Eddie Client, Google Play data safety
