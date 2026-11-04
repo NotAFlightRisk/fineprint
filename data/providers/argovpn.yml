@@ -1,0 +1,253 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: ArgoVPN
+icon: argovpn.svg
+checked: 2026-11-04
+
+criteria:
+  identity:
+    website:
+      value: https://argovpn.com/en/
+      sources: [home]
+    legal_entity:
+      value: null
+      note: >-
+        The policy only names the Filtershekanha team, and Google Play lists Nariman Gharib in the UK as
+        the developer. No company for either turns up at Companies House.
+      sources: [policy, play, companies-house]
+    owner:
+      value: Filtershekanha
+      note: The Iranian anti-censorship group behind Telegram DR and Electron Proxy. It isn't a registered company.
+      sources: [about]
+    founded:
+      value: 2020
+      sources: [home]
+    team:
+      value: partial
+      note: The site names nobody, but its Google Play listing names the developer.
+      sources: [about, play]
+    sister_brands: []
+    acquisitions: []
+
+  jurisdiction:
+    hq:
+      value: GB
+      evidence: claimed
+      note: From the developer address on Google Play. No registered company was found.
+      sources: [play, companies-house]
+    entities:
+      value: null
+      note: No registered company was found.
+      sources: [companies-house]
+
+  logging:
+    traffic:
+      value: none
+      evidence: verified
+      note: 7ASecurity's 2023 audit found the servers don't track visited sites or DNS requests and have access logs turned off.
+      sources: [policy-data, audit-2023]
+    dns:
+      value: none
+      evidence: verified
+      sources: [policy-data, audit-2023]
+    timestamps:
+      value: none
+      evidence: verified
+      sources: [policy-data, audit-2023]
+    bandwidth:
+      value: none
+      evidence: verified
+      sources: [policy-data, audit-2023]
+    source_ip:
+      value: none
+      evidence: verified
+      note: >-
+        The bridge site kept visitors' IP addresses for 24 hours to ration bridges, and only keeps hashes since
+        the 2023 audit.
+      sources: [audit-2023]
+    proven:
+      value: [audit]
+      note: The 2023 audit included privacy tests of the servers as well as the app.
+      sources: [audit-2023]
+    policy: https://argovpn.com/en/privacy
+
+  transparency:
+    audits:
+      value:
+        - date: 2023-03-26
+          auditor: 7ASecurity
+          scope: full
+          source: audit-2023
+      evidence: verified
+      note: >-
+        Funded by the Open Technology Fund, it covered the Android app, servers, cryptography and privacy. Cure53's
+        two 2020 audits aren't published.
+      sources: [audit-2023, audit-blog, home-audits]
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: none
+      note: There are no accounts.
+      sources: [policy-data]
+    personal_data:
+      value: []
+      sources: [policy-data]
+    payment:
+      value: []
+      note: It's free.
+      sources: [policy-data]
+
+  security:
+    protocols:
+      value: [other]
+      note: V2Ray's VMess over TLS with WebSocket or gRPC, with session keys handed out by its own Argo Authenticator.
+      sources: [play, audit-2023, faq]
+    post_quantum:
+      value: none
+      sources: [faq]
+    kill_switch:
+      value: app
+      evidence: claimed
+      sources: [home-features, policy-security]
+    dns:
+      value: third_party
+      note: >-
+        Lookups go over DNS-over-HTTPS to a resolver you pick, such as Cloudflare, Google or Quad9. The audit
+        found Iran blocks DoH, so plain system DNS is the fallback there.
+      sources: [home, faq, audit-2023]
+
+  infra:
+    ram_only: null
+    hosting:
+      value: rented
+      evidence: claimed
+      note: The policy says its infrastructure runs on Amazon and Cloudflare.
+      sources: [policy-storage]
+    virtual_locations: null
+    servers: null
+    countries: null
+
+  features:
+    connections:
+      value: unlimited
+      note: There are no accounts, and the terms let you install it on as many devices as you like.
+      sources: [policy-terms]
+    multihop: false
+    obfuscation:
+      value: [v2ray]
+      note: >-
+        Traffic looks like ordinary HTTPS through Cloudflare, with private bridges and your own domain (Falcon)
+        when the public servers get blocked.
+      sources: [home, audit-2023]
+    port_forwarding: null
+    split_tunnel:
+      value: true
+      sources: [home-features]
+    blocking:
+      value: [malware]
+      note: A firewall with a community phishing and malware list, plus Cloudflare's family and malware filters.
+      sources: [home-features]
+
+  clients:
+    platforms:
+      value: [android]
+      note: Also handed out as an APK through its Telegram bot and an Amazon S3 mirror.
+      sources: [home, play]
+    open_source:
+      value: none
+      note: The audited app and server repos aren't public.
+      sources: [github, audit-2023]
+    telemetry:
+      value: none
+      evidence: claimed
+      note: The audit found the app sends no user information to its servers.
+      sources: [policy-data, audit-2023]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 0, currency: USD }
+      note: Free, with no ads or data caps.
+      sources: [home-features, policy-terms]
+    best:
+      value: { amount: 0, currency: USD }
+      sources: [home-features]
+    best_term:
+      value: null
+      grade: na
+      note: It's free.
+      sources: [policy-terms]
+    renewal_increase:
+      value: 0
+      note: Nothing renews.
+      sources: [policy-terms]
+    free_tier:
+      value: true
+      sources: [home-features]
+    refund_days:
+      value: null
+      grade: na
+      note: It's free.
+      sources: [policy-terms]
+
+  ethics:
+    misleading_claims:
+      value: false
+      note: It says plainly that it doesn't make you anonymous and points people at Tor Browser for that.
+      sources: [faq, policy]
+    affiliates: false
+    review_sites: false
+    activism:
+      value: true
+      note: Filtershekanha exists to get Iranians past internet censorship, and gives its apps away.
+      sources: [about]
+
+refs:
+  home:
+    url: https://argovpn.com/en/
+    title: ArgoVPN home page
+  about:
+    url: https://argovpn.com/en/about
+    title: About ArgoVPN and the Filtershekanha team
+  policy:
+    url: https://argovpn.com/en/privacy
+    title: ArgoVPN Privacy Policy and Terms of Use
+  policy-data:
+    url: https://argovpn.com/en/privacy#data-collection
+    title: ArgoVPN Privacy Policy, Data Collection
+  policy-terms:
+    url: https://argovpn.com/en/privacy#terms
+    title: ArgoVPN Terms of Use of the App
+  policy-storage:
+    url: https://argovpn.com/en/privacy#storage
+    title: ArgoVPN Privacy Policy, Location of Collected Information
+  policy-security:
+    url: https://argovpn.com/en/privacy#security
+    title: ArgoVPN Privacy Policy, Information and App Security
+  home-features:
+    url: https://argovpn.com/en/#features
+    title: ArgoVPN features
+  home-audits:
+    url: https://argovpn.com/en/#audits
+    title: ArgoVPN independent audits
+  faq:
+    url: https://argovpn.com/en/faq
+    title: ArgoVPN FAQ
+  play:
+    url: https://play.google.com/store/apps/details?id=com.filtershekanha.argovpn
+    title: ArgoVPN on Google Play
+  companies-house:
+    url: https://find-and-update.company-information.service.gov.uk/officers/C_bw1Z8whN3UjMkljK8Wx8j3iCM/appointments
+    title: Companies House, Nariman Gharib's appointments
+  audit-2023:
+    url: https://7asecurity.com/reports/pentest-report-argovpn.pdf
+    title: 7ASecurity, ArgoVPN Mobile, Servers & Privacy Audit (2023)
+  audit-blog:
+    url: https://7asecurity.com/blog/argovpn-audit/
+    title: 7ASecurity, ArgoVPN audit write-up
+  github:
+    url: https://github.com/filtershekanha
+    title: filtershekanha on GitHub
