@@ -1,0 +1,276 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: BlancVPN
+icon: blancvpn.png
+checked: 2026-11-04
+
+criteria:
+  identity:
+    website:
+      value: https://blancvpn.com
+      sources: [home]
+    legal_entity:
+      value: Yadda OÜ
+      note: The same company is the Google Play developer and the App Store seller.
+      sources: [terms, register, play, app-store]
+    owner:
+      value: Dmitrii Anisimov
+      note: The company's sole shareholder and board member.
+      sources: [register]
+    founded:
+      value: 2020
+      note: It started in 2018 as a Telegram proxy, launched the VPN in 2020 and took the BlancVPN name in 2022.
+      sources: [about]
+    team:
+      value: partial
+      note: Its site names nobody, but Estonia's register names the company's owner and board member.
+      sources: [about, register]
+    sister_brands:
+      value: []
+      sources: [play-dev]
+    acquisitions:
+      value: []
+      note: Yadda OÜ was registered in March 2022, the year the service took the BlancVPN name.
+      sources: [register, about]
+
+  jurisdiction:
+    hq:
+      value: EE
+      sources: [register]
+    entities:
+      value: [EE]
+      note: The policy says Yadda OÜ is the only group company that handles personal data.
+      sources: [register, policy]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [policy, terms]
+    dns:
+      value: none
+      evidence: claimed
+      note: The policy rules out keeping any metadata about the sites you visit, without mentioning DNS separately.
+      sources: [policy]
+    timestamps:
+      value: null
+      note: >-
+        The policy says servers hold connection metadata only for the session, and keeps "technical/usage
+        data" for 3 hours, without saying whether that includes connection times.
+      sources: [policy]
+    bandwidth:
+      value: null
+      note: >-
+        The terms say an automated system looks for fair use breaches such as heavy daily bandwidth use,
+        without saying what it records per user or for how long.
+      sources: [terms]
+    source_ip:
+      value: none
+      evidence: claimed
+      note: The policy says your IP address is only held in the server's memory and isn't logged or written to disk.
+      sources: [policy]
+    proven: []
+    policy: https://blancvpn.com/doc/privacy-policy
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty:
+      value: true
+      note: Up to $50,000 for critical bugs, reported by email.
+      sources: [bug-bounty]
+    incidents: []
+
+  account:
+    email:
+      value: required
+      note: Signing up through its Telegram bot still asks for an email address for a new account.
+      sources: [subscribe, subscribe-telegram]
+    personal_data: []
+    payment:
+      value: [card, app_store, bitcoin, other_crypto]
+      note: Cards include Apple Pay and Google Pay. Crypto payments can't be refunded.
+      sources: [help, play, terms]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn, other]
+      note: Other is V2Ray and Shadowsocks through Outline.
+      sources: [protocols, windows]
+    post_quantum:
+      value: none
+      note: Nothing is published about its key exchange.
+      sources: [protocols]
+    kill_switch:
+      value: null
+      note: It doesn't say whether its own apps have one. On Windows and Linux you connect with third-party clients.
+      sources: [windows, devices]
+    dns:
+      value: null
+      note: It doesn't say whose DNS servers answer inside the tunnel.
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say how its servers are run.
+    hosting:
+      value: rented
+      evidence: claimed
+      note: The policy says its VPN servers are run by third-party hosting providers.
+      sources: [policy]
+    virtual_locations:
+      value: null
+      note: The policy says its locations page marks which locations are virtual, but that page marks none.
+      sources: [policy, locations]
+    servers:
+      value: null
+      note: It gives a count of locations, not servers.
+      sources: [locations]
+    countries:
+      value: 47
+      note: Across 52 locations, Russia and Hong Kong included.
+      sources: [locations]
+
+  features:
+    connections:
+      value: unlimited
+      note: The terms list an excessive number of simultaneous connections as unfair use, without giving a number.
+      sources: [home, terms]
+    multihop:
+      value: null
+      note: >-
+        The policy says it may route connections to some higher-risk countries through more than one
+        server, without saying which or offering it as a setting.
+      sources: [policy]
+    obfuscation:
+      value: [v2ray, shadowsocks]
+      note: Its open source page also says it uses AmneziaWG in its apps.
+      sources: [protocols, open-source]
+    port_forwarding: false
+    split_tunnel:
+      value: true
+      note: Its guide sets it up in third-party clients on Windows, iOS and Keenetic routers.
+      sources: [split]
+    blocking: []
+
+  clients:
+    platforms:
+      value: [macos, ios, android, browser]
+      note: >-
+        Extensions for Chrome, Firefox, Edge and Opera. Windows, Linux, routers and TVs use third-party
+        clients with its config files, and its Windows download is the Happ client.
+      sources: [about, devices, windows, app-store, play]
+    open_source:
+      value: none
+      note: The terms forbid reverse engineering the apps.
+      sources: [terms]
+    telemetry:
+      value: null
+      note: >-
+        The policy names Sentry for crash reports and PostHog for app analytics, without mentioning a way to
+        turn either off.
+      sources: [policy, play]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 7.99, currency: EUR }
+      sources: [pricing]
+    best:
+      value: { amount: 2.99, currency: EUR }
+      note: €71.76 for the first two years.
+      sources: [pricing, pricing-2026-07]
+    best_term:
+      value: 24
+      sources: [pricing]
+    renewal_increase:
+      value: 150
+      note: The terms say renewals drop the first-purchase discount, so two years renew at the listed €179.40.
+      sources: [pricing, terms]
+    free_tier: false
+    refund_days:
+      value: 30
+      note: First purchase only and twice at most, with no refunds on crypto, prepaid card or gift card payments. App store purchases follow the store's rules.
+      sources: [terms]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        Its homepage says you can browse "as if no one is watching" because "no one is", while its policy says
+        hosting providers, and in some countries local authorities, can see your IP address.
+      sources: [home, policy]
+    affiliates:
+      value: true
+      note: 40% of first purchases and 25% of renewals.
+      sources: [partner]
+    review_sites: false
+    activism:
+      value: true
+      note: It gives monthly to open source projects, including Xray-core and Tor's Snowflake bridges.
+      sources: [open-source]
+
+refs:
+  home:
+    url: https://blancvpn.com/
+    title: BlancVPN homepage
+  policy:
+    url: https://blancvpn.com/doc/privacy-policy
+    title: BlancVPN Privacy Policy (last updated 23 September 2026)
+  terms:
+    url: https://blancvpn.com/doc/terms-of-use
+    title: BlancVPN Terms of Use (last updated 23 September 2026)
+  pricing:
+    url: https://blancvpn.com/pricing
+    title: BlancVPN pricing
+  pricing-2026-07:
+    url: https://web.archive.org/web/20260720165316/https://blancvpn.com/pricing
+    title: BlancVPN pricing (archived July 2026)
+  about:
+    url: https://blancvpn.com/help/why-blancvpn
+    title: Our Mission & Story
+  register:
+    url: https://ariregister.rik.ee/eng/company/16469911
+    title: Yadda OÜ (registry code 16469911), Estonian e-Business Register
+  play:
+    url: https://play.google.com/store/apps/details?id=com.blancvpn.app
+    title: BlancVPN on Google Play
+  play-dev:
+    url: https://play.google.com/store/apps/developer?id=BlancVPN
+    title: BlancVPN apps on Google Play
+  app-store:
+    url: https://apps.apple.com/us/app/blancvpn/id6744585772
+    title: BlancVPN by Yadda OU on the App Store (US)
+  locations:
+    url: https://blancvpn.com/locations
+    title: BlancVPN locations worldwide
+  protocols:
+    url: https://blancvpn.com/help/which-vpn-protocol-to-choose
+    title: Which VPN protocol is the best?
+  split:
+    url: https://blancvpn.com/help/how-to-split-routing
+    title: Split tunneling
+  devices:
+    url: https://blancvpn.com/help/how-to-use-blancvpn-on-multiple-devices
+    title: How to use BlancVPN on multiple devices
+  windows:
+    url: https://blancvpn.com/get/windows
+    title: Download a secure VPN for Windows
+  subscribe:
+    url: https://blancvpn.com/help/how-to-subscribe-to-blancvpn
+    title: How to Get a BlancVPN Subscription
+  subscribe-telegram:
+    url: https://blancvpn.com/help/how-to-subscribe-to-blancvpn-using-telegram
+    title: How to subscribe to BlancVPN using Telegram
+  help:
+    url: https://blancvpn.com/help
+    title: BlancVPN Knowledge Base (FAQ, How can I pay for the BlancVPN subscription?)
+  bug-bounty:
+    url: https://blancvpn.com/bug-bounty
+    title: BlancVPN Bug Bounty program
+  open-source:
+    url: https://blancvpn.com/open-source
+    title: BlancVPN for Open Source
+  partner:
+    url: https://blancvpn.com/partner
+    title: Join BlancVPN Partner Program
