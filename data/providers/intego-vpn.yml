@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: Intego VPN
 icon: intego-vpn.svg
-checked: 2026-10-22
+checked: 2026-11-04
 
 criteria:
   identity:
@@ -94,8 +94,10 @@ criteria:
       sources: [kape-vdp]
     incidents:
       value: []
-      note: The CVEs filed against Intego in 2026 are in its backup and log reporter tools, not the VPN.
-      sources: [cve-2026-26224, cve-2026-26225]
+      note: >-
+        The CVEs filed against Intego in 2026 are in its backup and log reporter tools and its Windows
+        antivirus, not the VPN.
+      sources: [cve-2026-26224, cve-2026-26225, cve-2026-107707]
 
   account:
     email:
@@ -194,7 +196,7 @@ criteria:
       value: null
       grade: na
       note: There's no Android app.
-      sources: [one-vs-pp]
+      sources: [android]
     fdroid: false
 
   pricing:
@@ -223,7 +225,7 @@ criteria:
     refund_days:
       value: 30
       note: Purchases through a third party may have different terms.
-      sources: [tos, pricing]
+      sources: [refund, tos, pricing]
 
   ethics:
     misleading_claims:
@@ -276,6 +278,12 @@ refs:
   purchase:
     url: https://integosupport.zendesk.com/hc/en-us/articles/44979703729307-How-to-Purchase-Intego-ONE
     title: How to purchase Intego ONE
+  refund:
+    url: https://integosupport.zendesk.com/hc/en-us/articles/58097461419291-How-to-request-a-refund-for-your-Intego-Subscription
+    title: How to request a refund for your Intego subscription
+  android:
+    url: https://integosupport.zendesk.com/hc/en-us/articles/53969744803483-Does-Intego-ONE-or-Intego-X9-offer-coverage-for-Android-devices
+    title: Does Intego ONE or Intego X9 offer coverage for Android devices?
   one-vs-pp:
     url: https://integosupport.zendesk.com/hc/en-us/articles/55369752057115-Intego-ONE-VPN-vs-Intego-Privacy-Protection-VPN-What-s-the-Difference
     title: "Intego ONE VPN vs. Intego Privacy Protection VPN: what's the difference?"
@@ -303,6 +311,9 @@ refs:
   cve-2026-26225:
     url: https://www.cve.org/CVERecord?id=CVE-2026-26225
     title: CVE-2026-26225, Intego Personal Backup local privilege escalation
+  cve-2026-107707:
+    url: https://www.cve.org/CVERecord?id=CVE-2026-107707
+    title: CVE-2026-107707, Intego Antivirus for Windows local privilege escalation
   kape-acquisition:
     url: https://www.investegate.co.uk/announcement/rns/kape-technologies--kape/acquisition-of-intego-for-16-million/5399486
     title: Kape Technologies, acquisition of Intego for $16 million (RNS, 2018)
