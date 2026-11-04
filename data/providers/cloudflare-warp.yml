@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: Cloudflare WARP
 icon: cloudflare-warp.png
-checked: 2026-10-22
+checked: 2026-11-04
 
 criteria:
   identity:
@@ -197,9 +197,10 @@ criteria:
     obfuscation:
       value: [quic]
       note: >-
-        MASQUE runs over HTTP/3, which Cloudflare says looks more like normal web traffic. It isn't
+        MASQUE runs over HTTP/3, which Cloudflare says looks more like normal web traffic, and since
+        mid-2026 the iOS and macOS apps fall back to TCP where UDP or HTTP/3 is blocked. It isn't
         sold as a way round blocks.
-      sources: [masque]
+      sources: [masque, app-store, http2-fallback]
     port_forwarding:
       value: false
       sources: [macos]
@@ -266,7 +267,7 @@ criteria:
       sources: [app-store, home, warp-modes, faq]
     affiliates:
       value: false
-      note: Only a referral scheme that gives users free WARP+ data.
+      note: A referral scheme that gave users free WARP+ data ended in December 2024.
       sources: [app-store]
     review_sites:
       value: false
@@ -307,11 +308,14 @@ refs:
   linux-ui:
     url: https://developers.cloudflare.com/changelog/post/2026-05-26-warp-linux-ga/
     title: Cloudflare One Client for Linux 2026.4.1390.0, with the new UI (May 2026)
+  http2-fallback:
+    url: https://developers.cloudflare.com/changelog/post/2026-08-19-warp-macos-ga/
+    title: Cloudflare One Client for macOS 2026.7.1343.0, HTTP/2 fallback (August 2026)
   route-traffic:
     url: https://developers.cloudflare.com/cloudflare-one/team-and-resources/devices/cloudflare-one-client/configure/route-traffic/
     title: Route traffic (split tunnels)
   sec:
-    url: https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001477333
+    url: https://www.sec.gov/edgar/browse/?CIK=0001477333
     title: Cloudflare, Inc. on SEC EDGAR
   warp-intro:
     url: https://blog.cloudflare.com/1111-warp-better-vpn/
