@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: Safing SPN
 icon: safing-spn.png
-checked: 2026-10-24
+checked: 2026-11-05
 
 criteria:
   identity:
