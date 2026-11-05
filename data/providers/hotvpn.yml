@@ -1,0 +1,209 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: HotVPN
+icon: hotvpn.png
+checked: 2026-11-05
+
+criteria:
+  identity:
+    website:
+      value: https://hotvpn.pro
+      sources: [home]
+    legal_entity:
+      value: HotCodes
+      note: The name its privacy policy, terms and Google Play give. Google Play's developer details name an individual in the United Arab Emirates rather than a company.
+      sources: [privacy, terms, play]
+    owner:
+      value: null
+      note: It doesn't say who's behind HotCodes.
+      sources: [terms]
+    founded:
+      value: 2023
+      note: The Android app came out in July 2023.
+      sources: [play]
+    team:
+      value: partial
+      note: Its own pages name nobody, but Google Play's developer details give the name of an individual.
+      sources: [play]
+    sister_brands:
+      value: []
+      note: Its only other app on Google Play is a phone number lookup app.
+      sources: [play-dev]
+    acquisitions:
+      value: []
+      sources: [play-dev]
+
+  jurisdiction:
+    hq:
+      value: AE
+      evidence: claimed
+      note: Google Play gives the developer's country as the United Arab Emirates. Its own pages give no address or governing law.
+      sources: [play, terms]
+    entities:
+      value: null
+      note: No registered company is named.
+      sources: [terms]
+
+  logging:
+    traffic:
+      value: null
+      note: The privacy policy says nothing about the VPN connection.
+      sources: [privacy]
+    dns:
+      value: null
+      note: The privacy policy says nothing about the VPN connection.
+      sources: [privacy]
+    timestamps:
+      value: null
+      note: It doesn't say whether connection times are kept. The privacy policy's error logs include the time and date you used the app.
+      sources: [privacy]
+    bandwidth:
+      value: null
+      note: It doesn't say.
+      sources: [privacy]
+    source_ip:
+      value: null
+      note: It doesn't say whether the VPN servers keep your IP address. The privacy policy's error logs include your device's IP address.
+      sources: [privacy]
+    proven: []
+    policy: https://hotvpn.pro/privacypolicy/
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: none
+      note: There are no accounts.
+      sources: [home, play]
+    personal_data: []
+    payment:
+      value: []
+      note: It's free.
+      sources: [play]
+
+  security:
+    protocols:
+      value: [other]
+      note: Other is VMess, VLESS, Trojan and Shadowsocks through Xray, as in the open source v2rayNG it's built on. There's no WireGuard or OpenVPN.
+      sources: [apk]
+    post_quantum:
+      value: none
+      note: Nothing is published about its key exchange.
+    kill_switch:
+      value: none
+      note: The Android app has no kill switch of its own.
+      sources: [apk]
+    dns:
+      value: third_party
+      note: The Android app keeps v2rayNG's default of Cloudflare's 1.1.1.1 for lookups through the tunnel.
+      sources: [apk]
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say how its servers are run.
+    hosting:
+      value: null
+      note: It doesn't say whether it owns or rents its servers.
+    virtual_locations:
+      value: null
+      note: It doesn't say whether any locations are virtual.
+    servers:
+      value: null
+      note: It doesn't publish a server count. The app fetches its server list when it starts.
+      sources: [apk]
+    countries:
+      value: null
+      note: It doesn't publish a country count.
+
+  features:
+    connections:
+      value: unlimited
+      note: There are no accounts, so nothing ties it to a number of devices.
+      sources: [home]
+    multihop: false
+    obfuscation:
+      value: [v2ray]
+      note: V2Ray here is Xray, with VLESS and Reality in the app's core. Which protocol each server uses comes from its server list.
+      sources: [apk, home]
+    port_forwarding: false
+    split_tunnel:
+      value: false
+      note: The Android app has no split tunnelling setting.
+      sources: [apk]
+    blocking: []
+
+  clients:
+    platforms:
+      value: [android]
+      note: The site's App Store button is commented out, and there's no iOS app.
+      sources: [home]
+    open_source:
+      value: none
+      note: The Android app is built on the open source v2rayNG and Xray, but its own code isn't published.
+      sources: [apk]
+    telemetry:
+      value: null
+      note: >-
+        The app carries Google Analytics for Firebase alongside AdMob, and its Play data safety form says it collects
+        device IDs for analytics and advertising. Neither says whether you can opt out.
+      sources: [apk, play-data-safety]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 0, currency: USD }
+      note: Free and ad-supported, with no paid plan.
+      sources: [play]
+    best: { amount: 0, currency: USD }
+    best_term:
+      value: null
+      grade: na
+      note: It's free.
+    renewal_increase:
+      value: 0
+      note: Nothing renews.
+    free_tier:
+      value: true
+      note: Ad-supported.
+      sources: [home]
+    refund_days:
+      value: null
+      grade: na
+      note: It's free.
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: The site says it will "hide your identity", while the app shows Google ads and collects your device IDs for advertising.
+      sources: [home, play-data-safety]
+    affiliates: false
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://hotvpn.pro/
+    title: HotVPN homepage
+  privacy:
+    url: https://hotvpn.pro/privacypolicy/
+    title: HotVPN Privacy Policy (effective 8 July 2023)
+  terms:
+    url: https://hotvpn.pro/termsconditions/
+    title: HotVPN Terms and Conditions
+  play:
+    url: https://play.google.com/store/apps/details?id=com.hotcodes.hotvpn
+    title: HotVPN - Fast, Safe VPN on Google Play
+  play-data-safety:
+    url: https://play.google.com/store/apps/datasafety?id=com.hotcodes.hotvpn
+    title: HotVPN data safety on Google Play
+  play-dev:
+    url: https://play.google.com/store/apps/developer?id=HotCodes
+    title: HotCodes apps on Google Play
+  apk:
+    url: https://apkpure.net/hotvpn-fast-safe-vpn/com.hotcodes.hotvpn
+    title: HotVPN for Android 10.5.0, whose APK is built on v2rayNG and Xray, with AdMob and Google Analytics for Firebase
