@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: Obscura VPN
 icon: obscura-vpn.svg
-checked: 2026-10-24
+checked: 2026-11-05
 
 criteria:
   identity:
@@ -146,7 +146,7 @@ criteria:
       note: Every exit is a Mullvad server, linked to its entry on Mullvad's own server list.
       sources: [exits-api, mullvad-server-list]
     servers:
-      value: 366
+      value: 361
       note: Mullvad exit servers, reached through 44 of Obscura's own relays in 18 countries.
       sources: [exits-api, relays-api]
     countries:
