@@ -1,0 +1,259 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: LightXtreme VPN
+icon: lightxtreme-vpn.png
+checked: 2026-11-05
+
+criteria:
+  identity:
+    website:
+      value: https://lightxtremevpn.com
+      note: Called LightningX VPN until 2026, and 闪连 (Shanlian) in Chinese. The old lightningxvpn.com address redirects here.
+      sources: [home, site-2024]
+    legal_entity:
+      value: RayaAustin LLC
+      note: >-
+        The terms, privacy policy and Google Play name an Anchorage, Alaska company, while the policy says the
+        business is registered in Seychelles and the terms are under Seychelles law. Play also gives a Singapore
+        phone number.
+      sources: [terms, privacy, play]
+    owner:
+      value: null
+      note: Who owns RayaAustin LLC isn't published.
+    founded:
+      value: 2024
+      note: The LightningX VPN site was live by March 2024.
+      sources: [site-2024]
+    team:
+      value: anonymous
+      note: Nobody running it is named on its site or in its terms.
+      sources: [home]
+    sister_brands:
+      value: []
+      note: >-
+        HZTLX Network Ltd. sells an App Store app also called 闪连加速器, but with different contacts, prices and
+        policies, and it says it doesn't proxy traffic abroad. Nothing ties it to this service.
+      sources: [hztlx-app]
+    acquisitions:
+      value: []
+      note: The 2026 rename from LightningX VPN kept the same company.
+      sources: [ios-2025, privacy]
+
+  jurisdiction:
+    hq:
+      value: US
+      evidence: claimed
+      note: The company's address is in Alaska, though its privacy policy claims a Seychelles registration.
+      sources: [terms, play]
+    entities:
+      value: [US]
+      note: No Seychelles company is named anywhere.
+      sources: [privacy]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [privacy]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [privacy]
+    timestamps:
+      value: none
+      evidence: claimed
+      sources: [privacy]
+    bandwidth:
+      value: null
+      note: The policy doesn't mention usage totals, and the terms say it slows down users who download heavily for long periods.
+      sources: [privacy, terms]
+    source_ip:
+      value: none
+      evidence: claimed
+      note: The same policy says it complies with the requirements of law enforcement agencies in each server's region.
+      sources: [privacy]
+    proven: []
+    policy: https://lightxtremevpn.com/privacyPolicy
+
+  transparency:
+    audits:
+      value: []
+      sources: [home]
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: optional
+      note: Accounts are a random number plus a password, and an email can be added for password resets.
+      sources: [pricing]
+    personal_data: []
+    payment:
+      value: [card, paypal, app_store, other_crypto]
+      note: Other crypto is USDT. Alipay, WeChat Pay and UnionPay are taken too, and its FAQ also lists Bitcoin.
+      sources: [pricing, faq, play]
+
+  security:
+    protocols:
+      value: [wireguard, other]
+      note: Other is Shadowsocks and VLESS, run through the open source sing-box core.
+      sources: [play, apk]
+    post_quantum:
+      value: none
+      note: Nothing is published about key exchange.
+      sources: [home]
+    kill_switch:
+      value: null
+      note: It doesn't say whether the apps have one.
+      sources: [faq]
+    dns:
+      value: third_party
+      note: >-
+        The apps send lookups to Google or Cloudflare, or a server you pick, and in smart mode domains for
+        mainland China go to Alibaba's public DNS.
+      sources: [faq, apk]
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say how its servers are run.
+    hosting:
+      value: null
+      note: It doesn't say whether it owns or rents its servers, only that it uses "IPLC dedicated lines".
+      sources: [pricing]
+    virtual_locations:
+      value: null
+      note: It publishes no server list.
+      sources: [home]
+    servers:
+      value: 2000
+      note: Given as 2,000+.
+      sources: [home]
+    countries:
+      value: 70
+      note: Given as 70+.
+      sources: [home]
+
+  features:
+    connections:
+      value: 3
+      note: More can be arranged through support.
+      sources: [faq]
+    multihop: false
+    obfuscation:
+      value: [shadowsocks, v2ray]
+      note: V2Ray here is VLESS. A "dedicated line forwarding" setting is meant for users in mainland China, though the terms say mainland China isn't supported.
+      sources: [faq, terms]
+    port_forwarding: false
+    split_tunnel:
+      value: true
+      note: Per-app and per-domain bypass lists, plus a smart mode that sends some sites direct by preset rules.
+      sources: [faq]
+    blocking:
+      value: [ads]
+      note: The Android app has an ad blocking switch using a public blocklist.
+      sources: [apk]
+
+  clients:
+    platforms:
+      value: [windows, macos, linux_gui, android, browser]
+      note: >-
+        Android covers TVs too. The iOS and Apple TV app was pulled from the App Store in September 2026 and
+        hasn't come back, though the site still links to it.
+      sources: [download, ios-pulled, ios-2025]
+    open_source:
+      value: none
+      note: The terms forbid reverse engineering the apps.
+      sources: [terms]
+    telemetry:
+      value: null
+      note: >-
+        The Android app ships Firebase Analytics, Crashlytics, Sentry and Facebook's SDK, and Play lists crash,
+        diagnostic and app interaction data as optional. Nothing says how to turn it off.
+      sources: [apk, play-data-safety]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 9.99, currency: USD }
+      note: The page shows crossed-out prices up to $84.99 that it never charges.
+      sources: [pricing, play]
+    best:
+      value: { amount: 5, currency: USD }
+      sources: [pricing, play]
+    best_term:
+      value: 12
+      sources: [pricing]
+    renewal_increase:
+      value: 0
+      note: Plans bought on the site are one-off passes from a week to a year, at the same price each time.
+      sources: [pricing]
+    free_tier:
+      value: null
+      note: Its FAQ says it's paid-only with short trials and a free-time lottery, but its Play listing offers selected free servers.
+      sources: [faq, play]
+    refund_days:
+      value: 0
+      note: >-
+        The site advertises a 30-day money-back guarantee, but the terms only refund Google Play and App Store
+        subscribers, and say payments made directly can't be refunded.
+      sources: [home, terms]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        It says it "encrypts 100% of your internet data" and lets you "stay anonymous online", hiding "all your
+        Internet whereabouts", and calls itself "internationally certified security software".
+      sources: [download, pricing, faq]
+    affiliates:
+      value: true
+      note: Affiliates are offered up to 50% commission.
+      sources: [affiliate]
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://lightxtremevpn.com/
+    title: LightXtreme VPN homepage
+  site-2024:
+    url: https://web.archive.org/web/20240328074435/https://www.lightningxvpn.com/
+    title: LightningX VPN homepage (archived March 2024)
+  privacy:
+    url: https://lightxtremevpn.com/privacyPolicy
+    title: LightXtreme VPN - Privacy Policy
+  terms:
+    url: https://lightxtremevpn.com/terms-of-service
+    title: Terms of Service of LightXtreme VPN
+  pricing:
+    url: https://lightxtremevpn.com/register/
+    title: LightXtreme VPN plans and pricing
+  faq:
+    url: https://lightxtremevpn.com/faq/
+    title: LightXtreme VPN Help Center
+  download:
+    url: https://lightxtremevpn.com/download/
+    title: LightXtreme VPN Download Center
+  affiliate:
+    url: https://lightxtremevpn.com/affiliate-program/
+    title: LightXtreme VPN Affiliate Program
+  play:
+    url: https://play.google.com/store/apps/details?id=com.shanlian.pro
+    title: 'LightXtreme VPN: SuperFast VPN on Google Play'
+  play-data-safety:
+    url: https://play.google.com/store/apps/datasafety?id=com.shanlian.pro
+    title: LightXtreme VPN data safety on Google Play
+  apk:
+    url: https://lightxtremevpn.com/download/lightningx.apk
+    title: LightXtreme VPN for Android 4.5.5, whose APK holds sing-box with Firebase Analytics, Crashlytics, Sentry and Facebook SDKs
+  ios-2025:
+    url: https://web.archive.org/web/20250125052618/https://apps.apple.com/us/app/lightningx-vpn-fast-unlimited/id6476379983
+    title: 'LightningX VPN: Fast Unlimited on the App Store, seller RayaAustin LLC (archived January 2025)'
+  ios-pulled:
+    url: https://t.me/lightningxvpnnotification/219
+    title: iOS 版本临时下架 (September 2026 notice that the iOS app was taken down)
+  hztlx-app:
+    url: https://apps.apple.com/us/app/id6760284641
+    title: 闪连加速器 by HZTLX Network Ltd. on the App Store (US)
