@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: VPNSecure
 icon: vpnsecure.svg
-checked: 2026-10-24
+checked: 2026-11-05
 
 criteria:
   identity:
@@ -71,7 +71,8 @@ criteria:
     source_ip:
       value: none
       evidence: claimed
-      sources: [no-logging, terms]
+      note: The VPN servers keep no IPs, but the account keeps the IP of your latest sign-in to the apps, for fraud prevention.
+      sources: [privacy-policy, no-logging, terms]
     proven: []
     policy: https://www.vpnsecure.me/privacy-policy
 
@@ -118,8 +119,8 @@ criteria:
       sources: [how-vpn-works]
     kill_switch:
       value: app
-      note: The iOS app lists a kill switch. On Android it points you to the system's Always-on VPN setting.
-      sources: [app-store, google-play]
+      note: The desktop and iOS apps have one, off by default. On Android it points you to the system's Always-on VPN setting.
+      sources: [features, app-store, google-play]
     dns:
       value: first_party
       evidence: claimed
@@ -143,8 +144,7 @@ criteria:
       sources: [locations]
     countries:
       value: 25
-      note: The locations page lists 25, while the features and pricing pages still say 40.
-      sources: [locations, features, pricing]
+      sources: [locations]
 
   features:
     connections:
