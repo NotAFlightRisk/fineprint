@@ -1,0 +1,300 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: VPNHouse
+icon: vpnhouse.png
+checked: 2026-11-05
+
+criteria:
+  identity:
+    website:
+      value: https://vpnhouse.net
+      sources: [home]
+    legal_entity:
+      value: Trusted Security Inc.
+      note: >-
+        Its current terms and policy name Trusted Security Inc. under Californian law, without an address or
+        registration number. Mogol Limited in Cyprus, which the policy named until at least July 2026, still
+        sells the apps on Google Play and the App Store.
+      sources: [terms, policy, policy-2026-07, play, app-store, register]
+    owner:
+      value: null
+      note: Neither company says who owns it.
+      sources: [terms, register]
+    founded:
+      value: 2021
+      note: Its site says it began in 2021. Mogol Limited and vpnhouse.net were both registered in March 2022.
+      sources: [about, register, rdap]
+    team:
+      value: partial
+      note: Its site names nobody, but Cyprus's register names Mogol Limited's one director.
+      sources: [about, register]
+    sister_brands:
+      value: []
+      sources: [play-dev]
+    acquisitions:
+      value: []
+      sources: [register]
+
+  jurisdiction:
+    hq:
+      value: CY
+      evidence: claimed
+      note: >-
+        Mogol Limited is the one company behind it on a register. The terms don't say where Trusted Security
+        Inc. is registered, only that Californian law applies.
+      sources: [register, terms]
+    entities:
+      value: [CY]
+      sources: [register]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [policy]
+    dns:
+      value: none
+      evidence: claimed
+      note: The policy says it never ties the domains, sites or apps you use to you, without mentioning DNS separately.
+      sources: [policy]
+    timestamps:
+      value: none
+      evidence: claimed
+      note: The policy doesn't mention connection times. Its blog says it keeps no timestamps.
+      sources: [no-logs-post]
+    bandwidth:
+      value: none
+      evidence: claimed
+      note: The policy doesn't mention data use. Its blog says it keeps no record of bandwidth use.
+      sources: [no-logs-post]
+    source_ip:
+      value: temporary
+      evidence: claimed
+      note: The policy says your IP address is pseudonymised, encrypted and kept only until you disconnect.
+      sources: [policy]
+    proven: []
+    policy: https://vpnhouse.net/legal/privacy-policy
+
+  transparency:
+    audits:
+      value: []
+      note: The policy says it conducts external audits, but none has been published.
+      sources: [policy]
+    report: none
+    canary:
+      value: stale
+      note: The canary in its privacy policy is still dated 1 December 2022.
+      sources: [policy, policy-2023]
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: required
+      note: The free mobile apps work without an account, but paid plans are tied to an email address.
+      sources: [app-store, windows]
+    personal_data: []
+    payment:
+      value: [card, app_store, other_crypto]
+      note: Visa, Mastercard and Russia's Mir cards, plus USDT and other unnamed crypto.
+      sources: [home, play, app-store]
+
+  security:
+    protocols:
+      value: [wireguard, proprietary]
+      note: Its own protocol is IPRose, built to get past blocking.
+      sources: [iprose, no-logs-post, play]
+    post_quantum:
+      value: none
+      note: Nothing is published about its key exchange.
+      sources: [iprose]
+    kill_switch:
+      value: app
+      note: On Android the app points you to the system's Always-on VPN setting.
+      sources: [play, no-logs-post]
+    dns:
+      value: null
+      note: It doesn't say whose DNS servers answer inside the tunnel.
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say how its servers are run.
+    hosting:
+      value: null
+      note: The policy says data passes through server providers worldwide, without saying whether it owns any servers.
+      sources: [policy]
+    virtual_locations:
+      value: null
+      note: It doesn't say whether any locations are virtual.
+    servers:
+      value: null
+      note: It doesn't give a server count.
+    countries:
+      value: null
+      note: It doesn't say how many countries it has servers in.
+
+  features:
+    connections:
+      value: null
+      note: >-
+        An old blog post promises unlimited connections, while the subscription terms leave the number to each
+        plan and the pricing page gives none.
+      sources: [unlimited-post, subscription-terms, home]
+    multihop: false
+    obfuscation:
+      value: [proprietary]
+      note: IPRose, sold as working in Russia, China and Iran.
+      sources: [iprose, russia]
+    port_forwarding: false
+    split_tunnel:
+      value: true
+      note: In Russia, Russian sites skip the VPN automatically.
+      sources: [home, android]
+    blocking: []
+
+  clients:
+    platforms:
+      value: [windows, macos, linux_gui, linux_cli, ios, android, browser]
+      note: Extensions for Chrome and Edge. Desktop apps need a paid plan.
+      sources: [russia, windows, linux, chrome-extension]
+    open_source:
+      value: none
+      note: >-
+        Its blog calls the apps open source under GPL 3.0, but none of their code is public. Its GitHub
+        organisation once held a WireGuard server tool, since removed.
+      sources: [open-source-post, github-2022, github]
+    telemetry:
+      value: null
+      note: >-
+        The policy collects device data when the app opens, shared with third parties, and the Android app
+        carries Firebase and Sentry. Neither says whether you can opt out.
+      sources: [policy, play-data-safety]
+    trackers:
+      value: 30
+      note: Counted in version 2.4.14 from July 2025. Most are ad networks for the free plan.
+      sources: [exodus]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 9.99, currency: USD }
+      sources: [home]
+    best:
+      value: { amount: 4.99, currency: USD }
+      note: $59.88 a year. The Russian page sells the same plans in roubles.
+      sources: [home, home-ru]
+    best_term:
+      value: 12
+      sources: [home]
+    renewal_increase:
+      value: 0
+      note: Plans renew at whatever the current price is.
+      sources: [subscription-terms]
+    free_tier:
+      value: true
+      note: With ads and a limited choice of locations.
+      sources: [play, android]
+    refund_days:
+      value: 0
+      note: It doesn't give refunds as a rule, but says it reviews each request. App store purchases follow the store's rules.
+      sources: [refund-policy]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        Its blog says it proves its no-logs claim and that its apps are open source under GPL 3.0, with no
+        published audit or app code behind either.
+      sources: [no-logs-post, open-source-post, github]
+    affiliates:
+      value: false
+      note: Its referral scheme pays in free days, not money.
+      sources: [referral-terms]
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://vpnhouse.net/
+    title: VPNHouse homepage and pricing
+  home-ru:
+    url: https://vpnhouse.net/ru
+    title: VPNHouse homepage and pricing (Russian)
+  about:
+    url: https://vpnhouse.net/about
+    title: About VPNHouse
+  terms:
+    url: https://vpnhouse.net/legal/terms-of-service
+    title: VPNHouse Terms of Service
+  policy:
+    url: https://vpnhouse.net/legal/privacy-policy
+    title: VPNHouse Privacy Policy
+  policy-2026-07:
+    url: https://web.archive.org/web/20260724085152/https://vpnhouse.net/legal/privacy-policy
+    title: VPNHouse Privacy Policy, naming Mogol Limited (archived July 2026)
+  policy-2023:
+    url: https://web.archive.org/web/20230720022008/https://vpnhouse.net/privacy-policy
+    title: VPNHouse Privacy Policy (archived July 2023)
+  subscription-terms:
+    url: https://vpnhouse.net/legal/subscription-terms
+    title: VPNHouse Subscription Terms
+  refund-policy:
+    url: https://vpnhouse.net/legal/refund-policy
+    title: VPNHouse Cancellation and Refund Policy
+  referral-terms:
+    url: https://vpnhouse.net/legal/referral-program-terms
+    title: VPNHouse Referral Program Terms
+  register:
+    url: https://efiling.drcor.mcit.gov.cy/DrcorPublic/SearchResults.aspx?name=mogol&number=%25&searchtype=optStartMatch&index=1&tname=%25&sc=0
+    title: Mogol Limited (HE 432458), Cyprus Registrar of Companies
+  rdap:
+    url: https://rdap.verisign.com/net/v1/domain/vpnhouse.net
+    title: vpnhouse.net registration record (RDAP, registered 16 March 2022)
+  play:
+    url: https://play.google.com/store/apps/details?id=com.vpnhouse
+    title: VPNHouse Fast & Secure VPN on Google Play (developer Mogol Limited, Limassol)
+  play-data-safety:
+    url: https://play.google.com/store/apps/datasafety?id=com.vpnhouse
+    title: VPNHouse data safety on Google Play
+  play-dev:
+    url: https://play.google.com/store/apps/developer?id=VPNHouse
+    title: VPNHouse apps on Google Play
+  app-store:
+    url: https://apps.apple.com/us/app/id6450951758
+    title: VPNHouse - Fast & Secure VPN by Mogol Limited on the App Store (US)
+  chrome-extension:
+    url: https://chromewebstore.google.com/detail/kgmgaojbkgbkfkpcklialeacldlbaejn
+    title: VPNHouse – Fast VPN Proxy for Chrome on the Chrome Web Store
+  exodus:
+    url: https://web.archive.org/web/20251018175212/https://reports.exodus-privacy.eu.org/en/reports/com.vpnhouse/latest/
+    title: Exodus Privacy report for com.vpnhouse 2.4.14 (archived October 2025)
+  windows:
+    url: https://vpnhouse.net/vpn-for-windows
+    title: VPNHouse for Windows
+  linux:
+    url: https://vpnhouse.net/vpn-for-linux
+    title: VPNHouse for Linux
+  android:
+    url: https://vpnhouse.net/vpn-for-android
+    title: VPNHouse for Android
+  russia:
+    url: https://vpnhouse.net/vpn-working-in-russia
+    title: VPN That Works Reliably in Russia
+  iprose:
+    url: https://vpnhouse.net/blog/what-is-iprose-protocol
+    title: What is the IPRose Protocol?
+  no-logs-post:
+    url: https://vpnhouse.net/blog/why-do-you-need-a-no-log-vpn-service
+    title: Why Do You Need a No-Log VPN Service?
+  unlimited-post:
+    url: https://vpnhouse.net/blog/why-is-vpnouse-a-free-unlimited-vpn
+    title: Why is VPNHouse a Free Unlimited VPN?
+  open-source-post:
+    url: https://vpnhouse.net/blog/why-are-we-open-source-vpn
+    title: Why are we open source VPN?
+  github:
+    url: https://github.com/vpnhouse
+    title: VPNHouse on GitHub (no public repositories)
+  github-2022:
+    url: https://web.archive.org/web/20221020080806/https://github.com/vpnhouse/tunnel
+    title: vpnhouse/tunnel, WireGuard tunnel management service (archived October 2022)
