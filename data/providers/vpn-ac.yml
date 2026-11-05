@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: VPN.ac
 icon: vpn-ac.png
-checked: 2026-10-24
+checked: 2026-11-05
 
 criteria:
   identity:
@@ -188,9 +188,8 @@ criteria:
       note: The apps build on OpenVPN and OpenVPN for Android, but VPN.ac's own code isn't published.
       sources: [tos]
     telemetry:
-      value: none
-      evidence: claimed
-      note: The Play Store listing declares no data collected.
+      value: null
+      note: The Play Store listing declares no data collected, but VPN.ac doesn't say whether its apps send anything home.
       sources: [play-data-safety]
     fdroid:
       value: false
