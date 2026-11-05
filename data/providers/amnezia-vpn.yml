@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: Amnezia VPN
 icon: amnezia-vpn.svg
-checked: 2026-10-25
+checked: 2026-11-05
 
 criteria:
   identity:
@@ -100,12 +100,13 @@ criteria:
       value:
         - date: 2026-05-20
           summary: >-
-            Mass blocking of its IP addresses from 20 May, then a DDoS attack from 1 June, which Amnezia
-            blames on Russia's media regulator, took down Free and Premium for days. It kept users
-            posted and extended Premium subscriptions to make up for it.
+            Mass blocking of its IP addresses from 20 May, then a DDoS attack from 1 June and further
+            waves into late July, which Amnezia blames on Russia's media regulator, disrupted Free and
+            Premium in Russia for about six weeks. It kept users posted, published a postmortem and
+            extended Premium subscriptions to make up for it.
           handled: well
-          source: incident-summary
-      sources: [shutdown-digest]
+          source: postmortem
+      sources: [incident-summary, shutdown-digest]
 
   account:
     email:
@@ -144,14 +145,18 @@ criteria:
       value: rented
       note: NovoServe says it supplies dedicated servers for the Premium network.
       sources: [novoserve]
-    virtual_locations: null
+    virtual_locations:
+      value: none
+      evidence: claimed
+      sources: [choose-location]
     servers:
       value: null
       note: Only locations are listed.
       sources: [downloads]
     countries:
-      value: 20
-      sources: [downloads]
+      value: 50
+      note: The downloads page and one Premium FAQ answer still say 20.
+      sources: [premium, release-5-1]
 
   features:
     connections:
@@ -163,9 +168,9 @@ criteria:
       note: V2Ray here is Xray with VLESS and Reality.
       sources: [premium]
     port_forwarding:
-      value: false
-      note: P2P is only allowed on the Swiss location.
-      sources: [premium]
+      value: true
+      note: Only on the Switzerland location, through UPnP. It's also the only location that allows P2P.
+      sources: [choose-location, release-5-1]
     split_tunnel:
       value: true
       note: By app on Android and Windows. By IP address on every platform, except on Amnezia Free.
@@ -289,6 +294,15 @@ refs:
   otf-summary:
     url: https://www.opentech.fund/security-safety-audits/amneziavpn-security-audit-summary/
     title: Open Technology Fund, AmneziaVPN security audit summary
+  postmortem:
+    url: https://amnezia.org/en/blog/amnezia-vpn-hybrid-attack-postmortem
+    title: 'What We Did This Summer: Fought Off an Attack and Came Out Stronger'
+  release-5-1:
+    url: https://amnezia.org/en/blog/amnezia-vpn-release-5-1-0-6-features-location-sorting
+    title: 'Amnezia VPN 5.1.0.6: Favorite Locations and Country Sorting'
+  choose-location:
+    url: https://docs.amnezia.org/documentation/instructions/choose-location
+    title: How to Choose an Amnezia Premium Location
   shutdown-digest:
     url: https://amnezia.org/en/blog/amnezia-shutdown-digest-june-2026-russia
     title: 'Amnezia VPN Russia Internet Restrictions Digest: June 2026'
