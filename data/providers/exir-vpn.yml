@@ -1,0 +1,222 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Exir VPN
+icon: exir-vpn.png
+checked: 2026-11-05
+
+criteria:
+  identity:
+    website:
+      value: https://exirvpn.com
+      sources: [home]
+    legal_entity:
+      value: Ebadi GmbH
+      note: A software company registered in Flensburg in 2023.
+      sources: [privacy, play, register]
+    owner:
+      value: null
+      note: Nothing published says who owns Ebadi GmbH. Its managing director is Milad Ebadi.
+      sources: [register]
+    founded:
+      value: 2025
+      note: The Android app came out on Google Play in February 2025.
+      sources: [play]
+    team:
+      value: partial
+      note: Its own pages name nobody, but the company register names its managing director.
+      sources: [home, register]
+    sister_brands:
+      value: []
+      sources: [play-dev]
+    acquisitions:
+      value: []
+      sources: [register]
+
+  jurisdiction:
+    hq:
+      value: DE
+      sources: [register]
+    entities:
+      value: [DE]
+      sources: [register]
+
+  logging:
+    traffic:
+      value: null
+      note: >-
+        It says the content of your traffic isn't put in its analytics, but says outright that this isn't a promise
+        its servers and hosts keep no logs.
+      sources: [privacy-retention]
+    dns:
+      value: null
+      note: It doesn't say whether DNS lookups are kept.
+      sources: [privacy]
+    timestamps:
+      value: 'yes'
+      evidence: claimed
+      note: >-
+        Connection reports tied to your app install include session times, durations and the route you used, and
+        some are kept for 30 days.
+      sources: [privacy]
+    bandwidth:
+      value: null
+      note: The app's usage totals stay on your device. It doesn't say whether its servers count your data.
+      sources: [privacy-reports, privacy-retention]
+    source_ip:
+      value: null
+      note: >-
+        It processes your real IP address and keeps a location worked out from it with no set expiry, but doesn't
+        say whether the address itself is stored. Some versions send connection status reports outside the tunnel.
+      sources: [privacy, privacy-reports]
+    proven: []
+    policy: https://exirvpn.com/privacy/
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: none
+      note: There are no accounts for the VPN itself.
+      sources: [home, privacy]
+    personal_data: []
+    payment:
+      value: []
+      note: It's free.
+      sources: [play]
+
+  security:
+    protocols:
+      value: [other]
+      note: >-
+        Built on Xray (VLESS, VMess, Trojan, Shadowsocks) plus Hysteria2. It doesn't publish which of them its
+        servers use.
+      sources: [apk]
+    post_quantum:
+      value: none
+      note: Nothing is published about its key exchange.
+    kill_switch:
+      value: none
+      note: >-
+        It doesn't offer one of its own. The Android app's kill switch screen walks you through turning on
+        Android's Always-on VPN and Block connections without VPN.
+      sources: [apk]
+    dns:
+      value: third_party
+      note: The Android app is built on v2rayNG and keeps its default of Cloudflare's 1.1.1.1 for DNS, which you can change.
+      sources: [apk]
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say how its servers are run.
+    hosting:
+      value: null
+      note: Its policy only mentions unnamed infrastructure providers.
+      sources: [privacy-partners]
+    virtual_locations:
+      value: null
+      note: It doesn't say whether any locations are virtual.
+    servers:
+      value: null
+      note: It doesn't publish a server count.
+    countries:
+      value: null
+      note: It doesn't publish a country count.
+
+  features:
+    connections:
+      value: unlimited
+      note: There are no accounts, so nothing ties it to a number of devices.
+      sources: [home]
+    multihop: false
+    obfuscation:
+      value: [v2ray]
+      note: Xray with REALITY and TLS fragmentation, plus Hysteria2.
+      sources: [apk, home]
+    port_forwarding: false
+    split_tunnel:
+      value: true
+      note: The Android app lets you pick which apps skip the VPN.
+      sources: [home, apk]
+    blocking: []
+
+  clients:
+    platforms:
+      value: [android]
+      sources: [home, play]
+    open_source:
+      value: none
+      note: The Android app is built on the open source v2rayNG and Xray, but its own code isn't published.
+      sources: [apk]
+    telemetry:
+      value: forced
+      evidence: claimed
+      note: >-
+        Firebase Analytics and Crashlytics are on from startup, and its privacy choices only cover advertising. The
+        app also reports connection events, routes and latency to its own servers.
+      sources: [privacy-partners, play-data-safety]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 0, currency: USD }
+      note: Free and ad-supported, with no paid plan.
+      sources: [play]
+    best: { amount: 0, currency: USD }
+    best_term:
+      value: null
+      grade: na
+      note: It's free.
+    renewal_increase:
+      value: 0
+      note: Nothing renews.
+    free_tier:
+      value: true
+      note: Ad-supported, with a time limit on each connection and a daily cap.
+      sources: [home, apk]
+    refund_days:
+      value: null
+      grade: na
+      note: It's free.
+
+  ethics:
+    misleading_claims: false
+    affiliates: false
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://exirvpn.com/
+    title: Exir VPN homepage and FAQ
+  privacy:
+    url: https://exirvpn.com/privacy/
+    title: Exir VPN Privacy Policy, version 4.0 (effective 22 October 2026)
+  privacy-reports:
+    url: https://exirvpn.com/privacy/#connection-reports
+    title: Exir VPN Privacy Policy, installation-linked connection reports
+  privacy-retention:
+    url: https://exirvpn.com/privacy/#retention
+    title: Exir VPN Privacy Policy, retention and deletion
+  privacy-partners:
+    url: https://exirvpn.com/privacy/#partners
+    title: Exir VPN Privacy Policy, service providers and data recipients
+  play:
+    url: https://play.google.com/store/apps/details?id=com.exir.vpn
+    title: 'Exir VPN: Smart Secure Proxy on Google Play'
+  play-data-safety:
+    url: https://play.google.com/store/apps/datasafety?id=com.exir.vpn
+    title: Exir VPN data safety on Google Play
+  play-dev:
+    url: https://play.google.com/store/apps/developer?id=Ebadi+GmbH
+    title: Ebadi GmbH apps on Google Play
+  register:
+    url: https://www.handelsregister.de/rp_web/erweitertesuche/welcome.xhtml
+    title: 'Handelsregister: Ebadi GmbH, Amtsgericht Flensburg HRB 16405 FL (search "Ebadi GmbH")'
+  apk:
+    url: https://apkpure.net/exir-vpn-smart-secure-proxy/com.exir.vpn
+    title: Exir VPN for Android 5.0, whose APK is a v2rayNG fork on Xray and Hysteria2, with AdMob and Firebase
