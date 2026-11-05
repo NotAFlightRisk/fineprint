@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: AdGuard VPN
 icon: adguard-vpn.svg
-checked: 2026-10-25
+checked: 2026-11-05
 
 criteria:
   identity:
@@ -126,7 +126,7 @@ criteria:
       sources: [pq-blog, windows-kb, android-kb]
     kill_switch:
       value: app
-      note: Off by default, and unavailable in the iOS and Android modes that run alongside AdGuard's ad blocker.
+      note: Off by default, and unavailable in the Android mode that runs alongside AdGuard's ad blocker.
       sources: [windows-kb, android-kb, ios-kb]
     dns:
       value: first_party
