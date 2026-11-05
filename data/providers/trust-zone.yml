@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: Trust.Zone
 icon: trust-zone.png
-checked: 2026-10-24
+checked: 2026-11-05
 
 criteria:
   identity:
@@ -136,11 +136,11 @@ criteria:
       value: null
       note: It doesn't say whether any of its locations are virtual.
     servers:
-      value: 173
+      value: 172
       sources: [servers]
     countries:
       value: 36
-      note: The pricing page advertises 173 locations.
+      note: The pricing page advertises 172 locations.
       sources: [servers, pricing]
 
   features:
