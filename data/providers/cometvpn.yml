@@ -1,0 +1,306 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: CometVPN
+icon: cometvpn.svg
+checked: 2026-11-05
+
+criteria:
+  identity:
+    website: https://cometvpn.com
+    legal_entity:
+      value: Comet Tech Inc.
+      note: >-
+        The terms name no company. The site names Comet Tech Inc. of Panama, and the apps are
+        published by Simoresta UAB, a Lithuanian company.
+      sources: [terms, about, privacy, app-store, play]
+    owner:
+      value: null
+      note: >-
+        Simoresta UAB's RIPE record gives an IPRoyal email address, which points to the IPRoyal proxy
+        business, but no source names an owner. Comet Tech Inc. also runs MarsProxies, a proxy seller.
+      sources: [ripe-org, iproyal-about, marsproxies-terms]
+    founded:
+      value: 2023
+      note: Year only. The site was selling it by January 2023.
+      sources: [wayback-2023]
+    team:
+      value: anonymous
+      sources: [about]
+    sister_brands:
+      value: []
+      note: Comet Tech Inc. also sells proxies as MarsProxies, but no other VPN.
+      sources: [marsproxies-terms, app-store-seller]
+    acquisitions:
+      value: []
+      sources: [lt-register]
+
+  jurisdiction:
+    hq:
+      value: PA
+      evidence: claimed
+      note: The terms are governed by Cypriot law, though no Cypriot company is named.
+      sources: [about, privacy, terms]
+    entities:
+      value: [LT, PA]
+      note: Comet Tech Inc. in Panama, and Simoresta UAB in Lithuania, which publishes the apps.
+      sources: [about, lt-register, app-store]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [privacy]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [privacy]
+    timestamps:
+      value: 'yes'
+      evidence: claimed
+      note: >-
+        Your user ID, the server and the session length are kept for up to 9 months, though the app
+        store listings say it doesn't store session timestamps.
+      sources: [privacy, play, app-store]
+    bandwidth:
+      value: aggregate
+      evidence: claimed
+      note: A running total of the data you've used.
+      sources: [privacy]
+    source_ip:
+      value: none
+      evidence: claimed
+      sources: [privacy, terms]
+    proven:
+      value: []
+      sources: [features]
+    policy: https://cometvpn.com/privacy/
+
+  transparency:
+    audits:
+      value: []
+      sources: [features]
+    report:
+      value: none
+      sources: [terms]
+    canary:
+      value: none
+      sources: [terms]
+    bug_bounty:
+      value: false
+      sources: [features]
+    incidents:
+      value: []
+
+  account:
+    email:
+      value: required
+      sources: [terms]
+    personal_data:
+      value: []
+      sources: [privacy]
+    payment:
+      value: [card, paypal, app_store, bitcoin, other_crypto]
+      note: Crypto goes through CoinGate, and crypto payments can't be refunded.
+      sources: [pricing, terms, app-store]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn, ikev2]
+      sources: [encryption, kill-switch]
+    post_quantum:
+      value: none
+      sources: [encryption, wireguard]
+    kill_switch:
+      value: system
+      note: On Android it's Android's own "Block connections without VPN" setting.
+      sources: [kill-switch, play]
+    dns:
+      value: null
+      note: CometVPN says it prevents DNS leaks but not whose resolvers the tunnel uses.
+      sources: [dns-leak]
+
+  infra:
+    ram_only:
+      value: null
+      sources: [features]
+    hosting:
+      value: null
+      note: >-
+        Simoresta UAB holds its own IP address blocks and network numbers, but CometVPN doesn't say
+        whether its servers are owned or rented.
+      sources: [ripe-org, features]
+    virtual_locations:
+      value: null
+      note: >-
+        The location list includes North Korea and over 190 other countries, largely through the
+        residential add-on, and it doesn't say where the standard servers sit.
+      sources: [locations, residential]
+    servers:
+      value: null
+      sources: [locations]
+    countries:
+      value: 70
+      note: >-
+        Listed as 70+ for the standard VPN. The paid residential add-on claims 195+ countries
+        through other people's home connections.
+      sources: [play, residential]
+
+  features:
+    connections:
+      value: unlimited
+      note: The privacy policy mentions per-device limits it doesn't spell out.
+      sources: [pricing, privacy]
+    multihop:
+      value: false
+      sources: [features]
+    obfuscation:
+      value: [proprietary]
+      note: An obfuscated OpenVPN mode, which CometVPN doesn't explain.
+      sources: [obfuscated, app-store]
+    port_forwarding:
+      value: false
+      sources: [features]
+    split_tunnel:
+      value: true
+      sources: [play]
+    blocking:
+      value: []
+      sources: [features]
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android, browser]
+      note: Also Apple TV and Android TV apps, and Chrome and Firefox extensions.
+      sources: [download, play, app-store, firefox]
+    open_source:
+      value: none
+      sources: [terms]
+    telemetry:
+      value: null
+      note: >-
+        The Android app asks before collecting usage data, but the policy says crash reports go to
+        Sentry tied to your account and email, with no setting mentioned.
+      sources: [privacy]
+    fdroid:
+      value: false
+      sources: [fdroid]
+
+  pricing:
+    monthly:
+      value: { amount: 9.99, currency: USD }
+      sources: [pricing]
+    best:
+      value: { amount: 1.68, currency: USD }
+      note: The 2-year plan, sold as 24 months plus 3 free for $45.36.
+      sources: [pricing]
+    best_term:
+      value: 27
+      sources: [pricing]
+    renewal_increase:
+      value: null
+      note: >-
+        The terms say it renews at the price you first paid, $45.36, but not whether the 3 free months come
+        again. Without them it's $1.89 a month.
+      sources: [pricing, terms]
+    free_tier:
+      value: false
+      note: There's a 3-day free trial, but it takes payment details.
+      sources: [free-trial]
+    refund_days:
+      value: 30
+      note: Only on the 1 and 2-year plans, not monthly plans or crypto payments.
+      sources: [terms]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        It promises "a 100% private, no-log VPN service" and "military-grade AES-256 encryption",
+        while keeping session records for 9 months.
+      sources: [about, dns-leak, privacy]
+    affiliates:
+      value: true
+      note: 100% of a first monthly payment, 40% on yearly plans and 30% of renewals for life.
+      sources: [affiliate]
+    review_sites:
+      value: false
+      sources: [affiliate]
+    activism:
+      value: false
+      sources: [features]
+
+refs:
+  terms:
+    url: https://cometvpn.com/terms-of-service/
+    title: CometVPN terms of service
+  privacy:
+    url: https://cometvpn.com/privacy/
+    title: CometVPN privacy policy
+  about:
+    url: https://cometvpn.com/about-us/
+    title: About CometVPN
+  app-store:
+    url: https://apps.apple.com/us/app/cometvpn-fast-secure-vpn/id6472275460
+    title: 'CometVPN: Fast & Secure VPN (App Store)'
+  app-store-seller:
+    url: https://apps.apple.com/us/developer/simoresta-uab/id1662341244
+    title: Simoresta UAB apps (App Store)
+  play:
+    url: https://play.google.com/store/apps/details?id=com.comet.android
+    title: 'CometVPN: Fast & Secure VPN (Google Play)'
+  lt-register:
+    url: https://www.registrucentras.lt/jar/p/dok.php?kod=303108621
+    title: UAB "Simoresta", 303108621 (Registrų centras)
+  ripe-org:
+    url: https://rest.db.ripe.net/ripe/organisation/ORG-SU42-RIPE
+    title: Simoresta UAB, ORG-SU42-RIPE (RIPE database)
+  iproyal-about:
+    url: https://iproyal.com/about-us/
+    title: About IPRoyal
+  marsproxies-terms:
+    url: https://marsproxies.com/terms-of-service/
+    title: MarsProxies terms of service (Comet Tech Inc.)
+  wayback-2023:
+    url: https://web.archive.org/web/20230114160549/https://cometvpn.com/
+    title: CometVPN homepage, January 2023 (Wayback Machine)
+  pricing:
+    url: https://cometvpn.com/pricing/
+    title: CometVPN pricing
+  free-trial:
+    url: https://cometvpn.com/vpn-free-trial/
+    title: CometVPN free trial
+  features:
+    url: https://cometvpn.com/features/
+    title: CometVPN features
+  encryption:
+    url: https://cometvpn.com/features/vpn-encryption/
+    title: CometVPN VPN encryption
+  wireguard:
+    url: https://cometvpn.com/features/wireguard-vpn/
+    title: CometVPN WireGuard protocol
+  kill-switch:
+    url: https://cometvpn.com/features/kill-switch/
+    title: CometVPN kill switch
+  dns-leak:
+    url: https://cometvpn.com/features/dns-leak-protection/
+    title: CometVPN DNS leak protection
+  obfuscated:
+    url: https://cometvpn.com/features/obfuscated-vpn-servers/
+    title: CometVPN obfuscated VPN servers
+  locations:
+    url: https://cometvpn.com/locations/
+    title: CometVPN server locations
+  residential:
+    url: https://cometvpn.com/features/residential-vpn/
+    title: CometVPN residential VPN
+  download:
+    url: https://cometvpn.com/download/
+    title: Download CometVPN
+  firefox:
+    url: https://addons.mozilla.org/en-US/firefox/addon/cometvpn/
+    title: CometVPN for Firefox
+  fdroid:
+    url: https://search.f-droid.org/?q=cometvpn&lang=en
+    title: F-Droid search for CometVPN
+  affiliate:
+    url: https://cometvpn.com/affiliate/
+    title: CometVPN affiliate program
