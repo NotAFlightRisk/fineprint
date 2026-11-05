@@ -1,0 +1,311 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: BLOKK
+icon: blokk.svg
+checked: 2026-11-05
+
+criteria:
+  identity:
+    website:
+      value: https://blokkapp.com
+      sources: [home]
+    legal_entity:
+      value: Revoke Limited
+      note: >-
+        The terms, privacy policy and App Store seller all name Revoke. Since late April 2026 the Google Play developer
+        has been MyPA Limited, a Jersey company formed on 1 April 2026.
+      sources: [terms, jfsc-revoke, app-store, play, jfsc-mypa]
+    owner:
+      value: null
+      note: >-
+        The Jersey register doesn't show who owns Revoke. Its team page names Andrew Crossland and Adam Green as
+        co-founders.
+      sources: [jfsc-revoke, revoke-team]
+    founded:
+      value: 2025
+      note: >-
+        BLOKK launched in 2022 as an on-device tracker blocker. The help articles on its IP VPN went up in July 2025.
+      sources: [play-2022, kb-dates]
+    team:
+      value: partial
+      note: >-
+        Revoke names its board and executives, though its site warns some pages may be outdated. BLOKK's own pages and
+        MyPA name no one beyond a head of product quoted on the blog.
+      sources: [revoke-team, blog-free-vpns, jfsc-mypa]
+    sister_brands:
+      value: []
+      note: Revoke's other app sends data requests to companies and isn't a VPN.
+      sources: [revoke-about, app-store]
+    acquisitions:
+      value: null
+      note: >-
+        Nothing was announced, but the Play developer changed from Revoke Limited to MyPA Limited between 20 April 2026
+        and now. Whether that's a sale or a reshuffle isn't clear.
+      sources: [play-2026-04, play, jfsc-mypa]
+
+  jurisdiction:
+    hq:
+      value: JE
+      sources: [terms, jfsc-revoke]
+    entities:
+      value: [JE]
+      note: Revoke and MyPA are both Jersey companies.
+      sources: [jfsc-revoke, jfsc-mypa]
+
+  logging:
+    traffic:
+      value: null
+      note: >-
+        The privacy policy dates from 2022, before the IP VPN, and says BLOKK only works on your device. It lists apps
+        installed and websites visited among the data it collects, which it says can't be linked to you.
+      sources: [privacy, faq-ip-vpn]
+    dns:
+      value: null
+      note: >-
+        The 2022 terms say DNS lookups aren't stored centrally unless anonymised. Neither they nor the policy cover the
+        IP VPN.
+      sources: [terms, privacy]
+    timestamps:
+      value: null
+      note: The policy keeps app activity logs on its servers for as long as the service runs, and doesn't cover the IP VPN.
+      sources: [privacy]
+    bandwidth:
+      value: null
+      note: Neither the policy nor the terms mention the IP VPN.
+      sources: [terms]
+    source_ip:
+      value: null
+      note: >-
+        The policy says BLOKK doesn't store your IP address, but it was written for the on-device blocker before the IP
+        VPN existed.
+      sources: [privacy, faq-ip-vpn]
+    proven:
+      value: []
+    policy:
+      value: https://blokkapp.com/privacy-policy/
+      sources: [privacy]
+
+  transparency:
+    audits:
+      value: []
+      sources: [help]
+    report:
+      value: none
+      sources: [help]
+    canary:
+      value: none
+      sources: [help]
+    bug_bounty:
+      value: false
+      note: BLOKK publishes no bounty or security.txt.
+      sources: [help]
+    incidents:
+      value: []
+
+  account:
+    email:
+      value: none
+      note: The app needs no account and assigns a random ID instead.
+      sources: [home]
+    personal_data:
+      value: []
+      sources: [privacy]
+    payment:
+      value: [app_store]
+      note: Subscriptions are bought in the app through Google Play or the App Store.
+      sources: [privacy]
+
+  security:
+    protocols:
+      value: [openvpn]
+      note: From the Android app's code, which builds on the open source ics-openvpn library.
+      sources: [play]
+    post_quantum:
+      value: none
+      note: OpenVPN only, with no post-quantum key exchange.
+      sources: [play]
+    kill_switch:
+      value: null
+      note: BLOKK doesn't say whether the IP VPN blocks traffic if it drops.
+      sources: [faq-ip-vpn]
+    dns:
+      value: null
+      note: Lookups are filtered on the device, but BLOKK doesn't say who answers them through the IP VPN.
+      sources: [faq-how]
+
+  infra:
+    ram_only:
+      value: null
+      sources: [faq-ip-vpn]
+    hosting:
+      value: null
+      note: >-
+        BLOKK doesn't say whose servers it uses. The Android app's code mentions hide.me, PureVPN and ExpressVPN,
+        without showing which one runs them.
+      sources: [play]
+    virtual_locations:
+      value: disclosed
+      note: The app explains that a virtual server appears to be in one country but sits in another.
+      sources: [play]
+    servers:
+      value: 6000
+      note: '"Over 6000 servers", by its own count.'
+      sources: [home]
+    countries:
+      value: null
+      note: It claims over 100 locations, not broken down by country.
+      sources: [home]
+
+  features:
+    connections:
+      value: null
+      note: No device limit is stated.
+      sources: [help]
+    multihop:
+      value: false
+      sources: [faq-ip-vpn]
+    obfuscation:
+      value: []
+      sources: [help]
+    port_forwarding:
+      value: false
+      sources: [help]
+    split_tunnel:
+      value: null
+      note: >-
+        On Android you can turn BLOKK off for single apps, but it doesn't say whether that also takes them out of the
+        IP VPN.
+      sources: [help]
+    blocking:
+      value: [ads, trackers, malware]
+      note: On the device, including scam and phishing lists. It's free and works without the IP VPN.
+      sources: [home, faq-how, faq-on-device]
+
+  clients:
+    platforms:
+      value: [android, ios]
+      note: >-
+        The FAQ says the IP VPN is still coming to iOS, though the App Store listing already advertises worldwide VPN
+        servers.
+      sources: [play, app-store, faq-ip-vpn]
+    open_source:
+      value: none
+      note: The terms forbid decompiling or reverse engineering the app.
+      sources: [terms]
+    telemetry:
+      value: null
+      note: >-
+        The App Store label declares identifiers, usage and diagnostics for analytics, and Play's form declares app
+        interactions, installed apps, device IDs and crash logs. Nothing says whether it can be turned off.
+      sources: [app-store, play-datasafety]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 4.99, currency: USD }
+      note: >-
+        The US App Store price for MAX, the tier that adds the IP VPN to Ultra's blocking. There's no pricing page and
+        Play prices aren't public.
+      sources: [app-store]
+    best:
+      value: { amount: 2.5, currency: USD }
+      note: $29.99 a year for MAX.
+      sources: [app-store]
+    best_term: 12
+    renewal_increase:
+      value: 0
+      sources: [app-store]
+    free_tier:
+      value: false
+      note: The on-device blocker is free, but the IP VPN needs a paid plan after a seven-day trial.
+      sources: [faq-on-device, faq-ip-vpn, play]
+    refund_days:
+      value: null
+      note: It's only sold through the app stores, so refunds follow Google's and Apple's processes.
+      sources: [play-refund, apple-refund]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        The App Store listing promises "No data collection", while the privacy policy collects apps installed and
+        websites visited and the listing's own label declares analytics data.
+      sources: [app-store, privacy]
+    affiliates:
+      value: true
+      note: Affiliates get 50% of each subscription sale.
+      sources: [affiliates]
+    review_sites:
+      value: false
+      sources: [blog]
+    activism:
+      value: false
+      note: Revoke's other app helps people send data requests, but neither it nor BLOKK funds or campaigns for causes.
+      sources: [revoke-about, blog]
+
+refs:
+  home:
+    url: https://blokkapp.com/
+    title: BLOKK, Tracking Blocker, Privacy VPN, Data Protection
+  help:
+    url: https://blokkapp.com/help/
+    title: BLOKK help and FAQs
+  faq-ip-vpn:
+    url: https://blokkapp.com/knowledgebase/what-is-the-difference-between-on-device-vpn-and-blokks-ip-vpn/
+    title: What is the difference between On-Device VPN and BLOKK's IP VPN
+  faq-on-device:
+    url: https://blokkapp.com/knowledgebase/what-is-on-device-vpn/
+    title: What is "On-Device VPN"
+  faq-how:
+    url: https://blokkapp.com/knowledgebase/how-does-blokk-work/
+    title: How does BLOKK work?
+  kb-dates:
+    url: https://blokkapp.com/wp-json/wp/v2/knowledge_base?per_page=50&_fields=date,slug
+    title: BLOKK help articles with their publish dates (WordPress API)
+  privacy:
+    url: https://blokkapp.com/privacy-policy/
+    title: BLOKK Privacy Policy, v1.7, last updated 2022-12-14
+  terms:
+    url: https://blokkapp.com/terms-and-conditions/
+    title: BLOKK Terms and Conditions, v1.5, last updated 2022-08-03
+  affiliates:
+    url: https://blokkapp.com/affiliate-home/
+    title: BLOKK Affiliate Program
+  blog:
+    url: https://blokkapp.com/blog/
+    title: BLOKK blog
+  blog-free-vpns:
+    url: https://blokkapp.com/are-free-vpns-safe-the-truth-behind-free-vpns/
+    title: "Are Free VPNs Safe? The Truth Behind Free VPNs (2025-10-08)"
+  play:
+    url: https://play.google.com/store/apps/details?id=com.revokevpnapp
+    title: "BLOKK: Privacy VPN & Blocker on Google Play (developer MyPA Limited)"
+  play-datasafety:
+    url: https://play.google.com/store/apps/datasafety?id=com.revokevpnapp
+    title: BLOKK data safety on Google Play
+  play-2026-04:
+    url: https://web.archive.org/web/20260420162856/https://play.google.com/store/apps/details?id=com.revokevpnapp
+    title: BLOKK on Google Play, 2026-04-20 (developer Revoke Limited), Wayback Machine
+  play-2022:
+    url: https://web.archive.org/web/20221014160829/https://play.google.com/store/apps/details?id=com.revokevpnapp
+    title: "Blokk: Stop Tracking Me on Google Play, 2022-10-14, Wayback Machine"
+  app-store:
+    url: https://apps.apple.com/us/app/blokk-vpn-privacy-shield/id1644072748
+    title: "BLOKK: Privacy Shield & VPN on the App Store (in-app purchases and privacy label)"
+  jfsc-revoke:
+    url: https://www.jerseyfsc.org/registry/registry-entities/entity/308622
+    title: Revoke Limited (124314), Jersey Financial Services Commission register
+  jfsc-mypa:
+    url: https://www.jerseyfsc.org/registry/registry-entities/entity/3339756
+    title: MyPA Limited (164939), Jersey Financial Services Commission register
+  revoke-team:
+    url: https://revoke.com/about/team
+    title: Revoke, executive team
+  revoke-about:
+    url: https://revoke.com/about
+    title: About Revoke
+  play-refund:
+    url: https://support.google.com/googleplay/answer/2479637
+    title: Get refunds on Google Play purchases
+  apple-refund:
+    url: https://support.apple.com/en-us/118223
+    title: Request a refund for apps or content that you bought from Apple
