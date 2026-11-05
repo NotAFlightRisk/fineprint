@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: VP.NET
 icon: vp-net.png
-checked: 2026-10-24
+checked: 2026-11-05
 
 criteria:
   identity:
@@ -134,7 +134,7 @@ criteria:
       evidence: claimed
       sources: [server-list]
     servers:
-      value: 69
+      value: 67
       sources: [server-list]
     countries:
       value: 26
