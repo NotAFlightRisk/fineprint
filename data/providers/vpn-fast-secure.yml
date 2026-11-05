@@ -1,0 +1,257 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: VPN · Fast & Secure
+icon: vpn-fast-secure.png
+checked: 2026-11-05
+
+criteria:
+  identity:
+    website:
+      value: https://www.bucketlistlabs.com
+      note: The seller's company site, which covers its app business rather than the VPN.
+      sources: [home]
+    legal_entity:
+      value: Bucket List Labs S.L.
+      sources: [app-store, legal-notice, datoscif]
+    owner:
+      value: null
+      note: >-
+        The Las Palmas register names WEEWOO SL as Bucket List Labs' sole administrator, which doesn't show who owns
+        it. WEEWOO's representative, Félix Sánchez Echevarría, also represents the administrator behind Lockdown
+        Privacy's seller.
+      sources: [datoscif, borme-2024]
+    founded:
+      value: 2019
+      note: Version 1.0 came out in February 2019, two years before Bucket List Labs was registered.
+      sources: [lookup, datoscif]
+    team:
+      value: partial
+      note: >-
+        Neither the app nor the company site names anyone. The register names the administrator company's
+        representative, Félix Sánchez Echevarría.
+      sources: [borme-2024, home]
+    sister_brands:
+      value: []
+      note: Bucket List Labs' other apps are calendar, weather, Bible, translator, spelling and AI image apps.
+      sources: [developer-apps]
+    acquisitions:
+      value: null
+      note: >-
+        The app launched in 2019, but Bucket List Labs was only registered in 2021, so it changed hands from an
+        earlier developer on an unknown date. The company site offers to buy apps through escrow.
+      sources: [app-store, datoscif, home]
+
+  jurisdiction:
+    hq:
+      value: ES
+      sources: [legal-notice, datoscif]
+    entities:
+      value: [ES]
+      sources: [datoscif]
+
+  logging:
+    traffic:
+      value: null
+      note: >-
+        The listing promises a "Zero-log policy", but the only privacy policy covers all of the company's apps and
+        never mentions the VPN.
+      sources: [app-store, privacy]
+    dns:
+      value: null
+      note: The privacy policy doesn't mention the VPN or DNS requests.
+      sources: [privacy]
+    timestamps:
+      value: null
+      note: >-
+        The privacy policy doesn't mention connection times. It covers interactions with the app and device
+        identifiers, kept for as long as they're needed.
+      sources: [privacy]
+    bandwidth:
+      value: null
+      note: The privacy policy doesn't mention data use.
+      sources: [privacy]
+    source_ip:
+      value: null
+      note: The privacy policy doesn't say whether your IP address is kept when you connect.
+      sources: [privacy]
+    proven:
+      value: []
+    policy:
+      value: https://www.bucketlistlabs.com/PrivacyPolicy.html
+      note: A policy for all of Bucket List Labs' apps, with no section on the VPN.
+      sources: [privacy]
+
+  transparency:
+    audits:
+      value: []
+    report:
+      value: none
+      sources: [home]
+    canary:
+      value: none
+      sources: [home]
+    bug_bounty:
+      value: false
+      note: Bucket List Labs publishes no bounty or security.txt.
+      sources: [home]
+    incidents:
+      value: []
+
+  account:
+    email:
+      value: null
+      note: It's bought in the app through Apple, and nothing says whether an account is needed.
+      sources: [app-store]
+    personal_data:
+      value: null
+      note: Nothing says what, if anything, signing up asks for.
+      sources: [app-store]
+    payment:
+      value: [app_store]
+      note: Only sold through in-app purchases on the App Store.
+      sources: [app-store]
+
+  security:
+    protocols:
+      value: null
+      note: >-
+        The listing names OpenVPN and IKEv2, and credits "KeepSolid Wise technology", which is KeepSolid's protocol for
+        VPN Unlimited. Nothing shows whether it's licensed from KeepSolid or the text was copied.
+      sources: [app-store, vpn-unlimited]
+    post_quantum:
+      value: null
+    kill_switch:
+      value: null
+    dns:
+      value: null
+      note: The listing claims DNS masking but doesn't say whose resolvers answer.
+      sources: [app-store]
+
+  infra:
+    ram_only:
+      value: null
+    hosting:
+      value: null
+      note: >-
+        No operator for the servers is named. The KeepSolid technology the listing credits suggests VPN Unlimited's
+        network, but nothing confirms it.
+      sources: [app-store, vpn-unlimited]
+    virtual_locations:
+      value: null
+    servers:
+      value: null
+      note: No server count is given, only "70+ locations".
+      sources: [app-store]
+    countries:
+      value: null
+      note: The listing claims servers in 70+ locations without saying how many countries.
+      sources: [app-store]
+
+  features:
+    connections:
+      value: null
+    multihop:
+      value: null
+    obfuscation:
+      value: null
+      note: The listing says it may be blocked in China, the UAE, Saudi Arabia, Iraq, Iran, Turkmenistan and Turkey.
+      sources: [app-store]
+    port_forwarding:
+      value: null
+    split_tunnel:
+      value: null
+    blocking:
+      value: null
+
+  clients:
+    platforms:
+      value: [ios]
+      note: iPhone and iPad, and the same app runs on Apple silicon Macs and Vision Pro.
+      sources: [app-store]
+    open_source:
+      value: none
+      note: The app's source code isn't published.
+    telemetry:
+      value: null
+      note: >-
+        The App Store label declares identifiers used to track you across other companies' apps, plus analytics,
+        crash and performance data. Nothing says whether it can be turned off.
+      sources: [app-store]
+    trackers:
+      value: null
+      grade: na
+      note: There's no Android app.
+      sources: [developer-apps]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 14.99, currency: USD }
+      note: The US App Store price. There's no pricing page.
+      sources: [app-store]
+    best:
+      value: { amount: 5.83, currency: USD }
+      note: $69.99 a year. Three months is $39.99.
+      sources: [app-store]
+    best_term:
+      value: 12
+      sources: [lookup]
+    renewal_increase:
+      value: 0
+      sources: [lookup]
+    free_tier:
+      value: null
+      note: The app is a free download with subscriptions, and nothing says whether the VPN works without one.
+      sources: [app-store]
+    refund_days:
+      value: null
+      note: It's only sold through the App Store, so refunds follow Apple's process.
+      sources: [apple-refund]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        The listing promises a "Zero-log policy" and "anonymous and untraceable" browsing with no VPN policy behind
+        it, and credits KeepSolid's technology in text copied from VPN Unlimited's own listing.
+      sources: [app-store, privacy, vpn-unlimited]
+    affiliates:
+      value: null
+      note: Bucket List Labs doesn't say whether it pays anyone for sign-ups.
+    review_sites:
+      value: false
+      sources: [developer-apps, home]
+    activism:
+      value: false
+      sources: [home]
+
+refs:
+  home:
+    url: https://www.bucketlistlabs.com/
+    title: Bucket List Labs, App Development Experts
+  legal-notice:
+    url: https://www.bucketlistlabs.com/TermsOfUse.html
+    title: Bucket List Labs, Terms of Use and legal notice
+  privacy:
+    url: https://www.bucketlistlabs.com/PrivacyPolicy.html
+    title: Bucket List Labs, Privacy Policy (linked from the App Store listing)
+  app-store:
+    url: https://apps.apple.com/us/app/vpn-fast-secure/id1447640045
+    title: VPN · Fast & Secure on the App Store (description, in-app purchases, version history and privacy label)
+  lookup:
+    url: https://itunes.apple.com/lookup?id=1447640045
+    title: App Store lookup for VPN · Fast & Secure (seller, release date, version)
+  developer-apps:
+    url: https://apps.apple.com/us/developer/bucket-list-labs-s-l/id1616833567
+    title: BUCKET LIST LABS S.L. on the App Store
+  vpn-unlimited:
+    url: https://apps.apple.com/us/app/vpn-unlimited-fast-proxy/id694633015
+    title: VPN Unlimited by KeepSolid on the App Store (lists the KeepSolid Wise protocols)
+  datoscif:
+    url: https://www.datoscif.es/empresa/bucket-list-labs-sl
+    title: Bucket List Labs SL, Las Palmas company register entries
+  borme-2024:
+    url: https://www.boe.es/borme/dias/2024/03/25/pdfs/BORME-A-2024-60-35.pdf
+    title: BORME, Las Palmas register, 2024-03-25 (WEEWOO SL names Félix Sánchez Echevarría as representative)
+  apple-refund:
+    url: https://support.apple.com/en-us/118223
+    title: Request a refund for apps or content that you bought from Apple
