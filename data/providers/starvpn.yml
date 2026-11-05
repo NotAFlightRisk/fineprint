@@ -1,0 +1,256 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: StarVPN
+icon: starvpn.png
+checked: 2026-11-05
+
+criteria:
+  identity:
+    website:
+      value: https://www.starvpn.com
+      sources: [home]
+    legal_entity:
+      value: StarVPN Inc.
+      note: An Ontario corporation (5019951) in Toronto that also trades as Star Internet Services. Not related to Senight's Star VPN.
+      sources: [terms, register, contact]
+    owner: null
+    founded:
+      value: 2017
+      note: The starvpn.com domain belonged to an unrelated Chinese VPN around 2010.
+      sources: [blog-2017, wayback-2011]
+    team:
+      value: anonymous
+      sources: [contact]
+    sister_brands:
+      value: []
+      note: DNSFLEX, a Smart DNS service it calls its sister site, isn't a VPN.
+      sources: [smart-dns]
+    acquisitions: []
+
+  jurisdiction:
+    hq:
+      value: CA
+      sources: [register]
+    entities:
+      value: [CA]
+      sources: [register]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [policy]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [terms]
+    timestamps:
+      value: temporary
+      evidence: claimed
+      note: OpenVPN's connection status messages go to the system log, which is kept for a day and wiped nightly.
+      sources: [policy]
+    bandwidth:
+      value: aggregate
+      evidence: claimed
+      note: Usage is totalled monthly for billing and the free plan's data caps.
+      sources: [terms]
+    source_ip:
+      value: temporary
+      evidence: claimed
+      note: The system log includes your connecting IP address and is wiped nightly, while the terms say connection logs aren't kept at all.
+      sources: [policy, terms]
+    proven: []
+    policy:
+      value: https://www.starvpn.com/privacy-policy
+      sources: [policy]
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: required
+      note: The anonymous free tier needs no account at all.
+      sources: [terms, free-vpn]
+    personal_data:
+      value: [name, address, id_document]
+      note: The signup form asks for your name and street address, and the free VPN's terms say paid subscribers must show government photo ID and a use case.
+      sources: [terms, free-terms]
+    payment:
+      value: [card, paypal, bank, app_store, bitcoin]
+      note: Card, PayPal, Google Pay and Apple Pay go through Paddle, and crypto through BitPay.
+      sources: [faq]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn, other]
+      note: Other is AmneziaWG. Paid plans also include SOCKS5 and HTTP proxies, and the free tier is OpenVPN only.
+      sources: [home, free-android]
+    post_quantum: none
+    kill_switch:
+      value: null
+      note: On Android it's Android's own Always-on VPN and block setting, which you turn on yourself, and how the Windows app's works isn't stated.
+      sources: [home, play]
+    dns:
+      value: third_party
+      note: Configs default to Google or Cloudflare DNS, and the app offers Cloudflare, AdGuard, OpenDNS and others.
+      sources: [faq]
+
+  infra:
+    ram_only: null
+    hosting:
+      value: null
+      note: >-
+        Free servers sit on Linode, OVH and other hosts' addresses. Static residential IPs are leased from ISPs,
+        and rotating ones exit through people's home connections.
+      sources: [free-servers, residential, faq]
+    virtual_locations: null
+    servers:
+      value: 1000
+      note: Advertised as over 1,000 servers and access points, with no list published.
+      sources: [home]
+    countries:
+      value: null
+      note: Claims range from over 30 countries for datacenter IPs to over 60 for rotating residential ones.
+      sources: [faq, play]
+
+  features:
+    connections:
+      value: 10
+      note: WireGuard and AmneziaWG allow one device per key, and OpenVPN up to eight.
+      sources: [faq]
+    multihop:
+      value: true
+      evidence: claimed
+      note: Advertised as its own multi-hop protocol, with no detail on how the hops work.
+      sources: [free-vpn]
+    obfuscation:
+      value: [amneziawg]
+      sources: [home, amnezia]
+    port_forwarding: null
+    split_tunnel:
+      value: true
+      sources: [home, play]
+    blocking:
+      value: [ads, malware]
+      note: Through a choice of filtering DNS servers, including parental control.
+      sources: [play]
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android]
+      note: The Mac app is the iOS one from the App Store. Routers and Linux need manual WireGuard or OpenVPN setup.
+      sources: [apps, app-store, setup]
+    open_source: none
+    telemetry:
+      value: null
+      note: The Android app collects crash logs and shares device IDs for analytics and advertising, and StarVPN doesn't say whether you can turn this off.
+      sources: [play-data-safety]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 8, currency: USD }
+      note: The Datacenter VPN plan. Residential plans are $20 and $45 a month.
+      sources: [pricing]
+    best:
+      value: { amount: 8, currency: USD }
+      sources: [pricing]
+    best_term:
+      value: 1
+      sources: [pricing]
+    renewal_increase:
+      value: 0
+      sources: [pricing]
+    free_tier:
+      value: true
+      note: >-
+        100GB a month with no account, on Android and Windows. In exchange you join its network sharing
+        programme, which routes traffic its servers start through your connection. A registered Free VPN+ plan
+        gives 2GB a day.
+      sources: [free-vpn, free-terms]
+    refund_days:
+      value: 0
+      note: Monthly plans aren't refunded, and residential IPs generally aren't either, except case by case.
+      sources: [terms, faq]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        It sells "military grade" encryption and "100% anonymous" free use, and says it owns all of its
+        residential network while its rotating IPs run through home users' devices.
+      sources: [free-android, residential, faq]
+    affiliates:
+      value: true
+      sources: [home]
+    review_sites: false
+    activism: false
+
+refs:
+  pricing:
+    url: https://www.starvpn.com/#pricing
+    title: StarVPN pricing plans
+  apps:
+    url: https://www.starvpn.com/#apps
+    title: StarVPN apps and downloads
+  home:
+    url: https://www.starvpn.com/
+    title: StarVPN home page and pricing
+  policy:
+    url: https://www.starvpn.com/privacy-policy
+    title: StarVPN Inc. Privacy Policy
+  terms:
+    url: https://www.starvpn.com/terms-of-service
+    title: StarVPN Terms of Service
+  free-terms:
+    url: https://www.starvpn.com/terms-of-service-free-vpn
+    title: StarVPN Terms of Service Free VPN
+  faq:
+    url: https://www.starvpn.com/frequently-asked-questions
+    title: StarVPN Frequently Asked Questions
+  free-vpn:
+    url: https://www.starvpn.com/free-vpn
+    title: StarVPN Free VPN
+  free-android:
+    url: https://www.starvpn.com/free-android-vpn
+    title: StarVPN 100% Free Android VPN
+  residential:
+    url: https://www.starvpn.com/residential-proxies
+    title: StarVPN Residential Proxies
+  contact:
+    url: https://www.starvpn.com/contact-us
+    title: Contact StarVPN
+  smart-dns:
+    url: https://www.starvpn.com/smart-dns
+    title: Smart Streamer Smart DNS (StarVPN)
+  setup:
+    url: https://www.starvpn.com/setup-instructions
+    title: StarVPN setup instructions
+  amnezia:
+    url: https://www.starvpn.com/amnezia-vpn-setup-with-starvpn
+    title: AmneziaWG VPN Setup with StarVPN
+  blog-2017:
+    url: https://www.starvpn.com/how-to-setup-a-residential-ip-proxy-using-foxyproxy
+    title: How to route traffic from your PC browser through a SOCKS5 proxy using FoxyProxy (StarVPN, November 2017)
+  wayback-2011:
+    url: https://web.archive.org/web/20110207165837/http://starvpn.com/
+    title: starvpn.com in February 2011 (Wayback Machine)
+  free-servers:
+    url: https://api.starhome.io/v1/get_free_vpn_hostnames
+    title: StarVPN free VPN server list (StarVPN app API)
+  register:
+    url: https://opencorporates.com/companies/ca_on/5019951
+    title: STARVPN INC., Ontario corporation 5019951 (OpenCorporates)
+  play:
+    url: https://play.google.com/store/apps/details?id=com.starvpn&hl=en
+    title: StarVPN - Fast VPN Proxy (Google Play)
+  play-data-safety:
+    url: https://play.google.com/store/apps/datasafety?id=com.starvpn&hl=en
+    title: StarVPN data safety (Google Play)
+  app-store:
+    url: https://apps.apple.com/us/app/residential-vpn/id1624494670
+    title: Residential VPN by StarVPN Inc. (App Store)
