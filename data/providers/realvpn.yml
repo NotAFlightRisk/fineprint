@@ -1,0 +1,310 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: RealVPN
+icon: realvpn.svg
+checked: 2026-11-05
+
+criteria:
+  identity:
+    website:
+      value: https://realvpn.io
+      sources: [home]
+    legal_entity:
+      value: Security Tech OÜ
+      note: The same company is the Google Play developer and the App Store seller.
+      sources: [terms, register, play, app-store]
+    owner:
+      value: Andrii Mospan
+      note: The company's sole shareholder and board member, resident in Ukraine.
+      sources: [register]
+    founded:
+      value: 2017
+      evidence: claimed
+      note: Its own claim. Elestonia Trade OÜ, which ran it until 2023, was registered in June 2017.
+      sources: [about, register-elestonia]
+    team:
+      value: partial
+      note: Its site names nobody, but Estonia's register names the company's owner and board member.
+      sources: [about, register]
+    sister_brands:
+      value: []
+      sources: [play-dev]
+    acquisitions:
+      value: null
+      note: >-
+        Its policy named Elestonia Trade OÜ, owned by Volodymyr Ivanov, until it switched to Security Tech OÜ on
+        the day that company was registered in August 2023. No sale was announced, so it's unclear whether it
+        changed hands.
+      sources: [policy-2022, register-elestonia, register, policy]
+
+  jurisdiction:
+    hq:
+      value: EE
+      sources: [register]
+    entities:
+      value: [EE]
+      sources: [register]
+
+  logging:
+    traffic:
+      value: aggregate
+      evidence: claimed
+      note: >-
+        The policy says it doesn't record site visits by any specific user, but that websites visited through
+        its servers are collected and stored for aggregate analytics and troubleshooting.
+      sources: [policy]
+    dns:
+      value: null
+      note: >-
+        Its homepage says DNS queries are never stored, while the policy says the websites visited through its
+        servers are collected and stored, without mentioning DNS.
+      sources: [home, policy]
+    timestamps:
+      value: null
+      note: It doesn't say whether it records when you connect and disconnect.
+    bandwidth:
+      value: null
+      note: It doesn't say whether it records how much data you use.
+    source_ip:
+      value: temporary
+      evidence: claimed
+      note: >-
+        Held encrypted while you're connected and deleted when you disconnect. It's also used to work out your
+        rough location, which the policy says may be shared with advertisers on the free version.
+      sources: [policy, logs-faq]
+    proven: []
+    policy: https://realvpn.io/privacy-policy
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: required
+      note: >-
+        Signup asks for an email and password, and every app guide needs an account, though the policy still says
+        creating one is optional.
+      sources: [register-page, install-android, policy]
+    personal_data: []
+    payment:
+      value: [card, app_store, gift_card]
+      note: Cards and wallets through Stripe. Codes bought from partner stores can be redeemed for a plan.
+      sources: [payment-methods, redeem]
+
+  security:
+    protocols:
+      value: [openvpn, ikev2, other]
+      note: >-
+        Other is VLESS with Reality. The Android app only carries VLESS and IKEv2, and OpenVPN is offered in its
+        other apps and as manual configs.
+      sources: [home, choose-protocol, manual-config, play]
+    post_quantum:
+      value: null
+      note: Nothing is published about its key exchange.
+      sources: [choose-protocol]
+    kill_switch:
+      value: app
+      note: >-
+        The Mac app has one you turn on in settings, and the Android guide points you to Android's own always-on
+        setting. Nothing says the other apps have one.
+      sources: [install-mac, install-android]
+    dns:
+      value: third_party
+      note: The Android app's VLESS config sends lookups to Cloudflare's 1.1.1.1 and Google's 8.8.8.8.
+      sources: [play]
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say how its servers are run.
+    hosting:
+      value: rented
+      note: >-
+        The addresses in its server list belong to rented hosting from Vultr, Akamai's Linode, DigitalOcean,
+        Hetzner, EDIS and OneProvider.
+      sources: [regions, arin-vultr]
+    virtual_locations:
+      value: null
+      note: >-
+        It doesn't say whether any locations are virtual. Its Luxembourg server's address sits in a block its host
+        registers as Amsterdam.
+      sources: [regions, ripe-lux]
+    servers:
+      value: null
+      note: >-
+        Its Play listing claims over 1,000 servers, while its live server list has 58 locations with one address
+        each.
+      sources: [play, regions]
+    countries:
+      value: 47
+      note: Across 58 locations, with Puerto Rico listed on its own. Its homepage says 45.
+      sources: [locations, regions, home]
+
+  features:
+    connections:
+      value: 5
+      note: Extra devices can be added in packs of 5 for a monthly, yearly or one-off fee.
+      sources: [device-limit, home]
+    multihop: false
+    obfuscation:
+      value: [v2ray]
+      note: V2Ray here is Xray with VLESS and Reality, in its apps and as manual configs.
+      sources: [vpn-blocked, play]
+    port_forwarding: false
+    split_tunnel: false
+    blocking: []
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android, browser]
+      note: >-
+        Also Apple TV and Android TV apps. Linux and routers use third-party clients with its config files, and
+        its Linux download page points to Hiddify.
+      sources: [download, download-linux, install-browser, app-store, play, ms-store]
+    open_source: none
+    telemetry:
+      value: null
+      note: >-
+        The policy says the app and its service providers collect device details for analytics before you
+        connect, and the Android app carries Firebase Analytics and Crashlytics. Nothing says you can turn them off.
+      sources: [policy, play]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 4.99, currency: EUR }
+      sources: [pricing]
+    best:
+      value: { amount: 4.17, currency: EUR }
+      note: €49.99 a year. A lifetime plan costs €249.99 once.
+      sources: [pricing]
+    best_term:
+      value: 12
+      sources: [pricing]
+    renewal_increase:
+      value: 0
+      sources: [pricing, subscription]
+    free_tier:
+      value: null
+      note: >-
+        Its Play listing advertises a free tier, but its site only offers a 7-day trial of the yearly plan and
+        none of its locations is marked free.
+      sources: [play, pricing, regions]
+    refund_days:
+      value: 0
+      note: >-
+        All payments are non-refundable, though it may grant refunds case by case. The yearly plan has a 7-day free
+        trial.
+      sources: [terms, money-back, pricing]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        Its app listings promise "total anonymity online", and its homepage says "No logs. Ever." while its policy
+        says websites visited through its servers are collected and stored.
+      sources: [app-store, features, home, policy]
+    affiliates: false
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://realvpn.io/
+    title: RealVPN homepage
+  pricing:
+    url: https://realvpn.io/#pricing
+    title: RealVPN pricing
+  about:
+    url: https://realvpn.io/about
+    title: About RealVPN
+  policy:
+    url: https://realvpn.io/privacy-policy
+    title: RealVPN Privacy Policy (updated 29 August 2023)
+  policy-2022:
+    url: https://web.archive.org/web/20220124024515/https://www.realvpn.io/privacy-policy/
+    title: RealVPN Privacy Policy naming Elestonia Trade OÜ (archived January 2022)
+  terms:
+    url: https://realvpn.io/terms-and-conditions
+    title: RealVPN Terms & Conditions
+  register:
+    url: https://ariregister.rik.ee/eng/company/16806797
+    title: Security Tech OÜ (registry code 16806797), Estonian e-Business Register
+  register-elestonia:
+    url: https://ariregister.rik.ee/eng/company/14280227
+    title: Elestonia Trade OÜ (registry code 14280227), Estonian e-Business Register
+  play:
+    url: https://play.google.com/store/apps/details?id=io.realvpn.android
+    title: RealVPN on Google Play
+  play-dev:
+    url: https://play.google.com/store/apps/developer?id=Security+Tech+O%C3%9C
+    title: Security Tech OÜ apps on Google Play
+  app-store:
+    url: https://apps.apple.com/us/app/realvpn/id1367167731
+    title: RealVPN by Security Tech OU on the App Store (US)
+  ms-store:
+    url: https://apps.microsoft.com/detail/9PBK5KSDWS9Z
+    title: RealVPN on the Microsoft Store
+  logs-faq:
+    url: https://realvpn.io/help/doyourstorelogs
+    title: Do you store any logs?
+  features:
+    url: https://realvpn.io/help/features
+    title: RealVPN features
+  register-page:
+    url: https://realvpn.io/register
+    title: Create your RealVPN account
+  install-android:
+    url: https://realvpn.io/help/install-android
+    title: RealVPN on Android
+  install-mac:
+    url: https://realvpn.io/help/install-mac
+    title: RealVPN on Mac
+  install-browser:
+    url: https://realvpn.io/help/install-browser
+    title: RealVPN browser extensions
+  download:
+    url: https://realvpn.io/download
+    title: Download RealVPN
+  download-linux:
+    url: https://realvpn.io/download/linux
+    title: RealVPN for Linux
+  choose-protocol:
+    url: https://realvpn.io/help/choose-protocol
+    title: Which protocol should I use?
+  vpn-blocked:
+    url: https://realvpn.io/help/vpn-blocked
+    title: VPN is blocked on my network
+  manual-config:
+    url: https://realvpn.io/help/getmanualvpnconfig
+    title: How to get a manual VPN config
+  device-limit:
+    url: https://realvpn.io/help/device-limit
+    title: Maximum number of devices error
+  payment-methods:
+    url: https://realvpn.io/help/paymentmethods
+    title: What payment methods do you accept?
+  redeem:
+    url: https://realvpn.io/help/howtoredeemacode
+    title: How to apply/redeem a code
+  subscription:
+    url: https://realvpn.io/help/subscription
+    title: What is a RealVPN subscription?
+  money-back:
+    url: https://realvpn.io/help/moneyback
+    title: What is your money-back policy?
+  locations:
+    url: https://realvpn.io/server-locations
+    title: RealVPN server locations
+  regions:
+    url: https://apiv2.realvpn.space/api/listregions
+    title: RealVPN server list (the data its locations page loads)
+  ripe-lux:
+    url: https://rest.db.ripe.net/search.json?query-string=109.104.154.7
+    title: RIPE database record for RealVPN's Luxembourg server address
+  arin-vultr:
+    url: https://rdap.arin.net/registry/ip/45.32.83.209
+    title: ARIN record for RealVPN's Los Angeles server address (Vultr)
