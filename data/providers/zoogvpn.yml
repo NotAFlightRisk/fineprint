@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: ZoogVPN
 icon: zoogvpn.png
-checked: 2026-10-24
+checked: 2026-11-05
 
 criteria:
   identity:
@@ -20,9 +20,9 @@ criteria:
       value: 2013
       sources: [about]
     team:
-      value: anonymous
-      note: ZoogVPN names nobody who runs it.
-      sources: [about]
+      value: partial
+      note: Only its CEO, Yaroslav Savenkov, is named.
+      sources: [ceo-interview, about]
     sister_brands: []
     acquisitions:
       value: null
@@ -65,13 +65,21 @@ criteria:
     policy: https://zoogvpn.com/privacy/
 
   transparency:
-    audits: []
+    audits:
+      value:
+        - date: 2025-12-26
+          auditor: DEKRA
+          scope: apps
+          source: masa-report
+      evidence: verified
+      note: A Google Play MASA check of the Android app, version 4.0.4.
+      sources: [masa-cert]
     report:
       value: none
       sources: [warrant-canary]
     canary:
       value: maintained
-      note: Dated October 2026, but it has lapsed before, and still read October 2024 in August 2025.
+      note: Dated November 2026, but it has lapsed before, and still read October 2024 in August 2025.
       sources: [warrant-canary, warrant-canary-2025]
     bug_bounty:
       value: null
@@ -121,12 +129,12 @@ criteria:
       sources: [network]
     servers:
       value: null
-      note: It lists 146 locations rather than servers, and its sign-up pop-up claims 200+ servers.
+      note: It lists 147 locations rather than servers, and its sign-up pop-up claims 200+ servers.
       sources: [network]
     countries:
-      value: 81
-      note: Other pages say 35+, 50+ or 55+ countries.
-      sources: [network, faq]
+      value: 82
+      note: Other pages say 35+, 55+ or 80+ countries.
+      sources: [network, faq, pricing]
 
   features:
     connections:
@@ -287,6 +295,15 @@ refs:
   affiliates:
     url: https://zoogvpn.com/affiliates/
     title: ZoogVPN affiliate programme
+  ceo-interview:
+    url: https://zoogvpn.com/zoogvpn-ceo-interviewed-by-wizcase/
+    title: ZoogVPN's CEO Yaroslav Savenkov interviewed by WizCase
+  masa-cert:
+    url: https://cert.appdefensealliance.org/certifications/10202
+    title: App Defense Alliance record for Zoog VPN (com.zoogvpn.android)
+  masa-report:
+    url: https://cert.appdefensealliance.org/certifications/10202/report/download
+    title: DEKRA MASA evaluation report for Zoog VPN
   exodus:
     url: https://web.archive.org/web/20260214074453/https://reports.exodus-privacy.eu.org/en/reports/com.zoogvpn.android/latest/
     title: Exodus Privacy report for com.zoogvpn.android (archived February 2026)
