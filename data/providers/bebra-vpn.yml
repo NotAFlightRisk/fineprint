@@ -1,0 +1,275 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Bebra VPN
+icon: bebra-vpn.png
+checked: 2026-11-05
+
+criteria:
+  identity:
+    website:
+      value: https://bebra.ai
+      sources: [home]
+    legal_entity:
+      value: KONDAKOV&GORIN LLC
+      note: An Arizona company at a mailbox address in Lakeside. It's also the Google Play developer and the App Store seller.
+      sources: [terms, about, play, app-store]
+    owner:
+      value: null
+      note: KONDAKOV&GORIN LLC names Vladimir Kondakov as a co-founder, without saying who owns it.
+      sources: [company]
+    founded:
+      value: 2022
+      sources: [about]
+    team:
+      value: partial
+      note: Its own site names nobody, but its company's site names Vladimir Kondakov as co-founder and head of security.
+      sources: [about, company]
+    sister_brands:
+      value: [VanyaVPN, Ben's VPN]
+      note: KONDAKOV&GORIN LLC lists all three as its products, and also sells VanyaVPN's iPhone app.
+      sources: [company, vanya-app-store]
+    acquisitions: []
+
+  jurisdiction:
+    hq:
+      value: US
+      sources: [terms]
+    entities:
+      value: [US]
+      note: Its sister VanyaVPN sells through CODE ASSET LTD in London and, on the Mac App Store, KONDAKOV OOO.
+      sources: [terms, vanya-about, vanya-mac-app-store]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [policy, help]
+    dns:
+      value: none
+      evidence: claimed
+      note: The policy says neither its app analytics nor its per-account traffic counters include DNS queries.
+      sources: [policy, refunds]
+    timestamps:
+      value: null
+      note: >-
+        The policy says its anonymous analytics leave out connection times, but also that it processes per-account
+        connection-activity counters and when they were updated, without saying how long it keeps them.
+      sources: [policy]
+    bandwidth:
+      value: aggregate
+      evidence: claimed
+      note: It keeps a running data total per account, used to turn down refunds past 1 GB in 30 days.
+      sources: [policy, refunds]
+    source_ip:
+      value: null
+      note: The app says the servers see your IP address, and the policy doesn't say whether it's kept.
+      sources: [policy, play]
+    proven: []
+    policy: https://bebra.ai/app-privacy-policy
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty:
+      value: false
+      note: Its company takes vulnerability reports by email but doesn't offer rewards.
+      sources: [company]
+    incidents: []
+
+  account:
+    email:
+      value: optional
+      note: The apps make a guest account tied to the device, and an email is only needed to sign in elsewhere or pay on the website.
+      sources: [help, play]
+    personal_data: []
+    payment:
+      value: [card, bank, app_store, other_crypto]
+      note: Cards through Stripe or Russian Mir cards, bank is Russia's SBP and Tinkoff Pay, and crypto goes through Cryptomus without naming coins.
+      sources: [buy, help]
+
+  security:
+    protocols:
+      value: [openvpn, other]
+      note: >-
+        The apps use VLESS with REALITY, XHTTP, Hysteria2 and Shadowsocks, picked for you. OpenVPN and PPTP are only for
+        routers set up by hand.
+      sources: [technologies, router]
+    post_quantum:
+      value: none
+      note: Nothing is published about its key exchange.
+      sources: [technologies]
+    kill_switch:
+      value: null
+      note: Nothing says its apps have one. Its router app keeps the network offline while it reconnects.
+      sources: [router]
+    dns:
+      value: third_party
+      note: The Android app resolves through Cloudflare, Quad9 and OpenDNS inside the tunnel.
+      sources: [play]
+
+  infra:
+    ram_only:
+      value: partial
+      evidence: claimed
+      note: It says most servers in its most popular locations run from RAM.
+      sources: [technologies]
+    hosting:
+      value: null
+      note: It doesn't say who runs its servers.
+    virtual_locations:
+      value: null
+      note: It doesn't say whether any locations are virtual, though its list includes Vatican City, Somalia and Yemen.
+      sources: [locations]
+    servers:
+      value: 35880
+      note: Its company's site says over 35,000 servers in 174 countries.
+      sources: [home, company]
+    countries:
+      value: 187
+      sources: [locations]
+
+  features:
+    connections:
+      value: unlimited
+      note: The terms let it limit connections to keep its systems working.
+      sources: [help, terms]
+    multihop:
+      value: true
+      note: It turns on by itself when a location is blocked, or can be forced through a Russian server for whitelisted mobile networks.
+      sources: [home, play]
+    obfuscation:
+      value: [v2ray, quic, shadowsocks]
+      note: REALITY and XHTTP are from the Xray family, and Hysteria2 runs over QUIC with Salamander obfuscation.
+      sources: [technologies]
+    port_forwarding: false
+    split_tunnel:
+      value: true
+      note: By site, IP address or app, plus a mode that sends Russian sites around the VPN.
+      sources: [home, play]
+    blocking: []
+
+  clients:
+    platforms:
+      value: [windows, macos, linux_gui, ios, android, router]
+      note: Also Android TV. The router app runs on Keenetic, OpenWrt and MikroTik, and other routers use OpenVPN or PPTP.
+      sources: [apps, router, app-store]
+    open_source:
+      value: none
+      note: The apps are built on Jigsaw's open source Outline client, but Bebra's own code isn't published and the terms forbid reverse engineering.
+      sources: [play, terms]
+    telemetry:
+      value: forced
+      evidence: claimed
+      note: >-
+        The app says it sends device, network, connection and error reports to run the service, and the policy names
+        Firebase and App Center. Nothing offers a way to turn it off.
+      sources: [policy, play]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 5, currency: USD }
+      note: 500 roubles with a Russian card.
+      sources: [plans, home]
+    best:
+      value: { amount: 1.9, currency: USD }
+      note: $57 for two years plus six free months.
+      sources: [plans, home, home-2026-06]
+    best_term:
+      value: 30
+      sources: [home]
+    renewal_increase:
+      value: null
+      note: It doesn't say whether the six free months come with a renewal.
+      sources: [terms]
+    free_tier:
+      value: false
+      note: The trial is three days for 50 cents, then the monthly plan.
+      sources: [home, plans]
+    refund_days:
+      value: 14
+      note: Only if the account used under 1 GB in the last 30 days, and never for crypto. App store purchases follow the store's rules.
+      sources: [refunds]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        It says it "taught artificial intelligence to mask traffic" so you'd be very difficult to identify, and that no
+        one will know which sites you visit.
+      sources: [technologies]
+    affiliates:
+      value: true
+      note: Up to $20 for each first payment plus a cut of every renewal.
+      sources: [about]
+    review_sites: false
+    activism: false
+
+  other:
+    concerns:
+      value:
+        - title: Hands out shared Apple accounts
+          summary: >-
+            For users in Russia and China it gives out logins to its own US App Store accounts, and its help page says
+            people do sign into iCloud with them by mistake.
+          severity: minor
+          source: help
+
+refs:
+  home:
+    url: https://bebra.ai/
+    title: Bebra VPN homepage
+  home-2026-06:
+    url: https://web.archive.org/web/20260617000235/https://bebra.ai/
+    title: Bebra VPN homepage (archived June 2026)
+  about:
+    url: https://bebra.ai/about
+    title: About Bebra VPN
+  company:
+    url: https://kondakovgorin.us/
+    title: KONDAKOV&GORIN LLC, mobile app development
+  terms:
+    url: https://bebra.ai/app-terms-of-service
+    title: Bebra VPN Terms of Service (last updated 26 October 2026)
+  policy:
+    url: https://bebra.ai/app-privacy-policy
+    title: Privacy Policy for Bebra VPN Site & Services (last updated 28 August 2025)
+  refunds:
+    url: https://bebra.ai/refunds-policy
+    title: Bebra VPN refund policy (last updated 18 September 2026)
+  help:
+    url: https://bebra.ai/help
+    title: Bebra VPN help
+  technologies:
+    url: https://bebra.ai/technologies
+    title: Bebra VPN technologies
+  locations:
+    url: https://bebra.ai/locations
+    title: Bebra VPN locations
+  router:
+    url: https://bebra.ai/router
+    title: Bebra VPN for routers
+  apps:
+    url: https://bebra.ai/app
+    title: Download Bebra VPN
+  buy:
+    url: https://bebra.ai/buy/month
+    title: Bebra VPN checkout
+  plans:
+    url: https://api.bebra.ai/web/v1/order/plans
+    title: Bebra VPN plan prices (the data its pricing table loads)
+  play:
+    url: https://play.google.com/store/apps/details?id=ai.bebra.android.client
+    title: Bebra VPN on Google Play
+  app-store:
+    url: https://apps.apple.com/us/app/bebra-vpn/id6466726886
+    title: Bebra VPN by KONDAKOV&GORIN LLC on the App Store (US)
+  vanya-app-store:
+    url: https://apps.apple.com/us/app/id1618096210
+    title: VanyaVPN by KONDAKOV&GORIN LLC on the App Store (US)
+  vanya-mac-app-store:
+    url: https://apps.apple.com/us/app/vanyavpn/id6444087613
+    title: VanyaVPN by KONDAKOV OOO on the App Store (US)
+  vanya-about:
+    url: https://vanyavpn.com/about
+    title: О компании, Дядя Ваня VPN
