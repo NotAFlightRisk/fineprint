@@ -1,0 +1,284 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: VPN Satoshi
+icon: vpn-satoshi.png
+checked: 2026-11-05
+
+criteria:
+  identity:
+    website:
+      value: https://vpnsatoshi.com
+      sources: [home]
+    legal_entity:
+      value: Satoshi Technology LLC
+      note: >-
+        An Armenian company registered in Yerevan in March 2023 as VPN Satoshi LLC, the name its App Store
+        and Play listings still use. Its terms name no company and claim a base in the British Virgin Islands,
+        text copied from ExpressVPN.
+      sources: [register, app-store, play, terms]
+    owner:
+      value: Rafayel Manvelyan
+      note: >-
+        Holds 53.4%, with Mikhail Mikhaylov on 20%, since July 2024. Elina Manvelyan held all of it before. The
+        policy's "ultimate holding company, Kape Technologies PLC" is copied from ExpressVPN, and Kape doesn't list
+        it as a brand.
+      sources: [register-owners-2026, register-owners-2023, policy, kape-brands]
+    founded:
+      value: 2023
+      note: The company was registered in March 2023 and the iPhone app came out that July.
+      sources: [register, site-2023, app-store-lookup]
+    team:
+      value: partial
+      note: Its site names nobody, but Armenia's register names the company's owners.
+      sources: [contacts, register-owners-2026]
+    sister_brands:
+      value: []
+      note: Its other app, VPNS Bot, is a bare VLESS client for configs from any provider.
+      sources: [play-developer, vpns-bot]
+    acquisitions:
+      value: null
+      note: >-
+        Majority ownership passed from Elina to Rafayel Manvelyan in July 2024, with Mikhail Mikhaylov taking 20%.
+        Nothing says whether that was a sale.
+      sources: [register-owners-2023, register-owners-2026]
+
+  jurisdiction:
+    hq:
+      value: AM
+      note: The terms put it under British Virgin Islands law, copied from ExpressVPN, but the company is Armenian.
+      sources: [register, terms]
+    entities:
+      value: [AM]
+      sources: [register]
+
+  logging:
+    traffic:
+      value: null
+      note: >-
+        The website policy rules it out, but that policy is ExpressVPN's copied almost word for word. The app's
+        own policy says activity data is "cleared after the VPN session is closed".
+      sources: [policy, express-policy, apk]
+    dns:
+      value: null
+      note: Only the policy copied from ExpressVPN rules out keeping DNS queries.
+      sources: [policy, express-policy]
+    timestamps:
+      value: null
+      note: >-
+        Both its policies say it keeps the day you connected but not the time, in wording copied from
+        ExpressVPN's. The iPhone app's March 2026 update "introduced device activity date tracking".
+      sources: [policy, apk, app-store]
+    bandwidth:
+      value: aggregate
+      evidence: claimed
+      note: A running total per user, which also meters the free plan.
+      sources: [policy, apk, play]
+    source_ip:
+      value: null
+      note: Its policies say it keeps your country and ISP but not your IP address, in wording copied from ExpressVPN's.
+      sources: [policy, apk, express-policy]
+    proven: []
+    policy: https://vpnsatoshi.com/privacy-policy/
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: optional
+      note: The apps have a guest mode, and paying on the website needs only the account ID.
+      sources: [price, app-store]
+    personal_data: []
+    payment:
+      value: [card, app_store]
+      note: >-
+        Website payments are in roubles through YooMoney. The policy's mention of Bitcoin is copied from ExpressVPN,
+        and no crypto option is offered.
+      sources: [price, policy, apk]
+
+  security:
+    protocols:
+      value: [other]
+      note: >-
+        The Android app runs Xray-core, with VLESS, VMess, Trojan and Shadowsocks. The "decentralized" Cosmos
+        blockchain network it advertises doesn't show up in the app.
+      sources: [apk, play]
+    post_quantum:
+      value: none
+      note: Nothing is published about its key exchange.
+    kill_switch:
+      value: null
+      note: It only says your IP stays protected during a short disconnection, without naming a kill switch.
+      sources: [android]
+    dns:
+      value: null
+      note: >-
+        It doesn't say whose DNS servers it uses. The Android app lets you add your own and carries Cloudflare,
+        Google and AdGuard addresses.
+      sources: [apk]
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say how its servers are run.
+    hosting:
+      value: null
+      note: It doesn't say whether it owns or rents its servers.
+    virtual_locations:
+      value: null
+      note: It doesn't say whether any locations are virtual.
+    servers:
+      value: null
+      note: It doesn't give a server count.
+    countries:
+      value: 34
+      note: The pricing page claims 40 countries but lists 34, Russia among them.
+      sources: [price]
+
+  features:
+    connections:
+      value: 5
+      note: Its app pages say unlimited devices.
+      sources: [terms, ios]
+    multihop: false
+    obfuscation:
+      value: [v2ray]
+      note: VLESS with Reality, on Xray-core.
+      sources: [apk]
+    port_forwarding: false
+    split_tunnel:
+      value: true
+      note: On Android and iOS.
+      sources: [apk, app-store]
+    blocking: []
+
+  clients:
+    platforms:
+      value: [windows, macos, linux_gui, ios, android, browser]
+      note: Android TV has its own app. The Chrome extension is a proxy.
+      sources: [windows, mac, linux, ios, android, android-tv, chrome]
+    open_source:
+      value: none
+      note: No source is published, and the terms forbid reverse engineering.
+      sources: [terms]
+    telemetry:
+      value: null
+      note: >-
+        The policy copied from ExpressVPN calls crash reports opt-in, but the Android app carries Firebase
+        Analytics, Crashlytics and Yandex's AppMetrica, and its App Store label says location may be used to
+        track you.
+      sources: [policy, apk, app-store]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 449, currency: RUB }
+      note: The App Store charges $4.99 a month.
+      sources: [price, app-store]
+    best:
+      value: { amount: 249, currency: RUB }
+      note: 2,988 roubles a year.
+      sources: [price]
+    best_term:
+      value: 12
+      sources: [price]
+    renewal_increase:
+      value: null
+      note: Plans renew automatically, at a price it doesn't state.
+      sources: [price, terms]
+    free_tier:
+      value: true
+      note: Free with ads, after 3 GB without them.
+      sources: [android, play]
+    refund_days:
+      value: 30
+      note: Not for App Store purchases, which Apple refunds.
+      sources: [terms]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        It calls itself "the best VPN on the planet", "completely decentralized on Cosmos blockchain" with "no
+        vulnerabilities", and its policy claims a BVI base and Kape parent copied from ExpressVPN.
+      sources: [play, home, policy]
+    affiliates: false
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://vpnsatoshi.com/
+    title: VPN Satoshi homepage
+  policy:
+    url: https://vpnsatoshi.com/privacy-policy/
+    title: Privacy policy
+  terms:
+    url: https://vpnsatoshi.com/terms-of-service/
+    title: Terms of Service
+  express-policy:
+    url: https://www.expressvpn.com/privacy-policy
+    title: ExpressVPN privacy policy (last updated 2 October 2026), the source of most of VPN Satoshi's
+  kape-brands:
+    url: https://www.kape.com/our-brands/
+    title: Kape, our brands
+  contacts:
+    url: https://vpnsatoshi.com/contacts/
+    title: Feedback
+  price:
+    url: https://vpnsatoshi.com/price/
+    title: VPNS Premium pricing
+  site-2023:
+    url: https://web.archive.org/web/20230319032640/https://vpnsatoshi.com/
+    title: VPN Satoshi "coming soon" page (archived March 2023)
+  register:
+    url: https://e-register.moj.am/en/companies/53920326
+    title: Armenian State Register, SATOSHI TECHNOLOGY LLC (271.110.1304610, registered 17 March 2023)
+  register-owners-2023:
+    url: https://e-register.moj.am/en/companies/53920326/declarations/cfb24600-4022-4ea1-8261-190a2410f286
+    title: Beneficial owners declaration for VPN SATOSHI LLC (April 2023)
+  register-owners-2026:
+    url: https://e-register.moj.am/en/companies/53920326/declarations/a8d37939-9368-4285-98c3-295a411de911
+    title: Beneficial owners declaration for SATOSHI TECHNOLOGY LLC (February 2026)
+  app-store:
+    url: https://apps.apple.com/us/app/vpn-satoshi/id6448133226
+    title: 'VPN Satoshi: Turbo Express Vpn on the App Store, sold by VPN SATOSHI LLC (US)'
+  app-store-lookup:
+    url: https://itunes.apple.com/lookup?id=6448133226&country=us
+    title: iTunes lookup for VPN Satoshi, released 18 July 2023
+  play:
+    url: https://play.google.com/store/apps/details?id=com.satoshi.vpns&hl=en_US
+    title: 'VPN Satoshi: Fast & Secure on Google Play'
+  play-developer:
+    url: https://play.google.com/store/apps/developer?id=VPN+SATOSHI&hl=en_US
+    title: VPN SATOSHI apps on Google Play
+  vpns-bot:
+    url: https://play.google.com/store/apps/details?id=com.satoshi.vpns.box&hl=en_US
+    title: VPNS Bot on Google Play
+  apk:
+    url: https://storage.yandexcloud.net/android-no-google/VSatoshi_3.4.244.apk
+    title: VPN Satoshi for Android 3.4.244 (APK from vpnsatoshi.com), with Xray-core, Firebase, AppMetrica, Yandex ads and an in-app privacy policy
+  windows:
+    url: https://vpnsatoshi.com/windows/
+    title: VPN Satoshi for Windows
+  mac:
+    url: https://vpnsatoshi.com/mac/
+    title: VPN Satoshi for Mac
+  linux:
+    url: https://vpnsatoshi.com/linux/
+    title: VPN Satoshi for Linux
+  ios:
+    url: https://vpnsatoshi.com/ios/
+    title: VPN Satoshi for iOS
+  android:
+    url: https://vpnsatoshi.com/android/
+    title: VPN Satoshi for Android
+  android-tv:
+    url: https://vpnsatoshi.com/android-tv/
+    title: VPN Satoshi for Android TV
+  chrome:
+    url: https://chromewebstore.google.com/detail/oafoojegpciffpajphojgkkdgnngigfb
+    title: VPN Satoshi Chrome VPN extension on the Chrome Web Store
