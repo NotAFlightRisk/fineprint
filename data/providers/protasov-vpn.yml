@@ -1,0 +1,227 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Protasov VPN
+icon: protasov-vpn.png
+checked: 2026-11-07
+
+criteria:
+  identity:
+    website:
+      value: https://protasovvpn.ru
+      note: Also served at protasovvpn.com.
+      sources: [home]
+    legal_entity:
+      value: Protasov Vyacheslav Sergeevich, IP
+      note: >-
+        A Russian sole trader (ИП) in Angarsk, Irkutsk region. There are no published terms or offer, and the site
+        gives no registration number.
+      sources: [play, delete-account, app-store]
+    owner:
+      value: null
+      grade: na
+      note: A sole trader, so there's no company above it.
+      sources: [play]
+    founded:
+      value: 2024
+      note: The first app release was in December 2024.
+      sources: [releases]
+    team:
+      value: partial
+      note: The only person named is the sole trader himself.
+      sources: [play, delete-account]
+    sister_brands: []
+    acquisitions: []
+
+  jurisdiction:
+    hq:
+      value: RU
+      sources: [play]
+    entities:
+      value: [RU]
+      sources: [delete-account]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [policy]
+    dns:
+      value: null
+      note: >-
+        The current policy says it doesn't store browsing history or traffic destinations. The policy linked from the
+        App Store says it doesn't log DNS queries "for profiling or advertising", which leaves other logging open.
+      sources: [policy, policy-ios]
+    timestamps:
+      value: null
+      note: Neither policy says whether connection times are kept.
+      sources: [policy, policy-ios]
+    bandwidth:
+      value: null
+      note: Neither policy says whether data use is counted.
+      sources: [policy, policy-ios]
+    source_ip:
+      value: null
+      note: The App Store policy says your IP address is processed to route the connection, without saying whether it's kept.
+      sources: [policy-ios]
+    proven: []
+    policy: https://protasovvpn.ru/privacy/privacy.html
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: optional
+      note: The free servers work without an account, and Premium needs one with an email address.
+      sources: [policy, premium]
+    personal_data: []
+    payment:
+      value: [card, bank]
+      note: Premium is paid on the website through YooKassa, by card or Russia's SBP.
+      sources: [premium, policy-ios]
+
+  security:
+    protocols:
+      value: null
+      note: >-
+        It doesn't say which protocols its servers use. The apps run on the sing-box core, which takes VLESS with
+        REALITY, VMess, Trojan, Hysteria2, Shadowsocks, TUIC and WireGuard including AmneziaWG.
+      sources: [releases]
+    post_quantum:
+      value: none
+      note: Nothing is published about its key exchange.
+    kill_switch:
+      value: null
+      note: Nothing says its apps have one.
+      sources: [play]
+    dns:
+      value: null
+      note: The apps let you set the DNS server, but nothing says what they use by default.
+      sources: [home]
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say how its servers are run.
+    hosting:
+      value: null
+      note: The App Store listing says it runs its own server infrastructure, while the policy shares data with its hosting providers.
+      sources: [app-store, policy-ios]
+    virtual_locations:
+      value: null
+      note: It doesn't say whether any locations are virtual.
+    servers:
+      value: 50
+      note: >-
+        It says more than 50, for Premium. Free users get a separate list of "dynamic" servers that it refreshes now
+        and then.
+      sources: [home, telegram]
+    countries:
+      value: 27
+      sources: [home]
+
+  features:
+    connections:
+      value: 5
+      note: Premium allows five devices, and the free plan has no device limit.
+      sources: [home, policy]
+    multihop: false
+    obfuscation:
+      value: null
+      note: Premium promises unnamed "stealth protocols" for getting round blocks, without saying which ones.
+      sources: [home]
+    port_forwarding: false
+    split_tunnel:
+      value: true
+      note: By app, and by domain or IP address.
+      sources: [home, play, app-store]
+    blocking:
+      value: [ads, trackers]
+      note: Ad blocking is on by default. Tracker blocking comes with an "extreme" mode that's off by default.
+      sources: [home, telegram, releases]
+
+  clients:
+    platforms:
+      value: [windows, macos, linux_gui, ios, android]
+      note: Also Android TV. The iPhone and Mac app isn't sold in the Russian or Chinese App Store.
+      sources: [home, readme, app-store]
+    open_source:
+      value: none
+      note: Its GitHub repository only holds the app builds, not the source.
+      sources: [readme, releases]
+    telemetry:
+      value: opt_out
+      evidence: claimed
+      note: >-
+        The apps send a report when the VPN core crashes, and this can be turned off in the settings. The policy also
+        mentions crash logs and device details for diagnostics.
+      sources: [home, policy]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 99, currency: RUB }
+      note: For 30 days.
+      sources: [home]
+    best:
+      value: { amount: 83.25, currency: RUB }
+      note: 999 roubles for 365 days.
+      sources: [home]
+    best_term:
+      value: 12
+      sources: [home]
+    renewal_increase:
+      value: null
+      note: It doesn't say whether plans renew or at what price.
+      sources: [premium]
+    free_tier:
+      value: true
+      note: Free servers with no account, sold as up to 10 Mbps.
+      sources: [home]
+    refund_days:
+      value: null
+      note: It publishes no terms or refund policy.
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: The Google Play listing sells it on "Anonymity, speed and freedom on the internet", while signing up ties Premium to an email address.
+      sources: [play]
+    affiliates: false
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://protasovvpn.ru/
+    title: ProtasovVPN homepage, plans and changelog
+  premium:
+    url: https://protasovvpn.ru/premium
+    title: Оплата Premium подписки, ProtasovVPN
+  policy:
+    url: https://protasovvpn.ru/privacy/privacy.html
+    title: Политика конфиденциальности, ProtasovVPN (9 October 2026)
+  policy-ios:
+    url: https://protasovvpn.com/privacy/privacy_policy
+    title: ProtasovVPN Privacy Policy, linked from the App Store (effective 18 July 2026)
+  delete-account:
+    url: https://protasovvpn.ru/delete-account
+    title: Удаление аккаунта ProtasovVPN
+  play:
+    url: https://play.google.com/store/apps/details?id=app.protasovvpn.com
+    title: Protasov VPN on Google Play
+  app-store:
+    url: https://apps.apple.com/us/app/id6762463258
+    title: Protasov VPN by Protasov Vyacheslav Sergeevich, IP on the App Store (US)
+  readme:
+    url: https://github.com/protasovvpn/ProtasovVPN
+    title: protasovvpn/ProtasovVPN on GitHub
+  releases:
+    url: https://github.com/protasovvpn/ProtasovVPN/releases
+    title: ProtasovVPN releases on GitHub
+  telegram:
+    url: https://t.me/s/ProtasovVPN
+    title: ProtasovVPN Telegram channel
