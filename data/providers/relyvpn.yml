@@ -1,0 +1,252 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: RelyVPN
+icon: relyvpn.png
+checked: 2026-11-07
+
+criteria:
+  identity:
+    website: https://relyvpn.com
+    legal_entity:
+      value: RelyTech LLC
+      note: A New Mexico LLC, entity ID 0008105529, per its terms. Not confirmed against the state register.
+      sources: [terms, app-store]
+    owner:
+      value: null
+      note: No parent company or owner is named.
+      sources: [terms]
+    founded:
+      value: 2017
+      note: The year the iOS app first went on the App Store, then sold by FansUp.
+      sources: [app-store-2019]
+    team:
+      value: anonymous
+      note: No leadership is named. The Apple developer account behind the apps is in an individual's name.
+      sources: [terms, downloads]
+    sister_brands: []
+    acquisitions:
+      value: null
+      note: >-
+        The App Store seller went from Fans up entertainment (Cayman) Limited to Tomorrowsoft Inc. by
+        2025, then to an individual developer account and RelyTech LLC in 2026, with no announcement.
+        Whether these were sales isn't public.
+      sources: [app-store-2019, app-store-2025, app-store-2026-06, app-store]
+  jurisdiction:
+    hq:
+      value: US
+      evidence: claimed
+      sources: [terms]
+    entities:
+      value: [US]
+      sources: [terms]
+  logging:
+    traffic:
+      value: null
+      note: >-
+        The policy only says tunnel content isn't used to build advertising profiles. The April 2026
+        version said traffic contents weren't logged.
+      sources: [policy, policy-2026-04]
+    dns:
+      value: null
+      note: The current policy doesn't mention DNS queries. The April 2026 version said they weren't logged.
+      sources: [policy, policy-2026-04]
+    timestamps:
+      value: 'yes'
+      evidence: claimed
+      note: Connection times are kept as long as needed for service, security or disputes, with no fixed period.
+      sources: [policy]
+    bandwidth:
+      value: 'yes'
+      evidence: claimed
+      note: Traffic byte counters are listed with connection times and IP addresses, with no fixed retention.
+      sources: [policy]
+    source_ip:
+      value: 'yes'
+      evidence: claimed
+      note: >-
+        Client IP addresses are kept as long as needed, with no fixed period. The April 2026 policy said
+        originating IPs weren't stored.
+      sources: [policy, policy-2026-04]
+    proven: []
+    policy: https://relyvpn.com/privacy.html
+  transparency:
+    audits: []
+    report:
+      value: none
+      sources: [data-requests]
+    canary: none
+    bug_bounty:
+      value: false
+      sources: [downloads]
+    incidents: []
+  account:
+    email:
+      value: none
+      sources: [home]
+    personal_data:
+      value: []
+      sources: [policy]
+    payment:
+      value: [card, app_store, other_crypto]
+      note: WeChat Pay and Alipay too, which the table has no option for. Crypto is USDT and non-refundable.
+      sources: [pricing, refunds]
+  security:
+    protocols:
+      value: [other]
+      note: Its own QUIC protocol, built on Hysteria, with a TLS fallback. There's no WireGuard or OpenVPN.
+      sources: [protocol, apk]
+    post_quantum:
+      value: null
+      note: Doesn't say.
+      sources: [protocol]
+    kill_switch:
+      value: none
+      sources: [apk]
+    dns:
+      value: null
+      note: Doesn't say which resolvers the tunnel uses.
+      sources: [policy]
+  infra:
+    ram_only:
+      value: null
+      note: Doesn't say.
+    hosting:
+      value: rented
+      note: Node names in the app point at Vultr, Linode, OVH, LightNode and smaller resellers.
+      sources: [apk]
+    virtual_locations:
+      value: null
+      note: Doesn't say.
+    servers:
+      value: null
+      note: Doesn't publish a server count.
+      sources: [home]
+    countries:
+      value: null
+      note: Doesn't publish a country count.
+      sources: [home]
+  features:
+    connections:
+      value: 5
+      note: The free plan allows one device.
+      sources: [pricing]
+    multihop:
+      value: false
+      note: Its cluster mode spreads traffic over several nodes in one datacentre, which isn't multi-hop.
+      sources: [protocol, apk]
+    obfuscation:
+      value: [quic]
+      note: Built for mainland China, with a TLS fallback where UDP is blocked.
+      sources: [protocol]
+    port_forwarding:
+      value: false
+      sources: [apk]
+    split_tunnel:
+      value: true
+      note: Per app and per domain, plus a mode that sends mainland China sites outside the tunnel.
+      sources: [apk]
+    blocking:
+      value: []
+      sources: [apk]
+  clients:
+    platforms:
+      value: [windows, macos, ios, android]
+      note: Android is a direct APK with no Play listing. Apple silicon Macs use the iOS app.
+      sources: [home, downloads]
+    open_source:
+      value: none
+      sources: [downloads]
+    telemetry:
+      value: null
+      note: The policy collects crash, error and diagnostic data from the apps, and doesn't say it can be turned off.
+      sources: [policy]
+    fdroid:
+      value: false
+      sources: [downloads]
+  pricing:
+    monthly:
+      value: { amount: 49, currency: CNY }
+      note: A 30-day prepaid pass. App Store subscriptions are priced separately.
+      sources: [pricing]
+    best:
+      value: { amount: 29, currency: CNY }
+      note: The 365-day pass at ¥348.
+      sources: [pricing]
+    best_term:
+      value: 12
+      sources: [pricing]
+    renewal_increase:
+      value: 0
+      note: Website passes are one-off and don't renew.
+      sources: [pricing, terms]
+    free_tier:
+      value: true
+      note: 300 MB at full speed once, then 160 kbps with no time limit, on one device.
+      sources: [pricing, terms]
+    refund_days:
+      value: 14
+      note: Website purchases only, and only if the paid plan hasn't been used. Crypto is final, App Store refunds are Apple's call.
+      sources: [refunds]
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        The App Store listing promises a "Zero-logs policy - never store or share your data" and "zero
+        personal data collection", while its policy keeps IP addresses, connection times and byte counters.
+      sources: [app-store, policy]
+    affiliates:
+      value: true
+      note: Referral codes on the site, and an in-app partner programme that shares revenue on each conversion.
+      sources: [cookies, apk]
+    review_sites:
+      value: false
+      sources: [home]
+    activism:
+      value: false
+      sources: [home]
+
+refs:
+  home:
+    url: https://relyvpn.com/
+    title: RelyVPN homepage
+  terms:
+    url: https://relyvpn.com/terms.html
+    title: RelyVPN Terms of Service
+  policy:
+    url: https://relyvpn.com/privacy.html
+    title: RelyVPN Privacy Policy (effective 2026-10-19)
+  policy-2026-04:
+    url: https://web.archive.org/web/20260601190844/https://relyvpn.com/privacy.html
+    title: RelyVPN Privacy Policy, April 2026 version (Wayback Machine)
+  pricing:
+    url: https://relyvpn.com/pricing.html
+    title: RelyVPN Plans & Pricing
+  refunds:
+    url: https://relyvpn.com/refund-policy.html
+    title: RelyVPN Refund and Cancellation Policy
+  cookies:
+    url: https://relyvpn.com/cookie-policy.html
+    title: RelyVPN Cookie and Tracking Policy
+  data-requests:
+    url: https://relyvpn.com/data-requests.html
+    title: RelyVPN Privacy Choices and Data Requests
+  downloads:
+    url: https://relyvpn.com/download-transparency.html
+    title: RelyVPN Official Downloads and Transparency
+  protocol:
+    url: https://relyvpn.com/blog/proprietary-protocol.html
+    title: 'RelyVPN Protocol: Encryption and Connection Reliability'
+  apk:
+    url: https://relyvpn.com/downloads/RelyVPN_latest.apk
+    title: RelyVPN Android APK (direct download)
+  app-store:
+    url: https://apps.apple.com/us/app/id1204005238
+    title: RelyVPN on the App Store
+  app-store-2019:
+    url: https://web.archive.org/web/20191213165830/https://apps.apple.com/us/app/id1204005238
+    title: RelyVPN App Store listing, December 2019 (Wayback Machine)
+  app-store-2025:
+    url: https://web.archive.org/web/20250726230004/https://apps.apple.com/us/app/relyvpn-the-privacy-first-vpn/id1204005238
+    title: RelyVPN App Store listing, July 2025 (Wayback Machine)
+  app-store-2026-06:
+    url: https://web.archive.org/web/20260625064103/https://apps.apple.com/us/app/relyvpn-%E6%B0%B8%E4%B9%85%E7%A6%8F%E5%88%A9%E6%A8%A1%E5%BC%8F-%E6%97%A0%E9%99%90%E6%B5%81%E9%87%8F/id1204005238
+    title: RelyVPN App Store listing, June 2026 (Wayback Machine)
