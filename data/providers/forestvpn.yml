@@ -1,0 +1,286 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: ForestVPN
+icon: forestvpn.svg
+checked: 2026-11-07
+
+criteria:
+  identity:
+    website:
+      value: https://fvpn.net
+      note: Moved from forestvpn.com, which now redirects here.
+      sources: [about]
+    legal_entity:
+      value: Digital Services LLC
+      note: A Georgian company in Batumi per Apple's trader record (DUNS 506869942). The Android app is published by SWYPE FZE in Dubai instead.
+      sources: [terms, app-store, play]
+    owner:
+      value: null
+      note: No parent is named, and neither company says how it relates to the other.
+      sources: [terms, play]
+    founded:
+      value: 2020
+      note: The iOS app came out in June 2020. The old site claimed it was established in 2015.
+      sources: [app-store, old-about]
+    team:
+      value: partial
+      note: The current site names nobody. The old site, up to early 2026, named founder George Kutsurua and staff by first name.
+      sources: [about, old-about]
+    sister_brands:
+      value: []
+      sources: [play]
+    acquisitions:
+      value: []
+      sources: [about]
+
+  jurisdiction:
+    hq:
+      value: GE
+      evidence: claimed
+      note: The terms only say the law of wherever Digital Services LLC is established applies.
+      sources: [app-store, terms]
+    entities:
+      value: [GE, AE]
+      note: SWYPE FZE, a Dubai free zone company, is the Google Play developer.
+      sources: [app-store, play]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [policy]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [policy]
+    timestamps:
+      value: aggregate
+      evidence: claimed
+      note: Connections per device per day are kept 31 days and the last day a device was seen indefinitely. A row tying a device to a session is deleted an hour after it ends.
+      sources: [policy]
+    bandwidth:
+      value: aggregate
+      evidence: claimed
+      note: Bytes per device per day for 31 days, and per month indefinitely.
+      sources: [security]
+    source_ip:
+      value: none
+      evidence: claimed
+      note: The country and network operator of each ticket request are kept for 90 days under a pseudonymous device tag. Gcore, used on blocked networks, keeps IP addresses for 3 days.
+      sources: [policy]
+    proven:
+      value: []
+      sources: [compare-wireguard]
+    policy: https://fvpn.net/en/legal/privacy/
+
+  transparency:
+    audits:
+      value: []
+      sources: [compare-wireguard]
+    report:
+      value: none
+      sources: [security]
+    canary:
+      value: none
+      sources: [security]
+    bug_bounty:
+      value: false
+      note: Security reports go to the support address in its security.txt.
+      sources: [security]
+    incidents: []
+
+  account:
+    email:
+      value: none
+      note: An account is an optional 32-character number, only needed to share a subscription.
+      sources: [account-number]
+    personal_data:
+      value: []
+      sources: [account-number]
+    payment:
+      value: [card, app_store, other_crypto]
+      note: Crypto goes through NOWPayments, which picks the coins on offer. Card is Stripe or, in Russia, CloudPayments.
+      sources: [checkout, terms]
+
+  security:
+    protocols:
+      value: [wireguard, proprietary]
+      note: Quantum, its own engine around WireGuard's unmodified handshake, pads packets to varying sizes and falls back to a standard handshake.
+      sources: [protocol, compare-wireguard, catalog]
+    post_quantum:
+      value: none
+      note: ML-KEM key exchange is built but only on a test server so far, rolling out as servers are upgraded.
+      sources: [protocol]
+    kill_switch:
+      value: app
+      note: A per-device setting. Windows and Linux use firewall rules; on Android it only blocks while the app runs, unless Android's own Always-on VPN is turned on.
+      sources: [kill-switch]
+    dns:
+      value: third_party
+      evidence: claimed
+      note: Lookups inside the tunnel go to a public resolver operator at the exit's location.
+      sources: [dns-leak-test]
+
+  infra:
+    ram_only:
+      value: all
+      evidence: claimed
+      sources: [policy]
+    hosting:
+      value: null
+      note: It says it runs exits on hardware it operates, but also that hosting companies host them.
+      sources: [protocol, policy]
+    virtual_locations:
+      value: null
+      sources: [catalog]
+    servers:
+      value: null
+      note: It lists locations, not servers.
+      sources: [catalog]
+    countries:
+      value: 43
+      note: 45 live locations on 2026-11-07, all but 5 Premium only.
+      sources: [catalog]
+
+  features:
+    connections:
+      value: 10
+      note: Ten devices per account. Free is limited to 5 connections a day.
+      sources: [terms]
+    multihop:
+      value: true
+      note: Two servers, or three on Premium.
+      sources: [changelog]
+    obfuscation:
+      value: [proprietary]
+      note: Padded handshakes, port rotation, and a backup route over a CDN when the direct one is blocked.
+      sources: [play, backup-route, changelog]
+    port_forwarding:
+      value: false
+      sources: [cgnat]
+    split_tunnel:
+      value: true
+      note: By app on Android, by IP range on Windows and Linux, not on Apple devices.
+      sources: [split-tunneling]
+    blocking:
+      value: [malware]
+      note: On Android you can pick a third-party filtering DNS provider for malware or adult content.
+      sources: [play]
+
+  clients:
+    platforms:
+      value: [windows, macos, linux_gui, linux_cli, ios, android, router]
+      note: Also Apple TV and Android TV. Routers are MikroTik and OpenWrt.
+      sources: [download]
+    open_source:
+      value: none
+      note: Only an old 2023 CLI and API clients are on GitHub, not the current Rust core or apps.
+      sources: [github, licenses]
+    telemetry:
+      value: forced
+      evidence: claimed
+      note: The apps send anonymous route reports on connection outcomes a few times a day with no off switch. Diagnostic reports only go if you tap Send.
+      sources: [policy]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 7.99, currency: USD }
+      sources: [pricing]
+    best:
+      value: { amount: 4.17, currency: USD }
+      sources: [pricing]
+    best_term: 12
+    renewal_increase:
+      value: 0
+      sources: [checkout]
+    free_tier:
+      value: true
+      note: 2 GB per connection and 5 connections a day, on a few locations.
+      sources: [pricing]
+    refund_days:
+      value: 14
+      note: Web card payments, pro rata for the time used. Store purchases are refunded by Apple or Google, and crypto isn't refunded.
+      sources: [checkout, terms]
+
+  ethics:
+    misleading_claims:
+      value: false
+      note: The old site carried a "Wish I knew about ForestVPN earlier!" quote credited to J. Assange.
+      sources: [security, old-about]
+    affiliates:
+      value: true
+      sources: [policy]
+    review_sites:
+      value: false
+      sources: [about]
+    activism:
+      value: false
+      sources: [about]
+
+refs:
+  about:
+    url: https://fvpn.net/en/about/
+    title: About ForestVPN
+  terms:
+    url: https://fvpn.net/en/legal/terms/
+    title: ForestVPN terms of service
+  policy:
+    url: https://fvpn.net/en/legal/privacy/
+    title: ForestVPN privacy policy
+  security:
+    url: https://fvpn.net/en/security/
+    title: Security and privacy at ForestVPN
+  pricing:
+    url: https://fvpn.net/en/pricing/
+    title: ForestVPN pricing
+  checkout:
+    url: https://console.fvpn.net/en/checkout/
+    title: ForestVPN web checkout
+  account-number:
+    url: https://fvpn.net/en/features/account-number/
+    title: "No sign-up: your account is a number"
+  app-store:
+    url: https://apps.apple.com/de/app/id1510228117?l=en-GB
+    title: ForestVPN on the App Store, with Apple's trader details
+  play:
+    url: https://play.google.com/store/apps/details?id=com.forestvpn.android
+    title: ForestVPN on Google Play
+  old-about:
+    url: https://web.archive.org/web/20251229123402/https://forestvpn.com/en/about/
+    title: Old forestvpn.com About page (Wayback Machine, December 2025)
+  github:
+    url: https://github.com/forestvpn
+    title: ForestVPN on GitHub
+  licenses:
+    url: https://fvpn.net/en/legal/licenses/
+    title: ForestVPN third-party licences
+  protocol:
+    url: https://fvpn.net/en/features/protocol/
+    title: "Quantum protocol: a proven handshake, little CPU"
+  compare-wireguard:
+    url: https://fvpn.net/en/compare/wireguard/
+    title: "ForestVPN vs WireGuard: measured, Oct 2026"
+  kill-switch:
+    url: https://fvpn.net/en/features/kill-switch/
+    title: "Kill switch: block traffic if the tunnel drops"
+  split-tunneling:
+    url: https://fvpn.net/en/features/split-tunneling/
+    title: "Split tunneling: choose what skips the VPN"
+  backup-route:
+    url: https://fvpn.net/en/features/backup-route/
+    title: "Backup route: when the direct route fails"
+  dns-leak-test:
+    url: https://fvpn.net/en/blog/dns-leak-test/
+    title: "DNS leak test: run it, read the resolver list"
+  cgnat:
+    url: https://fvpn.net/en/blog/cgnat-port-forwarding/
+    title: "Port forwarding behind CGNAT: what works"
+  changelog:
+    url: https://fvpn.net/en/changelog/
+    title: ForestVPN changelog
+  catalog:
+    url: https://catalog.fvpn.net/v3/catalog.json
+    title: ForestVPN signed location catalogue
+  download:
+    url: https://fvpn.net/en/download/
+    title: Download ForestVPN
