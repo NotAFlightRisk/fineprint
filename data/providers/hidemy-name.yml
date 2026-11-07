@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: hidemy.name VPN
 icon: hidemy-name.svg
-checked: 2026-10-25
+checked: 2026-11-07
 
 criteria:
   identity:
@@ -101,7 +101,7 @@ criteria:
     protocols:
       value: [wireguard, openvpn, ikev2, other]
       note: WireGuard and AmneziaWG come as manual configs. Others are L2TP and PPTP.
-      sources: [setup, ports]
+      sources: [wireguard, ports]
     post_quantum: none
     kill_switch:
       value: app
@@ -145,7 +145,7 @@ criteria:
     obfuscation:
       value: [amneziawg, proprietary]
       note: Chameleon disguises the OpenVPN handshake in the Windows, Android and Linux apps. AmneziaWG is a manual config.
-      sources: [ports, setup, linux]
+      sources: [ports, wireguard, linux]
     port_forwarding:
       value: true
       note: Ports above 1000 on shared IPs, any port on a rented dedicated IP.
@@ -267,6 +267,9 @@ refs:
   setup:
     url: https://hide.mn/en/vpn/windows/
     title: VPN for Windows
+  wireguard:
+    url: https://hide.mn/en/faq/vpn/vpn-installation-and-configuration/third-party-applications/wireguard-for-linux/
+    title: Setting up WireGuard/AmneziaWG on Linux
   linux:
     url: https://hide.mn/en/vpn/linux/
     title: VPN for Linux
