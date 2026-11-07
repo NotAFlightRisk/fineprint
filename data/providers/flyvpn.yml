@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: FlyVPN
 icon: flyvpn.png
-checked: 2026-10-25
+checked: 2026-11-07
 
 criteria:
   identity:
@@ -32,8 +32,8 @@ criteria:
     entities:
       value: [HK]
       note: >-
-        The terms switched from Hong Kong law to UK law in 2024, but Companies House lists no
-        UDITech or FlyVPN company.
+        The terms switched from Hong Kong law to UK law in 2024, but the UK company UDITech Limited,
+        renamed the same week as the Hong Kong one, was struck off in 2023.
       sources: [hk-cr, terms, terms-2023, ch-uditech, ch-flyvpn]
 
   logging:
@@ -219,8 +219,8 @@ refs:
     url: https://www.cr.gov.hk/docs/wrpt/wk_new%26changednamecoys_20191230.pdf
     title: Hong Kong Companies Registry, companies which changed names, 30 Dec 2019 to 5 Jan 2020 (p. 204)
   ch-uditech:
-    url: https://find-and-update.company-information.service.gov.uk/search/companies?q=uditech
-    title: Companies House search for UDITech
+    url: https://find-and-update.company-information.service.gov.uk/company/09293321
+    title: UDITECH LIMITED (09293321), Companies House
   ch-flyvpn:
     url: https://find-and-update.company-information.service.gov.uk/search/companies?q=flyvpn
     title: Companies House search for FlyVPN
