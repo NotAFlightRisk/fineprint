@@ -1,0 +1,250 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: CureVPN
+icon: curevpn.png
+checked: 2026-11-07
+
+criteria:
+  identity:
+    website:
+      value: https://curevpn.com
+      note: >-
+        Not the same app as Starnest's "VPN - Fast Secure & Privacy" on Google Play, now published by Global
+        Mobile App Limited in Hong Kong, which shares nothing with it but CureVPN links Play shows beside it.
+      sources: [home, download, play-other]
+    legal_entity:
+      value: Maha93 Inc.
+      note: The terms say it owns and runs CureVPN, and its Play listing gives a Toronto address.
+      sources: [terms, play]
+    owner:
+      value: null
+      note: >-
+        It was built by VPN Crafter, a white-label VPN developer at the same Toronto address, which calls it its
+        flagship product. Nobody is named as owning either.
+      sources: [case-study, crafter-about]
+    founded:
+      value: 2025
+      sources: [about]
+    team:
+      value: partial
+      note: >-
+        Its team page lists "Jane Cooper" as CEO, a stock placeholder name VPN Crafter's team page also uses. Only
+        the marketing head, Syed Sazzadul Bari, a VPN Crafter co-founder, looks like a real person.
+      sources: [team, crafter-team]
+    sister_brands: []
+    acquisitions: []
+
+  jurisdiction:
+    hq:
+      value: CA
+      evidence: claimed
+      sources: [terms, about]
+    entities:
+      value: [CA]
+      sources: [play]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [policy]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [policy]
+    timestamps:
+      value: null
+      note: >-
+        The policy says its systems temporarily process connection status and server assignment, without saying
+        whether connection times are kept or for how long.
+      sources: [policy]
+    bandwidth:
+      value: null
+      note: The policy doesn't say whether it records how much data you use.
+      sources: [policy]
+    source_ip:
+      value: null
+      note: The policy doesn't say whether it records the IP address you connect from.
+      sources: [policy]
+    proven: []
+    policy: https://curevpn.com/privacy-polic/
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: required
+      note: The free Android app connects in a guest mode without an account, but buying a plan takes an email address.
+      sources: [signup, checkout, play]
+    personal_data: []
+    payment:
+      value: [card, app_store]
+      note: The policy also names PayPal, Stripe and Paddle as processors, but the checkout only offers cards.
+      sources: [checkout, policy]
+
+  security:
+    protocols:
+      value: [wireguard, other]
+      note: >-
+        The Android app connects over OpenConnect (Cisco AnyConnect's protocol) and nothing else. The Windows
+        installer bundles WireGuard and Xray.
+      sources: [play, download]
+    post_quantum:
+      value: none
+      note: Nothing is published about its key exchange.
+    kill_switch:
+      value: app
+      evidence: claimed
+      sources: [download]
+    dns:
+      value: null
+      note: It doesn't say whose DNS servers the apps use.
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say how its servers are run.
+    hosting:
+      value: null
+      note: It doesn't say whether it owns its servers.
+    virtual_locations:
+      value: null
+      note: It doesn't say whether any locations are virtual.
+    servers:
+      value: 50
+      evidence: claimed
+      note: It says "50+ servers".
+      sources: [pricing]
+    countries:
+      value: null
+      note: The pricing page says servers in "30+ countries", the Play listing "50+ countries".
+      sources: [pricing, play]
+
+  features:
+    connections:
+      value: 5
+      note: The download page says "Up to 10 device", but the terms limit an account to five at once.
+      sources: [terms, download]
+    multihop: false
+    obfuscation:
+      value: [v2ray]
+      evidence: claimed
+      note: Only on Windows, whose installer bundles Xray. The Android app has nothing like it.
+      sources: [download, case-study]
+    port_forwarding: false
+    split_tunnel:
+      value: true
+      note: In the Android app, per app.
+      sources: [play]
+    blocking:
+      value: [ads]
+      note: The Android app has an ad blocker setting.
+      sources: [play]
+
+  clients:
+    platforms:
+      value: [windows, android]
+      note: >-
+        iOS and macOS apps are listed as coming soon. The features page also lists Linux and browser extensions,
+        which don't exist.
+      sources: [download, features]
+    open_source: none
+    telemetry:
+      value: null
+      note: >-
+        The Android app carries Firebase Analytics, OneSignal and Google AdMob, and the policy names Firebase and
+        OneSignal, without saying whether you can turn them off. Its Play data safety form says no data is collected.
+      sources: [play, policy, play-data-safety]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 4.99, currency: USD }
+      note: Sold as an early bird price, against a struck-through $8.99.
+      sources: [pricing]
+    best:
+      value: { amount: 2, currency: USD }
+      note: $29.99 for a year plus three free months.
+      sources: [pricing, checkout]
+    best_term:
+      value: 15
+      sources: [pricing, checkout]
+    renewal_increase:
+      value: null
+      note: >-
+        Plans don't renew automatically, and it doesn't say what buying again costs once the launch offer ends. The
+        terms say new prices "may apply upon renewal".
+      sources: [terms, pricing]
+    free_tier:
+      value: true
+      note: One device and a handful of locations, with ads in the Android app.
+      sources: [pricing, terms]
+    refund_days:
+      value: 7
+      note: The pricing page shows a "30-day money-back guarantee", but the terms give seven days.
+      sources: [terms, pricing]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        It promises "Military-Grade Encryption" and "no ads", while its terms allow AdMob ads in the app and the
+        Android app carries them. Its team page names a placeholder CEO.
+      sources: [download, terms, team]
+    affiliates: false
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://curevpn.com/
+    title: CureVPN
+  download:
+    url: https://curevpn.com/download/
+    title: Download CureVPN App
+  pricing:
+    url: https://curevpn.com/pricing/
+    title: CureVPN pricing
+  checkout:
+    url: https://account.curevpn.com/checkout?plan=77
+    title: CureVPN checkout, 12 months plan
+  signup:
+    url: https://account.curevpn.com/signup
+    title: CureVPN account signup
+  features:
+    url: https://curevpn.com/features/
+    title: CureVPN features
+  about:
+    url: https://curevpn.com/about-us/
+    title: About CureVPN
+  team:
+    url: https://curevpn.com/our-team/
+    title: Meet the Team Behind Cure VPN
+  terms:
+    url: https://curevpn.com/terms-of-service/
+    title: CureVPN Terms of Service
+  policy:
+    url: https://curevpn.com/privacy-polic/
+    title: CureVPN Privacy Policy
+  play:
+    url: https://play.google.com/store/apps/details?id=com.curevpn.new&hl=en
+    title: 'Cure VPN: Private & Secure VPN on Google Play'
+  play-data-safety:
+    url: https://play.google.com/store/apps/datasafety?id=com.curevpn.new&hl=en
+    title: 'Cure VPN: Private & Secure VPN data safety on Google Play'
+  play-other:
+    url: https://play.google.com/store/apps/details?id=com.starnest.vpnandroid&hl=en
+    title: VPN - Fast Secure & Privacy on Google Play
+  case-study:
+    url: https://vpncrafter.com/case/cure-vpn-case-study/
+    title: 'Cure VPN Case Study: 70K Users in 6 Months, Built by VPN Crafter'
+  crafter-about:
+    url: https://vpncrafter.com/about-us/
+    title: About VPN Crafter
+  crafter-team:
+    url: https://vpncrafter.com/our-team/
+    title: VPN Crafter team
