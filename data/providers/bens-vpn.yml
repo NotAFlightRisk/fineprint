@@ -1,0 +1,293 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Ben's VPN
+icon: bens-vpn.png
+checked: 2026-11-07
+
+criteria:
+  identity:
+    website:
+      value: https://bensvpn.com
+      sources: [home]
+    legal_entity:
+      value: CODE ASSET LTD
+      note: >-
+        A London company formed in June 2025, also VanyaVPN's. The App Store seller and Google Play developer is
+        KONDAKOV&GORIN LLC, Bebra VPN's company.
+      sources: [terms, offer, register, app-store, play]
+    owner:
+      value: null
+      note: >-
+        KONDAKOV&GORIN LLC lists Ben's VPN as its product and names Vladimir Kondakov as a co-founder, without saying who
+        owns it. CODE ASSET LTD's majority shareholder is Oleg Solovyov.
+      sources: [company, register-psc]
+    founded:
+      value: 2022
+      sources: [about]
+    team:
+      value: partial
+      note: Its site says it doesn't publish staff names, but KONDAKOV&GORIN LLC names Vladimir Kondakov as co-founder and head of security.
+      sources: [about, company]
+    sister_brands:
+      value: [Bebra VPN, VanyaVPN]
+      note: KONDAKOV&GORIN LLC lists all three as its products, and VanyaVPN's site also names CODE ASSET LTD.
+      sources: [company, vanya-offer]
+    acquisitions: []
+
+  jurisdiction:
+    hq:
+      value: GB
+      sources: [terms, register]
+    entities:
+      value: [GB, US]
+      note: CODE ASSET LTD in London, and KONDAKOV&GORIN LLC in Arizona for the app stores.
+      sources: [register, app-store, play]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [policy, locations]
+    dns:
+      value: none
+      evidence: claimed
+      note: The policy says neither its app analytics nor its per-account traffic counters include DNS queries.
+      sources: [policy, refunds]
+    timestamps:
+      value: null
+      note: >-
+        The policy says its anonymous analytics leave out connection times, but also that it processes per-account
+        connection-activity counters and when they were updated, without saying how long it keeps them.
+      sources: [policy, personal-data]
+    bandwidth:
+      value: aggregate
+      evidence: claimed
+      note: It keeps a running data total per account, used to turn down refunds past 1 GB in 30 days.
+      sources: [policy, refunds]
+    source_ip:
+      value: null
+      note: The policy leaves IP addresses out of its app analytics, but doesn't say whether its servers keep them.
+      sources: [policy]
+    proven: []
+    policy: https://bensvpn.com/app-privacy-policy
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty:
+      value: false
+      note: KONDAKOV&GORIN LLC takes vulnerability reports by email but doesn't offer rewards.
+      sources: [company]
+    incidents: []
+
+  account:
+    email:
+      value: optional
+      note: The apps make a guest account tied to the device, and an email is only needed to sign in elsewhere, use the router app or pay on the website.
+      sources: [android, router, play]
+    personal_data: []
+    payment:
+      value: [card, bank, app_store, other_crypto]
+      note: Cards through Stripe or Russian Mir cards, bank is Russia's SBP, and crypto is offered without naming coins or a processor.
+      sources: [buy, android]
+
+  security:
+    protocols:
+      value: [openvpn, other]
+      note: >-
+        The apps use VLESS with REALITY, XHTTP, Hysteria2 and Shadowsocks, picked for you. OpenVPN and PPTP are only for
+        routers set up by hand.
+      sources: [router]
+    post_quantum:
+      value: none
+      note: Nothing is published about its key exchange.
+    kill_switch:
+      value: null
+      note: >-
+        Its own pages don't mention one, though KONDAKOV&GORIN LLC says it has a built-in kill switch. Its router app on
+        Keenetic keeps the network offline while it isn't working.
+      sources: [company, router]
+    dns:
+      value: third_party
+      note: The Android app resolves through Cloudflare, Quad9 and OpenDNS inside the tunnel.
+      sources: [play]
+
+  infra:
+    ram_only:
+      value: all
+      evidence: claimed
+      sources: [locations]
+    hosting:
+      value: null
+      note: It doesn't say who runs its servers.
+    virtual_locations:
+      value: null
+      note: >-
+        It doesn't say whether any locations are virtual, though its list includes Vatican City, Somalia and Yemen, and
+        Iran, Syria and Cuba, where its terms say the service isn't available.
+      sources: [locations, terms]
+    servers:
+      value: null
+      note: It gives a count of countries, and says no more than 10 customers share an IP address.
+      sources: [home]
+    countries:
+      value: 187
+      sources: [locations]
+
+  features:
+    connections:
+      value: unlimited
+      note: The terms let it limit connections to keep its systems working.
+      sources: [buy, terms]
+    multihop:
+      value: true
+      note: It only turns on by itself, as a last resort when the app can't find a working server.
+      sources: [play]
+    obfuscation:
+      value: [v2ray, quic, shadowsocks]
+      note: REALITY and XHTTP are from the Xray family, and Hysteria2 runs over QUIC.
+      sources: [home]
+    port_forwarding: false
+    split_tunnel:
+      value: true
+      note: By site or IP address in every app, and by app on Android only.
+      sources: [extension, android]
+    blocking: []
+
+  clients:
+    platforms:
+      value: [windows, macos, linux_gui, ios, android, router]
+      note: >-
+        Also Android TV and Apple TV. The router app runs on Keenetic, OpenWrt and MikroTik, and other routers use
+        OpenVPN or PPTP. There's no browser extension.
+      sources: [apps, router, extension]
+    open_source:
+      value: none
+      note: The apps are built on Jigsaw's open source Outline client, but Ben's VPN's own code isn't published and the terms forbid reverse engineering.
+      sources: [play, terms]
+    telemetry:
+      value: forced
+      evidence: claimed
+      note: >-
+        The policy says the apps send device details, crash reports, session lengths, server use and UI interactions,
+        and names Firebase and App Center. Nothing offers a way to turn it off.
+      sources: [policy]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 5, currency: USD }
+      note: 500 roubles with a Russian card.
+      sources: [plans, home]
+    best:
+      value: { amount: 1.9, currency: USD }
+      note: $57 for two years plus six free months.
+      sources: [plans, home]
+    best_term:
+      value: 30
+      sources: [home, business]
+    renewal_increase:
+      value: 25
+      note: It renews at $57 every two years without the free months, which is $2.38 a month.
+      sources: [buy]
+    free_tier:
+      value: false
+      note: The trial is three days for 50 cents, or one day in Russia and Belarus, then the monthly plan.
+      sources: [trial, buy]
+    refund_days:
+      value: 14
+      note: Only if the account used under 1 GB in the last 30 days, and never for crypto. App store purchases follow the store's rules.
+      sources: [refunds, terms]
+
+  ethics:
+    misleading_claims: false
+    affiliates:
+      value: true
+      note: Up to $20 for each first payment plus a payout for every renewal.
+      sources: [partners]
+    review_sites: false
+    activism: false
+
+  other:
+    concerns:
+      value:
+        - title: Hands out shared Apple accounts
+          summary: >-
+            For users in Russia it gives out 15-minute logins to its own US App Store accounts, and its guide covers
+            people signing into iCloud with them or getting their phone number attached.
+          severity: minor
+          source: ios-russia
+
+refs:
+  home:
+    url: https://bensvpn.com/
+    title: Ben's VPN homepage
+  about:
+    url: https://bensvpn.com/about
+    title: About Ben's VPN
+  company:
+    url: https://kondakovgorin.us/
+    title: KONDAKOV&GORIN LLC, mobile app development
+  terms:
+    url: https://bensvpn.com/app-terms-of-service
+    title: Ben's VPN Terms of Service (last updated 22 October 2026)
+  offer:
+    url: https://bensvpn.com/offer
+    title: Ben's VPN public offer (last updated 22 October 2026)
+  policy:
+    url: https://bensvpn.com/app-privacy-policy
+    title: Privacy Policy for Ben's VPN (last updated 28 August 2025)
+  personal-data:
+    url: https://bensvpn.com/personal-data
+    title: Ben's VPN personal data policy (last updated 22 October 2026)
+  refunds:
+    url: https://bensvpn.com/refunds-policy
+    title: Ben's VPN refund policy (last updated 18 September 2026)
+  locations:
+    url: https://bensvpn.com/locations
+    title: Ben's VPN server locations
+  router:
+    url: https://bensvpn.com/router
+    title: Ben's VPN for routers
+  apps:
+    url: https://bensvpn.com/app
+    title: Download Ben's VPN
+  android:
+    url: https://bensvpn.com/vpn/android
+    title: Ben's VPN for Android
+  extension:
+    url: https://bensvpn.com/extension
+    title: Ben's VPN in your browser
+  ios-russia:
+    url: https://bensvpn.com/ios
+    title: Ben's VPN на iPhone и iPad в России
+  trial:
+    url: https://bensvpn.com/trial
+    title: Ben's VPN trial
+  buy:
+    url: https://bensvpn.com/buy/month
+    title: Ben's VPN checkout
+  plans:
+    url: https://api.bensvpn.com/web/v1/order/plans
+    title: Ben's VPN plan prices (the data its pricing table loads)
+  business:
+    url: https://bensvpn.com/business
+    title: Ben's VPN for business
+  partners:
+    url: https://bensvpn.com/partners
+    title: Ben's VPN affiliate program
+  register:
+    url: https://find-and-update.company-information.service.gov.uk/company/16508808
+    title: CODE ASSET LTD (16508808), Companies House
+  register-psc:
+    url: https://find-and-update.company-information.service.gov.uk/company/16508808/persons-with-significant-control
+    title: CODE ASSET LTD persons with significant control, Companies House
+  vanya-offer:
+    url: https://vanyavpn.com/offer
+    title: Договор оферты, Дядя Ваня VPN (22 October 2026)
+  play:
+    url: https://play.google.com/store/apps/details?id=com.bensvpn.android.client
+    title: Ben's VPN on Google Play
+  app-store:
+    url: https://apps.apple.com/us/app/bens-vpn/id1673147025
+    title: Ben's VPN by KONDAKOV&GORIN LLC on the App Store (US)
