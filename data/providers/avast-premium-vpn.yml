@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: Avast Premium VPN
 icon: avast-premium-vpn.svg
-checked: 2026-10-21
+checked: 2026-11-07
 
 criteria:
   identity:
@@ -157,6 +157,9 @@ criteria:
       value: [proprietary]
       note: The Mimic protocol, for countries that restrict VPNs.
       sources: [faq, mimic]
+    port_forwarding:
+      value: false
+      sources: [faq]
     split_tunnel:
       value: true
       sources: [faq]
@@ -211,7 +214,11 @@ criteria:
       value: true
       note: Pays affiliates commission on all Avast product sales.
       sources: [affiliates]
-    activism: null
+    review_sites: false
+    activism:
+      value: true
+      note: A partner in the Coalition Against Stalkerware.
+      sources: [stalkerware]
 
 refs:
   home:
@@ -289,3 +296,6 @@ refs:
   avira-vpn:
     url: https://www.avira.com/en/free-vpn
     title: Avira Phantom VPN
+  stalkerware:
+    url: https://stopstalkerware.org/partners/avast/
+    title: Coalition Against Stalkerware, Avast
