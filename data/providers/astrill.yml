@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: Astrill VPN
 icon: astrill.png
-checked: 2026-10-21
+checked: 2026-11-07
 
 criteria:
   identity:
@@ -168,10 +168,6 @@ criteria:
       value: null
       note: Neither the privacy policy nor the app pages say whether the apps send usage or crash data.
       sources: [privacy-policy]
-    trackers:
-      value: 0
-      note: The newest report the Wayback Machine holds, from February 2023, covers version 3.12.9 from December 2022.
-      sources: [exodus]
     fdroid:
       value: false
       sources: [download-android]
@@ -290,6 +286,3 @@ refs:
   download-android:
     url: https://www.astrill.com/download/android
     title: Download Astrill VPN for Android
-  exodus:
-    url: https://reports.exodus-privacy.eu.org/en/reports/com.astrill.astrillvpn/latest/
-    title: Exodus Privacy report for com.astrill.astrillvpn
