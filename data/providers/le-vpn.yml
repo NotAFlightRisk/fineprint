@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: Le VPN
 icon: le-vpn.svg
-checked: 2026-10-25
+checked: 2026-11-08
 
 criteria:
   identity:
@@ -103,8 +103,8 @@ criteria:
     kill_switch:
       value: system
       evidence: claimed
-      note: Always on in the new Windows and macOS apps. The Linux app's firewall goes if its service stops, and the legacy Windows app has it as an option.
-      sources: [windows-v2, mac, linux, kill-switch]
+      note: Built into the WireGuard connection in the new Windows, macOS and Linux apps. The older Windows app is still offered.
+      sources: [windows, windows-v2, mac, linux]
     dns:
       value: first_party
       sources: [appstore, linux]
@@ -132,8 +132,8 @@ criteria:
   features:
     connections:
       value: 10
-      note: Some older help pages and the Google Play listing still say five.
-      sources: [pricing, linux, devices-kb, play]
+      note: The Google Play listing still says five.
+      sources: [pricing, linux, play]
     multihop:
       value: false
       note: The terms forbid running one VPN connection inside another.
@@ -208,7 +208,7 @@ criteria:
 
 refs:
   x402:
-    url: https://support.le-vpn.com/le-vpn-launches-x402-vpn-passes/
+    url: https://www.le-vpn.com/le-vpn-launches-x402-vpn-passes/
     title: Le VPN launches x402 VPN passes
   about:
     url: https://www.le-vpn.com/about-us/
@@ -255,12 +255,9 @@ refs:
   router:
     url: https://www.le-vpn.com/vpn-router/
     title: VPN for Router
-  kill-switch:
-    url: https://www.le-vpn.com/clients/index.php/knowledgebase/731/Disabling-the-Internet-connection-on-Le-VPN-disconnection.html
-    title: Disabling the Internet connection on Le VPN disconnection
-  devices-kb:
-    url: https://www.le-vpn.com/clients/index.php/knowledgebase/5/Can-I-use-Le-VPN-on-different-computers.html
-    title: Can I use Le VPN on different computers?
+  windows:
+    url: https://www.le-vpn.com/download/windows/
+    title: Le VPN for Windows
   pricing:
     url: https://www.le-vpn.com/buy-vpn/
     title: Buy Le VPN - Plans & Pricing
