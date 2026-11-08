@@ -1,0 +1,237 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: VPN for iPhone
+icon: vpn-for-iphone.png
+checked: 2026-11-08
+
+criteria:
+  identity:
+    website:
+      value: https://www.braincraftapps.com/our-products/details/59
+      note: The app's page on its developer's site, which mostly sells photo and video apps.
+      sources: [product]
+    legal_entity:
+      value: Brain Craft Ltd
+      sources: [lookup, home]
+    owner:
+      value: null
+      sources: [home, team]
+    founded:
+      value: 2017
+      sources: [lookup]
+    team:
+      value: public
+      note: The team page names the chairman and CEO, Muhammed Nyeem Hassan, and the managing director, Debotosh Dey.
+      sources: [team]
+    sister_brands:
+      value: []
+      note: Brain Craft's other apps are GIF, slideshow, video and photo editors and a phone cleaner.
+      sources: [developer-apps]
+    acquisitions:
+      value: []
+      sources: [lookup, team]
+
+  jurisdiction:
+    hq:
+      value: BD
+      sources: [home]
+    entities:
+      value: null
+      note: Brain Craft gives two Dhaka addresses but no registration number.
+      sources: [home]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [policy]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [policy]
+    timestamps:
+      value: aggregate
+      evidence: claimed
+      note: >-
+        The policy says it doesn't store connection timestamps, then lists the dates (not times) you connect among
+        what it collects.
+      sources: [policy]
+    bandwidth:
+      value: aggregate
+      evidence: claimed
+      note: The policy says it doesn't store bandwidth used, then lists the total data you transfer each day.
+      sources: [policy]
+    source_ip:
+      value: null
+      note: >-
+        The policy says your IP address is deleted when you disconnect, but also collects the IP address you
+        reach the service from as device information, with no limit on how long it's kept.
+      sources: [policy]
+    proven:
+      value: []
+    policy:
+      value: https://braincraftapps.com/workspace/vpn/Policy.html
+      sources: [policy]
+
+  transparency:
+    audits:
+      value: []
+    report:
+      value: none
+      sources: [product]
+    canary:
+      value: none
+      sources: [product]
+    bug_bounty:
+      value: false
+      sources: [product]
+    incidents:
+      value: []
+
+  account:
+    email:
+      value: none
+      note: The listing says no registration is needed.
+      sources: [app-store]
+    personal_data:
+      value: []
+      sources: [app-store]
+    payment:
+      value: [app_store]
+      note: Only sold through in-app purchases on the App Store.
+      sources: [app-store]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn, ikev2]
+      sources: [app-store]
+    post_quantum:
+      value: null
+    kill_switch:
+      value: null
+    dns:
+      value: null
+
+  infra:
+    ram_only:
+      value: null
+    hosting:
+      value: null
+      note: Nothing says who runs the servers.
+      sources: [policy, app-store]
+    virtual_locations:
+      value: null
+    servers:
+      value: null
+      note: The listing claims "200+ Global Servers" without a count.
+      sources: [app-store]
+    countries:
+      value: null
+      note: The listing claims 50+ countries, while Brain Craft's own home page still says 45.
+      sources: [app-store, home]
+
+  features:
+    connections:
+      value: null
+    multihop:
+      value: true
+      note: Its VPN Duo feature, added in May 2025, routes you through two servers.
+      sources: [app-store]
+    obfuscation:
+      value: null
+    port_forwarding:
+      value: null
+    split_tunnel:
+      value: null
+    blocking:
+      value: null
+
+  clients:
+    platforms:
+      value: [ios]
+      note: iPhone and iPad, and the same app runs on Vision Pro.
+      sources: [app-store]
+    open_source:
+      value: none
+      note: The app's source code isn't published.
+    telemetry:
+      value: null
+      note: >-
+        The policy names Firebase, Crashlytics, the Facebook SDK, AppsFlyer and Qonversion, plus AdMob for ads, and the
+        App Store label declares identifiers used to track you. Nothing says whether any of it can be turned off.
+      sources: [policy, app-store]
+    trackers:
+      value: null
+      grade: na
+      note: There's no Android app.
+      sources: [play-developer]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 9.99, currency: USD }
+      note: The US App Store price. A second monthly plan with a 7-day trial costs $14.99.
+      sources: [app-store]
+    best:
+      value: { amount: 4.17, currency: USD }
+      note: $49.99 a year. There's also a $69.99 yearly plan.
+      sources: [app-store]
+    best_term:
+      value: 12
+      sources: [app-store]
+    renewal_increase:
+      value: 0
+      sources: [app-store]
+    free_tier:
+      value: true
+      note: The app shows ads, and the policy covers an ad-supported version.
+      sources: [app-store, policy]
+    refund_days:
+      value: null
+      note: It's only sold through the App Store, so refunds follow Apple's process.
+      sources: [apple-refund]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        The listing promises a "No logs policy" and an identity that "stays protected", while the policy keeps the days
+        you connect and your daily data use, and the app carries ad and tracking SDKs.
+      sources: [app-store, policy]
+    affiliates:
+      value: null
+      note: Brain Craft doesn't say whether it pays anyone for sign-ups.
+    review_sites:
+      value: false
+      sources: [home, developer-apps]
+    activism:
+      value: false
+      sources: [product]
+
+refs:
+  home:
+    url: https://www.braincraftapps.com/
+    title: Brain Craft Ltd home page (products, about and contact)
+  product:
+    url: https://www.braincraftapps.com/our-products/details/59
+    title: VPN for iPhone - Proxy Server, Brain Craft product page
+  team:
+    url: https://www.braincraftapps.com/our-team
+    title: Brain Craft, Meet our Team
+  policy:
+    url: https://braincraftapps.com/workspace/vpn/Policy.html
+    title: VPN for iPhone privacy policy (linked from the App Store listing)
+  app-store:
+    url: https://apps.apple.com/us/app/vpn-for-iphone-proxy-server/id1273734740
+    title: VPN for iPhone on the App Store (description, in-app purchases, version history and privacy label)
+  lookup:
+    url: https://itunes.apple.com/lookup?id=1273734740
+    title: App Store lookup for VPN for iPhone (seller, release date, version)
+  developer-apps:
+    url: https://apps.apple.com/us/developer/brain-craft-ltd/id1205924536
+    title: Brain Craft Ltd on the App Store
+  play-developer:
+    url: https://play.google.com/store/apps/developer?id=Brain+Craft+Limited
+    title: Brain Craft Limited on Google Play (no VPN app)
+  apple-refund:
+    url: https://support.apple.com/en-us/118223
+    title: Request a refund for apps or content that you bought from Apple
