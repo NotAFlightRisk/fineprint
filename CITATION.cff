@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: If you use this data, please cite it as below.
+type: dataset
+title: fineprint
+abstract: >-
+  An unsponsored VPN comparison covering logging, jurisdiction, audits and
+  payment, with a source for every claim.
+authors:
+  - name: NotAFlightRisk
+url: https://fineprint.peng.ly
+repository-code: https://github.com/NotAFlightRisk/fineprint
+license: MIT
+keywords:
+  - vpn
+  - vpn-comparison
+  - privacy
+  - no-logs
+  - open-data
