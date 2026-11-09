@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: PandaVPN
 icon: pandavpn.png
-checked: 2026-10-25
+checked: 2026-11-09
 
 criteria:
   identity:
@@ -123,8 +123,8 @@ criteria:
   features:
     connections:
       value: 10
-      note: The 7-day plan allows 3. The FAQ says the yearly plan allows 20 and that the apps may still show older limits.
-      sources: [pricing, faq-billing, play]
+      note: Every plan on the pricing page allows 10, and you can pay extra for up to 30.
+      sources: [pricing, faq-billing]
     multihop: false
     obfuscation:
       value: [shadowsocks]
