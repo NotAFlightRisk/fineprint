@@ -1,0 +1,251 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Unblock Master VPN
+icon: unblock-master.png
+checked: 2026-11-09
+
+criteria:
+  identity:
+    website:
+      value: https://www.unblockmaster.com/en/
+      sources: [home]
+    legal_entity:
+      value: Yuix Networks Inc.
+      note: Belize company number 171104, per the terms of NameOcean, a domain registrar Yuix also runs.
+      sources: [policy, nameocean-terms]
+    owner:
+      value: null
+      sources: [yuix, nameocean-about]
+    founded:
+      value: 2018
+      sources: [lookup]
+    team:
+      value: anonymous
+      note: Yuix doesn't name anyone who runs it, beyond a first name in the Play listing's contact email.
+      sources: [yuix, play]
+    sister_brands:
+      value: [Lifetime Premium VPN]
+      note: Yuix's other VPN app, sold on iOS for a one-time payment and under the same privacy policy.
+      sources: [policy, developer-apps]
+    acquisitions:
+      value: []
+      sources: [yuix]
+
+  jurisdiction:
+    hq:
+      value: BZ
+      sources: [nameocean-terms, play]
+    entities:
+      value: [BZ]
+      note: Yuix says it was founded in Istanbul, and the Play listing gives a Turkish phone number with its Belize City address.
+      sources: [nameocean-about, play]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [policy, app-store]
+    dns:
+      value: none
+      evidence: claimed
+      note: The listing says it doesn't record the sites you visit.
+      sources: [policy, app-store]
+    timestamps:
+      value: null
+      note: The policy only promises your online activity isn't logged, and says nothing about connection times.
+      sources: [policy]
+    bandwidth:
+      value: null
+      note: The policy says nothing about data use.
+      sources: [policy]
+    source_ip:
+      value: null
+      note: The policy says it collects no personal information, then says your IP address doesn't count as personal information.
+      sources: [policy]
+    proven:
+      value: []
+    policy:
+      value: https://www.unblockmaster.com/en/privacy-policy/
+      sources: [policy]
+
+  transparency:
+    audits:
+      value: []
+    report:
+      value: none
+      sources: [home, faq]
+    canary:
+      value: none
+      sources: [home, faq]
+    bug_bounty:
+      value: false
+      sources: [home, faq]
+    incidents:
+      value: []
+
+  account:
+    email:
+      value: none
+      note: The listing says you don't need an account to start.
+      sources: [app-store]
+    personal_data:
+      value: []
+      sources: [app-store]
+    payment:
+      value: [app_store]
+      note: Only sold as in-app subscriptions on the App Store and Google Play.
+      sources: [app-store, play]
+
+  security:
+    protocols:
+      value: [wireguard, other]
+      note: AmneziaWG, an obfuscated fork of WireGuard, and Xray's Reality.
+      sources: [app-store, home]
+    post_quantum:
+      value: null
+    kill_switch:
+      value: system
+      evidence: claimed
+      note: >-
+        An auto kill switch is on by default while you're connected, and an optional permanent mode blocks the internet
+        whenever the VPN is off.
+      sources: [app-store]
+    dns:
+      value: null
+
+  infra:
+    ram_only:
+      value: null
+    hosting:
+      value: null
+      note: The listing says its servers are run by Yuix only, not rented from resellers, without saying who owns them.
+      sources: [app-store]
+    virtual_locations:
+      value: null
+    servers:
+      value: 1000
+      note: It claims "over 1000" servers.
+      sources: [servers]
+    countries:
+      value: 13
+      sources: [servers]
+
+  features:
+    connections:
+      value: null
+      note: One subscription covers iPhone, iPad and Mac, with no device limit given.
+      sources: [app-store]
+    multihop:
+      value: null
+    obfuscation:
+      value: [amneziawg, v2ray]
+      note: V2Ray here is Xray's Reality, which disguises the connection as an ordinary HTTPS visit.
+      sources: [app-store, home]
+    port_forwarding:
+      value: null
+    split_tunnel:
+      value: null
+    blocking:
+      value: [ads, trackers, malware]
+      note: Malware and phishing blocking, plus optional ad and tracker blocking, added in November 2026.
+      sources: [app-store]
+
+  clients:
+    platforms:
+      value: [ios, macos, android]
+      sources: [app-store, play]
+    open_source:
+      value: none
+      note: The app's source code isn't published.
+    telemetry:
+      value: opt_in
+      note: >-
+        The policy collects your advertising ID on iOS to measure ad campaigns, only if you allow tracking when asked. The
+        App Store label declares a device ID for app functionality, and Play's says nothing's collected.
+      sources: [policy, app-store, play]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 7.99, currency: USD }
+      note: The US App Store price. There's also a $3.99 weekly plan.
+      sources: [app-store]
+    best:
+      value: { amount: 4.17, currency: USD }
+      note: $49.99 a year.
+      sources: [app-store]
+    best_term:
+      value: 12
+      sources: [app-store]
+    renewal_increase:
+      value: 0
+      sources: [app-store]
+    free_tier:
+      value: false
+      note: A 7-day free trial, then a subscription.
+      sources: [app-store]
+    refund_days:
+      value: null
+      note: It's only sold through the app stores, so refunds follow Apple's and Google's processes.
+      sources: [apple-refund, play-refund]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: The home page promises "100% anonymous" browsing and "Military-grade encryption".
+      sources: [home]
+    affiliates:
+      value: null
+      note: Nothing says whether it pays anyone for sign-ups.
+    review_sites:
+      value: true
+      note: >-
+        Yuix also runs ipaddress.world, whose "rigorously tested" VPN comparison ranks Unblock Master first and Lifetime
+        Premium VPN in its top ten, without saying who owns it.
+      sources: [yuix, ipw-best]
+    activism:
+      value: false
+      sources: [yuix]
+
+refs:
+  home:
+    url: https://www.unblockmaster.com/en/
+    title: Unblock Master VPN home page
+  servers:
+    url: https://www.unblockmaster.com/en/vpn-servers/
+    title: Unblock Master VPN server locations
+  faq:
+    url: https://www.unblockmaster.com/en/faq/
+    title: Unblock Master VPN FAQ
+  policy:
+    url: https://www.unblockmaster.com/en/privacy-policy/
+    title: Yuix Networks privacy policy (Unblock Master and Lifetime Premium VPN)
+  app-store:
+    url: https://apps.apple.com/us/app/id1384170220
+    title: Unblock Master VPN on the App Store (description, in-app purchases and privacy label)
+  lookup:
+    url: https://itunes.apple.com/lookup?id=1384170220
+    title: App Store lookup for Unblock Master VPN (seller and release date)
+  developer-apps:
+    url: https://apps.apple.com/us/developer/yuix-networks-inc/id1237673379
+    title: Yuix Networks Inc. on the App Store
+  play:
+    url: https://play.google.com/store/apps/details?id=org.yuix.unblockmaster
+    title: Unblock Master VPN on Google Play (description, data safety and developer address)
+  yuix:
+    url: https://www.yuix.org/
+    title: Yuix Networks home page (its projects)
+  nameocean-about:
+    url: https://nameocean.net/about-us/
+    title: NameOcean, About Us (Yuix Networks Inc., founded in Istanbul)
+  nameocean-terms:
+    url: https://nameocean.net/terms/
+    title: NameOcean terms and conditions (Yuix Networks Inc., Belize company 171104)
+  ipw-best:
+    url: https://www.ipaddress.world/best-vpn-app/
+    title: ipaddress.world, Best iPhone/iPad VPN Apps Compared
+  apple-refund:
+    url: https://support.apple.com/en-us/118223
+    title: Request a refund for apps or content that you bought from Apple
+  play-refund:
+    url: https://support.google.com/googleplay/answer/2479637
+    title: Google Play refund policies
