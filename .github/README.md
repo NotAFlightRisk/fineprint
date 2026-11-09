@@ -55,6 +55,7 @@ To add a provider, `npm run new -- example-vpn "Example VPN"`, then edit the new
 
 It's a fully static site, so it'll run anywhere that serves files.
 There's several options for deploying:
+
 - **Cloudflare**: Fork the repo, add `CLOUDFLARE_ACCOUNT_ID` and `CLOUDFLARE_API_TOKEN` then trigger the [Deploy](https://github.com/NotAFlightRisk/fineprint/actions/workflows/deploy.yml) workflow
 - **Docker**: Just run `docker run -p 8080:8080 notaflightrisk/fineprint`
 - **From release**: Download and unzip site.zip from the [releases tab](https://github.com/NotAFlightRisk/fineprint/releases), then run `npx serve site`
