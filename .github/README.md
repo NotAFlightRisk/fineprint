@@ -19,9 +19,9 @@
 
 ## About
 
-Most "best VPN" lists are paid per signup, so they rank whoever pays the biggest cut. fineprint takes no money from anyone, has no affiliate links, and grades every provider on the same published rules.
+The aim of this project, is to provide an objective, unbiased, accurate comparison of VPN providers, focusing on privacy, security and essential features. There are no affiliate links, and every data point has either been manually tested and verified, or backed up by reputable sources. This is a community project, so we welcome additions/edits in the form of pull requests or issues.
 
-It picks up where That One Privacy Guy's old VPN comparison chart left off. Logging, jurisdiction, audits, how anonymously you can pay, what the apps get up to and what it all costs, with every value linked to its source. Anything nobody could find says Unknown rather than guessing.
+Credit to That One Privacy Guy, whose old VPN comparison chart provided the inspiration for this project.
 
 <p align="center"><img src="screenshot.png" alt="Five VPN providers compared as cards, each with a checklist of green, amber and red marks" width="800" /></p>
 
@@ -29,9 +29,9 @@ It picks up where That One Privacy Guy's old VPN comparison chart left off. Logg
 
 ## Usage
 
-Just head to [fineprint.peng.ly](https://fineprint.peng.ly). Cards give you the gist of each provider, the table lets you filter, sort and download the lot as CSV or JSON, and each provider has a page with the full picture and its sources. [How grading works](https://fineprint.peng.ly/methodology) lists every criterion and the rule behind each colour.
+Just head to [fineprint.peng.ly](https://fineprint.peng.ly), where there's a summary of all VPN data viewable as cards, table or JSON. Each VPN has a dedicated page with full details, sources, a change history and edit options. For info about how the grading works, see the [methodology](https://fineprint.peng.ly/methodology) page.
 
-The data's there for your own projects too:
+You can consume the data programmatically from our API endpoints too:
 
 | URL                                                                       | What's in it                                              |
 | ------------------------------------------------------------------------- | --------------------------------------------------------- |
@@ -44,45 +44,23 @@ The data's there for your own projects too:
 
 ## Contributing data
 
-Each provider is one YAML file in [`data/providers/`](../data/providers), checked against the criteria in [`data/criteria.yml`](../data/criteria.yml). Spotted something wrong? Hit "Suggest an edit" on its page, fix the value, add a source and open a pull request. The checks point at the exact line if anything's off.
+Each provider is one YAML file in [`data/providers/`](../data/providers). And the criteria definition lives in [`data/criteria.yml`](../data/criteria.yml).
+Spotted something wrong? You can edit the YAML directly, and submit a pull request back to the repo. Some automated checks will verify the structure is correct when your PR is opened.
 
-To add a provider, `npm run new -- example-vpn "Example VPN"` writes the file with every criterion listed. The [contributing guide](CONTRIBUTING.md) has the rest.
+To add a provider, `npm run new -- example-vpn "Example VPN"`, then edit the new `example-vpn.yml` file, filling in the fields. The [contributing guide](CONTRIBUTING.md) has more details on what to put for everything.
 
 ---
 
 ## Deployment
 
 It's a fully static site, so it'll run anywhere that serves files.
+There's several options for deploying:
 
-### Option 1: Cloudflare
-
-This is what [fineprint.peng.ly](https://fineprint.peng.ly) runs on. Build it, then push the `build/` folder up as a Worker with static assets:
-
-```bash
-npm run build
-npx wrangler deploy --name fineprint --assets build --compatibility-date 2026-10-01
-```
-
-### Option 2: Docker
-
-There's a multi-arch image on DockerHub ([`notaflightrisk/fineprint`](https://hub.docker.com/r/notaflightrisk/fineprint)) and GHCR ([`ghcr.io/notaflightrisk/fineprint`](https://github.com/NotAFlightRisk/fineprint/pkgs/container/fineprint)). It's nginx serving the built site:
-
-```bash
-docker run -p 8080:8080 notaflightrisk/fineprint
-```
-
-### Option 3: From a release
-
-Every [release](https://github.com/NotAFlightRisk/fineprint/releases) has the built site attached as `site.zip`. Unzip it and serve the folder with anything:
-
-```bash
-unzip site.zip -d site
-npx serve site
-```
-
-### Option 4: Build from source
-
-Follow the [Development](#development) steps, then `npm run build`. The site lands in `build/`.
+- **Cloudflare**: Fork the repo, add `CLOUDFLARE_ACCOUNT_ID` and `CLOUDFLARE_API_TOKEN` then trigger the [Deploy](https://github.com/NotAFlightRisk/fineprint/actions/workflows/deploy.yml) workflow
+- **Docker**: Just run `docker run -p 8080:8080 notaflightrisk/fineprint`
+- **From release**: Download and unzip site.zip from the [releases tab](https://github.com/NotAFlightRisk/fineprint/releases), then run `npx serve site`
+- **From source**: Follow the [Development](#development) steps below, then run `npm run build`, and serve `build/`
+- **Static host**: Fork the repo, and import it to Vercel, Netlify or any other static hosting provider
 
 ---
 
