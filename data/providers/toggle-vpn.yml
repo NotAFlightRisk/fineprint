@@ -1,0 +1,276 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Toggle VPN
+icon: toggle-vpn.svg
+checked: 2026-11-10
+
+criteria:
+  identity:
+    website:
+      value: https://toggle.org
+      sources: [home]
+    legal_entity:
+      value: Toggle Inc.
+      note: >-
+        A Delaware corporation, per the terms and the Google Play listing. The App Store seller is Toggle Corp.,
+        at an address in Stevenson Ranch, California.
+      sources: [terms, play, app-store-eu]
+    owner:
+      value: null
+      note: >-
+        Nobody owning Toggle Inc. is named. A Minsk company, Toggle Soft (ООО Тогл Софт), recruits for Toggle VPN
+        and names VPN Lumos as its other VPN.
+      sources: [terms, hh]
+    founded:
+      value: 2025
+      note: The Android app was released in July 2025.
+      sources: [play, hh]
+    team:
+      value: partial
+      note: >-
+        Its press releases name a CEO, Max Stevenson. The website and the Minsk developer name nobody.
+      sources: [pr-windows, home, hh]
+    sister_brands:
+      value: [VPN Lumos]
+      sources: [hh]
+    acquisitions: []
+
+  jurisdiction:
+    hq:
+      value: US
+      sources: [terms, policy]
+    entities:
+      value: [US, BY]
+      note: The Belarus company is the Minsk developer that hires for Toggle VPN.
+      sources: [terms, app-store-eu, hh]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [policy]
+    dns:
+      value: none
+      evidence: claimed
+      note: The policy rules out logging internet activity and browsing history, without mentioning DNS by name.
+      sources: [policy]
+    timestamps:
+      value: null
+      note: The policy doesn't mention connection times.
+      sources: [policy]
+    bandwidth:
+      value: none
+      evidence: claimed
+      sources: [policy]
+    source_ip:
+      value: null
+      note: >-
+        The policy says it doesn't store IP addresses, then lists your IP address among the data it collects
+        automatically, without saying for how long.
+      sources: [policy]
+    proven:
+      value: []
+      note: It calls its no-logs policy independently audited, but no audit has been published.
+      sources: [download, pr-launch]
+    policy: https://toggle.org/privacy-policy
+
+  transparency:
+    audits:
+      value: []
+      note: >-
+        Its website and launch press release say independent auditors confirmed its no-logs policy, but no
+        auditor or report is named.
+      sources: [download, pr-launch]
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: optional
+      note: >-
+        The apps make an account with one tap and a security code. Buying on the website asks for an email to
+        send the code to.
+      sources: [pricing, play-data-safety]
+    personal_data:
+      value: []
+      sources: [policy, play-data-safety]
+    payment:
+      value: [card, app_store]
+      note: Apple Pay and Google Pay are also taken on the website.
+      sources: [pricing, policy]
+
+  security:
+    protocols:
+      value: [wireguard, other]
+      note: The other is Shadowsocks.
+      sources: [servers, play]
+    post_quantum:
+      value: none
+      note: Nothing is published about its key exchange.
+    kill_switch:
+      value: system
+      note: >-
+        On Android it uses the system's always-on VPN and block-without-VPN settings. What the other apps' kill
+        switch does isn't described.
+      sources: [android, windows]
+    dns:
+      value: null
+      note: It doesn't say whose DNS servers the apps use.
+
+  infra:
+    ram_only:
+      value: none
+      evidence: claimed
+      note: It says its servers use full-disk encryption and that no session data is written to disk.
+      sources: [servers]
+    hosting:
+      value: null
+      note: It says it has bare-metal hardware in every location, but not whether it owns or rents it.
+      sources: [servers]
+    virtual_locations:
+      value: null
+      note: It doesn't say whether any locations are virtual.
+    servers:
+      value: 1356
+      evidence: claimed
+      note: The total of its server table. The same page's headline says about 1,400.
+      sources: [servers]
+    countries:
+      value: 29
+      evidence: claimed
+      sources: [servers]
+
+  features:
+    connections:
+      value: 10
+      note: Family Sharing adds up to five more people, each on one device at a time.
+      sources: [pricing]
+    multihop: false
+    obfuscation:
+      value: [shadowsocks]
+      sources: [servers]
+    port_forwarding: false
+    split_tunnel:
+      value: true
+      sources: [download, android, windows]
+    blocking:
+      value: [ads, trackers]
+      sources: [download, play]
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android]
+      note: There are also Android TV and Apple TV apps. A Linux app is promised but not out.
+      sources: [download, windows, mac, app-store, play]
+    open_source:
+      value: none
+      note: Its GitHub only has forks of other projects and hiring tests, not the apps.
+      sources: [github]
+    telemetry:
+      value: null
+      note: >-
+        The Android app includes Firebase Analytics, Crashlytics, the Facebook SDK, Singular and Amplitude. Both
+        stores' forms list device IDs for advertising or tracking, and nothing says you can turn any of it off.
+      sources: [play, play-data-safety, app-store]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 11.99, currency: USD }
+      note: After a 7-day free trial. It's the only plan on the website.
+      sources: [pricing]
+    best:
+      value: { amount: 4.17, currency: USD }
+      note: >-
+        $49.99 a year, among the US App Store's in-app purchases. The App Store also lists other weekly and
+        monthly prices without saying which are offers.
+      sources: [app-store, pricing]
+    best_term:
+      value: 12
+      sources: [app-store]
+    renewal_increase:
+      value: 0
+      note: The website's monthly plan renews at the same price. The store plans' renewal prices aren't published.
+      sources: [pricing]
+    free_tier:
+      value: false
+      note: Only a free trial.
+      sources: [pricing]
+    refund_days:
+      value: 30
+      note: For website purchases. App Store and Google Play refunds follow the stores' own rules.
+      sources: [refund, terms]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        It promises "total anonymity" and an "independently audited" no-logs policy, while no audit is published
+        and its own store labels list identifiers used to track you.
+      sources: [play, servers, app-store]
+    affiliates:
+      value: null
+      note: No affiliate scheme is published, though it runs a partner landing page with 20% off the first month.
+      sources: [partners]
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://toggle.org/
+    title: Toggle VPN homepage
+  terms:
+    url: https://toggle.org/terms-of-use
+    title: Toggle VPN terms of use (18 September 2026)
+  policy:
+    url: https://toggle.org/privacy-policy
+    title: Toggle VPN application privacy policy (18 September 2026)
+  pricing:
+    url: https://toggle.org/pricing
+    title: Toggle VPN pricing
+  refund:
+    url: https://toggle.org/refund-policy
+    title: Toggle VPN refund policy
+  servers:
+    url: https://toggle.org/servers
+    title: Toggle VPN server locations
+  download:
+    url: https://toggle.org/download
+    title: Download Toggle VPN
+  android:
+    url: https://toggle.org/vpn-for-android
+    title: Toggle VPN for Android
+  windows:
+    url: https://toggle.org/download-windows-vpn
+    title: Toggle VPN for Windows
+  mac:
+    url: https://toggle.org/download-macos-vpn
+    title: Toggle VPN for Mac
+  partners:
+    url: https://toggle.org/partners
+    title: 'Toggle VPN: Free 7-day trial with 20% off your first month'
+  play:
+    url: https://play.google.com/store/apps/details?id=org.toggle.vpn
+    title: 'Toggle VPN: Secure VPN Access on Google Play'
+  play-data-safety:
+    url: https://play.google.com/store/apps/datasafety?id=org.toggle.vpn
+    title: Toggle VPN data safety on Google Play
+  app-store:
+    url: https://apps.apple.com/us/app/toggle-vpn-for-movies-sport/id6744531647
+    title: Toggle VPN for Movies & Sport on the App Store (US)
+  app-store-eu:
+    url: https://apps.apple.com/de/app/toggle-vpn-for-movies-sport/id6744531647?l=en-GB
+    title: Toggle VPN on the App Store (Germany), with Toggle Corp.'s trader details
+  hh:
+    url: https://hh.ru/employer/12099673
+    title: Тогл Софт / Toggle, employer page on hh.ru
+  github:
+    url: https://github.com/toggle-org
+    title: Toggle Inc. on GitHub
+  pr-launch:
+    url: https://web.archive.org/web/20260312202855/https://www.newsfilecorp.com/release/282681/Toggle-Inc.-Launches-a-New-VPN-Service
+    title: Toggle Inc. Launches a New VPN Service (Newsfile, February 2026, archived)
+  pr-windows:
+    url: https://web.archive.org/web/20260713153032/https://www.newsfilecorp.com/release/294994/Toggle-VPN-Launches-Windows-Application
+    title: Toggle VPN Launches Windows Application (Newsfile, May 2026, archived)
