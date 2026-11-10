@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: VPN 360
 icon: vpn-360.png
-checked: 2026-10-26
+checked: 2026-11-10
 
 criteria:
   identity:
@@ -311,19 +311,19 @@ refs:
     url: https://web.archive.org/web/20190413071416/https://touchvpn.net/privacy.html
     title: Touch VPN privacy policy naming AnchorFree, April 2019 (archived)
   platforms:
-    url: https://support.vpn360.com/hc/en-us/articles/8478315280020-What-platforms-does-VPN360-support
+    url: https://support.vpn360.com/en/faq/general-questions/what-platforms-does-vpn360-support
     title: What platforms does VPN360 support?
   windows-settings:
-    url: https://support.vpn360.com/hc/en-us/articles/13100547808020-What-do-these-settings-mean-on-my-VPN360-Windows-application
+    url: https://support.vpn360.com/en/windows/general-information/what-do-these-settings-mean-on-my-vpn360-windows-application
     title: What do these settings mean on my VPN360 Windows application?
   cancel-renewal:
-    url: https://support.vpn360.com/hc/en-us/articles/9657713905300-How-do-I-cancel-auto-renewal-of-my-premium-subscription
+    url: https://support.vpn360.com/en/payments-subscriptions/manage-your-subscription/how-do-i-cancel-auto-renewal-of-my-premium-subscription
     title: How do I cancel auto-renewal of my premium subscription?
   purchase:
-    url: https://support.vpn360.com/hc/en-us/articles/8528343976340-How-do-I-purchase-a-VPN360-subscription
+    url: https://support.vpn360.com/en/payments-subscriptions/purchase-and-activate-premium-subscription/how-do-i-purchase-a-vpn360-subscription
     title: How do I purchase a VPN360 subscription?
   why-vpn360:
-    url: https://support.vpn360.com/hc/en-us/articles/8527002470292-What-is-VPN360-and-why-should-I-choose-you
+    url: https://support.vpn360.com/en/about/information/what-is-vpn360-and-why-should-i-choose-you
     title: What is VPN360 and why should I choose you?
   hss-affiliates:
     url: https://www.hotspotshield.com/affiliates/
