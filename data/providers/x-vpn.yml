@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: X-VPN
 icon: x-vpn.png
-checked: 2026-10-25
+checked: 2026-11-10
 
 criteria:
   identity:
@@ -196,8 +196,8 @@ criteria:
   clients:
     platforms:
       value: [windows, macos, linux_cli, ios, android, router, browser]
-      note: Plus Apple TV, Android TV and Fire TV apps. Routers are set up by hand with OpenVPN or L2TP.
-      sources: [about, linux, router]
+      note: Plus Apple TV, Android TV and Fire TV apps. Routers are set up by hand with OpenVPN, WireGuard or L2TP.
+      sources: [about, linux, router, open-protocols]
     open_source:
       value: some
       note: Only its Talaria protocol library, under the AGPL. The apps are closed.
@@ -205,8 +205,9 @@ criteria:
     telemetry:
       value: null
       note: >-
-        The policy says the apps send aggregated usage and crash statistics, with Firebase on mobile and ad
-        SDKs in the free version, without saying whether you can turn this off.
+        The policy says the apps send aggregated usage and crash statistics, with Firebase on mobile for
+        diagnostics, analytics and ad campaign measurement, and ad SDKs in the free version, without saying
+        whether you can turn this off.
       sources: [privacy]
     trackers:
       value: 3
@@ -241,9 +242,9 @@ criteria:
     misleading_claims:
       value: true
       note: >-
-        It says RAM-only servers make logging "physically impossible", obfuscation gives "complete anonymity",
-        and the free plan has "no ads, and no tracking" while its Android app carries AdMob and Firebase.
-      sources: [ram-only, obfuscation, free-vpn, exodus]
+        It says RAM-only servers make logging "physically impossible" and obfuscation gives "complete
+        anonymity".
+      sources: [ram-only, obfuscation]
     affiliates:
       value: true
       note: Students who post videos about it get affiliate commission on sales.
@@ -266,7 +267,7 @@ refs:
     title: X-VPN homepage
   privacy:
     url: https://xvpn.io/policy
-    title: X-VPN Privacy Policy (September 16, 2026)
+    title: X-VPN Privacy Policy (November 4, 2026)
   privacy-2025:
     url: https://web.archive.org/web/20250924140316/https://xvpn.io/policy
     title: X-VPN Privacy Policy naming Free Connected Limited (archived September 2025)
@@ -286,7 +287,7 @@ refs:
     url: https://play.google.com/store/apps/details?id=com.security.xvpn.z35kb
     title: X-VPN on Google Play
   app-store:
-    url: https://apps.apple.com/us/app/x-vpn-super-vpn-best-proxy/id1250312807
+    url: https://apps.apple.com/us/app/x-vpn-vpn-fast-secure/id1250312807
     title: X-VPN on the App Store (US)
   ttp-2025-04:
     url: https://www.techtransparencyproject.org/articles/apple-offers-apps-with-ties-to-chinese-military
@@ -381,6 +382,9 @@ refs:
   router:
     url: https://xvpn.io/download/vpn-router
     title: Best VPN for routers
+  open-protocols:
+    url: https://xvpn.io/help-center/open-source-vpn-protocols-xvpn
+    title: What Open-Source VPN Protocols Does X-VPN Support?
   exodus:
     url: https://web.archive.org/web/20260521050627/https://reports.exodus-privacy.eu.org/en/reports/com.security.xvpn.z35kb/latest/
     title: Exodus Privacy report for X-VPN 207.0.5 (archived May 2026)
