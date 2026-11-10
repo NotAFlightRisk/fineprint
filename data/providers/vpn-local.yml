@@ -1,0 +1,232 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: VPN Local
+icon: vpn-local.svg
+checked: 2026-11-10
+
+criteria:
+  identity:
+    website:
+      value: https://vpnlocal.app
+      note: >-
+        Sold on Android as a set of single-country apps (VPN USA, VPN Indonesia, VPN Japan and so on, mostly under
+        tap2free package names) and on iOS as Flex VPN.
+      sources: [home, apk-page, itunes-lookup]
+    legal_entity:
+      value: DITEC LTD
+      note: >-
+        It runs the site, sells the keys and is the iOS seller. The Android apps are published by AltApps, its
+        director's Kyiv trading name, and by SecureNet Limited in Hong Kong, under the same policy text.
+      sources: [site-policy, terms, itunes-lookup, app-policy, japan-policy]
+    owner:
+      value: Illia Varfolomieiev
+      note: DITEC LTD's sole director and person with significant control, and the developer behind the AltApps account.
+      sources: [register-officers, register-psc, play-usa]
+    founded:
+      value: 2019
+      note: The first country apps, VPN USA and VPN Ukraine, came out on Google Play in January 2019.
+      sources: [play-usa]
+    team:
+      value: partial
+      note: The site and apps name nobody, but Companies House and the Play listing name its director.
+      sources: [home, register-officers]
+    sister_brands:
+      value: []
+      sources: [apk-page]
+    acquisitions:
+      value: []
+      note: >-
+        DITEC LTD was set up in 2019 by a Costa Rican director, who handed over to Illia Varfolomieiev in April 2021.
+      sources: [register-officers, register-psc]
+
+  jurisdiction:
+    hq:
+      value: GB
+      note: The company is registered in London, but its director lives in Ukraine and the main apps are published from Kyiv.
+      sources: [register, register-psc]
+    entities:
+      value: [GB, HK]
+      note: The AltApps apps are published by its director as a sole trader in Ukraine.
+      sources: [register, play-japan]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [app-policy]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [app-policy]
+    timestamps:
+      value: null
+      note: >-
+        The servers keep error logs that can include the time and your IP address for up to 30 days, without saying
+        whether every connection gets one.
+      sources: [app-policy]
+    bandwidth:
+      value: none
+      evidence: claimed
+      note: The policy says the servers keep only your IP address and error logs.
+      sources: [app-policy]
+    source_ip:
+      value: 'yes'
+      evidence: claimed
+      note: The VPN servers keep your IP address for up to 30 days, to look into abuse.
+      sources: [app-policy]
+    proven: []
+    policy: https://tap2free.net/privacy/united-states/Privacy-Policy-of-USA-VPN-by-tap2free.html
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: optional
+      note: The apps need no account. Buying a key on the site takes an email address or a Telegram handle.
+      sources: [payment]
+    personal_data: []
+    payment:
+      value: [card, paypal, bitcoin, other_crypto, app_store]
+      note: Crypto, through Heleket, is for one-off keys only, not subscriptions.
+      sources: [payment, play-usa, app-store]
+
+  security:
+    protocols:
+      value: [openvpn, wireguard, other]
+      note: Shadowsocks is the third.
+      sources: [home, play-usa]
+    post_quantum: none
+    kill_switch:
+      value: system
+      note: On Android it points you to Android's own "Block connections without VPN" setting.
+      sources: [play-usa]
+    dns: null
+
+  infra:
+    ram_only: null
+    hosting: null
+    virtual_locations: null
+    servers:
+      value: null
+      note: The home page claims 500+ servers, while the download page lists 127 to 190 "VPNs worldwide" depending on the app.
+      sources: [home, apk-page]
+    countries:
+      value: null
+      note: The site says 64 countries in one place and over 65 in another.
+      sources: [home]
+
+  features:
+    connections:
+      value: 1
+      note: One key works on one device at a time.
+      sources: [home]
+    multihop: false
+    obfuscation:
+      value: [shadowsocks]
+      sources: [home, play-usa]
+    port_forwarding: false
+    split_tunnel:
+      value: true
+      note: The Android app can bypass the VPN for apps you pick.
+      sources: [play-usa]
+    blocking: []
+
+  clients:
+    platforms:
+      value: [android, ios]
+      note: The Android apps also run on Android TV, and come as APKs from the site as well as Google Play.
+      sources: [apk-page, app-store]
+    open_source: none
+    telemetry:
+      value: null
+      note: >-
+        The Android app has a switch for Firebase Analytics, whose storage stays off until you agree, but Crashlytics
+        crash reports are built in with no switch for them.
+      sources: [app-policy, play-usa]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 3.69, currency: USD }
+      note: A one-off month, without the subscription, is $4.29.
+      sources: [payment]
+    best:
+      value: { amount: 1.83, currency: USD }
+      note: $21.99 a year as a subscription, or $25.29 one-off.
+      sources: [payment]
+    best_term: 12
+    renewal_increase:
+      value: 0
+      evidence: claimed
+      note: Subscriptions renew at the current rate.
+      sources: [subscription-policy]
+    free_tier:
+      value: true
+      note: The free apps show ads, and some servers are kept for paying users.
+      sources: [payment, play-usa]
+    refund_days:
+      value: null
+      note: >-
+        Subscribers can ask for a refund of the unused part, less Stripe or PayPal fees, decided case by case.
+        The terms only add the 14-day withdrawal right for EU consumers.
+      sources: [subscription-policy, terms]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: The site promises "100% privacy", anonymity and a "Zero Logging Policy", while the apps' policy keeps your IP address for 30 days.
+      sources: [home, app-policy]
+    affiliates: false
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://vpnlocal.app/
+    title: VPN local, free and fast VPN in 64 countries
+  apk-page:
+    url: https://vpnlocal.app/apk
+    title: VPN local APK downloads for every country app
+  payment:
+    url: https://vpnlocal.app/payment
+    title: Buy a key for VPN local
+  subscription-policy:
+    url: https://vpnlocal.app/terms_subscription
+    title: VPN local subscription policy
+  terms:
+    url: https://vpnlocal.app/privacy/site/EN/terms-conditions-of-vpnlocal.html
+    title: Terms and conditions of vpnlocal.app
+  site-policy:
+    url: https://vpnlocal.app/privacy/site/EN/privacy-policy-of-vpnlocal.html
+    title: Privacy policy of vpnlocal.app
+  app-policy:
+    url: https://tap2free.net/privacy/united-states/Privacy-Policy-of-USA-VPN-by-tap2free.html
+    title: Privacy policy of USA VPN (AltApps), November 2026
+  japan-policy:
+    url: https://securenet.help/privacy-policy/japan/Privacy-Policy-of-VPN-Japan.html
+    title: Privacy policy of VPN Japan (SecureNet Limited), November 2026
+  play-usa:
+    url: https://play.google.com/store/apps/details?id=vpn.usa_tap2free
+    title: USA VPN on Google Play (AltApps)
+  play-japan:
+    url: https://play.google.com/store/apps/details?id=vpn.japan
+    title: VPN Japan on Google Play (SecureNet Limited)
+  app-store:
+    url: https://apps.apple.com/us/app/flex-vpn-unlimited-vpn-app/id1464897458
+    title: Flex VPN on the App Store (US)
+  itunes-lookup:
+    url: https://itunes.apple.com/lookup?id=1464897458&country=us
+    title: App Store lookup for Flex VPN (seller and site)
+  register:
+    url: https://find-and-update.company-information.service.gov.uk/company/12279531
+    title: Companies House, DITEC LTD (12279531)
+  register-officers:
+    url: https://find-and-update.company-information.service.gov.uk/company/12279531/officers
+    title: Companies House, DITEC LTD (12279531) officers
+  register-psc:
+    url: https://find-and-update.company-information.service.gov.uk/company/12279531/persons-with-significant-control
+    title: Companies House, DITEC LTD (12279531) persons with significant control
