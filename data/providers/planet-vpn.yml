@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: Planet VPN
 icon: planet-vpn.svg
-checked: 2026-10-26
+checked: 2026-11-10
 
 criteria:
   identity:
@@ -63,7 +63,15 @@ criteria:
     policy: https://freevpnplanet.com/policy/
 
   transparency:
-    audits: []
+    audits:
+      value:
+        - date: 2026-08-03
+          auditor: Leviathan Security Group
+          scope: apps
+          source: masa-report
+      evidence: verified
+      note: A Google Play MASA check of the Android app, version 8.5.7, not of the servers or the no-logs policy.
+      sources: [masa-report, ada]
     report: none
     canary: none
     bug_bounty: false
@@ -106,8 +114,8 @@ criteria:
       value: 1260
       sources: [servers]
     countries:
-      value: 63
-      note: It advertises 100+ locations, but its server list names 63 countries.
+      value: 71
+      note: It advertises 100+ locations, but its server list names 71 countries.
       sources: [servers]
 
   features:
@@ -172,7 +180,7 @@ criteria:
   ethics:
     misleading_claims:
       value: true
-      note: It says every session guarantees anonymity, and that you can confirm its no-logs policy through an independent audit, though none has been published.
+      note: It says every session guarantees anonymity, and that you can confirm its no-logs policy through an independent audit, though no no-logs audit has been published.
       sources: [no-logs]
     affiliates:
       value: true
@@ -247,6 +255,12 @@ refs:
   register:
     url: https://termene.ro/firma/44667783-FREE-VPN-PLANET-SRL
     title: FREE VPN PLANET S.R.L. (CUI 44667783, J2022008122407) company record
+  masa-report:
+    url: https://cert.appdefensealliance.org/certifications/10308/report/download
+    title: Leviathan Security Group, MASA compliance report for Planet Free VPN 8.5.7 (ADA-10036, evaluated 3 August 2026)
+  ada:
+    url: https://cert.appdefensealliance.org/certifications/10308
+    title: App Defense Alliance, Planet Free VPN MASA certificate 10308 (issued 28 October 2026)
   exodus:
     url: https://web.archive.org/web/20260211135841/https://reports.exodus-privacy.eu.org/en/reports/com.freevpnplanet/latest/
     title: Exodus Privacy report for com.freevpnplanet 8.2.6 (Wayback copy)
