@@ -1,0 +1,248 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: BelkaVPN
+icon: belkavpn.png
+checked: 2026-11-10
+
+criteria:
+  identity:
+    website:
+      value: https://belkavpn.com
+      sources: [home]
+    legal_entity:
+      value: DigiApp LLC
+      note: >-
+        The App Store seller, Google Play and Chrome Web Store developer, and the name on the site's copyright line. The
+        terms instead say BelkaVPN is provided by Dici-App Ltd, with no country or registration number.
+      sources: [terms, app-store, play, chrome]
+    owner:
+      value: null
+      note: Neither company says who owns it.
+      sources: [terms]
+    founded:
+      value: 2020
+      note: Its site was live and selling plans by August 2020.
+      sources: [home-2020]
+    team:
+      value: anonymous
+      note: Nobody at BelkaVPN, DigiApp LLC or Dici-App Ltd is named.
+      sources: [home]
+    sister_brands: []
+    acquisitions: []
+
+  jurisdiction:
+    hq:
+      value: US
+      evidence: claimed
+      note: >-
+        DigiApp LLC gives a registered-agent address in Lewes, Delaware, and a Vietnamese phone number. The policy says
+        BelkaVPN is based in Panama and the terms pick Panamanian law, but name no Panamanian company.
+      sources: [play, chrome, policy, terms]
+    entities:
+      value: [US]
+      note: Only DigiApp LLC can be placed. The terms' Dici-App Ltd gives no country.
+      sources: [chrome, terms]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [policy]
+    dns:
+      value: none
+      evidence: claimed
+      note: The policy and terms list traffic logs and "other data" as not stored, without naming DNS lookups.
+      sources: [policy, terms]
+    timestamps:
+      value: none
+      evidence: claimed
+      sources: [policy]
+    bandwidth:
+      value: none
+      evidence: claimed
+      sources: [policy]
+    source_ip:
+      value: none
+      evidence: claimed
+      sources: [policy]
+    proven: []
+    policy: https://belkavpn.com/privacy-policy
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: required
+      note: The terms say an email is needed to make a VPN connection, and it can never be changed.
+      sources: [terms, order]
+    personal_data:
+      value: []
+      sources: [order]
+    payment:
+      value: [card, app_store]
+      note: >-
+        The order page takes cards through Stripe. The policy also mentions PayPal, Google Pay and cryptocurrency
+        without naming which coins.
+      sources: [order, policy, app-store]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn]
+      note: >-
+        The Android app uses WireGuard and falls back to OpenVPN. On Windows and Mac you use config files in the
+        OpenVPN or WireGuard apps, and the browser extensions are proxies.
+      sources: [servers, desktop-openvpn, desktop-wireguard]
+    post_quantum: none
+    kill_switch:
+      value: system
+      evidence: claimed
+      note: >-
+        On Android it's the system's own always-on VPN setting. Desktop users rely on whatever the OpenVPN or
+        WireGuard app offers.
+      sources: [home, play, desktop-openvpn]
+    dns:
+      value: first_party
+      evidence: claimed
+      note: The Android app also carries AdGuard's public DNS addresses, which its ad blocker appears to use.
+      sources: [servers, play]
+
+  infra:
+    ram_only: null
+    hosting: null
+    virtual_locations: null
+    servers:
+      value: 1600
+      note: The app store listings say 145+ servers in 94 locations instead.
+      sources: [servers, app-store]
+    countries:
+      value: 64
+      note: The site says 65, but its list names 64 once Singapore's double entry is dropped.
+      sources: [servers]
+
+  features:
+    connections:
+      value: 5
+      note: >-
+        The plans say up to 5 devices, the terms allow six connections including proxies, and the homepage says
+        unlimited.
+      sources: [home, terms]
+    multihop: false
+    obfuscation:
+      value: null
+      note: >-
+        The homepage promises a "stealth mode" but describes it as limiting apps' connections while the VPN is off,
+        and says nothing of how it works.
+      sources: [home]
+    port_forwarding: false
+    split_tunnel:
+      value: true
+      sources: [order]
+    blocking:
+      value: [ads, malware]
+      sources: [home]
+
+  clients:
+    platforms:
+      value: [macos, ios, android, browser]
+      note: >-
+        The Mac app is the iOS app from the App Store. Windows uses the OpenVPN or WireGuard apps with config files.
+        The Edge extension hasn't been updated since 2020.
+      sources: [app-store, play, chrome, edge, desktop-openvpn, desktop-wireguard]
+    open_source: none
+    telemetry:
+      value: null
+      note: >-
+        The Android app includes Firebase Analytics and Sentry, and its Play listing declares crash logs and app
+        interactions collected for analytics, with no opt-out mentioned. Its App Store label says no data is
+        collected.
+      sources: [play-data-safety, app-store]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 11.99, currency: USD }
+      sources: [order]
+    best:
+      value: { amount: 2.78, currency: USD }
+      note: The page rounds it to $2.75. The App Store sells 1 month for $7.49 and a year for $49.99.
+      sources: [order, app-store]
+    best_term:
+      value: 36
+      sources: [order]
+    renewal_increase:
+      value: 140
+      note: >-
+        The 3-year plan is $99.99 once (24 months plus 12 free), then renews at the 12-month rate, $80 a year ($6.67 a
+        month).
+      sources: [order]
+    free_tier:
+      value: true
+      note: Free accounts can only use servers in the US and Canada.
+      sources: [chrome-guide, app-store]
+    refund_days:
+      value: 30
+      note: Not for App Store, prepaid card or gift card payments, and they want to troubleshoot first.
+      sources: [refund, terms]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: It sells "military-grade encryption" and says your real IP never leaks "not for a second".
+      sources: [home]
+    affiliates:
+      value: true
+      note: The policy sets affiliate cookies to track customers referred by partners.
+      sources: [policy]
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://belkavpn.com/
+    title: BelkaVPN homepage
+  home-2020:
+    url: https://web.archive.org/web/20200804143534/http://belkavpn.com/
+    title: BelkaVPN homepage, August 2020 (Wayback Machine)
+  terms:
+    url: https://belkavpn.com/terms
+    title: BelkaVPN terms of service
+  policy:
+    url: https://belkavpn.com/privacy-policy
+    title: BelkaVPN privacy policy
+  refund:
+    url: https://belkavpn.com/refund-policy
+    title: BelkaVPN refund policy
+  servers:
+    url: https://belkavpn.com/servers
+    title: BelkaVPN servers
+  order:
+    url: https://belkavpn.com/order-page
+    title: BelkaVPN order page
+  play:
+    url: https://play.google.com/store/apps/details?id=com.digiapp.vpn
+    title: BelkaVPN on Google Play
+  play-data-safety:
+    url: https://play.google.com/store/apps/datasafety?id=com.digiapp.vpn
+    title: BelkaVPN data safety on Google Play
+  app-store:
+    url: https://apps.apple.com/us/app/belkavpn-fast-secure-vpn/id1478707619
+    title: BelkaVPN on the App Store
+  chrome:
+    url: https://chromewebstore.google.com/detail/npgimkapccfidfkfoklhpkgmhgfejhbj
+    title: BelkaVPN on the Chrome Web Store
+  edge:
+    url: https://microsoftedge.microsoft.com/addons/detail/belkavpn-is-vpn-proxy/jgcpnjohjdaokjinmckdaeicklkpibde
+    title: BelkaVPN on Edge Add-ons
+  chrome-guide:
+    url: https://docs.belkavpn.com/chrome-extension-setup
+    title: Set up BelkaVPN on Chrome
+  desktop-openvpn:
+    url: https://docs.belkavpn.com/desktop-openvpn-setup
+    title: Install the BelkaVPN OpenVPN app (PC/Mac)
+  desktop-wireguard:
+    url: https://docs.belkavpn.com/desktop-wireguard-setup
+    title: Install the BelkaVPN WireGuard app (PC/Mac)
