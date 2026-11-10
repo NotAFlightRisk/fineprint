@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: Celo VPN
 icon: celo-vpn.png
-checked: 2026-10-27
+checked: 2026-11-10
 
 criteria:
   identity:
