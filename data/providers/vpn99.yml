@@ -1,0 +1,306 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: VPN99
+icon: vpn99.png
+checked: 2026-11-10
+
+criteria:
+  identity:
+    website:
+      value: https://vpn99.net
+      sources: [home]
+    legal_entity:
+      value: Shopcut LLC
+      note: A New Jersey company, formed in 2020.
+      sources: [terms, register]
+    owner:
+      value: null
+      note: >-
+        Shopcut doesn't say who owns it. Its Play listing gives the same Fair Lawn address and phone
+        number as Webistics Holdings (VPNWholesaler, which runs MaxiVPN), whose name is on VPN99's
+        help centre.
+      sources: [register, play, maxivpn-play, support]
+    founded:
+      value: 2017
+      note: Its earliest terms, from 2018, carry a 2017 copyright. The iOS app came out in December 2018.
+      sources: [terms-2018, app-store]
+    team:
+      value: anonymous
+      note: Only its EU representative is named.
+      sources: [policy]
+    sister_brands:
+      value: [NoCatch VPN, Trust VPN, VPN Fast]
+      note: >-
+        All three are Shopcut's own apps. MaxiVPN shares Shopcut's address and phone number but is
+        sold by Webistics.
+      sources: [app-store-dev, nocatch-play, maxivpn-play]
+    acquisitions:
+      value: null
+      note: >-
+        Its terms named 99TECH LP, an English partnership, until 2019, then Lillioz Software Ltd of
+        Cyprus, and Shopcut since at least 2024. Whether any of these was a sale isn't public.
+      sources: [terms-2018, terms-2021, terms]
+
+  jurisdiction:
+    hq:
+      value: US
+      sources: [terms, register]
+    entities:
+      value: [US]
+      note: >-
+        Its Windows app is signed by Keen Internet Technologies of Israel, and its terms still
+        mention Israeli law in two clauses while putting the contract under New Jersey law.
+      sources: [register, terms, windows-app]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [policy, vw-logging]
+    dns:
+      value: none
+      evidence: claimed
+      note: Lookups made through the VPN aren't logged. Lookups to its DNS from outside the VPN are kept for 7 days.
+      sources: [policy, vw-logging]
+    timestamps:
+      value: 'yes'
+      evidence: claimed
+      note: >-
+        Its policy keeps personal data until you ask for it to be deleted. The VPNWholesaler network
+        it runs on says up to 12 months.
+      sources: [policy, vw-logging]
+    bandwidth:
+      value: 'yes'
+      evidence: claimed
+      note: Kept per session.
+      sources: [policy, vw-logging]
+    source_ip:
+      value: 'yes'
+      evidence: claimed
+      note: The IP you connect from is kept alongside your connection times.
+      sources: [policy, vw-logging]
+    proven:
+      value: []
+    policy: https://vpn99.net/en/privacy-policy
+
+  transparency:
+    audits: []
+    report:
+      value: none
+    canary:
+      value: none
+    bug_bounty:
+      value: false
+      note: The terms forbid probing or testing its systems for vulnerabilities.
+      sources: [terms]
+    incidents:
+      value: []
+
+  account:
+    email:
+      value: optional
+      note: Buying on the website needs an email. Subscribing through Google Play creates an account without one.
+      sources: [pricing, alias]
+    personal_data:
+      value: []
+    payment:
+      value: [card, paypal, app_store, bitcoin, other_crypto]
+      note: >-
+        Crypto includes Ether, Litecoin, Solana and stablecoins. The Russian site adds FreeKassa,
+        a Russian payment service.
+      sources: [pricing, ru-pricing, app-store]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn, ikev2]
+      note: The Android app only offers OpenVPN and WireGuard. IKEv2 is in the Windows app.
+      sources: [windows-app, play, servers]
+    post_quantum:
+      value: none
+      sources: [windows-app]
+    kill_switch:
+      value: app
+      note: >-
+        Only the Windows app has one, as an optional setting that's off by default. The Android app
+        has an always-connect setting instead.
+      sources: [windows-app, play]
+    dns:
+      value: first_party
+      note: The apps' WireGuard profile points DNS at an address inside the tunnel.
+      sources: [play]
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say whether its servers run from RAM.
+    hosting:
+      value: null
+      note: >-
+        It runs on VPNWholesaler's network: its policy repeats that network's logging terms word for
+        word, and its apps use the same protocol line-up. Neither says who owns the servers.
+      sources: [vw-logging, vw-platforms, support]
+    virtual_locations:
+      value: null
+      note: It doesn't say whether any locations, China and Russia among them, are virtual.
+      sources: [servers]
+    servers:
+      value: 300
+      note: Given as over 300.
+      sources: [home, servers]
+    countries:
+      value: 53
+      note: Its homepage says over 60.
+      sources: [servers, home]
+
+  features:
+    connections:
+      value: 5
+      sources: [home]
+    multihop:
+      value: false
+      sources: [windows-app]
+    obfuscation:
+      value: [shadowsocks, v2ray]
+      note: >-
+        On Windows: Shadowsocks (Stealth Mode), Xray (XST), NaiveProxy (StealthUP) and OpenVPN over
+        TLS. Version 1.81 of the Android app has none of them, though the help centre says XST is on
+        every platform.
+      sources: [windows-app, servers, xst]
+    port_forwarding:
+      value: false
+      sources: [windows-app]
+    split_tunnel:
+      value: false
+      sources: [windows-app, play]
+    blocking:
+      value: []
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android, browser]
+      note: The Mac app is the iOS app from the Mac App Store. The browser app is a Chrome extension.
+      sources: [home, macos, app-store, chrome]
+    open_source:
+      value: none
+      sources: [terms]
+    telemetry:
+      value: forced
+      evidence: claimed
+      note: >-
+        The policy says the apps report feature usage that may be linked to you, and the Android app
+        includes Firebase Analytics, AppsFlyer, Affise and Facebook's SDK. No setting turns it off.
+      sources: [policy, play]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 5.99, currency: USD }
+      sources: [pricing]
+    best:
+      value: { amount: 2.50, currency: USD }
+      note: $29.99 billed every year.
+      sources: [pricing]
+    best_term:
+      value: 12
+      sources: [pricing]
+    renewal_increase:
+      value: 0
+      note: The yearly plan renews at the same $29.99.
+      sources: [pricing, app-store]
+    free_tier:
+      value: null
+      note: The Android app offers a limited free mode on a timer, but the site sells only paid plans.
+      sources: [play]
+    refund_days:
+      value: null
+      note: >-
+        The pricing page promises a 30-day money-back guarantee, and an older set of terms still on
+        the site gives 7 days on monthly plans. The current terms say refunds are at its sole
+        discretion.
+      sources: [pricing, ru-terms, terms]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        Its pricing page promises "no activity & connection logs" and its Play listing says it
+        doesn't remember your IP, while its policy keeps your IP and connection times. The apps
+        also promise "complete anonymity".
+      sources: [pricing, play]
+    affiliates:
+      value: true
+      evidence: claimed
+      note: There's no public scheme, but its policy says it tracks app installs to reward affiliates and traffic sources.
+      sources: [policy]
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://vpn99.net/en/
+    title: VPN99
+  terms:
+    url: https://vpn99.net/en/terms
+    title: VPN99 Terms of Service
+  ru-terms:
+    url: https://vpn99.net/ru/terms
+    title: Terms and Conditions of Use (Russian site)
+  policy:
+    url: https://vpn99.net/en/privacy-policy
+    title: VPN99 Privacy Policy
+  pricing:
+    url: https://vpn99.net/en/prices
+    title: VPN99 pricing
+  ru-pricing:
+    url: https://vpn99.net/ru/prices
+    title: VPN99 pricing (Russian site)
+  servers:
+    url: https://vpn99.net/en/servers
+    title: VPN99 server list
+  macos:
+    url: https://support.vpn99.net/article/11-macos-app
+    title: VPN99 help centre, macOS app
+  support:
+    url: https://support.vpn99.net/
+    title: VPN99 Support and Knowledge Base
+  alias:
+    url: https://support.vpn99.net/article/47-vpn99-alias-creation
+    title: VPN99 help centre, alias creation
+  xst:
+    url: https://support.vpn99.net/article/28-russia
+    title: VPN99 help centre, Russia firewall unblocking
+  register:
+    url: https://opencorporates.com/companies/us_nj/0450508549
+    title: Shopcut LLC, New Jersey company 0450508549 (OpenCorporates)
+  terms-2018:
+    url: https://web.archive.org/web/20181118110632/https://vpn99.net/terms
+    title: VPN99 terms, November 2018 (Wayback Machine)
+  terms-2021:
+    url: https://web.archive.org/web/20210517185636/https://vpn99.net/en/terms
+    title: VPN99 terms, May 2021 (Wayback Machine)
+  play:
+    url: https://play.google.com/store/apps/details?id=com.vpn99
+    title: VPN99 on Google Play
+  app-store:
+    url: https://apps.apple.com/us/app/vpn99-total-privacy-protector/id1361702640
+    title: VPN99 on the App Store (US)
+  app-store-dev:
+    url: https://apps.apple.com/us/developer/shopcut-llc/id1669529583
+    title: Shopcut LLC on the App Store
+  nocatch-play:
+    url: https://play.google.com/store/apps/details?id=vpn.privateme
+    title: NoCatch VPN on Google Play
+  maxivpn-play:
+    url: https://play.google.com/store/apps/details?id=com.maxivpn.maxivpn
+    title: MaxiVPN on Google Play (Webistics Holdings Ltd)
+  chrome:
+    url: https://chromewebstore.google.com/detail/jhilaocgbpkchpomekiejhldihlmhikd
+    title: VPN99 on the Chrome Web Store
+  windows-app:
+    url: https://vpn99.net/builds/vpn99_setup.msix
+    title: VPN99 for Windows 3.2 (MSIX installer)
+  vw-logging:
+    url: https://docs.vpnwholesaler.com/docs/Legal/Logging%20Policy
+    title: VPNWholesaler logging policy
+  vw-platforms:
+    url: https://docs.vpnwholesaler.com/docs/Support%20Platforms
+    title: VPNWholesaler, supported platforms and protocols
