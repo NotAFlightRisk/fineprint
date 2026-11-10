@@ -26,6 +26,9 @@ criteria:
       value: anonymous
       note: Neither company's website names anyone running it.
       sources: [home, midpoint]
+    sister_brands:
+      value: [Toggle VPN]
+      sources: [hh]
 
   jurisdiction:
     hq:
@@ -213,3 +216,6 @@ refs:
   exodus:
     url: https://web.archive.org/web/20251106235755/https://reports.exodus-privacy.eu.org/en/reports/private.internet.access.vpn.lumos/latest/
     title: Exodus Privacy report for VPN Lumos 1.69.5 (October 2025, archived)
+  hh:
+    url: https://hh.ru/employer/12099673
+    title: Тогл Софт / Toggle, employer page on hh.ru
