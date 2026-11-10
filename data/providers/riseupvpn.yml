@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: RiseupVPN
 icon: riseupvpn.svg
-checked: 2026-10-26
+checked: 2026-11-10
 
 criteria:
   identity:
@@ -157,7 +157,7 @@ criteria:
       value: none
       sources: [gateways]
     servers:
-      value: 21
+      value: 16
       sources: [gateways]
     countries:
       value: 4
@@ -172,7 +172,7 @@ criteria:
     multihop: false
     obfuscation:
       value: [obfs4]
-      note: Every gateway also takes obfs4 on port 443, and the app can fetch its setup over Snowflake where Riseup is blocked.
+      note: Every gateway also takes obfs4 on port 9443, and the app can fetch its setup over Snowflake where Riseup is blocked.
       sources: [gateways, leap, audit-srl-2025]
     port_forwarding:
       value: null
@@ -297,8 +297,8 @@ refs:
     url: https://www.opentech.fund/wp-content/uploads/2026/02/SRL-OTF_LEAP_Pentest_Report.v1.1.pdf
     title: Security Research Labs, LEAP Security Assessment penetration test v1.1 (2025)
   leap:
-    url: https://leap.se/
-    title: LEAP Encryption Access Project
+    url: https://web.archive.org/web/20261031175621/https://leap.se/
+    title: LEAP Encryption Access Project (Wayback Machine)
   tenable-2021:
     url: https://www.tenable.com/security/research/tra-2021-58
     title: 'Tenable TRA-2021-58: Riseup local privilege escalation (CVE-2021-44466)'
