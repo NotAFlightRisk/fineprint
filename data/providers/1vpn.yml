@@ -1,0 +1,267 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: 1VPN
+icon: 1vpn.png
+checked: 2026-11-10
+
+criteria:
+  identity:
+    website: https://1vpn.org
+    legal_entity:
+      value: 1Security Inc.
+      note: >-
+        The terms and privacy policy don't name a company. The site's footer and the Google Play listing
+        give 1Security Inc., with an address in Oakville, Ontario.
+      sources: [home, play, terms, policy]
+    owner:
+      value: null
+      note: Who owns 1Security Inc. isn't public.
+      sources: [play]
+    founded:
+      value: 2023
+      note: >-
+        The 1vpn.org domain was still for sale in early June 2023. It changed hands later that month, and the
+        Firefox add-on went up on 15 June 2023.
+      sources: [home-2023, rdap, amo-api]
+    team:
+      value: anonymous
+      note: The only person behind it you can see is a developer using the name Gu4rd on GitHub.
+      sources: [github]
+    sister_brands: []
+    acquisitions: []
+
+  jurisdiction:
+    hq:
+      value: CA
+      evidence: claimed
+      sources: [play]
+    entities:
+      value: [CA]
+      sources: [play]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [policy]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [policy]
+    timestamps:
+      value: none
+      evidence: claimed
+      note: Only covered by the policy's blanket promise not to log any use of the service.
+      sources: [policy]
+    bandwidth:
+      value: none
+      evidence: claimed
+      note: Only covered by the policy's blanket promise not to log any use of the service.
+      sources: [policy]
+    source_ip:
+      value: none
+      evidence: claimed
+      sources: [policy]
+    proven: []
+    policy: https://1vpn.org/privacy-policy/
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: required
+      note: The free plan needs no account. Premium needs one with an email address.
+      sources: [plans, cws]
+    personal_data:
+      value: []
+      sources: [plans, policy]
+    payment:
+      value: [card, paypal, app_store]
+      note: >-
+        Also cryptocurrency (without saying which coins), Alipay, Russia's SBP and Mir, and more through
+        Digiseller. The Android app sells through Google Play.
+      sources: [plans, app-changelog]
+
+  security:
+    protocols:
+      value: [other]
+      note: >-
+        The Android app uses Xray with VLESS and REALITY. The browser extensions are proxies for the browser
+        alone, over TLS.
+      sources: [play, app-changelog, ext-proxy]
+    post_quantum:
+      value: none
+      note: The key exchange is X25519.
+      sources: [home, play]
+    kill_switch:
+      value: app
+      note: >-
+        On Android, a connect that finds no working server blocks traffic, but after a minute the tunnel stops.
+        The app points you to Android's Always-on VPN setting, which is off until you turn it on.
+      sources: [app-changelog, release-3]
+    dns:
+      value: third_party
+      note: >-
+        The Android app sends lookups through the tunnel to Quad9, with Cloudflare as a fallback. The extensions
+        leave lookups to the proxy server, without saying whose resolver it uses.
+      sources: [app-dns, app-changelog, ext-proxy]
+
+  infra:
+    ram_only: null
+    hosting:
+      value: rented
+      note: >-
+        The free servers' addresses belong to Vultr, BlackHOST and BlueVPS. It doesn't say where the premium
+        servers are hosted.
+      sources: [ext-free-locations, ip-vultr, ip-blackhost, ip-bluevps]
+    virtual_locations: null
+    servers: null
+    countries:
+      value: 19
+      note: 32 cities in all. The extensions' free plan gets three of them.
+      sources: [home]
+
+  features:
+    connections:
+      value: 10
+      sources: [home]
+    multihop: false
+    obfuscation:
+      value: [v2ray]
+      note: V2Ray here is VLESS with REALITY, which disguises the connection as ordinary HTTPS. Android only.
+      sources: [play, app-changelog]
+    port_forwarding: false
+    split_tunnel:
+      value: true
+      note: Android only, and by country rather than app. Direct Regions sends one picked country's sites outside the tunnel.
+      sources: [app-changelog]
+    blocking: []
+
+  clients:
+    platforms:
+      value: [android, browser]
+      note: Extensions for Chrome, Edge and Firefox.
+      sources: [cws, edge, amo, github]
+    open_source:
+      value: all
+      note: Both the extension and the Android app are GPL-3.0. The Android app is a fork of OneXray.
+      sources: [github, app-changelog]
+    telemetry:
+      value: null
+      note: >-
+        Neither app's source has analytics or crash reporting, but the Android app shows free users Google
+        AdMob ads, whose SDK collects device data, though its Play data safety form says no data is collected.
+      sources: [ext-source, app-pubspec, play]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 6.99, currency: USD }
+      sources: [plans]
+    best:
+      value: { amount: 1.99, currency: USD }
+      note: Billed yearly.
+      sources: [plans]
+    best_term:
+      value: 12
+      sources: [plans]
+    renewal_increase:
+      value: 0
+      note: The yearly plan's 70% saving is against the monthly price, and nothing says it renews higher.
+      sources: [plans]
+    free_tier:
+      value: true
+      note: >-
+        No data cap. The extensions get Amsterdam, Singapore and Los Angeles for free. Free Android users see ads
+        before some connects and when switching location.
+      sources: [home, ext-free-locations, app-changelog]
+    refund_days:
+      value: 10
+      note: First purchases only. Renewals and crypto payments aren't refundable.
+      sources: [refund]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        It says your personal data is never stored, while its own privacy policy keeps your email address and
+        payment details.
+      sources: [home, policy]
+    affiliates: false
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://1vpn.org/
+    title: 1VPN homepage and FAQ
+  home-2023:
+    url: https://web.archive.org/web/20230604213601/https://1vpn.org/
+    title: 1vpn.org, for sale (Wayback Machine, June 2023)
+  rdap:
+    url: https://rdap.publicinterestregistry.org/rdap/domain/1vpn.org
+    title: RDAP record for 1vpn.org
+  policy:
+    url: https://1vpn.org/privacy-policy/
+    title: 1VPN privacy policy
+  terms:
+    url: https://1vpn.org/terms-of-service/
+    title: 1VPN terms of service
+  refund:
+    url: https://1vpn.org/refund-policy/
+    title: 1VPN refund policy
+  plans:
+    url: https://1vpn.org/select-plan/
+    title: 1VPN plans
+  play:
+    url: https://play.google.com/store/apps/details?id=com.one.vpnapp
+    title: 1VPN on Google Play
+  cws:
+    url: https://chromewebstore.google.com/detail/akcocjjpkmlniicdeemdceeajlmoabhg
+    title: Free VPN Proxy - 1VPN on the Chrome Web Store
+  edge:
+    url: https://microsoftedge.microsoft.com/addons/detail/dalhgafbhpdolibignjckpmiejgfddjp
+    title: 1VPN on Edge Add-ons
+  amo:
+    url: https://addons.mozilla.org/en-US/firefox/addon/1vpn/
+    title: VPN by 1VPN on Firefox Add-ons
+  amo-api:
+    url: https://addons.mozilla.org/api/v5/addons/addon/1vpn/
+    title: Firefox Add-ons API record for 1VPN
+  github:
+    url: https://github.com/1vpn
+    title: 1VPN on GitHub
+  app-changelog:
+    url: https://github.com/1vpn/app/blob/main/CHANGELOG.md
+    title: 1VPN Android app changelog
+  release-3:
+    url: https://github.com/1vpn/app/releases/tag/v3.0.0
+    title: 1VPN Android app 3.0.0 release
+  app-dns:
+    url: https://github.com/1vpn/app/blob/main/lib/onevpn/net/dns_resolver.dart
+    title: 1VPN Android app DNS resolvers (source)
+  app-pubspec:
+    url: https://github.com/1vpn/app/blob/main/pubspec.yaml
+    title: 1VPN Android app dependencies (source)
+  ext-source:
+    url: https://github.com/1vpn/browser-extension
+    title: 1VPN browser extension source
+  ext-proxy:
+    url: https://github.com/1vpn/browser-extension/blob/main/src/utils/manageProxy.js
+    title: 1VPN browser extension proxy settings (source)
+  ext-free-locations:
+    url: https://github.com/1vpn/browser-extension/blob/main/src/utils/freeLocations.js
+    title: 1VPN browser extension free locations (source)
+  ip-vultr:
+    url: https://rdap.arin.net/registry/ip/45.76.176.132
+    title: ARIN RDAP for a free Singapore server (Vultr)
+  ip-blackhost:
+    url: https://rdap.db.ripe.net/ip/86.54.28.106
+    title: RIPE RDAP for a free Amsterdam server (BlackHOST)
+  ip-bluevps:
+    url: https://rdap.db.ripe.net/ip/91.242.241.58
+    title: RIPE RDAP for a free Singapore server (BlueVPS)
