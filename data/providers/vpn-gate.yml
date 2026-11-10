@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: VPN Gate
 icon: vpn-gate.png
-checked: 2026-10-25
+checked: 2026-11-10
 
 criteria:
   identity:
@@ -133,7 +133,7 @@ criteria:
       value: none
       sources: [home, overview]
     servers:
-      value: 4877
+      value: 3010
       note: Volunteer relays come and go, so the count changes by the minute.
       sources: [home]
     countries:
