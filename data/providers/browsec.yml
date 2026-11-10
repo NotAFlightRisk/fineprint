@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: Browsec
 icon: browsec.svg
-checked: 2026-10-27
+checked: 2026-11-10
 
 criteria:
   identity:
@@ -107,7 +107,7 @@ criteria:
       note: It calls its locations virtual locations, without saying where the servers physically sit.
       sources: [locations, dns-leak]
     servers:
-      value: 1374
+      value: 1398
       note: Elsewhere it says 1,000+ servers.
       sources: [home, dns-leak]
     countries:
@@ -266,4 +266,4 @@ refs:
     title: Browsec desktop app 1.4.2
   chrome-extension:
     url: https://clients2.google.com/service/update2/crx?response=redirect&prodversion=140.0&acceptformat=crx2,crx3&x=id%3Domghfjlpggmjjaagoclmmobgdodcjboh%26uc
-    title: Browsec Chrome extension 4.1.0 (CRX package)
+    title: Browsec Chrome extension 4.1.1 (CRX package)
