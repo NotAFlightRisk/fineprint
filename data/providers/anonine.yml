@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: Anonine
 icon: anonine.png
-checked: 2026-10-27
+checked: 2026-11-10
 
 criteria:
   identity:
@@ -84,9 +84,9 @@ criteria:
       value: maintained
       grade: ok
       note: >-
-        The "as of" date comes from the reader's own device clock, so it shows today's date whether or not
-        anyone has renewed it. It isn't signed either.
-      sources: [about]
+        The "as of" date is the day the site was last rebuilt, so it moves with any site update rather than a
+        renewal. It isn't signed either.
+      sources: [about, about-2026-07]
     bug_bounty:
       value: false
       sources: [help]
@@ -231,6 +231,9 @@ refs:
   about:
     url: https://anonine.com/about/
     title: About us (and warrant canary)
+  about-2026-07:
+    url: https://web.archive.org/web/20260710235001/https://anonine.com/about/
+    title: About us, archived July 2026 (canary dated 2/20/2026)
   service:
     url: https://anonine.com/service/
     title: Service
