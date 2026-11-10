@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: Lantern
 icon: lantern.svg
-checked: 2026-10-26
+checked: 2026-11-10
 
 criteria:
   identity:
@@ -303,8 +303,8 @@ refs:
     url: https://play.google.com/store/apps/details?id=org.getlantern.lantern
     title: Lantern on Google Play
   app-store:
-    url: https://apps.apple.com/us/app/lantern-vpn/id1457872372
-    title: Lantern VPN on the App Store
+    url: https://apps.apple.com/us/app/lantern-fast-secure-vpn/id1457872372
+    title: 'Lantern: Fast, Secure VPN on the App Store'
   propublica:
     url: https://projects.propublica.org/nonprofits/organizations/273272909
     title: Brave New Software Project Inc, ProPublica Nonprofit Explorer
