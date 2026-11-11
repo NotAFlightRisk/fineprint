@@ -1,0 +1,253 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: uVPN
+icon: uvpn.png
+checked: 2026-11-11
+
+criteria:
+  identity:
+    website: https://uvpn.me
+    legal_entity:
+      value: Brocode Limited
+      note: >-
+        The terms and policy give a Hong Kong address. The Android app has been published since mid-2026 by APPOLO
+        ONE LTD, a London company, with a contact address at kodice.net.
+      sources: [terms, policy, play, play-2026]
+    owner:
+      value: null
+      note: >-
+        Who owns Brocode Limited isn't public. APPOLO ONE LTD, the Android app's publisher, is owned by Anton
+        Pasichnyk, a Ukrainian resident.
+      sources: [ch-psc]
+    founded:
+      value: 2019
+      note: No launch date is given. The site had a pricing page by July 2019 and the iOS app came out that December.
+      sources: [pricing-2019, ios]
+    team:
+      value: anonymous
+      note: The site names nobody. Only the Companies House record for the Android publisher names a director.
+      sources: [ch-officers]
+    sister_brands:
+      value: [1ClickVPN]
+      note: >-
+        Both browser extensions send each page you open to their maker in the same set of fields, the terms share
+        their logging wording word for word, and the Android listing's contact email is at Kodice LLC, which runs
+        1ClickVPN. The iOS publisher also sells VK VPN.
+      sources: [crx, oc-crx, oc-terms, play, ios]
+    acquisitions:
+      value: []
+      note: The Android listing moved from Brocode Limited to APPOLO ONE LTD in 2026, with no announcement.
+      sources: [play-2026, play]
+
+  jurisdiction:
+    hq:
+      value: HK
+      evidence: claimed
+      note: The terms are governed by Hong Kong law, with disputes going to the Hong Kong International Arbitration Centre.
+      sources: [terms]
+    entities:
+      value: [HK, GB]
+      sources: [policy, ch]
+
+  logging:
+    traffic:
+      value: null
+      note: >-
+        The terms promise no traffic logs, but the Chrome extension reports every page you open to its own server
+        by default.
+      sources: [terms, crx]
+    dns:
+      value: null
+      note: The Chrome extension reports the address of every page you open to its own server by default.
+      sources: [crx]
+    timestamps:
+      value: temporary
+      evidence: claimed
+      note: Your username and last session status are kept while connected and wiped within 15 minutes of disconnecting.
+      sources: [terms]
+    bandwidth:
+      value: none
+      evidence: claimed
+      sources: [terms]
+    source_ip:
+      value: none
+      evidence: claimed
+      note: The terms say IP addresses aren't stored, and the policy says automatically collected IP addresses aren't kept.
+      sources: [terms, policy]
+    proven: []
+    policy: https://uvpn.me/privacy-policy/
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: required
+      note: The free apps work without an account. Premium needs one with an email address.
+      sources: [play]
+    personal_data:
+      value: []
+      note: Signing up asks only for an email address and password, though the policy also lists name, phone and company.
+      sources: [crx, policy]
+    payment:
+      value: [card, app_store]
+      note: Card payments go through Paddle or FastSpring, and the mobile apps sell subscriptions in-app.
+      sources: [terms, ios]
+
+  security:
+    protocols:
+      value: [ikev2, openvpn, other]
+      note: >-
+        The apps offer IKEv2 and OpenVPN over TCP or UDP. Other is the browser extensions, which are proxies for
+        the browser alone.
+      sources: [encryption, cws]
+    post_quantum: none
+    kill_switch:
+      value: app
+      note: The Android app has a kill switch setting.
+      sources: [play]
+    dns: null
+
+  infra:
+    ram_only: null
+    hosting: null
+    virtual_locations: null
+    servers: null
+    countries:
+      value: 25
+      evidence: claimed
+      sources: [servers]
+
+  features:
+    connections:
+      value: 10
+      sources: [crx]
+    multihop: false
+    obfuscation: null
+    port_forwarding: false
+    split_tunnel: null
+    blocking:
+      value: [ads, trackers, malware]
+      evidence: claimed
+      note: The Android listing promises blocking of ads, trackers and malicious content, without saying how.
+      sources: [play]
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android, browser]
+      note: >-
+        The iOS app was last updated in February 2025, the Firefox add-on in December 2023 and the Windows
+        installer in June 2024. The Android app was updated in November 2025 and the Chrome extension in October 2026.
+      sources: [downloads, ios, amo, play, cws, edge]
+    open_source: none
+    telemetry:
+      value: opt_out
+      note: >-
+        The Chrome extension's "technical data" is on by default and includes every page you open, with the page you
+        came from and a device ID, which its privacy settings page doesn't list. The Android app carries AppsFlyer,
+        Facebook and Firebase analytics.
+      sources: [crx, play]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: null
+      note: Prices are only shown after signing in.
+      sources: [order]
+    best:
+      value: null
+      note: Prices are only shown after signing in.
+      sources: [order]
+    best_term: null
+    renewal_increase: null
+    free_tier:
+      value: true
+      note: The free plan has fewer locations than Premium.
+      sources: [cws]
+    refund_days:
+      value: 30
+      note: Annual plans get 30 days, six-month plans 14 and monthly plans 7.
+      sources: [terms]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        It says your browsing activity is never stored and that technical data is only versions, IP and error traces,
+        while the Chrome extension reports every page you open.
+      sources: [play, crx]
+    affiliates: null
+    review_sites: false
+    activism: false
+
+  other:
+    concerns:
+      value:
+        - title: Chrome extension reports every page you open
+          summary: >-
+            The Chrome extension sends the address of every page you open, and the page you came from, to its own
+            server under a device ID, unless you turn off technical data in its settings.
+          severity: serious
+          source: crx
+
+refs:
+  terms:
+    url: https://uvpn.me/terms-conditions/
+    title: uVPN Terms and Conditions
+  policy:
+    url: https://uvpn.me/privacy-policy/
+    title: uVPN Privacy Policy
+  servers:
+    url: https://uvpn.me/servers/
+    title: uVPN servers
+  encryption:
+    url: https://uvpn.me/vpn-encryption/
+    title: uVPN VPN encryption
+  downloads:
+    url: https://uvpn.me/downloads/
+    title: uVPN downloads
+  order:
+    url: https://manage.uvpn.me/order/
+    title: uVPN order page (sign-in)
+  play:
+    url: https://play.google.com/store/apps/details?id=com.brocode.uvpn&hl=en
+    title: uVPN on Google Play
+  play-2026:
+    url: https://web.archive.org/web/20260630015914/https://play.google.com/store/apps/details?referrer=utm_source%3Duvpn.me%26utm_medium%3Dinternal%26utm_content%3DGET%252BIT%252BON%252BGoogle%252BPlay%26utm_campaign%3DDownload%252BVPN%252Bfor%252BAndroid&id=com.brocode.uvpn
+    title: uVPN on Google Play (archived June 2026)
+  ios:
+    url: https://apps.apple.com/us/app/uvpn-super-fast-unlimited-vpn/id1475229877
+    title: uVPN on the App Store
+  cws:
+    url: https://chromewebstore.google.com/detail/free-vpn-chrome-extension/jaoafpkngncfpfggjefnekilbkcpjdgp
+    title: uVPN on the Chrome Web Store
+  edge:
+    url: https://microsoftedge.microsoft.com/addons/detail/free-vpn-edge-extension-/ffcobagjhencnhemanghdmgokpodejja
+    title: uVPN on Edge Add-ons
+  amo:
+    url: https://addons.mozilla.org/en-US/firefox/addon/uvpn-unlimited-vpn/
+    title: uVPN on Firefox Add-ons
+  crx:
+    url: https://clients2.google.com/service/update2/crx?response=redirect&prodversion=140.0&acceptformat=crx2,crx3&x=id%3Djaoafpkngncfpfggjefnekilbkcpjdgp%26uc
+    title: uVPN Chrome extension 8.0.11 (CRX package)
+  oc-crx:
+    url: https://clients2.google.com/service/update2/crx?response=redirect&prodversion=140.0&acceptformat=crx2,crx3&x=id%3Dfcfhplploccackoneaefokcmbjfbkenj%26uc
+    title: 1clickVPN Chrome extension (CRX package)
+  oc-terms:
+    url: https://1clickvpn.net/terms-of-service
+    title: 1clickVPN Terms and Conditions of Service
+  ch:
+    url: https://find-and-update.company-information.service.gov.uk/company/13397949
+    title: APPOLO ONE LTD at Companies House
+  ch-officers:
+    url: https://find-and-update.company-information.service.gov.uk/company/13397949/officers
+    title: APPOLO ONE LTD officers at Companies House
+  ch-psc:
+    url: https://find-and-update.company-information.service.gov.uk/company/13397949/persons-with-significant-control
+    title: APPOLO ONE LTD persons with significant control at Companies House
+  pricing-2019:
+    url: https://web.archive.org/web/20190722231206/https://uvpn.me/pricing/
+    title: uVPN pricing (archived July 2019)
