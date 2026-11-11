@@ -1,0 +1,220 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Final VPN
+icon: final-vpn.png
+checked: 2026-11-11
+
+criteria:
+  identity:
+    website:
+      value: https://finalvpn.app
+      sources: [home]
+    legal_entity:
+      value: METAPHASE LTD
+      note: >-
+        The App Store seller and Google Play developer. Its privacy policy says the app is provided by DevTech, and the
+        company has filed dormant accounts every year since it was formed.
+      sources: [app-store, play, register, privacy, filings]
+    owner:
+      value: Amin Rouzbahani
+      note: Holds 75% or more of METAPHASE LTD's shares and is its only director.
+      sources: [register-psc, register-officers]
+    founded:
+      value: 2022
+      note: The privacy policy dates from October 2022, and METAPHASE LTD was formed the next month.
+      sources: [register, privacy]
+    team:
+      value: partial
+      note: Neither the site nor the apps name anyone, but the company register names its sole director.
+      sources: [home, register-officers]
+    sister_brands:
+      value: []
+      note: METAPHASE LTD's only other app is Alowa, a calling app.
+      sources: [app-store]
+    acquisitions: []
+
+  jurisdiction:
+    hq:
+      value: GB
+      sources: [register]
+    entities:
+      value: [GB]
+      sources: [register]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      note: >-
+        The app store listings say it doesn't monitor or store browsing activity. The privacy policy is a generic app
+        policy that doesn't cover the VPN at all.
+      sources: [app-store, play, privacy]
+    dns:
+      value: null
+      note: The privacy policy doesn't cover what the VPN servers keep.
+      sources: [privacy]
+    timestamps:
+      value: null
+      note: The privacy policy doesn't cover what the VPN servers keep.
+      sources: [privacy]
+    bandwidth:
+      value: null
+      note: The privacy policy doesn't cover what the VPN servers keep.
+      sources: [privacy]
+    source_ip:
+      value: null
+      note: >-
+        The policy only says error reports from the app may include your IP address, and doesn't cover what the VPN
+        servers keep.
+      sources: [privacy]
+    proven: []
+    policy: https://finalvpn.app/privacy.html
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: none
+      evidence: claimed
+      note: The apps start on a free trial with one tap, and the App Store privacy label lists no contact details.
+      sources: [app-store]
+    personal_data: []
+    payment:
+      value: [app_store]
+      note: The website's own plan buttons lead to a dead page, so the apps' in-app purchases are the only way to pay.
+      sources: [app-store, play, home]
+
+  security:
+    protocols:
+      value: [openvpn]
+      note: The Android app is built on the open source OpenVPN for Android client. The iOS app's protocol isn't stated.
+      sources: [play]
+    post_quantum:
+      value: none
+      note: Nothing is published about its key exchange.
+    kill_switch:
+      value: app
+      evidence: claimed
+      sources: [play]
+    dns:
+      value: null
+      note: It doesn't say whose DNS servers the tunnel uses.
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say how its servers are run.
+    hosting:
+      value: null
+      note: It doesn't say who runs its servers.
+    virtual_locations:
+      value: null
+      note: It doesn't say where its servers physically are.
+    servers:
+      value: null
+      note: It gives no server count.
+    countries:
+      value: null
+      note: The website claims access to more than 20 locations, without listing them.
+      sources: [home]
+
+  features:
+    connections:
+      value: 1
+      note: A standard plan covers one device. A three-seat plan costs $12.99 a month.
+      sources: [app-store, home]
+    multihop: false
+    obfuscation:
+      value: null
+      note: It sells "Special Route" plans without saying what they do or how it gets past blocking.
+      sources: [app-store]
+    port_forwarding: false
+    split_tunnel:
+      value: true
+      note: Android only.
+      sources: [play]
+    blocking:
+      value: []
+      note: The website says it helps you avoid phishing, scams and malware, but the apps list no blocking feature.
+      sources: [home, play]
+
+  clients:
+    platforms:
+      value: [android, ios, macos]
+      note: >-
+        The iOS app also runs on Mac and Apple TV, and the Android app on Android TV. The website's Windows download
+        link is dead.
+      sources: [app-store, play, home]
+    open_source: none
+    telemetry:
+      value: null
+      note: >-
+        The Android app includes Firebase Analytics and Crashlytics, while its Play listing says it shares no data.
+        Whether you can turn them off isn't stated.
+      sources: [play, play-data-safety]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 5.99, currency: USD }
+      note: >-
+        In-app price. The website still shows older plans from $1 for 5 GB a month, but its buttons lead to a dead
+        page.
+      sources: [app-store, home]
+    best:
+      value: { amount: 5, currency: USD }
+      note: $59.99 a year in the app.
+      sources: [app-store]
+    best_term: 12
+    renewal_increase: 0
+    free_tier:
+      value: false
+      note: There's a free trial of two hours.
+      sources: [app-store]
+    refund_days:
+      value: null
+      note: It's only sold through the app stores, so refunds follow Google's and Apple's processes.
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        The website calls it one of the fastest VPNs in the world and says it helps you avoid phishing, scams and
+        malware, with no blocking feature in the apps.
+      sources: [home]
+    affiliates: false
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://finalvpn.app/
+    title: FinalVPN - Fast & Secure VPN
+  privacy:
+    url: https://finalvpn.app/privacy.html
+    title: Privacy Policy - FinalVPN
+  app-store:
+    url: https://apps.apple.com/us/app/final-vpn-fast-secure-vpn/id6447474488
+    title: FinalVPN on the App Store
+  play:
+    url: https://play.google.com/store/apps/details?id=com.metaphase.finalvpn
+    title: Final VPN on Google Play
+  play-data-safety:
+    url: https://play.google.com/store/apps/datasafety?id=com.metaphase.finalvpn
+    title: Final VPN data safety on Google Play
+  register:
+    url: https://find-and-update.company-information.service.gov.uk/company/14495381
+    title: METAPHASE LTD at Companies House
+  register-officers:
+    url: https://find-and-update.company-information.service.gov.uk/company/14495381/officers
+    title: METAPHASE LTD officers
+  register-psc:
+    url: https://find-and-update.company-information.service.gov.uk/company/14495381/persons-with-significant-control
+    title: METAPHASE LTD persons with significant control
+  filings:
+    url: https://find-and-update.company-information.service.gov.uk/company/14495381/filing-history
+    title: METAPHASE LTD filing history
