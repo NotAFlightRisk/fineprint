@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: iProVPN
 icon: iprovpn.png
-checked: 2026-10-27
+checked: 2026-11-11
 
 criteria:
   identity:
