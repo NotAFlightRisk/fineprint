@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: FrootVPN
 icon: frootvpn.svg
-checked: 2026-10-27
+checked: 2026-11-11
 
 criteria:
   identity:
@@ -131,21 +131,21 @@ criteria:
     hosting:
       value: null
       note: >-
-        It doesn't say. Its network is shared with sister brand Easy Hide IP: 714 of the 732 server IPs it listed
-        in December 2020 were on Easy Hide IP's list a month later.
-      sources: [servers-2020, ehip-servers-2021]
+        It doesn't say. Its network is shared with sister brand Easy Hide IP: 274 of the 280 server IPs in its
+        status feed are on Easy Hide IP's too.
+      sources: [server-status, ehip-server-status]
     virtual_locations:
       value: null
       note: It doesn't say whether any locations are virtual.
       sources: [servers]
     servers:
       value: 150
-      note: It says "150+ VPN servers". Its server status page listed none on 2026-10-27.
-      sources: [order, servers]
+      note: It says "150+ VPN servers". Its server status feed lists 36 locations.
+      sources: [order, server-status]
     countries:
       value: 32
-      note: It says "over 32 countries".
-      sources: [order]
+      note: It says "over 32 countries", but its server status feed lists 28.
+      sources: [order, server-status]
 
   features:
     connections:
@@ -283,6 +283,9 @@ refs:
   servers:
     url: https://frootvpn.com/servers
     title: Server locations
+  server-status:
+    url: https://frootvpn.com/ajax/server-status
+    title: FrootVPN server status feed
   affiliate:
     url: https://frootvpn.com/affiliate
     title: Affiliate program
@@ -319,12 +322,9 @@ refs:
   edelino-2019:
     url: https://web.archive.org/web/20190905203648/http://edelinocommerce.com/
     title: Edelino Commerce, archived September 2019
-  servers-2020:
-    url: https://web.archive.org/web/20201221003655/https://frootvpn.com/ajax/server-status
-    title: FrootVPN server list, archived December 2020
-  ehip-servers-2021:
-    url: https://web.archive.org/web/20210110233518/https://easy-hide-ip.com/ajax/server-status
-    title: Easy Hide IP server list, archived January 2021
+  ehip-server-status:
+    url: https://easy-hide-ip.com/ajax/server-status
+    title: Easy Hide IP server status feed
   anonine:
     url: https://anonine.com/
     title: Anonine
