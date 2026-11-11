@@ -1,0 +1,231 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: DotVPN
+icon: dotvpn.png
+checked: 2026-11-11
+
+criteria:
+  identity:
+    website: https://dotvpn.com
+    legal_entity:
+      value: Smart Security Limited
+      note: >-
+        Incorporated in Hong Kong in May 2014. The register gives its office in Kwun Tong, the
+        privacy policy one in Wan Chai and the site footer one in Tsuen Wan.
+      sources: [policy, hk-register, about]
+    owner:
+      value: null
+      note: Who owns Smart Security Limited isn't public.
+      sources: [hk-register]
+    founded:
+      value: 2014
+      evidence: claimed
+      sources: [play-2023, hk-register]
+    team:
+      value: anonymous
+      sources: [about, cws]
+    sister_brands: []
+    acquisitions: []
+
+  jurisdiction:
+    hq:
+      value: HK
+      note: The terms and user agreement are governed by Hong Kong law.
+      sources: [hk-register, user-agreement]
+    entities:
+      value: [HK]
+      sources: [hk-register]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      note: >-
+        The user agreement keeps a "history of user connections" for 24 hours without saying what's in it.
+      sources: [features, cws, user-agreement]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [features]
+    timestamps:
+      value: temporary
+      evidence: claimed
+      note: The connection history is kept for 24 hours, then deleted.
+      sources: [user-agreement]
+    bandwidth:
+      value: aggregate
+      evidence: claimed
+      note: Refunds depend on how many GB you've used and how many times you've connected, so both are counted per account.
+      sources: [refund]
+    source_ip:
+      value: temporary
+      evidence: claimed
+      note: Your IP address is kept for 24 hours after you last connect.
+      sources: [policy, user-agreement]
+    proven: []
+    policy: https://dotvpn.com/en/legal/privacy-policy/
+
+  transparency:
+    audits: []
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: required
+      note: The free extension works without an account. Premium needs one, signed into with an emailed code.
+      sources: [signup, crx]
+    personal_data: []
+    payment:
+      value: [card]
+      note: The user agreement also mentions unnamed "online payment systems". Prices are only shown once you're signed in.
+      sources: [user-agreement]
+
+  security:
+    protocols:
+      value: [other]
+      note: >-
+        A proxy for the browser alone, through Chrome's HTTPS proxy support. The user agreement still describes
+        IPSec from its old apps.
+      sources: [crx, user-agreement]
+    post_quantum: none
+    kill_switch:
+      value: null
+      note: The Chrome listing promises a kill switch for Premium, but the extension has no setting for one.
+      sources: [cws, crx]
+    dns:
+      value: first_party
+      evidence: claimed
+      sources: [features]
+
+  infra:
+    ram_only: null
+    hosting: null
+    virtual_locations: null
+    servers:
+      value: null
+      note: The site says 700 servers and the Chrome listing says over 2,500.
+      sources: [features, cws]
+    countries:
+      value: 59
+      evidence: claimed
+      note: The free plan gets 3 of them. The Chrome listing claims over 70 countries.
+      sources: [crx, cws]
+
+  features:
+    connections:
+      value: null
+      note: The user agreement allows 3 devices at once, while the Chrome listing says Premium covers 5.
+      sources: [user-agreement, cws]
+    multihop:
+      value: false
+      note: The Chrome listing promises "Double VPN" for Premium, but the extension sends each site through one server.
+      sources: [crx, cws]
+    obfuscation: []
+    port_forwarding: false
+    split_tunnel:
+      value: false
+      note: >-
+        The extension covers the browser alone. On the free plan it only proxies the sites you switch it on
+        for.
+      sources: [crx]
+    blocking:
+      value: [ads, trackers]
+      evidence: claimed
+      note: The extension's blocking switches are passed to its servers, which do the blocking.
+      sources: [features, crx]
+
+  clients:
+    platforms:
+      value: [browser]
+      note: >-
+        A proxy for the browser alone. The Chrome extension was updated in September 2026 and the Opera one
+        last in May 2018. The site still links Firefox, Android and iOS apps that are no longer listed, and
+        the Android app was last updated in June 2019.
+      sources: [cws, opera, download-android, play-2023]
+    open_source:
+      value: none
+      sources: [crx]
+    telemetry:
+      value: forced
+      evidence: claimed
+      note: >-
+        The extension reports when you open it, connect, pick a country and disconnect, under an install ID,
+        with no setting to stop it.
+      sources: [crx]
+    trackers:
+      value: null
+      grade: na
+      note: There's no Android app any more.
+      sources: [download-android]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 4.99, currency: USD }
+      note: Shown in the extension. The site only shows prices after you sign in.
+      sources: [crx]
+    best: null
+    best_term: null
+    renewal_increase: null
+    free_tier:
+      value: true
+      note: The free plan gets 3 countries, with time-limited sessions per site.
+      sources: [crx, cws]
+    refund_days:
+      value: 30
+      note: >-
+        Only if you've used under 10 GB, connected fewer than 100 times, and support has confirmed a technical
+        problem it can't fix.
+      sources: [refund]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        The Chrome listing sells a "verified" zero-logs policy that's never been audited, and says it doesn't
+        collect IP addresses or connection times, which the user agreement keeps for 24 hours. The site claims
+        stronger encryption than governments use.
+      sources: [cws, user-agreement, features]
+    affiliates: null
+    review_sites: false
+    activism: false
+
+refs:
+  about:
+    url: https://dotvpn.com/en/about/
+    title: About DotVPN
+  features:
+    url: https://dotvpn.com/en/features/
+    title: Why DotVPN? (features)
+  policy:
+    url: https://dotvpn.com/en/legal/privacy-policy/
+    title: DotVPN Privacy Policy
+  user-agreement:
+    url: https://dotvpn.com/en/legal/user-agreement/
+    title: DotVPN User Agreement
+  refund:
+    url: https://dotvpn.com/en/legal/refund-policy/
+    title: DotVPN Refund Policy
+  signup:
+    url: https://account.dotvpn.com/v2/en/signup
+    title: Sign up to DotVPN
+  download-android:
+    url: https://dotvpn.com/en/download/android/
+    title: DotVPN for Android
+  hk-register:
+    url: https://data.cr.gov.hk/cr/api/api/v1/api_builder/json/local/search?query[0][key1]=Brn&query[0][key2]=equal&query[0][key3]=63326384
+    title: Hong Kong Companies Registry, Smart Security Limited
+  cws:
+    url: https://chromewebstore.google.com/detail/dotvpn-fast-private-vpn/kpiecbcckbofpmkkkdibbllpinceiihk
+    title: 'DotVPN: Fast & Private VPN on the Chrome Web Store'
+  crx:
+    url: https://clients2.google.com/service/update2/crx?response=redirect&prodversion=140.0&acceptformat=crx2,crx3&x=id%3Dkpiecbcckbofpmkkkdibbllpinceiihk%26uc
+    title: DotVPN Chrome extension 2.8.12 (CRX package)
+  opera:
+    url: https://addons.opera.com/en/extensions/details/dotvpn-free-and-secure-vpn-2/
+    title: DotVPN on Opera add-ons
+  play-2023:
+    url: https://web.archive.org/web/20230228012434/https://play.google.com/store/apps/details?id=com.dotvpn.vpn
+    title: DotVPN on Google Play (archived February 2023)
