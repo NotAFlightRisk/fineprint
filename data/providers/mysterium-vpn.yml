@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: Mysterium VPN
 icon: mysterium-vpn.svg
-checked: 2026-10-27
+checked: 2026-11-11
 
 criteria:
   identity:
@@ -199,19 +199,21 @@ criteria:
 
   pricing:
     monthly:
-      value: { amount: 12.99, currency: USD }
-      note: Basic. Plus is $14.99 and Pro $19.99 a month.
+      value: { amount: 10.99, currency: USD }
+      note: Basic. Plus is $13.99 and Pro $19.99 a month.
       sources: [pricing]
     best:
-      value: { amount: 2.29, currency: USD }
-      note: Plus at $54.94 for the first two years.
-      sources: [pricing]
+      value: { amount: 2.59, currency: USD }
+      note: >-
+        Basic at $62.16 for two years, before the Black Friday deal that's run since October and sells two years
+        of Plus for $54.96.
+      sources: [pricing-2026-05, pricing]
     best_term:
       value: 24
-      sources: [pricing]
+      sources: [pricing-2026-05]
     renewal_increase:
       value: null
-      note: Plans renew for the same term, but the renewal price isn't given. The 2-year Plus plan is shown as 85% off $359.76.
+      note: Plans renew for the same term, but the renewal price isn't given.
       sources: [terms, pricing]
     free_tier:
       value: false
@@ -274,6 +276,9 @@ refs:
   pricing:
     url: https://www.mysteriumvpn.com/vpn-pricing
     title: Mysterium VPN plans and pricing
+  pricing-2026-05:
+    url: https://web.archive.org/web/20260522062250/https://www.mysteriumvpn.com/vpn-pricing
+    title: Mysterium VPN plans and pricing (May 2026 copy, Wayback Machine)
   affiliates:
     url: https://www.mysteriumvpn.com/affiliates
     title: Mysterium VPN affiliate program
