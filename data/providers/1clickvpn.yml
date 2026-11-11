@@ -26,12 +26,13 @@ criteria:
       value: anonymous
       sources: [about, cws]
     sister_brands:
-      value: null
+      value: [uVPN]
       note: >-
-        1ClickVPN Proxy at 1clickvpn.com, which Koi Security caught collecting AI chats, is a different
-        product sold by Sugar - Smart Shopping Inc. In Russia the extension points you to AltaVPN's Telegram bot
-        instead, without saying who runs it.
-      sources: [com-play, koi-2025, crx]
+        uVPN's terms share its logging wording word for word, its extension reports pages in the same fields, and
+        its Android listing's contact email is at Kodice. 1ClickVPN Proxy at 1clickvpn.com, which Koi Security
+        caught collecting AI chats, is a different product sold by Sugar - Smart Shopping Inc. In Russia the
+        extension points you to AltaVPN's Telegram bot instead, without saying who runs it.
+      sources: [uvpn-terms, uvpn-play, com-play, koi-2025, crx]
     acquisitions: []
 
   jurisdiction:
@@ -220,6 +221,12 @@ criteria:
           source: crx
 
 refs:
+  uvpn-terms:
+    url: https://uvpn.me/terms-conditions/
+    title: uVPN Terms and Conditions
+  uvpn-play:
+    url: https://play.google.com/store/apps/details?id=com.brocode.uvpn&hl=en
+    title: uVPN on Google Play
   policy:
     url: https://1clickvpn.net/privacy
     title: 1clickVPN Privacy Policy
