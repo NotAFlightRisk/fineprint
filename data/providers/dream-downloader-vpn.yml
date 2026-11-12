@@ -1,0 +1,238 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: VPN - Proxy Master (Dream Downloader)
+icon: dream-downloader-vpn.png
+checked: 2026-11-12
+
+criteria:
+  identity:
+    website:
+      value: https://dreamdownloader.net
+      note: >-
+        Its developer's site, which also sells a business card scanner. The privacy policy and terms call the app
+        VPNBite, and it has nothing to do with Secureguard's VPN Proxy Master.
+      sources: [home, terms]
+    legal_entity:
+      value: Dream Downloader Infotech Ltd.
+      note: >-
+        In 2021 the App Store named the seller as FITACK Technologies Private Limited, under the same developer name
+        and policy links.
+      sources: [terms, lookup, app-store-2021]
+    owner:
+      value: null
+      sources: [contact]
+    founded:
+      value: 2019
+      sources: [lookup]
+    team:
+      value: anonymous
+      note: The site, policy, terms and listing name nobody behind the company.
+      sources: [contact, terms, app-store-eu]
+    sister_brands:
+      value: []
+      note: Dream Downloader's other apps are a sticker maker, a GIF maker and a business card scanner.
+      sources: [developer-apps]
+    acquisitions:
+      value: []
+      sources: [lookup, app-store-2021]
+
+  jurisdiction:
+    hq:
+      value: BD
+      sources: [contact, app-store-eu]
+    entities:
+      value: null
+      note: Its EU trader details give a Dhaka address and a DUNS number, but no registration number.
+      sources: [app-store-eu]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [policy]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [policy]
+    timestamps:
+      value: null
+      note: >-
+        The policy says connection and disconnection events sit in server logs that are deleted "after a short
+        period", without saying how long.
+      sources: [policy]
+    bandwidth:
+      value: null
+      note: The policy logs how much data you transfer and deletes it "after a short period", without saying how long.
+      sources: [policy]
+    source_ip:
+      value: null
+      note: The policy logs the IP address you connect from and deletes it "after a short period", without saying how long.
+      sources: [policy]
+    proven:
+      value: []
+    policy:
+      value: https://dreamdownloader.net/api/vpn/privacy.php
+      sources: [policy]
+
+  transparency:
+    audits:
+      value: []
+    report:
+      value: none
+      sources: [home]
+    canary:
+      value: none
+      sources: [home]
+    bug_bounty:
+      value: false
+      sources: [home]
+    incidents:
+      value: []
+
+  account:
+    email:
+      value: none
+      note: The listing says no registration or login is needed.
+      sources: [app-store]
+    personal_data:
+      value: []
+      sources: [policy]
+    payment:
+      value: [app_store]
+      note: Only sold through in-app purchases on the App Store.
+      sources: [terms]
+
+  security:
+    protocols:
+      value: [ikev2]
+      evidence: claimed
+      sources: [app-store]
+    post_quantum:
+      value: null
+    kill_switch:
+      value: null
+    dns:
+      value: null
+
+  infra:
+    ram_only:
+      value: null
+    hosting:
+      value: null
+      note: The policy says the servers are under its "exclusive control", but not whether it owns or rents them.
+      sources: [policy]
+    virtual_locations:
+      value: null
+    servers:
+      value: null
+      note: The listing only promises "global" servers.
+      sources: [app-store]
+    countries:
+      value: null
+
+  features:
+    connections:
+      value: null
+    multihop:
+      value: null
+    obfuscation:
+      value: null
+    port_forwarding:
+      value: null
+    split_tunnel:
+      value: null
+    blocking:
+      value: null
+
+  clients:
+    platforms:
+      value: [ios]
+      note: iPhone and iPad, and the same app runs on Apple silicon Macs and Vision Pro.
+      sources: [app-store]
+    open_source:
+      value: none
+      note: The app's source code isn't published.
+    telemetry:
+      value: null
+      note: >-
+        The app carries Firebase Analytics and AdMob, and the App Store label declares identifiers used to track you.
+        Nothing says whether the analytics can be turned off.
+      sources: [policy, app-store]
+    trackers:
+      value: null
+      grade: na
+      note: There's no Android app.
+      sources: [home, developer-apps]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: null
+      note: >-
+        The 2021 listing priced the monthly plan at $11.99, and plans at that price are still listed, but today's
+        listing doesn't say which is monthly.
+      sources: [app-store, app-store-2021]
+    best:
+      value: null
+      note: >-
+        The listing shows a $49.99 "Yearly Premium" and a $7.99 weekly plan, alongside unlabelled plans from $4.99 to
+        $71.99.
+      sources: [app-store]
+    renewal_increase:
+      value: null
+    free_tier:
+      value: true
+      note: Free users get ads.
+      sources: [terms]
+    refund_days:
+      value: null
+      note: It's only sold through the App Store, so refunds follow Apple's process.
+      sources: [terms, apple-refund]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        The listing calls it the "most trusted VPN" for "untraceable web browsing", while the app carries ad and
+        tracking SDKs and the policy logs your IP address.
+      sources: [app-store, policy]
+    affiliates:
+      value: null
+      note: Dream Downloader doesn't say whether it pays anyone for sign-ups.
+    review_sites:
+      value: false
+      sources: [home, developer-apps]
+    activism:
+      value: false
+      sources: [home]
+
+refs:
+  home:
+    url: https://dreamdownloader.net/
+    title: Dream Downloader home page
+  contact:
+    url: https://dreamdownloader.net/contact/
+    title: Dream Downloader contact page (Dhaka mailing address)
+  policy:
+    url: https://dreamdownloader.net/api/vpn/privacy.php
+    title: VPNBite privacy policy, last updated 2026-08-26 (linked from the App Store listing)
+  terms:
+    url: https://dreamdownloader.net/api/vpn/terms.php
+    title: VPNBite terms of service, last updated 2026-08-26
+  app-store:
+    url: https://apps.apple.com/us/app/vpn-proxy-master/id1456731716
+    title: VPN - Proxy Master on the App Store (description, in-app purchases, version history and privacy label)
+  app-store-eu:
+    url: https://apps.apple.com/ie/app/vpn-proxy-master/id1456731716
+    title: VPN - Proxy Master on the Irish App Store (EU trader details)
+  app-store-2021:
+    url: https://web.archive.org/web/20210223212433/https://apps.apple.com/us/app/vpn/id1456731716
+    title: The App Store listing in February 2021 (Wayback Machine)
+  lookup:
+    url: https://itunes.apple.com/lookup?id=1456731716
+    title: App Store lookup for VPN - Proxy Master (seller, release date, version)
+  developer-apps:
+    url: https://apps.apple.com/us/developer/dream-downloader-infotech-ltd/id1126686428
+    title: Dream Downloader Infotech Ltd. on the App Store
+  apple-refund:
+    url: https://support.apple.com/en-us/118223
+    title: Request a refund for apps or content that you bought from Apple
