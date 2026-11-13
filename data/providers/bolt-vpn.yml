@@ -1,0 +1,280 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Bolt VPN
+icon: bolt-vpn.svg
+checked: 2026-11-13
+
+criteria:
+  identity:
+    website:
+      value: https://boltvpn.org
+      sources: [home]
+    legal_entity:
+      value: GALIXO (SMC-PRIVATE) LIMITED
+      note: >-
+        It publishes the Android app. The website is signed by Galixo LLC at a Wyoming registered-agent address, and the
+        iOS app and Edge extension are sold by Galixo L.L.C-FZ in Dubai.
+      sources: [play, policy, galixo-net, app-store-eu]
+    owner:
+      value: null
+      sources: [galixo-ai, galixo-net]
+    founded:
+      value: null
+    team:
+      value: anonymous
+      note: None of Galixo's sites or store listings name anyone behind it.
+      sources: [galixo-ai, galixo-net, contact]
+    sister_brands:
+      value: [VPN - Secure & Fast VPN Master]
+      note: Galixo's other VPN app on Google Play, which its privacy policy still calls Gravity VPN Pro.
+      sources: [sister-play, sister-policy]
+    acquisitions:
+      value: []
+
+  jurisdiction:
+    hq:
+      value: PK
+      note: >-
+        Its Play listing and company site put it in Rawalpindi, while the contact page gives a placeholder "123
+        Cybersecurity Avenue, Tech City" address.
+      sources: [play, galixo-ai, contact]
+    entities:
+      value: [PK, AE, US]
+      evidence: claimed
+      sources: [play, app-store-eu, galixo-net]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      note: >-
+        The site and the iOS policy say so, but the policy the Android app links to only covers the website and never
+        mentions VPN logs.
+      sources: [countries, ios-policy, policy]
+    dns:
+      value: none
+      evidence: claimed
+      note: Only the site's server page says so, and neither privacy policy mentions DNS.
+      sources: [countries, policy, ios-policy]
+    timestamps:
+      value: null
+      note: Neither privacy policy says.
+      sources: [policy, ios-policy]
+    bandwidth:
+      value: null
+      note: Neither privacy policy says.
+      sources: [policy, ios-policy]
+    source_ip:
+      value: null
+      note: Neither privacy policy says.
+      sources: [policy, ios-policy]
+    proven:
+      value: []
+    policy:
+      value: https://boltvpn.org/privacypolicy
+      sources: [policy]
+
+  transparency:
+    audits:
+      value: []
+    report:
+      value: none
+      sources: [home]
+    canary:
+      value: none
+      sources: [home]
+    bug_bounty:
+      value: false
+      sources: [home]
+    incidents:
+      value: []
+
+  account:
+    email:
+      value: optional
+      note: Accounts on the website need an email, but the apps can be used without one.
+      sources: [policy, ios-policy, play]
+    personal_data:
+      value: []
+      sources: [policy]
+    payment:
+      value: [card, paypal, app_store]
+      note: >-
+        The site advertises "anonymous payments", but only takes Visa, Mastercard, Google Pay and PayPal through
+        Stripe.
+      sources: [home, policy]
+
+  security:
+    protocols:
+      value: [wireguard, openvpn, ikev2]
+      evidence: claimed
+      note: The Android app offers WireGuard, OpenVPN, IKEv2 and Shadowsocks, though the server list only names the last three.
+      sources: [play, countries]
+    post_quantum:
+      value: null
+    kill_switch:
+      value: app
+      evidence: claimed
+      note: It's a setting in the Android app.
+      sources: [features, play]
+    dns:
+      value: null
+      note: The site promises "private DNS" without saying whose.
+      sources: [countries]
+
+  infra:
+    ram_only:
+      value: null
+    hosting:
+      value: null
+    virtual_locations:
+      value: null
+    servers:
+      value: null
+      note: Its pricing page claims 21,000+ servers and its server page 80.
+      sources: [pricing, countries]
+    countries:
+      value: null
+      note: >-
+        The server page says 40 locations but lists 18 countries, and elsewhere the site claims 50+ countries and 111
+        locations.
+      sources: [countries, pricing]
+
+  features:
+    connections:
+      value: null
+      note: The site says 4, 5 and 10 devices on different pages.
+      sources: [features, countries, pricing]
+    multihop:
+      value: null
+    obfuscation:
+      value: [shadowsocks]
+      evidence: claimed
+      sources: [countries, play]
+    port_forwarding:
+      value: null
+    split_tunnel:
+      value: true
+      evidence: claimed
+      sources: [play]
+    blocking:
+      value: null
+      note: The site promises ad, tracker and malware blocking, but neither app listing mentions it.
+      sources: [pricing, play, app-store]
+
+  clients:
+    platforms:
+      value: [android, ios, windows, browser]
+      note: >-
+        Chrome and Edge extensions. The site also offers a Linux download, but it points at a host that doesn't
+        resolve.
+      sources: [download, play, app-store, chrome, edge]
+    open_source:
+      value: none
+      note: The apps' source code isn't published.
+    telemetry:
+      value: null
+      note: >-
+        Both store labels list crash and usage analytics, and the Android app carries ad SDKs from Google, Meta, Unity,
+        ironSource, Mintegral, Vungle, InMobi and Pangle. Nothing says the analytics can be turned off.
+      sources: [play-data-safety, app-store, ios-policy, play]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 15, currency: USD }
+      note: In the apps it's priced differently, $9.99 a month in the iOS terms and €22.99 on the Irish App Store.
+      sources: [pricing, ios-terms, app-store-eu]
+    best:
+      value: { amount: 7.5, currency: USD }
+      sources: [pricing]
+    best_term: 12
+    renewal_increase:
+      value: null
+      note: The yearly plan shows $90 against a struck-out $180, without saying what it renews at.
+      sources: [pricing]
+    free_tier:
+      value: true
+      note: Free users get ads.
+      sources: [play, ios-policy]
+    refund_days:
+      value: null
+      note: Neither the site nor its terms mention refunds.
+      sources: [terms, pricing]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        It promises "complete anonymity" and "military-grade" encryption, and claims 50M+ downloads where Google Play
+        shows 10M+.
+      sources: [features, download, play]
+    affiliates:
+      value: null
+    review_sites:
+      value: false
+      sources: [home, galixo-ai]
+    activism:
+      value: false
+      sources: [home]
+
+refs:
+  home:
+    url: https://boltvpn.org/
+    title: Bolt VPN home page
+  pricing:
+    url: https://boltvpn.org/pricing
+    title: Bolt VPN pricing
+  countries:
+    url: https://boltvpn.org/country
+    title: Bolt VPN server locations
+  features:
+    url: https://boltvpn.org/features
+    title: Bolt VPN features
+  download:
+    url: https://boltvpn.org/download
+    title: Download Bolt VPN
+  contact:
+    url: https://boltvpn.org/contact-us
+    title: Bolt VPN contact page
+  policy:
+    url: https://boltvpn.org/privacypolicy
+    title: Bolt VPN privacy policy, effective 2025-01-15 (linked from Google Play)
+  terms:
+    url: https://boltvpn.org/terms-and-conditions
+    title: Bolt VPN terms and conditions, effective 2024-02-28
+  ios-policy:
+    url: https://galixo.net/bolt-vpn/privacy-policy.html
+    title: Bolt VPN iOS privacy policy, effective 2025-03-18
+  ios-terms:
+    url: https://galixo.net/bolt-vpn/terms-and-conditions.html
+    title: Bolt VPN iOS terms of use
+  play:
+    url: https://play.google.com/store/apps/details?id=com.vpn.proxy.unblock.privatevpn.fastvpn.securevpn
+    title: Bolt VPN on Google Play (description, developer details, and the settings in version 2.7.9)
+  play-data-safety:
+    url: https://play.google.com/store/apps/datasafety?id=com.vpn.proxy.unblock.privatevpn.fastvpn.securevpn
+    title: Bolt VPN data safety section on Google Play
+  app-store:
+    url: https://apps.apple.com/us/app/bolt-vpn-fast-and-secure-vpn/id6738089266
+    title: Bolt VPN on the App Store (description and privacy label)
+  app-store-eu:
+    url: https://apps.apple.com/ie/app/bolt-vpn-fast-and-secure-vpn/id6738089266
+    title: Bolt VPN on the Irish App Store (in-app prices and EU trader details)
+  chrome:
+    url: https://chromewebstore.google.com/detail/doejajbiefdhpdmjbjkkkdhfmjaidmgj
+    title: Bolt VPN & Proxy on the Chrome Web Store
+  edge:
+    url: https://microsoftedge.microsoft.com/addons/detail/bhhljejbdjhpnighjjjemnlbgpaohibf
+    title: Bolt VPN & Proxy on Microsoft Edge Add-ons
+  galixo-ai:
+    url: https://galixo.ai/
+    title: GalixoAI company site
+  galixo-net:
+    url: https://galixo.net/
+    title: Galixo app site (Wyoming and Dubai addresses)
+  sister-play:
+    url: https://play.google.com/store/apps/details?id=com.vpn.app.network.connectivity.client
+    title: VPN - Secure & Fast VPN Master on Google Play
+  sister-policy:
+    url: https://galixo.ai/gravity-vpn-pro/privacy-policy.html
+    title: VPN - Secure & Fast VPN Master privacy policy
