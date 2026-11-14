@@ -1,0 +1,248 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Norka VPN
+icon: norka-vpn.png
+checked: 2026-11-14
+
+criteria:
+  identity:
+    website:
+      value: https://app.norka.io
+      sources: [home]
+    legal_entity:
+      value: Tinkers, LLC
+      sources: [terms, register]
+    owner:
+      value: Anatolii Parashchuk
+      note: A Russian citizen who owns all of Tinkers and runs it, per Armenia's register. He sold the app as a sole trader before the company was set up in October 2024.
+      sources: [register-owners, policy-2022]
+    founded:
+      value: 2022
+      sources: [policy-2022]
+    team:
+      value: partial
+      note: Its site names nobody, but Armenia's register names the company's owner and manager.
+      sources: [home, register-owners]
+    sister_brands:
+      value: []
+    acquisitions:
+      value: []
+
+  jurisdiction:
+    hq:
+      value: AM
+      sources: [policy, register]
+    entities:
+      value: [AM]
+      sources: [register]
+
+  logging:
+    traffic:
+      value: null
+      note: >-
+        The policy collects "your actions in the Service", which it defines to include the VPN, without saying
+        whether that covers what you do online.
+      sources: [policy]
+    dns:
+      value: null
+      note: The policy never mentions DNS.
+      sources: [policy]
+    timestamps:
+      value: null
+      note: >-
+        The policy collects the time of each visit to the "Service", which it defines to include the VPN, and keeps
+        personal data for four years after you leave, without saying whether that covers connections.
+      sources: [policy]
+    bandwidth:
+      value: null
+      note: The policy doesn't say.
+      sources: [policy]
+    source_ip:
+      value: null
+      note: >-
+        The policy collects your IP address when you use the "Service", which it defines to include the VPN, without
+        saying whether that covers connections.
+      sources: [policy]
+    proven:
+      value: []
+    policy:
+      value: https://app.norka.io/pp
+      sources: [policy]
+
+  transparency:
+    audits:
+      value: []
+    report:
+      value: none
+      sources: [faq]
+    canary:
+      value: none
+      sources: [faq]
+    bug_bounty:
+      value: false
+      sources: [home]
+    incidents:
+      value: []
+
+  account:
+    email:
+      value: optional
+      note: >-
+        The phone apps work without an account, while the Mac app and web purchases need you to sign in with Apple or
+        Google.
+      sources: [faq, terms]
+    personal_data:
+      value: []
+      note: >-
+        The policy lists your name, which comes from the Apple or Google account you sign in with, and the terms let
+        it ask for ID at any time.
+      sources: [policy, terms]
+    payment:
+      value: [card, app_store]
+      note: Its website takes Russian and foreign cards.
+      sources: [home, faq]
+
+  security:
+    protocols:
+      value: [ikev2, other]
+      note: Taken from the Android app, which carries strongSwan for IKEv2 and Xray for VLESS. The site doesn't name any protocol.
+      sources: [apk]
+    post_quantum:
+      value: null
+    kill_switch:
+      value: null
+    dns:
+      value: null
+
+  infra:
+    ram_only:
+      value: null
+    hosting:
+      value: null
+    virtual_locations:
+      value: null
+    servers:
+      value: null
+    countries:
+      value: 1
+      evidence: claimed
+      note: Every server is in Russia, since the whole point is a Russian IP address.
+      sources: [home, play]
+
+  features:
+    connections:
+      value: unlimited
+      evidence: claimed
+      sources: [faq]
+    multihop:
+      value: null
+    obfuscation:
+      value: [v2ray]
+      evidence: claimed
+      note: V2Ray here is Xray with VLESS, found in the Android app.
+      sources: [apk]
+    port_forwarding:
+      value: null
+    split_tunnel:
+      value: null
+    blocking:
+      value: null
+
+  clients:
+    platforms:
+      value: [ios, macos, android]
+      note: Android TV too. Russia's App Store gets separate iPhone and Mac apps from the rest of the world.
+      sources: [faq, app-store, play]
+    open_source:
+      value: none
+      note: The Android app is built on open source Xray and strongSwan, but its own code isn't published.
+      sources: [apk]
+    telemetry:
+      value: null
+      note: >-
+        The Android app carries Firebase Analytics, Crashlytics, AppsFlyer and Statsig, and the App Store label says
+        identifiers are used to track you. Nothing says you can opt out.
+      sources: [apk, app-store, play-data-safety]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 9.99, currency: USD }
+      note: In the US App Store. Its website sells subscriptions too, but only after you sign in.
+      sources: [app-store, terms]
+    best:
+      value: { amount: 9.99, currency: USD }
+      note: The only other plan is a week for $1.99.
+      sources: [app-store]
+    best_term: 1
+    renewal_increase:
+      value: 0
+      sources: [app-store]
+    free_tier:
+      value: true
+      evidence: claimed
+      sources: [play, home]
+    refund_days:
+      value: null
+      note: Store purchases follow Apple's and Google's rules, and the terms say nothing on refunds for the website.
+      sources: [terms]
+
+  ethics:
+    misleading_claims:
+      value: false
+      sources: [home, play]
+    affiliates:
+      value: null
+    review_sites:
+      value: false
+      sources: [home, blog]
+    activism:
+      value: false
+      sources: [home]
+
+  other:
+    concerns:
+      value:
+        - title: Russian exits only, under Russia's blocklist
+          summary: >-
+            Every server is in Russia, and its terms ban using it to reach anything Roskomnadzor blocks or to hide who
+            you are or where your traffic comes from.
+          severity: minor
+          source: terms
+
+refs:
+  home:
+    url: https://app.norka.io/
+    title: Norka home page and FAQ (Russian)
+  faq:
+    url: https://app.norka.io/faq
+    title: Norka FAQ (Russian)
+  blog:
+    url: https://norkavpn.com/
+    title: Norka VPN blog about living abroad (Russian)
+  policy:
+    url: https://app.norka.io/pp
+    title: Norka privacy policy (Russian)
+  policy-2022:
+    url: https://web.archive.org/web/20250119155820/https://app.norka.io/pp
+    title: Norka iOS app privacy policy by Anatolii Parashchuk, IE, effective 2022-11-02 (Wayback, January 2025)
+  terms:
+    url: https://app.norka.io/tnc
+    title: Norka licence agreement (Russian)
+  register:
+    url: https://e-register.moj.am/en/companies/55030040
+    title: Armenian State Register, TINKERS LLC (278.110.1415582, registered 14 October 2024)
+  register-owners:
+    url: https://e-register.moj.am/en/companies/55030040/declarations/4c557bcd-0de0-4875-a922-4fe99f90cc58
+    title: Armenian State Register, TINKERS LLC beneficial owner declaration (February 2026)
+  play:
+    url: https://play.google.com/store/apps/details?id=app.norka.io
+    title: 'Норка: ВПН Россия, русский VPN on Google Play'
+  play-data-safety:
+    url: https://play.google.com/store/apps/datasafety?id=app.norka.io
+    title: Norka data safety section on Google Play
+  app-store:
+    url: https://apps.apple.com/us/app/id6444030286
+    title: 'Норка: ВПН Россия / VPN Russia on the App Store (US, prices and privacy label)'
+  apk:
+    url: https://apkpure.net/%D0%BD%D0%BE%D1%80%D0%BA%D0%B0-%D0%B2%D0%BF%D0%BD-%D1%80%D0%BE%D1%81%D1%81%D0%B8%D1%8F-%D1%80%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9-vpn/app.norka.io
+    title: Norka for Android 2.1.1, whose APK holds strongSwan and Xray with Firebase, Crashlytics, AppsFlyer and Statsig
