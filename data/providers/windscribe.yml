@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: Windscribe
 icon: windscribe.png
-checked: 2026-10-18
+checked: 2026-11-14
 
 criteria:
   identity:
@@ -32,7 +32,7 @@ criteria:
     hq:
       value: CA
       note: >-
-        Canada's lawful access bill C-22, in Senate committee as of October 2026, could force
+        Canada's lawful access bill C-22, in Senate committee as of November 2026, could force
         metadata retention. Windscribe says it's preparing to leave Canada if it has to.
       sources: [terms, c22-letter, canary, c22-bill]
     entities:
