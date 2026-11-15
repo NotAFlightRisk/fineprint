@@ -1,0 +1,227 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: VPN Fast
+icon: vpn-fast.png
+checked: 2026-11-15
+
+criteria:
+  identity:
+    website:
+      value: https://vpnproxymaster.app
+      note: Also sold as VPNFast. Its site used to be vpnsuper.app, but it's a different company from VPN Super.
+      sources: [home, tomsguide-2024]
+    legal_entity:
+      value: Green Dygital Consulting LLP
+      note: Neither the terms nor the policy name a company, but every App Store listing is sold by this LLP.
+      sources: [app-store, terms]
+    owner:
+      value: null
+      note: The company's partners aren't named anywhere it publishes.
+    founded:
+      value: 2020
+      note: The iOS app came out in April 2020.
+      sources: [app-store]
+    team:
+      value: anonymous
+      sources: [terms]
+    sister_brands: []
+    acquisitions: []
+
+  jurisdiction:
+    hq:
+      value: IN
+      note: >-
+        The seller is an Indian LLP registered in Ahmedabad in August 2019. The policy says it operates from
+        India, Singapore and the US.
+      sources: [register, privacy]
+    entities:
+      value: [IN]
+      note: It doesn't name any company in Singapore or the US.
+      sources: [register]
+
+  logging:
+    traffic:
+      value: null
+      note: >-
+        The site promises a strict no-logs policy, but the privacy policy collects "logs & metadata" from the VPN
+        without saying what's in them.
+      sources: [home, privacy]
+    dns:
+      value: null
+      note: The policy doesn't say, and its "logs & metadata" could cover it.
+    timestamps:
+      value: 'yes'
+      evidence: claimed
+      note: The policy collects your VPN connection history and how long each connection lasts.
+      sources: [privacy]
+    bandwidth:
+      value: null
+      note: The policy doesn't say whether data use is recorded.
+    source_ip:
+      value: 'yes'
+      evidence: claimed
+      note: The policy collects your IP address and keeps that data as long as it needs it for analytics or legal claims.
+      sources: [privacy]
+    proven: []
+    policy: https://vpnproxymaster.app/privacy-policy/
+
+  transparency:
+    audits:
+      value: []
+      note: Its server page says third-party audits confirm its privacy claims, but none has been published.
+      sources: [servers]
+    report: none
+    canary: none
+    bug_bounty: false
+    incidents: []
+
+  account:
+    email:
+      value: optional
+      note: The policy treats an account as optional, but the website's checkout asks for an email.
+      sources: [privacy, checkout]
+    personal_data: []
+    payment:
+      value: [card, app_store]
+      note: The website takes payment through Razorpay, an Indian processor.
+      sources: [checkout, app-store]
+
+  security:
+    protocols:
+      value: [wireguard, ikev2, other]
+      note: Tom's Guide found WireGuard, IKEv2 and Shadowsocks in 2024. The site doesn't list them.
+      sources: [tomsguide-2024]
+    post_quantum:
+      value: null
+      note: It says nothing about its key exchange.
+    kill_switch:
+      value: null
+      note: The site advertises one without saying how it works, and Tom's Guide found none in 2024.
+      sources: [home, tomsguide-2024]
+    dns:
+      value: first_party
+      evidence: claimed
+      note: The site says every server runs its own private DNS.
+      sources: [home]
+
+  infra:
+    ram_only:
+      value: null
+      note: It doesn't say how its servers are run.
+    hosting:
+      value: null
+      note: It doesn't say whether it owns or rents its servers.
+    virtual_locations:
+      value: null
+      note: It doesn't say whether any locations are virtual.
+    servers:
+      value: null
+      note: It claims "1500+ servers" without listing them.
+      sources: [home]
+    countries:
+      value: 108
+      note: That's the places on its own server list, against the "190+ countries" it advertises.
+      sources: [servers]
+
+  features:
+    connections:
+      value: unlimited
+      note: Paid plans only, the free plan is one device.
+      sources: [home, pricing]
+    multihop: false
+    obfuscation:
+      value: [shadowsocks]
+      sources: [tomsguide-2024]
+    port_forwarding: false
+    split_tunnel:
+      value: true
+      sources: [home]
+    blocking:
+      value: [malware]
+      note: Sold as Threat Protection.
+      sources: [home]
+
+  clients:
+    platforms:
+      value: [ios, macos, android, windows, browser]
+      note: >-
+        On Android it's only on Amazon's app store and Huawei's AppGallery, whose copy hasn't been updated since
+        December 2024. Its Google Play app has gone.
+      sources: [app-store, ms-store, cws, huawei, amazon]
+    open_source: none
+    telemetry:
+      value: null
+      note: >-
+        The policy collects crash data, device and advertising identifiers and how you use the app, and the App
+        Store label lists the same. It doesn't mention a way to turn this off.
+      sources: [privacy, app-store]
+
+  pricing:
+    monthly:
+      value: { amount: 4.99, currency: USD }
+      sources: [pricing]
+    best:
+      value: { amount: 4.17, currency: USD }
+      note: $49.99 a year, which the checkout charges even though the plan table says $29.99.
+      sources: [pricing, checkout, app-store]
+    best_term: 12
+    free_tier:
+      value: true
+      note: Ad-supported, one device, a few locations and a daily data cap.
+      sources: [pricing]
+    refund_days:
+      value: 30
+      sources: [pricing]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        It sells a strict no-logs policy the privacy policy contradicts, audits nobody has seen and 190+
+        countries from a list of 108. In the UK and India the App Store app is called "VPN super unlimited
+        proxy", the name of a much bigger rival.
+      sources: [home, privacy, servers, app-store-gb]
+    activism: false
+
+refs:
+  home:
+    url: https://vpnproxymaster.app/
+    title: VPN Fast homepage
+  privacy:
+    url: https://vpnproxymaster.app/privacy-policy/
+    title: VPNFast Privacy Policy
+  terms:
+    url: https://vpnproxymaster.app/terms-of-use/
+    title: VPNFast Terms of Use
+  pricing:
+    url: https://vpnproxymaster.app/pricing/
+    title: VPNFast pricing
+  checkout:
+    url: https://vpnproxymaster.app/web/payment/year-premium?platform=web
+    title: VPNFast yearly plan checkout
+  servers:
+    url: https://vpnproxymaster.app/vpnfast-server-locations/
+    title: VPNFast server locations
+  app-store:
+    url: https://apps.apple.com/us/app/vpn-fast-unlimited-secure-vpn/id1492285103
+    title: VPN -fast unlimited secure vpn on the App Store (US)
+  app-store-gb:
+    url: https://apps.apple.com/gb/app/vpn-super-unlimited-proxy/id1492285103
+    title: VPN super unlimited proxy on the App Store (UK), the same app
+  ms-store:
+    url: https://apps.microsoft.com/detail/9p7d7llzgvc0
+    title: VPNFast on the Microsoft Store
+  cws:
+    url: https://chromewebstore.google.com/detail/free-vpn-super-fast-unlim/cppljodbhecoilefippjhdbekghdigae
+    title: Free VPN - Super Fast Unlimited VPN Proxy on the Chrome Web Store
+  huawei:
+    url: https://appgallery.huawei.com/app/C105515011
+    title: VPNFast on Huawei AppGallery
+  amazon:
+    url: https://www.amazon.com/gp/product/B0DGGCYCKC
+    title: VPNFast on the Amazon Appstore
+  register:
+    url: https://www.zaubacorp.com/GREEN-DYGITAL-CONSULTING-LLP-AAQ-2824
+    title: Green Dygital Consulting LLP (LLPIN AAQ-2824), Zauba Corp
+  tomsguide-2024:
+    url: https://www.tomsguide.com/computing/vpns/1-million-downloads-down-the-drain-why-you-cant-trust-this-vpn
+    title: Tom's Guide, 1 million downloads down the drain - why you can't trust this VPN (2024)
