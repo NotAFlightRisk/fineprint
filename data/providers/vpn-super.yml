@@ -30,9 +30,9 @@ criteria:
       note: VPN Super names nobody, but its parent Super Unlimited names its CEO and board.
       sources: [terms, super-unlimited]
     sister_brands:
-      value: null
-      note: The terms also cover an app called VPN by Free VPN Pte Ltd, from a related Singapore company.
-      sources: [terms]
+      value: [Free VPN]
+      note: An iOS app from Free VPN Pte. Ltd., which VPN Super's terms call an affiliate, under Super Unlimited's privacy notice.
+      sources: [terms, free-vpn-privacy, free-vpn-app-store]
     acquisitions:
       value: null
       note: No sale is on record, but the companies' owners aren't public.
@@ -246,6 +246,12 @@ refs:
   app-store:
     url: https://apps.apple.com/us/app/vpn-super-unlimited-proxy/id1370293473
     title: VPN - Super Unlimited Proxy on the App Store (US)
+  free-vpn-privacy:
+    url: https://freevpn.co/privacy-notice
+    title: Free VPN Privacy Notice (last updated 16 September 2025)
+  free-vpn-app-store:
+    url: https://apps.apple.com/us/app/free-vpn-by-free-vpn-pte-ltd/id1259128859
+    title: Free VPN by Free VPN Pte Ltd. on the App Store (US)
   register-free-vpn:
     url: https://data.gov.sg/api/action/datastore_search?resource_id=d_3f960c10fed6145404ca7b821f263b87&q=201929358N
     title: Free VPN Pte. Ltd. (UEN 201929358N), ACRA corporate entities dataset
