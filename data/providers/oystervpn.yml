@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: OysterVPN
 icon: oystervpn.svg
-checked: 2026-10-27
+checked: 2026-11-16
 
 criteria:
   identity:
@@ -136,11 +136,11 @@ criteria:
       sources: [virtual-servers, servers]
     servers:
       value: null
-      note: Its plans list 413+ servers, while its server page counts 39.
+      note: Its plans list 413+ servers, while its server page counts 41.
       sources: [pricing, servers]
     countries:
-      value: 32
-      note: Its server page lists 39 countries but shows no servers in seven of them. Its plans say 40+.
+      value: 34
+      note: Its server page lists 39 countries but shows no servers in five of them. Its plans say 40+.
       sources: [servers, pricing]
 
   features:
@@ -171,7 +171,7 @@ criteria:
       value: [windows, macos, ios, android, browser]
       note: >-
         Also Apple TV, Fire TV and Android TV apps. The browser extensions are proxies. Linux and routers use
-        manual setup. The Android app was updated in September 2026.
+        manual setup. The Android app was updated in October 2026.
       sources: [download, windows-app, mac-app, app-store, play, chrome-ext, linux, routers]
     open_source:
       value: none
