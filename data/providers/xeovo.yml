@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: Xeovo
 icon: xeovo.png
-checked: 2026-10-27
+checked: 2026-11-16
 
 criteria:
   identity:
@@ -132,12 +132,12 @@ criteria:
       note: Xeovo doesn't say whether every location is physically where it's listed.
       sources: [status]
     servers:
-      value: 28
-      note: VPN servers on 2026-10-27, across 26 cities. The stealth proxies run on their own servers.
-      sources: [status]
+      value: 31
+      note: VPN servers on 2026-11-16, across 29 cities, four of them in Finland. The stealth proxies run on their own servers.
+      sources: [status, finland]
     countries:
-      value: 23
-      note: For the VPN. The stealth proxies add Bulgaria, Lithuania and South Korea.
+      value: 24
+      note: For the VPN. The stealth proxies add Bulgaria, Lithuania, Moldova and South Korea.
       sources: [status]
 
   features:
@@ -331,6 +331,9 @@ refs:
   trade-register:
     url: https://www.kauppalehti.fi/yritykset/yritys/32339017
     title: Xeovo Oy on Kauppalehti (Finnish trade register data)
+  finland:
+    url: https://hub.xeovo.com/posts/231-expanding-our-presence-in-finland
+    title: Expanding our presence in Finland
   transparency-2024:
     url: https://hub.xeovo.com/posts/66-transparency-report-for-2024
     title: Transparency report for 2024
