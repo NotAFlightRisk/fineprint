@@ -1,6 +1,7 @@
 {
-  "commit": "3eadbd0fc966e7dc7c48b00c7cdab23df99e9017",
+  "commit": "eb21e3b1a38e4e0d4eb3bc45172fed1fd3337284",
   "entries": [
+    {"date":"2026-11-17","commit":"eb21e3b","pr":419,"id":"panda-dome-vpn","name":"Panda Dome VPN","checked":true,"changes":[{"key":"clients.platforms"}]},
     {"date":"2026-11-17","commit":"3eadbd0","pr":418,"id":"avg-secure-vpn","name":"AVG Secure VPN","changes":[{"key":"ethics.review_sites","from":"Not checked","to":"No","grade":"good"}]},
     {"date":"2026-11-17","commit":"f08d32a","pr":417,"id":"vpn-lumos","name":"VPN Lumos","changes":[{"key":"identity.acquisitions","from":"Not checked","to":"Unknown"},{"key":"features.blocking","from":"Not checked","to":"Unknown"}]},
     {"date":"2026-11-17","commit":"aefedb3","pr":416,"id":"vpn-fast","name":"VPN Fast","changes":[{"key":"clients.fdroid","from":"Not checked","to":"No"},{"key":"pricing.renewal_increase","from":"Not checked","to":"0%","grade":"good"},{"key":"ethics.affiliates","from":"Not checked","to":"No","grade":"good"},{"key":"ethics.review_sites","from":"Not checked","to":"No","grade":"good"}]},
