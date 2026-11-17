@@ -1,6 +1,7 @@
 {
-  "commit": "323043784d0c1b423b6584d204d8606e169ad3ce",
+  "commit": "72abd261cd42478dda76fb5c4202e274592fd114",
   "entries": [
+    {"date":"2026-11-17","commit":"72abd26","pr":414,"id":"purevpn","name":"PureVPN","changes":[{"key":"features.multihop","from":"Not checked","to":"No","grade":"ok"},{"key":"ethics.review_sites","from":"Not checked","to":"Unknown"},{"key":"ethics.activism","from":"Not checked","to":"No","grade":"ok"}]},
     {"date":"2026-11-17","commit":"8b4c9e3","pr":411,"id":"totalav-vpn","name":"TotalAV VPN","changes":[{"key":"logging.timestamps"},{"key":"logging.source_ip"}]},
     {"date":"2026-11-17","commit":"9de9909","pr":410,"id":"urban-vpn","name":"Urban VPN","changes":[{"key":"security.dns"},{"key":"clients.telemetry","grade":"bad"},{"key":"pricing.refund_days"},{"key":"ethics.affiliates","from":"Unknown","to":"No","grade":"good"}]},
     {"date":"2026-11-17","commit":"b108414","pr":409,"id":"hola-vpn","name":"Hola VPN","changes":[{"key":"security.dns"},{"key":"infra.hosting"},{"key":"infra.virtual_locations"},{"key":"clients.telemetry","from":"Unknown","to":"Can't be turned off","grade":"bad"},{"key":"ethics.affiliates"}]},
