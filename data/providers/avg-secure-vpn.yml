@@ -214,6 +214,7 @@ criteria:
       value: true
       note: Pays affiliates up to 30% commission on sales.
       sources: [affiliate]
+    review_sites: false
     activism: null
 
 refs:
