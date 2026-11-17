@@ -97,3 +97,30 @@ export interface Dataset {
   categories: Category[];
   providers: Provider[];
 }
+
+/** One field that changed, as it read at the time: from and to, or what joined and left a list */
+export interface Change {
+  key: string;
+  from?: string;
+  to?: string;
+  added?: string[];
+  removed?: string[];
+  grade?: Grade;
+}
+
+export interface LogEntry {
+  date: string;
+  id: string;
+  name: string;
+  pr?: number;
+  commit?: string;
+  added?: true;
+  removed?: true;
+  checked?: true;
+  changes?: Change[];
+}
+
+export interface Changelog {
+  commit: string;
+  entries: LogEntry[];
+}

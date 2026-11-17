@@ -24,7 +24,8 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "new": "node scripts/new-provider.ts",
-    "readme": "node scripts/readme-insert.ts"
+    "readme": "node scripts/readme-insert.ts",
+    "changelog": "node scripts/build-changelog.ts"
   },
   "imports": {
     "#lib/*": "./src/lib/*"
