@@ -67,15 +67,19 @@ criteria:
       sources: [help-what-is]
     timestamps:
       value: null
-      note: The privacy policy mentions collecting the time and date of visits, without saying what applies to VPN sessions.
-      sources: [privacy-policy]
+      note: >-
+        The privacy policy mentions collecting the time and date of visits, and the processor list has
+        IPVanish handling "connect data" for Total VPN, without saying what that covers or how long it's kept.
+      sources: [privacy-policy, third-party]
     bandwidth:
       value: null
       sources: [privacy-policy, help-what-is]
     source_ip:
       value: null
-      note: The privacy policy says it collects IP addresses, without saying whether that covers the one you connect from.
-      sources: [privacy-policy]
+      note: >-
+        The privacy policy says it collects IP addresses, and the processor list has IPVanish handling them
+        for Total VPN, without saying whether that's the one you connect from or how long it's kept.
+      sources: [privacy-policy, third-party]
     proven: []
     policy: https://legal.totalav.com/privacy
 
