@@ -6,7 +6,8 @@ import { formatDate } from '#lib/format.ts';
 import { gradeNames, markPaths, type MarkKey } from '#lib/marks.ts';
 import { ogSize } from '#lib/site.ts';
 import { byId, redFlags, summarise, type Summary } from '#lib/summary.ts';
-import { data, flagFile, stats } from '#lib/server/data.ts';
+import type { LogEntry } from '#lib/data/types.ts';
+import { changelog, data, flagFile, stats } from '#lib/server/data.ts';
 
 // Social images drawn at build time: satori lays the divs out as SVG, resvg makes the PNG
 
@@ -271,6 +272,33 @@ function contributingImage(counts: ReturnType<typeof stats>) {
   );
 }
 
+function changelogImage(entries: LogEntry[]) {
+  return frame(
+    `${entries.length} changes since ${formatDate(entries.at(-1)!.date, true)}`,
+    lede('Changelog', 'Every change to the data, newest first, with the pull request behind it.'),
+    div(
+      { gap: 24 },
+      ...entries.slice(0, 3).map((entry) =>
+        div(
+          {
+            flex: 1,
+            flexDirection: 'column',
+            gap: 8,
+            minWidth: 0,
+            paddingTop: 16,
+            borderTop: `4px solid ${colour.text}`
+          },
+          div({ fontSize: 24, color: colour.muted }, formatDate(entry.date)),
+          div(
+            { fontSize: 30, fontWeight: 600, overflow: 'hidden', whiteSpace: 'nowrap' },
+            entry.name
+          )
+        )
+      )
+    )
+  );
+}
+
 let fonts: { name: string; data: Buffer; weight: 400 | 600; style: 'normal' }[] | undefined;
 let wasm: Promise<void> | undefined;
 
@@ -293,7 +321,7 @@ async function rasterise(svg: string, width?: number) {
   return Buffer.from(new Resvg(svg, { fitTo }).render().asPng());
 }
 
-/** The PNG for a page: index, methodology, contributing, search, or a provider's id */
+/** The PNG for a page: index, methodology, contributing, search, changelog, or a provider's id */
 export async function drawPage(page: string) {
   const { categories, providers } = data();
   const criteria = byId(categories);
@@ -303,6 +331,7 @@ export async function drawPage(page: string) {
   if (page === 'methodology') return render(methodologyImage(categories.length, stats()));
   if (page === 'contributing') return render(contributingImage(stats()));
   if (page === 'search') return render(searchImage(stats()));
+  if (page === 'changelog') return render(changelogImage(changelog()));
   if (index >= 0) return render(providerImage(summaries[index], providers[index].checked));
 }
 

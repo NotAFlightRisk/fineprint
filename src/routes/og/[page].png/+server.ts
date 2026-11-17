@@ -10,6 +10,7 @@ export const entries = () => [
   { page: 'methodology' },
   { page: 'contributing' },
   { page: 'search' },
+  { page: 'changelog' },
   ...data().providers.map(({ id }) => ({ page: id }))
 ];
 

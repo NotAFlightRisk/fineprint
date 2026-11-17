@@ -1,10 +1,12 @@
 <script lang="ts">
+  import Changes from '#lib/components/Changes.svelte';
   import Checklist from '#lib/components/Checklist.svelte';
   import Cite from '#lib/components/Cite.svelte';
   import Flag from '#lib/components/Flag.svelte';
   import GradeMark from '#lib/components/GradeMark.svelte';
   import Records from '#lib/components/Records.svelte';
   import Seo from '#lib/components/Seo.svelte';
+  import { labelsOf } from '#lib/data/changes.ts';
   import type { Item } from '#lib/data/types.ts';
   import { formatDate, formatValue, newestFirst, showEntry } from '#lib/format.ts';
   import { evidenceMeanings } from '#lib/marks.ts';
@@ -13,9 +15,10 @@
   import { tip } from '#lib/tip.ts';
 
   let { data } = $props();
-  const { provider, categories } = $derived(data);
+  const { provider, categories, changes } = $derived(data);
 
   const criteria = $derived(byId(categories));
+  const labels = $derived(labelsOf(categories));
   const summary = $derived(summarise(provider, criteria));
   const flags = $derived(redFlagsOf(provider, criteria));
   const { website, hq, where, checks } = $derived(summary);
@@ -212,6 +215,17 @@
       {/each}
     </ol>
   </section>
+
+  {#if changes.length}
+    <section class="section" id="changelog" aria-labelledby="changelog-title">
+      <div class="lead">
+        <h2 id="changelog-title">Changelog</h2>
+        <p>What's changed on this page and when, with the pull request behind each change.</p>
+        <p><a href="/changelog">Every provider's changes</a></p>
+      </div>
+      <Changes entries={changes} {labels} />
+    </section>
+  {/if}
 
   <section class="section" aria-labelledby="contribute">
     <div class="lead">

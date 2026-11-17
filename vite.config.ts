@@ -34,6 +34,7 @@ export default defineConfig({
           '/api/criteria.json',
           '/schema/provider.json',
           '/sitemap.xml',
+          '/atom.xml',
           '/llms.txt',
           '/logo.png'
         ]

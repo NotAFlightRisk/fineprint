@@ -1,9 +1,15 @@
+import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { dataset } from '#lib/data/build.ts';
-import type { Dataset } from '#lib/data/types.ts';
+import type { Changelog, Dataset } from '#lib/data/types.ts';
 
 let cached: Dataset | undefined;
 export const data = () => (cached ??= dataset());
+
+let log: Changelog | undefined;
+export const changelog = () =>
+  (log ??= JSON.parse(readFileSync(resolve('.github/changelog.json'), 'utf8')) as Changelog)
+    .entries;
 
 export const flagFile = (code: string) =>
   resolve(`node_modules/flag-icons/flags/4x3/${code.toLowerCase()}.svg`);
