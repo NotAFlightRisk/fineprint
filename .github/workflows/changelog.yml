@@ -1,0 +1,62 @@
+name: 🕛 Changelog
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'data/providers/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: changelog
+  cancel-in-progress: false
+
+jobs:
+  update:
+    name: 🕛 Log what changed
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      HAS_BOT: ${{ secrets.BOT_PRIVATE_KEY != '' }}
+    steps:
+      - uses: actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510 # v3.3.0
+        id: bot
+        if: env.HAS_BOT == 'true'
+        with:
+          client-id: Iv23liPIG7E12UlaQMaD
+          private-key: ${{ secrets.BOT_PRIVATE_KEY }}
+          permission-contents: write
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: main
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 22
+          package-manager-cache: false
+      - run: npm ci
+      - run: npm run -s changelog >> "$GITHUB_STEP_SUMMARY"
+      - name: Commit it to main
+        env:
+          GH_TOKEN: ${{ steps.bot.outputs.token || github.token }}
+        run: |
+          if git diff --quiet -- .github/changelog.json; then
+            echo "Nothing new to log" >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          base64 -w0 .github/changelog.json > "$RUNNER_TEMP/changelog"
+          # readme.yml commits on the same pushes, and the contents API refuses two at once
+          for attempt in 1 2 3; do
+            gh api -X PUT "repos/$GITHUB_REPOSITORY/contents/.github/changelog.json" \
+              -f message='docs: update the changelog' -f branch=main \
+              -f sha="$(git rev-parse HEAD:.github/changelog.json)" -F content=@"$RUNNER_TEMP/changelog" \
+              --jq '"✅ Committed [\(.commit.sha[:7])](\(.commit.html_url))"' >> "$GITHUB_STEP_SUMMARY" \
+              && exit 0
+            sleep $((attempt * 10))
+          done
+          exit 1
