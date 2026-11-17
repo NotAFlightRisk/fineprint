@@ -29,6 +29,10 @@ criteria:
     sister_brands:
       value: [Toggle VPN]
       sources: [hh]
+    acquisitions:
+      value: null
+      note: Lumos has sold the app since at least 2022, and no older copy of the listing shows who sold it before.
+      sources: [app-store-2022]
 
   jurisdiction:
     hq:
@@ -130,6 +134,10 @@ criteria:
     split_tunnel:
       value: null
       note: It doesn't say.
+    blocking:
+      value: null
+      note: Neither app listing mentions blocking ads, trackers or malware.
+      sources: [app-store, play]
 
   clients:
     platforms:
@@ -183,6 +191,9 @@ criteria:
     activism: false
 
 refs:
+  app-store-2022:
+    url: https://web.archive.org/web/20220823164846/https://apps.apple.com/us/app/securenet-vpn-virtual-shield/id1373844471
+    title: 'SecureNet: VPN Virtual Shield on the App Store (August 2022, archived)'
   home:
     url: https://lumos.mobi/
     title: Lumos homepage
