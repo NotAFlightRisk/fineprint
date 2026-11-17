@@ -135,8 +135,10 @@ criteria:
       sources: [features]
     dns:
       value: null
-      note: Who answers DNS inside the tunnel isn't stated.
-      sources: [circumvention]
+      note: >-
+        Lookups for tunnelled sites are resolved on Lantern's servers, whose resolver isn't stated. Other
+        queries go to Quad9, or to AliDNS or Yandex for Chinese, Persian and Russian locales.
+      sources: [radiance-dns]
 
   infra:
     ram_only:
@@ -204,11 +206,9 @@ criteria:
 
   pricing:
     monthly:
-      value: null
-      note: >-
-        The website only sells 12 and 24 month plans. The US App Store lists monthly plans at $12.99 and
-        $12.00.
-      sources: [pro, app-store]
+      value: { amount: 12, currency: USD }
+      note: The US App Store lists monthly plans at $12.99 and $12.00.
+      sources: [pricing, app-store]
     best:
       value: { amount: 3.63, currency: USD }
       note: $87 for two years.
@@ -278,6 +278,9 @@ refs:
   pro:
     url: https://lantern.io/pro
     title: Get Lantern Pro
+  pricing:
+    url: https://lantern.io/pricing
+    title: Lantern Pro Pricing
   transparency:
     url: https://lantern.io/transparency
     title: Lantern Transparency Report
@@ -296,6 +299,9 @@ refs:
   source-code:
     url: https://github.com/getlantern/lantern
     title: getlantern/lantern on GitHub
+  radiance-dns:
+    url: https://github.com/getlantern/radiance/blob/main/vpn/dnsoptions.go
+    title: Lantern's client DNS settings (radiance, dnsoptions.go)
   fdroid:
     url: https://search.f-droid.org/?q=lantern&lang=en
     title: F-Droid search for lantern
