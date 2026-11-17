@@ -119,7 +119,10 @@ criteria:
       evidence: claimed
       note: It's off until you enable it in settings, and only in the mobile apps so far, with desktop "coming soon".
       sources: [faq, kill-switch]
-    dns: null
+    dns:
+      value: null
+      note: It claims DNS leak protection, but not whose servers answer DNS requests.
+      sources: [business]
 
   infra:
     ram_only: null
@@ -194,7 +197,9 @@ criteria:
       sources: [why-free, premium]
     refund_days:
       value: null
-      note: The pricing page offers a 30-day money-back guarantee, but the FAQ and Premium page say there isn't one and the terms call fees non-refundable.
+      note: >-
+        The pricing page offers a 30-day money-back guarantee on the yearly plan only, but the FAQ and Premium
+        page say there isn't one and the terms call fees non-refundable.
       sources: [pricing, faq, premium, terms]
 
   ethics:
@@ -202,7 +207,7 @@ criteria:
       value: true
       note: The pricing page says "Nothing tracked, nothing logged", while the policy collects your browsing and AI chats.
       sources: [pricing, policy]
-    affiliates: null
+    affiliates: false
     review_sites: false
     activism: false
 
@@ -266,10 +271,13 @@ refs:
     title: B.I Science (2009) Ltd. Trust Center (Prighter)
   chrome-extension:
     url: https://clients2.google.com/service/update2/crx?response=redirect&prodversion=140.0&acceptformat=crx2,crx3&x=id%3Deppiocemhmnlbhjplcgkofciiegomcon%26uc
-    title: Urban VPN Proxy Chrome extension 5.14.4 (CRX package)
+    title: Urban VPN Proxy Chrome extension 5.15.1 (CRX package)
   pwned-2026:
     url: https://amibeingpwned.com/blog/urban-vpn-postmessage-command-injection
     title: Am I Being Pwned, Urban VPN postMessage command injection (May 27, 2026)
+  business:
+    url: https://www.urban-vpn.com/proxy-for-business/
+    title: Urban VPN for business
   oneclick-policy:
     url: https://www.1clickvpn.com/privacy-policy-extension/
     title: 1ClickVPN extension privacy policy
