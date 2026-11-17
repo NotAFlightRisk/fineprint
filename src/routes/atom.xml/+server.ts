@@ -41,7 +41,7 @@ export const GET = () => {
   const items = entries.map(
     (entry) =>
       `<entry><title>${escape(title(entry))}</title>` +
-      `<link href="${absolute(`/${entry.id}`)}#changelog"/>` +
+      `<link href="${entry.removed ? absolute('/changelog') : absolute(`/${entry.id}#changelog`)}"/>` +
       `<id>tag:${new URL(site.url).host},${entry.date}:${changeKey(entry)}</id>` +
       `<updated>${entry.date}T00:00:00Z</updated>` +
       `<content type="html">${escape(content(entry))}</content></entry>`

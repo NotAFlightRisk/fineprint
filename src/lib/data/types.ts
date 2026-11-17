@@ -112,8 +112,8 @@ export interface LogEntry {
   date: string;
   id: string;
   name: string;
+  commit: string;
   pr?: number;
-  commit?: string;
   added?: true;
   removed?: true;
   checked?: true;

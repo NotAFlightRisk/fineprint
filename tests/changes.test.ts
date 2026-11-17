@@ -48,8 +48,16 @@ describe('changelog diff', () => {
       raw.criteria.transparency.audits[0].auditor = 'Cure53 GmbH';
     });
     expect(diff(criteria, before, after)?.changes).toEqual([
-      { key: 'logging.traffic' },
-      { key: 'transparency.audits' }
+      { key: 'logging.traffic', grade: 'good' },
+      { key: 'transparency.audits', grade: 'good' }
+    ]);
+  });
+
+  it('notes an edited source on everything that cites it', () => {
+    const after = variant((raw) => (raw.refs.policy.url = 'https://good.example/legal/privacy'));
+    expect(diff(criteria, before, after)?.changes?.map(({ key }) => key)).toEqual([
+      'logging.traffic',
+      'logging.dns'
     ]);
   });
 

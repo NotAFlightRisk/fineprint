@@ -1,4 +1,12 @@
-import type { Category, Change, Criterion, Entry, LogEntry, Provider } from '#lib/data/types.ts';
+import type {
+  Category,
+  Change,
+  Criterion,
+  Entry,
+  LogEntry,
+  Provider,
+  Ref
+} from '#lib/data/types.ts';
 import { formatValue, showEntry } from '#lib/format.ts';
 
 const lists = new Set(['set', 'list', 'countries']);
@@ -11,7 +19,10 @@ const shown = (criterion: Criterion, entry?: Entry) => {
 
 const same = (a: unknown, b: unknown) => JSON.stringify(a) === JSON.stringify(b);
 
-function change(criterion: Criterion, before?: Entry, after?: Entry): Change | undefined {
+type Side = { entry?: Entry; refs: Record<string, Ref> };
+
+function change(criterion: Criterion, old: Side, next: Side): Change | undefined {
+  const [before, after] = [old.entry, next.entry];
   const key = criterion.id;
   const grade = after?.grade && graded.has(after.grade) ? { grade: after.grade } : {};
   const [was, now] = [before?.value, after?.value];
@@ -29,10 +40,15 @@ function change(criterion: Criterion, before?: Entry, after?: Entry): Change | u
     if (from !== to) return { key, from, to, ...grade };
   }
 
-  // a reworded note, a new source, or a record edited without changing the count
-  const details = (entry?: Entry) =>
-    [entry?.note, entry?.sources, entry?.evidence, list ? 0 : entry?.value];
-  if (!same(details(before), details(after))) return { key };
+  // a reworded note, a new or edited source, a regrade, or a record edited in place
+  const details = ({ entry, refs }: Side) => [
+    entry?.note,
+    entry?.sources.map((ref) => refs[ref]),
+    entry?.evidence,
+    entry?.grade,
+    list ? 0 : entry?.value
+  ];
+  if (!same(details(old), details(next))) return { key, ...grade };
 }
 
 /** What changed in one provider's file, or nothing if none of it shows on the site */
@@ -40,14 +56,18 @@ export function diff(
   criteria: Map<string, Criterion>,
   before?: Provider,
   after?: Provider
-): Omit<LogEntry, 'date'> | undefined {
+): Omit<LogEntry, 'date' | 'commit'> | undefined {
   const { id, name } = (after ?? before)!;
   if (!before || !after) return { id, name, ...(after ? { added: true } : { removed: true }) };
 
   const changes = [...criteria.values()]
     .filter((criterion) => !criterion.derived)
     .map((criterion) =>
-      change(criterion, before.criteria[criterion.id], after.criteria[criterion.id])
+      change(
+        criterion,
+        { entry: before.criteria[criterion.id], refs: before.refs },
+        { entry: after.criteria[criterion.id], refs: after.refs }
+      )
     )
     .filter((change) => change !== undefined);
   if (before.name !== after.name)
@@ -70,4 +90,4 @@ export function changeText({ added, removed }: Change) {
   return parts.filter(Boolean).join(', ') || 'details updated';
 }
 
-export const changeKey = (entry: LogEntry) => `${entry.pr ?? entry.commit}-${entry.id}`;
+export const changeKey = (entry: LogEntry) => `${entry.commit}-${entry.id}`;

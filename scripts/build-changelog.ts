@@ -29,6 +29,7 @@ const saved: Changelog = existsSync(FILE)
   : { commit: '', entries: [] };
 const resume = saved.commit && succeeds('merge-base', '--is-ancestor', saved.commit, 'HEAD');
 const head = git('rev-parse', 'HEAD');
+const emptyTree = git('hash-object', '-t', 'tree', '/dev/null');
 
 // criteria.yml rarely changes, so most commits share one parse
 const parsed = new Map<string, Category[]>();
@@ -43,6 +44,7 @@ const providerAt = (rev: string, file: string, today: Date) =>
 
 const commits = git(
   'log',
+  '--first-parent',
   '--format=%H%x09%P%x09%cs%x09%s',
   resume ? `${saved.commit}..HEAD` : 'HEAD',
   '--',
@@ -51,16 +53,17 @@ const commits = git(
 
 const fresh: LogEntry[] = [];
 for (const line of commits.split('\n').filter(Boolean)) {
-  const [sha, parent, date, subject] = line.split('\t');
+  const [sha, parents, date, subject] = line.split('\t');
+  const [parent] = parents.split(' ');
   const today = new Date(date);
   const pr = subject.match(/\(#(\d+)\)$/)?.[1];
-  const link = pr ? { pr: Number(pr) } : { commit: sha.slice(0, 7) };
+  const link = { commit: sha.slice(0, 7), ...(pr ? { pr: Number(pr) } : {}) };
   const criteria = new Map([
     ...(parent ? byId(categoriesAt(parent)) : []),
     ...byId(categoriesAt(sha))
   ]);
 
-  const files = git('diff-tree', '--root', '-r', '--no-commit-id', '--name-status', sha);
+  const files = git('diff-tree', '-r', '--name-status', parent || emptyTree, sha);
   const entries = files
     .split('\n')
     .map((row) => row.split('\t'))
