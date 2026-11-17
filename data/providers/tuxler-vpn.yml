@@ -21,6 +21,10 @@ criteria:
       note: Neither the site, the policies nor the store listings name anyone behind the company.
       sources: [about, chrome]
     sister_brands: []
+    acquisitions:
+      value: []
+      note: The same company has run it since at least 2021, though who owns that company isn't public.
+      sources: [about, eula-2021]
 
   jurisdiction:
     hq:
@@ -80,10 +84,18 @@ criteria:
       sources: [faq]
 
   infra:
+    ram_only:
+      value: null
+      note: Residential exits are other users' Windows PCs, and Tuxler doesn't say how its data-center servers are set up.
+      sources: [about, faq]
     hosting:
       value: null
       note: Residential locations are other users' home connections, and it doesn't say where its data-center ones are.
       sources: [about, faq]
+    virtual_locations:
+      value: null
+      note: Residential exits sit wherever their users live, and Tuxler doesn't say where its data-center servers are.
+      sources: [about, locations]
     servers: null
     countries:
       value: null
@@ -97,6 +109,11 @@ criteria:
       sources: [faq]
     multihop: false
     obfuscation: []
+    port_forwarding: false
+    split_tunnel:
+      value: null
+      note: The browser extensions send the whole browser through, and the site doesn't say whether the Windows app can leave apps out.
+      sources: [faq, chrome]
     blocking: []
 
   clients:
@@ -158,6 +175,9 @@ criteria:
           source: eula
 
 refs:
+  eula-2021:
+    url: https://web.archive.org/web/20210120134053/https://www.tuxlervpn.com/end-user-license-agreement/
+    title: Tuxler end-user licence agreement (January 2021, archived)
   about:
     url: https://www.tuxlervpn.com/about/
     title: About TuxlerVPN
