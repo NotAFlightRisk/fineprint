@@ -30,10 +30,10 @@ const marks: Record<string, string[]> = {
 };
 const headings: Record<string, string> = {
   logs: 'No logs',
-  audited: 'Audited',
+  audited: 'Audit',
   anonymous: 'Anon signup',
   open: 'Open source',
-  ram: 'RAM&#8209;only',
+  ram: 'RAM only',
   trackers: 'No trackers'
 };
 
@@ -51,7 +51,7 @@ function issues({ id, flags, serious }: Summary) {
 function cost(provider: Provider) {
   const price = provider.criteria['pricing.best']?.value as Price | null | undefined;
   if (!price) return '?';
-  return price.amount ? money(price) : 'Free';
+  return price.amount ? money(price).replace('US$', '$') : 'Free';
 }
 
 const row = (summary: Summary) => {
