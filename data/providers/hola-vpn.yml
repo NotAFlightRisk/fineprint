@@ -148,12 +148,27 @@ criteria:
       evidence: claimed
       note: It stops apps you pick when the connection drops, rather than blocking all traffic.
       sources: [kill-switch]
-    dns: null
+    dns:
+      value: null
+      note: >-
+        The Android app sets Google's 8.8.8.8 or whatever DNS servers Hola's remote config names, so whose
+        resolver answers depends on settings Hola can change at any time.
+      sources: [play]
 
   infra:
     ram_only: null
-    hosting: null
-    virtual_locations: null
+    hosting:
+      value: null
+      note: >-
+        Apps connect to Hola's data centre proxy servers, but it doesn't say whether it owns them. Exits in
+        most countries are other users' devices.
+      sources: [faq, locations]
+    virtual_locations:
+      value: null
+      note: >-
+        Countries without Hola servers exit through peers' devices in that country, which aren't virtual
+        locations. Hola doesn't say whether its own servers sit where they're labelled.
+      sources: [locations]
     servers:
       value: 700
       sources: [locations]
@@ -185,9 +200,11 @@ criteria:
       sources: [faq, desktop]
     open_source: none
     telemetry:
-      value: null
-      note: The Android app collects crash logs and app interactions for analytics and shares device IDs, and Hola doesn't say whether you can turn this off.
-      sources: [play-data-safety]
+      value: forced
+      note: >-
+        The Android app carries Firebase Analytics and Facebook's app events SDK, and both the app and the
+        extension report events to Hola's own server, with no setting to turn any of it off.
+      sources: [play, chrome-store, play-data-safety]
     fdroid: false
 
   pricing:
@@ -228,8 +245,8 @@ criteria:
       sources: [faq, policy]
     affiliates:
       value: null
-      note: Hola has paid affiliates through ad networks, but its own affiliate page is gone and at least one network lists the campaign as paused.
-      sources: [cuelinks]
+      note: Hola ran its own affiliate programme until 2022 and paid affiliates through ad networks, but its page is gone and at least one network lists the campaign as paused.
+      sources: [affiliate-2022, cuelinks]
     review_sites: false
     activism: false
   other:
@@ -273,12 +290,21 @@ refs:
   desktop:
     url: https://hola.org/products/desktop
     title: Hola desktop app for Windows and macOS
+  play:
+    url: https://play.google.com/store/apps/details?id=org.hola.play&hl=en
+    title: "Hola VPN: Fast, Free VPN Proxy (Google Play)"
+  chrome-store:
+    url: https://chromewebstore.google.com/detail/gkojfkhlekighikafcpjkiklfbnlmeio
+    title: Hola VPN extension (Chrome Web Store)
   play-data-safety:
     url: https://play.google.com/store/apps/datasafety?id=org.hola.play&hl=en
     title: Hola VPN data safety (Google Play)
   cuelinks:
     url: https://www.cuelinks.com/campaigns/hola-vpn-affiliate-program
     title: Hola VPN (CPS) affiliate programme (Cuelinks)
+  affiliate-2022:
+    url: https://web.archive.org/web/20220407063725/https://hola.org/affiliate
+    title: Hola's Affiliate Program (Wayback Machine, April 7, 2022)
   kill-switch:
     url: https://support.hola.org/en/articles/9636412-what-is-the-kill-switch-feature
     title: What is the kill switch feature? (Hola Help Center)
