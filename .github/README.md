@@ -8,7 +8,7 @@
 <!-- badges-start -->
 <img src="https://img.shields.io/badge/VPNs%20compared-222-2da44e?style=flat-square" alt="VPNs compared: 222" />
 <img src="https://img.shields.io/badge/criteria-57-0969da?style=flat-square" alt="criteria: 57" />
-<img src="https://img.shields.io/badge/sources-5%2C772-8250df?style=flat-square" alt="sources: 5,772" />
+<img src="https://img.shields.io/badge/sources-5%2C774-8250df?style=flat-square" alt="sources: 5,774" />
 <img src="https://img.shields.io/badge/affiliate%20links-zero-cf222e?style=flat-square" alt="affiliate links: zero" />
 <img src="https://img.shields.io/badge/updated-2026--11--16-57606a?style=flat-square" alt="updated: 2026-11-16" />
 <!-- badges-end -->
