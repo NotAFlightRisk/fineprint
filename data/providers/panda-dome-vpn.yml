@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: Panda Dome VPN
 icon: panda-dome-vpn.svg
-checked: 2026-10-27
+checked: 2026-11-17
 
 criteria:
   identity:
@@ -186,7 +186,9 @@ criteria:
   clients:
     platforms:
       value: [windows, macos, ios, android]
-      note: On Android and iOS the VPN is part of the Panda Dome app. No Linux app, router support or browser extension.
+      note: >-
+        On Android and iOS the VPN is part of the Panda Dome app, and the iOS one hasn't been updated since June 2025.
+        No Linux app, router support or browser extension.
       sources: [android-vpn, play, app-store]
     open_source: none
     telemetry:
@@ -280,9 +282,6 @@ refs:
   vector-majority:
     url: https://www.watchguard.com/wgrd-news/press-releases/vector-capital-acquires-majority-ownership-watchguard-technologies-0
     title: Vector Capital acquires majority ownership of WatchGuard Technologies
-  vector-watchguard:
-    url: https://www.vectorcapital.com/investments/case-study/watchguard
-    title: Vector Capital, WatchGuard case study
   watchguard-about:
     url: https://www.watchguard.com/wgrd-about
     title: About WatchGuard, leadership and board
