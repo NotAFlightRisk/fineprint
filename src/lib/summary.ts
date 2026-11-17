@@ -75,7 +75,7 @@ export function describeRule(criterion: Criterion, match: Match): string {
   return parts.join(', ') || 'Anything else';
 }
 
-const describeEntry = (provider: Provider, criterion: Criterion) =>
+export const describeEntry = (provider: Provider, criterion: Criterion) =>
   `${criterion.label}: ${showEntry(criterion, provider.criteria[criterion.id])}`;
 
 export interface RedFlag {
