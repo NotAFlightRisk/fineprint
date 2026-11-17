@@ -1,6 +1,8 @@
 {
-  "commit": "425c6ea8500de2e023f1b2e9c1a0f5ebfdb1541d",
+  "commit": "f08d32a3262e9c086b9dea6a8ceafc8ed23eab89",
   "entries": [
+    {"date":"2026-11-17","commit":"f08d32a","pr":417,"id":"vpn-lumos","name":"VPN Lumos","changes":[{"key":"identity.acquisitions","from":"Not checked","to":"Unknown"},{"key":"features.blocking","from":"Not checked","to":"Unknown"}]},
+    {"date":"2026-11-17","commit":"aefedb3","pr":416,"id":"vpn-fast","name":"VPN Fast","changes":[{"key":"clients.fdroid","from":"Not checked","to":"No"},{"key":"pricing.renewal_increase","from":"Not checked","to":"0%","grade":"good"},{"key":"ethics.affiliates","from":"Not checked","to":"No","grade":"good"},{"key":"ethics.review_sites","from":"Not checked","to":"No","grade":"good"}]},
     {"date":"2026-11-17","commit":"425c6ea","pr":415,"id":"tuxler-vpn","name":"Tuxler VPN","changes":[{"key":"identity.acquisitions","from":"Not checked","to":"None"},{"key":"infra.ram_only","from":"Not checked","to":"Unknown"},{"key":"infra.virtual_locations","from":"Not checked","to":"Unknown"},{"key":"features.port_forwarding","from":"Not checked","to":"No"},{"key":"features.split_tunnel","from":"Not checked","to":"Unknown"}]},
     {"date":"2026-11-17","commit":"72abd26","pr":414,"id":"purevpn","name":"PureVPN","changes":[{"key":"features.multihop","from":"Not checked","to":"No","grade":"ok"},{"key":"ethics.review_sites","from":"Not checked","to":"Unknown"},{"key":"ethics.activism","from":"Not checked","to":"No","grade":"ok"}]},
     {"date":"2026-11-17","commit":"8b4c9e3","pr":411,"id":"totalav-vpn","name":"TotalAV VPN","changes":[{"key":"logging.timestamps"},{"key":"logging.source_ip"}]},
