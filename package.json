@@ -23,7 +23,8 @@
     "test": "vitest run",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "new": "node scripts/new-provider.ts"
+    "new": "node scripts/new-provider.ts",
+    "readme": "node scripts/readme-insert.ts"
   },
   "imports": {
     "#lib/*": "./src/lib/*"
