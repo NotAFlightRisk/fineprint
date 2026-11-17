@@ -154,6 +154,7 @@ criteria:
         The policy collects crash data, device and advertising identifiers and how you use the app, and the App
         Store label lists the same. It doesn't mention a way to turn this off.
       sources: [privacy, app-store]
+    fdroid: false
 
   pricing:
     monthly:
@@ -164,6 +165,9 @@ criteria:
       note: $49.99 a year, which the checkout charges even though the plan table says $29.99.
       sources: [pricing, checkout, app-store]
     best_term: 12
+    renewal_increase:
+      value: 0
+      sources: [checkout, app-store]
     free_tier:
       value: true
       note: Ad-supported, one device, a few locations and a daily data cap.
@@ -180,6 +184,8 @@ criteria:
         countries from a list of 108. In the UK and India the App Store app is called "VPN super unlimited
         proxy", the name of a much bigger rival.
       sources: [home, privacy, servers, app-store-gb]
+    affiliates: false
+    review_sites: false
     activism: false
 
 refs:
