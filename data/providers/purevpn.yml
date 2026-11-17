@@ -228,6 +228,10 @@ criteria:
       value: 10
       note: More with the paid Multi Login add-on.
       sources: [home]
+    multihop:
+      value: false
+      note: Its own guide to double VPN explains the idea without offering it, and no app or plan lists it.
+      sources: [chaining, features]
     obfuscation:
       value: [proprietary]
       note: Obfuscated servers, which PureVPN says disguise VPN traffic as HTTPS without naming the method.
@@ -309,11 +313,22 @@ criteria:
       value: true
       note: Its affiliate page offers 100% of the first month's price, or 40% on longer plans plus 35% recurring.
       sources: [affiliates]
+    review_sites:
+      value: null
+      note: Disrupt, which owns PureVPN, doesn't list any among its companies, but its shareholdings aren't published.
+      sources: [disrupt]
+    activism: false
 
 refs:
   home:
     url: https://www.purevpn.com/
     title: PureVPN homepage
+  features:
+    url: https://www.purevpn.com/features
+    title: PureVPN features
+  chaining:
+    url: https://www.purevpn.com/blog/vpn-chaining/
+    title: What is VPN chaining (or double VPN)? (PureVPN blog)
   about:
     url: https://www.purevpn.com/about.php
     title: About PureVPN
