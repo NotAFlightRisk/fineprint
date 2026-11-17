@@ -1,6 +1,7 @@
 {
-  "commit": "72abd261cd42478dda76fb5c4202e274592fd114",
+  "commit": "425c6ea8500de2e023f1b2e9c1a0f5ebfdb1541d",
   "entries": [
+    {"date":"2026-11-17","commit":"425c6ea","pr":415,"id":"tuxler-vpn","name":"Tuxler VPN","changes":[{"key":"identity.acquisitions","from":"Not checked","to":"None"},{"key":"infra.ram_only","from":"Not checked","to":"Unknown"},{"key":"infra.virtual_locations","from":"Not checked","to":"Unknown"},{"key":"features.port_forwarding","from":"Not checked","to":"No"},{"key":"features.split_tunnel","from":"Not checked","to":"Unknown"}]},
     {"date":"2026-11-17","commit":"72abd26","pr":414,"id":"purevpn","name":"PureVPN","changes":[{"key":"features.multihop","from":"Not checked","to":"No","grade":"ok"},{"key":"ethics.review_sites","from":"Not checked","to":"Unknown"},{"key":"ethics.activism","from":"Not checked","to":"No","grade":"ok"}]},
     {"date":"2026-11-17","commit":"8b4c9e3","pr":411,"id":"totalav-vpn","name":"TotalAV VPN","changes":[{"key":"logging.timestamps"},{"key":"logging.source_ip"}]},
     {"date":"2026-11-17","commit":"9de9909","pr":410,"id":"urban-vpn","name":"Urban VPN","changes":[{"key":"security.dns"},{"key":"clients.telemetry","grade":"bad"},{"key":"pricing.refund_days"},{"key":"ethics.affiliates","from":"Unknown","to":"No","grade":"good"}]},
