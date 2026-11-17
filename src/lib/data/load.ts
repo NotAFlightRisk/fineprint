@@ -13,8 +13,11 @@ export interface Source {
   lineOf: (path: (string | number)[]) => number;
 }
 
-export function loadCriteria(dir = dataDir): Category[] {
-  const { categories } = parse(readFileSync(join(dir, 'criteria.yml'), 'utf8'));
+export const loadCriteria = (dir = dataDir) =>
+  parseCriteria(readFileSync(join(dir, 'criteria.yml'), 'utf8'));
+
+export function parseCriteria(text: string): Category[] {
+  const { categories } = parse(text);
   return categories.map(({ criteria, ...category }: Category) => ({
     ...category,
     criteria: criteria.map((criterion) => ({

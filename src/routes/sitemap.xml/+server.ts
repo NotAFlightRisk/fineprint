@@ -1,4 +1,4 @@
-import { data, stats } from '#lib/server/data.ts';
+import { changelog, data, stats } from '#lib/server/data.ts';
 import { absolute } from '#lib/site.ts';
 
 export const prerender = true;
@@ -10,6 +10,7 @@ export const GET = () => {
     { path: '/methodology' },
     { path: '/contributing' },
     { path: '/search' },
+    { path: '/changelog', modified: changelog()[0]?.date },
     ...data().providers.map(({ id, checked }) => ({ path: `/${id}`, modified: checked }))
   ];
   const urls = pages
