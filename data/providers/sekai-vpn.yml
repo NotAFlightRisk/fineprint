@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: Sekai VPN
 icon: sekai-vpn.png
-checked: 2026-10-27
+checked: 2026-11-18
 
 criteria:
   identity:
@@ -120,11 +120,11 @@ criteria:
       note: It doesn't say whether any of its locations are virtual.
       sources: [server-list]
     servers:
-      value: 72
+      value: 70
       evidence: claimed
       note: >-
-        28 take most protocols, two per country outside Japan, and share 19 addresses. The other 44, 35 of them in
-        Japan, only take OpenConnect.
+        28 take most protocols, ten in Japan and two in each other country. The other 42, 33 of them in Japan, only
+        take OpenConnect.
       sources: [server-list, openvpn-list, oc-status]
     countries:
       value: 10
