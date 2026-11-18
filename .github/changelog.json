@@ -1,6 +1,7 @@
 {
-  "commit": "eb21e3b1a38e4e0d4eb3bc45172fed1fd3337284",
+  "commit": "d5863b5862be4c1269f1441da9652323624592e1",
   "entries": [
+    {"date":"2026-11-18","commit":"d5863b5","pr":420,"id":"sekai-vpn","name":"Sekai VPN","checked":true,"changes":[{"key":"infra.servers","from":"72 (claimed)","to":"70 (claimed)"}]},
     {"date":"2026-11-17","commit":"eb21e3b","pr":419,"id":"panda-dome-vpn","name":"Panda Dome VPN","checked":true,"changes":[{"key":"clients.platforms"}]},
     {"date":"2026-11-17","commit":"3eadbd0","pr":418,"id":"avg-secure-vpn","name":"AVG Secure VPN","changes":[{"key":"ethics.review_sites","from":"Not checked","to":"No","grade":"good"}]},
     {"date":"2026-11-17","commit":"f08d32a","pr":417,"id":"vpn-lumos","name":"VPN Lumos","changes":[{"key":"identity.acquisitions","from":"Not checked","to":"Unknown"},{"key":"features.blocking","from":"Not checked","to":"Unknown"}]},
