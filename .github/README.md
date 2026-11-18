@@ -10,7 +10,7 @@
 <img src="https://img.shields.io/badge/criteria-57-0969da?style=flat-square" alt="criteria: 57" />
 <img src="https://img.shields.io/badge/sources-5%2C781-8250df?style=flat-square" alt="sources: 5,781" />
 <img src="https://img.shields.io/badge/affiliate%20links-zero-cf222e?style=flat-square" alt="affiliate links: zero" />
-<img src="https://img.shields.io/badge/updated-2026--11--17-57606a?style=flat-square" alt="updated: 2026-11-17" />
+<img src="https://img.shields.io/badge/updated-2026--11--18-57606a?style=flat-square" alt="updated: 2026-11-18" />
 <!-- badges-end -->
 </p>
 
