@@ -18,7 +18,7 @@ const json = (schema: object, description: string) => ({
 });
 
 const fallback = {
-  description: "The value a provider gets when its file leaves this criterion out",
+  description: 'The value a provider gets when its file leaves this criterion out',
   anyOf: [
     { type: 'boolean' },
     { type: 'number' },
