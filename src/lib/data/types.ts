@@ -4,20 +4,23 @@ export const evidences = ['claimed', 'verified', 'tested'] as const;
 export type Grade = (typeof grades)[number] | null;
 export type Evidence = (typeof evidences)[number];
 
-export type Type =
-  | 'bool'
-  | 'int'
-  | 'limit'
-  | 'text'
-  | 'list'
-  | 'url'
-  | 'date'
-  | 'country'
-  | 'countries'
-  | 'enum'
-  | 'set'
-  | 'price'
-  | 'records';
+export const types = [
+  'bool',
+  'int',
+  'limit',
+  'text',
+  'list',
+  'url',
+  'date',
+  'country',
+  'countries',
+  'enum',
+  'set',
+  'price',
+  'records'
+] as const;
+
+export type Type = (typeof types)[number];
 
 export interface Price {
   amount: number;

@@ -299,6 +299,19 @@ function changelogImage(entries: LogEntry[]) {
   );
 }
 
+function apiImage(counts: ReturnType<typeof stats>) {
+  return frame(
+    `${counts.providers} providers · ${counts.criteria} criteria`,
+    lede('API', 'Every provider, grade and source as JSON. Free, with no key to sign up for.'),
+    div(
+      { flexDirection: 'column', gap: 10, fontSize: 30, fontWeight: 600 },
+      ...['/api/providers.json', '/api/providers/{id}.json', '/api/criteria.json'].map((path) =>
+        div({ gap: 20 }, div({ color: colour.muted }, 'GET'), path)
+      )
+    )
+  );
+}
+
 let fonts: { name: string; data: Buffer; weight: 400 | 600; style: 'normal' }[] | undefined;
 let wasm: Promise<void> | undefined;
 
@@ -321,7 +334,7 @@ async function rasterise(svg: string, width?: number) {
   return Buffer.from(new Resvg(svg, { fitTo }).render().asPng());
 }
 
-/** The PNG for a page: index, methodology, contributing, search, changelog, or a provider's id */
+/** The PNG for a page: index, methodology, contributing, search, changelog, api or a provider's id */
 export async function drawPage(page: string) {
   const { categories, providers } = data();
   const criteria = byId(categories);
@@ -332,6 +345,7 @@ export async function drawPage(page: string) {
   if (page === 'contributing') return render(contributingImage(stats()));
   if (page === 'search') return render(searchImage(stats()));
   if (page === 'changelog') return render(changelogImage(changelog()));
+  if (page === 'api') return render(apiImage(stats()));
   if (index >= 0) return render(providerImage(summaries[index], providers[index].checked));
 }
 

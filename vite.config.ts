@@ -32,6 +32,7 @@ export default defineConfig({
           '*',
           '/api/providers.json',
           '/api/criteria.json',
+          '/api/openapi.json',
           '/schema/provider.json',
           '/sitemap.xml',
           '/atom.xml',

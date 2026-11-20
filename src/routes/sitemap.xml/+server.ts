@@ -11,6 +11,7 @@ export const GET = () => {
     { path: '/contributing' },
     { path: '/search' },
     { path: '/changelog', modified: changelog()[0]?.date },
+    { path: '/api' },
     ...data().providers.map(({ id, checked }) => ({ path: `/${id}`, modified: checked }))
   ];
   const urls = pages
