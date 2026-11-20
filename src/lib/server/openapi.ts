@@ -17,8 +17,8 @@ const json = (schema: object, description: string) => ({
   content: { 'application/json': { schema } }
 });
 
-const value = {
-  description: "The value, in whatever shape the criterion's type gives it. Null when unknown",
+const fallback = {
+  description: "The value a provider gets when its file leaves this criterion out",
   anyOf: [
     { type: 'boolean' },
     { type: 'number' },
@@ -86,9 +86,8 @@ export function openapi({ categories, providers }: Dataset) {
       version: '1.0.0',
       summary: 'Every VPN provider fineprint compares, with grades and sources, as JSON.',
       description: [
-        `The data behind [${site.name}](${site.url}), as static JSON. No key, no sign-up, and`,
-        'no rate limit beyond being polite. Files are rebuilt whenever the data changes,',
-        'and anyone can call them from a browser.',
+        `The data behind [${site.name}](${site.url}), as static JSON with no key or sign-up.`,
+        'Files are rebuilt whenever the data changes, and anyone can call them from a browser.',
         '',
         `Grades come from the published rules in [How grading works](${absolute('/methodology')}),`,
         'which `/api/criteria.json` carries too, so you can grade things yourself.'
@@ -263,7 +262,7 @@ export function openapi({ categories, providers }: Dataset) {
             required: { type: 'boolean', description: 'Every provider has to give it' },
             derived: { type: 'boolean', description: 'Worked out from other values' },
             serious: { type: 'boolean', description: 'A bad grade here turns the total red' },
-            default: value
+            default: fallback
           }
         },
         Field: {
