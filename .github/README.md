@@ -249,12 +249,14 @@ Credit to That One Privacy Guy, whose old VPN comparison chart provided the insp
 
 Just head to [fineprint.peng.ly](https://fineprint.peng.ly), where there's a summary of all VPN data viewable as cards, table or JSON. Each VPN has a dedicated page with full details, sources, a change history and edit options. For info about how the grading works, see the [methodology](https://fineprint.peng.ly/methodology) page.
 
-You can consume the data programmatically from our API endpoints too:
+You can consume the data programmatically from our API too, with no key needed. The docs are at [fineprint.peng.ly/api](https://fineprint.peng.ly/api):
 
 | URL                                                                       | What's in it                                              |
 | ------------------------------------------------------------------------- | --------------------------------------------------------- |
 | [`/api/providers.json`](https://fineprint.peng.ly/api/providers.json)     | Every provider, with grades and derived values worked out |
+| `/api/providers/{id}.json`                                                | One provider by its id, like `mullvad`                    |
 | [`/api/criteria.json`](https://fineprint.peng.ly/api/criteria.json)       | What's measured, and the grading rules                    |
+| [`/api/openapi.json`](https://fineprint.peng.ly/api/openapi.json)         | The OpenAPI spec for all of the above                     |
 | [`/schema/provider.json`](https://fineprint.peng.ly/schema/provider.json) | JSON Schema for the provider YAML files                   |
 | [`/llms.txt`](https://fineprint.peng.ly/llms.txt)                         | A plain-text summary for AI assistants                    |
 

@@ -48,7 +48,7 @@
     <li><a href="/search">Search</a></li>
     <li><a href="/changelog">Changelog</a></li>
     <li><a href="/methodology">How grading works</a></li>
-    <li><a href="/api/providers.json">Data as JSON</a></li>
+    <li><a href="/api">API</a></li>
     <li><a href={site.repo} target="_blank" rel="noopener external">Source on GitHub</a></li>
   </ul>
 </footer>

@@ -11,6 +11,7 @@ export const entries = () => [
   { page: 'contributing' },
   { page: 'search' },
   { page: 'changelog' },
+  { page: 'api' },
   ...data().providers.map(({ id }) => ({ page: id }))
 ];
 

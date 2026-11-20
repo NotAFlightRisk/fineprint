@@ -36,6 +36,7 @@ export const GET = () => {
     '',
     link('Every provider', '/api/providers.json', 'all values, grades, notes and sources, as JSON'),
     link('Criteria', '/api/criteria.json', 'what is measured and the grading rules, as JSON'),
+    link('API spec', '/api/openapi.json', 'OpenAPI, including one provider at a time'),
     link('How grading works', '/methodology', 'every criterion and the rule behind each grade'),
     '',
     '## Optional',

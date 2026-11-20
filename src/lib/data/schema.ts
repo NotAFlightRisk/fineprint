@@ -8,7 +8,7 @@ const options = (spec: { options?: Record<string, string> }) => ({
   enum: Object.keys(spec.options ?? {})
 });
 
-function valueSchema(
+export function valueSchema(
   spec: Pick<Criterion, 'options' | 'fields'> & Pick<Field, 'max'> & { type: string }
 ): object {
   switch (spec.type) {
