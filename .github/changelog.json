@@ -1,6 +1,7 @@
 {
-  "commit": "f96a5d9f2cf453b24c56f9f56e184e287a4338ff",
+  "commit": "9d75089264f062f8d21e250bb4dad89e83f4590d",
   "entries": [
+    {"date":"2026-11-21","commit":"9d75089","pr":423,"id":"switchvpn","name":"SwitchVPN","checked":true},
     {"date":"2026-11-18","commit":"f96a5d9","pr":421,"id":"swissvpn","name":"SwissVPN","checked":true},
     {"date":"2026-11-18","commit":"d5863b5","pr":420,"id":"sekai-vpn","name":"Sekai VPN","checked":true,"changes":[{"key":"infra.servers","from":"72 (claimed)","to":"70 (claimed)"}]},
     {"date":"2026-11-17","commit":"eb21e3b","pr":419,"id":"panda-dome-vpn","name":"Panda Dome VPN","checked":true,"changes":[{"key":"clients.platforms"}]},
