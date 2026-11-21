@@ -1,6 +1,7 @@
 {
-  "commit": "0b6bd76d57b33ce4272c9ea02370495e624d4835",
+  "commit": "e285c39c0b2ddb7f3ac524d093ca0eb3e395beaf",
   "entries": [
+    {"date":"2026-11-21","commit":"e285c39","pr":426,"id":"tor-vpn","name":"Tor VPN","checked":true,"changes":[{"key":"infra.servers","from":"9183","to":"9592"},{"key":"infra.countries","from":"78","to":"76"}]},
     {"date":"2026-11-21","commit":"0b6bd76","pr":425,"id":"cloudbric-vpn","name":"Cloudbric VPN","added":true},
     {"date":"2026-11-21","commit":"ffabe74","pr":424,"id":"lagom-vpn","name":"Lagom VPN","added":true},
     {"date":"2026-11-21","commit":"9d75089","pr":423,"id":"switchvpn","name":"SwitchVPN","checked":true},
