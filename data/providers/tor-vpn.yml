@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: Tor VPN
 icon: tor-vpn.svg
-checked: 2026-10-27
+checked: 2026-11-21
 
 criteria:
   identity:
@@ -144,12 +144,12 @@ criteria:
       note: A relay's country comes from a GeoIP lookup of its address, not from what its operator says.
       sources: [onionoo-docs, exit-location]
     servers:
-      value: 9183
-      note: Running relays on 2026-10-26, 2,744 of them exits.
+      value: 9592
+      note: Running relays on 2026-11-21, 2,772 of them exits.
       sources: [onionoo]
     countries:
-      value: 78
-      note: Countries with a running relay on 2026-10-26. Exits were in 54 of them.
+      value: 76
+      note: Countries with a running relay on 2026-11-21. Exits were in 52 of them.
       sources: [onionoo]
 
   features:
