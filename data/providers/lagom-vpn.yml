@@ -1,0 +1,281 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Lagom VPN
+icon: lagom-vpn.png
+checked: 2026-11-21
+
+criteria:
+  identity:
+    website:
+      value: https://lagomvpn.com
+      sources: [home]
+    legal_entity:
+      value: Lagom Products LLC
+      note: >-
+        Its site also shows the UK register entry for Lagom Limited, a 2009 Gloucestershire company with the same
+        name and different owners.
+      sources: [oferta, register, companies-house]
+    owner:
+      value: Denis Babayan
+      note: A Russian citizen who owns all of Lagom Products and runs it, per Armenia's register.
+      sources: [register-owners]
+    founded:
+      value: 2023
+      evidence: claimed
+      note: Its Telegram bot launched in June 2023, a year before the company was registered.
+      sources: [channel-launch, register]
+    team:
+      value: partial
+      note: Its site names nobody, but Armenia's register names the company's owner and manager.
+      sources: [home, register-owners]
+    sister_brands:
+      value: []
+      sources: [play]
+    acquisitions:
+      value: []
+
+  jurisdiction:
+    hq:
+      value: AM
+      sources: [register]
+    entities:
+      value: [AM]
+      sources: [register]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      note: Its terms also say it spots BitTorrent and other P2P traffic and locks you out for a while when it does.
+      sources: [policy, oferta]
+    dns:
+      value: none
+      evidence: claimed
+      note: DNS isn't named, but the policy says it doesn't keep a history of the sites you visit.
+      sources: [policy]
+    timestamps:
+      value: null
+      note: >-
+        The policy collects the date and length of "sessions" without saying whether that means VPN connections,
+        and keeps data for as long as it needs it.
+      sources: [policy]
+    bandwidth:
+      value: aggregate
+      evidence: claimed
+      note: The policy doesn't say, but the free plan's monthly data limit means it keeps a running total per account.
+      sources: [policy, play, app-store]
+    source_ip:
+      value: null
+      note: The policy keeps your IP address "temporarily, to provide the connection", without saying for how long.
+      sources: [policy]
+    proven:
+      value: []
+    policy:
+      value: https://lagomvpn.com/policy
+      sources: [policy]
+
+  transparency:
+    audits:
+      value: []
+    report:
+      value: none
+      sources: [home]
+    canary:
+      value: none
+      sources: [home]
+    bug_bounty:
+      value: false
+      sources: [home]
+    incidents:
+      value:
+        - date: 2026-04-07
+          summary: >-
+            A flaw common to Xray-based apps, v2rayNG and Happ among them, let any other app on the phone use their
+            local proxy, which had no password, to find the VPN's exit address. Lagom said three days later that Happ
+            had fixed it and its own Android app would in the next update.
+          handled: well
+          source: channel-flaw
+      sources: [habr-flaw, channel-flaw]
+
+  account:
+    email:
+      value: optional
+      note: >-
+        The free plan works through the apps or its Telegram bot without one, but the terms take an email for every
+        order through the site or bot.
+      sources: [oferta, channel-happ]
+    personal_data:
+      value: []
+      sources: [oferta]
+    payment:
+      value: [card, app_store]
+      note: Cards go through YooKassa, Russia's Mir included, and it takes Telegram Stars too.
+      sources: [home-2026, play, channel-stars]
+
+  security:
+    protocols:
+      value: [other]
+      note: Other is VLESS, run through Xray in the Android app.
+      sources: [apk]
+    post_quantum:
+      value: null
+    kill_switch:
+      value: app
+      evidence: claimed
+      note: Only its Play listing mentions one.
+      sources: [play]
+    dns:
+      value: null
+
+  infra:
+    ram_only:
+      value: null
+    hosting:
+      value: null
+    virtual_locations:
+      value: null
+    servers:
+      value: null
+      note: It doesn't publish a server list.
+      sources: [home]
+    countries:
+      value: null
+      note: It doesn't publish a server list.
+      sources: [home]
+
+  features:
+    connections:
+      value: unlimited
+      evidence: claimed
+      note: The free plan allows one device.
+      sources: [apk]
+    multihop:
+      value: null
+    obfuscation:
+      value: [v2ray]
+      evidence: claimed
+      note: V2Ray here is Xray with VLESS over TLS.
+      sources: [apk]
+    port_forwarding:
+      value: null
+    split_tunnel:
+      value: true
+      evidence: claimed
+      note: It can also send Russian apps and sites around the VPN automatically.
+      sources: [play, channel-routing]
+    blocking:
+      value: null
+
+  clients:
+    platforms:
+      value: [android]
+      note: >-
+        Its iPhone app is still listed outside Russia but hasn't been updated since February 2026, and since September
+        its channel says everything but its Android app connects through the third-party Happ app.
+      sources: [play, app-store, channel-happ]
+    open_source:
+      value: none
+      note: >-
+        The Android app is built on the open source v2rayNG and Xray, but its own code isn't published, and its GitHub
+        only holds the APKs.
+      sources: [apk, github]
+    telemetry:
+      value: null
+      note: >-
+        The Android app carries Firebase Analytics, Crashlytics, Sentry, Yandex's AppMetrica, Adjust and Meta's SDK,
+        and the policy uses advertising IDs for analytics and retargeting, while the App Store label says no data is
+        collected and Play's says only that some may be shared.
+      sources: [apk, policy, play-data-safety, app-store]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 299, currency: RUB }
+      sources: [oferta]
+    best:
+      value: { amount: 239, currency: RUB }
+      note: 2,868 roubles a year.
+      sources: [oferta]
+    best_term: 12
+    renewal_increase:
+      value: 0
+      sources: [oferta]
+    free_tier:
+      value: true
+      note: With a monthly data limit, 5 GB per its App Store listing, on one device.
+      sources: [play, app-store, apk]
+    refund_days:
+      value: 7
+      note: For monthly plans. Longer ones refund the months you haven't started.
+      sources: [oferta]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        Its Play listing says it uses no trackers, while the app carries Meta's, Yandex's and Adjust's SDKs and the
+        policy describes ad tracking and retargeting.
+      sources: [play, apk, policy]
+    affiliates:
+      value: null
+    review_sites:
+      value: false
+      sources: [home, channel-launch]
+    activism: false
+
+refs:
+  home:
+    url: https://lagomvpn.com/
+    title: Lagom VPN website, which opens on its privacy policy (Russian)
+  policy:
+    url: https://lagomvpn.com/policy
+    title: Lagom VPN privacy policy, effective 1 April 2026 (Russian)
+  oferta:
+    url: https://lagomvpn.com/oferta
+    title: Lagom public offer, with prices and refunds (Russian)
+  register:
+    url: https://e-register.moj.am/en/companies/54751771
+    title: Armenian State Register, LAGOM PRODUCTS LLC (273.110.1387755, registered 14 May 2024)
+  register-owners:
+    url: https://e-register.moj.am/en/companies/54751771/declarations/5358aac8-9136-4186-876a-202a27fde169
+    title: Armenian State Register, LAGOM PRODUCTS LLC beneficial owner declaration (February 2026)
+  companies-house:
+    url: https://find-and-update.company-information.service.gov.uk/company/06918261
+    title: LAGOM LIMITED (06918261) at Companies House
+  play:
+    url: https://play.google.com/store/apps/details?id=com.lagomproductsllc.lagomvpn
+    title: 'Lagom: Fast VPN Proxy on Google Play'
+  play-data-safety:
+    url: https://play.google.com/store/apps/datasafety?id=com.lagomproductsllc.lagomvpn
+    title: Lagom data safety section on Google Play
+  app-store:
+    url: https://apps.apple.com/us/app/id6670336253
+    title: LagomVPN on the App Store (US, privacy label)
+  apk:
+    url: https://github.com/Lagom-VPN/lagomvpn-app/releases/tag/v0.25.1
+    title: >-
+      LagomVPN for Android 0.25.1, whose APK holds v2rayNG, Xray, Firebase, Crashlytics, Sentry, AppMetrica, Adjust
+      and Meta's SDK
+  github:
+    url: https://github.com/Lagom-VPN/lagomvpn-app
+    title: Lagom-VPN/lagomvpn-app on GitHub, a README and APK releases
+  home-2026:
+    url: https://web.archive.org/web/20260314221843/https://lagomvpn.com/
+    title: Lagom VPN home page with Mir, Visa and Mastercard logos and a YooKassa checkout (Wayback, March 2026)
+  habr-flaw:
+    url: https://habr.com/ru/articles/1020080/
+    title: Critical vulnerability in VLESS clients, runetfreedom on Habr, 7 April 2026 (Russian)
+  channel-flaw:
+    url: https://t.me/LagomVPN/170
+    title: Lagom on Telegram, on the VLESS client vulnerability, April 2026 (Russian)
+  channel-launch:
+    url: https://t.me/LagomVPN/9
+    title: Lagom's first Telegram channel post, June 2023 (Russian)
+  channel-routing:
+    url: https://t.me/LagomVPN/171
+    title: Lagom on Telegram, on routing Russian apps around the VPN, April 2026 (Russian)
+  channel-stars:
+    url: https://t.me/LagomVPN/172
+    title: Lagom on Telegram, on paying with Telegram Stars, April 2026 (Russian)
+  channel-happ:
+    url: https://t.me/LagomVPN/194
+    title: Lagom on Telegram, on connecting only through its Android app or Happ, September 2026 (Russian)
