@@ -1,0 +1,237 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Defyx VPN
+icon: defyx-vpn.png
+checked: 2026-11-21
+
+criteria:
+  identity:
+    website:
+      value: https://unboundtech.de/defyx
+      sources: [home]
+    legal_entity:
+      value: UnboundTech UG (haftungsbeschränkt)
+      sources: [terms, impressum, play]
+    owner:
+      value: Kiumars Naderi
+      note: He owns all of UnboundTech and is its managing director, per Berlin's commercial register.
+      sources: [register]
+    founded:
+      value: 2025
+      sources: [app-store, github]
+    team:
+      value: partial
+      note: Its site and impressum name nobody, but the commercial register names the company's owner and manager.
+      sources: [impressum, register]
+    sister_brands:
+      value: [Begzar VPN]
+      note: Begzar is published under the same Google Play developer account.
+      sources: [play-developer, begzar]
+    acquisitions:
+      value: []
+
+  jurisdiction:
+    hq:
+      value: DE
+      sources: [impressum, play]
+    entities:
+      value: [DE]
+      sources: [impressum]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [policy]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [policy]
+    timestamps:
+      value: 'yes'
+      evidence: claimed
+      note: Connection times are kept for up to 30 days.
+      sources: [policy]
+    bandwidth:
+      value: 'yes'
+      evidence: claimed
+      note: Kept for up to 30 days, like connection times.
+      sources: [policy]
+    source_ip:
+      value: null
+      note: The policy says what it keeps "includes" connection times and bandwidth, without saying whether your IP address is part of it.
+      sources: [policy]
+    proven:
+      value: []
+    policy:
+      value: https://unboundtech.de/defyx/privacy-policy
+      sources: [policy]
+
+  transparency:
+    audits:
+      value: []
+    report:
+      value: none
+    canary:
+      value: none
+    bug_bounty:
+      value: false
+    incidents:
+      value: []
+
+  account:
+    email:
+      value: none
+      note: The free service needs no account, and Priority accounts are made through its Telegram bot, tied to your Telegram ID.
+      sources: [home, terms]
+    personal_data:
+      value: []
+      sources: [terms]
+    payment:
+      value: [app_store, other_crypto]
+      note: Crypto goes through its Telegram bot, without saying which coins.
+      sources: [market, app-store]
+
+  security:
+    protocols:
+      value: [wireguard, proprietary, other]
+      evidence: claimed
+      note: >-
+        It picks a method for you. WireGuard is Cloudflare WARP's, other covers Psiphon, Xray and Outline, and its own
+        protocols sit in a closed core.
+      sources: [github, dxcore]
+    post_quantum:
+      value: null
+    kill_switch:
+      value: null
+    dns:
+      value: third_party
+      evidence: claimed
+      note: Its Play listing says it uses Cloudflare's DNS filtering.
+      sources: [play]
+
+  infra:
+    ram_only:
+      value: null
+    hosting:
+      value: null
+      note: >-
+        Free access runs on shared capacity through Cloudflare WARP, Psiphon and others, and its Market sells VPN
+        configurations from what it calls trusted suppliers.
+      sources: [github, terms, market]
+    virtual_locations:
+      value: null
+    servers:
+      value: null
+    countries:
+      value: null
+
+  features:
+    connections:
+      value: null
+      note: Each Priority pack has its own device limit, shown before you buy.
+      sources: [terms]
+    blocking:
+      value: [malware]
+      evidence: claimed
+      sources: [play]
+    obfuscation:
+      value: [shadowsocks, v2ray, proprietary]
+      evidence: claimed
+      note: Through Outline, Xray, Psiphon and its own closed core.
+      sources: [github, dxcore]
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android]
+      note: Android TV too, and a Linux build is a pre-release on GitHub.
+      sources: [download]
+    open_source:
+      value: some
+      note: The app is MIT-licensed, but DXcore, the part that makes the connections, is closed.
+      sources: [github, dxcore]
+    telemetry:
+      value: null
+      note: >-
+        The app's code pulls in Firebase Analytics, Crashlytics and Google's ads SDK, the App Store label says
+        identifiers and usage data are used to track you, and the privacy policy mentions none of it.
+      sources: [pubspec, app-store, policy]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 2.86, currency: EUR }
+      note: A one-off 30 days with 300 GB.
+      sources: [market]
+    best:
+      value: { amount: 2.08, currency: EUR }
+      note: €24.95 for 365 days with 3,600 GB.
+      sources: [market]
+    best_term: 12
+    renewal_increase:
+      value: 0
+      note: Priority packs are one-off payments that don't renew.
+      sources: [terms]
+    free_tier:
+      value: true
+      note: Best effort on shared capacity, with ads.
+      sources: [terms, play]
+    refund_days:
+      value: null
+      note: The terms leave refunds to the law, the payment channel and the circumstances.
+      sources: [terms]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        Its Play listing promises a "strict no-logs policy" where it never stores your activity, while the privacy
+        policy keeps connection times and bandwidth for 30 days.
+      sources: [play, policy]
+    affiliates:
+      value: null
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://unboundtech.de/defyx
+    title: Defyx, VPN for restricted networks
+  download:
+    url: https://unboundtech.de/defyx/download
+    title: Download Defyx
+  policy:
+    url: https://unboundtech.de/defyx/privacy-policy
+    title: Defyx privacy policy (July 2026)
+  terms:
+    url: https://unboundtech.de/defyx/terms-and-conditions
+    title: Defyx terms and conditions (July 2026)
+  impressum:
+    url: https://unboundtech.de/impressum
+    title: UnboundTech impressum (HRB 273739 B, Amtsgericht Charlottenburg)
+  market:
+    url: https://market.defyxvpn.com/
+    title: Defyx Marketplace, Priority packs and prices
+  github:
+    url: https://github.com/UnboundTechCo/defyxVPN
+    title: UnboundTechCo/defyxVPN on GitHub (MIT)
+  pubspec:
+    url: https://github.com/UnboundTechCo/defyxVPN/blob/main/pubspec.yaml
+    title: Defyx app dependencies, with Firebase Analytics, Crashlytics and google_mobile_ads
+  dxcore:
+    url: https://github.com/UnboundTechCo/DXcore
+    title: DXcore on GitHub, described as a proprietary and closed core
+  play:
+    url: https://play.google.com/store/apps/details?id=de.unboundtech.defyxvpn
+    title: Defyx on Google Play
+  register:
+    url: https://handelsregister.ai/en/organizations/berlin/computer-consultancy-activities/unboundtech-ug-haftungsbeschrankt-56ff68c90d83666da5cce9c011db31e0
+    title: UnboundTech UG (HRB 273739 B), directors and shareholders from the Berlin commercial register
+  play-developer:
+    url: https://play.google.com/store/apps/developer?id=UnboundTechCo
+    title: UnboundTechCo apps on Google Play
+  begzar:
+    url: https://play.google.com/store/apps/details?id=cloud.begzar.begzar
+    title: Begzar VPN on Google Play
+  app-store:
+    url: https://apps.apple.com/us/app/defyx/id6746811872
+    title: Defyx on the App Store (US, in-app credits and privacy label)
