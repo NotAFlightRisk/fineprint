@@ -1,6 +1,7 @@
 {
-  "commit": "9d75089264f062f8d21e250bb4dad89e83f4590d",
+  "commit": "ffabe7467ce8e445dceb3645698150daf48053de",
   "entries": [
+    {"date":"2026-11-21","commit":"ffabe74","pr":424,"id":"lagom-vpn","name":"Lagom VPN","added":true},
     {"date":"2026-11-21","commit":"9d75089","pr":423,"id":"switchvpn","name":"SwitchVPN","checked":true},
     {"date":"2026-11-18","commit":"f96a5d9","pr":421,"id":"swissvpn","name":"SwissVPN","checked":true},
     {"date":"2026-11-18","commit":"d5863b5","pr":420,"id":"sekai-vpn","name":"Sekai VPN","checked":true,"changes":[{"key":"infra.servers","from":"72 (claimed)","to":"70 (claimed)"}]},
