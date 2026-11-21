@@ -1,0 +1,243 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Cloudbric VPN
+icon: cloudbric-vpn.png
+checked: 2026-11-21
+
+criteria:
+  identity:
+    website:
+      value: https://www.cloudbric.com/cloudbric-vpn/
+      sources: [page]
+    legal_entity:
+      value: Penta Security Inc.
+      sources: [vpn-terms, play]
+    owner:
+      value: null
+    founded:
+      value: 2022
+      evidence: claimed
+      note: Its VPN page was up by May 2022, under the Cloudbric Corp. name.
+      sources: [page-2022]
+    team:
+      value: public
+      note: Penta Security names its CEO, and the privacy policy names the officer responsible for it.
+      sources: [ceo]
+    sister_brands:
+      value: []
+    acquisitions:
+      value:
+        - date: 2023-10-31
+          acquirer: Penta Security Inc.
+          source: merger
+      note: Cloudbric Inc., whose name the VPN's page carried in 2022, merged into Penta Security.
+      sources: [merger, page-2022]
+
+  jurisdiction:
+    hq:
+      value: KR
+      sources: [vpn-terms, locations]
+    entities:
+      value: [KR, JP, VN]
+      sources: [locations]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [vpn-privacy]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [vpn-privacy, no-logs-faq]
+    timestamps:
+      value: 'yes'
+      evidence: claimed
+      note: >-
+        Connection and disconnection times are kept for three months with the server and an ID the app makes up, under
+        a policy that takes effect on 23 November 2026 and says this isn't new.
+      sources: [vpn-privacy, amendment]
+    bandwidth:
+      value: 'yes'
+      evidence: claimed
+      note: The data each session uses is kept for three months alongside the connection times.
+      sources: [vpn-privacy]
+    source_ip:
+      value: none
+      evidence: claimed
+      sources: [amendment]
+    proven:
+      value: []
+    policy:
+      value: https://www.cloudbric.com/vpn-privacy-policy/
+      sources: [vpn-privacy]
+
+  transparency:
+    audits:
+      value: []
+    report:
+      value: none
+    canary:
+      value: none
+    bug_bounty:
+      value: false
+    incidents:
+      value: []
+
+  account:
+    email:
+      value: required
+      sources: [apk]
+    personal_data:
+      value: []
+      sources: [vpn-privacy]
+    payment:
+      value: [app_store]
+      note: Staking more than 200,000 of Cloudbric's own CLBK crypto tokens also unlocks the paid plan.
+      sources: [paypal-faq, clbk]
+
+  security:
+    protocols:
+      value: [wireguard]
+      sources: [page, apk]
+    post_quantum:
+      value: null
+    kill_switch:
+      value: null
+      note: It doesn't mention one.
+      sources: [features]
+    dns:
+      value: first_party
+      evidence: claimed
+      sources: [private-dns]
+
+  infra:
+    ram_only:
+      value: null
+    hosting:
+      value: rented
+      evidence: claimed
+      note: Akamai hosts its servers and databases.
+      sources: [vpn-privacy]
+    virtual_locations:
+      value: null
+    servers:
+      value: null
+    countries:
+      value: 35
+      evidence: claimed
+      note: Five on the free plan.
+      sources: [features]
+
+  features:
+    connections:
+      value: 10
+      evidence: claimed
+      note: One on the free plan.
+      sources: [page]
+    multihop:
+      value: null
+    port_forwarding:
+      value: null
+    split_tunnel:
+      value: null
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android]
+      sources: [page, play, app-store]
+    open_source:
+      value: none
+      sources: [apk]
+    telemetry:
+      value: null
+      note: >-
+        The Android app carries no analytics or crash-reporting libraries, but the App Store label says a device ID is
+        used for its own marketing.
+      sources: [apk, app-store]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 4.99, currency: USD }
+      sources: [page, app-store]
+    best:
+      value: { amount: 2.08, currency: USD }
+      note: $24.99 a year.
+      sources: [page, app-store]
+    best_term: 12
+    renewal_increase:
+      value: 0
+      sources: [renewal-faq, vpn-terms]
+    free_tier:
+      value: true
+      note: Five countries and one device.
+      sources: [features]
+    refund_days:
+      value: 30
+      note: Once per account.
+      sources: [vpn-terms]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        It sells a "strict no-log policy" and says it guarantees anonymity, while its revised policy keeps connection
+        times and data use for three months.
+      sources: [page, vpn-privacy]
+    affiliates:
+      value: null
+    review_sites: false
+    activism: false
+
+refs:
+  page:
+    url: https://www.cloudbric.com/cloudbric-vpn/
+    title: Cloudbric VPN page, with plans and FAQ
+  page-2022:
+    url: https://web.archive.org/web/20220510061608/https://www.cloudbric.com/cloudbric-vpn/
+    title: Cloudbric VPN page under the Cloudbric Corp. name (Wayback, May 2022)
+  vpn-privacy:
+    url: https://www.cloudbric.com/vpn-privacy-policy/
+    title: Cloudbric VPN privacy policy, revised version from 23 November 2026 at the top
+  vpn-terms:
+    url: https://www.cloudbric.com/vpn-terms-of-service/
+    title: Cloudbric VPN terms of service, revised version from 23 November 2026 at the top
+  amendment:
+    url: https://cloudbricvpn.zendesk.com/hc/en-us/articles/49844752843149
+    title: Cloudbric VPN Terms of Service and Privacy Policy Amendment (October 2026)
+  no-logs-faq:
+    url: https://cloudbricvpn.zendesk.com/hc/en-us/articles/35442957153293
+    title: Does Cloudbric VPN Store Any Logs?
+  features:
+    url: https://cloudbricvpn.zendesk.com/hc/en-us/articles/35443017766541
+    title: What are the Features of Cloudbric VPN?
+  private-dns:
+    url: https://cloudbricvpn.zendesk.com/hc/en-us/articles/35443067988749
+    title: What is Private DNS?
+  paypal-faq:
+    url: https://cloudbricvpn.zendesk.com/hc/en-us/articles/35511181891469
+    title: Does Cloudbric VPN Support PayPal Payments?
+  clbk:
+    url: https://cloudbricvpn.zendesk.com/hc/en-us/articles/48632104699917
+    title: How does my Cloudbric VPN subscription with CLBK work?
+  renewal-faq:
+    url: https://cloudbricvpn.zendesk.com/hc/en-us/articles/35636363521805
+    title: How Much Will I Need to Pay Upon Renewal?
+  merger:
+    url: https://www.cloudbric.com/cloudbric-merger-announcement/
+    title: Cloudbric, Inc. Merger Announcement (October 2023)
+  ceo:
+    url: https://www.pentasecurity.co.kr/ceo-info/
+    title: Penta Security CEO message, signed by Kim Tae-gyun (Korean)
+  locations:
+    url: https://www.pentasecurity.com/company/locations/
+    title: Penta Security locations, with its Japanese and Vietnamese companies
+  play:
+    url: https://play.google.com/store/apps/details?id=com.cloudbric.vpn
+    title: Cloudbric VPN – Fast & Secure on Google Play
+  app-store:
+    url: https://apps.apple.com/us/app/id6480168061
+    title: Cloudbric VPN on the App Store (US, prices and privacy label)
+  apk:
+    url: https://apkpure.net/cloudbric-vpn-%E2%80%93-fast-secure/com.cloudbric.vpn
+    title: Cloudbric VPN for Android 2.1.2, a Flutter app with WireGuard and no analytics or crash-reporting SDKs
