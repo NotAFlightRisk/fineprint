@@ -1,6 +1,7 @@
 {
-  "commit": "e285c39c0b2ddb7f3ac524d093ca0eb3e395beaf",
+  "commit": "be662ac2eeeadb12c955fd7b7d983e5fcaf40ae3",
   "entries": [
+    {"date":"2026-11-21","commit":"be662ac","pr":427,"id":"defyx-vpn","name":"Defyx VPN","added":true},
     {"date":"2026-11-21","commit":"e285c39","pr":426,"id":"tor-vpn","name":"Tor VPN","checked":true,"changes":[{"key":"infra.servers","from":"9183","to":"9592"},{"key":"infra.countries","from":"78","to":"76"}]},
     {"date":"2026-11-21","commit":"0b6bd76","pr":425,"id":"cloudbric-vpn","name":"Cloudbric VPN","added":true},
     {"date":"2026-11-21","commit":"ffabe74","pr":424,"id":"lagom-vpn","name":"Lagom VPN","added":true},
