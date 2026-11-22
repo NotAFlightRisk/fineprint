@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: AdGuard VPN
 icon: adguard-vpn.svg
-checked: 2026-11-05
+checked: 2026-11-22
 
 criteria:
   identity:
@@ -77,8 +77,10 @@ criteria:
           scope: apps
           source: masa-blog
       evidence: verified
-      note: An App Defense Alliance MASA Level 2 check of the Android app, with no public report or exact dates.
-      sources: [masa-blog]
+      note: >-
+        An App Defense Alliance MASA Level 2 check of the Android app, with no public report or exact dates. Google
+        Play no longer shows its security review badge.
+      sources: [masa-blog, play]
     report:
       value: regular
       note: Lists requests by country and year, last updated October 2026.
@@ -134,14 +136,29 @@ criteria:
       sources: [dns-leaks]
 
   infra:
-    ram_only: null
-    hosting: null
-    virtual_locations: null
-    servers: null
+    ram_only:
+      value: none
+      evidence: claimed
+      sources: [reddit-answer]
+    hosting:
+      value: rented
+      evidence: claimed
+      note: Dedicated physical servers rented from hosting firms, not cloud VPSes.
+      sources: [reddit-answer]
+    virtual_locations:
+      value: disclosed
+      evidence: claimed
+      note: Russia, India, Taiwan and China, which the browser extension marks as virtual. The website's location list doesn't.
+      sources: [reddit-answer, extension-virtual, server-locations]
+    servers:
+      value: 1000
+      evidence: claimed
+      note: Over 1,000.
+      sources: [reddit-answer]
     countries:
       value: 62
-      note: Across 75+ cities.
-      sources: [server-locations]
+      note: Across more than 80 locations.
+      sources: [server-locations, reddit-answer]
 
   features:
     connections:
@@ -307,6 +324,12 @@ refs:
   extension-repo:
     url: https://github.com/AdguardTeam/AdGuardVPNExtension
     title: AdguardTeam/AdGuardVPNExtension on GitHub
+  extension-virtual:
+    url: https://github.com/AdguardTeam/AdGuardVPNExtension/blob/f4d6c53bbedd0a89f3df893bbf58f385e3f0e84e/src/popup/components/Locations/Location.tsx#L70-L76
+    title: AdGuard VPN extension, virtual location label
+  reddit-answer:
+    url: https://www.reddit.com/r/Adguard/comments/1xyq6xd/does_adguard_vpn_use_ramonly_servers/
+    title: AdGuard's answers on RAM-only servers, hosting and virtual locations (r/Adguard, November 2026)
   affiliates:
     url: https://adguard-vpn.com/en/vpn-affiliate-program.html
     title: AdGuard VPN affiliate program
