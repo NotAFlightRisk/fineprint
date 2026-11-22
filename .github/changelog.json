@@ -1,6 +1,7 @@
 {
-  "commit": "be662ac2eeeadb12c955fd7b7d983e5fcaf40ae3",
+  "commit": "392c7ee251cb0866daf60bcd0e45b45828c793fd",
   "entries": [
+    {"date":"2026-11-22","commit":"392c7ee","pr":430,"id":"adguard-vpn","name":"AdGuard VPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"1 (tested)","grade":"bad"}]},
     {"date":"2026-11-21","commit":"be662ac","pr":427,"id":"defyx-vpn","name":"Defyx VPN","added":true},
     {"date":"2026-11-21","commit":"e285c39","pr":426,"id":"tor-vpn","name":"Tor VPN","checked":true,"changes":[{"key":"infra.servers","from":"9183","to":"9592"},{"key":"infra.countries","from":"78","to":"76"}]},
     {"date":"2026-11-21","commit":"0b6bd76","pr":425,"id":"cloudbric-vpn","name":"Cloudbric VPN","added":true},
