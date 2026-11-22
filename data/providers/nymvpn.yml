@@ -55,9 +55,10 @@ criteria:
       note: Operators agree not to record anything about users' activity. Opt-in app stats include session length, sent through the tunnel.
       sources: [operator-terms, privacy-policy, anon-stats]
     bandwidth:
-      value: null
-      note: There's a daily fair-use allowance, but the policy doesn't say how data use is counted or kept.
-      sources: [v2026-11, privacy-policy]
+      value: aggregate
+      evidence: claimed
+      note: It counts the data-allowance tickets each account draws against a daily fair-use limit, not the traffic itself.
+      sources: [v2026-11, data-allowance]
     source_ip:
       value: none
       evidence: claimed
@@ -120,11 +121,9 @@ criteria:
       note: Fast mode is two-hop WireGuard (AmneziaWG). Anonymous mode is its own five-hop mixnet with cover traffic.
       sources: [wireguard-help, torrenting]
     post_quantum:
-      value: null
-      note: >-
-        Its Lewes Protocol key exchange was an opt-in on Android in April 2026, but the toggle went in May
-        and Nym hasn't said whether it's now on for everyone.
-      sources: [lewes, android-changelog]
+      value: default
+      note: In Fast mode only, since version 2026.9 in June 2026. Anonymous mode's mixnet isn't post-quantum yet.
+      sources: [v2026-9, lewes, roadmap]
     kill_switch:
       value: system
       note: Built in and always on across all apps, with no toggle.
@@ -192,6 +191,11 @@ criteria:
       evidence: claimed
       note: Sentry crash reports and Nym's own anonymous usage stats are both off by default. Usage stats travel through the tunnel.
       sources: [privacy-policy, anon-stats, android-changelog]
+    trackers:
+      value: 1
+      evidence: tested
+      note: Sentry crash reporting, found by checking version 2026.15.3 against Exodus Privacy's tracker list. Every Android build includes it.
+      sources: [fdroid, android-sentry, exodus-signatures]
     fdroid:
       value: true
       sources: [fdroid]
@@ -319,6 +323,21 @@ refs:
   v2026-11:
     url: https://nym.com/blog/nymvpn-v2026.11
     title: NymVPN v2026.11
+  v2026-9:
+    url: https://nym.com/blog/nymvpn-v2026.9
+    title: NymVPN v2026.9 is live
+  roadmap:
+    url: https://nym.com/nymvpn-roadmap
+    title: The NymVPN roadmap
+  data-allowance:
+    url: https://web.archive.org/web/20260401173731/https://support.nym.com/hc/en-us/articles/34845187865105-Why-do-I-see-the-Monthly-data-limit-reached-Contact-Support-for-a-quick-data-boost-error
+    title: Why do I see the "Monthly data limit reached" error? (archived 2026-04-01)
+  android-sentry:
+    url: https://github.com/nymtech/nym-vpn-client/blob/74ce9ee4160ad75ccdb02e3856850b8bc6c9453d/nym-vpn-android/app/build.gradle.kts#L287-L288
+    title: nym-vpn-android build file, Sentry dependency
+  exodus-signatures:
+    url: https://web.archive.org/web/20261017091629/https://reports.exodus-privacy.eu.org/api/trackers
+    title: Exodus Privacy tracker signatures (archived 2026-10-17)
   v2026-12:
     url: https://nym.com/blog/nymvpn-v2026.12
     title: NymVPN v2026.12 is live
