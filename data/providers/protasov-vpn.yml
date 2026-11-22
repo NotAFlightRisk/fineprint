@@ -159,6 +159,11 @@ criteria:
         The apps send a report when the VPN core crashes, and this can be turned off in the settings. The policy also
         mentions crash logs and device details for diagnostics.
       sources: [home, policy]
+    trackers:
+      value: 0
+      evidence: tested
+      note: Version 0.6.5 from its GitHub releases, checked against Exodus Privacy's tracker list.
+      sources: [release-0-6-5, exodus-signatures]
     fdroid: false
 
   pricing:
@@ -225,3 +230,9 @@ refs:
   telegram:
     url: https://t.me/s/ProtasovVPN
     title: ProtasovVPN Telegram channel
+  release-0-6-5:
+    url: https://github.com/protasovvpn/ProtasovVPN/releases/tag/ProtasovVPN_0_6_5
+    title: ProtasovVPN 0.6.5 for Android, Windows
+  exodus-signatures:
+    url: https://web.archive.org/web/20261017091629/https://reports.exodus-privacy.eu.org/api/trackers
+    title: Exodus Privacy tracker signatures (archived 2026-10-17)
