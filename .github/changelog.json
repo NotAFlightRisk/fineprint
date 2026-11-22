@@ -1,6 +1,7 @@
 {
-  "commit": "bfaf14f869c5eb7453fa0a1361391b14b5368015",
+  "commit": "c6377b2e6297cf0cbc50a160de91b406544f3a0f",
   "entries": [
+    {"date":"2026-11-22","commit":"c6377b2","pr":436,"id":"nymvpn","name":"NymVPN","changes":[{"key":"logging.bandwidth","from":"Unknown","to":"Aggregated only (claimed)","grade":"ok"},{"key":"security.post_quantum","from":"Unknown","to":"On by default","grade":"good"},{"key":"clients.trackers","from":"Not checked","to":"1 (tested)","grade":"bad"}]},
     {"date":"2026-11-22","commit":"bfaf14f","pr":435,"id":"hide-me","name":"hide.me VPN","changes":[{"key":"identity.owner"},{"key":"transparency.bug_bounty","from":"Unknown","to":"No","grade":"ok"},{"key":"clients.trackers","from":"Not checked","to":"1 (tested)","grade":"bad"}]},
     {"date":"2026-11-22","commit":"8976928","pr":434,"id":"protasov-vpn","name":"Protasov VPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"0 (tested)","grade":"good"}]},
     {"date":"2026-11-22","commit":"b283833","pr":433,"id":"vpn-ac","name":"VPN.ac","changes":[{"key":"clients.trackers","from":"Not checked","to":"0 (tested)","grade":"good"}]},
