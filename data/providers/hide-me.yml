@@ -12,8 +12,10 @@ criteria:
       sources: [terms]
     owner:
       value: null
-      note: Its help centre calls eVenture Ltd the parent company and names nothing above it. hide.me doesn't say who holds the shares.
-      sources: [company-overview]
+      note: >-
+        Its help centre calls eVenture Ltd the parent, and its CEO said in 2020 it isn't part of any bigger group.
+        hide.me doesn't say who holds the shares.
+      sources: [company-overview, i2coalition-spotlight]
     founded:
       value: 2012
       sources: [about]
@@ -90,8 +92,8 @@ criteria:
       value: none
       sources: [about, transparency-2025]
     bug_bounty:
-      value: null
-      note: Its site and help centre don't mention a bug bounty or a way to report security flaws.
+      value: false
+      note: No bounty, disclosure policy or security.txt on its site or in its help centre.
       sources: [help-centre]
     incidents:
       value: []
@@ -194,6 +196,11 @@ criteria:
       value: opt_in
       note: Anonymised crash reports and connection diagnostics, only with your consent.
       sources: [privacy-policy]
+    trackers:
+      value: 1
+      evidence: tested
+      note: Sentry crash reporting, found by checking the 6.1.2 APK from its site against Exodus Privacy's tracker list.
+      sources: [android-app, exodus-signatures]
     fdroid: false
 
   pricing:
@@ -317,6 +324,9 @@ refs:
   company-overview:
     url: https://hide.me/en/help/about-hide-me-vpn-company-overview-background/
     title: About hide.me VPN, company overview and background
+  i2coalition-spotlight:
+    url: https://policy.i2coalition.com/i2coalition-member-spotlight-hide-me/
+    title: 'i2Coalition Member Spotlight: Hide.me (2020)'
   is-it-safe:
     url: https://hide.me/en/blog/is-hide-me-safe/
     title: Is hide.me safe? Audits, jurisdiction, and track record explained
@@ -365,6 +375,12 @@ refs:
   android-release-notes:
     url: https://hide.me/en/help/hide-me-vpn-for-android-release-notes/
     title: hide.me VPN for Android release notes
+  android-app:
+    url: https://hide.me/en/software/android
+    title: hide.me VPN app for Android
+  exodus-signatures:
+    url: https://web.archive.org/web/20261017091629/https://reports.exodus-privacy.eu.org/api/trackers
+    title: Exodus Privacy tracker signatures (archived 2026-10-17)
   openvpn-obfuscation:
     url: https://hide.me/en/blog/security-hardened-openvpn-config-with-traffic-obfuscation/
     title: Security-hardened OpenVPN config with traffic obfuscation
