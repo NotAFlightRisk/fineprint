@@ -197,9 +197,9 @@
     {/if}
   {:catch}
     <p class="status" role="status">
-      The table didn't load. <button type="button" class="link" onclick={() => location.reload()}
-        >Try again</button
-      >
+      The table didn't load. <button type="button" class="link" onclick={() => location.reload()}>
+        Try again
+      </button>
     </p>
   {/await}
 {/if}

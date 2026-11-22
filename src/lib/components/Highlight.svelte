@@ -4,8 +4,9 @@
   let { text, terms }: { text: string; terms: Term[] } = $props();
 </script>
 
-{#each highlight(text, terms) as piece, index (index)}{#if piece.hit}<mark>{piece.text}</mark
-    >{:else}{piece.text}{/if}{/each}
+{#each highlight(text, terms) as piece, index (index)}{#if piece.hit}<mark>
+      {piece.text}
+    </mark>{:else}{piece.text}{/if}{/each}
 
 <style>
   mark {

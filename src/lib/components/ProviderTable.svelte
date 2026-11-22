@@ -68,9 +68,9 @@
   <button type="button" onclick={() => sortOn(id)} {@attach tip(description)}>
     {label}
     {#if sort.id === id}
-      <svg viewBox="0 0 16 16" aria-hidden="true" class:down={sort.direction === -1}
-        ><path d="M8 13V3M4 7l4-4 4 4" /></svg
-      >
+      <svg viewBox="0 0 16 16" aria-hidden="true" class:down={sort.direction === -1}>
+        <path d="M8 13V3M4 7l4-4 4 4" />
+      </svg>
     {/if}
   </button>
 {/snippet}

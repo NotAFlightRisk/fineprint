@@ -174,8 +174,10 @@ npm run dev`;
       <a
         href="{site.repo}/issues?q=is%3Aissue+label%3Anew-provider"
         target="_blank"
-        rel="noopener external">already on it</a
-      >.
+        rel="noopener external"
+      >
+        already on it
+      </a>.
     </p>
   </div>
   <div class="body">
@@ -259,9 +261,9 @@ npm run dev`;
       </li>
       <li>
         Title it as a
-        <a href="https://www.conventionalcommits.org/" target="_blank" rel="noopener external"
-          >Conventional Commit</a
-        >, like <code>fix(data): mullvad's port forwarding</code> or
+        <a href="https://www.conventionalcommits.org/" target="_blank" rel="noopener external">
+          Conventional Commit
+        </a>, like <code>fix(data): mullvad's port forwarding</code> or
         <code>feat: sort by price</code>.
       </li>
     </ol>
@@ -272,9 +274,9 @@ npm run dev`;
     </p>
     <p class="small">
       By contributing, you agree to the
-      <a href={file('.github/CODE_OF_CONDUCT.md')} target="_blank" rel="noopener external"
-        >Code of Conduct</a
-      >, and to your work being
+      <a href={file('.github/CODE_OF_CONDUCT.md')} target="_blank" rel="noopener external">
+        Code of Conduct
+      </a>, and to your work being
       <a href={file('LICENSE')} target="_blank" rel="noopener external">MIT licensed</a>.
     </p>
   </div>
@@ -300,14 +302,15 @@ npm run dev`;
           <tr>
             <th scope="row"><a href="/{provider.id}">{provider.name}</a></th>
             <td class:stale={provider.stale}>
-              <time datetime={provider.checked}>{formatDate(provider.checked)}</time
-              >{#if provider.stale}, due a recheck{/if}
+              <time datetime={provider.checked}>
+                {formatDate(provider.checked)}
+              </time>{#if provider.stale}, due a recheck{/if}
             </td>
             <td>{gaps(provider)}</td>
             <td>
-              <a href={editUrl(provider.id)} target="_blank" rel="noopener external"
-                >Edit<span class="visually-hidden"> {provider.name}</span></a
-              >
+              <a href={editUrl(provider.id)} target="_blank" rel="noopener external">
+                Edit<span class="visually-hidden"> {provider.name}</span>
+              </a>
             </td>
           </tr>
         {/each}

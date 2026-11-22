@@ -4,9 +4,9 @@
   let { ref, number, title }: { ref: string; number: number | undefined; title: string } = $props();
 </script>
 
-<a class="cite" href="#ref-{ref}" {@attach tip(title)}
-  ><span class="visually-hidden">{'Source '}</span>{number}</a
->
+<a class="cite" href="#ref-{ref}" {@attach tip(title)}>
+  <span class="visually-hidden">{'Source '}</span>{number}
+</a>
 
 <style>
   .cite {

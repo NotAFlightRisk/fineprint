@@ -35,9 +35,9 @@
             <dd>
               <p class="value">
                 {#if fact.grade !== 'info'}<GradeMark grade={fact.grade} />{/if}
-                <span class:unknown={fact.grade === null}
-                  ><Highlight text={fact.text} {terms} /></span
-                >
+                <span class:unknown={fact.grade === null}>
+                  <Highlight text={fact.text} {terms} />
+                </span>
               </p>
               {#if detail}
                 <p class="detail"><Highlight text={excerpt(detail, terms)} {terms} /></p>
@@ -47,9 +47,9 @@
         {/each}
       </dl>
       {#if matches.length > limit}
-        <a class="more" href="/{summary.id}"
-          >{matches.length - limit} more<span class="visually-hidden"> for {summary.name}</span></a
-        >
+        <a class="more" href="/{summary.id}">
+          {matches.length - limit} more<span class="visually-hidden"> for {summary.name}</span>
+        </a>
       {/if}
     </div>
   {:else}

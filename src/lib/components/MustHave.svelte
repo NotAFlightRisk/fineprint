@@ -18,8 +18,10 @@
       <button
         type="button"
         aria-pressed={selected.includes(check.id)}
-        onclick={() => toggle(check.id)}>{check.label}</button
+        onclick={() => toggle(check.id)}
       >
+        {check.label}
+      </button>
     {/each}
   </div>
 </fieldset>
