@@ -93,8 +93,10 @@
         <a
           href="{site.repo}/blob/main/.github/changelog.json"
           target="_blank"
-          rel="noopener external">the changelog file</a
-        >.
+          rel="noopener external"
+        >
+          the changelog file
+        </a>.
       </p>
     {/if}
   </div>

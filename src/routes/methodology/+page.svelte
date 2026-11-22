@@ -55,10 +55,10 @@
     </p>
     <p>
       Nobody pays to be listed, there are no affiliate links, and the data lives in
-      <a href="{site.repo}/tree/main/data" target="_blank" rel="noopener external"
-        >plain YAML files on GitHub</a
-      >, so you can check our working or fix it. There's a free <a href="/api">API</a> too, if you'd like
-      to build something with it.
+      <a href="{site.repo}/tree/main/data" target="_blank" rel="noopener external">
+        plain YAML files on GitHub
+      </a>, so you can check our working or fix it. There's a free <a href="/api">API</a> too, if you'd
+      like to build something with it.
     </p>
   </div>
 </section>

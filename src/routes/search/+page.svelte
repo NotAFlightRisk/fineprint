@@ -113,9 +113,9 @@
 
 <form class="box" role="search" onsubmit={submit}>
   <label for="query" class="visually-hidden">Search providers</label>
-  <svg viewBox="0 0 24 24" aria-hidden="true"
-    ><circle cx="10.5" cy="10.5" r="6.5" /><path d="m15.5 15.5 5 5" /></svg
-  >
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <circle cx="10.5" cy="10.5" r="6.5" /><path d="m15.5 15.5 5 5" />
+  </svg>
   <input
     id="query"
     type="search"

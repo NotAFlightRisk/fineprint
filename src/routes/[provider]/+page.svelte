@@ -76,9 +76,9 @@
     <div class="name">
       <h1><img src="/icons/{provider.icon}" alt="" width="64" height="64" />{provider.name}</h1>
       <p class="meta">
-        <a href={website} target="_blank" rel="noopener external"
-          >{formatValue(criteria.get('identity.website')!, website)}</a
-        >
+        <a href={website} target="_blank" rel="noopener external">
+          {formatValue(criteria.get('identity.website')!, website)}
+        </a>
         {#each where as part, index (part)}
           <span aria-hidden="true">·</span>
           <span>
@@ -126,13 +126,13 @@
             {#each flags as flag, index (index)}
               <li>
                 <GradeMark grade="bad" />
-                <span
-                  ><a href="#{flag.id}">{flag.label}</a>:
-                  {#if flag.detail}<button type="button" class="noted" {@attach tip(flag.detail)}
-                      >{flag.value}</button
-                    >{:else}{flag.value}{/if}
-                  {#if flag.serious}<span class="tag serious">Serious</span>{/if}</span
-                >
+                <span>
+                  <a href="#{flag.id}">{flag.label}</a>:
+                  {#if flag.detail}<button type="button" class="noted" {@attach tip(flag.detail)}>
+                      {flag.value}
+                    </button>{:else}{flag.value}{/if}
+                  {#if flag.serious}<span class="tag serious">Serious</span>{/if}
+                </span>
               </li>
             {/each}
           </ul>
@@ -154,9 +154,9 @@
           {@const entry = provider.criteria[criterion.id]}
           <div class="row" id={criterion.id}>
             <dt>
-              <button type="button" class="noted" {@attach tip(criterion.description)}
-                >{criterion.label}</button
-              >
+              <button type="button" class="noted" {@attach tip(criterion.description)}>
+                {criterion.label}
+              </button>
             </dt>
             <dd>
               <p class="value" class:graded={entry?.grade !== 'info'}>
@@ -166,19 +166,21 @@
                     <Flag code={entry.value} />
                   {/if}
                   {#if criterion.type === 'url' && typeof entry?.value === 'string'}
-                    <a class="url" href={entry.value} target="_blank" rel="noopener external"
-                      >{showEntry(criterion, entry)}</a
-                    >
+                    <a class="url" href={entry.value} target="_blank" rel="noopener external">
+                      {showEntry(criterion, entry)}
+                    </a>
                   {:else}
-                    <span class:unknown={!entry || entry.value === null}
-                      >{showEntry(criterion, entry)}</span
-                    >
+                    <span class:unknown={!entry || entry.value === null}>
+                      {showEntry(criterion, entry)}
+                    </span>
                   {/if}
                   {#if entry?.evidence}<button
                       type="button"
                       class="tag noted"
-                      {@attach tip(evidenceMeanings[entry.evidence])}>{entry.evidence}</button
-                    >{/if}
+                      {@attach tip(evidenceMeanings[entry.evidence])}
+                    >
+                      {entry.evidence}
+                    </button>{/if}
                   {#each entry?.sources ?? [] as ref (ref)}
                     <Cite {ref} number={cited.get(ref)} title={provider.refs[ref].title} />
                   {/each}
@@ -205,9 +207,9 @@
         <li id="ref-{ref}">
           <span class="number">{number}</span>
           <div>
-            <a href={provider.refs[ref].url} target="_blank" rel="noopener external"
-              >{provider.refs[ref].title}</a
-            >
+            <a href={provider.refs[ref].url} target="_blank" rel="noopener external">
+              {provider.refs[ref].title}
+            </a>
             <p>{provider.refs[ref].url.replace(/^https:\/\//, '')}</p>
             {#if backs(ref).length}<p>Backs {backs(ref).join(', ')}</p>{/if}
           </div>
@@ -240,8 +242,10 @@
           `${provider.name}: `
         )}"
         target="_blank"
-        rel="noopener external">Report a mistake</a
+        rel="noopener external"
       >
+        Report a mistake
+      </a>
     </p>
   </section>
 </article>

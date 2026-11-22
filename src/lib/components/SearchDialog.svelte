@@ -50,9 +50,9 @@
     (target === dialog || (target as Element).closest('a')) && (open = false)}
 >
   <label>
-    <svg viewBox="0 0 24 24" aria-hidden="true"
-      ><circle cx="10.5" cy="10.5" r="6.5" /><path d="m15.5 15.5 5 5" /></svg
-    >
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <circle cx="10.5" cy="10.5" r="6.5" /><path d="m15.5 15.5 5 5" />
+    </svg>
     <input
       type="text"
       role="combobox"
@@ -98,9 +98,9 @@
     {/each}
   </div>
   {#if results.length > limit}
-    <a class="all" href="/search?q={encodeURIComponent(query.trim())}"
-      >All {results.length} results</a
-    >
+    <a class="all" href="/search?q={encodeURIComponent(query.trim())}">
+      All {results.length} results
+    </a>
   {:else if searchIndex.failed}
     <p>Search didn't load</p>
   {:else if terms.length && searchIndex.current && !results.length}

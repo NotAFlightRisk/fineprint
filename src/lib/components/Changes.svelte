@@ -27,9 +27,9 @@
       </p>
       <div class="what">
         {#if named}
-          {#if entry.removed}<strong>{entry.name}</strong>{:else}<a class="name" href="/{entry.id}"
-              >{entry.name}</a
-            >{/if}
+          {#if entry.removed}<strong>{entry.name}</strong>{:else}<a class="name" href="/{entry.id}">
+              {entry.name}
+            </a>{/if}
         {/if}
         <ul>
           {#if entry.added}<li><span>Added to the comparison</span></li>{/if}
