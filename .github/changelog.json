@@ -1,6 +1,7 @@
 {
-  "commit": "b2838334214f863084b122e485789ed594bfa3b0",
+  "commit": "8976928ff1e5d203b2132f02ea19fc0e58e37550",
   "entries": [
+    {"date":"2026-11-22","commit":"8976928","pr":434,"id":"protasov-vpn","name":"Protasov VPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"0 (tested)","grade":"good"}]},
     {"date":"2026-11-22","commit":"b283833","pr":433,"id":"vpn-ac","name":"VPN.ac","changes":[{"key":"clients.trackers","from":"Not checked","to":"0 (tested)","grade":"good"}]},
     {"date":"2026-11-22","commit":"d708c95","pr":432,"id":"solo-vpn","name":"SOLO VPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"4 (tested)","grade":"bad"}]},
     {"date":"2026-11-22","commit":"3657061","pr":431,"id":"geph","name":"Geph","changes":[{"key":"clients.telemetry","from":"None","to":"Can't be turned off","grade":"bad"},{"key":"clients.trackers","from":"Not checked","to":"1 (tested)","grade":"bad"}]},
