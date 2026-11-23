@@ -198,6 +198,13 @@ criteria:
         The privacy policy says the apps upload how you use them and error data, with no opt-out stated. The free version
         also runs Google's ads SDK.
       sources: [privacy-policy, play]
+    trackers:
+      value: 4
+      evidence: tested
+      note: >-
+        AdMob, Adobe Experience Cloud, Crashlytics and Firebase Analytics, found by checking version 3.15.1 of
+        Panda Dome, the app the VPN comes inside, against Exodus Privacy's tracker list.
+      sources: [play, exodus-signatures]
     fdroid: false
 
   pricing:
@@ -318,3 +325,6 @@ refs:
   heegong-2023:
     url: https://heegong.github.io/posts/Local-privilege-escalation-in-Panda-Dome-VPN-for-Windows-Installer/
     title: HeeChan Kim, CVE-2023-37849 write-up and timeline
+  exodus-signatures:
+    url: https://web.archive.org/web/20261017091629/https://reports.exodus-privacy.eu.org/api/trackers
+    title: Exodus Privacy tracker signatures (archived 2026-10-17)
