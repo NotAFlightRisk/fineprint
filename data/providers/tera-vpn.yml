@@ -157,6 +157,11 @@ criteria:
         The app carries Flurry Analytics and Sentry crash reporting, and its Play data safety form says it shares
         crash logs, app interactions, device IDs and location for analytics. Neither says whether you can opt out.
       sources: [apk, play-data-safety, privacy]
+    trackers:
+      value: 4
+      evidence: tested
+      note: AdMob, Flurry, Pangle and Sentry, found by checking version 5.3 against Exodus Privacy's tracker list.
+      sources: [play, exodus-signatures]
     fdroid: false
 
   pricing:
@@ -212,3 +217,6 @@ refs:
   apk:
     url: https://apkpure.net/tera-vpn/tera.aiapp.com
     title: Tera VPN for Android 5.2, whose APK is built on OpenVPN for Android and Xray, with AdMob, Flurry Analytics and Sentry
+  exodus-signatures:
+    url: https://web.archive.org/web/20261017091629/https://reports.exodus-privacy.eu.org/api/trackers
+    title: Exodus Privacy tracker signatures (archived 2026-10-17)
