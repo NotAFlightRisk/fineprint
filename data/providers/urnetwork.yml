@@ -205,6 +205,11 @@ criteria:
       value: null
       note: The Android app has no third-party analytics or crash SDK, and the privacy policy doesn't say whether the apps send usage data.
       sources: [privacy, android-build]
+    trackers:
+      value: 0
+      evidence: tested
+      note: Version 2026.10.15-play, checked against Exodus Privacy's tracker list.
+      sources: [play, exodus-signatures]
     fdroid:
       value: true
       sources: [fdroid]
@@ -372,3 +377,6 @@ refs:
   provide-default:
     url: https://github.com/urnetwork/android/commit/d27fe4feb6b3f2314942455da498af1dae7cf0be
     title: urnetwork/android commit d27fe4f, providing defaults to never (July 11, 2026)
+  exodus-signatures:
+    url: https://web.archive.org/web/20261017091629/https://reports.exodus-privacy.eu.org/api/trackers
+    title: Exodus Privacy tracker signatures (archived 2026-10-17)
