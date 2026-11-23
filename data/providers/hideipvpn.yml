@@ -146,6 +146,11 @@ criteria:
       value: null
       note: Both app store listings declare no data collected, but HideIPVPN doesn't say what its apps send.
       sources: [play, app-store]
+    trackers:
+      value: 0
+      evidence: tested
+      note: Version 3.0.2, checked against Exodus Privacy's tracker list.
+      sources: [play, exodus-signatures]
     fdroid:
       value: false
       sources: [software]
@@ -244,3 +249,6 @@ refs:
   app-store-developer:
     url: https://apps.apple.com/us/developer/server-management-llc/id964479809
     title: Server Management LLC apps on the App Store
+  exodus-signatures:
+    url: https://web.archive.org/web/20261017091629/https://reports.exodus-privacy.eu.org/api/trackers
+    title: Exodus Privacy tracker signatures (archived 2026-10-17)
