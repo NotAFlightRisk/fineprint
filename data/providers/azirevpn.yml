@@ -190,6 +190,11 @@ criteria:
       value: none
       evidence: claimed
       sources: [play-data-safety, app-store]
+    trackers:
+      value: 0
+      evidence: tested
+      note: Version 2.4.2, checked against Exodus Privacy's tracker list.
+      sources: [play-store, exodus-signatures]
     fdroid:
       value: false
       sources: [fdroid-search]
@@ -328,3 +333,6 @@ refs:
   mb-bug-bounty:
     url: https://www.malwarebytes.com/secure
     title: Malwarebytes Coordinated Vulnerability Disclosure Bug Bounty Program
+  exodus-signatures:
+    url: https://web.archive.org/web/20261017091629/https://reports.exodus-privacy.eu.org/api/trackers
+    title: Exodus Privacy tracker signatures (archived 2026-10-17)
