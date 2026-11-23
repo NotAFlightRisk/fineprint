@@ -1,0 +1,255 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: Begzar VPN
+icon: begzar-vpn.png
+checked: 2026-11-23
+
+criteria:
+  identity:
+    website: https://begzar.app
+    legal_entity:
+      value: null
+      note: >-
+        Begzar's site and policy name no company. Google Play lists UnboundTech UG in Berlin as the developer, but
+        that account publishes other projects' apps too, like Hiddify, and Begzar's support address there is a Gmail one.
+      sources: [policy, play, play-developer]
+    owner:
+      value: null
+      note: Nothing beyond the shared Google Play account ties it to UnboundTech or its owner.
+      sources: [play-developer]
+    founded:
+      value: 2024
+      note: Its Telegram channel was created in May 2024.
+      sources: [telegram-2024]
+    team:
+      value: anonymous
+      note: Its developer signs posts with a pseudonym, PsrkGermez.
+      sources: [review-post]
+    sister_brands:
+      value: []
+    acquisitions:
+      value: []
+
+  jurisdiction:
+    hq:
+      value: DE
+      evidence: claimed
+      note: Only its Google Play publisher is German. Begzar names no country of its own, and it's built for users in Iran.
+      sources: [play, github]
+    entities:
+      value: null
+      note: Begzar's own pages name no company.
+      sources: [home]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [policy]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [policy]
+    timestamps:
+      value: 'yes'
+      evidence: claimed
+      note: >-
+        The policy rules out connection times tied to you, but each install gets a random session key and the
+        server records when it was last active, with no retention period given.
+      sources: [policy, issue-48]
+    bandwidth:
+      value: aggregate
+      evidence: claimed
+      note: Premium accounts keep a traffic counter.
+      sources: [policy]
+    source_ip:
+      value: null
+      note: The policy keeps the first three parts of your IP address, with no set time limit, to improve connections.
+      sources: [policy]
+    proven:
+      value: []
+    policy: https://begzar.app/privacy
+
+  transparency:
+    audits:
+      value: []
+      note: It says Paskoocheh's security team reviewed the app in 2026, but no report's been published.
+      sources: [review-post]
+    report:
+      value: none
+    canary:
+      value: none
+    bug_bounty:
+      value: false
+    incidents:
+      value: []
+
+  account:
+    email:
+      value: null
+      note: >-
+        The free service needs no account, and Premium accounts made on the site or in the app need an email. It
+        doesn't say whether its Telegram bot, which sells Premium too, asks for one.
+      sources: [signup, release-8, payments-post]
+    personal_data:
+      value: []
+      sources: [signup]
+    payment:
+      value: [app_store, bank, other_crypto]
+      note: TRX on the site, Google Play in the Android app, and Iranian bank card transfers through its Telegram bot.
+      sources: [premium, payments-post]
+
+  security:
+    protocols:
+      value: [other]
+      note: It's built on Xray, and the app handles VLESS, VMess, Trojan and Shadowsocks.
+      sources: [home, release-8]
+    post_quantum:
+      value: null
+    kill_switch:
+      value: none
+      note: Neither the app's settings nor its site mention one.
+      sources: [release-8]
+    dns:
+      value: third_party
+      note: The app's DNS setting offers Cloudflare, Google, Quad9 and OpenDNS, or one you type in.
+      sources: [release-8]
+
+  infra:
+    ram_only:
+      value: null
+    hosting:
+      value: null
+      note: It pays for servers in dollars, and its site asks for server donations too.
+      sources: [price-post, home]
+    virtual_locations:
+      value: null
+    servers:
+      value: null
+    countries:
+      value: null
+
+  features:
+    connections:
+      value: 1
+      note: Premium is priced per device, up to 5 on one account ($8.99 a month for 5).
+      sources: [premium]
+    multihop:
+      value: false
+    obfuscation:
+      value: [v2ray]
+      note: Xray's VLESS with REALITY.
+      sources: [release-8]
+    port_forwarding:
+      value: false
+    split_tunnel:
+      value: true
+      sources: [play]
+    blocking:
+      value: []
+
+  clients:
+    platforms:
+      value: [windows, macos, ios, android]
+      note: iOS and macOS only through Apple's TestFlight beta. Android TV too.
+      sources: [home, testflight, testflight-post]
+    open_source:
+      value: none
+      note: Versions before 5.5.0 were MIT-licensed. Newer ones are closed.
+      sources: [github]
+    telemetry:
+      value: forced
+      evidence: claimed
+      note: The policy says the apps use Firebase Analytics, and the app has no setting to turn it off.
+      sources: [policy, release-8]
+    trackers:
+      value: 1
+      evidence: tested
+      note: >-
+        Google Firebase Analytics, found by checking the 8.0.0 APK from its GitHub releases, and the same version
+        from Google Play, against Exodus Privacy's tracker list.
+      sources: [release-8, exodus-signatures]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 2.99, currency: USD }
+      sources: [premium]
+    best:
+      value: { amount: 1.62, currency: USD }
+      note: $19.49 for a year, paid in TRX.
+      sources: [premium]
+    best_term: 12
+    renewal_increase:
+      value: 0
+      note: Plans paid in TRX don't renew, they add days to your account.
+      sources: [premium]
+    free_tier:
+      value: true
+      note: Slower shared servers, with ads you have to watch to the end or it disconnects you.
+      sources: [home, release-8]
+    refund_days:
+      value: null
+      note: Its site has no terms or refund policy.
+      sources: [home]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        Its Play listing and GitHub page say no data is collected, while the policy lists part of your IP address,
+        Firebase Analytics and Premium account emails.
+      sources: [play, github, policy]
+    affiliates:
+      value: false
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://begzar.app
+    title: Begzar, free VPN with a Premium upgrade
+  premium:
+    url: https://begzar.app/premium
+    title: Begzar Premium, prices per device and paying with TRX
+  signup:
+    url: https://begzar.app/register
+    title: Begzar, create an account
+  policy:
+    url: https://begzar.app/privacy
+    title: Begzar privacy policy (October 2026)
+  play:
+    url: https://play.google.com/store/apps/details?id=cloud.begzar.begzar
+    title: Begzar VPN on Google Play, published by UnboundTech UG
+  play-developer:
+    url: https://play.google.com/store/apps/developer?id=UnboundTechCo
+    title: UnboundTechCo apps on Google Play
+  github:
+    url: https://github.com/Begzar/BegzarApp
+    title: Begzar/BegzarApp on GitHub, closed source from 5.5.0
+  release-8:
+    url: https://github.com/Begzar/BegzarApp/releases/tag/v8.0.0
+    title: Begzar 8.0.0 for Android and Windows, GitHub release
+  issue-48:
+    url: https://github.com/Begzar/BegzarApp/issues/48
+    title: Begzar's answer on closed source, the session key and what its server records (November 2026)
+  testflight:
+    url: https://testflight.apple.com/join/cRSCr51a
+    title: Begzar on TestFlight
+  testflight-post:
+    url: https://t.me/BegzarVPN/1265
+    title: Begzar fixes iOS and macOS disconnects in a TestFlight build (October 2026, Persian)
+  payments-post:
+    url: https://t.me/BegzarVPN/1260
+    title: Begzar's three ways to pay for Premium (October 2026, Persian)
+  price-post:
+    url: https://t.me/BegzarVPN/1253
+    title: Begzar raises Premium prices 15% as its dollar server costs climb (October 2026, Persian)
+  telegram-2024:
+    url: https://web.archive.org/web/20240714103526/https://t.me/s/BegzarVPN
+    title: Begzar's Telegram channel, archived July 2024
+  exodus-signatures:
+    url: https://web.archive.org/web/20261017091629/https://reports.exodus-privacy.eu.org/api/trackers
+    title: Exodus Privacy tracker signatures (archived 2026-10-17)
+  review-post:
+    url: https://t.me/BegzarVPN/1231
+    title: Begzar says Paskoocheh's security team reviewed it, signed by its developer (September 2026, Persian)
