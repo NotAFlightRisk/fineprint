@@ -178,6 +178,11 @@ criteria:
         The policy says it collects device model, OS, language, region, app version and crash reports, and Android
         version 3.6.0 bundles Firebase Crashlytics and AppsFlyer with no setting to turn them off.
       sources: [privacy, apk]
+    trackers:
+      value: 3
+      evidence: tested
+      note: AdMob, AppsFlyer and Crashlytics, found by checking version 3.6.0 against Exodus Privacy's tracker list.
+      sources: [play, exodus-signatures]
     fdroid: false
 
   pricing:
@@ -295,3 +300,6 @@ refs:
   agreement:
     url: https://api.wirevpn.app/files/user_agreement.html
     title: WireVPN user agreement
+  exodus-signatures:
+    url: https://web.archive.org/web/20261017091629/https://reports.exodus-privacy.eu.org/api/trackers
+    title: Exodus Privacy tracker signatures (archived 2026-10-17)
