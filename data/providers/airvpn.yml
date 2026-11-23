@@ -226,6 +226,11 @@ criteria:
       evidence: claimed
       note: The Play Store listing declares no data collected, and the open-source Android app pulls in no analytics or crash-reporting libraries.
       sources: [play-data-safety, eddie-android-gitlab]
+    trackers:
+      value: 0
+      evidence: tested
+      note: Version 4.1.0, checked against Exodus Privacy's tracker list.
+      sources: [play-android, exodus-signatures]
     fdroid:
       value: false
       note: The APK is offered on AirVPN's own site.
@@ -412,3 +417,9 @@ refs:
   multihop:
     url: https://airvpn.org/forums/topic/68249-multi-hop-daita-like-system/
     title: multi-hop + DAITA-like system (staff reply, 2025)
+  exodus-signatures:
+    url: https://web.archive.org/web/20261017091629/https://reports.exodus-privacy.eu.org/api/trackers
+    title: Exodus Privacy tracker signatures (archived 2026-10-17)
+  play-android:
+    url: https://play.google.com/store/apps/details?id=org.airvpn.eddie
+    title: AirVPN Eddie Client on Google Play
