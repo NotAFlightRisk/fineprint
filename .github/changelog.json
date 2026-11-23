@@ -1,6 +1,8 @@
 {
-  "commit": "5c62d7d15dfe08d59d9e0e3a66da42af3f2988dc",
+  "commit": "766c35aa22b4eb0009e1dc635dc5b81fc5d2cec0",
   "entries": [
+    {"date":"2026-11-23","commit":"35c8cec","pr":543,"id":"best-vpn","name":"Best VPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"23 (tested)","grade":"bad"}]},
+    {"date":"2026-11-23","commit":"1baf2d3","pr":542,"id":"relyvpn","name":"RelyVPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"0 (tested)","grade":"good"}]},
     {"date":"2026-11-23","commit":"5c62d7d","pr":541,"id":"private-internet-access","name":"Private Internet Access","changes":[{"key":"clients.trackers","from":"Not checked","to":"0 (tested)","grade":"good"}]},
     {"date":"2026-11-23","commit":"2203c63","pr":540,"id":"kaspersky-vpn","name":"Kaspersky VPN","changes":[{"key":"clients.trackers","from":"7","to":"7 (tested)","grade":"bad"}]},
     {"date":"2026-11-23","commit":"32e6640","pr":539,"id":"mullvad","name":"Mullvad VPN","changes":[{"key":"clients.trackers","from":"0","to":"0 (tested)","grade":"good"}]},
