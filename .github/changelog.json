@@ -1,6 +1,11 @@
 {
-  "commit": "4a44631200c0d458e41da34dd580b6b9a627d54c",
+  "commit": "041aa7499443c4986df97e4afa0e20a5ab864c22",
   "entries": [
+    {"date":"2026-11-23","commit":"041aa74","pr":528,"id":"millenvpn","name":"MillenVPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"0 (tested)","grade":"good"}]},
+    {"date":"2026-11-23","commit":"1f04653","pr":527,"id":"bullvpn","name":"BullVPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"4 (tested)","grade":"bad"}]},
+    {"date":"2026-11-23","commit":"d9c2fff","pr":526,"id":"switchvpn","name":"SwitchVPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"0 (tested)","grade":"good"}]},
+    {"date":"2026-11-23","commit":"c1ea9d9","pr":525,"id":"lightxtreme-vpn","name":"LightXtreme VPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"5 (tested)","grade":"bad"}]},
+    {"date":"2026-11-23","commit":"6480bd7","pr":524,"id":"bvpn","name":"bVPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"5 (tested)","grade":"bad"}]},
     {"date":"2026-11-23","commit":"4a44631","pr":523,"id":"safeshell-vpn","name":"SafeShell VPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"6 (tested)","grade":"bad"}]},
     {"date":"2026-11-23","commit":"0674e22","pr":522,"id":"hirovpn","name":"Hiro VPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"7 (tested)","grade":"bad"}]},
     {"date":"2026-11-23","commit":"10998cd","pr":521,"id":"setupvpn","name":"SetupVPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"1 (tested)","grade":"bad"}]},
