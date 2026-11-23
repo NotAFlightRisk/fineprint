@@ -1,6 +1,7 @@
 {
-  "commit": "766c35aa22b4eb0009e1dc635dc5b81fc5d2cec0",
+  "commit": "0311c13ffe8e35b9f5791de1e42efb5ab22ea501",
   "entries": [
+    {"date":"2026-11-23","commit":"0311c13","pr":545,"id":"vpn-local","name":"VPN Local","changes":[{"key":"clients.trackers","from":"Not checked","to":"6 (tested)","grade":"bad"}]},
     {"date":"2026-11-23","commit":"35c8cec","pr":543,"id":"best-vpn","name":"Best VPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"23 (tested)","grade":"bad"}]},
     {"date":"2026-11-23","commit":"1baf2d3","pr":542,"id":"relyvpn","name":"RelyVPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"0 (tested)","grade":"good"}]},
     {"date":"2026-11-23","commit":"5c62d7d","pr":541,"id":"private-internet-access","name":"Private Internet Access","changes":[{"key":"clients.trackers","from":"Not checked","to":"0 (tested)","grade":"good"}]},
