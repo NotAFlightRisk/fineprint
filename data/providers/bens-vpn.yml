@@ -172,6 +172,11 @@ criteria:
         The policy says the apps send device details, crash reports, session lengths, server use and UI interactions,
         and names Firebase and App Center. Nothing offers a way to turn it off.
       sources: [policy]
+    trackers:
+      value: 0
+      evidence: tested
+      note: Version 1.21.1, checked against Exodus Privacy's tracker list.
+      sources: [play, exodus-signatures]
     fdroid: false
 
   pricing:
@@ -291,3 +296,6 @@ refs:
   app-store:
     url: https://apps.apple.com/us/app/bens-vpn/id1673147025
     title: Ben's VPN by KONDAKOV&GORIN LLC on the App Store (US)
+  exodus-signatures:
+    url: https://web.archive.org/web/20261017091629/https://reports.exodus-privacy.eu.org/api/trackers
+    title: Exodus Privacy tracker signatures (archived 2026-10-17)
