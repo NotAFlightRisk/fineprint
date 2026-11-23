@@ -1,6 +1,7 @@
 {
-  "commit": "ddee9de85067dff41b37c9caa7cb5762422267c3",
+  "commit": "11e44f96c59ebcac5857e2720f465147455745fc",
   "entries": [
+    {"date":"2026-11-23","commit":"11e44f9","pr":547,"id":"argovpn","name":"ArgoVPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"0 (tested)","grade":"good"}]},
     {"date":"2026-11-23","commit":"ddee9de","pr":546,"id":"browsec","name":"Browsec","changes":[{"key":"clients.trackers","from":"Not checked","to":"2 (tested)","grade":"bad"}]},
     {"date":"2026-11-23","commit":"fecd8cd","pr":544,"id":"bolehvpn","name":"BolehVPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"0 (tested)","grade":"good"}]},
     {"date":"2026-11-23","commit":"0311c13","pr":545,"id":"vpn-local","name":"VPN Local","changes":[{"key":"clients.trackers","from":"Not checked","to":"6 (tested)","grade":"bad"}]},
