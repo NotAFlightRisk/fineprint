@@ -1,6 +1,16 @@
 {
-  "commit": "a72d2b348772aa7c520837588d497423fdc946e9",
+  "commit": "9c9d229507108bf1b6106792d4dc369b87fb4a9e",
   "entries": [
+    {"date":"2026-11-23","commit":"9c9d229","pr":478,"id":"starvpn","name":"StarVPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"3 (tested)","grade":"bad"}]},
+    {"date":"2026-11-23","commit":"64567cb","pr":477,"id":"vpn-unlimited","name":"VPN Unlimited","changes":[{"key":"clients.trackers","from":"Not checked","to":"6 (tested)","grade":"bad"}]},
+    {"date":"2026-11-23","commit":"57accaa","pr":476,"id":"hello-vpn","name":"Hello VPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"5 (tested)","grade":"bad"}]},
+    {"date":"2026-11-23","commit":"86c43c3","pr":475,"id":"vpn-satoshi","name":"VPN Satoshi","changes":[{"key":"clients.trackers","from":"Not checked","to":"12 (tested)","grade":"bad"}]},
+    {"date":"2026-11-23","commit":"9467c7b","pr":474,"id":"blokk","name":"BLOKK","changes":[{"key":"clients.trackers","from":"Not checked","to":"2 (tested)","grade":"bad"}]},
+    {"date":"2026-11-23","commit":"782fadd","pr":473,"id":"red-shield-vpn","name":"Red Shield VPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"1 (tested)","grade":"bad"}]},
+    {"date":"2026-11-23","commit":"bb62dc6","pr":472,"id":"privatevpn","name":"PrivateVPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"2 (tested)","grade":"bad"}]},
+    {"date":"2026-11-23","commit":"9b20f92","pr":470,"id":"panda-dome-vpn","name":"Panda Dome VPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"4 (tested)","grade":"bad"}]},
+    {"date":"2026-11-23","commit":"3f076a5","pr":469,"id":"oystervpn","name":"OysterVPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"2 (tested)","grade":"bad"}]},
+    {"date":"2026-11-23","commit":"5cd864f","pr":468,"id":"final-vpn","name":"Final VPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"2 (tested)","grade":"bad"}]},
     {"date":"2026-11-23","commit":"a72d2b3","pr":466,"id":"clearvpn","name":"ClearVPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"5 (tested)","grade":"bad"}]},
     {"date":"2026-11-23","commit":"a226aa6","pr":464,"id":"hotvpn","name":"HotVPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"2 (tested)","grade":"bad"}]},
     {"date":"2026-11-23","commit":"21d6f63","pr":467,"id":"maxivpn","name":"MaxiVPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"1 (tested)","grade":"bad"}]},
