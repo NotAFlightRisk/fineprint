@@ -190,6 +190,11 @@ criteria:
       value: none
       evidence: claimed
       sources: [policy, fdroid]
+    trackers:
+      value: 0
+      evidence: tested
+      note: Version 1.10.0Beta, checked against Exodus Privacy's tracker list.
+      sources: [play, exodus-signatures]
     fdroid:
       value: true
       sources: [fdroid]
@@ -341,3 +346,6 @@ refs:
   people:
     url: https://www.torproject.org/about/people/
     title: Tor Project people
+  exodus-signatures:
+    url: https://web.archive.org/web/20261017091629/https://reports.exodus-privacy.eu.org/api/trackers
+    title: Exodus Privacy tracker signatures (archived 2026-10-17)
