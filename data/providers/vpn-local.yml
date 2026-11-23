@@ -147,6 +147,14 @@ criteria:
         The Android app has a switch for Firebase Analytics, whose storage stays off until you agree, but Crashlytics
         crash reports are built in with no switch for them.
       sources: [app-policy, play-usa]
+    trackers:
+      value: 6
+      evidence: tested
+      note: >-
+        AdMob, Crashlytics, Facebook Ads, Firebase Analytics, IAB Open Measurement and InMobi, found in both
+        the Japan app's 1.163 build (the version Google Play lists) and the USA app's 3.171 APK from its site,
+        checked against Exodus Privacy's tracker list.
+      sources: [play-japan, apk-page, exodus-signatures]
     fdroid: false
 
   pricing:
@@ -230,3 +238,6 @@ refs:
   register-psc:
     url: https://find-and-update.company-information.service.gov.uk/company/12279531/persons-with-significant-control
     title: Companies House, DITEC LTD (12279531) persons with significant control
+  exodus-signatures:
+    url: https://web.archive.org/web/20261017091629/https://reports.exodus-privacy.eu.org/api/trackers
+    title: Exodus Privacy tracker signatures (archived 2026-10-17)
