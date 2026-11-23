@@ -1,6 +1,14 @@
 {
-  "commit": "9b668149aa49d9503f86b455dbf83b666e9827df",
+  "commit": "c74502e30fd7c983618799a34352f394f11e9678",
   "entries": [
+    {"date":"2026-11-23","commit":"c74502e","pr":454,"id":"itop-vpn","name":"iTop VPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"2 (tested)","grade":"bad"}]},
+    {"date":"2026-11-23","commit":"f7369cd","pr":453,"id":"cometvpn","name":"CometVPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"4 (tested)","grade":"bad"}]},
+    {"date":"2026-11-23","commit":"e269e8d","pr":452,"id":"cloudbric-vpn","name":"Cloudbric VPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"0 (tested)","grade":"good"}]},
+    {"date":"2026-11-23","commit":"3751e05","pr":451,"id":"celo-vpn","name":"Celo VPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"0 (tested)","grade":"good"}]},
+    {"date":"2026-11-23","commit":"29743d6","pr":450,"id":"urnetwork","name":"URnetwork","changes":[{"key":"clients.trackers","from":"Not checked","to":"0 (tested)","grade":"good"}]},
+    {"date":"2026-11-23","commit":"e8efb1c","pr":449,"id":"bens-vpn","name":"Ben's VPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"0 (tested)","grade":"good"}]},
+    {"date":"2026-11-23","commit":"2036548","pr":448,"id":"azirevpn","name":"AzireVPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"0 (tested)","grade":"good"}]},
+    {"date":"2026-11-23","commit":"053dc6b","pr":447,"id":"aura-vpn","name":"Aura VPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"3 (tested)","grade":"bad"}]},
     {"date":"2026-11-23","commit":"186a8bf","pr":445,"id":"bebra-vpn","name":"Bebra VPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"0 (tested)","grade":"good"}]},
     {"date":"2026-11-23","commit":"cbb7c1c","pr":444,"id":"touch-vpn","name":"Touch VPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"14 (tested)","grade":"bad"}]},
     {"date":"2026-11-23","commit":"9b6f559","pr":443,"id":"njalla-vpn","name":"Njalla VPN","changes":[{"key":"security.kill_switch","from":"None","to":"Doesn't apply"},{"key":"features.split_tunnel","from":"No","to":"Doesn't apply"},{"key":"clients.telemetry","from":"None","to":"Doesn't apply"},{"key":"clients.trackers","from":"Not checked","to":"Doesn't apply"}]},
