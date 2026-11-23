@@ -1,6 +1,10 @@
 {
-  "commit": "041aa7499443c4986df97e4afa0e20a5ab864c22",
+  "commit": "adae867d0ef54096243526a198a9c740878060e6",
   "entries": [
+    {"date":"2026-11-23","commit":"adae867","pr":532,"id":"strongvpn","name":"StrongVPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"2 (tested)","grade":"bad"}]},
+    {"date":"2026-11-23","commit":"776746c","pr":531,"id":"runvpn","name":"RunVPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"3 (tested)","grade":"bad"}]},
+    {"date":"2026-11-23","commit":"02ec91e","pr":530,"id":"nthlink","name":"nthLink","changes":[{"key":"clients.trackers","from":"Not checked","to":"1 (tested)","grade":"bad"}]},
+    {"date":"2026-11-23","commit":"842dc26","pr":529,"id":"beepass-vpn","name":"BeePass VPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"0 (tested)","grade":"good"}]},
     {"date":"2026-11-23","commit":"041aa74","pr":528,"id":"millenvpn","name":"MillenVPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"0 (tested)","grade":"good"}]},
     {"date":"2026-11-23","commit":"1f04653","pr":527,"id":"bullvpn","name":"BullVPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"4 (tested)","grade":"bad"}]},
     {"date":"2026-11-23","commit":"d9c2fff","pr":526,"id":"switchvpn","name":"SwitchVPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"0 (tested)","grade":"good"}]},
