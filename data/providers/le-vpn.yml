@@ -163,6 +163,11 @@ criteria:
       value: null
       note: The App Store listing declares analytics and crash data, and the Play listing says app performance data and device IDs are shared with third parties. Whether you can turn it off isn't stated.
       sources: [appstore, play]
+    trackers:
+      value: 2
+      evidence: tested
+      note: Amplitude and Crashlytics, found by checking version 3.9.0 against Exodus Privacy's tracker list.
+      sources: [play, exodus-signatures]
     fdroid:
       value: false
       sources: [protocols]
@@ -261,3 +266,6 @@ refs:
   pricing:
     url: https://www.le-vpn.com/buy-vpn/
     title: Buy Le VPN - Plans & Pricing
+  exodus-signatures:
+    url: https://web.archive.org/web/20261017091629/https://reports.exodus-privacy.eu.org/api/trackers
+    title: Exodus Privacy tracker signatures (archived 2026-10-17)
