@@ -184,6 +184,11 @@ criteria:
       value: null
       note: The project doesn't say. The connection log does record your client's name, version and ID.
       sources: [abuse]
+    trackers:
+      value: null
+      grade: na
+      note: There's no Android app.
+      sources: [download]
     fdroid: false
 
   pricing:
