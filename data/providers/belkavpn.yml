@@ -160,6 +160,13 @@ criteria:
         interactions collected for analytics, with no opt-out mentioned. Its App Store label says no data is
         collected.
       sources: [play-data-safety, app-store]
+    trackers:
+      value: 3
+      evidence: tested
+      note: >-
+        Amplitude, Firebase Analytics and Sentry, found by checking version 2.2.72 against Exodus Privacy's
+        tracker list.
+      sources: [play, exodus-signatures]
     fdroid: false
 
   pricing:
@@ -246,3 +253,6 @@ refs:
   desktop-wireguard:
     url: https://docs.belkavpn.com/desktop-wireguard-setup
     title: Install the BelkaVPN WireGuard app (PC/Mac)
+  exodus-signatures:
+    url: https://web.archive.org/web/20261017091629/https://reports.exodus-privacy.eu.org/api/trackers
+    title: Exodus Privacy tracker signatures (archived 2026-10-17)
