@@ -1,6 +1,11 @@
 {
-  "commit": "41e65e1b48cb20fee1a6babaf6d3ce184699febb",
+  "commit": "b77aae0d0d44cbb7bffb84a25e54bdbff3c5868f",
   "entries": [
+    {"date":"2026-11-23","commit":"7df2b07","pr":538,"id":"safing-spn","name":"Safing SPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"Doesn't apply"}]},
+    {"date":"2026-11-23","commit":"7df2b07","pr":538,"id":"skybluevpn","name":"SkyBlueVPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"Doesn't apply"}]},
+    {"date":"2026-11-23","commit":"7df2b07","pr":538,"id":"tuxler-vpn","name":"Tuxler VPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"Doesn't apply"}]},
+    {"date":"2026-11-23","commit":"7df2b07","pr":538,"id":"vpn-gate","name":"VPN Gate","changes":[{"key":"clients.trackers","from":"Not checked","to":"Doesn't apply"}]},
+    {"date":"2026-11-23","commit":"b1503be","pr":537,"id":"malwarebytes-privacy-vpn","name":"Malwarebytes Privacy VPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"5 (tested)","grade":"bad"}]},
     {"date":"2026-11-23","commit":"41e65e1","pr":535,"id":"astrill","name":"Astrill VPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"0 (tested)","grade":"good"}]},
     {"date":"2026-11-23","commit":"b032f91","pr":512,"id":"betternet","name":"Betternet","changes":[{"key":"clients.trackers","from":"Not checked","to":"12 (tested)","grade":"bad"}]},
     {"date":"2026-11-23","commit":"d8be1ef","pr":536,"id":"hideipvpn","name":"HideIPVPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"0 (tested)","grade":"good"}]},
