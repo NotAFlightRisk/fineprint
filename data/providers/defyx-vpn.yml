@@ -23,9 +23,11 @@ criteria:
       note: Its site and impressum name nobody, but the commercial register names the company's owner and manager.
       sources: [impressum, register]
     sister_brands:
-      value: [Begzar VPN]
-      note: Begzar is published under the same Google Play developer account.
-      sources: [play-developer, begzar]
+      value: []
+      note: >-
+        Its Google Play account also publishes Begzar VPN and Hiddify, but UnboundTech's site only lists Defyx as
+        its own, and nothing else ties them to it.
+      sources: [play-developer, begzar, unboundtech]
     acquisitions:
       value: []
 
@@ -235,3 +237,6 @@ refs:
   app-store:
     url: https://apps.apple.com/us/app/defyx/id6746811872
     title: Defyx on the App Store (US, in-app credits and privacy label)
+  unboundtech:
+    url: https://unboundtech.de/
+    title: UnboundTech, products and services
