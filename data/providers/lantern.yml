@@ -200,6 +200,11 @@ criteria:
       evidence: claimed
       note: Covers crash reports and usage data. The apps always send a random device ID.
       sources: [faq, policy]
+    trackers:
+      value: 0
+      evidence: tested
+      note: Version 10.0.5, checked against Exodus Privacy's tracker list.
+      sources: [play, exodus-signatures]
     fdroid:
       value: false
       sources: [fdroid]
@@ -329,3 +334,6 @@ refs:
   builtin-la:
     url: https://www.builtinla.com/articles/how-la-coder-making-internet-free-bahrain-china
     title: Built In LA, How an LA coder is making the Internet free from Bahrain to China (2015)
+  exodus-signatures:
+    url: https://web.archive.org/web/20261017091629/https://reports.exodus-privacy.eu.org/api/trackers
+    title: Exodus Privacy tracker signatures (archived 2026-10-17)
