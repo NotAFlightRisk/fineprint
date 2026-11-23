@@ -1,6 +1,17 @@
 {
-  "commit": "7a047366935b736fb5fe03fc75a2067197b87df3",
+  "commit": "a0142c8d3833c6b18efaa248d1298c724c5d9a83",
   "entries": [
+    {"date":"2026-11-23","commit":"a0142c8","pr":509,"id":"ovpn","name":"OVPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"1 (tested)","grade":"bad"}]},
+    {"date":"2026-11-23","commit":"41008c3","pr":506,"id":"flowvpn","name":"FlowVPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"0 (tested)","grade":"good"}]},
+    {"date":"2026-11-23","commit":"5c91649","pr":505,"id":"tera-vpn","name":"Tera VPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"4 (tested)","grade":"bad"}]},
+    {"date":"2026-11-23","commit":"c32fdf1","pr":503,"id":"toggle-vpn","name":"Toggle VPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"4 (tested)","grade":"bad"}]},
+    {"date":"2026-11-23","commit":"20a6c44","pr":502,"id":"sota-vpn","name":"Sota VPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"1 (tested)","grade":"bad"}]},
+    {"date":"2026-11-23","commit":"be3e037","pr":501,"id":"lantern","name":"Lantern","changes":[{"key":"clients.trackers","from":"Not checked","to":"0 (tested)","grade":"good"}]},
+    {"date":"2026-11-23","commit":"1336038","pr":500,"id":"orchid","name":"Orchid","changes":[{"key":"clients.trackers","from":"Not checked","to":"0 (tested)","grade":"good"}]},
+    {"date":"2026-11-23","commit":"843e9e7","pr":499,"id":"obscura-vpn","name":"Obscura VPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"0 (tested)","grade":"good"}]},
+    {"date":"2026-11-23","commit":"5a852d4","pr":498,"id":"realvpn","name":"RealVPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"2 (tested)","grade":"bad"}]},
+    {"date":"2026-11-23","commit":"6cae9ee","pr":497,"id":"vpn-proxy-master","name":"VPN Proxy Master","changes":[{"key":"clients.trackers","from":"Not checked","to":"10 (tested)","grade":"bad"}]},
+    {"date":"2026-11-23","commit":"63f5076","pr":496,"id":"shellfire-vpn","name":"Shellfire VPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"1 (tested)","grade":"bad"}]},
     {"date":"2026-11-23","commit":"7a04736","pr":495,"id":"g-data-vpn","name":"G DATA VPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"0 (tested)","grade":"good"}]},
     {"date":"2026-11-23","commit":"e0c5f93","pr":494,"id":"yoga-vpn","name":"Yoga VPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"3 (tested)","grade":"bad"}]},
     {"date":"2026-11-23","commit":"8ba6a08","pr":493,"id":"mcafee-vpn","name":"McAfee VPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"6 (tested)","grade":"bad"}]},
