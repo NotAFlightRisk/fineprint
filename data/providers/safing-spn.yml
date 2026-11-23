@@ -191,6 +191,11 @@ criteria:
       evidence: claimed
       note: Bug reports are only sent when you file one from the app.
       sources: [policy]
+    trackers:
+      value: null
+      grade: na
+      note: There's no Android app.
+      sources: [pricing]
     fdroid:
       value: false
       note: An early Android alpha was once on F-Droid, but there's no Android app now.

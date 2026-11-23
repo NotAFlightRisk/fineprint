@@ -128,6 +128,11 @@ criteria:
       note: The licence forbids reverse engineering the apps or trying to discover their protocol.
       sources: [eula]
     telemetry: null
+    trackers:
+      value: null
+      grade: na
+      note: There's no Android app.
+      sources: [faq]
     fdroid: false
 
   pricing:

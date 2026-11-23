@@ -161,6 +161,11 @@ criteria:
         The Android app carries Firebase Analytics, Crashlytics, Singular and 1Flow, and the policy collects
         your device ID and a list of your installed apps. Nothing says whether you can opt out.
       sources: [apk, privacy, app-store]
+    trackers:
+      value: null
+      grade: na
+      note: The Android app is no longer on Google Play.
+      sources: [home, play-2022]
     fdroid: false
 
   pricing:
