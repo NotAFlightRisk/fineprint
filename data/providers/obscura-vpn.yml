@@ -194,6 +194,11 @@ criteria:
       evidence: claimed
       note: Debug bundles are only made and sent when you choose to.
       sources: [debug-bundles, source-code]
+    trackers:
+      value: 0
+      evidence: tested
+      note: Version 1.185, checked against Exodus Privacy's tracker list.
+      sources: [play-listing, exodus-signatures]
     fdroid:
       value: false
       note: The Android app is on Google Play and Obtainium.
@@ -355,3 +360,6 @@ refs:
   mullvad-pq:
     url: https://mullvad.net/en/blog/quantum-resistant-tunnels-are-now-the-default-on-desktop
     title: Mullvad quantum-resistant tunnels are now the default on desktop
+  exodus-signatures:
+    url: https://web.archive.org/web/20261017091629/https://reports.exodus-privacy.eu.org/api/trackers
+    title: Exodus Privacy tracker signatures (archived 2026-10-17)
