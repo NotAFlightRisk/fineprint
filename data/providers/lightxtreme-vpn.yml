@@ -172,6 +172,13 @@ criteria:
         The Android app ships Firebase Analytics, Crashlytics, Sentry and Facebook's SDK, and Play lists crash,
         diagnostic and app interaction data as optional. Nothing says how to turn it off.
       sources: [apk, play-data-safety]
+    trackers:
+      value: 5
+      evidence: tested
+      note: >-
+        Crashlytics, Facebook Login, Facebook Share, Firebase Analytics and Sentry, found by checking version
+        4.5.4 against Exodus Privacy's tracker list.
+      sources: [play, exodus-signatures]
     fdroid: false
 
   pricing:
@@ -257,3 +264,6 @@ refs:
   hztlx-app:
     url: https://apps.apple.com/us/app/id6760284641
     title: 闪连加速器 by HZTLX Network Ltd. on the App Store (US)
+  exodus-signatures:
+    url: https://web.archive.org/web/20261017091629/https://reports.exodus-privacy.eu.org/api/trackers
+    title: Exodus Privacy tracker signatures (archived 2026-10-17)
