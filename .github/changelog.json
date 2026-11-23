@@ -1,6 +1,7 @@
 {
-  "commit": "f16d7fb2ffdb1fe41baf0f4c97c2ab831ed75398",
+  "commit": "a002fe52c974160e425f643b8ede13db111fd79f",
   "entries": [
+    {"date":"2026-11-23","commit":"a002fe5","pr":442,"id":"xeovo","name":"Xeovo","checked":true,"changes":[{"key":"identity.owner"},{"key":"account.payment","grade":"good"},{"key":"infra.ram_only","from":"Unknown","to":"No (claimed)","grade":"bad"},{"key":"infra.virtual_locations","from":"Unknown","to":"None (claimed)","grade":"good"},{"key":"infra.servers"},{"key":"ethics.misleading_claims","grade":"bad"}]},
     {"date":"2026-11-23","commit":"f16d7fb","pr":441,"id":"easylight-vpn","name":"EasyLight VPN","added":true},
     {"date":"2026-11-23","commit":"1d0d61f","pr":440,"id":"defyx-vpn","name":"Defyx VPN","changes":[{"key":"identity.sister_brands","removed":["Begzar VPN"]}]},
     {"date":"2026-11-23","commit":"6abc845","pr":439,"id":"begzar-vpn","name":"Begzar VPN","added":true},
