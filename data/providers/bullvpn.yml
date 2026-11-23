@@ -152,6 +152,13 @@ criteria:
         Store listing says usage data may be used to track you across other companies' apps. Nothing says
         whether you can turn it off.
       sources: [apk, app-store, play-data-safety]
+    trackers:
+      value: 4
+      evidence: tested
+      note: >-
+        Crashlytics, Facebook Analytics, Facebook Login and Firebase Analytics, found by checking version 12.3
+        against Exodus Privacy's tracker list.
+      sources: [play, exodus-signatures]
     fdroid: false
 
   pricing:
@@ -258,3 +265,6 @@ refs:
   apk:
     url: https://apkpure.net/bullvpn-vpn-secure-proxy/th.co.persec.bullvpn
     title: BullVPN for Android 12.2, whose APK holds strongSwan, OpenVPN and WireGuard with Firebase, Crashlytics and Facebook SDKs
+  exodus-signatures:
+    url: https://web.archive.org/web/20261017091629/https://reports.exodus-privacy.eu.org/api/trackers
+    title: Exodus Privacy tracker signatures (archived 2026-10-17)
