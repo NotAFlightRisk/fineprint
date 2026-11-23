@@ -179,6 +179,11 @@ criteria:
         Crash reports go to Sentry with your country, device and the last 100 in-app events, and the app
         can't be set up without agreeing to data collection. The policy also lists Firebase.
       sources: [policy, reporter, onboarding]
+    trackers:
+      value: 0
+      evidence: tested
+      note: Version 1.12.0, checked against Exodus Privacy's tracker list.
+      sources: [play, exodus-signatures]
     fdroid:
       value: false
       sources: [fdroid]
@@ -308,3 +313,6 @@ refs:
   filterwatch-2026:
     url: https://filter.watch/wp-content/uploads/sites/2/2026/01/Irans-Stealth-Blackout_-A-Multi-stakeholder-Analysis-of-the-June-2025-Internet-Shutdown.pdf
     title: "Filterwatch, Iran's Stealth Blackout: the June 2025 internet shutdown (2026), figure 4.9"
+  exodus-signatures:
+    url: https://web.archive.org/web/20261017091629/https://reports.exodus-privacy.eu.org/api/trackers
+    title: Exodus Privacy tracker signatures (archived 2026-10-17)
