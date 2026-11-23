@@ -1,6 +1,7 @@
 {
-  "commit": "fecd8cd0fc8cd506fe5b632a6cd5b33582da16e1",
+  "commit": "ddee9de85067dff41b37c9caa7cb5762422267c3",
   "entries": [
+    {"date":"2026-11-23","commit":"ddee9de","pr":546,"id":"browsec","name":"Browsec","changes":[{"key":"clients.trackers","from":"Not checked","to":"2 (tested)","grade":"bad"}]},
     {"date":"2026-11-23","commit":"fecd8cd","pr":544,"id":"bolehvpn","name":"BolehVPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"0 (tested)","grade":"good"}]},
     {"date":"2026-11-23","commit":"0311c13","pr":545,"id":"vpn-local","name":"VPN Local","changes":[{"key":"clients.trackers","from":"Not checked","to":"6 (tested)","grade":"bad"}]},
     {"date":"2026-11-23","commit":"35c8cec","pr":543,"id":"best-vpn","name":"Best VPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"23 (tested)","grade":"bad"}]},
