@@ -177,6 +177,13 @@ criteria:
         The policy names Sentry for Windows app diagnostics and Firebase for the Android, Fire TV and
         Apple apps, without saying whether you can turn them off.
       sources: [privacy-policy, play]
+    trackers:
+      value: 2
+      evidence: tested
+      note: >-
+        Crashlytics and Firebase Analytics, found by checking version 2.4.8.0.286264 against Exodus Privacy's
+        tracker list.
+      sources: [play, exodus-signatures]
     fdroid: false
 
   pricing:
@@ -324,3 +331,6 @@ refs:
   pcmag-review:
     url: https://www.pcmag.com/reviews/strongvpn
     title: StrongVPN review (PCMag)
+  exodus-signatures:
+    url: https://web.archive.org/web/20261017091629/https://reports.exodus-privacy.eu.org/api/trackers
+    title: Exodus Privacy tracker signatures (archived 2026-10-17)
