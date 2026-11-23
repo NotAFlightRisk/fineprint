@@ -1,0 +1,282 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: EasyLight VPN
+icon: easylight-vpn.png
+checked: 2026-11-23
+
+criteria:
+  identity:
+    website: https://easylightvpn.com
+    legal_entity:
+      value: KSPN-Tekhnologii LLC
+      note: >-
+        That's who the Russian site, policy, user agreement and rouble checkout name. The English site and terms,
+        dated August 2026, name NKSP EasyLight Software Design FZCO in Dubai, which publishes the smaller of its
+        two Play apps.
+      sources: [agreement, policy-ru, checkout, terms, play-world]
+    owner:
+      value: null
+      note: >-
+        The Russian register names Arseniy Pliska as KSPN-Tekhnologii's director, and he publishes the 5M+ app on
+        Google Play, but who owns either company isn't shown.
+      sources: [register, play]
+    founded:
+      value: 2023
+      note: It was selling configs on easylight.tech by December 2023.
+      sources: [site-2023]
+    team:
+      value: partial
+      note: The site names nobody, but Google Play and the Russian register both name Arseniy Pliska.
+      sources: [play, register]
+    sister_brands:
+      value: []
+    acquisitions:
+      value: []
+
+  jurisdiction:
+    hq:
+      value: RU
+      sources: [agreement, policy-ru]
+    entities:
+      value: [RU, AE]
+      note: The Russian policy says personal data is processed in Russia and can go to Russian authorities as Russian law allows.
+      sources: [policy-ru, terms]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      note: It does watch for BitTorrent traffic, and blocks your IP address for 10 minutes when it spots some.
+      sources: [policy, torrent-post]
+    dns:
+      value: none
+      evidence: claimed
+      sources: [policy]
+    timestamps:
+      value: none
+      evidence: claimed
+      note: The policy rules out connection times linked to identifiable users.
+      sources: [policy]
+    bandwidth:
+      value: null
+      note: Neither policy mentions data use.
+      sources: [policy, policy-ru]
+    source_ip:
+      value: null
+      note: >-
+        The policy rules out IP addresses associated with VPN sessions, but it blocks your IP for 10 minutes when it
+        spots BitTorrent, without saying what it keeps after that.
+      sources: [policy, torrent-post]
+    proven:
+      value: []
+    policy: https://easylightvpn.com/en/legal/privacy-policy
+
+  transparency:
+    audits:
+      value: []
+    report:
+      value: none
+    canary:
+      value: none
+    bug_bounty:
+      value: false
+    incidents:
+      value:
+        - date: 2026-01-20
+          summary: >-
+            Connections broke on 20 January and took days to restore while it rebuilt its blocking workarounds, then
+            waves of blocks from Russia's media regulator hit its servers in March and its sign-in in April. It
+            posted updates on Telegram and gave Gold subscribers three extra days for January.
+          handled: well
+          source: outage-post
+      sources: [outage-post, rkn-post, update-2-8-1195]
+
+  account:
+    email:
+      value: optional
+      note: >-
+        Google Play lists email as optional, but the site's trial, rouble plans and config files for other devices
+        all go to an email address.
+      sources: [datasafety, home-ru]
+    personal_data:
+      value: []
+      sources: [policy, agreement]
+    payment:
+      value: [app_store, card]
+      note: Google Play, or a card on its rouble checkout, through a payment service it doesn't name.
+      sources: [home, agreement, checkout]
+
+  security:
+    protocols:
+      value: [other]
+      note: Xray, which it moved to in 2024.
+      sources: [xray-post]
+    post_quantum:
+      value: null
+    kill_switch:
+      value: null
+    dns:
+      value: null
+
+  infra:
+    ram_only:
+      value: null
+    hosting:
+      value: rented
+      note: It runs on foreign hosting providers' servers.
+      sources: [policy, torrent-post]
+    virtual_locations:
+      value: null
+    servers:
+      value: null
+    countries:
+      value: null
+
+  features:
+    connections:
+      value: unlimited
+      sources: [devices-post, home-ru]
+    multihop:
+      value: false
+    obfuscation:
+      value: [v2ray]
+      note: Through Xray.
+      sources: [xray-post]
+    port_forwarding:
+      value: false
+    split_tunnel:
+      value: true
+      note: You pick sites and apps that skip the VPN.
+      sources: [exclusions-post, update-2-8-1195]
+    blocking:
+      value: []
+
+  clients:
+    platforms:
+      value: [android]
+      note: Also Android TV. Windows, macOS and iOS only get config files for apps like v2RayTun and Happ.
+      sources: [home, apps-post]
+    open_source:
+      value: none
+    telemetry:
+      value: null
+      note: >-
+        The app includes Firebase Analytics and Yandex's AppMetrica. The 5M+ app's Play listing marks crash and
+        diagnostic data optional, without saying whether it's opt-in or opt-out.
+      sources: [play-world, datasafety-5m]
+    trackers:
+      value: 1
+      evidence: tested
+      note: >-
+        Firebase Analytics, found by checking the 2.8.1243 Google Play build and the 2.8.1223 APK from its site
+        against Exodus Privacy's tracker list. Both also carry AppMetrica 6, whose new package name the list
+        doesn't catch yet.
+      sources: [play-world, exodus-signatures]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: { amount: 239, currency: RUB }
+      note: The English site sells a month for $4.99 through Google Play.
+      sources: [home-ru, home]
+    best:
+      value: { amount: 166.5, currency: RUB }
+      note: 999 roubles for six months.
+      sources: [home-ru]
+    best_term: 6
+    renewal_increase:
+      value: 0
+      sources: [home-ru, agreement]
+    free_tier:
+      value: true
+      note: After a 14-day trial, the app drops to 3 Mbps with no time limit.
+      sources: [play-world]
+    refund_days:
+      value: 7
+      note: Google Play purchases follow Google's own refund rules.
+      sources: [refund-ru, refund]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        Its main Play listing promises "anonymity and online privacy at the highest level" and that it "eliminates
+        all potential online threats".
+      sources: [play]
+    affiliates:
+      value: false
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://easylightvpn.com/
+    title: EasyLight, plans and downloads
+  home-ru:
+    url: https://easylightvpn.com/?region=ru
+    title: EasyLight, Russian site with rouble prices
+  checkout:
+    url: https://easylightcash.com/
+    title: EasyLight rouble plans, sold by KSPN-Tekhnologii LLC
+  policy:
+    url: https://easylightvpn.com/en/legal/privacy-policy
+    title: EasyLight privacy policy (NKSP EasyLight Software Design FZCO)
+  terms:
+    url: https://easylightvpn.com/en/legal/terms-of-service
+    title: EasyLight terms of service (August 2026)
+  refund:
+    url: https://easylightvpn.com/en/legal/refund-policy
+    title: EasyLight refund policy (July 2026)
+  policy-ru:
+    url: https://easylightvpn.com/confidence
+    title: EasyLight personal data policy, Russian (KSPN-Tekhnologii LLC)
+  agreement:
+    url: https://easylightvpn.com/agreement
+    title: EasyLight user agreement, Russian (KSPN-Tekhnologii LLC)
+  refund-ru:
+    url: https://easylightvpn.com/return-policy
+    title: EasyLight refund terms, Russian (7 days)
+  play:
+    url: https://play.google.com/store/apps/details?id=com.easylight.vpn
+    title: EasyLight VPN on Google Play (5M+), developer Arseniy Pliska
+  datasafety-5m:
+    url: https://play.google.com/store/apps/datasafety?id=com.easylight.vpn
+    title: EasyLight VPN (5M+) data safety on Google Play
+  play-world:
+    url: https://play.google.com/store/apps/details?id=com.easylight.vpnworld
+    title: EasyLight on Google Play, the app its site links, by NKSP EasyLight Software Design FZCO
+  datasafety:
+    url: https://play.google.com/store/apps/datasafety?id=com.easylight.vpnworld
+    title: EasyLight data safety on Google Play
+  register:
+    url: https://www.list-org.com/search?type=all&val=7804715072
+    title: KSPN-Tekhnologii LLC (INN 7804715072) and its director, list-org register search
+  site-2023:
+    url: https://web.archive.org/web/20231230224634/http://easylight.tech/
+    title: EasyLight VPN on easylight.tech, archived December 2023
+  xray-post:
+    url: https://t.me/EasyLightTech/27
+    title: EasyLight finishes moving to Xray (April 2024, Russian)
+  exclusions-post:
+    url: https://t.me/EasyLightTech/112
+    title: EasyLight for Android 2.8.1133 adds exclusions (April 2025, Russian)
+  apps-post:
+    url: https://t.me/EasyLightTech/147
+    title: EasyLight recommends v2RayTun and Happ for its config files (November 2025, Russian)
+  devices-post:
+    url: https://t.me/EasyLightTech/151
+    title: EasyLight, one email and unlimited devices (December 2025, Russian)
+  outage-post:
+    url: https://t.me/EasyLightTech/155
+    title: EasyLight credits Gold users three days during January's outage (January 2026, Russian)
+  rkn-post:
+    url: https://t.me/EasyLightTech/163
+    title: EasyLight rebuilds infrastructure after a wave of Roskomnadzor blocks (March 2026, Russian)
+  update-2-8-1195:
+    url: https://t.me/EasyLightTech/172
+    title: EasyLight for Android 2.8.1195, with a sign-in fix after overnight Roskomnadzor blocks (April 2026, Russian)
+  torrent-post:
+    url: https://t.me/EasyLightTech/191
+    title: EasyLight blocks an IP for 10 minutes on BitTorrent traffic, citing its foreign hosts (September 2026, Russian)
+  exodus-signatures:
+    url: https://web.archive.org/web/20261017091629/https://reports.exodus-privacy.eu.org/api/trackers
+    title: Exodus Privacy tracker signatures (archived 2026-10-17)
