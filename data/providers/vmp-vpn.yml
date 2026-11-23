@@ -186,6 +186,13 @@ criteria:
         Facebook's SDK. Its App Store label says usage data may be used to track you, while the policy only
         mentions basic connection diagnostics.
       sources: [apk, app-store, play-data-safety, privacy]
+    trackers:
+      value: 2
+      evidence: tested
+      note: >-
+        Crashlytics and Firebase Analytics, found by checking version 4.32 against Exodus Privacy's tracker
+        list.
+      sources: [play, exodus-signatures]
     fdroid: false
 
   pricing:
@@ -327,3 +334,6 @@ refs:
   nord-audits:
     url: https://nordsecurity.com/press-area/nordvpn-verifies-its-no-logs-assurance-assessment-for-the-fifth-time/
     title: NordVPN verifies its no-logs assurance assessment for the fifth time (Nord Security)
+  exodus-signatures:
+    url: https://web.archive.org/web/20261017091629/https://reports.exodus-privacy.eu.org/api/trackers
+    title: Exodus Privacy tracker signatures (archived 2026-10-17)
