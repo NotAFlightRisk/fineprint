@@ -161,6 +161,11 @@ criteria:
       value: null
       note: The iOS privacy label says the app collects crash, performance and other diagnostic data. WiTopia doesn't say whether it can be turned off.
       sources: [app-store]
+    trackers:
+      value: 2
+      evidence: tested
+      note: Firebase Analytics and Sentry, found by checking version 2.6.3 against Exodus Privacy's tracker list.
+      sources: [play, exodus-signatures]
     fdroid: false
 
   pricing:
@@ -252,3 +257,6 @@ refs:
   app-store:
     url: https://apps.apple.com/us/app/witopia-personalvpn/id1492111686
     title: WiTopia personalVPN on the App Store
+  exodus-signatures:
+    url: https://web.archive.org/web/20261017091629/https://reports.exodus-privacy.eu.org/api/trackers
+    title: Exodus Privacy tracker signatures (archived 2026-10-17)
