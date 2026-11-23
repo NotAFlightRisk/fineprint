@@ -1,6 +1,8 @@
 {
-  "commit": "21d6f63be9909b3232f5e06a916e5365969cd341",
+  "commit": "a72d2b348772aa7c520837588d497423fdc946e9",
   "entries": [
+    {"date":"2026-11-23","commit":"a72d2b3","pr":466,"id":"clearvpn","name":"ClearVPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"5 (tested)","grade":"bad"}]},
+    {"date":"2026-11-23","commit":"a226aa6","pr":464,"id":"hotvpn","name":"HotVPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"2 (tested)","grade":"bad"}]},
     {"date":"2026-11-23","commit":"21d6f63","pr":467,"id":"maxivpn","name":"MaxiVPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"1 (tested)","grade":"bad"}]},
     {"date":"2026-11-23","commit":"ab87ef8","pr":465,"id":"le-vpn","name":"Le VPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"2 (tested)","grade":"bad"}]},
     {"date":"2026-11-23","commit":"93ec4cc","pr":463,"id":"hide-my-ip","name":"Hide My IP","changes":[{"key":"clients.trackers","from":"Not checked","to":"0 (tested)","grade":"good"}]},
