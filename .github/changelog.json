@@ -1,6 +1,7 @@
 {
-  "commit": "cbb7c1c52a3062c07c2a5694104f25ba03c2cf04",
+  "commit": "9b668149aa49d9503f86b455dbf83b666e9827df",
   "entries": [
+    {"date":"2026-11-23","commit":"186a8bf","pr":445,"id":"bebra-vpn","name":"Bebra VPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"0 (tested)","grade":"good"}]},
     {"date":"2026-11-23","commit":"cbb7c1c","pr":444,"id":"touch-vpn","name":"Touch VPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"14 (tested)","grade":"bad"}]},
     {"date":"2026-11-23","commit":"9b6f559","pr":443,"id":"njalla-vpn","name":"Njalla VPN","changes":[{"key":"security.kill_switch","from":"None","to":"Doesn't apply"},{"key":"features.split_tunnel","from":"No","to":"Doesn't apply"},{"key":"clients.telemetry","from":"None","to":"Doesn't apply"},{"key":"clients.trackers","from":"Not checked","to":"Doesn't apply"}]},
     {"date":"2026-11-23","commit":"9b6f559","pr":443,"id":"swissvpn","name":"SwissVPN","changes":[{"key":"security.kill_switch","from":"None","to":"Doesn't apply"},{"key":"features.split_tunnel","from":"No","to":"Doesn't apply"},{"key":"clients.telemetry","from":"None","to":"Doesn't apply"}]},
