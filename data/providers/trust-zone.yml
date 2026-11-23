@@ -182,6 +182,11 @@ criteria:
         The policy says the apps use no third-party analytics or tracking SDKs. The Play listing says the V2
         app may collect personal info and device IDs, without saying what for.
       sources: [privacy-policy, google-play-v2]
+    trackers:
+      value: 0
+      evidence: tested
+      note: Version 2.0.0-alpha.32, checked against Exodus Privacy's tracker list.
+      sources: [google-play-v2, exodus-signatures]
     fdroid: false
 
   pricing:
@@ -297,3 +302,6 @@ refs:
   affiliate-program:
     url: https://get-trust-zone.info/
     title: Trust.Zone affiliate program
+  exodus-signatures:
+    url: https://web.archive.org/web/20261017091629/https://reports.exodus-privacy.eu.org/api/trackers
+    title: Exodus Privacy tracker signatures (archived 2026-10-17)
