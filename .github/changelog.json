@@ -1,6 +1,9 @@
 {
-  "commit": "1b3fd970c76abc9006240c867d5f3fa331013984",
+  "commit": "6ea2606430eedbcc3ee25cf6a1694001f8eb66c8",
   "entries": [
+    {"date":"2026-11-23","commit":"6ea2606","pr":514,"id":"speedify","name":"Speedify","changes":[{"key":"clients.trackers","from":"Not checked","to":"1 (tested)","grade":"bad"}]},
+    {"date":"2026-11-23","commit":"3e10966","pr":513,"id":"ipvanish","name":"IPVanish","changes":[{"key":"clients.trackers","from":"Not checked","to":"3 (tested)","grade":"bad"}]},
+    {"date":"2026-11-23","commit":"c86be6d","pr":511,"id":"mozilla-vpn","name":"Mozilla VPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"0 (tested)","grade":"good"}]},
     {"date":"2026-11-23","commit":"1b3fd97","pr":510,"id":"airvpn","name":"AirVPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"0 (tested)","grade":"good"}]},
     {"date":"2026-11-23","commit":"0fda3da","pr":508,"id":"trust-zone","name":"Trust.Zone","changes":[{"key":"clients.trackers","from":"Not checked","to":"0 (tested)","grade":"good"}]},
     {"date":"2026-11-23","commit":"4ffa2e9","pr":507,"id":"vpnuk","name":"VPNUK","changes":[{"key":"clients.trackers","from":"Not checked","to":"2 (tested)","grade":"bad"}]},
