@@ -206,6 +206,13 @@ criteria:
         The privacy policy says it collects how often and how long you use its services, without mentioning
         a way to turn this off.
       sources: [privacy-policy]
+    trackers:
+      value: 3
+      evidence: tested
+      note: >-
+        Crashlytics, Firebase Analytics and Sentry, found by checking version 26.46.0 of the Aura app, which
+        the VPN comes inside, against Exodus Privacy's tracker list.
+      sources: [play, exodus-signatures]
     fdroid: false
 
   pricing:
@@ -339,3 +346,6 @@ refs:
   wayback-2021:
     url: https://web.archive.org/web/20210616010217/https://www.aura.com/pricing
     title: Aura pricing, June 2021 (archived)
+  exodus-signatures:
+    url: https://web.archive.org/web/20261017091629/https://reports.exodus-privacy.eu.org/api/trackers
+    title: Exodus Privacy tracker signatures (archived 2026-10-17)
