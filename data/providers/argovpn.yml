@@ -165,6 +165,13 @@ criteria:
       evidence: claimed
       note: The audit found the app sends no user information to its servers.
       sources: [policy-data, audit-2023]
+    trackers:
+      value: 0
+      evidence: tested
+      note: >-
+        The 3.2.2 APK from its site (the version Google Play lists), checked against Exodus Privacy's tracker
+        list.
+      sources: [play, exodus-signatures]
     fdroid: false
 
   pricing:
@@ -251,3 +258,6 @@ refs:
   github:
     url: https://github.com/filtershekanha
     title: filtershekanha on GitHub
+  exodus-signatures:
+    url: https://web.archive.org/web/20261017091629/https://reports.exodus-privacy.eu.org/api/trackers
+    title: Exodus Privacy tracker signatures (archived 2026-10-17)
