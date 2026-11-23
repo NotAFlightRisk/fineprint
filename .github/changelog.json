@@ -1,6 +1,7 @@
 {
-  "commit": "a0b0023470ff1a56cd2579adff2436a9127138f7",
+  "commit": "e6f3770bcbc91928caad594712d7c089dd07349b",
   "entries": [
+    {"date":"2026-11-23","commit":"e6f3770","pr":438,"id":"totalav-vpn","name":"TotalAV VPN","checked":true,"changes":[{"key":"account.email","grade":"bad"},{"key":"features.blocking"},{"key":"clients.trackers","from":"Not checked","to":"4 (tested)","grade":"bad"},{"key":"pricing.best"},{"key":"pricing.free_tier"},{"key":"pricing.refund_days","grade":"good"}]},
     {"date":"2026-11-22","commit":"a0b0023","pr":437,"id":"adguard-vpn","name":"AdGuard VPN","checked":true,"changes":[{"key":"transparency.audits","grade":"ok"},{"key":"infra.ram_only","from":"Unknown","to":"No (claimed)","grade":"bad"},{"key":"infra.hosting","from":"Unknown","to":"Rented (claimed)","grade":"ok"},{"key":"infra.virtual_locations","from":"Unknown","to":"Used, and labelled (claimed)","grade":"ok"},{"key":"infra.servers","from":"Unknown","to":"1000 (claimed)"},{"key":"infra.countries"}]},
     {"date":"2026-11-22","commit":"c6377b2","pr":436,"id":"nymvpn","name":"NymVPN","changes":[{"key":"logging.bandwidth","from":"Unknown","to":"Aggregated only (claimed)","grade":"ok"},{"key":"security.post_quantum","from":"Unknown","to":"On by default","grade":"good"},{"key":"clients.trackers","from":"Not checked","to":"1 (tested)","grade":"bad"}]},
     {"date":"2026-11-22","commit":"bfaf14f","pr":435,"id":"hide-me","name":"hide.me VPN","changes":[{"key":"identity.owner"},{"key":"transparency.bug_bounty","from":"Unknown","to":"No","grade":"ok"},{"key":"clients.trackers","from":"Not checked","to":"1 (tested)","grade":"bad"}]},
