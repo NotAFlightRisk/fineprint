@@ -1,6 +1,11 @@
 {
-  "commit": "a002fe52c974160e425f643b8ede13db111fd79f",
+  "commit": "9b6f559d8776cf7bacacafbebae3b8c3e82a825a",
   "entries": [
+    {"date":"2026-11-23","commit":"9b6f559","pr":443,"id":"njalla-vpn","name":"Njalla VPN","changes":[{"key":"security.kill_switch","from":"None","to":"Doesn't apply"},{"key":"features.split_tunnel","from":"No","to":"Doesn't apply"},{"key":"clients.telemetry","from":"None","to":"Doesn't apply"},{"key":"clients.trackers","from":"Not checked","to":"Doesn't apply"}]},
+    {"date":"2026-11-23","commit":"9b6f559","pr":443,"id":"swissvpn","name":"SwissVPN","changes":[{"key":"security.kill_switch","from":"None","to":"Doesn't apply"},{"key":"features.split_tunnel","from":"No","to":"Doesn't apply"},{"key":"clients.telemetry","from":"None","to":"Doesn't apply"}]},
+    {"date":"2026-11-23","commit":"9b6f559","pr":443,"id":"vpn-jantit","name":"VPN Jantit","changes":[{"key":"clients.telemetry","from":"None","to":"Doesn't apply"}]},
+    {"date":"2026-11-23","commit":"9b6f559","pr":443,"id":"vpnbook","name":"VPNBook","changes":[{"key":"clients.telemetry","from":"None","to":"Doesn't apply"}]},
+    {"date":"2026-11-23","commit":"9b6f559","pr":443,"id":"xeovo","name":"Xeovo","changes":[{"key":"clients.telemetry","from":"None","to":"Doesn't apply"}]},
     {"date":"2026-11-23","commit":"a002fe5","pr":442,"id":"xeovo","name":"Xeovo","checked":true,"changes":[{"key":"identity.owner"},{"key":"account.payment","grade":"good"},{"key":"infra.ram_only","from":"Unknown","to":"No (claimed)","grade":"bad"},{"key":"infra.virtual_locations","from":"Unknown","to":"None (claimed)","grade":"good"},{"key":"infra.servers"},{"key":"ethics.misleading_claims","grade":"bad"}]},
     {"date":"2026-11-23","commit":"f16d7fb","pr":441,"id":"easylight-vpn","name":"EasyLight VPN","added":true},
     {"date":"2026-11-23","commit":"1d0d61f","pr":440,"id":"defyx-vpn","name":"Defyx VPN","changes":[{"key":"identity.sister_brands","removed":["Begzar VPN"]}]},
