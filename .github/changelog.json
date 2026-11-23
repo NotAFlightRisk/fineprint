@@ -1,6 +1,7 @@
 {
-  "commit": "1d0d61f6bc78f4c1a2ed4ee462d87a98aa41649e",
+  "commit": "f16d7fb2ffdb1fe41baf0f4c97c2ab831ed75398",
   "entries": [
+    {"date":"2026-11-23","commit":"f16d7fb","pr":441,"id":"easylight-vpn","name":"EasyLight VPN","added":true},
     {"date":"2026-11-23","commit":"1d0d61f","pr":440,"id":"defyx-vpn","name":"Defyx VPN","changes":[{"key":"identity.sister_brands","removed":["Begzar VPN"]}]},
     {"date":"2026-11-23","commit":"6abc845","pr":439,"id":"begzar-vpn","name":"Begzar VPN","added":true},
     {"date":"2026-11-23","commit":"e6f3770","pr":438,"id":"totalav-vpn","name":"TotalAV VPN","checked":true,"changes":[{"key":"account.email","grade":"bad"},{"key":"features.blocking"},{"key":"clients.trackers","from":"Not checked","to":"4 (tested)","grade":"bad"},{"key":"pricing.best"},{"key":"pricing.free_tier"},{"key":"pricing.refund_days","grade":"good"}]},
