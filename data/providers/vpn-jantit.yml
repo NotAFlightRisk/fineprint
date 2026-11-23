@@ -152,7 +152,8 @@ criteria:
       note: There are no VPN Jantit apps to publish.
       sources: [terms]
     telemetry:
-      value: none
+      value: null
+      grade: na
       note: There are no VPN Jantit apps.
       sources: [free-xray]
     trackers:

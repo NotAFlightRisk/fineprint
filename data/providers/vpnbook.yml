@@ -155,7 +155,8 @@ criteria:
       note: There are no VPNBook apps to publish.
       sources: [howto]
     telemetry:
-      value: none
+      value: null
+      grade: na
       note: There are no VPNBook apps.
       sources: [howto]
     trackers:

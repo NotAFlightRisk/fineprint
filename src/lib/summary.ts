@@ -5,6 +5,7 @@ export interface Check {
   id: string;
   label: string;
   from: string[];
+  aboutApps?: boolean;
 }
 
 export const checks: Check[] = [
@@ -19,9 +20,9 @@ export const checks: Check[] = [
     label: 'Anonymous signup and payment',
     from: ['account.email', 'account.personal_data', 'account.payment']
   },
-  { id: 'open', label: 'Open source apps', from: ['clients.open_source'] },
+  { id: 'open', label: 'Open source apps', from: ['clients.open_source'], aboutApps: true },
   { id: 'ram', label: 'RAM-only servers', from: ['infra.ram_only'] },
-  { id: 'trackers', label: 'No trackers in the app', from: ['clients.trackers'] }
+  { id: 'trackers', label: 'No trackers in the app', from: ['clients.trackers'], aboutApps: true }
 ];
 
 export const byId = (categories: Category[]) =>
@@ -35,6 +36,7 @@ export function combine(grades: Grade[]): Grade {
 }
 
 export function checklist(provider: Provider, criteria: Map<string, Criterion>) {
+  const platforms = provider.criteria['clients.platforms']?.value as string[] | null | undefined;
   return checks.map((check) => {
     const entries = check.from.map((id) => provider.criteria[id]);
     const lines = check.from.map((id, index) => {
@@ -43,7 +45,10 @@ export function checklist(provider: Provider, criteria: Map<string, Criterion>) 
     });
     return {
       ...check,
-      grade: combine(entries.map((entry) => entry?.grade ?? null)),
+      grade:
+        check.aboutApps && platforms?.length === 0
+          ? 'na'
+          : combine(entries.map((entry) => entry?.grade ?? null)),
       tip: lines.join('\n')
     };
   });

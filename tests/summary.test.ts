@@ -22,6 +22,7 @@ describe('criteria named in the code', () => {
   it('all still exist in criteria.yml', () => {
     const named = [
       ...checks.flatMap((check) => check.from),
+      'clients.platforms',
       'features.connections',
       'identity.founded',
       'identity.legal_entity',
@@ -102,6 +103,28 @@ describe('provider summary', () => {
     expect(completeness({ ...provider, criteria: rest }, criteria)).toBe(
       completeness(provider, criteria)
     );
+  });
+});
+
+describe('privacy checks', () => {
+  const unanswerable: Entry = { value: null, grade: 'na', sources: [] };
+  const gradesWith = (platforms: Value) => {
+    const entries: Record<string, Entry> = {
+      ...provider.criteria,
+      'clients.platforms': { value: platforms, grade: 'info', sources: [] },
+      'clients.open_source': unanswerable,
+      'clients.trackers': unanswerable
+    };
+    const { checks } = summarise({ ...provider, criteria: entries }, criteria);
+    return Object.fromEntries(checks.map((check) => [check.id, check.grade]));
+  };
+
+  it("reads the app checks as Doesn't apply for a VPN with no apps", () => {
+    expect(gradesWith([])).toMatchObject({ open: 'na', trackers: 'na', ram: null });
+  });
+
+  it('leaves them Unknown for apps it just has no way to check', () => {
+    expect(gradesWith(['ios'])).toMatchObject({ open: null, trackers: null });
   });
 });
 

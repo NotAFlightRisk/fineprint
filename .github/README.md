@@ -31,7 +31,7 @@
 
 > Visit [fineprint.peng.ly](https://fineprint.peng.ly/) for a full privacy breakdown of each VPN provider<br>
 > <sub><b>Key:</b>
-> 🟢 Yes &nbsp; 🟡 Partly &nbsp; 🔴 No &nbsp; ⚪ Unknown &nbsp;&nbsp;|&nbsp;&nbsp; Privacy issues: 🔴 serious &nbsp; 🟠 minor only
+> 🟢 Yes &nbsp; 🟡 Partly &nbsp; 🔴 No &nbsp; ⚪ Unknown &nbsp; ➖ Doesn't apply &nbsp;&nbsp;|&nbsp;&nbsp; Privacy issues: 🔴 serious &nbsp; 🟠 minor only
 > </sub><br>
 > <sub>Hover any dot for the details, follow the link for full details and sources</sub>
 

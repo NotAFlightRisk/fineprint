@@ -183,7 +183,8 @@ criteria:
       note: There are no Xeovo apps to publish.
       sources: [guides]
     telemetry:
-      value: none
+      value: null
+      grade: na
       note: There are no Xeovo apps.
       sources: [guides]
     trackers:

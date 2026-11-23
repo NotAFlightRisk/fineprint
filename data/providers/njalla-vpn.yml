@@ -109,7 +109,8 @@ criteria:
       value: null
       note: Njalla doesn't say.
     kill_switch:
-      value: none
+      value: null
+      grade: na
       note: There's no Njalla app, so it's down to the WireGuard or OpenVPN client you use.
       sources: [vpn, thinkpenguin]
     dns:
@@ -151,7 +152,8 @@ criteria:
       value: null
       note: Njalla doesn't say.
     split_tunnel:
-      value: false
+      value: null
+      grade: na
       note: There's no app, though WireGuard and OpenVPN configs can be edited to route only some traffic.
       sources: [vpn, thinkpenguin]
     blocking:
@@ -168,8 +170,14 @@ criteria:
       note: There are no Njalla apps to publish. The WireGuard and OpenVPN clients it relies on are open source.
       sources: [thinkpenguin]
     telemetry:
-      value: none
+      value: null
+      grade: na
       note: There are no Njalla apps.
+    trackers:
+      value: null
+      grade: na
+      note: There's no Android app.
+      sources: [thinkpenguin]
     fdroid:
       value: false
       sources: [fdroid-search]

@@ -63,6 +63,8 @@ A couple of criteria are worked out for you, like the Eyes alliance from the hea
 
 Grades come from the rules in `criteria.yml`, so the same value always gets the same colour whoever it belongs to. If a rule would genuinely mislead for one provider, you can set `grade:` by hand, but it needs a `note` saying why or the checks won't let it through.
 
+Something that can't apply at all is `value: null` with `grade: na` and a note, and the site shows it as Doesn't apply. A VPN with no apps of its own (`platforms: []`) gets that on its kill switch, split tunnelling, open source, telemetry and trackers, and its app checks in the summary read Doesn't apply too.
+
 ---
 
 ### Other red flags

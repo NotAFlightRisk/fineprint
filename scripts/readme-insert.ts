@@ -26,7 +26,8 @@ const flag = (country: string) =>
 const marks: Record<string, string[]> = {
   good: ['🟢', 'yes'],
   ok: ['🟡', 'partly'],
-  bad: ['🔴', 'no']
+  bad: ['🔴', 'no'],
+  na: ['➖', "doesn't apply"]
 };
 const headings: Record<string, string> = {
   logs: 'No logs',
