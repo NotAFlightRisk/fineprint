@@ -187,6 +187,11 @@ criteria:
         doesn't mention. The site says there are no trackers or analytics, and the Play listing says no
         data is collected.
       sources: [apk, app-store, play, about, privacy-data]
+    trackers:
+      value: 1
+      evidence: tested
+      note: Sentry, found by checking version 1.8.11 against Exodus Privacy's tracker list.
+      sources: [play, exodus-signatures]
     fdroid:
       value: false
       sources: [fdroid-search]
@@ -323,3 +328,6 @@ refs:
   fdroid-search:
     url: https://search.f-droid.org/?q=sota&lang=en
     title: F-Droid search for sota
+  exodus-signatures:
+    url: https://web.archive.org/web/20261017091629/https://reports.exodus-privacy.eu.org/api/trackers
+    title: Exodus Privacy tracker signatures (archived 2026-10-17)
