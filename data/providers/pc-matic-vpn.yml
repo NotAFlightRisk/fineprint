@@ -188,6 +188,11 @@ criteria:
         The VPN sends diagnostic data, and Google Play's label says diagnostics are shared with other
         companies. Neither says whether you can turn it off.
       sources: [privacy, play-data]
+    trackers:
+      value: 0
+      evidence: tested
+      note: Version 3.0.0.44, checked against Exodus Privacy's tracker list.
+      sources: [play, exodus-signatures]
     fdroid: false
 
   pricing:
@@ -326,3 +331,6 @@ refs:
   zd-10k-2025:
     url: https://www.sec.gov/Archives/edgar/data/1084048/000108404826000005/zd-20251231.htm
     title: Ziff Davis, annual report on Form 10-K for 2025
+  exodus-signatures:
+    url: https://web.archive.org/web/20261017091629/https://reports.exodus-privacy.eu.org/api/trackers
+    title: Exodus Privacy tracker signatures (archived 2026-10-17)
