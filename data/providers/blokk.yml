@@ -197,6 +197,13 @@ criteria:
         The App Store label declares identifiers, usage and diagnostics for analytics, and Play's form declares app
         interactions, installed apps, device IDs and crash logs. Nothing says whether it can be turned off.
       sources: [app-store, play-datasafety]
+    trackers:
+      value: 2
+      evidence: tested
+      note: >-
+        Firebase Analytics and OneSignal, found by checking version 1.3.47 against Exodus Privacy's tracker
+        list.
+      sources: [play, exodus-signatures]
     fdroid: false
 
   pricing:
@@ -309,3 +316,6 @@ refs:
   apple-refund:
     url: https://support.apple.com/en-us/118223
     title: Request a refund for apps or content that you bought from Apple
+  exodus-signatures:
+    url: https://web.archive.org/web/20261017091629/https://reports.exodus-privacy.eu.org/api/trackers
+    title: Exodus Privacy tracker signatures (archived 2026-10-17)
