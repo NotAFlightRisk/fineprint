@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: TotalAV VPN
 icon: totalav-vpn.png
-checked: 2026-10-27
+checked: 2026-11-23
 
 criteria:
   identity:
@@ -192,6 +192,13 @@ criteria:
         The privacy policy says it automatically collects device details and activity on its apps and
         services, and only offers an opt-out for Google Analytics on its websites.
       sources: [privacy-policy]
+    trackers:
+      value: 4
+      evidence: tested
+      note: >-
+        Adjust, AppsFlyer and Microsoft App Center's analytics and crash reporting, found by checking the
+        1.0.3 APK, the version Google Play lists, against Exodus Privacy's tracker list.
+      sources: [android-apk, exodus-signatures]
     fdroid: false
 
   pricing:
@@ -245,8 +252,8 @@ refs:
     url: https://legal.totalav.com/terms
     title: TotalAV terms of service
   pricing:
-    url: https://www.totalav.com/pricing
-    title: TotalAV pricing
+    url: https://www.totalav.com/product/antivirus-pro
+    title: TotalAV plans and prices
   renewal-usd:
     url: https://www.totalav.com/subscription-pricing-matrix/active/usd
     title: TotalAV renewal prices, USD tab of the pricing matrix
@@ -325,3 +332,6 @@ refs:
   third-party:
     url: https://legal.totalav.com/third-party
     title: Total Security third-party processors
+  exodus-signatures:
+    url: https://web.archive.org/web/20261017091629/https://reports.exodus-privacy.eu.org/api/trackers
+    title: Exodus Privacy tracker signatures (archived 2026-10-17)
