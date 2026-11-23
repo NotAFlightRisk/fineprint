@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: Xeovo
 icon: xeovo.png
-checked: 2026-11-16
+checked: 2026-11-23
 
 criteria:
   identity:
@@ -14,8 +14,10 @@ criteria:
       sources: [tos, privacy-controller, register]
     owner:
       value: null
-      note: Xeovo says it's bootstrapped with no outside shareholders, but doesn't say who owns Xeovo Oy.
-      sources: [about, register]
+      note: >-
+        Xeovo says it's bootstrapped with no outside shareholders and points to Finland's trade register,
+        which doesn't record shareholders and keeps beneficial owners private.
+      sources: [about, reddit, register, prh-shareholders, prh-owners]
     founded:
       value: 2016
       sources: [about]
@@ -96,9 +98,9 @@ criteria:
     payment:
       value: [card, paypal, bitcoin, monero, other_crypto, cash]
       note: >-
-        Other crypto is Litecoin. Apple Pay, Google Pay and MobilePay are offered too. Cash is listed, but
-        Xeovo doesn't say how to send it.
-      sources: [pricing, faq]
+        Other crypto is Litecoin. Apple Pay, Google Pay and MobilePay are offered too. Cash is only for the
+        12-month plan.
+      sources: [pricing, faq, reddit]
 
   security:
     protocols:
@@ -120,20 +122,21 @@ criteria:
 
   infra:
     ram_only:
-      value: null
-      note: Xeovo doesn't say.
+      value: none
+      evidence: claimed
+      sources: [reddit]
     hosting:
       value: rented
       evidence: claimed
       note: Staff say servers come from hosting suppliers, and that some hosts are no use as they're widely blocked.
       sources: [helsinki, qa-2022]
     virtual_locations:
-      value: null
-      note: Xeovo doesn't say whether every location is physically where it's listed.
-      sources: [status]
+      value: none
+      evidence: claimed
+      sources: [reddit, status]
     servers:
       value: 31
-      note: VPN servers on 2026-11-16, across 29 cities, four of them in Finland. The stealth proxies run on their own servers.
+      note: VPN servers on 2026-11-23, across 29 cities, four of them in Finland. The stealth proxies run on their own servers.
       sources: [status, finland]
     countries:
       value: 24
@@ -219,9 +222,9 @@ criteria:
     misleading_claims:
       value: true
       note: >-
-        The About page says Xeovo keeps no data that can be taken by court orders, while its privacy policy
-        says it could hand over account details and payment method.
-      sources: [about, privacy-court]
+        The About page says Xeovo keeps no data a court order can take, but its policy says it could confirm a
+        named person's account and payment method.
+      sources: [about, privacy-court, reddit]
     affiliates:
       value: false
       note: It has a referral scheme that gives both sides a free month instead.
@@ -256,6 +259,15 @@ refs:
   privacy-controller:
     url: https://xeovo.com/privacy/#contact-info
     title: Privacy Policy - Data controller contact information
+  reddit:
+    url: https://www.reddit.com/r/xeovo/s/DDooCjXWJh
+    title: Xeovo's answers to our questions on r/xeovo (November 2026)
+  prh-shareholders:
+    url: https://www.prh.fi/en/companiesandorganisations/muutokset_rekisteritietoihin/limitedcompanyamendments.html
+    title: PRH, Notification of changes for limited liability companies to the Finnish Trade Register
+  prh-owners:
+    url: https://www.prh.fi/en/companiesandorganisations/beneficial_owner_details.html
+    title: PRH, Notification of beneficial owners with the Trade Register
   register:
     url: https://avoindata.prh.fi/opendata-ytj-api/v3/companies?businessId=3233901-7
     title: Finnish Patent and Registration Office open data, Xeovo Oy (3233901-7)
