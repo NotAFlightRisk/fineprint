@@ -211,6 +211,13 @@ criteria:
         be turned off. Only tying it to your device ID is optional. Its App Store label says diagnostics
         may be used to track you.
       sources: [notice, app-store]
+    trackers:
+      value: 5
+      evidence: tested
+      note: >-
+        AppsFlyer, Crashlytics, Firebase Analytics, Google Analytics and Google Tag Manager, found by checking
+        version 6.0.1450 against Exodus Privacy's tracker list.
+      sources: [play, exodus-signatures]
     fdroid: false
 
   pricing:
@@ -330,3 +337,6 @@ refs:
   bulletin-2022:
     url: https://helpcenter.trendmicro.com/en-us/article/tmka-11042
     title: 'Security bulletin: Trend Micro VPN local privilege escalation (CVE-2022-33158)'
+  exodus-signatures:
+    url: https://web.archive.org/web/20261017091629/https://reports.exodus-privacy.eu.org/api/trackers
+    title: Exodus Privacy tracker signatures (archived 2026-10-17)
