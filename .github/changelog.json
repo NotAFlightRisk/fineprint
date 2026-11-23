@@ -1,6 +1,7 @@
 {
-  "commit": "2203c6371697fb8291e7a039d1d19eb25d75b0c4",
+  "commit": "5c62d7d15dfe08d59d9e0e3a66da42af3f2988dc",
   "entries": [
+    {"date":"2026-11-23","commit":"5c62d7d","pr":541,"id":"private-internet-access","name":"Private Internet Access","changes":[{"key":"clients.trackers","from":"Not checked","to":"0 (tested)","grade":"good"}]},
     {"date":"2026-11-23","commit":"2203c63","pr":540,"id":"kaspersky-vpn","name":"Kaspersky VPN","changes":[{"key":"clients.trackers","from":"7","to":"7 (tested)","grade":"bad"}]},
     {"date":"2026-11-23","commit":"32e6640","pr":539,"id":"mullvad","name":"Mullvad VPN","changes":[{"key":"clients.trackers","from":"0","to":"0 (tested)","grade":"good"}]},
     {"date":"2026-11-23","commit":"7df2b07","pr":538,"id":"safing-spn","name":"Safing SPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"Doesn't apply"}]},
