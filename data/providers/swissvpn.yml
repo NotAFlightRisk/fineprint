@@ -97,7 +97,8 @@ criteria:
       value: none
       sources: [ovpn-config, sstp]
     kill_switch:
-      value: none
+      value: null
+      grade: na
       note: There's no SwissVPN app, so it's down to the client you use. The help pages suggest a separate firewall to block traffic outside the tunnel.
       sources: [help, instructions]
     dns:
@@ -143,7 +144,8 @@ criteria:
         you on any port unless you add the firewall option. A static IP costs extra.
       sources: [home, help, static-ip]
     split_tunnel:
-      value: false
+      value: null
+      grade: na
       note: There's no app, though the built-in VPN clients it relies on can be set to route only some traffic.
       sources: [instructions]
     blocking:
@@ -164,7 +166,8 @@ criteria:
       note: There are no SwissVPN apps to publish.
       sources: [instructions]
     telemetry:
-      value: none
+      value: null
+      grade: na
       note: There are no SwissVPN apps.
       sources: [instructions]
     trackers:
