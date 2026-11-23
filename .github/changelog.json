@@ -1,6 +1,11 @@
 {
-  "commit": "6ea2606430eedbcc3ee25cf6a1694001f8eb66c8",
+  "commit": "dba9645e635282caaf5a1655bbe9ebf77059b8d6",
   "entries": [
+    {"date":"2026-11-23","commit":"dba9645","pr":519,"id":"defyx-vpn","name":"Defyx VPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"3 (tested)","grade":"bad"}]},
+    {"date":"2026-11-23","commit":"3004800","pr":518,"id":"gnuvpn","name":"GnuVPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"4 (tested)","grade":"bad"}]},
+    {"date":"2026-11-23","commit":"337579f","pr":517,"id":"1vpn","name":"1VPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"1 (tested)","grade":"bad"}]},
+    {"date":"2026-11-23","commit":"d7a8f3c","pr":516,"id":"amnezia-vpn","name":"Amnezia VPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"0 (tested)","grade":"good"}]},
+    {"date":"2026-11-23","commit":"8b2bc9c","pr":515,"id":"tor-vpn","name":"Tor VPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"0 (tested)","grade":"good"}]},
     {"date":"2026-11-23","commit":"6ea2606","pr":514,"id":"speedify","name":"Speedify","changes":[{"key":"clients.trackers","from":"Not checked","to":"1 (tested)","grade":"bad"}]},
     {"date":"2026-11-23","commit":"3e10966","pr":513,"id":"ipvanish","name":"IPVanish","changes":[{"key":"clients.trackers","from":"Not checked","to":"3 (tested)","grade":"bad"}]},
     {"date":"2026-11-23","commit":"c86be6d","pr":511,"id":"mozilla-vpn","name":"Mozilla VPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"0 (tested)","grade":"good"}]},
