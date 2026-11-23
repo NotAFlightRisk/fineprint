@@ -204,6 +204,13 @@ criteria:
         The Android app sends screen views and connection events to Firebase Analytics, Crashlytics and
         Mixpanel, with no setting to turn them off. Its app store labels declare no usage or crash data.
       sources: [apk, kb-settings, consumer-terms, play-data, app-store]
+    trackers:
+      value: 3
+      evidence: tested
+      note: >-
+        Crashlytics, Firebase Analytics and Mixpanel, found by checking version 1.3.0 against Exodus Privacy's
+        tracker list.
+      sources: [play, exodus-signatures]
     fdroid: false
 
   pricing:
@@ -337,3 +344,6 @@ refs:
   affiliates:
     url: https://www.webroot.com/affiliates/
     title: Webroot affiliate program
+  exodus-signatures:
+    url: https://web.archive.org/web/20261017091629/https://reports.exodus-privacy.eu.org/api/trackers
+    title: Exodus Privacy tracker signatures (archived 2026-10-17)
