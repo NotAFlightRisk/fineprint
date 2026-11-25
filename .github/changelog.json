@@ -1,6 +1,8 @@
 {
-  "commit": "b06c709964eb87674121f8319293769bbd0c7290",
+  "commit": "da6dd1c9a9914ccebeb2d8f44e618ea754b76098",
   "entries": [
+    {"date":"2026-11-25","commit":"c446c87","pr":564,"id":"guardian","name":"Guardian Firewall + VPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"0 (tested)","grade":"good"}]},
+    {"date":"2026-11-25","commit":"fa3a18d","pr":563,"id":"vp-net","name":"VP.NET","changes":[{"key":"clients.trackers","from":"Not checked","to":"0 (tested)","grade":"good"}]},
     {"date":"2026-11-25","commit":"b06c709","pr":562,"id":"anonine","name":"Anonine","changes":[{"key":"clients.trackers","from":"Not checked","to":"7 (tested)","grade":"bad"}]},
     {"date":"2026-11-25","commit":"5fd801f","pr":561,"id":"sekai-vpn","name":"Sekai VPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"0 (tested)","grade":"good"}]},
     {"date":"2026-11-25","commit":"f6c8a23","pr":560,"id":"duckduckgo-vpn","name":"DuckDuckGo VPN","changes":[{"key":"clients.trackers","from":"0","to":"0 (tested)","grade":"good"}]},
