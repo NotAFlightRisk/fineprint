@@ -1,6 +1,8 @@
 {
-  "commit": "ad73c938424fd0a32bbede2bdc1a14442b029321",
+  "commit": "b06c709964eb87674121f8319293769bbd0c7290",
   "entries": [
+    {"date":"2026-11-25","commit":"b06c709","pr":562,"id":"anonine","name":"Anonine","changes":[{"key":"clients.trackers","from":"Not checked","to":"7 (tested)","grade":"bad"}]},
+    {"date":"2026-11-25","commit":"5fd801f","pr":561,"id":"sekai-vpn","name":"Sekai VPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"0 (tested)","grade":"good"}]},
     {"date":"2026-11-25","commit":"f6c8a23","pr":560,"id":"duckduckgo-vpn","name":"DuckDuckGo VPN","changes":[{"key":"clients.trackers","from":"0","to":"0 (tested)","grade":"good"}]},
     {"date":"2026-11-25","commit":"5fccf8f","pr":559,"id":"surfshark","name":"Surfshark","changes":[{"key":"clients.trackers","from":"3","to":"3 (tested)","grade":"bad"}]},
     {"date":"2026-11-25","commit":"e4e8945","pr":558,"id":"ivpn","name":"IVPN","changes":[{"key":"clients.trackers","from":"0","to":"0 (tested)","grade":"good"}]},
