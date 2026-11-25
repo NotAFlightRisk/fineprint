@@ -1,6 +1,8 @@
 {
-  "commit": "10fe79070765c937cf2911b13dc7898a837c3249",
+  "commit": "2d130d6df63de1e9b89354b78aa0244b89e20545",
   "entries": [
+    {"date":"2026-11-25","commit":"8235fda","pr":568,"id":"ufo-vpn","name":"UFO VPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"18 (tested)","grade":"bad"}]},
+    {"date":"2026-11-25","commit":"4825e4d","pr":567,"id":"purevpn","name":"PureVPN","changes":[{"key":"clients.trackers","from":"9","to":"8 (tested)","grade":"bad"}]},
     {"date":"2026-11-25","commit":"10fe790","pr":566,"id":"windscribe","name":"Windscribe","changes":[{"key":"clients.trackers","from":"0","to":"0 (tested)","grade":"good"}]},
     {"date":"2026-11-25","commit":"2688aea","pr":565,"id":"cyberghost","name":"CyberGhost VPN","changes":[{"key":"clients.trackers","from":"4","to":"Not checked"}]},
     {"date":"2026-11-25","commit":"c446c87","pr":564,"id":"guardian","name":"Guardian Firewall + VPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"0 (tested)","grade":"good"}]},
