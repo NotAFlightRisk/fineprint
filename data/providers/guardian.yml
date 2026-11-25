@@ -230,6 +230,11 @@ criteria:
       evidence: claimed
       note: The App Store listing says no data is collected, and the policy says nothing is collected automatically.
       sources: [app-store, privacy]
+    trackers:
+      value: 0
+      evidence: tested
+      note: Version 1.9.0, the one Google Play lists, checked against Exodus Privacy's tracker list.
+      sources: [play-android, exodus-signatures]
     fdroid:
       value: false
       sources: [fdroid-search]
@@ -381,3 +386,9 @@ refs:
   fdroid-search:
     url: https://search.f-droid.org/?q=guardian&lang=en
     title: F-Droid search for guardian
+  play-android:
+    url: https://play.google.com/store/apps/details?id=com.guardianapp.Guardian
+    title: Guardian Firewall + VPN on Google Play
+  exodus-signatures:
+    url: https://web.archive.org/web/20261017091629/https://reports.exodus-privacy.eu.org/api/trackers
+    title: Exodus Privacy tracker signatures (archived 2026-10-17)
