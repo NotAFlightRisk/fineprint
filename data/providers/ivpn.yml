@@ -223,8 +223,11 @@ criteria:
       sources: [privacy]
     trackers:
       value: 0
-      note: Exodus's latest report is for version 2.11.1 from October 2025, as the app is currently off Google Play.
-      sources: [exodus, android-app]
+      evidence: tested
+      note: >-
+        Version 2.13.1, the newest release, checked against Exodus Privacy's tracker list. The app is
+        currently off Google Play.
+      sources: [android-app, exodus-signatures]
     fdroid:
       value: true
       sources: [fdroid, android-app]
@@ -396,9 +399,6 @@ refs:
   github:
     url: https://github.com/ivpn
     title: IVPN on GitHub
-  exodus:
-    url: https://web.archive.org/web/20251012135041/https://reports.exodus-privacy.eu.org/en/reports/net.ivpn.client/latest/
-    title: Exodus Privacy report for net.ivpn.client 2.11.1 (archived copy)
   fdroid:
     url: https://f-droid.org/en/packages/net.ivpn.client/
     title: IVPN on F-Droid
@@ -417,3 +417,6 @@ refs:
   supported-projects:
     url: https://www.ivpn.net/en/supported-projects/
     title: IVPN Supported Projects
+  exodus-signatures:
+    url: https://web.archive.org/web/20261017091629/https://reports.exodus-privacy.eu.org/api/trackers
+    title: Exodus Privacy tracker signatures (archived 2026-10-17)
