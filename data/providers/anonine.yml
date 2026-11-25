@@ -180,6 +180,14 @@ criteria:
         The policy lists Google Analytics, Hotjar and Amplitude for tracking how users move, without saying
         whether the apps send anything.
       sources: [privacy-policy]
+    trackers:
+      value: 7
+      evidence: tested
+      note: >-
+        Amplitude, AppsFlyer, Facebook Analytics, Facebook Login, Facebook Places, Facebook Share and Firebase
+        Analytics, found by checking version 3.0.146, the APK on its site, against Exodus Privacy's tracker
+        list.
+      sources: [app-android, exodus-signatures]
     fdroid: false
 
   pricing:
@@ -324,3 +332,6 @@ refs:
   affiliate:
     url: https://vpnpartner.com/
     title: VPN Partner, multi-site VPN affiliate program
+  exodus-signatures:
+    url: https://web.archive.org/web/20261017091629/https://reports.exodus-privacy.eu.org/api/trackers
+    title: Exodus Privacy tracker signatures (archived 2026-10-17)
