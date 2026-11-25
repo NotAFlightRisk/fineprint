@@ -1,6 +1,8 @@
 {
-  "commit": "f9150c5a3db04e5ab4ea8b96a969fd96c33d1ec1",
+  "commit": "9f1e0162be1569ac03c7ec47028102b7e07d7301",
   "entries": [
+    {"date":"2026-11-25","commit":"9f1e016","pr":571,"id":"btguard","name":"BTGuard","changes":[{"key":"clients.trackers","from":"Not checked","to":"0 (tested)","grade":"good"}]},
+    {"date":"2026-11-25","commit":"5add95d","pr":570,"id":"vsem-vpn","name":"Vsem VPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"16 (tested)","grade":"bad"}]},
     {"date":"2026-11-25","commit":"f99e40d","pr":569,"id":"lagom-vpn","name":"Lagom VPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"6 (tested)","grade":"bad"}]},
     {"date":"2026-11-25","commit":"8235fda","pr":568,"id":"ufo-vpn","name":"UFO VPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"18 (tested)","grade":"bad"}]},
     {"date":"2026-11-25","commit":"4825e4d","pr":567,"id":"purevpn","name":"PureVPN","changes":[{"key":"clients.trackers","from":"9","to":"8 (tested)","grade":"bad"}]},
