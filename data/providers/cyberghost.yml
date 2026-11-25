@@ -239,12 +239,6 @@ criteria:
         The apps send connection events to third-party analytics, which the policy calls anonymous. It
         doesn't say whether you can turn this off.
       sources: [privacy-policy]
-    trackers:
-      value: 4
-      note: >-
-        AppsFlyer, Google Analytics, Google Tag Manager and Sentry, in version 8.18.0.2844 from January
-        2024, the newest archived report.
-      sources: [exodus]
     fdroid: false
 
   pricing:
@@ -419,9 +413,6 @@ refs:
   zenmate:
     url: https://zenmate.com/blog/zenmate-changes
     title: Important changes to ZenMate
-  exodus:
-    url: https://reports.exodus-privacy.eu.org/en/reports/de.mobileconcepts.cyberghost/latest/
-    title: Exodus Privacy report for de.mobileconcepts.cyberghost
   vpnmentor:
     url: https://www.vpnmentor.com/about-us/
     title: About vpnMentor
