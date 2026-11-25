@@ -250,8 +250,11 @@ criteria:
       sources: [privacy, android-setup]
     trackers:
       value: 3
-      note: AppsFlyer, Google Crashlytics and Firebase Analytics, in version 3.25.0 from February 2026.
-      sources: [exodus]
+      evidence: tested
+      note: >-
+        AppsFlyer, Crashlytics and Firebase Analytics, found by checking version 3.39.0 from its site, the
+        same version Google Play lists, against Exodus Privacy's tracker list.
+      sources: [play-android, exodus-signatures]
     fdroid:
       value: false
       sources: [fdroid]
@@ -489,9 +492,6 @@ refs:
   android-setup:
     url: https://support.surfshark.com/hc/en-us/articles/360010921959-How-to-set-up-Surfshark-VPN-on-Android
     title: How to set up Surfshark VPN on Android
-  exodus:
-    url: https://reports.exodus-privacy.eu.org/en/reports/com.surfshark.vpnclient.android/latest/
-    title: Exodus Privacy report for com.surfshark.vpnclient.android
   fdroid:
     url: https://search.f-droid.org/?q=surfshark&lang=en
     title: F-Droid search for Surfshark
@@ -513,3 +513,9 @@ refs:
   advocacy-fund:
     url: https://surfshark.com/cybersecurity-advocacy-fund
     title: Cybersecurity Advocacy Fund
+  play-android:
+    url: https://play.google.com/store/apps/details?id=com.surfshark.vpnclient.android
+    title: Surfshark on Google Play
+  exodus-signatures:
+    url: https://web.archive.org/web/20261017091629/https://reports.exodus-privacy.eu.org/api/trackers
+    title: Exodus Privacy tracker signatures (archived 2026-10-17)
