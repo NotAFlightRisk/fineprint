@@ -135,6 +135,16 @@ criteria:
       value: null
       note: The policy says crash reports may be sent, without saying whether you can turn them off.
       sources: [policy]
+    trackers:
+      value: 16
+      evidence: tested
+      note: >-
+        Ad SDKs from AdMob, AppLovin, AppMonet, Chartboost, Facebook Ads, Fyber, IAB Open Measurement, InMobi,
+        ironSource, Mintegral, myTarget, Pangle, Unity Ads and Yandex, plus Firebase Analytics and myTracker,
+        found by checking version 2.0.7 from October 2026, the newest build, against Exodus Privacy's tracker
+        list. Google Play's listing still shows 2.0.6. It also carries AppMetrica 6, whose new package name
+        the list doesn't catch yet.
+      sources: [play, exodus-signatures]
     fdroid: false
 
   pricing:
@@ -212,3 +222,6 @@ refs:
   tg-creators:
     url: https://t.me/vsemvpn_app/13
     title: VSEM VPN's paid scheme for video creators, Telegram post (23 September 2026)
+  exodus-signatures:
+    url: https://web.archive.org/web/20261017091629/https://reports.exodus-privacy.eu.org/api/trackers
+    title: Exodus Privacy tracker signatures (archived 2026-10-17)
