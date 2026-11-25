@@ -1,6 +1,7 @@
 {
-  "commit": "2d130d6df63de1e9b89354b78aa0244b89e20545",
+  "commit": "f9150c5a3db04e5ab4ea8b96a969fd96c33d1ec1",
   "entries": [
+    {"date":"2026-11-25","commit":"f99e40d","pr":569,"id":"lagom-vpn","name":"Lagom VPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"6 (tested)","grade":"bad"}]},
     {"date":"2026-11-25","commit":"8235fda","pr":568,"id":"ufo-vpn","name":"UFO VPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"18 (tested)","grade":"bad"}]},
     {"date":"2026-11-25","commit":"4825e4d","pr":567,"id":"purevpn","name":"PureVPN","changes":[{"key":"clients.trackers","from":"9","to":"8 (tested)","grade":"bad"}]},
     {"date":"2026-11-25","commit":"10fe790","pr":566,"id":"windscribe","name":"Windscribe","changes":[{"key":"clients.trackers","from":"0","to":"0 (tested)","grade":"good"}]},
