@@ -1,6 +1,9 @@
 {
-  "commit": "252f87ac5f78f0319799d36af890941e17602aea",
+  "commit": "31771fa0858dc3a1a024015746a73aecf6187dbb",
   "entries": [
+    {"date":"2026-11-25","commit":"31771fa","pr":552,"id":"thunder-vpn","name":"Thunder VPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"2 (tested)","grade":"bad"}]},
+    {"date":"2026-11-25","commit":"0da55bf","pr":551,"id":"secure-signal-vpn","name":"Secure VPN (Secure Signal)","changes":[{"key":"clients.trackers","from":"Not checked","to":"2 (tested)","grade":"bad"}]},
+    {"date":"2026-11-25","commit":"0791aaf","pr":550,"id":"flyvpn","name":"FlyVPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"1 (tested)","grade":"bad"}]},
     {"date":"2026-11-25","commit":"252f87a","pr":549,"id":"vpnify","name":"vpnify","changes":[{"key":"clients.trackers","from":"Not checked","to":"6 (tested)","grade":"bad"}]},
     {"date":"2026-11-25","commit":"81da49e","pr":548,"id":"forestvpn","name":"ForestVPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"0 (tested)","grade":"good"}]},
     {"date":"2026-11-23","commit":"11e44f9","pr":547,"id":"argovpn","name":"ArgoVPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"0 (tested)","grade":"good"}]},
