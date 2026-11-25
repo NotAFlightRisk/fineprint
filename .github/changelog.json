@@ -1,6 +1,9 @@
 {
-  "commit": "0083072b61b60d21a0433e68f0f2e8294b18b5a9",
+  "commit": "e4e894538f8851d8e8ec1b66eb9312f19b25befe",
   "entries": [
+    {"date":"2026-11-25","commit":"e4e8945","pr":558,"id":"ivpn","name":"IVPN","changes":[{"key":"clients.trackers","from":"0","to":"0 (tested)","grade":"good"}]},
+    {"date":"2026-11-25","commit":"978c470","pr":557,"id":"vpn-super","name":"VPN Super","changes":[{"key":"clients.trackers","from":"28","to":"14 (tested)","grade":"bad"}]},
+    {"date":"2026-11-25","commit":"0c0bca1","pr":556,"id":"vpn-lat","name":"VPN.lat","changes":[{"key":"clients.trackers","from":"6","to":"6 (tested)","grade":"bad"}]},
     {"date":"2026-11-25","commit":"0083072","pr":555,"id":"opera-vpn-pro","name":"Opera VPN Pro","changes":[{"key":"clients.trackers","from":"10","to":"6 (tested)","grade":"bad"}]},
     {"date":"2026-11-25","commit":"e0e477e","pr":554,"id":"riseupvpn","name":"RiseupVPN","changes":[{"key":"clients.trackers","from":"0","to":"0 (tested)","grade":"good"}]},
     {"date":"2026-11-25","commit":"5e5b3df","pr":553,"id":"uvpn","name":"uVPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"7 (tested)","grade":"bad"}]},
