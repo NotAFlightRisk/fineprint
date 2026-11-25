@@ -1,6 +1,7 @@
 {
-  "commit": "2688aea6f4aead851c820cfd2b94baef70d78768",
+  "commit": "10fe79070765c937cf2911b13dc7898a837c3249",
   "entries": [
+    {"date":"2026-11-25","commit":"10fe790","pr":566,"id":"windscribe","name":"Windscribe","changes":[{"key":"clients.trackers","from":"0","to":"0 (tested)","grade":"good"}]},
     {"date":"2026-11-25","commit":"2688aea","pr":565,"id":"cyberghost","name":"CyberGhost VPN","changes":[{"key":"clients.trackers","from":"4","to":"Not checked"}]},
     {"date":"2026-11-25","commit":"c446c87","pr":564,"id":"guardian","name":"Guardian Firewall + VPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"0 (tested)","grade":"good"}]},
     {"date":"2026-11-25","commit":"fa3a18d","pr":563,"id":"vp-net","name":"VP.NET","changes":[{"key":"clients.trackers","from":"Not checked","to":"0 (tested)","grade":"good"}]},
