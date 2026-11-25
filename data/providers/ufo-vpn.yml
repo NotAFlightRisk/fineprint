@@ -184,6 +184,16 @@ criteria:
         app carries Firebase Analytics, Crashlytics, AppsFlyer and Facebook's SDK alongside a dozen ad
         networks, and its App Store labels say device identifiers are used to track you for ads.
       sources: [no-log, apk, app-store, play-data-safety]
+    trackers:
+      value: 18
+      evidence: tested
+      note: >-
+        Ad SDKs from AdMob, AppLovin, AppMonet, Chartboost, Facebook Ads, IAB Open Measurement, InMobi,
+        ironSource, Mintegral, Pangle, Unity Ads and Yandex, plus AppsFlyer, Crashlytics, Facebook Analytics,
+        Facebook Login, Facebook Share and Firebase Analytics, found by checking version 2.6.26 from August
+        2026, the APK on its site, against Exodus Privacy's tracker list. Google Play has 2.7.0. It also
+        carries AppMetrica 6, whose new package name the list doesn't catch yet.
+      sources: [download-android, exodus-signatures]
     fdroid: false
 
   pricing:
@@ -309,3 +319,6 @@ refs:
   affiliate-2025:
     url: https://web.archive.org/web/20250616003151/https://ufovpn.io/affiliate
     title: UFO VPN Affiliate Program (archived June 2025)
+  exodus-signatures:
+    url: https://web.archive.org/web/20261017091629/https://reports.exodus-privacy.eu.org/api/trackers
+    title: Exodus Privacy tracker signatures (archived 2026-10-17)
