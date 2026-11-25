@@ -150,6 +150,13 @@ criteria:
         came from and a device ID, which its privacy settings page doesn't list. The Android app carries AppsFlyer,
         Facebook and Firebase analytics.
       sources: [crx, play]
+    trackers:
+      value: 7
+      evidence: tested
+      note: >-
+        AdMob, AppsFlyer, Facebook Analytics, Facebook Login, Facebook Share, Firebase Analytics and Sentry,
+        found by checking version 5.4.2 against Exodus Privacy's tracker list.
+      sources: [play, exodus-signatures]
     fdroid: false
 
   pricing:
@@ -251,3 +258,6 @@ refs:
   pricing-2019:
     url: https://web.archive.org/web/20190722231206/https://uvpn.me/pricing/
     title: uVPN pricing (archived July 2019)
+  exodus-signatures:
+    url: https://web.archive.org/web/20261017091629/https://reports.exodus-privacy.eu.org/api/trackers
+    title: Exodus Privacy tracker signatures (archived 2026-10-17)
