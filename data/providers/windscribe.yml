@@ -244,8 +244,11 @@ criteria:
       sources: [privacy, no-logs]
     trackers:
       value: 0
-      note: Exodus's latest report covers version 3.82.1645 from March 2025.
-      sources: [exodus]
+      evidence: tested
+      note: >-
+        Version 4.4.2412 from November 2026, the Google Play build Windscribe also posts on GitHub, checked
+        against Exodus Privacy's tracker list. Play has since moved on to 4.5.
+      sources: [github-android, exodus-signatures]
     fdroid:
       value: true
       sources: [fdroid]
@@ -429,9 +432,6 @@ refs:
   github:
     url: https://github.com/Windscribe
     title: Windscribe on GitHub
-  exodus:
-    url: https://reports.exodus-privacy.eu.org/en/reports/com.windscribe.vpn/latest/
-    title: Exodus Privacy report for com.windscribe.vpn
   fdroid:
     url: https://f-droid.org/en/packages/com.windscribe.vpn/
     title: Windscribe on F-Droid
@@ -444,3 +444,9 @@ refs:
   cure53-2022:
     url: https://windscribe.com/blog/content/files/2024/07/2022-12-11---Windscribe---Cure53.pdf
     title: Cure53, VPN server pentest (2022)
+  github-android:
+    url: https://github.com/Windscribe/Android-App/releases/tag/v4.4
+    title: Windscribe Android app 4.4 on GitHub
+  exodus-signatures:
+    url: https://web.archive.org/web/20261017091629/https://reports.exodus-privacy.eu.org/api/trackers
+    title: Exodus Privacy tracker signatures (archived 2026-10-17)
