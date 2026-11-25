@@ -204,8 +204,10 @@ criteria:
       sources: [android-vpn-pixels, privacy, ios-strings]
     trackers:
       value: 0
-      note: In version 5.270.2 from March 2026.
-      sources: [exodus]
+      evidence: tested
+      note: >-
+        Version 5.304.0 of the DuckDuckGo Android app, checked against Exodus Privacy's tracker list.
+      sources: [play-android, exodus-signatures]
     fdroid:
       value: true
       note: >-
@@ -352,9 +354,6 @@ refs:
   ios-strings:
     url: https://github.com/duckduckgo/apple-browsers/blob/main/iOS/DuckDuckGo/UserInterfaceResources/en.lproj/Localizable.strings
     title: iOS app strings, including the crash report prompt
-  exodus:
-    url: https://web.archive.org/web/20260308110823/https://reports.exodus-privacy.eu.org/en/reports/com.duckduckgo.mobile.android/latest/
-    title: Exodus Privacy report for com.duckduckgo.mobile.android 5.270.2 (archived)
   fdroid:
     url: https://f-droid.org/en/packages/com.duckduckgo.mobile.android/
     title: DuckDuckGo Privacy Browser on F-Droid
@@ -370,3 +369,9 @@ refs:
   donations:
     url: https://spreadprivacy.com/2026-duckduckgo-charitable-donations/
     title: '2026 DuckDuckGo Charitable Donations: $1M to privacy and digital competition non-profits around the world'
+  play-android:
+    url: https://play.google.com/store/apps/details?id=com.duckduckgo.mobile.android
+    title: DuckDuckGo on Google Play
+  exodus-signatures:
+    url: https://web.archive.org/web/20261017091629/https://reports.exodus-privacy.eu.org/api/trackers
+    title: Exodus Privacy tracker signatures (archived 2026-10-17)
