@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
 name: RostamVPN
 icon: rostam-vpn.png
-checked: 2026-10-31
+checked: 2026-11-26
 
 criteria:
   identity:
@@ -28,7 +28,7 @@ criteria:
       sources: [red-team, red-founder]
     sister_brands:
       value: [RedVPN, InternetPro]
-      note: Both run on the same company's network and transport, and InternetPro calls itself RostamVPN's sibling.
+      note: Both run on the same company's network and transport, and InternetPro says it's from the team behind RostamVPN.
       sources: [red-about, internetpro, build]
     acquisitions:
       value: []
@@ -75,7 +75,10 @@ criteria:
     policy: https://rostam.app/privacy/
 
   transparency:
-    audits: []
+    audits:
+      value: []
+      note: Its October 2026 penetration test reports on GitHub were written by Red Team LTD itself, so they aren't independent.
+      sources: [sec-audit]
     report: none
     canary: none
     bug_bounty: false
@@ -161,19 +164,25 @@ criteria:
       note: A "protected apps" list in the Android app.
       sources: [settings]
     blocking:
-      value: [malware]
-      note: Protect Mode, off by default, refuses hosts on a threat list used for malware, phishing and botnet control.
-      sources: [home, policy]
+      value: [ads, trackers, malware]
+      note: >-
+        Protect Mode refuses hosts on a threat list used for malware, phishing and botnet control, plus ad and
+        tracker lists that start switched on.
+      sources: [protect, policy]
 
   clients:
     platforms:
       value: [android, ios]
-      note: The Android app is no longer on Google Play, and comes as an APK from its own site.
+      note: >-
+        The Android app is no longer on Google Play, and comes as an APK from its own site, now under the name Rostam
+        Mobile Security.
       sources: [home, apk, play-2026]
     open_source:
       value: some
-      note: The Android app's source is on GitHub under Apache-2.0, and the iOS app's isn't.
-      sources: [source]
+      note: >-
+        The Android app's source is on GitHub under Apache-2.0, last published at 6.8.5 under its old package name,
+        and the iOS app's isn't.
+      sources: [source, brand]
     telemetry:
       value: none
       evidence: claimed
@@ -181,6 +190,11 @@ criteria:
         The policy says there's no analytics code, and the Android source links no ad or analytics SDK for
         this brand. Its old Google Play listing said "Contains ads".
       sources: [policy, build, play-2026]
+    trackers:
+      value: 0
+      evidence: tested
+      note: Found by checking the 6.8.9 APK from its site against Exodus Privacy's tracker list.
+      sources: [apk, exodus-signatures]
     fdroid: false
 
   pricing:
@@ -224,7 +238,7 @@ refs:
     title: RostamVPN Privacy (effective 27 October 2026)
   app-store:
     url: https://apps.apple.com/us/app/id1487875612
-    title: RostamVPN on the US App Store
+    title: 'RostamVPN: Mobile Security VPN on the US App Store'
   itunes:
     url: https://itunes.apple.com/lookup?id=1487875612
     title: App Store record for RostamVPN (released 21 November 2019)
@@ -233,7 +247,13 @@ refs:
     title: RostamVPN on Google Play, August 2026 (Wayback Machine)
   apk:
     url: https://rostam.app/download
-    title: RostamVPN Android APK (version 6.7.0)
+    title: Rostam Mobile Security Android APK (version 6.8.9)
+  protect:
+    url: https://rostam.app/protect/
+    title: Rostam Protect Mode
+  exodus-signatures:
+    url: https://web.archive.org/web/20261017091629/https://reports.exodus-privacy.eu.org/api/trackers
+    title: Exodus Privacy tracker signatures (archived 2026-10-17)
   source:
     url: https://github.com/RostamVPN/rostamvpn-android
     title: RostamVPN/rostamvpn-android on GitHub
@@ -243,12 +263,18 @@ refs:
   config:
     url: https://github.com/RostamVPN/rostamvpn-android/blob/main/android/gen/android/app/src/main/assets/default-config.json
     title: rostamvpn-android, bundled default-config.json
+  brand:
+    url: https://github.com/RostamVPN/rostamvpn-android/blob/main/brands/rostam.json
+    title: rostamvpn-android, RostamVPN brand config (version 6.8.5)
   build:
     url: https://github.com/RostamVPN/rostamvpn-android/blob/main/android/gen/android/app/build.gradle.kts
     title: rostamvpn-android, app build flavours
   settings:
     url: https://github.com/RostamVPN/rostamvpn-android/blob/main/android/gen/android/app/src/main/java/com/rostamvpn/android/ui/components/SettingsSheet.kt
     title: rostamvpn-android, settings screen
+  sec-audit:
+    url: https://github.com/RostamVPN/sec-audit
+    title: RostamVPN security audit RVPN-01, by Red Team Ltd (October 2026)
   red-about:
     url: https://vpn.red/about/
     title: About Red Team LTD
