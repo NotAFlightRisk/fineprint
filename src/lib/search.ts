@@ -42,7 +42,7 @@ export interface Term {
 
 const fold = (text: string) => text.normalize('NFD').replace(/\p{M}/gu, '').toLowerCase();
 const split = (text: string) => fold(text).match(/[\p{L}\p{N}]+/gu) ?? [];
-const stem = (word: string) => (word.length > 4 ? word.replace(/(?<!s)s$|ing$|ed$/, '') : word);
+const stem = (word: string) => (word.length > 4 ? word.replace(/([^s])s$|ing$|ed$/, '$1') : word);
 const sum = (numbers: number[]) => numbers.reduce((total, n) => total + n, 0);
 const filler = new Set(
   `a accept accepts allow allows an and any are by can do does for has have in is it of offer offers
