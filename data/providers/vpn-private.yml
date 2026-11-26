@@ -1,0 +1,236 @@
+# yaml-language-server: $schema=https://fineprint.peng.ly/schema/provider.json
+name: VPN Private
+icon: vpn-private.png
+checked: 2026-11-26
+
+criteria:
+  identity:
+    website: https://vpn-private.net
+    legal_entity:
+      value: Foxy Media Ltd
+      note: >-
+        Google Play names it as the trader behind the app, and Israel's register has it in Herzliya. Its site and
+        policy name no company, and Foxy Media's own site only mentions TV, podcast and brand content work.
+      sources: [play, register, foxymedia]
+    owner:
+      value: null
+      note: Israel's open company register doesn't show who owns Foxy Media.
+      sources: [register]
+    founded:
+      value: 2019
+      note: The Android app came out on Google Play in September 2019.
+      sources: [play]
+    team:
+      value: anonymous
+      note: Nobody's named on its site, in its policy or on its Play listing.
+      sources: [home, policy, play]
+    sister_brands:
+      value: []
+      note: Its Play account publishes only this app.
+      sources: [play-developer]
+    acquisitions:
+      value: []
+
+  jurisdiction:
+    hq:
+      value: IL
+      sources: [play, register]
+    entities:
+      value: [IL]
+      sources: [register]
+
+  logging:
+    traffic:
+      value: none
+      evidence: claimed
+      sources: [policy]
+    dns:
+      value: null
+      note: The policy rules out logging where your traffic goes, but doesn't mention DNS lookups.
+      sources: [policy]
+    timestamps:
+      value: temporary
+      evidence: claimed
+      note: The policy says it may keep how long you were connected, for less than 24 hours.
+      sources: [policy]
+    bandwidth:
+      value: aggregate
+      evidence: claimed
+      note: The policy says it may keep how much data you used that day, for less than 24 hours.
+      sources: [policy]
+    source_ip:
+      value: none
+      evidence: claimed
+      sources: [policy]
+    proven:
+      value: []
+    policy: https://vpn-private.net/privacy
+
+  transparency:
+    audits:
+      value: []
+    report:
+      value: none
+    canary:
+      value: none
+    bug_bounty:
+      value: true
+      evidence: claimed
+      note: It offers $1,000 for a critical flaw and $200 for an important one, plus free Premium.
+      sources: [vdp]
+    incidents:
+      value: []
+
+  account:
+    email:
+      value: none
+      evidence: claimed
+      note: The app needs no registration.
+      sources: [home]
+    personal_data:
+      value: []
+      sources: [home]
+    payment:
+      value: [app_store]
+      note: Premium is an in-app subscription through Google Play.
+      sources: [play, refund]
+
+  security:
+    protocols:
+      value: null
+      note: >-
+        The Android app runs on Xray 1.6.6, which can carry several protocols, and which one its servers use isn't
+        said anywhere.
+      sources: [aptoide]
+    post_quantum:
+      value: null
+    kill_switch:
+      value: null
+    dns:
+      value: null
+
+  infra:
+    ram_only:
+      value: null
+    hosting:
+      value: null
+      note: The site says it maintains its servers "in-house", without saying whether it owns them.
+      sources: [locations]
+    virtual_locations:
+      value: null
+    servers:
+      value: null
+      note: The site only says "hundreds".
+      sources: [locations]
+    countries:
+      value: 21
+      sources: [locations]
+
+  features:
+    connections:
+      value: null
+    multihop:
+      value: null
+    obfuscation:
+      value: null
+    port_forwarding:
+      value: null
+    split_tunnel:
+      value: null
+    blocking:
+      value: null
+
+  clients:
+    platforms:
+      value: [android]
+      note: The app was last updated in February 2024.
+      sources: [play]
+    open_source:
+      value: none
+    telemetry:
+      value: null
+      note: >-
+        The app carries Firebase Analytics and Crashlytics, and the policy says it may use them to find bugs and
+        connection failures, without saying whether you can turn them off.
+      sources: [aptoide, policy]
+    trackers:
+      value: 3
+      evidence: tested
+      note: >-
+        AdMob, Crashlytics and Firebase Analytics, found by checking the 2.0.14 APK, the version on Google Play and
+        signed with the certificate its site lists, against Exodus Privacy's tracker list.
+      sources: [aptoide, assetlinks, exodus-signatures]
+    fdroid: false
+
+  pricing:
+    monthly:
+      value: null
+      note: Google Play lists its in-app purchases at $0.99 to $54.99 without naming the plans.
+      sources: [play]
+    best:
+      value: null
+    free_tier:
+      value: true
+      note: The free version shows two ads a session, and Premium drops them and adds more locations.
+      sources: [play, vdp]
+    refund_days:
+      value: 2
+      note: You have 48 hours to ask by email, and nothing after a free trial.
+      sources: [refund]
+
+  ethics:
+    misleading_claims:
+      value: true
+      note: >-
+        Its site promises "military-grade security", and its Play data safety form says the app collects nothing,
+        while its own policy says it may keep how long you connect and your daily data use, and that its ad partner
+        may collect your advertising ID.
+      sources: [vpn-page, datasafety, policy]
+    affiliates:
+      value: false
+    review_sites: false
+    activism: false
+
+refs:
+  home:
+    url: https://vpn-private.net/
+    title: VPN Private homepage
+  policy:
+    url: https://vpn-private.net/privacy
+    title: VPN Private privacy policy (April 2020)
+  refund:
+    url: https://vpn-private.net/refund
+    title: VPN Private refund policy
+  vdp:
+    url: https://vpn-private.net/vdp
+    title: VPN Private vulnerability disclosure policy and researcher rewards
+  locations:
+    url: https://vpn-private.net/locations
+    title: VPN Private locations
+  vpn-page:
+    url: https://vpn-private.net/vpn
+    title: What is a VPN? (VPN Private)
+  assetlinks:
+    url: https://vpn-private.net/.well-known/assetlinks.json
+    title: VPN Private's Android signing certificate fingerprint (assetlinks.json)
+  play:
+    url: https://play.google.com/store/apps/details?id=free.vpn.private
+    title: VPN Private on Google Play, by Master of VPN (Foxy Media Ltd, Herzliya)
+  play-developer:
+    url: https://play.google.com/store/apps/developer?id=Master+of+VPN
+    title: Master of VPN's apps on Google Play
+  datasafety:
+    url: https://play.google.com/store/apps/datasafety?id=free.vpn.private
+    title: VPN Private data safety on Google Play
+  aptoide:
+    url: https://ws75.aptoide.com/api/7/app/getMeta?package_name=free.vpn.private
+    title: VPN Private for Android 2.0.14 on Aptoide, a Flutter app on an Xray 1.6.6 core
+  exodus-signatures:
+    url: https://web.archive.org/web/20261017091629/https://reports.exodus-privacy.eu.org/api/trackers
+    title: Exodus Privacy tracker signatures (archived 2026-10-17)
+  register:
+    url: https://data.gov.il/api/3/action/datastore_search?resource_id=f004176c-b85f-4542-8901-7b3176f9a054&q=514602143
+    title: Foxy Media Ltd (514602143) in Israel's company register, on data.gov.il
+  foxymedia:
+    url: https://www.foxymedia.co.il/
+    title: Foxymedia, content formats and media production
