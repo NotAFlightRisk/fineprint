@@ -6,11 +6,11 @@
 
 <p align="center">
 <!-- badges-start -->
-<img src="https://img.shields.io/badge/VPNs%20compared-227-2da44e?style=flat-square" alt="VPNs compared: 227" />
+<img src="https://img.shields.io/badge/VPNs%20compared-228-2da44e?style=flat-square" alt="VPNs compared: 228" />
 <img src="https://img.shields.io/badge/criteria-57-0969da?style=flat-square" alt="criteria: 57" />
-<img src="https://img.shields.io/badge/sources-6%2C028-8250df?style=flat-square" alt="sources: 6,028" />
+<img src="https://img.shields.io/badge/sources-6%2C042-8250df?style=flat-square" alt="sources: 6,042" />
 <img src="https://img.shields.io/badge/affiliate%20links-zero-cf222e?style=flat-square" alt="affiliate links: zero" />
-<img src="https://img.shields.io/badge/updated-2026--11--23-57606a?style=flat-square" alt="updated: 2026-11-23" />
+<img src="https://img.shields.io/badge/updated-2026--11--26-57606a?style=flat-square" alt="updated: 2026-11-26" />
 <!-- badges-end -->
 </p>
 
@@ -69,7 +69,7 @@
 <details>
 <summary><b>Show 166 more</b></summary>
 
-> Note that 36 providers which had insufficient data, sources or testing are not yet included in the below list.<br>
+> Note that 37 providers which had insufficient data, sources or testing are not yet included in the below list.<br>
 > You can view these on [our website](https://fineprint.peng.ly/), or [contribute](https://fineprint.peng.ly/contributing) to help us fill in the gaps.
 
 | VPN | HQ | No logs | Audit | Anon signup | Open source | RAM only | No trackers | Privacy issues | Cost |
