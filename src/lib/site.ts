@@ -6,6 +6,34 @@ export const site = {
     'The unsponsored VPN comparison. Logging, jurisdiction, audits, payment and apps, side by side, with a source for every claim.'
 };
 
+// the methodology page points at these, with their logos in static/apps
+export const relatedApps = [
+  {
+    slug: 'awesome-privacy-guide',
+    name: 'Awesome Privacy Guide',
+    about: 'Private alternatives to the apps you use every day',
+    url: 'https://awesomeprivacy.peng.ly'
+  },
+  {
+    slug: 'exitformat',
+    name: 'Exit Format',
+    about: 'How to take your data with you when you leave an app',
+    url: 'https://exitformat.peng.ly'
+  },
+  {
+    slug: 'android-rom-compat',
+    name: 'Android ROM Compat',
+    about: 'Which custom ROMs run on your Android phone, and how well',
+    url: 'https://android-rom-compat.peng.ly'
+  },
+  {
+    slug: 'enshittification',
+    name: 'The Enshittification Index',
+    about: 'A dated, sourced record of big tech making things worse',
+    url: 'https://enshittification.peng.ly'
+  }
+];
+
 // every page lives at its path with no trailing slash, and the home page at /
 export const absolute = (path: string) => new URL(path, site.url).href;
 

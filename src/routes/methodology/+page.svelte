@@ -1,5 +1,6 @@
 <script lang="ts">
   import GradeMark from '#lib/components/GradeMark.svelte';
+  import RelatedApps from '#lib/components/RelatedApps.svelte';
   import Seo from '#lib/components/Seo.svelte';
   import { evidences } from '#lib/data/types.ts';
   import { minComplete } from '#lib/filters.ts';
@@ -135,6 +136,8 @@
     </div>
   </section>
 {/each}
+
+<RelatedApps />
 
 <style>
   .legend {
