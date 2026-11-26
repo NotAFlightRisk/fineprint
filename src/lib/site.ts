@@ -6,7 +6,7 @@ export const site = {
     'The unsponsored VPN comparison. Logging, jurisdiction, audits, payment and apps, side by side, with a source for every claim.'
 };
 
-// the methodology page points at these, with their logos in static/apps
+// the methodology page points at these
 export const relatedApps = [
   {
     slug: 'awesome-privacy-guide',
