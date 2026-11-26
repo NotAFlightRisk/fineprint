@@ -1,6 +1,7 @@
 {
-  "commit": "629a878576e286dba1aecef8c4345dd88657a6f7",
+  "commit": "c777a6598fb100ec1287d6317045d19431853a03",
   "entries": [
+    {"date":"2026-11-26","commit":"c777a65","pr":573,"id":"rostam-vpn","name":"RostamVPN","checked":true,"changes":[{"key":"identity.legal_entity"},{"key":"identity.sister_brands"},{"key":"transparency.audits","grade":"bad"},{"key":"account.payment","grade":"bad"},{"key":"security.kill_switch"},{"key":"security.dns"},{"key":"features.connections"},{"key":"features.blocking","added":["Ads","Trackers"]},{"key":"clients.platforms"},{"key":"clients.open_source","grade":"ok"},{"key":"clients.trackers","from":"Not checked","to":"0 (tested)","grade":"good"},{"key":"pricing.monthly"},{"key":"pricing.best"},{"key":"pricing.renewal_increase","grade":"good"}]},
     {"date":"2026-11-26","commit":"629a878","pr":572,"id":"vpn-private","name":"VPN Private","added":true},
     {"date":"2026-11-25","commit":"9f1e016","pr":571,"id":"btguard","name":"BTGuard","changes":[{"key":"clients.trackers","from":"Not checked","to":"0 (tested)","grade":"good"}]},
     {"date":"2026-11-25","commit":"5add95d","pr":570,"id":"vsem-vpn","name":"Vsem VPN","changes":[{"key":"clients.trackers","from":"Not checked","to":"16 (tested)","grade":"bad"}]},
