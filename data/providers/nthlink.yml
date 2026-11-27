@@ -101,7 +101,12 @@ criteria:
         which can do Trojan and VLESS Reality.
       sources: [policies, play]
     post_quantum: none
-    kill_switch: null
+    kill_switch:
+      value: null
+      note: >-
+        The Android app's Kill Switch option only opens Android's own VPN settings, for you to turn on Always-on
+        VPN and Block connections without VPN yourself.
+      sources: [android-strings]
     dns:
       value: null
       note: The site only says it uses trusted DNS.
@@ -223,3 +228,6 @@ refs:
   exodus-signatures:
     url: https://web.archive.org/web/20261017091629/https://reports.exodus-privacy.eu.org/api/trackers
     title: Exodus Privacy tracker signatures (archived 2026-10-17)
+  android-strings:
+    url: https://github.com/nthlink/nthlink-os-android/blob/main/app/src/main/res/values/strings.xml
+    title: nthLink Android app strings on GitHub
