@@ -114,7 +114,10 @@ criteria:
       note: V2Ray here is Xray, built into the Android app.
       sources: [apk]
     port_forwarding: null
-    split_tunnel: null
+    split_tunnel:
+      value: false
+      note: The Android app can't leave chosen apps outside the VPN.
+      sources: [apk]
     blocking: null
 
   clients:
@@ -131,6 +134,13 @@ criteria:
         The policy lists Google Analytics for Firebase and Crashlytics in the app, without saying whether
         you can turn them off.
       sources: [policy]
+    trackers:
+      value: 3
+      evidence: tested
+      note: >-
+        Version 1.2.7 from June 2026 (Google AdMob, Crashlytics and Firebase Analytics), checked against
+        Exodus Privacy's tracker list. Google Play has 1.2.8.
+      sources: [apk, play, exodus-signatures]
     fdroid: false
 
   pricing:
@@ -203,3 +213,6 @@ refs:
   apk:
     url: https://ws75.aptoide.com/api/7/app/getMeta?package_name=com.vivavpn.vpn
     title: Viva VPN 1.2.7 for Android on Aptoide
+  exodus-signatures:
+    url: https://web.archive.org/web/20261017091629/https://reports.exodus-privacy.eu.org/api/trackers
+    title: Exodus Privacy tracker signatures (archived 2026-10-17)
