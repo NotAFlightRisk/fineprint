@@ -136,7 +136,9 @@ criteria:
     port_forwarding:
       value: null
     split_tunnel:
-      value: null
+      value: false
+      note: The Android app can't leave chosen apps outside the VPN.
+      sources: [aptoide]
     blocking:
       value: null
 
