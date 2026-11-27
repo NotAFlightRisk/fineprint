@@ -1,6 +1,7 @@
 {
-  "commit": "c777a6598fb100ec1287d6317045d19431853a03",
+  "commit": "8a8006ebd15edef36cd2a812c5a11fce6d31a31c",
   "entries": [
+    {"date":"2026-11-27","commit":"8a8006e","pr":577,"id":"viva-vpn","name":"Viva VPN","changes":[{"key":"features.split_tunnel","from":"Unknown","to":"No"},{"key":"clients.trackers","from":"Not checked","to":"3 (tested)","grade":"bad"}]},
     {"date":"2026-11-26","commit":"c777a65","pr":573,"id":"rostam-vpn","name":"RostamVPN","checked":true,"changes":[{"key":"identity.legal_entity"},{"key":"identity.sister_brands"},{"key":"transparency.audits","grade":"bad"},{"key":"account.payment","grade":"bad"},{"key":"security.kill_switch"},{"key":"security.dns"},{"key":"features.connections"},{"key":"features.blocking","added":["Ads","Trackers"]},{"key":"clients.platforms"},{"key":"clients.open_source","grade":"ok"},{"key":"clients.trackers","from":"Not checked","to":"0 (tested)","grade":"good"},{"key":"pricing.monthly"},{"key":"pricing.best"},{"key":"pricing.renewal_increase","grade":"good"}]},
     {"date":"2026-11-26","commit":"629a878","pr":572,"id":"vpn-private","name":"VPN Private","added":true},
     {"date":"2026-11-25","commit":"9f1e016","pr":571,"id":"btguard","name":"BTGuard","changes":[{"key":"clients.trackers","from":"Not checked","to":"0 (tested)","grade":"good"}]},
