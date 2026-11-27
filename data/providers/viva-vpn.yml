@@ -114,7 +114,10 @@ criteria:
       note: V2Ray here is Xray, built into the Android app.
       sources: [apk]
     port_forwarding: null
-    split_tunnel: null
+    split_tunnel:
+      value: false
+      note: The Android app can't leave chosen apps outside the VPN.
+      sources: [apk]
     blocking: null
 
   clients:
