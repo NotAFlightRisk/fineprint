@@ -104,7 +104,9 @@ criteria:
     post_quantum:
       value: null
     kill_switch:
-      value: null
+      value: app
+      note: A setting keeps the tunnel up when the connection behind it drops, so traffic stops instead of going out unprotected.
+      sources: [kill-switch-source]
     dns:
       value: third_party
       evidence: claimed
@@ -250,3 +252,6 @@ refs:
   exodus-signatures:
     url: https://web.archive.org/web/20261017091629/https://reports.exodus-privacy.eu.org/api/trackers
     title: Exodus Privacy tracker signatures (archived 2026-10-17)
+  kill-switch-source:
+    url: https://github.com/UnboundTechCo/defyxVPN/blob/v5.16.4/lib/modules/core/vpn.dart
+    title: Defyx VPN's tunnel code, with the kill switch (v5.16.4)
