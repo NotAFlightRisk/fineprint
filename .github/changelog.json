@@ -1,6 +1,7 @@
 {
-  "commit": "2d3931757511595329f82941bd2da141942b07ab",
+  "commit": "a692bc5b144c127bb80b2c480c257bf0f9b1ef21",
   "entries": [
+    {"date":"2026-11-27","commit":"a692bc5","pr":581,"id":"defyx-vpn","name":"Defyx VPN","changes":[{"key":"security.kill_switch","from":"Unknown","to":"In the app only","grade":"ok"}]},
     {"date":"2026-11-27","commit":"2d39317","pr":580,"id":"vp-net","name":"VP.NET","changes":[{"key":"features.split_tunnel","from":"Unknown","to":"Yes"}]},
     {"date":"2026-11-27","commit":"4c38790","pr":579,"id":"riseupvpn","name":"RiseupVPN","changes":[{"key":"features.split_tunnel","from":"Unknown","to":"Yes"}]},
     {"date":"2026-11-27","commit":"a4f2c00","pr":578,"id":"vpn-private","name":"VPN Private","changes":[{"key":"features.split_tunnel","from":"Unknown","to":"No"}]},
