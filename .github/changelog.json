@@ -1,6 +1,7 @@
 {
-  "commit": "a692bc5b144c127bb80b2c480c257bf0f9b1ef21",
+  "commit": "8ba48664ad4f3aabd73d7e231aebbff2dfe46326",
   "entries": [
+    {"date":"2026-11-27","commit":"f5beb03","pr":582,"id":"nthlink","name":"nthLink","changes":[{"key":"security.kill_switch"}]},
     {"date":"2026-11-27","commit":"a692bc5","pr":581,"id":"defyx-vpn","name":"Defyx VPN","changes":[{"key":"security.kill_switch","from":"Unknown","to":"In the app only","grade":"ok"}]},
     {"date":"2026-11-27","commit":"2d39317","pr":580,"id":"vp-net","name":"VP.NET","changes":[{"key":"features.split_tunnel","from":"Unknown","to":"Yes"}]},
     {"date":"2026-11-27","commit":"4c38790","pr":579,"id":"riseupvpn","name":"RiseupVPN","changes":[{"key":"features.split_tunnel","from":"Unknown","to":"Yes"}]},
