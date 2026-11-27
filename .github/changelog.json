@@ -1,6 +1,7 @@
 {
-  "commit": "4c38790b7f31431b5e87b190266539417d473ed2",
+  "commit": "2d3931757511595329f82941bd2da141942b07ab",
   "entries": [
+    {"date":"2026-11-27","commit":"2d39317","pr":580,"id":"vp-net","name":"VP.NET","changes":[{"key":"features.split_tunnel","from":"Unknown","to":"Yes"}]},
     {"date":"2026-11-27","commit":"4c38790","pr":579,"id":"riseupvpn","name":"RiseupVPN","changes":[{"key":"features.split_tunnel","from":"Unknown","to":"Yes"}]},
     {"date":"2026-11-27","commit":"a4f2c00","pr":578,"id":"vpn-private","name":"VPN Private","changes":[{"key":"features.split_tunnel","from":"Unknown","to":"No"}]},
     {"date":"2026-11-27","commit":"8a8006e","pr":577,"id":"viva-vpn","name":"Viva VPN","changes":[{"key":"features.split_tunnel","from":"Unknown","to":"No"},{"key":"clients.trackers","from":"Not checked","to":"3 (tested)","grade":"bad"}]},
